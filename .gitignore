@@ -4,3 +4,7 @@ BattleRoyaleNearEarth.suo
 ipch
 source/Debug
 source/BattleRoyaleNearEarth.vcxproj.user
+build
+dist
+.DS_store
+.dep.inc

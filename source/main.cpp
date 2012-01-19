@@ -1,5 +1,13 @@
-#define FREEGLUT_STATIC
-#include <GL\glut.h>
+
+
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <Glut/glut.h>
+#else
+    #define FREEGLUT_STATIC
+    #include <GL\glut.h>
+#endif
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
