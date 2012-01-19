@@ -6,5 +6,6 @@ source/Debug
 source/BattleRoyaleNearEarth.vcxproj.user
 build
 dist
+nbproject/private
 .DS_store
 .dep.inc
