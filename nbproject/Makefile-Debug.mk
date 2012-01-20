@@ -34,7 +34,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/source/main.o
+	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/PlayerModel.o \
+	${OBJECTDIR}/source/AntennaModel.o \
+	${OBJECTDIR}/source/Player.o \
+	${OBJECTDIR}/source/Model.o
 
 
 # C Compiler Flags
@@ -65,6 +69,26 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+
+${OBJECTDIR}/source/PlayerModel.o: source/PlayerModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/PlayerModel.o source/PlayerModel.cpp
+
+${OBJECTDIR}/source/AntennaModel.o: source/AntennaModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AntennaModel.o source/AntennaModel.cpp
+
+${OBJECTDIR}/source/Player.o: source/Player.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Player.o source/Player.cpp
+
+${OBJECTDIR}/source/Model.o: source/Model.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model.o source/Model.cpp
 
 # Subprojects
 .build-subprojects:

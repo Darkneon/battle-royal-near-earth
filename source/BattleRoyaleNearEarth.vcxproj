@@ -75,10 +75,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AntennaModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AntennaModel.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
