@@ -2,7 +2,7 @@
 	#include <Glut/glut.h>
 #else
     #define FREEGLUT_STATIC
-    #include <GL\glut.h>
+    #include <GL/glut.h>
 #endif
 
 #include <cstdlib>
