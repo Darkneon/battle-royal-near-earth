@@ -1,5 +1,7 @@
 
 
+#include <math.h>
+
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -27,19 +29,144 @@ double fovy = 45.0;
 static GLint rotX = 0;
 static GLint rotY = 0;
 
-//the vertices
-//==============================================================================
-GLfloat vPhasersBase[] = { -1.0f,  0.5f,  1.0f, //v1
-					        1.0f,  0.5f,  1.0f, //v2
-					        1.0f, -0.5f,  1.0f, //v3
-					       -1.0f, -0.5f,  1.0f, //v4
-					       -1.0f, -0.5f, -1.0f, //v5
-					        1.0f, -0.5f, -1.0f, //v6
-						    1.0f,  0.5f, -1.0f, //v7
-					       -1.0f,  0.5f, -1.0f}; //v8
+static int choice = 0;
 
-//==============================================================================
+void drawRectangle()
+{
+	//phaser base
+	glBegin(GL_TRIANGLE_STRIP);
+		glVertex3f(-1.0f, -0.5f,  1.0f);
+		glVertex3f(1.0f, -0.5f,  1.0f);
+		glVertex3f(-1.0f,  0.5f,  1.0f);
+		glVertex3f(1.0f,  0.5f,  1.0f);
+		glVertex3f(-1.0f,  0.5f, -1.0f);
+		glVertex3f(1.0f,  0.5f, -1.0f);
+		glVertex3f(-1.0f, -0.5f, -1.0f);
+		glVertex3f(1.0f, -0.5f, -1.0f);
+		glVertex3f(-1.0f, -0.5f,  1.0f);
+		glVertex3f(1.0f, -0.5f,  1.0f);
+	glEnd();
 
+	glBegin(GL_TRIANGLES);
+		glVertex3f(1.0f, -0.5f, -1.0f);
+		glVertex3f(1.0f,  0.5f, -1.0f);
+		glVertex3f(1.0f,  0.5f,  1.0f);
+		glVertex3f(1.0f, -0.5f, -1.0f);
+		glVertex3f(1.0f,  0.5f,  1.0f);
+		glVertex3f(1.0f, -0.5f,  1.0f);
+		glVertex3f(1.0f, -0.5f, -1.0f);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+		glVertex3f(-1.0f, -0.5f, -1.0f);
+		glVertex3f(-1.0f,  0.5f, -1.0f);
+		glVertex3f(-1.0f,  0.5f,  1.0f);
+		glVertex3f(-1.0f, -0.5f, -1.0f);
+		glVertex3f(-1.0f,  0.5f,  1.0f);
+		glVertex3f(-1.0f, -0.5f,  1.0f);
+		glVertex3f(-1.0f, -0.5f, -1.0f);
+	glEnd();
+}
+
+void drawCylinder(GLint degrees)
+{
+	const GLfloat PI_TO_DEGREE_RATIO = 3.14159265 / 180;
+
+	GLfloat radius = 1.0f;
+	GLfloat height = 1.5f;
+	GLint increment = 10;
+	
+	glPushMatrix();
+
+		glTranslatef(-radius/2, -height/2, -radius/2);
+
+		glBegin(GL_POLYGON);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			for (int i = 0; i <= degrees; i += increment)
+			{
+				GLfloat angle = i;
+				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
+			}
+		glEnd();
+		
+		glBegin(GL_POLYGON);
+			glVertex3f(0.0f, height, 0.0f);
+			for (int i = 0; i <= degrees; i += increment)
+			{
+				GLfloat angle = i;
+				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
+			}
+		glEnd();
+	
+		glBegin(GL_TRIANGLES); // 2 triangles on the Z axis
+			glVertex3f(0.0f, 0.0f, radius);
+			glVertex3f(0.0f, height, -radius);
+			glVertex3f(0.0f, 0.0f, -radius);
+			glVertex3f(0.0f, 0.0f, radius);
+			glVertex3f(0.0f, height, radius);
+			glVertex3f(0.0f, height, -radius);
+			glVertex3f(0.0f, height, radius);
+		glEnd();
+
+		/*
+		glBegin(GL_TRIANGLES); // 2 triangles on X
+			glVertex3f(radius, 0.0f, 0.0f);
+			glVertex3f(0.0f, height, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glVertex3f(radius, 0.0f, 0.0f);
+			glVertex3f(radius, height, 0.0f);
+			glVertex3f(0.0f, height, 0.0f);
+			glVertex3f(radius, height, 0.0f);
+		glEnd();
+		*/
+
+		for (int i = 0; i < degrees; i += increment) //all the triangles along the perimeter
+		{
+			GLint angleNext = i + increment;
+			GLfloat angle = i;
+
+			glBegin(GL_POLYGON);
+				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
+			glEnd();
+		}
+
+	glPopMatrix();
+}
+
+
+void drawPhaserCannon()
+{
+	glEnable(GL_DEPTH_TEST);
+	//back panel
+	glPushMatrix();
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glTranslatef(1.0f, 0.0f, 0.0f);
+		glScalef(1.2f, 1.0f, 1.2f);
+		drawCylinder(180);
+	glPopMatrix();
+
+	//cannon barrel
+	glPushMatrix();
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glTranslatef(-0.1f, 0.0f, -0.55f);
+		glScalef(0.5f, 1.1f, 0.4f);
+		drawRectangle();
+	glPopMatrix();
+
+	//cannon base
+	glPushMatrix();
+		glColor3f(0,1,0);
+		glTranslatef(1.1f, -1.1f, -0.1f);
+		glScalef(0.9f, 0.5f, 0.9f);
+		drawCylinder(360);
+	glPopMatrix();
+}
 
 //sets up rendering context
 void render()
@@ -53,43 +180,17 @@ void render()
 
 	glRotatef(rotX * 10, 1, 0, 0);
 	glRotatef(rotY * 10, 0, 1, 0);
-
-	//phaser base
-	glBegin(GL_QUAD_STRIP);
-		glColor3f(1, 0, 0);
-		glVertex3f(vPhasersBase[9], vPhasersBase[10], vPhasersBase[11]); //v4
-		glVertex3f(vPhasersBase[6], vPhasersBase[7], vPhasersBase[8]); //v3
-		glVertex3f(vPhasersBase[0], vPhasersBase[1], vPhasersBase[2]); //v1
-		glVertex3f(vPhasersBase[3], vPhasersBase[4], vPhasersBase[5]); //v2
-		glVertex3f(vPhasersBase[21], vPhasersBase[22], vPhasersBase[23]); //v8
-		glVertex3f(vPhasersBase[18], vPhasersBase[19], vPhasersBase[20]); //v7
-		glVertex3f(vPhasersBase[12], vPhasersBase[13], vPhasersBase[14]); //v5
-		glVertex3f(vPhasersBase[15], vPhasersBase[16], vPhasersBase[17]); //v6
-		glVertex3f(vPhasersBase[9], vPhasersBase[10], vPhasersBase[11]); //v4
-		glVertex3f(vPhasersBase[6], vPhasersBase[7], vPhasersBase[8]); //v3
-	glEnd();
-
-	glBegin(GL_QUADS);
-		glColor3f(1, 0, 0);
-		glVertex3f(vPhasersBase[3], vPhasersBase[4], vPhasersBase[5]); //v2
-		glVertex3f(vPhasersBase[18], vPhasersBase[19], vPhasersBase[20]); //v7
-		glVertex3f(vPhasersBase[15], vPhasersBase[16], vPhasersBase[17]); //v6
-		glVertex3f(vPhasersBase[6], vPhasersBase[7], vPhasersBase[8]); //v3
-	glEnd();
-
-	glBegin(GL_QUADS);
-		glColor3f(1, 0, 0);
-		glVertex3f(vPhasersBase[0], vPhasersBase[1], vPhasersBase[2]); //v1
-		glVertex3f(vPhasersBase[9], vPhasersBase[10], vPhasersBase[11]); //v4
-		glVertex3f(vPhasersBase[12], vPhasersBase[13], vPhasersBase[14]); //v5
-		glVertex3f(vPhasersBase[21], vPhasersBase[22], vPhasersBase[23]); //v8
-	glEnd();
-
 	
-
+	if (choice == 1) //draw a cylinder	
+		drawRectangle();
+	else if (choice == 0) //draw half a cylinder
+		drawPhaserCannon();
+	
 	glutSwapBuffers();
-	glutPostRedisplay();
+	
 }
+
+
 
 // Respond to window resizing, preserving proportions.
 void reshapeMainWindow (int newWidth, int newHeight)
@@ -123,6 +224,22 @@ void functionKeys(int key, int x, int y)
 		rotX--;
 		break;
 	}
+	glutPostRedisplay();
+}
+
+void keyboardKeys(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case 'q':
+		choice = ++choice % 2; 
+		break;
+
+	case 27:
+		exit(0);
+	}
+
+	glutPostRedisplay();
 }
 
 int main (int argc, char **argv)
@@ -131,13 +248,14 @@ int main (int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(width, height);
-	glutCreateWindow("Robots mid and top");
+	glutCreateWindow("Robot mids");
 
-	//callbacks
+	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);
 	glutDisplayFunc(render);
 	glutSpecialFunc(functionKeys);
-	
+	glutKeyboardFunc(keyboardKeys);
+
 	glutMainLoop();
 
 	return 0;
