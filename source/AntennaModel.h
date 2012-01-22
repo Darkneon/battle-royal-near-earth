@@ -14,7 +14,6 @@ class AntennaModel : Model {
 public:
     AntennaModel();
     void render();
-    virtual ~AntennaModel();
 };
 
 #endif	/* ANTENNAMODEL_H */

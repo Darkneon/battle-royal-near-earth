@@ -13,10 +13,6 @@
 AntennaModel::AntennaModel() {	
 }
 
-
-AntennaModel::~AntennaModel() {	
-}
-
 void AntennaModel::render() {
     GLUquadric *quadratic = gluNewQuadric(); 
 	gluQuadricNormals(quadratic, GLU_SMOOTH);

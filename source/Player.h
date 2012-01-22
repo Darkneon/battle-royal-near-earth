@@ -14,9 +14,9 @@ class Player {
 public:
     Player();
     ~Player();
-    void draw();        
+    void draw();     
 private:
-        Model *model;
+    Model *model;
     
 };
 

@@ -1,9 +1,9 @@
 
 
 #ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <Glut/glut.h>
+    #include <OpenGL/gl.h>
+    #include <OpenGL/glu.h>
+    #include <Glut/glut.h>
 #else
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
@@ -57,7 +57,9 @@ void render()
 	glRotatef(rotX * 10, 1, 0, 0);
 	glRotatef(rotY * 10, 0, 1, 0);
 	
+
     player.draw();
+
 
 	glutSwapBuffers();
 	glutPostRedisplay();
