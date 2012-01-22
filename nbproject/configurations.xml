@@ -19,11 +19,15 @@
         <itemPath>source/FenceModel.h</itemPath>
         <itemPath>source/Model.cpp</itemPath>
         <itemPath>source/Model.h</itemPath>
+        <itemPath>source/MountainModel.cpp</itemPath>
+        <itemPath>source/MountainModel.h</itemPath>
         <itemPath>source/PlayerModel.cpp</itemPath>
         <itemPath>source/PlayerModel.h</itemPath>
       </logicalFolder>
       <itemPath>source/Fence.cpp</itemPath>
       <itemPath>source/Fence.h</itemPath>
+      <itemPath>source/Mountain.cpp</itemPath>
+      <itemPath>source/Mountain.h</itemPath>
       <itemPath>source/Player.cpp</itemPath>
       <itemPath>source/Player.h</itemPath>
       <itemPath>source/main.cpp</itemPath>

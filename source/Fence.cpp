@@ -13,6 +13,13 @@ Fence::Fence() {
     
 }
 
+Fence::~Fence() {
+    if (model != NULL) {
+		delete model;
+		model = NULL;
+	}
+}
+
 void Fence::draw() {
     model->draw();
 }

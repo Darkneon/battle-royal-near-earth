@@ -13,6 +13,7 @@
 class Fence {
 public:
     Fence();
+    ~Fence();
     void draw();
 private:
     Model *model;
