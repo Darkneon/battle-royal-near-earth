@@ -19,8 +19,6 @@
 
 PlayerModel::PlayerModel() {
     AntennaModel *child = new AntennaModel;
-    
-    firstChild = (Model*)child;
     setNextChild( (Model*)child );
 }
 

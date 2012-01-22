@@ -8,16 +8,17 @@
 #ifndef MODEL_H
 #define	MODEL_H
 #include <cstdlib>
+#include <vector>
+
+using namespace std;
 
 class Model {
 public:
     Model() {
         parent = NULL;
-        firstChild = NULL;
-        nextChild = NULL;
     }
     
-	virtual ~Model();
+    virtual ~Model();
 
     virtual void render() = 0;
     
@@ -27,8 +28,8 @@ public:
         return parent;
     }
     
-    Model *getNextChild() {
-        return nextChild;
+    vector<Model *> getChildren() {
+        return children;
     }
     
     void setParent(Model *value) {
@@ -36,14 +37,22 @@ public:
     }
     
     void setNextChild(Model *value) {
-        nextChild = value;
+        children.push_back(value);
     }
     
-protected:
-    Model *firstChild;
+    Model* getFirstChild() {
+        if (children.size() > 0) {
+            return children.front();
+        }
+        else {
+            return NULL;
+        }
+    }
+    
 private:
     Model *parent;
-    Model *nextChild;
+    vector<Model *> children;
+    
 };
 
 #endif	/* MODEL_H */
