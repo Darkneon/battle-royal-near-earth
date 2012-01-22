@@ -12,14 +12,20 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>source/AntennaModel.cpp</itemPath>
-      <itemPath>source/AntennaModel.h</itemPath>
-      <itemPath>source/Model.cpp</itemPath>
-      <itemPath>source/Model.h</itemPath>
+      <logicalFolder name="f1" displayName="Models" projectFiles="true">
+        <itemPath>source/AntennaModel.cpp</itemPath>
+        <itemPath>source/AntennaModel.h</itemPath>
+        <itemPath>source/FenceModel.cpp</itemPath>
+        <itemPath>source/FenceModel.h</itemPath>
+        <itemPath>source/Model.cpp</itemPath>
+        <itemPath>source/Model.h</itemPath>
+        <itemPath>source/PlayerModel.cpp</itemPath>
+        <itemPath>source/PlayerModel.h</itemPath>
+      </logicalFolder>
+      <itemPath>source/Fence.cpp</itemPath>
+      <itemPath>source/Fence.h</itemPath>
       <itemPath>source/Player.cpp</itemPath>
       <itemPath>source/Player.h</itemPath>
-      <itemPath>source/PlayerModel.cpp</itemPath>
-      <itemPath>source/PlayerModel.h</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"

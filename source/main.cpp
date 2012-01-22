@@ -10,6 +10,7 @@
 #endif
 
 #include "Player.h"
+#include "Fence.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -30,6 +31,7 @@ static GLint rotX = 0;
 static GLint rotY = 0;
 
 Player player;
+Fence fence;
 //the vertices
 //==============================================================================
 GLfloat vPhasersBase[] = { -1.0f,  0.5f,  1.0f, //v1
@@ -59,7 +61,7 @@ void render()
 	
 
     player.draw();
-
+    fence.draw();
 
 	glutSwapBuffers();
 	glutPostRedisplay();

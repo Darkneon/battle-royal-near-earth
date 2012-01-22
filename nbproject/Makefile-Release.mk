@@ -35,9 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/Fence.o \
 	${OBJECTDIR}/source/PlayerModel.o \
 	${OBJECTDIR}/source/AntennaModel.o \
 	${OBJECTDIR}/source/Player.o \
+	${OBJECTDIR}/source/FenceModel.o \
 	${OBJECTDIR}/source/Model.o
 
 
@@ -70,6 +72,11 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
+${OBJECTDIR}/source/Fence.o: source/Fence.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Fence.o source/Fence.cpp
+
 ${OBJECTDIR}/source/PlayerModel.o: source/PlayerModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
@@ -84,6 +91,11 @@ ${OBJECTDIR}/source/Player.o: source/Player.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Player.o source/Player.cpp
+
+${OBJECTDIR}/source/FenceModel.o: source/FenceModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/FenceModel.o source/FenceModel.cpp
 
 ${OBJECTDIR}/source/Model.o: source/Model.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
