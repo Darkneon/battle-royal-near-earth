@@ -75,10 +75,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AntennaModel.cpp" />
+    <ClCompile Include="Fence.cpp" />
+    <ClCompile Include="FenceModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Mountain.cpp" />
+    <ClCompile Include="MountainModel.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AntennaModel.h" />
+    <ClInclude Include="Fence.h" />
+    <ClInclude Include="FenceModel.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Mountain.h" />
+    <ClInclude Include="MountainModel.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

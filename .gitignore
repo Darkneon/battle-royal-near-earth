@@ -9,3 +9,4 @@ dist
 nbproject/private
 .DS_store
 .dep.inc
+*.opensdf

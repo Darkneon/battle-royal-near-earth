@@ -3,13 +3,17 @@
 #include <math.h>
 
 #ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <Glut/glut.h>
+    #include <OpenGL/gl.h>
+    #include <OpenGL/glu.h>
+    #include <Glut/glut.h>
 #else
     #define FREEGLUT_STATIC
-    #include <GL\glut.h>
+    #include <GL/glut.h>
 #endif
+
+#include "Player.h"
+#include "Fence.h"
+#include "Mountain.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -30,6 +34,10 @@ static GLint rotX = 0;
 static GLint rotY = 0;
 
 static int choice = 0;
+Player player;
+Fence fence;
+Mountain mountain;
+
 
 void drawRectangle()
 {
@@ -321,11 +329,17 @@ void render()
 	case 2:
 		drawPhaserCannon();
 		break;
+	case 3:
+	    player.draw();
+		fence.draw();
+		mountain.draw();
+		break;
 	}
-	
+
+  
+    
 	glutSwapBuffers();
 }
-
 
 
 // Respond to window resizing, preserving proportions.
@@ -338,6 +352,8 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	glLoadIdentity();
 	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
 	gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void functionKeys(int key, int x, int y)
@@ -368,7 +384,7 @@ void keyboardKeys(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'q':
-		choice = ++choice % 3; 
+		choice = ++choice % 4; 
 		break;
 
 	case 27:
@@ -387,7 +403,7 @@ int main (int argc, char **argv)
 {
 	// GLUT initialization.
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Robot mids");
 
