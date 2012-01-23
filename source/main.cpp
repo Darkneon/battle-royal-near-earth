@@ -125,24 +125,102 @@ void drawCylinder(GLint degrees)
 			GLint angleNext = i + increment;
 			GLfloat angle = i;
 
+			GLfloat x0 = sin(angle * PI_TO_DEGREE_RATIO) * radius;
+			GLfloat x1 = sin(angleNext * PI_TO_DEGREE_RATIO) * radius;
+			GLfloat z0 = cos(angle * PI_TO_DEGREE_RATIO) * radius;
+			GLfloat z1 = cos(angleNext * PI_TO_DEGREE_RATIO) * radius;
+
 			glBegin(GL_POLYGON);
-				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
-				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
-				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
-				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
-				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
-				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
-				glVertex3f(0.0f + sin(angleNext * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angleNext * PI_TO_DEGREE_RATIO) * radius);
+				glVertex3f(x1, 0.0f, z1);
+				glVertex3f(x0, height, z0);
+				glVertex3f(x0, 0.0f, z0);
+				glVertex3f(x1, 0.0f, z1);
+				glVertex3f(x1, height, z1);
+				glVertex3f(x0, height, z0);
+				glVertex3f(x1, 0.0f, z1);
 			glEnd();
 		}
 
 	glPopMatrix();
 }
 
+void drawTriangularPrism()
+{
+	glPushMatrix();
+		glRotatef(-135.0f, 0.0f, 0.0f, 1.0f);
+		glTranslatef(-0.5f, -0.25f, 0.5f);
+		
+		glBegin(GL_TRIANGLES); //base 1
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glVertex3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.5f, 0.5f, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+		glEnd();
+
+		glBegin(GL_TRIANGLES); //base 2
+			glVertex3f(0.0f, 0.0f, -1.0f);
+			glVertex3f(1.0f, 0.0f, -1.0f);
+			glVertex3f(0.5f, 0.5f, -1.0f);
+			glVertex3f(0.0f, 0.0f, -1.0f);
+		glEnd();
+
+		glBegin(GL_TRIANGLES); //the "under part"
+			glVertex3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 0.0f, -1.0f);
+			glVertex3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(1.0f, 0.0f, -1.0f);
+			glVertex3f(0.0f, 0.0f, -1.0f);
+			glVertex3f(1.0f, 0.0f, -1.0f);
+		glEnd();
+
+		glBegin(GL_TRIANGLES); //the "top left part"
+			glVertex3f(0.5f, 0.5f, 0.0f);
+			glVertex3f(0.0f, 0.0f, -1.0f);
+			glVertex3f(0.0f, 0.0f, 0.0f);
+			glVertex3f(0.5f, 0.5f, 0.0f);
+			glVertex3f(0.5f, 0.5f, -1.0f);
+			glVertex3f(0.0f, 0.0f, -1.0f);
+			glVertex3f(0.5f, 0.5f, 0.0f);
+		glEnd();
+
+		glBegin(GL_TRIANGLES); //the "top right part"
+			glVertex3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.5f, 0.5f, 0.0f);
+			glVertex3f(0.5f, 0.5f, -1.0f);
+			glVertex3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.5f, 0.5f, -1.0f);
+			glVertex3f(1.0f, 0.0f, -1.0f);
+			glVertex3f(1.0f, 0.0f, 0.0f);
+		glEnd();
+
+	glPopMatrix();
+}
+
+void drawTrapezoidalPrism()
+{
+	glPushMatrix();
+		glTranslatef(-0.5f, 0.25f, 0.0f);
+		
+		glPushMatrix();
+			glTranslatef(0.0f, -0.24f, 0.0f);
+			glScalef(1.0f, 1.4f, 2.0f);
+			drawTriangularPrism();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(1.0f, 0.0f, 0.0f);
+			glScalef(0.8f, 1.0f, 1.0f);
+			drawRectangle();
+		glPopMatrix();
+	glPopMatrix();
+}
 
 void drawPhaserCannon()
 {
 	glEnable(GL_DEPTH_TEST);
+	glTranslatef(-0.9f, 0.9f, 0.5f);
+
 	//back panel
 	glPushMatrix();
 		glColor3f(0.0f, 0.0f, 1.0f);
@@ -154,7 +232,7 @@ void drawPhaserCannon()
 	//cannon barrel
 	glPushMatrix();
 		glColor3f(1.0f, 0.0f, 0.0f);
-		glTranslatef(-0.1f, 0.0f, -0.55f);
+		glTranslatef(-0.1f, 0.0f, -0.6f);
 		glScalef(0.5f, 1.1f, 0.4f);
 		drawRectangle();
 	glPopMatrix();
@@ -162,32 +240,90 @@ void drawPhaserCannon()
 	//cannon base
 	glPushMatrix();
 		glColor3f(0,1,0);
-		glTranslatef(1.1f, -1.1f, -0.1f);
+		glTranslatef(1.1f, -1.1f, -0.125f);
 		glScalef(0.9f, 0.5f, 0.9f);
 		drawCylinder(360);
 	glPopMatrix();
 }
 
-//sets up rendering context
+void drawMissileLauncher()
+{
+	glRotatef(-90, 0.0f, 1.0f, 0.0f);
+
+	glPushMatrix();
+		glColor3f(1.0f, 4.0f, 0.0f);
+		glScalef(1.1f, 0.9f, 0.8f);
+		drawRectangle();
+	glPopMatrix();
+
+	glPushMatrix();
+		glColor3f(0.5f, 0.0f, 0.5f);
+		glPushMatrix();
+			glTranslatef(-1.3f, -0.5f, 0.0f);
+			glRotatef(90, 1.0f, 0.0f, 0.0f);
+			glScalef(0.3f, 1.7f, 0.3f);
+			drawCylinder(360);
+		glPopMatrix();
+
+		glPushMatrix();
+			glColor3f(0.5f, 0.0f, 0.5f);
+			glTranslatef(1.6f, -0.5f, 0.0f);
+			glRotatef(90, 1.0f, 0.0f, 0.0f);
+			glScalef(0.3f, 1.7f, 0.3f);
+			drawCylinder(360);
+		glPopMatrix();
+	glPopMatrix();
+}
+
+void drawCannon()
+{
+	glPushMatrix();
+		glColor3f(1.0f, 0.0f, 0.0f);
+		drawTrapezoidalPrism();
+	glPopMatrix();
+
+	glPushMatrix();
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glTranslatef(-0.9f, 0.35f, 0.5f);
+		glRotatef(90, 0.0f, 0.0f, 1.0f);
+		glScalef(0.1f, 0.6, 0.1f);
+		drawCylinder(360);
+	glPopMatrix();
+
+	glPushMatrix();
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glTranslatef(-0.9f, 0.35f, -0.5f);
+		glRotatef(90, 0.0f, 0.0f, 1.0f);
+		glScalef(0.1f, 0.6, 0.1f);
+		drawCylinder(360);
+	glPopMatrix();
+}
+
 void render()
 {
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//preps the 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	glRotatef(rotX * 10, 1, 0, 0);
 	glRotatef(rotY * 10, 0, 1, 0);
-	
-	if (choice == 1) //draw a cylinder	
-		drawRectangle();
-	else if (choice == 0) //draw half a cylinder
+
+	switch (choice)
+	{
+	case 0:
+		drawCannon();
+		break;
+	case 1:
+		drawMissileLauncher();
+		break;
+	case 2:
 		drawPhaserCannon();
+		break;
+	}
 	
 	glutSwapBuffers();
-	
 }
 
 
@@ -232,7 +368,7 @@ void keyboardKeys(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'q':
-		choice = ++choice % 2; 
+		choice = ++choice % 3; 
 		break;
 
 	case 27:
@@ -240,6 +376,11 @@ void keyboardKeys(unsigned char key, int x, int y)
 	}
 
 	glutPostRedisplay();
+}
+
+void init()
+{
+	glEnable(GL_DEPTH_TEST);
 }
 
 int main (int argc, char **argv)
@@ -255,6 +396,8 @@ int main (int argc, char **argv)
 	glutDisplayFunc(render);
 	glutSpecialFunc(functionKeys);
 	glutKeyboardFunc(keyboardKeys);
+
+	init();
 
 	glutMainLoop();
 
