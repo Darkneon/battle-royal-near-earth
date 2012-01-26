@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/MountainModel.o \
 	${OBJECTDIR}/source/Grass.o \
 	${OBJECTDIR}/source/Fence.o \
+	${OBJECTDIR}/source/LevelRenderer.o \
 	${OBJECTDIR}/source/Mountain.o \
 	${OBJECTDIR}/source/PlayerModel.o \
 	${OBJECTDIR}/source/AntennaModel.o \
@@ -91,6 +92,11 @@ ${OBJECTDIR}/source/Fence.o: source/Fence.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Fence.o source/Fence.cpp
+
+${OBJECTDIR}/source/LevelRenderer.o: source/LevelRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LevelRenderer.o source/LevelRenderer.cpp
 
 ${OBJECTDIR}/source/Mountain.o: source/Mountain.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source

@@ -14,9 +14,10 @@ TeamNumberModel::TeamNumberModel() {
 void TeamNumberModel::render() {
     glColor3f(0, 0.5f, 0);
     
-    GLfloat distance = -1.0 / 5.0;
+    GLfloat distance = -1.0f / 5.0f;
     glPushMatrix();
-        glTranslatef(0, 0.01f, 0);
+        glTranslatef(0.25f, 0.01f, -0.25f);
+		glScalef(0.5, 1, 0.5);
         glBegin(GL_TRIANGLES);
             //bottom
             glVertex3f(0, 0, 0);

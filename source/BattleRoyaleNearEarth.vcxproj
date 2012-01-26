@@ -78,12 +78,16 @@
     <ClCompile Include="AntennaModel.cpp" />
     <ClCompile Include="Fence.cpp" />
     <ClCompile Include="FenceModel.cpp" />
+    <ClCompile Include="Grass.cpp" />
+    <ClCompile Include="GrassModel.cpp" />
+    <ClCompile Include="LevelRenderer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Mountain.cpp" />
     <ClCompile Include="MountainModel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerModel.cpp" />
+    <ClCompile Include="TeamNumberModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
@@ -92,11 +96,15 @@
     <ClInclude Include="AntennaModel.h" />
     <ClInclude Include="Fence.h" />
     <ClInclude Include="FenceModel.h" />
+    <ClInclude Include="Grass.h" />
+    <ClInclude Include="GrassModel.h" />
+    <ClInclude Include="LevelRenderer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Mountain.h" />
     <ClInclude Include="MountainModel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerModel.h" />
+    <ClInclude Include="TeamNumberModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

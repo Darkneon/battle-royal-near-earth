@@ -15,6 +15,7 @@
 #include "Fence.h"
 #include "Mountain.h"
 #include "Grass.h"
+#include "LevelRenderer.h"
 // Initial size of graphics window.
 const int WIDTH  = 600;
 const int HEIGHT = 400;
@@ -28,7 +29,7 @@ double nearPlane =  1.0;
 double farPlane  = 85.0;
 
 // Viewing angle.
-double fovy = 45.0;
+double fovy = 60.0;
 
 static GLint rotX = 0;
 static GLint rotY = 0;
@@ -38,7 +39,7 @@ Player player;
 Fence fence;
 Mountain mountain;
 Grass grass;
-
+LevelRenderer levelRenderer;
 void drawRectangle()
 {
 	//phaser base
@@ -330,10 +331,11 @@ void render()
 		drawPhaserCannon();
 		break;
 	case 3:
-	    player.draw();
-		fence.draw();
-		mountain.draw();
-        grass.draw();
+	 //   player.draw();
+		//fence.draw();
+		//mountain.draw();
+  //      grass.draw();
+		levelRenderer.render();
 		break;
 	}
 

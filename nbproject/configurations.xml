@@ -32,6 +32,8 @@
       <itemPath>source/Fence.h</itemPath>
       <itemPath>source/Grass.cpp</itemPath>
       <itemPath>source/Grass.h</itemPath>
+      <itemPath>source/LevelRenderer.cpp</itemPath>
+      <itemPath>source/LevelRenderer.h</itemPath>
       <itemPath>source/Mountain.cpp</itemPath>
       <itemPath>source/Mountain.h</itemPath>
       <itemPath>source/Player.cpp</itemPath>
