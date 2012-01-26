@@ -17,15 +17,21 @@
         <itemPath>source/AntennaModel.h</itemPath>
         <itemPath>source/FenceModel.cpp</itemPath>
         <itemPath>source/FenceModel.h</itemPath>
+        <itemPath>source/GrassModel.cpp</itemPath>
+        <itemPath>source/GrassModel.h</itemPath>
         <itemPath>source/Model.cpp</itemPath>
         <itemPath>source/Model.h</itemPath>
         <itemPath>source/MountainModel.cpp</itemPath>
         <itemPath>source/MountainModel.h</itemPath>
         <itemPath>source/PlayerModel.cpp</itemPath>
         <itemPath>source/PlayerModel.h</itemPath>
+        <itemPath>source/TeamNumberModel.cpp</itemPath>
+        <itemPath>source/TeamNumberModel.h</itemPath>
       </logicalFolder>
       <itemPath>source/Fence.cpp</itemPath>
       <itemPath>source/Fence.h</itemPath>
+      <itemPath>source/Grass.cpp</itemPath>
+      <itemPath>source/Grass.h</itemPath>
       <itemPath>source/Mountain.cpp</itemPath>
       <itemPath>source/Mountain.h</itemPath>
       <itemPath>source/Player.cpp</itemPath>

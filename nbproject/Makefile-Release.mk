@@ -36,12 +36,15 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
 	${OBJECTDIR}/source/MountainModel.o \
-	${OBJECTDIR}/source/Mountain.o \
+	${OBJECTDIR}/source/Grass.o \
 	${OBJECTDIR}/source/Fence.o \
+	${OBJECTDIR}/source/Mountain.o \
 	${OBJECTDIR}/source/PlayerModel.o \
 	${OBJECTDIR}/source/AntennaModel.o \
 	${OBJECTDIR}/source/Player.o \
+	${OBJECTDIR}/source/GrassModel.o \
 	${OBJECTDIR}/source/FenceModel.o \
+	${OBJECTDIR}/source/TeamNumberModel.o \
 	${OBJECTDIR}/source/Model.o
 
 
@@ -79,15 +82,20 @@ ${OBJECTDIR}/source/MountainModel.o: source/MountainModel.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/MountainModel.o source/MountainModel.cpp
 
-${OBJECTDIR}/source/Mountain.o: source/Mountain.cpp 
+${OBJECTDIR}/source/Grass.o: source/Grass.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Mountain.o source/Mountain.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Grass.o source/Grass.cpp
 
 ${OBJECTDIR}/source/Fence.o: source/Fence.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Fence.o source/Fence.cpp
+
+${OBJECTDIR}/source/Mountain.o: source/Mountain.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Mountain.o source/Mountain.cpp
 
 ${OBJECTDIR}/source/PlayerModel.o: source/PlayerModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -104,10 +112,20 @@ ${OBJECTDIR}/source/Player.o: source/Player.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Player.o source/Player.cpp
 
+${OBJECTDIR}/source/GrassModel.o: source/GrassModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/GrassModel.o source/GrassModel.cpp
+
 ${OBJECTDIR}/source/FenceModel.o: source/FenceModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/FenceModel.o source/FenceModel.cpp
+
+${OBJECTDIR}/source/TeamNumberModel.o: source/TeamNumberModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/TeamNumberModel.o source/TeamNumberModel.cpp
 
 ${OBJECTDIR}/source/Model.o: source/Model.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source

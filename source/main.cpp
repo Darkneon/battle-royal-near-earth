@@ -14,7 +14,7 @@
 #include "Player.h"
 #include "Fence.h"
 #include "Mountain.h"
-
+#include "Grass.h"
 // Initial size of graphics window.
 const int WIDTH  = 600;
 const int HEIGHT = 400;
@@ -37,7 +37,7 @@ static int choice = 0;
 Player player;
 Fence fence;
 Mountain mountain;
-
+Grass grass;
 
 void drawRectangle()
 {
@@ -333,6 +333,7 @@ void render()
 	    player.draw();
 		fence.draw();
 		mountain.draw();
+        grass.draw();
 		break;
 	}
 

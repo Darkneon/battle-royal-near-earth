@@ -7,6 +7,14 @@
 
 #ifndef MODEL_H
 #define	MODEL_H
+
+#ifdef __APPLE__
+	#include <Glut/glut.h>
+#else
+    #define FREEGLUT_STATIC
+    #include <GL/glut.h>
+#endif
+
 #include <cstdlib>
 #include <vector>
 
