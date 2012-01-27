@@ -7,6 +7,7 @@
 
 #include "LevelRenderer.h"
 #include "GrassModel.h"
+#include "HillsModel.h"
 
 LevelRenderer::LevelRenderer() {	
 	for(int i = 0; i != 50; i++) {
@@ -16,7 +17,9 @@ LevelRenderer::LevelRenderer() {
 	}
 
 	GrassModel *grassModel = new GrassModel;
+    HillsModel *hillsModel = new HillsModel;
 	models[0] = (Model*)grassModel;
+	models[1] = (Model*)hillsModel;
 } 
 
 LevelRenderer::~LevelRenderer() {

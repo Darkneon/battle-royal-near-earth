@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/HillsModel.o \
+	${OBJECTDIR}/source/LightRubbleModel.o \
 	${OBJECTDIR}/source/MountainModel.o \
 	${OBJECTDIR}/source/Grass.o \
 	${OBJECTDIR}/source/Fence.o \
@@ -77,6 +79,16 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+
+${OBJECTDIR}/source/HillsModel.o: source/HillsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HillsModel.o source/HillsModel.cpp
+
+${OBJECTDIR}/source/LightRubbleModel.o: source/LightRubbleModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LightRubbleModel.o source/LightRubbleModel.cpp
 
 ${OBJECTDIR}/source/MountainModel.o: source/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source

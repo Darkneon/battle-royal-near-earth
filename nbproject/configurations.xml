@@ -19,6 +19,10 @@
         <itemPath>source/FenceModel.h</itemPath>
         <itemPath>source/GrassModel.cpp</itemPath>
         <itemPath>source/GrassModel.h</itemPath>
+        <itemPath>source/HillsModel.cpp</itemPath>
+        <itemPath>source/HillsModel.h</itemPath>
+        <itemPath>source/LightRubbleModel.cpp</itemPath>
+        <itemPath>source/LightRubbleModel.h</itemPath>
         <itemPath>source/Model.cpp</itemPath>
         <itemPath>source/Model.h</itemPath>
         <itemPath>source/MountainModel.cpp</itemPath>
