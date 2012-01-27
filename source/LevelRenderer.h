@@ -4,10 +4,12 @@
 #include "Model.h"
 class LevelRenderer {
 public:
-	LevelRenderer();
-	void render();
+    LevelRenderer();
+    ~LevelRenderer();
+    void render();
 private:	
-	int level[50][50];
-	Model* models[1];
+    static const int NUM_MODELS = 1;
+    int level[50][50];
+    Model* models[NUM_MODELS];
 };
 #endif

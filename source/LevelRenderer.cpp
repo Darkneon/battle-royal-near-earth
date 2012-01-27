@@ -19,6 +19,13 @@ LevelRenderer::LevelRenderer() {
 	models[0] = (Model*)grassModel;
 } 
 
+LevelRenderer::~LevelRenderer() {
+    for (int i = 0; i != NUM_MODELS; i++) {
+        if (models[i] != NULL) {
+            delete models[i];
+        }
+    }
+}
 
 //Todo: will probably change while we get more requirements
 void LevelRenderer::render() {
@@ -26,7 +33,7 @@ void LevelRenderer::render() {
 		for(int j = 0; j != 50; j++) {	
 			glPushMatrix();
 				glTranslatef(i, 0, j);
-				models[0]->draw();
+				models[ level[i][j] ]->draw();
 			glPopMatrix();
 		}
 	}
