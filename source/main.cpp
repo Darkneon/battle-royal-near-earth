@@ -1,5 +1,3 @@
-
-
 #include <math.h>
 
 #ifdef __APPLE__
@@ -11,9 +9,7 @@
     #include <GL/glut.h>
 #endif
 
-#include "Player.h"
-#include "Fence.h"
-#include "Mountain.h"
+#include "GameIncludes.h"
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -34,278 +30,22 @@ static GLint rotX = 0;
 static GLint rotY = 0;
 
 static int choice = 0;
+static int nbOfChoices = 12;
+
 Player player;
 Fence fence;
 Mountain mountain;
-
-
-void drawRectangle()
-{
-	//phaser base
-	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(-1.0f, -0.5f,  1.0f);
-		glVertex3f(1.0f, -0.5f,  1.0f);
-		glVertex3f(-1.0f,  0.5f,  1.0f);
-		glVertex3f(1.0f,  0.5f,  1.0f);
-		glVertex3f(-1.0f,  0.5f, -1.0f);
-		glVertex3f(1.0f,  0.5f, -1.0f);
-		glVertex3f(-1.0f, -0.5f, -1.0f);
-		glVertex3f(1.0f, -0.5f, -1.0f);
-		glVertex3f(-1.0f, -0.5f,  1.0f);
-		glVertex3f(1.0f, -0.5f,  1.0f);
-	glEnd();
-
-	glBegin(GL_TRIANGLES);
-		glVertex3f(1.0f, -0.5f, -1.0f);
-		glVertex3f(1.0f,  0.5f, -1.0f);
-		glVertex3f(1.0f,  0.5f,  1.0f);
-		glVertex3f(1.0f, -0.5f, -1.0f);
-		glVertex3f(1.0f,  0.5f,  1.0f);
-		glVertex3f(1.0f, -0.5f,  1.0f);
-		glVertex3f(1.0f, -0.5f, -1.0f);
-	glEnd();
-
-	glBegin(GL_TRIANGLES);
-		glVertex3f(-1.0f, -0.5f, -1.0f);
-		glVertex3f(-1.0f,  0.5f, -1.0f);
-		glVertex3f(-1.0f,  0.5f,  1.0f);
-		glVertex3f(-1.0f, -0.5f, -1.0f);
-		glVertex3f(-1.0f,  0.5f,  1.0f);
-		glVertex3f(-1.0f, -0.5f,  1.0f);
-		glVertex3f(-1.0f, -0.5f, -1.0f);
-	glEnd();
-}
-
-void drawCylinder(GLint degrees)
-{
-	const GLfloat PI_TO_DEGREE_RATIO = 3.14159265 / 180;
-
-	GLfloat radius = 1.0f;
-	GLfloat height = 1.5f;
-	GLint increment = 10;
-	
-	glPushMatrix();
-
-		glTranslatef(-radius/2, -height/2, -radius/2);
-
-		glBegin(GL_POLYGON);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			for (int i = 0; i <= degrees; i += increment)
-			{
-				GLfloat angle = i;
-				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, 0.0f, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
-			}
-		glEnd();
-		
-		glBegin(GL_POLYGON);
-			glVertex3f(0.0f, height, 0.0f);
-			for (int i = 0; i <= degrees; i += increment)
-			{
-				GLfloat angle = i;
-				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
-			}
-		glEnd();
-	
-		glBegin(GL_TRIANGLES); // 2 triangles on the Z axis
-			glVertex3f(0.0f, 0.0f, radius);
-			glVertex3f(0.0f, height, -radius);
-			glVertex3f(0.0f, 0.0f, -radius);
-			glVertex3f(0.0f, 0.0f, radius);
-			glVertex3f(0.0f, height, radius);
-			glVertex3f(0.0f, height, -radius);
-			glVertex3f(0.0f, height, radius);
-		glEnd();
-
-		/*
-		glBegin(GL_TRIANGLES); // 2 triangles on X
-			glVertex3f(radius, 0.0f, 0.0f);
-			glVertex3f(0.0f, height, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(radius, 0.0f, 0.0f);
-			glVertex3f(radius, height, 0.0f);
-			glVertex3f(0.0f, height, 0.0f);
-			glVertex3f(radius, height, 0.0f);
-		glEnd();
-		*/
-
-		for (int i = 0; i < degrees; i += increment) //all the triangles along the perimeter
-		{
-			GLint angleNext = i + increment;
-			GLfloat angle = i;
-
-			GLfloat x0 = sin(angle * PI_TO_DEGREE_RATIO) * radius;
-			GLfloat x1 = sin(angleNext * PI_TO_DEGREE_RATIO) * radius;
-			GLfloat z0 = cos(angle * PI_TO_DEGREE_RATIO) * radius;
-			GLfloat z1 = cos(angleNext * PI_TO_DEGREE_RATIO) * radius;
-
-			glBegin(GL_POLYGON);
-				glVertex3f(x1, 0.0f, z1);
-				glVertex3f(x0, height, z0);
-				glVertex3f(x0, 0.0f, z0);
-				glVertex3f(x1, 0.0f, z1);
-				glVertex3f(x1, height, z1);
-				glVertex3f(x0, height, z0);
-				glVertex3f(x1, 0.0f, z1);
-			glEnd();
-		}
-
-	glPopMatrix();
-}
-
-void drawTriangularPrism()
-{
-	glPushMatrix();
-		glRotatef(-135.0f, 0.0f, 0.0f, 1.0f);
-		glTranslatef(-0.5f, -0.25f, 0.5f);
-		
-		glBegin(GL_TRIANGLES); //base 1
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.5f, 0.5f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-		glEnd();
-
-		glBegin(GL_TRIANGLES); //base 2
-			glVertex3f(0.0f, 0.0f, -1.0f);
-			glVertex3f(1.0f, 0.0f, -1.0f);
-			glVertex3f(0.5f, 0.5f, -1.0f);
-			glVertex3f(0.0f, 0.0f, -1.0f);
-		glEnd();
-
-		glBegin(GL_TRIANGLES); //the "under part"
-			glVertex3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, -1.0f);
-			glVertex3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(1.0f, 0.0f, -1.0f);
-			glVertex3f(0.0f, 0.0f, -1.0f);
-			glVertex3f(1.0f, 0.0f, -1.0f);
-		glEnd();
-
-		glBegin(GL_TRIANGLES); //the "top left part"
-			glVertex3f(0.5f, 0.5f, 0.0f);
-			glVertex3f(0.0f, 0.0f, -1.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.5f, 0.5f, 0.0f);
-			glVertex3f(0.5f, 0.5f, -1.0f);
-			glVertex3f(0.0f, 0.0f, -1.0f);
-			glVertex3f(0.5f, 0.5f, 0.0f);
-		glEnd();
-
-		glBegin(GL_TRIANGLES); //the "top right part"
-			glVertex3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.5f, 0.5f, 0.0f);
-			glVertex3f(0.5f, 0.5f, -1.0f);
-			glVertex3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.5f, 0.5f, -1.0f);
-			glVertex3f(1.0f, 0.0f, -1.0f);
-			glVertex3f(1.0f, 0.0f, 0.0f);
-		glEnd();
-
-	glPopMatrix();
-}
-
-void drawTrapezoidalPrism()
-{
-	glPushMatrix();
-		glTranslatef(-0.5f, 0.25f, 0.0f);
-		
-		glPushMatrix();
-			glTranslatef(0.0f, -0.24f, 0.0f);
-			glScalef(1.0f, 1.4f, 2.0f);
-			drawTriangularPrism();
-		glPopMatrix();
-
-		glPushMatrix();
-			glTranslatef(1.0f, 0.0f, 0.0f);
-			glScalef(0.8f, 1.0f, 1.0f);
-			drawRectangle();
-		glPopMatrix();
-	glPopMatrix();
-}
-
-void drawPhaserCannon()
-{
-	glEnable(GL_DEPTH_TEST);
-	glTranslatef(-0.9f, 0.9f, 0.5f);
-
-	//back panel
-	glPushMatrix();
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glTranslatef(1.0f, 0.0f, 0.0f);
-		glScalef(1.2f, 1.0f, 1.2f);
-		drawCylinder(180);
-	glPopMatrix();
-
-	//cannon barrel
-	glPushMatrix();
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glTranslatef(-0.1f, 0.0f, -0.6f);
-		glScalef(0.5f, 1.1f, 0.4f);
-		drawRectangle();
-	glPopMatrix();
-
-	//cannon base
-	glPushMatrix();
-		glColor3f(0,1,0);
-		glTranslatef(1.1f, -1.1f, -0.125f);
-		glScalef(0.9f, 0.5f, 0.9f);
-		drawCylinder(360);
-	glPopMatrix();
-}
-
-void drawMissileLauncher()
-{
-	glRotatef(-90, 0.0f, 1.0f, 0.0f);
-
-	glPushMatrix();
-		glColor3f(1.0f, 4.0f, 0.0f);
-		glScalef(1.1f, 0.9f, 0.8f);
-		drawRectangle();
-	glPopMatrix();
-
-	glPushMatrix();
-		glColor3f(0.5f, 0.0f, 0.5f);
-		glPushMatrix();
-			glTranslatef(-1.3f, -0.5f, 0.0f);
-			glRotatef(90, 1.0f, 0.0f, 0.0f);
-			glScalef(0.3f, 1.7f, 0.3f);
-			drawCylinder(360);
-		glPopMatrix();
-
-		glPushMatrix();
-			glColor3f(0.5f, 0.0f, 0.5f);
-			glTranslatef(1.6f, -0.5f, 0.0f);
-			glRotatef(90, 1.0f, 0.0f, 0.0f);
-			glScalef(0.3f, 1.7f, 0.3f);
-			drawCylinder(360);
-		glPopMatrix();
-	glPopMatrix();
-}
-
-void drawCannon()
-{
-	glPushMatrix();
-		glColor3f(1.0f, 0.0f, 0.0f);
-		drawTrapezoidalPrism();
-	glPopMatrix();
-
-	glPushMatrix();
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glTranslatef(-0.9f, 0.35f, 0.5f);
-		glRotatef(90, 0.0f, 0.0f, 1.0f);
-		glScalef(0.1f, 0.6, 0.1f);
-		drawCylinder(360);
-	glPopMatrix();
-
-	glPushMatrix();
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glTranslatef(-0.9f, 0.35f, -0.5f);
-		glRotatef(90, 0.0f, 0.0f, 1.0f);
-		glScalef(0.1f, 0.6, 0.1f);
-		drawCylinder(360);
-	glPopMatrix();
-}
+Phaser phaser;
+Cannon cannon;
+HollowBlock hollowBlock;
+HalfHollowBlock halfHollowBlock;
+PlainBlock plainBlock;
+HalfPlainBlock halfPlainBlock;
+MissileLauncher missileLauncher;
+Pit pit;
+Pit pit2;
+Electronics electronics;
+Nuclear nuclear;
 
 void render()
 {
@@ -321,23 +61,45 @@ void render()
 	switch (choice)
 	{
 	case 0:
-		drawCannon();
+		cannon.draw();
 		break;
 	case 1:
-		drawMissileLauncher();
+		missileLauncher.draw();
 		break;
 	case 2:
-		drawPhaserCannon();
+		phaser.draw();
 		break;
 	case 3:
 	    player.draw();
 		fence.draw();
 		mountain.draw();
 		break;
+	case 4:
+		plainBlock.draw();
+		break;
+	case 5:
+		halfPlainBlock.draw();
+		break;
+	case 6:
+		hollowBlock.draw();
+		break;
+	case 7:
+		halfHollowBlock.draw();
+		break;
+	case 8:
+		pit.draw();
+		break;
+	case 9:
+		pit2.draw();
+		break;
+	case 10:
+		electronics.draw();
+		break;
+	case 11:
+		nuclear.draw();
+		break;
 	}
 
-  
-    
 	glutSwapBuffers();
 }
 
@@ -353,7 +115,6 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
 	gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
 
-	glEnable(GL_DEPTH_TEST);
 }
 
 void functionKeys(int key, int x, int y)
@@ -384,7 +145,7 @@ void keyboardKeys(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'q':
-		choice = ++choice % 4; 
+		choice = ++choice % nbOfChoices; 
 		break;
 
 	case 27:
@@ -397,6 +158,7 @@ void keyboardKeys(unsigned char key, int x, int y)
 void init()
 {
 	glEnable(GL_DEPTH_TEST);
+	pit2.switchPitType();
 }
 
 int main (int argc, char **argv)
@@ -405,7 +167,7 @@ int main (int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
-	glutCreateWindow("Robot mids");
+	glutCreateWindow("Battle Royale Near Earth");
 
 	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);

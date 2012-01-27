@@ -76,12 +76,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AntennaModel.cpp" />
+    <ClCompile Include="Cannon.cpp" />
+    <ClCompile Include="CannonModel.cpp" />
+    <ClCompile Include="Electronics.cpp" />
+    <ClCompile Include="ElectronicsModel.cpp" />
     <ClCompile Include="Fence.cpp" />
     <ClCompile Include="FenceModel.cpp" />
+    <ClCompile Include="GeoHelper.cpp" />
+    <ClCompile Include="HalfHollowBlock.cpp" />
+    <ClCompile Include="HalfHollowBlockModel.cpp" />
+    <ClCompile Include="HalfPlainBlock.cpp" />
+    <ClCompile Include="HalfPlainBlockModel.cpp" />
+    <ClCompile Include="HollowBlock.cpp" />
+    <ClCompile Include="HollowBlockModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MissileLauncher.cpp" />
+    <ClCompile Include="MissileLauncherModel.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Mountain.cpp" />
     <ClCompile Include="MountainModel.cpp" />
+    <ClCompile Include="Nuclear.cpp" />
+    <ClCompile Include="NuclearModel.cpp" />
+    <ClCompile Include="Phaser.cpp" />
+    <ClCompile Include="PhaserModel.cpp" />
+    <ClCompile Include="Pit.cpp" />
+    <ClCompile Include="PitModel.cpp" />
+    <ClCompile Include="PlainBlock.cpp" />
+    <ClCompile Include="PlainBlockModel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerModel.cpp" />
   </ItemGroup>
@@ -90,11 +111,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntennaModel.h" />
+    <ClInclude Include="Cannon.h" />
+    <ClInclude Include="CannonModel.h" />
+    <ClInclude Include="Electronics.h" />
+    <ClInclude Include="ElectronicsModel.h" />
     <ClInclude Include="Fence.h" />
     <ClInclude Include="FenceModel.h" />
+    <ClInclude Include="GameIncludes.h" />
+    <ClInclude Include="GeoHelper.h" />
+    <ClInclude Include="HalfHollowBlock.h" />
+    <ClInclude Include="HalfHollowBlockModel.h" />
+    <ClInclude Include="HalfPlainBlock.h" />
+    <ClInclude Include="HalfPlainBlockModel.h" />
+    <ClInclude Include="HollowBlock.h" />
+    <ClInclude Include="HollowBlockModel.h" />
+    <ClInclude Include="MissileLauncher.h" />
+    <ClInclude Include="MissileLauncherModel.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Mountain.h" />
     <ClInclude Include="MountainModel.h" />
+    <ClInclude Include="Nuclear.h" />
+    <ClInclude Include="NuclearModel.h" />
+    <ClInclude Include="Phaser.h" />
+    <ClInclude Include="PhaserModel.h" />
+    <ClInclude Include="Pit.h" />
+    <ClInclude Include="PitModel.h" />
+    <ClInclude Include="PlainBlock.h" />
+    <ClInclude Include="PlainBlockModel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerModel.h" />
   </ItemGroup>
