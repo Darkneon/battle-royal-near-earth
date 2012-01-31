@@ -8,8 +8,8 @@
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
-
 #include "GameIncludes.h"
+
 
 // Initial size of graphics window.
 const int WIDTH  = 600;
@@ -24,7 +24,7 @@ double nearPlane =  1.0;
 double farPlane  = 85.0;
 
 // Viewing angle.
-double fovy = 45.0;
+double fovy = 60.0;
 
 static GLint rotX = 0;
 static GLint rotY = 0;
@@ -46,6 +46,10 @@ Pit pit;
 Pit pit2;
 Electronics electronics;
 Nuclear nuclear;
+Grass grass;
+LevelRenderer levelRenderer;
+
+
 
 void render()
 {
@@ -70,9 +74,11 @@ void render()
 		phaser.draw();
 		break;
 	case 3:
-	    player.draw();
-		fence.draw();
-		mountain.draw();
+	 //   player.draw();
+		//fence.draw();
+		//mountain.draw();
+  //      grass.draw();
+		levelRenderer.render();
 		break;
 	case 4:
 		plainBlock.draw();

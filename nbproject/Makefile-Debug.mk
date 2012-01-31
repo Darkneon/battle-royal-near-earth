@@ -35,13 +35,19 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/HillsModel.o \
+	${OBJECTDIR}/source/LightRubbleModel.o \
 	${OBJECTDIR}/source/MountainModel.o \
-	${OBJECTDIR}/source/Mountain.o \
+	${OBJECTDIR}/source/Grass.o \
 	${OBJECTDIR}/source/Fence.o \
+	${OBJECTDIR}/source/LevelRenderer.o \
+	${OBJECTDIR}/source/Mountain.o \
 	${OBJECTDIR}/source/PlayerModel.o \
 	${OBJECTDIR}/source/AntennaModel.o \
 	${OBJECTDIR}/source/Player.o \
+	${OBJECTDIR}/source/GrassModel.o \
 	${OBJECTDIR}/source/FenceModel.o \
+	${OBJECTDIR}/source/TeamNumberModel.o \
 	${OBJECTDIR}/source/Model.o
 
 
@@ -74,20 +80,40 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
+${OBJECTDIR}/source/HillsModel.o: source/HillsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HillsModel.o source/HillsModel.cpp
+
+${OBJECTDIR}/source/LightRubbleModel.o: source/LightRubbleModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LightRubbleModel.o source/LightRubbleModel.cpp
+
 ${OBJECTDIR}/source/MountainModel.o: source/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/MountainModel.o source/MountainModel.cpp
 
-${OBJECTDIR}/source/Mountain.o: source/Mountain.cpp 
+${OBJECTDIR}/source/Grass.o: source/Grass.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Mountain.o source/Mountain.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Grass.o source/Grass.cpp
 
 ${OBJECTDIR}/source/Fence.o: source/Fence.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Fence.o source/Fence.cpp
+
+${OBJECTDIR}/source/LevelRenderer.o: source/LevelRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LevelRenderer.o source/LevelRenderer.cpp
+
+${OBJECTDIR}/source/Mountain.o: source/Mountain.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Mountain.o source/Mountain.cpp
 
 ${OBJECTDIR}/source/PlayerModel.o: source/PlayerModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -104,10 +130,20 @@ ${OBJECTDIR}/source/Player.o: source/Player.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Player.o source/Player.cpp
 
+${OBJECTDIR}/source/GrassModel.o: source/GrassModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/GrassModel.o source/GrassModel.cpp
+
 ${OBJECTDIR}/source/FenceModel.o: source/FenceModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/FenceModel.o source/FenceModel.cpp
+
+${OBJECTDIR}/source/TeamNumberModel.o: source/TeamNumberModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/TeamNumberModel.o source/TeamNumberModel.cpp
 
 ${OBJECTDIR}/source/Model.o: source/Model.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source

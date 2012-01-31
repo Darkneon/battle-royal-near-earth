@@ -11,3 +11,8 @@
 #include "Pit.h"
 #include "Electronics.h"
 #include "Nuclear.h"
+#include "Player.h"
+#include "Fence.h"
+#include "Mountain.h"
+#include "Grass.h"
+#include "LevelRenderer.h"

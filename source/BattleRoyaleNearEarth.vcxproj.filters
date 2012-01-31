@@ -1,243 +1,257 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Models">
-      <UniqueIdentifier>{2f39b4fe-1306-497b-aca7-580c9691ff0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models\RobotParts">
-      <UniqueIdentifier>{d54a881f-562b-442d-a162-a35cb60aaef7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models\RobotParts\Middle">
-      <UniqueIdentifier>{c43b7757-2a5b-4153-8425-c02a602912c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models\RobotParts\Top">
-      <UniqueIdentifier>{201da318-64dc-46a7-8ca6-5bc2af66d5a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models\RobotParts\Bottom">
-      <UniqueIdentifier>{8f885fa3-17bb-41ff-9bec-10277d42b00d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models\Obsticles">
-      <UniqueIdentifier>{a6c415bd-f746-49d6-b951-6d1a900bb2e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models\Helper">
-      <UniqueIdentifier>{59edd70e-dbdc-4fb3-ab10-b93d67274f09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Logic">
-      <UniqueIdentifier>{5f2f8286-140a-4892-aa82-91dd4847e1e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Logic\Obsticles">
-      <UniqueIdentifier>{7c1f120f-27f8-47ab-8360-bbadfadb9cf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Logic\RobotParts">
-      <UniqueIdentifier>{d4aa88e2-c8a2-4b67-af35-d64fd4731a12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Logic\RobotParts\Middle">
-      <UniqueIdentifier>{c36ba4bc-ec0e-4b23-b8d5-4b97a8636e04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Logic\RobotParts\Top">
-      <UniqueIdentifier>{d4439108-35ae-4914-b0f1-a075ee4d3fe1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Logic\RobotParts\Bottom">
-      <UniqueIdentifier>{77baa4aa-c006-48b6-9a45-2f4e4c4da345}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="LevelRenderer.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Source Files\Models</Filter>
+      <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="PlayerModel.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="PhaserModel.cpp">
-      <Filter>Source Files\Models\RobotParts\Middle</Filter>
-    </ClCompile>
-    <ClCompile Include="Fence.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="Mountain.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="MountainModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="FenceModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="AntennaModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="GeoHelper.cpp">
-      <Filter>Source Files\Models\Helper</Filter>
-    </ClCompile>
-    <ClCompile Include="HollowBlockModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="HollowBlock.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="HalfHollowBlockModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="HalfHollowBlock.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="CannonModel.cpp">
-      <Filter>Source Files\Models\RobotParts\Middle</Filter>
+      <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Logic</Filter>
+      <Filter>Logic</Filter>
     </ClCompile>
-    <ClCompile Include="Phaser.cpp">
-      <Filter>Source Files\Logic\RobotParts\Middle</Filter>
+    <ClCompile Include="AntennaModel.cpp">
+      <Filter>Model\Static</Filter>
     </ClCompile>
-    <ClCompile Include="Cannon.cpp">
-      <Filter>Source Files\Logic\RobotParts\Middle</Filter>
+    <ClCompile Include="FenceModel.cpp">
+      <Filter>Model\Static</Filter>
     </ClCompile>
-    <ClCompile Include="PlainBlockModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="PlainBlock.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="HalfPlainBlockModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="HalfPlainBlock.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="MissileLauncherModel.cpp">
-      <Filter>Source Files\Models\RobotParts\Middle</Filter>
-    </ClCompile>
-    <ClCompile Include="MissileLauncher.cpp">
-      <Filter>Source Files\Logic\RobotParts\Middle</Filter>
-    </ClCompile>
-    <ClCompile Include="PitModel.cpp">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClCompile>
-    <ClCompile Include="Pit.cpp">
-      <Filter>Source Files\Logic\Obsticles</Filter>
+    <ClCompile Include="CannonModel.cpp">
+      <Filter>Model\Robot\Middle</Filter>
     </ClCompile>
     <ClCompile Include="ElectronicsModel.cpp">
-      <Filter>Source Files\Models\RobotParts\Top</Filter>
+      <Filter>Model\Robot\Top</Filter>
     </ClCompile>
-    <ClCompile Include="Electronics.cpp">
-      <Filter>Source Files\Logic\RobotParts\Top</Filter>
+    <ClCompile Include="GeoHelper.cpp">
+      <Filter>Model\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="GrassModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="HalfHollowBlockModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="HalfPlainBlockModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="HollowBlockModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileLauncherModel.cpp">
+      <Filter>Model\Robot\Middle</Filter>
+    </ClCompile>
+    <ClCompile Include="MountainModel.cpp">
+      <Filter>Model\Static</Filter>
     </ClCompile>
     <ClCompile Include="NuclearModel.cpp">
-      <Filter>Source Files\Models\RobotParts\Top</Filter>
+      <Filter>Model\Robot\Top</Filter>
+    </ClCompile>
+    <ClCompile Include="PitModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="PlainBlockModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="TeamNumberModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="PhaserModel.cpp">
+      <Filter>Model\Robot\Middle</Filter>
+    </ClCompile>
+    <ClCompile Include="Fence.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Grass.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="HalfHollowBlock.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="HalfPlainBlock.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="HollowBlock.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Pit.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="PlainBlock.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Logic\Robot\Middle</Filter>
+    </ClCompile>
+    <ClCompile Include="Electronics.cpp">
+      <Filter>Logic\Robot\Top</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileLauncher.cpp">
+      <Filter>Logic\Robot\Middle</Filter>
+    </ClCompile>
+    <ClCompile Include="Mountain.cpp">
+      <Filter>Logic\Static</Filter>
     </ClCompile>
     <ClCompile Include="Nuclear.cpp">
-      <Filter>Source Files\Logic\RobotParts\Top</Filter>
+      <Filter>Logic\Robot\Top</Filter>
     </ClCompile>
+    <ClCompile Include="Phaser.cpp">
+      <Filter>Logic\Robot\Middle</Filter>
+    </ClCompile>
+    <ClCompile Include="HillsModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameIncludes.h" />
+    <ClInclude Include="LevelRenderer.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="AntennaModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="FenceModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonModel.h">
+      <Filter>Model\Robot\Middle</Filter>
+    </ClInclude>
+    <ClInclude Include="ElectronicsModel.h">
+      <Filter>Model\Robot\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoHelper.h">
+      <Filter>Model\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="GrassModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfHollowBlockModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfPlainBlockModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="HollowBlockModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileLauncherModel.h">
+      <Filter>Model\Robot\Middle</Filter>
+    </ClInclude>
+    <ClInclude Include="MountainModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="NuclearModel.h">
+      <Filter>Model\Robot\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="PitModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="PlainBlockModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamNumberModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="PhaserModel.h">
+      <Filter>Model\Robot\Middle</Filter>
+    </ClInclude>
+    <ClInclude Include="Fence.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Grass.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfHollowBlock.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfPlainBlock.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="HollowBlock.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Pit.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="PlainBlock.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>Logic\Robot\Middle</Filter>
+    </ClInclude>
+    <ClInclude Include="Electronics.h">
+      <Filter>Logic\Robot\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileLauncher.h">
+      <Filter>Logic\Robot\Middle</Filter>
+    </ClInclude>
+    <ClInclude Include="Mountain.h">
+      <Filter>Logic\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Nuclear.h">
+      <Filter>Logic\Robot\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="Phaser.h">
+      <Filter>Logic\Robot\Middle</Filter>
+    </ClInclude>
+    <ClInclude Include="HillsModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Model.h">
-      <Filter>Source Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerModel.h">
-      <Filter>Source Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="PhaserModel.h">
-      <Filter>Source Files\Models\RobotParts\Middle</Filter>
-    </ClInclude>
-    <ClInclude Include="Fence.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="Mountain.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="MountainModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="FenceModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="AntennaModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="GeoHelper.h">
-      <Filter>Source Files\Models\Helper</Filter>
-    </ClInclude>
-    <ClInclude Include="HollowBlockModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="HollowBlock.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="HalfHollowBlockModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="HalfHollowBlock.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="CannonModel.h">
-      <Filter>Source Files\Models\RobotParts\Middle</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Source Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Phaser.h">
-      <Filter>Source Files\Logic\RobotParts\Middle</Filter>
-    </ClInclude>
-    <ClInclude Include="Cannon.h">
-      <Filter>Source Files\Logic\RobotParts\Middle</Filter>
-    </ClInclude>
-    <ClInclude Include="PlainBlockModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="PlainBlock.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="HalfPlainBlockModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="HalfPlainBlock.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="GameIncludes.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileLauncherModel.h">
-      <Filter>Source Files\Models\RobotParts\Middle</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileLauncher.h">
-      <Filter>Source Files\Logic\RobotParts\Middle</Filter>
-    </ClInclude>
-    <ClInclude Include="PitModel.h">
-      <Filter>Source Files\Models\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="Pit.h">
-      <Filter>Source Files\Logic\Obsticles</Filter>
-    </ClInclude>
-    <ClInclude Include="ElectronicsModel.h">
-      <Filter>Source Files\Models\RobotParts\Top</Filter>
-    </ClInclude>
-    <ClInclude Include="Electronics.h">
-      <Filter>Source Files\Logic\RobotParts\Top</Filter>
-    </ClInclude>
-    <ClInclude Include="NuclearModel.h">
-      <Filter>Source Files\Models\RobotParts\Top</Filter>
-    </ClInclude>
-    <ClInclude Include="Nuclear.h">
-      <Filter>Source Files\Logic\RobotParts\Top</Filter>
-    </ClInclude>
+    <Filter Include="Model">
+      <UniqueIdentifier>{f28a1f67-d6d5-45b6-83fc-b8ebe7d1cbab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic">
+      <UniqueIdentifier>{a4e0d1d8-039e-4804-bae3-a48692c36326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Robot">
+      <UniqueIdentifier>{5142ac0b-6583-4f29-9599-c4fcdc5accd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Robot\Bottom">
+      <UniqueIdentifier>{7b69e01b-7182-4070-8a81-404e85cbb2f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Robot\Middle">
+      <UniqueIdentifier>{a92cf620-dff5-48ce-8e9e-bcdd1f01a998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Robot\Top">
+      <UniqueIdentifier>{80b365d6-8305-4900-af60-dc5dbbddf28c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Static">
+      <UniqueIdentifier>{e2ac3ff9-becd-49fb-b010-fa9d8e3356f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Helper">
+      <UniqueIdentifier>{56d716df-b3e9-4b9b-b7d3-ff5c37cb28fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\Static">
+      <UniqueIdentifier>{caeebbf5-ee10-4b1f-add8-7bc266aecadc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\Robot">
+      <UniqueIdentifier>{9e27b7c1-2d5b-4463-b915-e6189d529887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\Robot\Middle">
+      <UniqueIdentifier>{b84b445b-bc8b-40db-8804-49696f2b230f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\Robot\Bottom">
+      <UniqueIdentifier>{e8a1baa4-5e8e-4f0f-8184-cf60e01b77ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logic\Robot\Top">
+      <UniqueIdentifier>{7c11c48d-d226-47fd-a2ca-09aac7ee24cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
