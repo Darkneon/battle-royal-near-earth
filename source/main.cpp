@@ -30,6 +30,7 @@ static double fovy = 60.0;
 //camera rotation
 static GLint rot = 0;
 //camera location
+
 static const GLfloat RADIUS = 10.0f;
 static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
 
@@ -75,19 +76,20 @@ void commanderCamera()
 	//gluLookAt(locX + radius, locY, locZ, locX, 0, locZ - radius, 0, 1, 0);
 }
 
+
 static GLfloat denom = 4.0f;
 
 void keyOperations()
 {
 	if (keyStates[GLUT_KEY_LEFT])
-		--locX;
+		locX--;
 	else if (keyStates[GLUT_KEY_RIGHT])
-		++locX;
+		locX++;
 
 	if (keyStates[GLUT_KEY_UP])
-		--locZ;
+		locZ--;
 	else if (keyStates[GLUT_KEY_DOWN])
-		++locZ;
+		locZ++;
 
 	if (keyStates[GLUT_KEY_PAGE_UP])
 		rot++;
@@ -123,6 +125,7 @@ void keyOperations()
 		locY = LOC_Y_INITIAL;
 		denom = 4.0f;
 	}	
+
 	if (keyStates[27])
 		exit(0);
 	
