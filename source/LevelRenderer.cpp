@@ -54,10 +54,10 @@ LevelRenderer::LevelRenderer() {
 	models[8] = (Model*)pitTopModel;
 	models[9] = (Model*)pitInsideModel;
 	models[10] = (Model*)pitBottomModel;
-	//models[11] = (Model*)lightRubbleModel;
-	models[11] = (Model*)eModel;
+	models[11] = (Model*)lightRubbleModel;
+	//models[11] = (Model*)eModel;
 	map1();
-	level[0][0] = 11;
+	//level[0][0] = 11;
 
 } 
 
@@ -100,7 +100,7 @@ void LevelRenderer::render() {
 
 void LevelRenderer::map1(){
 	
-	/*for(int i = 0; i != 50; i++) {
+	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {	
 			if(i == 0 || i == 49 || j == 0 || j == 49){
 				level[i][j] = 3;
@@ -125,5 +125,5 @@ void LevelRenderer::map1(){
 	level[35][8] = 10;
 
 	level[40][10] = 2;
-	level[40][15] = 11;*/
+	level[40][15] = 11;
 }

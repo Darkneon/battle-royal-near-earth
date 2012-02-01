@@ -112,6 +112,7 @@
     <ClCompile Include="PlainBlockModel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerModel.cpp" />
+    <ClCompile Include="Robot.cpp" />
     <ClCompile Include="TeamNumberModel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="PlainBlockModel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerModel.h" />
+    <ClInclude Include="Robot.h" />
     <ClInclude Include="TeamNumberModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

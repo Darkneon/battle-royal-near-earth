@@ -113,6 +113,9 @@
     <ClCompile Include="Base.cpp">
       <Filter>Logic\Static</Filter>
     </ClCompile>
+    <ClCompile Include="Robot.cpp">
+      <Filter>Logic\Robot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameIncludes.h" />
@@ -227,9 +230,9 @@
     <ClInclude Include="Base.h">
       <Filter>Logic\Static</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\library\freeglut_static.lib" />
+    <ClInclude Include="Robot.h">
+      <Filter>Logic\Robot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -271,5 +274,10 @@
     <Filter Include="Logic\Robot\Top">
       <UniqueIdentifier>{7c11c48d-d226-47fd-a2ca-09aac7ee24cf}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\library\freeglut_static.lib">
+      <Filter>Model\Robot\Top</Filter>
+    </Library>
   </ItemGroup>
 </Project>

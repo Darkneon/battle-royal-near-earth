@@ -14,13 +14,17 @@
 #endif
 
 #include "NuclearModel.h"
+#include "PhaserModel.h"
 
-NuclearModel::NuclearModel() {}
+NuclearModel::NuclearModel() {
+	PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
+}
 
 void NuclearModel::render() 
 {
 	GLUquadricObj *quadratic = gluNewQuadric();;
-	glTranslatef(.5,0,.5);
+	glTranslatef(0,1,0);
     glPushMatrix();
 		glRotatef(-90, 1,0,0);
 		gluCylinder(quadratic, .5, .5, 1, 8, 5);
@@ -35,5 +39,6 @@ void NuclearModel::render()
 		gluDisk(quadratic, 0, .5, 8, 5);
     glPopMatrix();
 
+	glTranslatef(0, -1, 0); //draw children on top
 	gluDeleteQuadric(quadratic);
 }

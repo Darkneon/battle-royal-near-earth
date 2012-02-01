@@ -65,6 +65,8 @@ Nuclear nuclear;
 Grass grass;
 LevelRenderer levelRenderer;
 Base base;
+Robot robot;
+
 void commanderCamera()
 {
 	glMatrixMode(GL_PROJECTION);
@@ -148,6 +150,8 @@ void render()
 		glPushMatrix();
 			glTranslatef(35,0,35);
 			player.draw();
+			glTranslatef(4,0,0);
+			robot.draw();
 		glPopMatrix();
 		break;
 	case 1:
