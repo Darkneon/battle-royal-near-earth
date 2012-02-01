@@ -19,6 +19,9 @@ public:
 	static void drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xEnd, GLfloat yEnd, GLfloat zEnd);
 	static void drawTrapezoidalPrism();
 	static void drawTriangularPrism();
+	static void drawMidBuilding(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
+	static void drawMidBuildingFront(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
+	static void drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
 };
 
 #endif

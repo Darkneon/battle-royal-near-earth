@@ -18,7 +18,6 @@ public:
 	void switchPitType();
 
 private:
-	static GeoHelper geoHelper;
 	bool isEndingPit;
     void drawPitOut();
 	void drawPitIn();

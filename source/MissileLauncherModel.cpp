@@ -24,7 +24,7 @@ void MissileLauncherModel::render() {
 		glPushMatrix();
 			glColor3f(1.0f, 4.0f, 0.0f);
 			glScalef(1.1f, 0.9f, 0.8f);
-			geoHelper.drawRectangle();
+			GeoHelper::drawRectangle();
 		glPopMatrix();
 
 		glPushMatrix();
@@ -33,7 +33,7 @@ void MissileLauncherModel::render() {
 				glTranslatef(-1.3f, -0.5f, 0.0f);
 				glRotatef(90, 1.0f, 0.0f, 0.0f);
 				glScalef(0.3f, 1.7f, 0.3f);
-				geoHelper.drawCylinder(360);
+				GeoHelper::drawCylinder(360);
 			glPopMatrix();
 
 			glPushMatrix();
@@ -41,7 +41,7 @@ void MissileLauncherModel::render() {
 				glTranslatef(1.6f, -0.5f, 0.0f);
 				glRotatef(90, 1.0f, 0.0f, 0.0f);
 				glScalef(0.3f, 1.7f, 0.3f);
-				geoHelper.drawCylinder(360);
+				GeoHelper::drawCylinder(360);
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();

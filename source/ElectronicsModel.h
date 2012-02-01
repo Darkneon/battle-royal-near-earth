@@ -15,7 +15,6 @@ public:
     ElectronicsModel();
 private:
 	void render();
-    static GeoHelper geoHelper;
 };
 
 #endif

@@ -22,7 +22,7 @@ void CannonModel::render() {
     glPushMatrix();
 		glPushMatrix();
 			glColor3f(1.0f, 0.0f, 0.0f);
-			geoHelper.drawTrapezoidalPrism();
+			GeoHelper::drawTrapezoidalPrism();
 		glPopMatrix();
 
 		glPushMatrix();
@@ -30,7 +30,7 @@ void CannonModel::render() {
 			glTranslatef(-0.9f, 0.35f, 0.5f);
 			glRotatef(90, 0.0f, 0.0f, 1.0f);
 			glScalef(0.1f, 0.6, 0.1f);
-			geoHelper.drawCylinder(360);
+			GeoHelper::drawCylinder(360);
 		glPopMatrix();
 
 		glPushMatrix();
@@ -38,7 +38,7 @@ void CannonModel::render() {
 			glTranslatef(-0.9f, 0.35f, -0.5f);
 			glRotatef(90, 0.0f, 0.0f, 1.0f);
 			glScalef(0.1f, 0.6, 0.1f);
-			geoHelper.drawCylinder(360);
+			GeoHelper::drawCylinder(360);
 		glPopMatrix();
 	glPopMatrix();
 }
