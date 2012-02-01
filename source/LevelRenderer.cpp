@@ -55,8 +55,8 @@ LevelRenderer::LevelRenderer() {
 	models[9] = (Model*)pitInsideModel;
 	models[10] = (Model*)pitBottomModel;
 	//models[11] = (Model*)lightRubbleModel;
-	models[11] = (Model*)eModel;
-	//map1();
+	//models[11] = (Model*)eModel;
+	map1();
 	level[0][0] = 11;
 
 } 

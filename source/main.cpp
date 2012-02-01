@@ -37,8 +37,8 @@ static GLint rot = 0;
 //camera location
 static const GLfloat radius = 10.0f;
 static GLint locX = 0.0f;
-//static GLfloat locY = radius * tan(GL_PI / 4);
-static GLfloat locY = 0;
+static GLfloat locY = radius * tan(GL_PI / 4);
+//static GLfloat locY = 0;
 static GLint locZ = radius;
 
 static bool wireframeView;
