@@ -6,7 +6,7 @@ Addison  Rodomista	1967568
 
 Key mappings:
 
-w --------------- toggle wireframe (not implemented yet)
+w --------------- toggle wireframe
 q --------------- change models (remove before demo)
 arrows ---------- move camera around
 page up/down ---- rotate

@@ -102,13 +102,18 @@ void keyOperations()
 	if (keyStates[(int)'q'])
 		choice = ++choice % nbOfChoices; 
 		
-	if (keyStates[(int)'w'])
+	if (keyStates[(int)'w']){
 		wireframeView = !wireframeView;
+		if(wireframeView){
+			glPolygonMode(GL_BACK, GL_LINE);
+			glPolygonMode(GL_FRONT, GL_LINE);
+		}else{
+			glPolygonMode(GL_BACK, GL_FILL);
+			glPolygonMode(GL_FRONT, GL_FILL);
+		}
+
+	}
 		
-    if (keyStates[(int)'t']) {
-        robot.changeTop();
-    }
-    
 	if (keyStates[(int)'-'])
 	{
 		if (denom != 4.0f)
@@ -149,7 +154,14 @@ void render()
 	switch (choice)
 	{
 	case 3:
+		
 		levelRenderer.render();
+		glPushMatrix();
+			glTranslatef(35,0,35);
+			player.draw();
+			glTranslatef(4,0,0);
+			robot.draw();
+		glPopMatrix();
 		break;
 	case 1:
 		missileLauncher.draw();
@@ -159,12 +171,6 @@ void render()
 		break;
 	case 0:
 		levelRenderer.render();
-        glPushMatrix();
-			glTranslatef(35,0,35);
-			player.draw();
-			glTranslatef(8,0,0);
-			robot.draw();
-		glPopMatrix();
 		break;
 	case 4:
 		plainBlock.draw();

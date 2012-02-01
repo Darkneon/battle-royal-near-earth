@@ -116,6 +116,27 @@
     <ClCompile Include="Robot.cpp">
       <Filter>Logic\Robot</Filter>
     </ClCompile>
+    <ClCompile Include="AntiGravModel.cpp">
+      <Filter>Model\Robot\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="BipodModel.cpp">
+      <Filter>Model\Robot\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="TracksModel.cpp">
+      <Filter>Model\Robot\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="Bipod.cpp">
+      <Filter>Logic\Robot\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracks.cpp">
+      <Filter>Logic\Robot\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiGrav.cpp">
+      <Filter>Logic\Robot\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameIncludes.h" />
@@ -232,6 +253,27 @@
     </ClInclude>
     <ClInclude Include="Robot.h">
       <Filter>Logic\Robot</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiGravModel.h">
+      <Filter>Model\Robot\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="BipodModel.h">
+      <Filter>Model\Robot\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="TracksModel.h">
+      <Filter>Model\Robot\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="Bipod.h">
+      <Filter>Logic\Robot\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracks.h">
+      <Filter>Logic\Robot\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiGrav.h">
+      <Filter>Logic\Robot\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryModel.h">
+      <Filter>Model\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

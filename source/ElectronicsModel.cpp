@@ -19,48 +19,48 @@ ElectronicsModel::ElectronicsModel() {
 }
 
 void ElectronicsModel::render() {
-   
+	glTranslatef(.5f,0.0f,.5f);
+	glScalef(.6f,.6f,.6f);
 	glPushMatrix();
-        glTranslatef(0.35f,0.8f,-0.3f);
-        glScalef(.6,.6,.6);
+		
 		//Rotation for full object
 		glRotatef(-90, 1, 0, 0);	
 
 		glPushMatrix();
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
-			glColor3f(.2,.2,.2);
+			glColor3f(.2f,.2f,.2f);
 			gluCylinder(quadratic, .8, .8, .1, 8, 3);
 
 			// Bottom of Base
-			glColor3f(.2,.2,.2);
-			glTranslatef(0,0,0);
+			glColor3f(.2f,.2f,.2f);
+			glTranslatef(0.0f,0.0f,0.0f);
 			gluDisk(quadratic, 0, .8, 8, 5);
 		
 			// Top of Base
-			glColor3f(.2,.2,.2);
-			glTranslatef(0,0,.1);
+			glColor3f(.2f,.2f,.2f);
+			glTranslatef(0.0f,0.0f,.1f);
 			gluDisk(quadratic, 0, .8, 8, 5);
 		glPopMatrix();
-		glTranslatef(0,.1,.1);
+		glTranslatef(0.0f,.1f,.1f);
 		
 		glPushMatrix();
 			//Neck
-			glColor3f(.7,.7,.7);
+			glColor3f(.7f,.7f,.7f);
 			gluCylinder(quadratic, .2, .2, .4, 8, 4);
 		
 			// Top of Base
-			glColor3f(.7,.7,.7);
-			glTranslatef(0,0,.4);
+			glColor3f(.7f,.7f,.7f);
+			glTranslatef(0.0f,0.0f,.4f);
 			gluDisk(quadratic, 0, .2, 8, 4);
 		glPopMatrix();
 		
 		glPushMatrix();
 			//Sphere: rotate sphere upward
-			glRotatef(-20,1,0,0);
+			glRotatef(-20,1.0f,0.0f,0.0f);
 
 			//Translate clipped sphere to top of neck
-			glTranslatef(0,-.5,.8);
+			glTranslatef(0.0f,-.5f,.8f);
 			
 			glPushMatrix();
 				//set up clip plane & draw sphere
