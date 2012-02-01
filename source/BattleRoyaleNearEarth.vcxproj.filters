@@ -107,6 +107,12 @@
     <ClCompile Include="LightRubbleModel.cpp">
       <Filter>Model\Static</Filter>
     </ClCompile>
+    <ClCompile Include="BaseModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameIncludes.h" />
@@ -214,6 +220,12 @@
     </ClInclude>
     <ClInclude Include="LightRubbleModel.h">
       <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Logic\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

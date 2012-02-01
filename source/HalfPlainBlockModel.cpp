@@ -21,7 +21,7 @@ HalfPlainBlockModel::HalfPlainBlockModel() {
 void HalfPlainBlockModel::render() {
 	glTranslatef(.5,.25,.5);
 	glPushMatrix();
-		geoHelper.drawCube(-0.5f, -0.25, -0.5f, 0.5f, 0.25, 0.5f);
+		GeoHelper::drawCube(-0.5f, -0.25, -0.5f, 0.5f, 0.25, 0.5f);
 	glPopMatrix();
 }
 

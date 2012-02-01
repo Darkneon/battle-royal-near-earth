@@ -76,6 +76,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AntennaModel.cpp" />
+    <ClCompile Include="Base.cpp" />
+    <ClCompile Include="BaseModel.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="CannonModel.cpp" />
     <ClCompile Include="Electronics.cpp" />
@@ -117,6 +119,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntennaModel.h" />
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="BaseModel.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="CannonModel.h" />
     <ClInclude Include="Electronics.h" />

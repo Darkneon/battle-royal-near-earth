@@ -5,7 +5,6 @@
  * Created on January 26, 2012, 6:47 PM
  */
 
-
 #ifdef __APPLE__
 	#include <Glut/glut.h>
 #else
@@ -21,10 +20,10 @@ HalfHollowBlockModel::HalfHollowBlockModel() {
 void HalfHollowBlockModel::render() {
 	glTranslatef(.5,.25,.5);
 	glPushMatrix();
-		geoHelper.drawCube(-0.5f, -0.25f, -0.5f, 0.5f, 0.25f, -0.25f);
-		geoHelper.drawCube(-0.5f, -0.25f, -0.25f, -0.25f, 0.25f, 0.25f);
-		geoHelper.drawCube(-0.5f, -0.25f, 0.25f, 0.5f, 0.25f, 0.5f);
-		geoHelper.drawCube(0.25f, -0.25f, -0.25f, 0.5f, 0.25f, 0.5f);
+		GeoHelper::drawCube(-0.5f, -0.25f, -0.5f, 0.5f, 0.25f, -0.25f);
+		GeoHelper::drawCube(-0.5f, -0.25f, -0.25f, -0.25f, 0.25f, 0.25f);
+		GeoHelper::drawCube(-0.5f, -0.25f, 0.25f, 0.5f, 0.25f, 0.5f);
+		GeoHelper::drawCube(0.25f, -0.25f, -0.25f, 0.5f, 0.25f, 0.5f);
 	glPopMatrix();
 }
 

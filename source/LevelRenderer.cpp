@@ -16,7 +16,7 @@
 #include "PitModel.h"
 #include "PlainBlockModel.h"
 #include "LightRubbleModel.h"
-#include "CannonModel.h"
+#include "BaseModel.h"
 
 
 LevelRenderer::LevelRenderer() {	
@@ -41,7 +41,7 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
-	CannonModel *eModel = new CannonModel;
+	BaseModel *eModel = new BaseModel;
 
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
@@ -55,7 +55,7 @@ LevelRenderer::LevelRenderer() {
 	models[9] = (Model*)pitInsideModel;
 	models[10] = (Model*)pitBottomModel;
 	//models[11] = (Model*)lightRubbleModel;
-	//models[11] = (Model*)eModel;
+	models[11] = (Model*)eModel;
 	map1();
 	level[0][0] = 11;
 

@@ -40,23 +40,27 @@ void PitModel::drawPitIn()
 	drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
 		glPushMatrix();
 			glTranslatef(0.0f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
+			geoHelper.drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
 			glTranslatef(0.0f, -0.2f, 0.0f);
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0.8f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
+			geoHelper.drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
 			glTranslatef(0.0f, -0.2f, 0.0f);
 		glPopMatrix();
 	glPopMatrix();
 }
 
+<<<<<<< HEAD
 void PitModel::drawPitTop()
 {
 	//Pit Outside
 	glTranslatef(.5,-.5,.5);
 	glPushMatrix();
 		drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+=======
+	GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 		glPushMatrix();
 			glTranslatef(0.0f, 0.2f, 0.0f);
 			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
@@ -69,7 +73,7 @@ void PitModel::drawPitTop()
 		glPopMatrix();
 		glPushMatrix();
 			glTranslatef(0.2f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.6f, 0.8f, 0.2f);
+			geoHelper.drawCube(0.0f, 0.0f, 0.0f, 0.6f, 0.8f, 0.2f);
 			glTranslatef(-0.2f, -0.2f, 0.0f);
 		glPopMatrix();
 	glPopMatrix();
@@ -81,7 +85,11 @@ void PitModel::drawPitBottom()
 	glTranslatef(1.5,-.5,1.5);
 	glRotatef(180,0,1,0);
 	glPushMatrix();
+<<<<<<< HEAD
 		drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+=======
+		GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 		glPushMatrix();
 			glTranslatef(0.0f, 0.2f, 0.0f);
 			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);

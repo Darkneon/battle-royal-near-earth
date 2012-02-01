@@ -30,14 +30,30 @@ static double fovy = 60.0;
 //camera rotation
 static GLint rot = 0;
 //camera location
-static GLint rotZ = 0;
 
 static const GLfloat RADIUS = 10.0f;
 static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
 
+<<<<<<< HEAD
+static GLint rotX = 0;
+static GLint rotY = 0;
+static GLint rotZ = 0;
+
+//camera rotation
+static GLint rot = 0;
+//camera location
+static const GLfloat radius = 10.0f;
+static GLint locX = 0.0f;
+static GLfloat locY = radius * tan(GL_PI / 4);
+//static GLfloat locY = 0;
+static GLint locZ = radius;
+
+static bool wireframeView;
+=======
 static GLfloat locX = 0.0f;
 static GLfloat locY = LOC_Y_INITIAL;
 static GLfloat locZ = RADIUS;
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 
 static bool wireframeView;
 
@@ -47,6 +63,9 @@ static int nbOfChoices = 13;
 //===================
 
 bool* keyStates = new bool[256];
+
+bool* keyStates = new bool[256];
+
 
 Player player;
 Fence fence;
@@ -65,6 +84,8 @@ Nuclear nuclear;
 Grass grass;
 LevelRenderer levelRenderer;
 Base base;
+
+
 void commanderCamera()
 {
 	glMatrixMode(GL_PROJECTION);
@@ -78,6 +99,19 @@ void commanderCamera()
 
 static GLfloat denom = 4.0f;
 
+<<<<<<< HEAD
+void commanderCamera()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
+	
+	gluLookAt(locX + radius * sin(rot * 1.0f / 8), locY, locZ - radius + radius * cos(rot * 1.0f / 8), locX, 0, locZ - radius, 0, 1, 0);
+	//gluLookAt(locX + radius, locY, locZ, locX, 0, locZ - radius, 0, 1, 0);
+}
+
+=======
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 void keyOperations()
 {
 	if (keyStates[GLUT_KEY_LEFT])
@@ -104,6 +138,14 @@ void keyOperations()
 		wireframeView = !wireframeView;
 		
 	if (keyStates[(int)'-'])
+<<<<<<< HEAD
+		fovy++;
+	else if (keyStates[(int)'='])
+		fovy--;	
+	else if (keyStates[(int)'0'])
+		fovy = 60.0f;
+		
+=======
 	{
 		if (denom != 4.0f)
 		{
@@ -125,6 +167,7 @@ void keyOperations()
 		denom = 4.0f;
 	}	
 
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 	if (keyStates[27])
 		exit(0);
 	
@@ -136,6 +179,24 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	keyOperations();
+<<<<<<< HEAD
+	
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	//glRotatef(rotX * 10, 1, 0, 0);
+	//glRotatef(rotY * 10, 0, 1, 0);
+
+	switch (choice)
+	{
+	case 0:
+		
+		levelRenderer.render();
+		glPushMatrix();
+			glTranslatef(35,0,35);
+			player.draw();
+		glPopMatrix();
+=======
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -143,12 +204,8 @@ void render()
 	switch (choice)
 	{
 	case 3:
-		
-		levelRenderer.render();
-		glPushMatrix();
-			glTranslatef(35,0,35);
-			player.draw();
-		glPopMatrix();
+		cannon.draw();
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 		break;
 	case 1:
 		missileLauncher.draw();
@@ -156,8 +213,13 @@ void render()
 	case 2:
 		phaser.draw();
 		break;
+<<<<<<< HEAD
+	case 3:
+		cannon.draw();
+=======
 	case 0:
 		levelRenderer.render();
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 		break;
 	case 4:
 		plainBlock.draw();
@@ -188,7 +250,11 @@ void render()
 		break;
 	}
 
+<<<<<<< HEAD
+	commanderCamera();	
+=======
 	commanderCamera();
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 
 	glutSwapBuffers();
 }
@@ -202,6 +268,70 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	glViewport(0, 0, width, height);
 
 	commanderCamera();
+<<<<<<< HEAD
+}
+
+void functionKeyUp(int key, int x, int y)
+{
+	keyStates[key] = false;
+	glutPostRedisplay();
+}
+
+void functionKeys(int key, int x, int y)
+{
+	keyStates[key] = true;
+
+	glutPostRedisplay();
+}
+
+void keyUp(unsigned char key, int x, int y)
+{
+	keyStates[key] = false;
+	glutPostRedisplay();
+}
+
+void keyboardKeys(unsigned char key, int x, int y)
+{
+	keyStates[key] = true;	
+	glutPostRedisplay();
+}
+
+/*
+void functionKeys(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		locX--;
+		break;
+	
+	case GLUT_KEY_RIGHT:
+		locX++;
+		break;
+
+	case GLUT_KEY_UP:
+		locZ--;
+		break;
+
+	case GLUT_KEY_DOWN:
+		locZ++;
+		break;
+
+	case GLUT_KEY_PAGE_UP:
+		rotX++;
+		break;
+
+	case GLUT_KEY_PAGE_DOWN:
+		rotX--;
+		break;
+
+	case GLUT_KEY_END:
+		rotZ = 0;
+		rotX = 0;
+		break;
+
+	}
+=======
 }
 
 void functionKeyUp(int key, int x, int y)
@@ -219,14 +349,39 @@ void functionKeys(int key, int x, int y)
 void keyUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 	glutPostRedisplay();
 }
 
 void keyboardKeys(unsigned char key, int x, int y)
 {
+<<<<<<< HEAD
+	switch (key)
+	{
+	case 'q':
+		choice = ++choice % nbOfChoices; 
+		break;
+	case 'w':
+		wireframeView = !wireframeView;
+		break;
+	case '-':
+		fovy++;
+		break;
+	case '=':
+		fovy--;
+		break;
+	case '0':
+		fovy = 60.0f;
+		break;
+	case 27:
+		exit(0);
+	}
+
+=======
 	keyStates[key] = true;	
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 	glutPostRedisplay();
-}
+}*/
 
 void init()
 {
@@ -254,7 +409,10 @@ int main (int argc, char **argv)
 	glutKeyboardFunc(keyboardKeys);
 	glutKeyboardUpFunc(keyUp);
 	glutSpecialUpFunc(functionKeyUp);
+<<<<<<< HEAD
+=======
 	glutDisplayFunc(render);
+>>>>>>> 4eead3a19414f0119acb7d4cd7f43ebb266e25c8
 
 	init();
 
