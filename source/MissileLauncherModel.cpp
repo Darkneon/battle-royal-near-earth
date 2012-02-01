@@ -18,6 +18,8 @@ MissileLauncherModel::MissileLauncherModel() {
 }
 
 void MissileLauncherModel::render() {
+	glTranslatef(.5,0,.4);//by jeff
+	glScalef(.27,.27,.27);//by jeff
     glPushMatrix();
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
 

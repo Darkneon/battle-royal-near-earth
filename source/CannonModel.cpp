@@ -19,6 +19,8 @@ CannonModel::CannonModel() {
 }
 
 void CannonModel::render() {
+	glTranslatef(.5,.2,.5); //by Jeff
+	glScalef(.4,.8,.4);//by Jeff
     glPushMatrix();
 		glPushMatrix();
 			glColor3f(1.0f, 0.0f, 0.0f);

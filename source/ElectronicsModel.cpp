@@ -19,7 +19,9 @@ ElectronicsModel::ElectronicsModel() {
 }
 
 void ElectronicsModel::render() {
-    glPushMatrix();
+	glTranslatef(.5,0,.5);
+	glScalef(.6,.6,.6);
+	glPushMatrix();
 		
 		//Rotation for full object
 		glRotatef(-90, 1, 0, 0);	
@@ -27,13 +29,16 @@ void ElectronicsModel::render() {
 		glPushMatrix();
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
+			glColor3f(.2,.2,.2);
 			gluCylinder(quadratic, .8, .8, .1, 8, 3);
 
 			// Bottom of Base
+			glColor3f(.2,.2,.2);
 			glTranslatef(0,0,0);
 			gluDisk(quadratic, 0, .8, 8, 5);
 		
 			// Top of Base
+			glColor3f(.2,.2,.2);
 			glTranslatef(0,0,.1);
 			gluDisk(quadratic, 0, .8, 8, 5);
 		glPopMatrix();
@@ -41,9 +46,11 @@ void ElectronicsModel::render() {
 		
 		glPushMatrix();
 			//Neck
+			glColor3f(.7,.7,.7);
 			gluCylinder(quadratic, .2, .2, .4, 8, 4);
 		
 			// Top of Base
+			glColor3f(.7,.7,.7);
 			glTranslatef(0,0,.4);
 			gluDisk(quadratic, 0, .2, 8, 4);
 		glPopMatrix();
@@ -61,16 +68,19 @@ void ElectronicsModel::render() {
 				glClipPlane(GL_CLIP_PLANE0, coordinate);
 				glEnable(GL_CLIP_PLANE0);
 					//outer sphere
+					glColor3f(.5,.5,.5);
 					gluSphere(quadratic, .6, 10,10);
 					
 					//inner sphere
 					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					glColor3f(.55,.55,.55);
 					gluSphere(quadratic,.5, 10, 10);
 					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 				glDisable(GL_CLIP_PLANE0);
 				glPushMatrix();
 					glTranslatef(0,-.15,0);
 					glRotatef(90, 1, 0, 0);
+					glColor3f(.4,.4,.4);
 					gluDisk(quadratic,.465, .59, 20, 5);
 				glPopMatrix();
 
@@ -78,6 +88,7 @@ void ElectronicsModel::render() {
 				glPushMatrix();
 					glTranslatef(0,0.55,0);
 					glRotatef(90,1,0,0);
+					glColor3f(.8,.8,.8);
 					gluCylinder(quadratic, .05, 0, .9, 8, 4);
 					glPushMatrix();
 						//Tip of antenna

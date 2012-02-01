@@ -104,6 +104,9 @@
     <ClCompile Include="HillsModel.cpp">
       <Filter>Model\Static</Filter>
     </ClCompile>
+    <ClCompile Include="LightRubbleModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameIncludes.h" />
@@ -207,6 +210,9 @@
       <Filter>Logic\Robot\Middle</Filter>
     </ClInclude>
     <ClInclude Include="HillsModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="LightRubbleModel.h">
       <Filter>Model\Static</Filter>
     </ClInclude>
   </ItemGroup>

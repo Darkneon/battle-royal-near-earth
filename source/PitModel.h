@@ -19,9 +19,12 @@ public:
 
 private:
 	static GeoHelper geoHelper;
-	bool isEndingPit;
-    void drawPitOut();
+	int pitType;
+    void drawPitTop();
 	void drawPitIn();
+	void drawPitBottom();
+	void drawBase(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend);
+	
 	
 };
 

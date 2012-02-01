@@ -19,7 +19,9 @@ FenceModel::FenceModel() {
 }
 
 void FenceModel::render() {
-    glPushMatrix();
+	glScalef(.5,.5,.5);
+    glTranslatef(4,2,0);
+	glPushMatrix();
         glColor3f(1, 0, 0);
         glScalef(2, 2, 2);
         glTranslatef(-2, -1, 0);

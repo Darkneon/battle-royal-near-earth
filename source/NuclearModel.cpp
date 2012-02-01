@@ -20,19 +20,19 @@ NuclearModel::NuclearModel() {}
 void NuclearModel::render() 
 {
 	GLUquadricObj *quadratic = gluNewQuadric();;
-
+	glTranslatef(.5,0,.5);
     glPushMatrix();
-		glRotatef(90, 1,0,0);
-		gluCylinder(quadratic, 1, 1, 1, 8, 5);
+		glRotatef(-90, 1,0,0);
+		gluCylinder(quadratic, .5, .5, 1, 8, 5);
 
 		// Bottom
-		
 		glTranslatef(0,0,0);
-		gluDisk(quadratic, 0, 1, 8, 5);
+		glColor3f(1,0,0);
+		gluDisk(quadratic, 0, .5, 8, 5);
 		
 		// Top
 		glTranslatef(0,0,1);
-		gluDisk(quadratic, 0, 1, 8, 5);
+		gluDisk(quadratic, 0, .5, 8, 5);
     glPopMatrix();
 
 	gluDeleteQuadric(quadratic);

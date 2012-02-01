@@ -19,6 +19,7 @@ HalfHollowBlockModel::HalfHollowBlockModel() {
 }
 
 void HalfHollowBlockModel::render() {
+	glTranslatef(.5,.25,.5);
 	glPushMatrix();
 		geoHelper.drawCube(-0.5f, -0.25f, -0.5f, 0.5f, 0.25f, -0.25f);
 		geoHelper.drawCube(-0.5f, -0.25f, -0.25f, -0.25f, 0.25f, 0.25f);

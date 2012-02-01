@@ -8,8 +8,9 @@ public:
     ~LevelRenderer();
     void render();
 private:	
-    static const int NUM_MODELS = 1;
+    static const int NUM_MODELS = 11;
     int level[50][50];
     Model* models[NUM_MODELS];
+	void map1();
 };
 #endif

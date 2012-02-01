@@ -7,13 +7,16 @@
 
 #include <cstdlib>
 #include "LightRubbleModel.h"
+#include "GrassModel.h"
 
 LightRubbleModel::LightRubbleModel(void)
 {
+	GrassModel* child = new GrassModel;
+	setNextChild( (Model*)child );
 }
 
-
 void LightRubbleModel::render() {
+	glColor3f(.7,.7,.7);
 	glPushMatrix();
 		glTranslatef(0.15,0,0.2);
 			drawRock();
@@ -36,6 +39,7 @@ void LightRubbleModel::render() {
 		glTranslatef(-0.75, 0, -0.32);
 
 		glTranslatef(0.72,0,0.15);
+			//glColor3f(1.0f,1.0f,1.0f);
 			drawBRock();
 		glTranslatef(-0.72, 0, -0.15);
 
