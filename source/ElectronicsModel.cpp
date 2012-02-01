@@ -19,10 +19,10 @@ ElectronicsModel::ElectronicsModel() {
 }
 
 void ElectronicsModel::render() {
-	glTranslatef(.5,0,.5);
-	glScalef(.6,.6,.6);
+   
 	glPushMatrix();
-		
+        glTranslatef(0.35f,0.8f,-0.3f);
+        glScalef(.6,.6,.6);
 		//Rotation for full object
 		glRotatef(-90, 1, 0, 0);	
 

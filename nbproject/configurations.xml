@@ -15,33 +15,82 @@
       <logicalFolder name="f1" displayName="Models" projectFiles="true">
         <itemPath>source/AntennaModel.cpp</itemPath>
         <itemPath>source/AntennaModel.h</itemPath>
+        <itemPath>source/BaseModel.cpp</itemPath>
+        <itemPath>source/BaseModel.h</itemPath>
+        <itemPath>source/CannonModel.cpp</itemPath>
+        <itemPath>source/CannonModel.h</itemPath>
+        <itemPath>source/ElectronicsModel.cpp</itemPath>
+        <itemPath>source/ElectronicsModel.h</itemPath>
         <itemPath>source/FenceModel.cpp</itemPath>
         <itemPath>source/FenceModel.h</itemPath>
         <itemPath>source/GrassModel.cpp</itemPath>
         <itemPath>source/GrassModel.h</itemPath>
+        <itemPath>source/HalfHollowBlockModel.cpp</itemPath>
+        <itemPath>source/HalfHollowBlockModel.h</itemPath>
+        <itemPath>source/HalfPlainBlockModel.cpp</itemPath>
+        <itemPath>source/HalfPlainBlockModel.h</itemPath>
         <itemPath>source/HillsModel.cpp</itemPath>
         <itemPath>source/HillsModel.h</itemPath>
+        <itemPath>source/HollowBlockModel.cpp</itemPath>
+        <itemPath>source/HollowBlockModel.h</itemPath>
         <itemPath>source/LightRubbleModel.cpp</itemPath>
         <itemPath>source/LightRubbleModel.h</itemPath>
+        <itemPath>source/MissileLauncherModel.cpp</itemPath>
+        <itemPath>source/MissileLauncherModel.h</itemPath>
         <itemPath>source/Model.cpp</itemPath>
         <itemPath>source/Model.h</itemPath>
         <itemPath>source/MountainModel.cpp</itemPath>
         <itemPath>source/MountainModel.h</itemPath>
+        <itemPath>source/NuclearModel.cpp</itemPath>
+        <itemPath>source/NuclearModel.h</itemPath>
+        <itemPath>source/PhaserModel.cpp</itemPath>
+        <itemPath>source/PhaserModel.h</itemPath>
+        <itemPath>source/PitModel.cpp</itemPath>
+        <itemPath>source/PitModel.h</itemPath>
+        <itemPath>source/PlainBlockModel.cpp</itemPath>
+        <itemPath>source/PlainBlockModel.h</itemPath>
         <itemPath>source/PlayerModel.cpp</itemPath>
         <itemPath>source/PlayerModel.h</itemPath>
         <itemPath>source/TeamNumberModel.cpp</itemPath>
         <itemPath>source/TeamNumberModel.h</itemPath>
       </logicalFolder>
+      <itemPath>source/Base.cpp</itemPath>
+      <itemPath>source/Base.h</itemPath>
+      <itemPath>source/Cannon.cpp</itemPath>
+      <itemPath>source/Cannon.h</itemPath>
+      <itemPath>source/Electronics.cpp</itemPath>
+      <itemPath>source/Electronics.h</itemPath>
       <itemPath>source/Fence.cpp</itemPath>
       <itemPath>source/Fence.h</itemPath>
+      <itemPath>source/GameIncludes.h</itemPath>
+      <itemPath>source/GeoHelper.cpp</itemPath>
+      <itemPath>source/GeoHelper.h</itemPath>
       <itemPath>source/Grass.cpp</itemPath>
       <itemPath>source/Grass.h</itemPath>
+      <itemPath>source/HalfHollowBlock.cpp</itemPath>
+      <itemPath>source/HalfHollowBlock.h</itemPath>
+      <itemPath>source/HalfPlainBlock.cpp</itemPath>
+      <itemPath>source/HalfPlainBlock.h</itemPath>
+      <itemPath>source/HollowBlock.cpp</itemPath>
+      <itemPath>source/HollowBlock.h</itemPath>
       <itemPath>source/LevelRenderer.cpp</itemPath>
       <itemPath>source/LevelRenderer.h</itemPath>
+      <itemPath>source/MissileLauncher.cpp</itemPath>
+      <itemPath>source/MissileLauncher.h</itemPath>
       <itemPath>source/Mountain.cpp</itemPath>
       <itemPath>source/Mountain.h</itemPath>
+      <itemPath>source/Nuclear.cpp</itemPath>
+      <itemPath>source/Nuclear.h</itemPath>
+      <itemPath>source/Phaser.cpp</itemPath>
+      <itemPath>source/Phaser.h</itemPath>
+      <itemPath>source/Pit.cpp</itemPath>
+      <itemPath>source/Pit.h</itemPath>
+      <itemPath>source/PlainBlock.cpp</itemPath>
+      <itemPath>source/PlainBlock.h</itemPath>
       <itemPath>source/Player.cpp</itemPath>
       <itemPath>source/Player.h</itemPath>
+      <itemPath>source/Robot.cpp</itemPath>
+      <itemPath>source/Robot.h</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
