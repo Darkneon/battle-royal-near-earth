@@ -15,7 +15,6 @@ public:
     PlainBlockModel();        
 private:
     void render();
-	static GeoHelper geoHelper;
 };
 
 #endif

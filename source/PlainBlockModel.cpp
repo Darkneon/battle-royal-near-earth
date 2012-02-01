@@ -20,6 +20,6 @@ PlainBlockModel::PlainBlockModel() {
 
 void PlainBlockModel::render() {
 	glPushMatrix();
-		geoHelper.drawCube(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f);
+		GeoHelper::drawCube(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f);
 	glPopMatrix();
 }

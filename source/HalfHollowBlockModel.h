@@ -15,7 +15,6 @@ public:
     HalfHollowBlockModel();        
 private:
     void render();
-	static GeoHelper geoHelper;
 };
 
 #endif
