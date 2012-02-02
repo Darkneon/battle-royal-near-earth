@@ -48,10 +48,10 @@ void ElectronicsModel::render() {
 			//Team #
 			glPushMatrix();
 				glColor3f(1.0f,0.0f,0.0f);
-				glTranslatef(0.0f,-0.2f,0.1f);
+				glTranslatef(0.0f,-0.3f,0.01f);
 				glScalef(0.25f, 0.25f, 0.25f);
 				glBegin(GL_LINES);
-					glLineWidth(0.4f);
+					glLineWidth(1.0f);
 					glVertex3f(-0.25f, -0.25f, 0.0f);
 					glVertex3f(0.25f, -0.25f, 0.0f);
 

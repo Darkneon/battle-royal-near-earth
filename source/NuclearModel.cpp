@@ -41,6 +41,30 @@ void NuclearModel::render()
 		// Top
 		glTranslatef(0,0,.5);
 		gluDisk(quadratic, 0, .45, 8, 5);
+
+		//Team #
+			glPushMatrix();
+				glColor3f(1.0f,0.0f,0.0f);
+				glTranslatef(0.0f,0.0f,0.01f);
+				glScalef(0.25f, 0.25f, 0.25f);
+				glBegin(GL_LINES);
+					glLineWidth(1.0f);
+					glVertex3f(-0.25f, -0.25f, 0.0f);
+					glVertex3f(0.25f, -0.25f, 0.0f);
+
+					glVertex3f(-0.25f, -0.25f, 0.0f);
+					glVertex3f(-0.25f, 0.0f, 0.0f);
+
+					glVertex3f(0.25f, 0.0f, 0.0f);
+					glVertex3f(-0.25f, 0.0f, 0.0f);
+
+					glVertex3f(0.25f, 0.0f, 0.0f);
+					glVertex3f(0.25f, 0.25f, 0.0f);
+
+					glVertex3f(-0.25f, 0.25f, 0.0f);
+					glVertex3f(0.25f, 0.25f, 0.0f);
+				glEnd();
+			glPopMatrix();
     glPopMatrix();
 	
     
