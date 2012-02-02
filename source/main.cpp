@@ -30,8 +30,6 @@ static double fovy = 60.0;
 //camera rotation
 static GLint rot = 0;
 //camera location
-static GLint rotZ = 0;
-
 static const GLfloat RADIUS = 10.0f;
 static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
 
@@ -47,6 +45,7 @@ static int nbOfChoices = 13;
 //===================
 
 bool* keyStates = new bool[256];
+bool* funcKeyStates = new bool[256];
 
 Player player;
 Fence fence;
@@ -72,33 +71,52 @@ void commanderCamera()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
-	
-	gluLookAt(locX + RADIUS * sin(rot * 1.0f / 8), locY, locZ - RADIUS + RADIUS * cos(rot * 1.0f / 8), locX, 0, locZ - RADIUS, 0, 1, 0);
-	//gluLookAt(locX + radius, locY, locZ, locX, 0, locZ - radius, 0, 1, 0);
+
+	gluLookAt(locX + RADIUS * sin(rot * 1.0f / 8), locY, locZ - RADIUS + RADIUS * cos(rot * 1.0f / 8),
+		locX, 0, locZ - RADIUS, 0, 1, 0);
 }
 
+
+void funcKeyOperations()
+{
+	if (funcKeyStates[GLUT_KEY_LEFT])
+	{
+		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
+		locZ += moveVector[0];
+		locX -= moveVector[1];	
+	}
+	else if (funcKeyStates[GLUT_KEY_RIGHT])
+	{
+		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
+		locZ -= moveVector[0];
+		locX += moveVector[1];
+	}
+
+	if (funcKeyStates[GLUT_KEY_UP])
+	{
+		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
+		locZ -= moveVector[1];
+		locX -= moveVector[0];
+	}
+	else if (funcKeyStates[GLUT_KEY_DOWN])
+	{
+		GLfloat moveVector[] = { 0 + 1 * sin(rot * 1.0f / 8), 0 + 1 * cos(rot * 1.0f / 8)};
+		locZ += moveVector[1];
+		locX += moveVector[0];
+	}
+
+	if (funcKeyStates[GLUT_KEY_PAGE_UP])
+		rot++;
+	else if (funcKeyStates[GLUT_KEY_PAGE_DOWN])
+		rot--;
+	else if (funcKeyStates[GLUT_KEY_END])
+		rot = 0;
+}
 
 static GLfloat denom = 4.0f;
 
 void keyOperations()
 {
-	if (keyStates[GLUT_KEY_LEFT])
-		locX--;
-	else if (keyStates[GLUT_KEY_RIGHT])
-		locX++;
-
-	if (keyStates[GLUT_KEY_UP])
-		locZ--;
-	else if (keyStates[GLUT_KEY_DOWN])
-		locZ++;
-
-	if (keyStates[GLUT_KEY_PAGE_UP])
-		rot++;
-	else if (keyStates[GLUT_KEY_PAGE_DOWN])
-		rot--;
-	else if (keyStates[GLUT_KEY_END])
-		rot = 0;
-
 	if (keyStates[(int)'q'])
 		choice = ++choice % nbOfChoices; 
 		
@@ -146,6 +164,7 @@ void render()
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	funcKeyOperations();
 	keyOperations();
 
 	glMatrixMode(GL_MODELVIEW);
@@ -219,13 +238,13 @@ void reshapeMainWindow (int newWidth, int newHeight)
 
 void functionKeyUp(int key, int x, int y)
 {
-	keyStates[key] = false;
+	funcKeyStates[key] = false;
 	glutPostRedisplay();
 }
 
 void functionKeys(int key, int x, int y)
 {
-	keyStates[key] = true;
+	funcKeyStates[key] = true;
 	glutPostRedisplay();
 }
 
@@ -249,7 +268,10 @@ void init()
 
 
 	for (int i = 0; i < 256; i++)
+	{
 		keyStates[i] = false;
+		funcKeyStates[i] = false;
+	}
 }
 
 
@@ -272,6 +294,9 @@ int main (int argc, char **argv)
 	init();
 
 	glutMainLoop();
+
+	delete keyStates;
+	delete funcKeyStates;
 
 	return 0;
 }
