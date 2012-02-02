@@ -6,17 +6,15 @@
 #endif
 
 #include "BipodModel.h"
+#include "PhaserModel.h"
 #include "TeamNumberModel.h"
 
 BipodModel::BipodModel(void)
 {
-	//height approximately 1
+    PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
 }
 
-
-BipodModel::~BipodModel(void)
-{
-}
 
 void BipodModel::render(){
 	glPushMatrix();
@@ -64,8 +62,6 @@ void BipodModel::render(){
 				glVertex3f(0.0f, 0.0f, 1.5f);
 			glEnd();
 		glPopMatrix();
-		glTranslatef(0.0f,-1.3f,0.0f);
-
 	glPopMatrix();
 	glTranslated(0,1,0);
 }

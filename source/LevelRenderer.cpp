@@ -85,7 +85,12 @@ LevelRenderer::LevelRenderer() {
 	models[18] = (Model*)electronicsModel;
 	models[19] = (Model*)nuclearModel;
 	models[20] = (Model*)factoryModel;
-	models[19]->removeAllChildren();
+	models[12]->removeAllChildren();
+	models[13]->removeAllChildren();
+	models[14]->removeAllChildren();
+	models[15]->removeAllChildren();
+	models[16]->removeAllChildren();
+	models[17]->removeAllChildren();
 	map1();
 	//level[0][0] = 16;
 

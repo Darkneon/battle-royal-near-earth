@@ -13,15 +13,17 @@
 #endif
 
 #include "MissileLauncherModel.h"
+#include "NuclearModel.h"
 
 MissileLauncherModel::MissileLauncherModel() {
-	//height approx. .3
+    NuclearModel *model = new NuclearModel();
+    setNextChild( (Model*)model );
 }
 
 void MissileLauncherModel::render() {
-	glTranslatef(.5f,0.175f,.5f);//by jeff
-	glScalef(.27f,.27f,.27f);//by jeff
     glPushMatrix();
+        glTranslatef(0.5f,0.175f,0.5f);//by jeff
+        glScalef(.27f,.27f,.27f);//by jeff
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
 
 		glPushMatrix();
@@ -48,4 +50,6 @@ void MissileLauncherModel::render() {
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
+    
+    glTranslatef(0, 0.3f, 0);
 }

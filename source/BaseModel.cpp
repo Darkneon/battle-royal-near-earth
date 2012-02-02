@@ -21,7 +21,9 @@ BaseModel::BaseModel(){}
 
 void BaseModel::render() 
 {
-   drawBase(0.0f, 0.0f, 0.0f);
+	glPushMatrix();
+	drawBase(0.0f, 0.0f, 0.0f);
+	glPopMatrix();
 }
 
 //Uses the previous methods to draw a base

@@ -14,9 +14,11 @@
 #endif
 
 #include "CannonModel.h"
+#include "NuclearModel.h"
 
 CannonModel::CannonModel() {
-	//height approximately .35
+    NuclearModel *model = new NuclearModel();
+    setNextChild( (Model*)model );
 }
 
 void CannonModel::render() {
@@ -43,8 +45,7 @@ void CannonModel::render() {
 			glScalef(0.1f, 0.6, 0.1f);
 			GeoHelper::drawCylinder(360);
 		glPopMatrix();
-	glPopMatrix();        
+	glPopMatrix();
     
-    glTranslatef(-0.2, -2.5f, -1.0f);
-
+    glTranslatef(0, 0.4f, 0);
 }

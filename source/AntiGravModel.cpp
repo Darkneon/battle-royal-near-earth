@@ -6,16 +6,15 @@
 #endif
 
 #include "AntiGravModel.h"
+#include "PhaserModel.h"
+
 
 AntiGravModel::AntiGravModel(void)
 {
-	//height: approximately .6
+    PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
 }
 
-
-AntiGravModel::~AntiGravModel(void)
-{
-}
 
 void AntiGravModel::render(){
 	GLUquadricObj *quadratic = gluNewQuadric();
@@ -112,6 +111,7 @@ void AntiGravModel::render(){
 
 	glPopMatrix();
 
+    glTranslatef(0, 0.7f, 0);
 	gluDeleteQuadric(quadratic);
 }
 

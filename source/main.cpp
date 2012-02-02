@@ -202,9 +202,9 @@ void render()
 			player.draw();
 			glTranslatef(5,0,0);
 			base.draw();
-			glTranslatef(5,0,0);
-			//factory.draw();
-			//robot.draw();
+			glTranslatef(7,0,5);
+			robot.draw();
+
 		glPopMatrix();
         break;
 	case 4:
@@ -281,7 +281,6 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 	wireframeView = false;
 	pit2.switchPitType();
-
 
 	for (int i = 0; i < 256; i++)
 	{
