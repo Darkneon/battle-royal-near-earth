@@ -31,10 +31,7 @@ Robot::Robot() {
 }
 
 Robot::~Robot() {
-	if (model != NULL) {
-		delete model;
-		model = NULL;
-	}
+    //Deleting the head frees up its children as well
     
     if (head1 != NULL) {
         delete head1;
@@ -45,6 +42,7 @@ Robot::~Robot() {
         delete head2;
         head2 = NULL;
     } 
+    
 }
 
 void Robot::changeTop() {
