@@ -111,7 +111,7 @@ void GeoHelper::drawRectangle()
 
 void GeoHelper::drawCylinder(GLint degrees)
 {
-	const GLfloat PI_TO_DEGREE_RATIO = 3.14159265 / 180;
+	const GLfloat PI_TO_DEGREE_RATIO = 3.14159265f / 180;
 
 	GLfloat radius = 1.0f;
 	GLfloat height = 1.5f;
@@ -134,7 +134,7 @@ void GeoHelper::drawCylinder(GLint degrees)
 			glVertex3f(0.0f, height, 0.0f);
 			for (int i = 0; i <= degrees; i += increment)
 			{
-				GLfloat angle = i;
+				GLfloat angle = (float)i;
 				glVertex3f(0.0f + sin(angle * PI_TO_DEGREE_RATIO) * radius, height, 0.0f + cos(angle * PI_TO_DEGREE_RATIO) * radius);
 			}
 		glEnd();

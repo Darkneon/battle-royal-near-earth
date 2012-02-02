@@ -16,50 +16,50 @@ LightRubbleModel::LightRubbleModel(void)
 }
 
 void LightRubbleModel::render() {
-	glColor3f(.7,.7,.7);
+	glColor3f(.7f,.7f,.7f);
 	glPushMatrix();
-		glTranslatef(0.15,0,0.2);
+		glTranslatef(0.15f,0.0f,0.2f);
 			drawRock();
-		glTranslatef(-0.15, 0, -0.2);
+		glTranslatef(-0.15f, 0.0f, -0.2f);
 
-		glTranslatef(0.8,0,0.8);
+		glTranslatef(0.8f,0.0f,0.8f);
 			drawBRock();
-		glTranslatef(-0.8, 0, -0.8);
+		glTranslatef(-0.8f, 0.0f, -0.8f);
 
-		glTranslatef(0.5,0,0.5);
+		glTranslatef(0.5f,0.0f,0.5f);
 			drawRock();
-		glTranslatef(-0.5, 0, -0.5);
+		glTranslatef(-0.5f, 0.0f, -0.5f);
 
-		glTranslatef(0.1,0,0.6);
+		glTranslatef(0.1f,0.0f,0.6f);
 			drawBRock();
-		glTranslatef(-0.1, 0, -0.6);
+		glTranslatef(-0.1f, 0.0f, -0.6f);
 
-		glTranslatef(0.75,0,0.32);
+		glTranslatef(0.75f,0.0f,0.32f);
 			drawRock();
-		glTranslatef(-0.75, 0, -0.32);
+		glTranslatef(-0.75f, 0.0f, -0.32f);
 
-		glTranslatef(0.72,0,0.15);
+		glTranslatef(0.72f,0.0f,0.15f);
 			//glColor3f(1.0f,1.0f,1.0f);
 			drawBRock();
-		glTranslatef(-0.72, 0, -0.15);
+		glTranslatef(-0.72f, 0.0f, -0.15f);
 
-		glTranslatef(0.25,0,0.85);
+		glTranslatef(0.25f,0.0f,0.85f);
 			drawRock();
-		glTranslatef(-0.25, 0, -0.85);
+		glTranslatef(-0.25f, 0.0f, -0.85f);
 
-		glTranslatef(0.3,0,0.4);
+		glTranslatef(0.3f,0.0f,0.4f);
 			drawBRock();
-		glTranslatef(-0.3, 0, -0.4);
+		glTranslatef(-0.3f, 0.0f, -0.4f);
 
-		glTranslatef(0.65,0,0.7);
+		glTranslatef(0.65f,0.0f,0.7f);
 			drawRock();
-		glTranslatef(-0.65, 0, -0.7);
+		glTranslatef(-0.65f, 0.0f, -0.7f);
 	glPopMatrix();
 }
 
 void LightRubbleModel::drawRock() {
 	glPushMatrix();
-		glScalef(0.15,0.15,0.2);
+		glScalef(0.15f,0.15f,0.2f);
         GLUquadric *quadratic=gluNewQuadric();
 		gluSphere(quadratic,0.5,10,10);
 	glPopMatrix();
@@ -67,7 +67,7 @@ void LightRubbleModel::drawRock() {
 
 void LightRubbleModel::drawBRock() {
 	glPushMatrix();
-		glScalef(0.25,0.2,0.3);
+		glScalef(0.25f,0.2f,0.3f);
         GLUquadric *quadratic=gluNewQuadric();
 		gluSphere(quadratic,0.5,10,10);
 	glPopMatrix();

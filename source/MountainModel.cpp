@@ -28,15 +28,15 @@ void MountainModel::render() {
         drawPeak();
         
 		//right
-		glColor3f(.8,.8,.8);
-        glTranslatef(1, 0, 0);
-        glScalef(1, 1.5, 1);
+		glColor3f(.8f,.8f,.8f);
+        glTranslatef(1.0f, 0.0f, 0.0f);
+        glScalef(1.0f, 1.5f, 1.0f);
         drawPeak();
         
 		//middle
-		glColor3f(.6,.6,.6);
-        glTranslatef(-.5, 0, 0.0f);
-        glScalef(1, 2.5, 1);
+		glColor3f(.6f,.6f,.6f);
+        glTranslatef(-.5f, 0.0f, 0.0f);
+        glScalef(1.0f, 2.5f, 1.0f);
         drawPeak();
         
     glPopMatrix();

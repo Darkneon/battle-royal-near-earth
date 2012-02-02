@@ -1,7 +1,5 @@
-#ifndef ROBOT_H
-#define ROBOT_H
-
-#include "Model.h"
+#include "ElectronicsModel.h"
+#include "NuclearModel.h"
 
 class Robot {
 public:

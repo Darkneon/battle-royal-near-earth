@@ -1,15 +1,8 @@
 #include "Robot.h"
-#include "ElectronicsModel.h"
-#include "NuclearModel.h"
-#include "ElectronicsModel.h"
 
 Robot::Robot() {
 	NuclearModel *nuclearModel = new NuclearModel();
-    ElectronicsModel *electronicModel = new ElectronicsModel();
-    
-    head1 = (Model*)nuclearModel;
-    head2 = (Model*)electronicModel;
-    model = this->head1;
+	model = (Model*)nuclearModel;
 }
 
 Robot::~Robot() {
@@ -17,17 +10,7 @@ Robot::~Robot() {
 		delete model;
 		model = NULL;
 	}
-    /*
-    if (head1 != NULL) {
-        delete head1;
-        head1 = NULL;
-    }
     
-    if (head2 != NULL) {
-        delete head2;
-        head2 = NULL;
-    }
-    */
 }
 
 void Robot::changeTop() {

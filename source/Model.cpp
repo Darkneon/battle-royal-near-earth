@@ -6,7 +6,10 @@ Model::~Model() {
     vector<Model *>::iterator iter;
     
     for(iter = children.begin(); iter != children.end(); ++iter) {
-        delete *iter;
+		if (*iter != NULL) {
+			delete *iter;
+			*iter = NULL;
+		}
     }
 }
 

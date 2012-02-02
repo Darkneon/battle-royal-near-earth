@@ -76,12 +76,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AntennaModel.cpp" />
+    <ClCompile Include="AntiGrav.cpp" />
+    <ClCompile Include="AntiGravModel.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BaseModel.cpp" />
+    <ClCompile Include="Bipod.cpp" />
+    <ClCompile Include="BipodModel.cpp" />
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="CannonModel.cpp" />
     <ClCompile Include="Electronics.cpp" />
     <ClCompile Include="ElectronicsModel.cpp" />
+    <ClCompile Include="FactoryModel.cpp" />
     <ClCompile Include="Fence.cpp" />
     <ClCompile Include="FenceModel.cpp" />
     <ClCompile Include="GeoHelper.cpp" />
@@ -114,18 +119,25 @@
     <ClCompile Include="PlayerModel.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="TeamNumberModel.cpp" />
+    <ClCompile Include="Tracks.cpp" />
+    <ClCompile Include="TracksModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AntennaModel.h" />
+    <ClInclude Include="AntiGrav.h" />
+    <ClInclude Include="AntiGravModel.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="BaseModel.h" />
+    <ClInclude Include="Bipod.h" />
+    <ClInclude Include="BipodModel.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="CannonModel.h" />
     <ClInclude Include="Electronics.h" />
     <ClInclude Include="ElectronicsModel.h" />
+    <ClInclude Include="FactoryModel.h" />
     <ClInclude Include="Fence.h" />
     <ClInclude Include="FenceModel.h" />
     <ClInclude Include="GameIncludes.h" />
@@ -158,6 +170,8 @@
     <ClInclude Include="PlayerModel.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="TeamNumberModel.h" />
+    <ClInclude Include="Tracks.h" />
+    <ClInclude Include="TracksModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

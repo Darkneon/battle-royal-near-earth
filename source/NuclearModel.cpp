@@ -24,14 +24,13 @@ NuclearModel::NuclearModel() {
 void NuclearModel::render() 
 {
 	GLUquadricObj *quadratic = gluNewQuadric();;
+	glTranslatef(0,1,0);
     glPushMatrix();
-        glTranslatef(0.5f,0.8f,-0.3f);
-
-        glScalef(0.8, 0.5, 0.8);
 		glRotatef(-90, 1,0,0);
 		gluCylinder(quadratic, .5, .5, 1, 8, 5);
 
 		// Bottom
+		glTranslatef(0,0,0);
 		glColor3f(1,0,0);
 		gluDisk(quadratic, 0, .5, 8, 5);
 		
@@ -40,5 +39,6 @@ void NuclearModel::render()
 		gluDisk(quadratic, 0, .5, 8, 5);
     glPopMatrix();
 
+	glTranslatef(0, -1, 0); //draw children on top
 	gluDeleteQuadric(quadratic);
 }

@@ -19,9 +19,11 @@ PhaserModel::PhaserModel() {
 }
 
 void PhaserModel::render() {
+	//glTranslatef(.7,0,.5);//by jeff
+	glScalef(.5,.5,.5);
     glPushMatrix();
-        glScalef(.5,1,.5);
-    
+		//glTranslatef(-0.9f, 0.9f, 0.5f);
+
 		//back panel
 		glPushMatrix();
 			glColor3f(0.0f, 0.0f, 1.0f);
