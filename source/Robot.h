@@ -2,6 +2,7 @@
 #include "NuclearModel.h"
 
 #include "Model.h"
+#include "TeamNumberModel.h"
 
 class Robot {
 public:
@@ -29,6 +30,9 @@ private:
         Model* bottom2;
         Model* bottom3;
         
+        TeamNumberModel teamNumberModel;
+        int topCounter;
+        int middleCounter;
         int bottomCounter;
         
         

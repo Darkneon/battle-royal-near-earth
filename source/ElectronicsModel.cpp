@@ -14,11 +14,8 @@
 #endif
 
 #include "ElectronicsModel.h"
-#include "TeamNumberModel.h"
 
 ElectronicsModel::ElectronicsModel() {
-	//TeamNumberModel* child = new TeamNumberModel();
-    //setNextChild( (Model*)child );
 }
 
 void ElectronicsModel::render() {
@@ -29,7 +26,8 @@ void ElectronicsModel::render() {
 		glScalef(.4f,.4f,.4f);	
 		//Rotation for full object
 		glRotatef(-90, 1, 0, 0);	
-		glPushMatrix();
+
+        glPushMatrix();
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
 			glColor3f(.2f,.2f,.2f);

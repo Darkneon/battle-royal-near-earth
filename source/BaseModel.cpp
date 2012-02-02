@@ -26,19 +26,21 @@ void BaseModel::render()
 {
      //Draw number -- Addison
     glPushMatrix();
-    glTranslatef(1.0f, 0.75f, 1.67f);
-    teamNumber->render();
+        //Draw Base
+        drawBase(0.0f, 0.0f, 0.0f);
+        glTranslatef(1.75f, 1.15f, 2.2f);
+        teamNumber->render();
     glPopMatrix();
-    //Draw Base
-    drawBase(0.0f, 0.0f, 0.0f);
+  
   
 }
 
 //Uses the previous methods to draw a base
 void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos) 
 {
+    glPushMatrix();
     glTranslatef(0.0f,0.0f,0.3f);
-    glScalef(0.012f, 0.015f, 0.012f); //scale enlarged x3 by Jeff
+    glScalef(0.012f * 1.5, 0.015f * 1.5, 0.012f * 1.5); //scale enlarged x3 by Jeff
     //Start Drawing the buildings
     //First step
     GeoHelper::drawGarage(xPos+0.0f, yPos+0.0f, zPos+0.0f);
@@ -60,6 +62,5 @@ void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos)
     //Fifth step
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+0.0f);
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+50.0f);
-    //Draw number
-    
+    glPopMatrix();
 }

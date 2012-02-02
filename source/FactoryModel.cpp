@@ -17,18 +17,21 @@
 FactoryModel::FactoryModel(void)
 {}
 
-
+/*
 FactoryModel::~FactoryModel(void)
 {}
-
+*/
 void FactoryModel::render() 
 {
-   drawFactory(0.0f, 0.0f, 0.0f);
+    glPushMatrix();
+        drawFactory(0.0f, 0.0f, 0.0f);
+    glPopMatrix();
 }
 
 //Uses the previous methods to draw a base
 void FactoryModel::drawFactory(GLfloat xPos, GLfloat yPos, GLfloat zPos) 
 {
+	glScalef(0.0192f, 0.024f, 0.0192f);
 	//First step
     GeoHelper::drawGarage(xPos, yPos, zPos);
     GeoHelper::drawGarage(xPos+50.0f, yPos, zPos);

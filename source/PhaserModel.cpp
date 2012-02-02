@@ -14,8 +14,11 @@
 #endif
 
 #include "PhaserModel.h"
+#include "NuclearModel.h"
 
 PhaserModel::PhaserModel() {
+    NuclearModel *model = new NuclearModel();
+    setNextChild( (Model*)model );
     teamNumber = new TeamNumberModel();
 }
 
@@ -55,5 +58,5 @@ void PhaserModel::render() {
 		glPopMatrix();
 	glPopMatrix();
     
-    glTranslatef(-0.2, -2.5f, -1.0f);
+    glTranslatef(0, 0.85f, 0);
 }

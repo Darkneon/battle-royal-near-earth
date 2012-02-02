@@ -6,16 +6,14 @@
 #endif
 
 #include "TracksModel.h"
+#include "PhaserModel.h"
 
 
 TracksModel::TracksModel(void)
 {
-	//height approximately .35
-}
-
-
-TracksModel::~TracksModel(void)
-{
+    PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
+	teamNumber = new TeamNumberModel();
 }
 
 void TracksModel::render(){
@@ -32,6 +30,8 @@ void TracksModel::render(){
 		glTranslatef(0,0,-1);
 	
 	glPopMatrix();
+    
+    glTranslatef(0, 0.5f, 0);
 }
 
 void TracksModel::drawTrack(){
@@ -105,6 +105,19 @@ void TracksModel::drawTrack(){
 			glTranslatef(1.5,0.5,0.5);
 			drawCircle(0.5);
 			glTranslatef(-1.5,-0.5,-0.5);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(1.5f,0.0f, 0.0f);
+			glRotatef(180, 0.0f,1.0f, 0.0f);
+			glRotatef(90, 1.0f,0.0f, 0.0f);
+			teamNumber->render();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(.5f,0.0f, 0.5f);
+			glRotatef(90, 1.0f,0.0f, 0.0f);
+			teamNumber->render();
 		glPopMatrix();
 
 	glPopMatrix();

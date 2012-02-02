@@ -17,10 +17,7 @@
 #include "PhaserModel.h"
 #include "TeamNumberModel.h"
 
-NuclearModel::NuclearModel() {
-	PhaserModel *child = new PhaserModel();
-	setNextChild( (Model*)child );
- 
+NuclearModel::NuclearModel() { 
 }
 
 void NuclearModel::render() 

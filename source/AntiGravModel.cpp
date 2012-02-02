@@ -6,16 +6,16 @@
 #endif
 
 #include "AntiGravModel.h"
+#include "PhaserModel.h"
+#include "TeamNumberModel.h"
+
 
 AntiGravModel::AntiGravModel(void)
 {
-	//height: approximately .6
+    PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
 }
 
-
-AntiGravModel::~AntiGravModel(void)
-{
-}
 
 void AntiGravModel::render(){
 	GLUquadricObj *quadratic = gluNewQuadric();
@@ -76,6 +76,12 @@ void AntiGravModel::render(){
 		glPopMatrix();
 		glTranslatef(0.0f,-0.8f,0.0f);
 
+		glPushMatrix();
+			glTranslatef(0.3f,1.0f,1.2f);
+			TeamNumberModel *teamNumber = new TeamNumberModel();
+			teamNumber->render();
+		glPopMatrix();
+
 		//cylinder
 		glColor3f(0.5f, 0.0f, 0.5f);
 		glTranslatef(1.0f,0.8f,1.0f);
@@ -112,6 +118,7 @@ void AntiGravModel::render(){
 
 	glPopMatrix();
 
+    glTranslatef(0, 0.7f, 0);
 	gluDeleteQuadric(quadratic);
 }
 
