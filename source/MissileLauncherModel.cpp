@@ -15,10 +15,11 @@
 #include "MissileLauncherModel.h"
 
 MissileLauncherModel::MissileLauncherModel() {
+	//height approx. .3
 }
 
 void MissileLauncherModel::render() {
-	glTranslatef(.5f,0.0f,.4f);//by jeff
+	glTranslatef(.5f,0.175f,.5f);//by jeff
 	glScalef(.27f,.27f,.27f);//by jeff
     glPushMatrix();
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);

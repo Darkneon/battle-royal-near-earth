@@ -25,24 +25,25 @@ NuclearModel::NuclearModel() {
 
 void NuclearModel::render() 
 {
-    glTranslatef(0, 2.7, 0);
-	GLUquadricObj *quadratic = gluNewQuadric();;
+    
+	GLUquadricObj *quadratic = gluNewQuadric();
     glPushMatrix();
-        glScalef(0.8, 0.5, 0.8);
-        glTranslatef(0.5f,0.0f,-0.3f);
+		glTranslatef(0.5f,0.0f,0.5f);
+		glScalef(0.6f, 0.6f, 0.6f);
         glRotatef(-90, 1,0,0);
-		gluCylinder(quadratic, .5, .5, 1, 8, 5);
+		glColor3f(0.4f,0.4f,0.4f);
+		gluCylinder(quadratic, .45, .45, .5, 8, 5);
 
 		// Bottom
-		glColor3f(1,0,0);
-		gluDisk(quadratic, 0, .5, 8, 5);
+		glColor3f(0.6f,0.6f,0.6f);
+		gluDisk(quadratic, 0, .45, 8, 5);
 		
 		// Top
-		glTranslatef(0,0,1);
-		gluDisk(quadratic, 0, .5, 8, 5);
+		glTranslatef(0,0,.5);
+		gluDisk(quadratic, 0, .45, 8, 5);
     glPopMatrix();
 	
-    glTranslatef(0,-0.5f,0);
+    
 
 	gluDeleteQuadric(quadratic);
 }

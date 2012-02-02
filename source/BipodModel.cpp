@@ -9,6 +9,7 @@
 
 BipodModel::BipodModel(void)
 {
+	//height approximately 1
 }
 
 
@@ -18,6 +19,9 @@ BipodModel::~BipodModel(void)
 
 void BipodModel::render(){
 	glPushMatrix();
+		glTranslatef(.8,0,1);
+		glRotatef(180,0,1,0);
+		glScalef(.65,.65,.65);
 		//first leg
 		drawLeg();
 
@@ -62,6 +66,7 @@ void BipodModel::render(){
 		glTranslatef(0.0f,-1.3f,0.0f);
 
 	glPopMatrix();
+	glTranslated(0,1,0);
 }
 
 void BipodModel::drawLeg(){

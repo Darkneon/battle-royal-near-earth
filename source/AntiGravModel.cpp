@@ -9,6 +9,7 @@
 
 AntiGravModel::AntiGravModel(void)
 {
+	//height: approximately .6
 }
 
 
@@ -20,7 +21,8 @@ void AntiGravModel::render(){
 	GLUquadricObj *quadratic = gluNewQuadric();
 
 	glPushMatrix();
-        glTranslatef(-0.1, 0.5f, 0);
+        glTranslatef(0.125f, 0.2f, 0.125f);
+		glScalef(0.5f, 0.5f, 0.5f);
     
 		//first machine block
 		drawMachineCube();
@@ -43,7 +45,7 @@ void AntiGravModel::render(){
 		//rectangle
 		glTranslatef(0.0f,0.8f,0.0f);
 		glPushMatrix();
-			glColor3f(0.0f, 1.0f, 0.0f);
+			glColor3f(0.4f, 0.4f, 0.4f);
 			glBegin(GL_QUADS);
 				glVertex3f(0.2f, 0.0f, 0.2f);
 				glVertex3f(0.2f, 0.2f, 0.2f);

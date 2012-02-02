@@ -23,6 +23,8 @@ PlayerModel::PlayerModel() {
 }
 
 void PlayerModel::render() {
+	glPushMatrix();
+	glScalef(0.3f,0.3f,0.3f);
     glColor3f(0, 1, 0);
     
 	renderPlane();
@@ -59,7 +61,7 @@ void PlayerModel::render() {
         glRotated(90.0f, 0, 1.0f, 0);
         renderOneSide();
     glPopMatrix();
-       
+    glPopMatrix();
 }
 void PlayerModel::renderOneSide() {
     glBegin(GL_TRIANGLES);

@@ -34,7 +34,7 @@ static GLint rotZ = 0;
 
 static const GLfloat RADIUS = 10.0f;
 static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
-
+//static const GLfloat LOC_Y_INITIAL = 0;
 static GLfloat locX = 0.0f;
 static GLfloat locY = LOC_Y_INITIAL;
 static GLfloat locZ = RADIUS;
@@ -66,6 +66,7 @@ Grass grass;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
+ElectronicsModel *electronicsModel = new ElectronicsModel;
 
 void commanderCamera()
 {
@@ -177,11 +178,13 @@ void render()
 		break;
 	case 0:
 		levelRenderer.render();
+		//Drawing robot models on map
 		glPushMatrix();
-			glTranslatef(35,0,35);
+			glTranslatef(15,0,40);
 			player.draw();
-			glTranslatef(4,0,0);
-			robot.draw();
+			glTranslatef(5,0,0);
+			base.draw();
+			//robot.draw();
 		glPopMatrix();
         break;
 	case 4:

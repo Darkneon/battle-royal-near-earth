@@ -27,7 +27,8 @@ void BaseModel::render()
 //Uses the previous methods to draw a base
 void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos) 
 {
-    glScalef(0.004f, 0.005f, 0.004f);
+	glTranslatef(0.0f,0.0f,0.3f);
+    glScalef(0.012f, 0.015f, 0.012f); //scale enlarged x3 by Jeff
     //Start Drawing the buildings
     //First step
     GeoHelper::drawGarage(xPos+0.0f, yPos+0.0f, zPos+0.0f);

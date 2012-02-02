@@ -10,6 +10,7 @@
 
 TracksModel::TracksModel(void)
 {
+	//height approximately .35
 }
 
 
@@ -19,6 +20,9 @@ TracksModel::~TracksModel(void)
 
 void TracksModel::render(){
 	glPushMatrix();
+		glTranslatef(0.1f, 0.0f, 0.2f);
+		glScalef(0.4f,0.4f,0.4f);
+		
 		//track 1
 		drawTrack();
 		

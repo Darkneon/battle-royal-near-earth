@@ -62,6 +62,8 @@ public:
         }
     }
     
+	void removeAllChildren();
+
 private:
     Model *parent;
     vector<Model *> children;
