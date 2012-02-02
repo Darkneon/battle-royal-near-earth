@@ -32,8 +32,8 @@ void MissileLauncherModel::render() {
                 
 	
     glPushMatrix();
-                glTranslatef(.5f,0.175f,.5f);//by jeff
-                glScalef(.27f,.27f,.27f);//by jeff
+        glTranslatef(0.5f,0.175f,0.5f);//by jeff
+        glScalef(.27f,.27f,.27f);//by jeff
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
 
 		glPushMatrix();
