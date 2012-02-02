@@ -14,8 +14,11 @@
 #endif
 
 #include "ElectronicsModel.h"
+#include "TeamNumberModel.h"
 
 ElectronicsModel::ElectronicsModel() {
+	TeamNumberModel* child = new TeamNumberModel();
+    setNextChild( (Model*)child );
 }
 
 void ElectronicsModel::render() {

@@ -159,12 +159,12 @@ void render()
 		break;
 	case 0:
 		levelRenderer.render();
-        glPushMatrix();
+       /* glPushMatrix();
 			glTranslatef(35,0,35);
 			player.draw();
 			glTranslatef(8,0,0);
 			robot.draw();
-		glPopMatrix();
+		glPopMatrix();*/
 		break;
 	case 4:
 		plainBlock.draw();

@@ -8,11 +8,11 @@ public:
 	Robot();
 	~Robot();
 	void draw();
-        void changeTop();
+    void changeTop();
 private:
 	Model* model;
-        Model* head1;
-        Model* head2;
+    Model* head1;
+    Model* head2;
 };
 
 #endif

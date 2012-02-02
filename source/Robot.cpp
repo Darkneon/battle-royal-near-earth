@@ -17,7 +17,7 @@ Robot::~Robot() {
 		delete model;
 		model = NULL;
 	}
-    
+    /*
     if (head1 != NULL) {
         delete head1;
         head1 = NULL;
@@ -27,7 +27,7 @@ Robot::~Robot() {
         delete head2;
         head2 = NULL;
     }
-    
+    */
 }
 
 void Robot::changeTop() {

@@ -28,5 +28,7 @@ void GrassModel::render() {
             glVertex3f(0, 0, -1);
         glEnd();
     glPopMatrix();
+	glPushMatrix();
+	glPopMatrix();
 }
 
