@@ -16,9 +16,16 @@
 #include "PhaserModel.h"
 
 PhaserModel::PhaserModel() {
+    teamNumber = new TeamNumberModel();
 }
 
 void PhaserModel::render() {
+                //Draw number -- Addison
+                glPushMatrix();
+                        glTranslatef(0.4f, 0.85f, 0.6f);
+                        glScalef(0.5f, 0.5f, 0.5f);
+                        teamNumber->render();
+                glPopMatrix();
     glPushMatrix();
         glTranslatef(.3,.55,.71);
 		glScalef(.4,.4,.4);

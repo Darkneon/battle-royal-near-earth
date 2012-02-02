@@ -9,13 +9,16 @@
 #define	BASEMODEL_H
 
 #include "Model.h"
+#include "TeamNumberModel.h"
 
 class BaseModel : Model {
 public:
     BaseModel();
     void render();
+    
 private:
 	void drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos);
+        TeamNumberModel *teamNumber; //Addison
 };
 
 #endif
