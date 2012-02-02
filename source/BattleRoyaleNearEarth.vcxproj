@@ -86,6 +86,7 @@
     <ClCompile Include="CannonModel.cpp" />
     <ClCompile Include="Electronics.cpp" />
     <ClCompile Include="ElectronicsModel.cpp" />
+    <ClCompile Include="Factory.cpp" />
     <ClCompile Include="FactoryModel.cpp" />
     <ClCompile Include="Fence.cpp" />
     <ClCompile Include="FenceModel.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="CannonModel.h" />
     <ClInclude Include="Electronics.h" />
     <ClInclude Include="ElectronicsModel.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="FactoryModel.h" />
     <ClInclude Include="Fence.h" />
     <ClInclude Include="FenceModel.h" />

@@ -137,6 +137,9 @@
     <ClCompile Include="FactoryModel.cpp">
       <Filter>Model\Static</Filter>
     </ClCompile>
+    <ClCompile Include="Factory.cpp">
+      <Filter>Logic\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameIncludes.h" />
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="FactoryModel.h">
       <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Logic\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
