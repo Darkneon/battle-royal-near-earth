@@ -65,7 +65,6 @@ Grass grass;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
-ElectronicsModel *electronicsModel = new ElectronicsModel;
 
 void commanderCamera()
 {
@@ -203,6 +202,8 @@ void render()
 			player.draw();
 			glTranslatef(5,0,0);
 			base.draw();
+			glTranslatef(5,0,0);
+			//factory.draw();
 			//robot.draw();
 		glPopMatrix();
         break;

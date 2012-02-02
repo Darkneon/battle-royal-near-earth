@@ -17,6 +17,7 @@
 #include "PlainBlockModel.h"
 #include "LightRubbleModel.h"
 #include "FactoryModel.h"
+#include "BaseModel.h"
 
 //Robot Model includes
 #include "AntiGravModel.h"
@@ -27,7 +28,7 @@
 #include "PhaserModel.h"
 #include "ElectronicsModel.h"
 #include "NuclearModel.h"
-#include "FactoryModel.h"
+
 
 LevelRenderer::LevelRenderer() {	
 	for(int i = 0; i != 50; i++) {
@@ -51,7 +52,7 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
-	//FactoryModel *factoryModel = new FactoryModel;
+	FactoryModel *factoryModel = new FactoryModel;
 
 	//Robot Models
 	AntiGravModel *antiGravModel = new AntiGravModel;
@@ -83,9 +84,10 @@ LevelRenderer::LevelRenderer() {
 	models[17] = (Model*)phaserModel;
 	models[18] = (Model*)electronicsModel;
 	models[19] = (Model*)nuclearModel;
+	models[20] = (Model*)factoryModel;
 	models[19]->removeAllChildren();
 	map1();
-	//level[0][0] = 11;
+	//level[0][0] = 16;
 
 	
 
@@ -151,6 +153,7 @@ void LevelRenderer::map1(){
 			}*/
 		}
 	}
+	level[25][40] = 20;
 	for(int model = 1; model < 20; model++){
 		for(int i = 5; i < 50; i += 5){
 			level[i][model*2] = model;
