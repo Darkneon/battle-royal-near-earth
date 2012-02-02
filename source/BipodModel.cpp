@@ -30,7 +30,7 @@ void BipodModel::render(){
 		glTranslatef(0.f, 1.3f, 0.f);
 		//rectangle
 		glPushMatrix();
-			glColor3f(0.0f, 1.0f, 0.0f);
+			glColor3f(0.0f, 0.5f, 0.0f);
 			glBegin(GL_QUADS);
 				glVertex3f(0.0f, 0.0f, 0.0f);
 				glVertex3f(0.0f, 0.2f, 0.0f);
