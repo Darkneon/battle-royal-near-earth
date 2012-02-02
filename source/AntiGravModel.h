@@ -9,7 +9,6 @@ class AntiGravModel : Model
 {
 public:
 	AntiGravModel(void);
-	~AntiGravModel(void);
 	void render();
 private:
 	void drawMachineCube();

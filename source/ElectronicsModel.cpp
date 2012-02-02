@@ -19,14 +19,14 @@ ElectronicsModel::ElectronicsModel() {
 }
 
 void ElectronicsModel::render() {
-    glTranslatef(0, 2.7, 0);
-
 	glPushMatrix();
         glTranslatef(.35f, 0, -0.3f);
-        glScalef(.6f,.6f,.6f);	
+        glScalef(.4f,.4f,.4f);	
 		//Rotation for full object
 		glRotatef(-90, 1, 0, 0);	
-		glPushMatrix();
+		glRotatef(-90, 0, 0, 1);	
+
+        glPushMatrix();
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
 			glColor3f(.2f,.2f,.2f);
@@ -101,8 +101,5 @@ void ElectronicsModel::render() {
 		glPopMatrix();
 
     glPopMatrix();
-
-    glTranslatef(0, -0.5f,0);
-
 	gluDeleteQuadric(quadratic);
 }

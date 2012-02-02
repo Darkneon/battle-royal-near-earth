@@ -14,14 +14,17 @@
 #endif
 
 #include "CannonModel.h"
+#include "NuclearModel.h"
 
 CannonModel::CannonModel() {
+    NuclearModel *model = new NuclearModel();
+    setNextChild( (Model*)model );
 }
 
 void CannonModel::render() {
     glPushMatrix();
-        glTranslatef(0.2f ,-0.5f,-0.3f); //by Jeff
-        glScalef(.4f,.8f,.4f);//by Jeff
+        glTranslatef(0.2f ,-0.35f,-0.3f); //by Jeff
+        glScalef(.4f,1.0f,.4f);//by Jeff
 		glPushMatrix();
 			glColor3f(1.0f, 0.0f, 0.0f);
 			GeoHelper::drawTrapezoidalPrism();
@@ -43,7 +46,4 @@ void CannonModel::render() {
 			GeoHelper::drawCylinder(360);
 		glPopMatrix();
 	glPopMatrix();        
-    
-    glTranslatef(-0.2, -2.5f, -1.0f);
-
 }

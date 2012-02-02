@@ -11,7 +11,6 @@ class TracksModel : Model
 {
 public:
 	TracksModel(void);
-	~TracksModel(void);
 	void render();
 
 private:

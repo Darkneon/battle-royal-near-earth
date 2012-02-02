@@ -6,19 +6,21 @@
 #endif
 
 #include "BipodModel.h"
+#include "PhaserModel.h"
 
 BipodModel::BipodModel(void)
 {
+    PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
 }
 
-
-BipodModel::~BipodModel(void)
-{
-}
 
 void BipodModel::render(){
-	glPushMatrix();
-		//first leg
+    glPushMatrix();
+        glTranslatef(0.8, 0, 1);
+        glRotatef(180, 0, 1, 0);
+        glScalef(0.66, 0.66, 0.66);
+        //first leg
 		drawLeg();
 
 		//second leg
@@ -59,9 +61,9 @@ void BipodModel::render(){
 				glVertex3f(0.0f, 0.0f, 1.5f);
 			glEnd();
 		glPopMatrix();
-		glTranslatef(0.0f,-1.3f,0.0f);
-
 	glPopMatrix();
+    
+    glTranslatef(0, 1, 0);
 }
 
 void BipodModel::drawLeg(){

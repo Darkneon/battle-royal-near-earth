@@ -6,15 +6,13 @@
 #endif
 
 #include "TracksModel.h"
+#include "PhaserModel.h"
 
 
 TracksModel::TracksModel(void)
 {
-}
-
-
-TracksModel::~TracksModel(void)
-{
+    PhaserModel *child = new PhaserModel();
+	setNextChild( (Model*)child );
 }
 
 void TracksModel::render(){
@@ -28,6 +26,8 @@ void TracksModel::render(){
 		glTranslatef(0,0,-1);
 	
 	glPopMatrix();
+    
+    glTranslatef(0, 1, 0);
 }
 
 void TracksModel::drawTrack(){

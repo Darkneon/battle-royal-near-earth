@@ -14,16 +14,17 @@
 #endif
 
 #include "PhaserModel.h"
-#include "BipodModel.h"
+#include "NuclearModel.h"
 
 PhaserModel::PhaserModel() {
-    BipodModel *child = new BipodModel();
-    setNextChild( (Model*)child );
+    NuclearModel *model = new NuclearModel();
+    setNextChild( (Model*)model );
 }
 
 void PhaserModel::render() {
     glPushMatrix();
-        glScalef(.5,.5,.5);
+        glTranslatef(.3, 0.55, .71);
+        glScalef(.4,.4,.4);
 
 		//back panel
 		glPushMatrix();
@@ -50,5 +51,5 @@ void PhaserModel::render() {
 		glPopMatrix();
 	glPopMatrix();
     
-    glTranslatef(-0.2, -2.5f, -1.0f);
+    glTranslatef(0, 1, 0);
 }

@@ -259,7 +259,6 @@ void init()
 	wireframeView = false;
 	pit2.switchPitType();
 
-
 	for (int i = 0; i < 256; i++)
 		keyStates[i] = false;
 }

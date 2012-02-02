@@ -10,7 +10,6 @@ class BipodModel : Model
 {
 public:
 	BipodModel(void);
-	~BipodModel(void);
 	void render();
 
 private:
