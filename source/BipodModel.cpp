@@ -7,6 +7,7 @@
 
 #include "BipodModel.h"
 #include "PhaserModel.h"
+#include "TeamNumberModel.h"
 
 BipodModel::BipodModel(void)
 {
@@ -16,11 +17,11 @@ BipodModel::BipodModel(void)
 
 
 void BipodModel::render(){
-    glPushMatrix();
-        glTranslatef(0.8, 0, 1);
-        glRotatef(180, 0, 1, 0);
-        glScalef(0.66, 0.66, 0.66);
-        //first leg
+	glPushMatrix();
+		glTranslatef(.8,0,1);
+		glRotatef(180,0,1,0);
+		glScalef(.65,.65,.65);
+		//first leg
 		drawLeg();
 
 		//second leg
@@ -32,7 +33,7 @@ void BipodModel::render(){
 		glTranslatef(0.f, 1.3f, 0.f);
 		//rectangle
 		glPushMatrix();
-			glColor3f(0.0f, 0.5f, 0.0f);
+			glColor3f(0.5f, 0.0f, 0.5f);
 			glBegin(GL_QUADS);
 				glVertex3f(0.0f, 0.0f, 0.0f);
 				glVertex3f(0.0f, 0.2f, 0.0f);
@@ -62,8 +63,7 @@ void BipodModel::render(){
 			glEnd();
 		glPopMatrix();
 	glPopMatrix();
-    
-    glTranslatef(0, 1, 0);
+	glTranslated(0,1,0);
 }
 
 void BipodModel::drawLeg(){
@@ -100,6 +100,14 @@ void BipodModel::drawLeg(){
 
 
 		//feet
+		glPushMatrix();
+			glScalef(.5f,.5f,.5f);
+			glRotatef(-90, 0.0f,1.0f, 0.0f);
+			glRotatef(90, 1.0f,0.0f, 0.0f);
+			TeamNumberModel *teamNumber = new TeamNumberModel();
+			teamNumber->render();
+		glPopMatrix();
+
 		glColor3f(0.0f, 1.0f, 1.0f);
 		glBegin(GL_QUADS);
 			glVertex3f(0.0f, 0.0f, 0.0f);

@@ -23,8 +23,8 @@ PhaserModel::PhaserModel() {
 
 void PhaserModel::render() {
     glPushMatrix();
-        glTranslatef(.3, 0.55, .71);
-        glScalef(.4,.4,.4);
+        glTranslatef(.3,.55,.71);
+		glScalef(.4,.4,.4);
 
 		//back panel
 		glPushMatrix();
@@ -44,12 +44,12 @@ void PhaserModel::render() {
 
 		//cannon base
 		glPushMatrix();
-			glColor3f(0,1,0);
+			glColor3f(0.4f,0.4f,0.4f);
 			glTranslatef(1.1f, -1.1f, -0.125f);
 			glScalef(0.9f, 0.5f, 0.9f);
 			GeoHelper::drawCylinder(360);
 		glPopMatrix();
 	glPopMatrix();
     
-    glTranslatef(0, 1, 0);
+    glTranslatef(0, 0.85f, 0);
 }

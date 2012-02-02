@@ -24,7 +24,6 @@ private:
 	void drawPitBottom();
 	void drawBase(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend);
 	
-	
 };
 
 #endif

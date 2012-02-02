@@ -316,10 +316,13 @@
     <Filter Include="Logic\Robot\Top">
       <UniqueIdentifier>{7c11c48d-d226-47fd-a2ca-09aac7ee24cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{f60e49fe-7773-48a6-b236-01ea4180fe06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib">
-      <Filter>Model\Robot\Top</Filter>
+      <Filter>Libraries</Filter>
     </Library>
   </ItemGroup>
 </Project>

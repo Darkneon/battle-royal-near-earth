@@ -18,6 +18,7 @@ void AntennaModel::render() {
 	gluQuadricNormals(quadratic, GLU_SMOOTH);
 
 	glPushMatrix();
+		glScalef(0.3f,0.3f,0.3f);
 		glTranslatef(1.5f, 2.0f, 1.5f);
 		glRotatef(90.0f, 1.0f, 0, 0);
 		gluCylinder(quadratic, 0.1f, 0.1f, 1, 10, 10);

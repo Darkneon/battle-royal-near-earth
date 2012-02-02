@@ -34,7 +34,7 @@ void PitModel::switchPitType()
 
 void PitModel::drawPitIn()
 {
-	//Pit Outside
+	//Pit Inside
 	glTranslatef(.5,-.5,.5);
 	glPushMatrix();
 	drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
@@ -53,6 +53,7 @@ void PitModel::drawPitIn()
 
 void PitModel::drawPitTop()
 {
+	GLUquadricObj *quadratic = gluNewQuadric();
 	//Pit Outside
 	glTranslatef(.5,-.5,.5);
 	glPushMatrix();
@@ -72,11 +73,40 @@ void PitModel::drawPitTop()
 			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.6f, 0.8f, 0.2f);
 			glTranslatef(-0.2f, -0.2f, 0.0f);
 		glPopMatrix();
+	
+		//curved inside
+		glPushMatrix();
+			glTranslatef(0.5f,1.0f,0.5f);
+			glPushMatrix();
+				glRotatef(90.0f, 1.0f,0.0f,0.0f);
+				GLdouble coordinate[4] = {0,-1,0,0};
+				glClipPlane(GL_CLIP_PLANE0, coordinate);
+				glEnable(GL_CLIP_PLANE0);
+					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					gluCylinder(quadratic, .33f, .33f, 1.0f, 6.0f,4.0f);
+					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
+				glDisable(GL_CLIP_PLANE0);
+				glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.5f, 1.0f, 0.5f);
+			glPushMatrix();
+				glRotatef(90.0f,1.0f,0.0f,0.0f);
+				glClipPlane(GL_CLIP_PLANE0, coordinate);
+				glEnable(GL_CLIP_PLANE0);
+					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					gluDisk(quadratic,0.325f,0.5f,6.0f,3.0f);
+					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
+				glDisable(GL_CLIP_PLANE0);
+			glPopMatrix();
+		glPopMatrix();
 	glPopMatrix();
+	gluDeleteQuadric(quadratic);
 }
 
 void PitModel::drawPitBottom()
 {
+	GLUquadricObj *quadratic = gluNewQuadric();
 	//Pit Outside
 	glTranslatef(1.5,-.5,1.5);
 	glRotatef(180,0,1,0);
@@ -97,7 +127,34 @@ void PitModel::drawPitBottom()
 			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.6f, 0.8f, 0.2f);
 			glTranslatef(-0.2f, -0.2f, 0.0f);
 		glPopMatrix();
+		//curved inside
+		glPushMatrix();
+			glTranslatef(0.5f,1.0f,0.5f);
+			glPushMatrix();
+				glRotatef(90.0f, 1.0f,0.0f,0.0f);
+				GLdouble coordinate[4] = {0,-1,0,0};
+				glClipPlane(GL_CLIP_PLANE0, coordinate);
+				glEnable(GL_CLIP_PLANE0);
+					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					gluCylinder(quadratic, .33f, .33f, 1.0f, 6.0f,4.0f);
+					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
+				glDisable(GL_CLIP_PLANE0);
+				glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+			glTranslatef(0.5f, 1.0f, 0.5f);
+			glPushMatrix();
+				glRotatef(90.0f,1.0f,0.0f,0.0f);
+				glClipPlane(GL_CLIP_PLANE0, coordinate);
+				glEnable(GL_CLIP_PLANE0);
+					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					gluDisk(quadratic,0.325f,0.5f,6.0f,3.0f);
+					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
+				glDisable(GL_CLIP_PLANE0);
+			glPopMatrix();
+		glPopMatrix();
 	glPopMatrix();
+	gluDeleteQuadric(quadratic);
 }
 
 void PitModel::render() 

@@ -17,6 +17,9 @@ TracksModel::TracksModel(void)
 
 void TracksModel::render(){
 	glPushMatrix();
+		glTranslatef(0.1f, 0.0f, 0.2f);
+		glScalef(0.4f,0.4f,0.4f);
+		
 		//track 1
 		drawTrack();
 		
@@ -27,7 +30,7 @@ void TracksModel::render(){
 	
 	glPopMatrix();
     
-    glTranslatef(0, 1, 0);
+    glTranslatef(0, 0.5f, 0);
 }
 
 void TracksModel::drawTrack(){

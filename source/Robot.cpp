@@ -41,12 +41,13 @@ Robot::~Robot() {
         head2 = NULL;
     } 
     
+    
 }
 
 void Robot::changeTop() {
     vector<Model *> children = currentMiddle->getChildren();
     
-    switch(topCounter % 2) {
+    switch(topCounter % 3) {
         case 0:
             children[0] = head1;
             break;

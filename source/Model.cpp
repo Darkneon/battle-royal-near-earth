@@ -3,14 +3,7 @@
 
 
 Model::~Model() {
-    vector<Model *>::iterator iter;
-    
-    for(iter = children.begin(); iter != children.end(); ++iter) {
-		if (*iter != NULL) {
-			delete *iter;
-			*iter = NULL;
-		}
-    }
+   removeAllChildren();
 }
 
 void Model::draw() {
@@ -22,4 +15,17 @@ void Model::draw() {
     for(iter = children.begin(); iter != children.end(); ++iter) {
         (*iter)->draw();
     }
+}
+
+void Model::removeAllChildren(){
+	 vector<Model *>::iterator iter;
+    
+    for(iter = children.begin(); iter != children.end(); ++iter) {
+		if (*iter != NULL) {
+			delete *iter;
+			*iter = NULL;
+		}
+    }
+
+	children.clear();
 }
