@@ -200,7 +200,7 @@ void render()
 		glPushMatrix();
 			glTranslatef(15,0,40);
 			player.draw();
-			glTranslatef(5,0,0);
+			glTranslatef(1,0,0);
 			base.draw();
 			glTranslatef(7,0,5);
 			robot.draw();

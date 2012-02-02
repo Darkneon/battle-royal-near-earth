@@ -17,20 +17,30 @@
 #include "Model.h"
 #include "BaseModel.h"
 
-BaseModel::BaseModel(){}
+BaseModel::BaseModel()
+{
+   teamNumber = new TeamNumberModel();
+}
 
 void BaseModel::render() 
 {
-	glPushMatrix();
-	drawBase(0.0f, 0.0f, 0.0f);
-	glPopMatrix();
+     //Draw number -- Addison
+    glPushMatrix();
+        //Draw Base
+        drawBase(0.0f, 0.0f, 0.0f);
+        glTranslatef(1.75f, 1.15f, 2.2f);
+        teamNumber->render();
+    glPopMatrix();
+  
+  
 }
 
 //Uses the previous methods to draw a base
 void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos) 
 {
-	glTranslatef(0.0f,0.0f,0.3f);
-    glScalef(0.012f, 0.015f, 0.012f); //scale enlarged x3 by Jeff
+    glPushMatrix();
+    glTranslatef(0.0f,0.0f,0.3f);
+    glScalef(0.012f * 1.5, 0.015f * 1.5, 0.012f * 1.5); //scale enlarged x3 by Jeff
     //Start Drawing the buildings
     //First step
     GeoHelper::drawGarage(xPos+0.0f, yPos+0.0f, zPos+0.0f);
@@ -52,4 +62,5 @@ void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos)
     //Fifth step
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+0.0f);
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+50.0f);
+    glPopMatrix();
 }

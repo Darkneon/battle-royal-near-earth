@@ -23,7 +23,9 @@ FactoryModel::~FactoryModel(void)
 */
 void FactoryModel::render() 
 {
-   drawFactory(0.0f, 0.0f, 0.0f);
+    glPushMatrix();
+        drawFactory(0.0f, 0.0f, 0.0f);
+    glPopMatrix();
 }
 
 //Uses the previous methods to draw a base

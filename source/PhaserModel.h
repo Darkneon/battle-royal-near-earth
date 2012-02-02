@@ -9,12 +9,14 @@
 #define	PHASERMODEL_H
 
 #include "Model.h"
+#include "TeamNumberModel.h"
 
 class PhaserModel : Model {
 public:
     PhaserModel();
 private:
 	void render();
+        TeamNumberModel *teamNumber; //Addison
 };
 
 #endif

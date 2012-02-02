@@ -18,9 +18,19 @@
 MissileLauncherModel::MissileLauncherModel() {
     NuclearModel *model = new NuclearModel();
     setNextChild( (Model*)model );
+	//height approx. .3
+        teamNumber = new TeamNumberModel();
 }
 
 void MissileLauncherModel::render() {
+                 //Draw number -- Addison
+                glPushMatrix();
+                        glTranslatef(0.2f, 0.3f, 0.6f);
+                        glScalef(0.5f, 0.5f, 0.5f);
+                        teamNumber->render();
+                glPopMatrix();
+                
+	
     glPushMatrix();
         glTranslatef(0.5f,0.175f,0.5f);//by jeff
         glScalef(.27f,.27f,.27f);//by jeff
