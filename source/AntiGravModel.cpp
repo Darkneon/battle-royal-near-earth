@@ -7,6 +7,7 @@
 
 #include "AntiGravModel.h"
 #include "PhaserModel.h"
+#include "TeamNumberModel.h"
 
 
 AntiGravModel::AntiGravModel(void)
@@ -74,6 +75,12 @@ void AntiGravModel::render(){
 			glEnd();
 		glPopMatrix();
 		glTranslatef(0.0f,-0.8f,0.0f);
+
+		glPushMatrix();
+			glTranslatef(0.3f,1.0f,1.2f);
+			TeamNumberModel *teamNumber = new TeamNumberModel();
+			teamNumber->render();
+		glPopMatrix();
 
 		//cylinder
 		glColor3f(0.5f, 0.0f, 0.5f);

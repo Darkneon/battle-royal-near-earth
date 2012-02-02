@@ -5,6 +5,7 @@
 #define	TRACKMODEL_H
 
 #include "Model.h"
+#include "TeamNumberModel.h"
 #include <math.h>
 
 class TracksModel : Model
@@ -16,6 +17,7 @@ public:
 private:
 	void drawTrack();
 	void drawCircle(float radius);
+	TeamNumberModel *teamNumber;
 };
 #endif	/* TRACKMODEL_H */
 
