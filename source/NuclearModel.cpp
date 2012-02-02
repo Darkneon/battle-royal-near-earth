@@ -15,22 +15,25 @@
 
 #include "NuclearModel.h"
 #include "PhaserModel.h"
+#include "TeamNumberModel.h"
 
 NuclearModel::NuclearModel() {
 	PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
+ 
 }
 
 void NuclearModel::render() 
 {
+    glTranslatef(0, 2.7, 0);
 	GLUquadricObj *quadratic = gluNewQuadric();;
-	glTranslatef(0,1,0);
     glPushMatrix();
-		glRotatef(-90, 1,0,0);
+        glScalef(0.8, 0.5, 0.8);
+        glTranslatef(0.5f,0.0f,-0.3f);
+        glRotatef(-90, 1,0,0);
 		gluCylinder(quadratic, .5, .5, 1, 8, 5);
 
 		// Bottom
-		glTranslatef(0,0,0);
 		glColor3f(1,0,0);
 		gluDisk(quadratic, 0, .5, 8, 5);
 		
@@ -38,7 +41,8 @@ void NuclearModel::render()
 		glTranslatef(0,0,1);
 		gluDisk(quadratic, 0, .5, 8, 5);
     glPopMatrix();
+	
+    glTranslatef(0,-0.5f,0);
 
-	glTranslatef(0, -1, 0); //draw children on top
 	gluDeleteQuadric(quadratic);
 }

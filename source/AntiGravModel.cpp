@@ -20,6 +20,8 @@ void AntiGravModel::render(){
 	GLUquadricObj *quadratic = gluNewQuadric();
 
 	glPushMatrix();
+        glTranslatef(-0.1, 0.5f, 0);
+    
 		//first machine block
 		drawMachineCube();
 
