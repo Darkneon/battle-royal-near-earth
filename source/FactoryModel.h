@@ -9,11 +9,11 @@
 
 #include "Model.h"
 
-class FactoryModel
+class FactoryModel: Model
 {
 public:
 	FactoryModel(void);
-	~FactoryModel(void);
+	//~FactoryModel(void);
 	void render();
 private:
 	void drawFactory(GLfloat xPos, GLfloat yPos, GLfloat zPos);

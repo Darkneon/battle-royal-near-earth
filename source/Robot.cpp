@@ -109,10 +109,4 @@ void Robot::changeBottom() {
 
 void Robot::draw() {
 	model->draw();
-    
-    glPushMatrix();
-        glScalef(.5f, 1, 0.5f);
-        glTranslatef(0.75f, 3.5f, 1.9f);
-        teamNumberModel.render();
-    glPopMatrix();
 }
