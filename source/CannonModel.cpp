@@ -19,9 +19,9 @@ CannonModel::CannonModel() {
 }
 
 void CannonModel::render() {
-	glTranslatef(.5f,.2f,.5f); //by Jeff
-	glScalef(.4f,.8f,.4f);//by Jeff
     glPushMatrix();
+        glTranslatef(0.2f ,-0.5f,-0.3f); //by Jeff
+        glScalef(.4f,.8f,.4f);//by Jeff
 		glPushMatrix();
 			glColor3f(1.0f, 0.0f, 0.0f);
 			GeoHelper::drawTrapezoidalPrism();
@@ -42,5 +42,8 @@ void CannonModel::render() {
 			glScalef(0.1f, 0.6, 0.1f);
 			GeoHelper::drawCylinder(360);
 		glPopMatrix();
-	glPopMatrix();
+	glPopMatrix();        
+    
+    glTranslatef(-0.2, -2.5f, -1.0f);
+
 }

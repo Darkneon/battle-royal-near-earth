@@ -41,6 +41,10 @@ public:
         return children;
     }
     
+    void setChildren(vector<Model*> value) {
+        children = value;
+    }
+    
     void setParent(Model *value) {
         parent = value;
     }

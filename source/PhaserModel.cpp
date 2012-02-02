@@ -14,15 +14,16 @@
 #endif
 
 #include "PhaserModel.h"
+#include "BipodModel.h"
 
 PhaserModel::PhaserModel() {
+    BipodModel *child = new BipodModel();
+    setNextChild( (Model*)child );
 }
 
 void PhaserModel::render() {
-	//glTranslatef(.7,0,.5);//by jeff
-	glScalef(.5,.5,.5);
     glPushMatrix();
-		//glTranslatef(-0.9f, 0.9f, 0.5f);
+        glScalef(.5,.5,.5);
 
 		//back panel
 		glPushMatrix();
@@ -48,4 +49,6 @@ void PhaserModel::render() {
 			GeoHelper::drawCylinder(360);
 		glPopMatrix();
 	glPopMatrix();
+    
+    glTranslatef(-0.2, -2.5f, -1.0f);
 }

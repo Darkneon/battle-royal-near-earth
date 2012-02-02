@@ -114,6 +114,19 @@ void keyOperations()
 
 	}
 		
+    if (keyStates[(int)'t']) {
+        robot.changeTop();
+    }
+  
+    if (keyStates[(int)'y']) {
+        robot.changeMiddle();
+    }
+
+      
+    if (keyStates[(int)'u']) {
+        robot.changeBottom();
+    }
+    
 	if (keyStates[(int)'-'])
 	{
 		if (denom != 4.0f)
@@ -154,14 +167,7 @@ void render()
 	switch (choice)
 	{
 	case 3:
-		
 		levelRenderer.render();
-		glPushMatrix();
-			glTranslatef(35,0,35);
-			player.draw();
-			glTranslatef(4,0,0);
-			robot.draw();
-		glPopMatrix();
 		break;
 	case 1:
 		missileLauncher.draw();
@@ -171,13 +177,13 @@ void render()
 		break;
 	case 0:
 		levelRenderer.render();
-       /* glPushMatrix();
+		glPushMatrix();
 			glTranslatef(35,0,35);
 			player.draw();
-			glTranslatef(8,0,0);
+			glTranslatef(4,0,0);
 			robot.draw();
-		glPopMatrix();*/
-		break;
+		glPopMatrix();
+        break;
 	case 4:
 		plainBlock.draw();
 		break;
