@@ -35,51 +35,36 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
-	${OBJECTDIR}/source/BipodModel.o \
-	${OBJECTDIR}/source/HalfHollowBlockModel.o \
-	${OBJECTDIR}/source/PitModel.o \
-	${OBJECTDIR}/source/BaseModel.o \
-	${OBJECTDIR}/source/HillsModel.o \
-	${OBJECTDIR}/source/PlainBlock.o \
-	${OBJECTDIR}/source/MountainModel.o \
-	${OBJECTDIR}/source/LightRubbleModel.o \
-	${OBJECTDIR}/source/LevelRenderer.o \
-	${OBJECTDIR}/source/Mountain.o \
-	${OBJECTDIR}/source/Phaser.o \
-	${OBJECTDIR}/source/Fence.o \
-	${OBJECTDIR}/source/Grass.o \
-	${OBJECTDIR}/source/NuclearModel.o \
-	${OBJECTDIR}/source/PlayerModel.o \
-	${OBJECTDIR}/source/AntennaModel.o \
-	${OBJECTDIR}/source/CannonModel.o \
-	${OBJECTDIR}/source/AntiGravModel.o \
-	${OBJECTDIR}/source/Electronics.o \
-	${OBJECTDIR}/source/Player.o \
-	${OBJECTDIR}/source/MissileLauncher.o \
-	${OBJECTDIR}/source/PlainBlockModel.o \
-	${OBJECTDIR}/source/TracksModel.o \
-	${OBJECTDIR}/source/Pit.o \
-	${OBJECTDIR}/source/GrassModel.o \
-	${OBJECTDIR}/source/ElectronicsModel.o \
-	${OBJECTDIR}/source/PhaserModel.o \
-	${OBJECTDIR}/source/Tracks.o \
-	${OBJECTDIR}/source/Base.o \
-	${OBJECTDIR}/source/AntiGrav.o \
-	${OBJECTDIR}/source/FenceModel.o \
-	${OBJECTDIR}/source/TeamNumberModel.o \
-	${OBJECTDIR}/source/HalfHollowBlock.o \
-	${OBJECTDIR}/source/HalfPlainBlockModel.o \
-	${OBJECTDIR}/source/FactoryModel.o \
-	${OBJECTDIR}/source/GeoHelper.o \
-	${OBJECTDIR}/source/Cannon.o \
-	${OBJECTDIR}/source/HollowBlockModel.o \
-	${OBJECTDIR}/source/Robot.o \
-	${OBJECTDIR}/source/Model.o \
-	${OBJECTDIR}/source/Bipod.o \
-	${OBJECTDIR}/source/MissileLauncherModel.o \
-	${OBJECTDIR}/source/HollowBlock.o \
-	${OBJECTDIR}/source/Nuclear.o \
-	${OBJECTDIR}/source/HalfPlainBlock.o
+	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
+	${OBJECTDIR}/source/Model/Static/FenceModel.o \
+	${OBJECTDIR}/source/Logic/Base.o \
+	${OBJECTDIR}/source/Logic/Player.o \
+	${OBJECTDIR}/source/Model/Robot/CannonModel.o \
+	${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o \
+	${OBJECTDIR}/source/Model/Static/HollowBlockModel.o \
+	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
+	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
+	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
+	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
+	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
+	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
+	${OBJECTDIR}/source/Model/Player/AntennaModel.o \
+	${OBJECTDIR}/source/Logic/LevelRenderer.o \
+	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
+	${OBJECTDIR}/source/Model/Robot/PhaserModel.o \
+	${OBJECTDIR}/source/Model/Model.o \
+	${OBJECTDIR}/source/Model/Static/HillsModel.o \
+	${OBJECTDIR}/source/Model/Static/MountainModel.o \
+	${OBJECTDIR}/source/Model/Robot/NuclearModel.o \
+	${OBJECTDIR}/source/Model/Static/LightRubbleModel.o \
+	${OBJECTDIR}/source/Logic/Factory.o \
+	${OBJECTDIR}/source/Logic/Robot.o \
+	${OBJECTDIR}/source/Model/Static/PitModel.o \
+	${OBJECTDIR}/source/Model/Robot/BipodModel.o \
+	${OBJECTDIR}/source/Model/Robot/AntiGravModel.o \
+	${OBJECTDIR}/source/Model/Robot/TracksModel.o \
+	${OBJECTDIR}/source/Model/Static/GrassModel.o \
+	${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o
 
 
 # C Compiler Flags
@@ -111,230 +96,155 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
-${OBJECTDIR}/source/BipodModel.o: source/BipodModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/MissileLauncherModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/BipodModel.o source/BipodModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o source/Model/Robot/MissileLauncherModel.cpp
 
-${OBJECTDIR}/source/HalfHollowBlockModel.o: source/HalfHollowBlockModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/FenceModel.o: source/Model/Static/FenceModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HalfHollowBlockModel.o source/HalfHollowBlockModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/FenceModel.o source/Model/Static/FenceModel.cpp
 
-${OBJECTDIR}/source/PitModel.o: source/PitModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Logic/Base.o: source/Logic/Base.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/PitModel.o source/PitModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Base.o source/Logic/Base.cpp
 
-${OBJECTDIR}/source/BaseModel.o: source/BaseModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Logic/Player.o: source/Logic/Player.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/BaseModel.o source/BaseModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Player.o source/Logic/Player.cpp
 
-${OBJECTDIR}/source/HillsModel.o: source/HillsModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/CannonModel.o: source/Model/Robot/CannonModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HillsModel.o source/HillsModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/CannonModel.o source/Model/Robot/CannonModel.cpp
 
-${OBJECTDIR}/source/PlainBlock.o: source/PlainBlock.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o: source/Model/Static/HalfPlainBlockModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/PlainBlock.o source/PlainBlock.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o source/Model/Static/HalfPlainBlockModel.cpp
 
-${OBJECTDIR}/source/MountainModel.o: source/MountainModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/HollowBlockModel.o: source/Model/Static/HollowBlockModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/MountainModel.o source/MountainModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HollowBlockModel.o source/Model/Static/HollowBlockModel.cpp
 
-${OBJECTDIR}/source/LightRubbleModel.o: source/LightRubbleModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/PlainBlockModel.o: source/Model/Static/PlainBlockModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LightRubbleModel.o source/LightRubbleModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o source/Model/Static/PlainBlockModel.cpp
 
-${OBJECTDIR}/source/LevelRenderer.o: source/LevelRenderer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/TeamNumberModel.o: source/Model/Static/TeamNumberModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LevelRenderer.o source/LevelRenderer.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o source/Model/Static/TeamNumberModel.cpp
 
-${OBJECTDIR}/source/Mountain.o: source/Mountain.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Helper/GeoHelper.o: source/Model/Helper/GeoHelper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Helper
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Mountain.o source/Mountain.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/GeoHelper.o source/Model/Helper/GeoHelper.cpp
 
-${OBJECTDIR}/source/Phaser.o: source/Phaser.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Phaser.o source/Phaser.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
 
-${OBJECTDIR}/source/Fence.o: source/Fence.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Fence.o source/Fence.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
 
-${OBJECTDIR}/source/Grass.o: source/Grass.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Grass.o source/Grass.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
 
-${OBJECTDIR}/source/NuclearModel.o: source/NuclearModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Player/AntennaModel.o: source/Model/Player/AntennaModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/NuclearModel.o source/NuclearModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Player/AntennaModel.o source/Model/Player/AntennaModel.cpp
 
-${OBJECTDIR}/source/PlayerModel.o: source/PlayerModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Logic/LevelRenderer.o: source/Logic/LevelRenderer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/PlayerModel.o source/PlayerModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/LevelRenderer.o source/Logic/LevelRenderer.cpp
 
-${OBJECTDIR}/source/AntennaModel.o: source/AntennaModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Player/PlayerModel.o: source/Model/Player/PlayerModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AntennaModel.o source/AntennaModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Player/PlayerModel.o source/Model/Player/PlayerModel.cpp
 
-${OBJECTDIR}/source/CannonModel.o: source/CannonModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/PhaserModel.o: source/Model/Robot/PhaserModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/CannonModel.o source/CannonModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/PhaserModel.o source/Model/Robot/PhaserModel.cpp
 
-${OBJECTDIR}/source/AntiGravModel.o: source/AntiGravModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AntiGravModel.o source/AntiGravModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
 
-${OBJECTDIR}/source/Electronics.o: source/Electronics.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/HillsModel.o: source/Model/Static/HillsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Electronics.o source/Electronics.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HillsModel.o source/Model/Static/HillsModel.cpp
 
-${OBJECTDIR}/source/Player.o: source/Player.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/MountainModel.o: source/Model/Static/MountainModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Player.o source/Player.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/MountainModel.o source/Model/Static/MountainModel.cpp
 
-${OBJECTDIR}/source/MissileLauncher.o: source/MissileLauncher.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/NuclearModel.o: source/Model/Robot/NuclearModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/MissileLauncher.o source/MissileLauncher.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/NuclearModel.o source/Model/Robot/NuclearModel.cpp
 
-${OBJECTDIR}/source/PlainBlockModel.o: source/PlainBlockModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/LightRubbleModel.o: source/Model/Static/LightRubbleModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/PlainBlockModel.o source/PlainBlockModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/LightRubbleModel.o source/Model/Static/LightRubbleModel.cpp
 
-${OBJECTDIR}/source/TracksModel.o: source/TracksModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Logic/Factory.o: source/Logic/Factory.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/TracksModel.o source/TracksModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Factory.o source/Logic/Factory.cpp
 
-${OBJECTDIR}/source/Pit.o: source/Pit.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Logic/Robot.o: source/Logic/Robot.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Pit.o source/Pit.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Robot.o source/Logic/Robot.cpp
 
-${OBJECTDIR}/source/GrassModel.o: source/GrassModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/PitModel.o: source/Model/Static/PitModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/GrassModel.o source/GrassModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/PitModel.o source/Model/Static/PitModel.cpp
 
-${OBJECTDIR}/source/ElectronicsModel.o: source/ElectronicsModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/BipodModel.o: source/Model/Robot/BipodModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/ElectronicsModel.o source/ElectronicsModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BipodModel.o source/Model/Robot/BipodModel.cpp
 
-${OBJECTDIR}/source/PhaserModel.o: source/PhaserModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/AntiGravModel.o: source/Model/Robot/AntiGravModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/PhaserModel.o source/PhaserModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/AntiGravModel.o source/Model/Robot/AntiGravModel.cpp
 
-${OBJECTDIR}/source/Tracks.o: source/Tracks.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Robot/TracksModel.o: source/Model/Robot/TracksModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Tracks.o source/Tracks.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/TracksModel.o source/Model/Robot/TracksModel.cpp
 
-${OBJECTDIR}/source/Base.o: source/Base.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/GrassModel.o: source/Model/Static/GrassModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Base.o source/Base.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/GrassModel.o source/Model/Static/GrassModel.cpp
 
-${OBJECTDIR}/source/AntiGrav.o: source/AntiGrav.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
+${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o: source/Model/Static/HalfHollowBlockModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AntiGrav.o source/AntiGrav.cpp
-
-${OBJECTDIR}/source/FenceModel.o: source/FenceModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/FenceModel.o source/FenceModel.cpp
-
-${OBJECTDIR}/source/TeamNumberModel.o: source/TeamNumberModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/TeamNumberModel.o source/TeamNumberModel.cpp
-
-${OBJECTDIR}/source/HalfHollowBlock.o: source/HalfHollowBlock.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HalfHollowBlock.o source/HalfHollowBlock.cpp
-
-${OBJECTDIR}/source/HalfPlainBlockModel.o: source/HalfPlainBlockModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HalfPlainBlockModel.o source/HalfPlainBlockModel.cpp
-
-${OBJECTDIR}/source/FactoryModel.o: source/FactoryModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/FactoryModel.o source/FactoryModel.cpp
-
-${OBJECTDIR}/source/GeoHelper.o: source/GeoHelper.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/GeoHelper.o source/GeoHelper.cpp
-
-${OBJECTDIR}/source/Cannon.o: source/Cannon.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Cannon.o source/Cannon.cpp
-
-${OBJECTDIR}/source/HollowBlockModel.o: source/HollowBlockModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HollowBlockModel.o source/HollowBlockModel.cpp
-
-${OBJECTDIR}/source/Robot.o: source/Robot.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Robot.o source/Robot.cpp
-
-${OBJECTDIR}/source/Model.o: source/Model.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model.o source/Model.cpp
-
-${OBJECTDIR}/source/Bipod.o: source/Bipod.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Bipod.o source/Bipod.cpp
-
-${OBJECTDIR}/source/MissileLauncherModel.o: source/MissileLauncherModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/MissileLauncherModel.o source/MissileLauncherModel.cpp
-
-${OBJECTDIR}/source/HollowBlock.o: source/HollowBlock.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HollowBlock.o source/HollowBlock.cpp
-
-${OBJECTDIR}/source/Nuclear.o: source/Nuclear.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Nuclear.o source/Nuclear.cpp
-
-${OBJECTDIR}/source/HalfPlainBlock.o: source/HalfPlainBlock.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/HalfPlainBlock.o source/HalfPlainBlock.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o source/Model/Static/HalfHollowBlockModel.cpp
 
 # Subprojects
 .build-subprojects:
