@@ -22,7 +22,7 @@ int height = HEIGHT;
 
 // Bounds of viewing frustum.
 double nearPlane =  1.0;
-double farPlane  = 85.0;
+double farPlane  = 100.0;
 
 // Viewing angle.
 static double fovy = 60.0;
@@ -30,38 +30,19 @@ static double fovy = 60.0;
 //camera rotation
 static GLint rot = 0;
 //camera location
-static const GLfloat RADIUS = 10.0f;
+static const GLfloat RADIUS = 20.0f;
 static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
 //static const GLfloat LOC_Y_INITIAL = 0;
-static GLfloat locX = 0.0f;
+static GLfloat locX = 25.0f;
 static GLfloat locY = LOC_Y_INITIAL;
-static GLfloat locZ = RADIUS;
+static GLfloat locZ = 25.0f + RADIUS;
 
 static bool wireframeView;
-
-//demo purposes only   -jon
-static int choice = 0;
-static int nbOfChoices = 13;
-//===================
 
 bool* keyStates = new bool[256];
 bool* funcKeyStates = new bool[256];
 
 Player player;
-Fence fence;
-Mountain mountain;
-Phaser phaser;
-Cannon cannon;
-HollowBlock hollowBlock;
-HalfHollowBlock halfHollowBlock;
-PlainBlock plainBlock;
-HalfPlainBlock halfPlainBlock;
-MissileLauncher missileLauncher;
-Pit pit;
-Pit pit2;
-Electronics electronics;
-Nuclear nuclear;
-Grass grass;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
@@ -117,8 +98,16 @@ static GLfloat denom = 4.0f;
 
 void keyOperations()
 {
-	if (keyStates[(int)'q'])
-		choice = ++choice % nbOfChoices; 
+	if (keyStates[(int)'z'])
+	{
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
+
+		GLfloat newRadius = 65.0f;
+		gluLookAt(newRadius, newRadius/2 * tan(GL_PI / 4), newRadius,
+			25, 0, 25, 0, 1, 0);
+	}
 		
 	if (keyStates[(int)'w']){
 		wireframeView = !wireframeView;
@@ -183,61 +172,19 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	switch (choice)
-	{
-	case 3:
-		levelRenderer.render();
-		break;
-	case 1:
-		missileLauncher.draw();
-		break;
-	case 2:
-		phaser.draw();
-		break;
-	case 0:
-		levelRenderer.render();
-		//Drawing robot models on map
-		glPushMatrix();
-			glTranslatef(15,0,40);
-			player.draw();
-			glTranslatef(1,0,0);
-			base.draw();
-			glTranslatef(7,0,5);
-			robot.draw();
-
-		glPopMatrix();
-        break;
-	case 4:
-		plainBlock.draw();
-		break;
-	case 5:
-		halfPlainBlock.draw();
-		break;
-	case 6:
-		hollowBlock.draw();
-		break;
-	case 7:
-		halfHollowBlock.draw();
-		break;
-	case 8:
-		pit.draw();
-		break;
-	case 9:
-		pit2.draw();
-		break;
-	case 10:
-		electronics.draw();
-		break;
-	case 11:
-		nuclear.draw();
-		break;
-	case 12:
+	levelRenderer.render();
+	//Drawing robot models on map
+	glPushMatrix();
+		glTranslatef(15,0,40);
+		player.draw();
+		glTranslatef(1,0,0);
 		base.draw();
-		break;
-	}
+		glTranslatef(7,0,5);
+		robot.draw();
 
+	glPopMatrix();
+    
 	commanderCamera();
-
 	glutSwapBuffers();
 }
 
@@ -280,7 +227,6 @@ void init()
 {
 	glEnable(GL_DEPTH_TEST);
 	wireframeView = false;
-	pit2.switchPitType();
 
 	for (int i = 0; i < 256; i++)
 	{
