@@ -7,7 +7,6 @@
 
 #ifndef MODEL_H
 #define	MODEL_H
-#include "Helper/GeoHelper.h"
 
 #ifdef __APPLE__
 	#include <Glut/glut.h>
@@ -19,6 +18,7 @@
 #include <cstdlib>
 #include <vector>
 
+#include "Helper/GeoHelper.h"
 using namespace std;
 
 class Model {

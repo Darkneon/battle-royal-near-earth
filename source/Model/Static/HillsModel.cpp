@@ -2,7 +2,7 @@
 #ifdef __APPLE__
 	#include <Glut/glut.h>
 #else
-    #define FREEGLUT_STATIC
+    //#define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
 

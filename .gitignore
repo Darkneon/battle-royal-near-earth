@@ -11,3 +11,6 @@ nbproject/private
 .dep.inc
 *.opensdf
 *.orig
+*.o
+battle-royale-near-earth-linux
+*.swp

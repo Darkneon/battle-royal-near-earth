@@ -2,8 +2,6 @@
 #include "GameIncludes.h"
 
 #ifdef __APPLE__
-    #include <OpenGL/gl.h>
-    #include <OpenGL/glu.h>
     #include <Glut/glut.h>
 #else
     #define FREEGLUT_STATIC
