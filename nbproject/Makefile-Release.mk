@@ -46,15 +46,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
 	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
-	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
+	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Player/AntennaModel.o \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
 	${OBJECTDIR}/source/Model/Robot/PhaserModel.o \
 	${OBJECTDIR}/source/Model/Model.o \
-	${OBJECTDIR}/source/Model/Static/HillsModel.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
+	${OBJECTDIR}/source/Model/Static/HillsModel.o \
 	${OBJECTDIR}/source/Model/Robot/NuclearModel.o \
 	${OBJECTDIR}/source/Model/Static/LightRubbleModel.o \
 	${OBJECTDIR}/source/Logic/Factory.o \
@@ -151,15 +151,15 @@ ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/Electroni
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
 
-${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
-
 ${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
+
+${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
 
 ${OBJECTDIR}/source/Model/Player/AntennaModel.o: source/Model/Player/AntennaModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
@@ -186,15 +186,15 @@ ${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
 
-${OBJECTDIR}/source/Model/Static/HillsModel.o: source/Model/Static/HillsModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HillsModel.o source/Model/Static/HillsModel.cpp
-
 ${OBJECTDIR}/source/Model/Static/MountainModel.o: source/Model/Static/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/MountainModel.o source/Model/Static/MountainModel.cpp
+
+${OBJECTDIR}/source/Model/Static/HillsModel.o: source/Model/Static/HillsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HillsModel.o source/Model/Static/HillsModel.cpp
 
 ${OBJECTDIR}/source/Model/Robot/NuclearModel.o: source/Model/Robot/NuclearModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
