@@ -94,6 +94,7 @@ LevelRenderer::LevelRenderer() {
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
 	map1();
+
 } 
 
 LevelRenderer::~LevelRenderer() {
@@ -116,7 +117,7 @@ void LevelRenderer::render() {
 		}
 	}
 	//Added by Jeff to see axes
-	/*glPushMatrix();
+	glPushMatrix();
 		glBegin(GL_LINES);
 			glColor3f(1,0,0);
 			glVertex3f(0,0,0);
@@ -130,7 +131,7 @@ void LevelRenderer::render() {
 			glVertex3f(0,0,0);
 			glVertex3f(0,0,1);
 		glEnd();
-	glPopMatrix();*/
+	glPopMatrix();
 	
 	for(int i = 1; i != 49; i++) {
 		for(int j = 23; j != 48; j++) {	

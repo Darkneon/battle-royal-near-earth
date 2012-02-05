@@ -22,7 +22,8 @@ private:
     void drawPitTop();
 	void drawPitIn();
 	void drawPitBottom();
-	void drawBase(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend);
+	void drawSquare();
+	void drawColoredCube(GLfloat* tColor, GLfloat* bColor, GLfloat* lColor, GLfloat* rColor, GLfloat* nColor, GLfloat* fColor);
 	
 };
 

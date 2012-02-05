@@ -35,18 +35,26 @@ void PitModel::switchPitType()
 void PitModel::drawPitIn()
 {
 	//Pit Inside
-	glTranslatef(.5,-.5,.5);
 	glPushMatrix();
-	drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+		GLfloat black[3] = {0.0f, 0.0f, 0.0f}; //How do I delete????
+		GLfloat brown[3] = {0.7f, 0.3f, 0.0f};
+		GLfloat dbrown[3] = {0.6f, 0.2f, 0.0f};
+		//Base
 		glPushMatrix();
-			glTranslatef(0.0f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
-			glTranslatef(0.0f, -0.2f, 0.0f);
+			glScalef(1.0f, 0.2f, 1.0f);
+			drawColoredCube(black, black, black, black, black, black);
 		glPopMatrix();
+		//Left Side
 		glPushMatrix();
-			glTranslatef(0.8f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
-			glTranslatef(0.0f, -0.2f, 0.0f);
+			glTranslatef(0.0f,0.2f,0.0f);
+			glScalef(0.2f,0.8f,1.0f);
+			drawColoredCube(brown, black, black, dbrown, black, black);
+		glPopMatrix();
+		//Right Side
+		glPushMatrix();
+			glTranslatef(0.8f,0.2f,0.0f);
+			glScalef(0.2f,0.8f,1.0f);
+			drawColoredCube(brown, black, dbrown, black, black, black);
 		glPopMatrix();
 	glPopMatrix();
 }
@@ -54,26 +62,35 @@ void PitModel::drawPitIn()
 void PitModel::drawPitTop()
 {
 	GLUquadricObj *quadratic = gluNewQuadric();
-	//Pit Outside
-	glTranslatef(.5,-.5,.5);
+	GLfloat black[3] = {0.0f, 0.0f, 0.0f}; //How do I delete????
+	GLfloat brown[3] = {0.7f, 0.3f, 0.0f};
+	GLfloat dbrown[3] = {0.6f, 0.2f, 0.0f};
+
 	glPushMatrix();
-		drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+		//Base
 		glPushMatrix();
-			glTranslatef(0.0f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
-			glTranslatef(0.0f, -0.2f, 0.0f);
+			glScalef(1.0f, 0.2f, 1.0f);
+			drawColoredCube(black, black, black, black, black, black);
 		glPopMatrix();
+		//Left Side
 		glPushMatrix();
-			glTranslatef(0.8f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
-			glTranslatef(0.0f, -0.2f, 0.0f);
+			glTranslatef(0.0f,0.2f,0.0f);
+			glScalef(0.2f,0.8f,1.0f);
+			drawColoredCube(brown, black, black, dbrown, black, black);
 		glPopMatrix();
+		//Right Side
 		glPushMatrix();
-			glTranslatef(0.2f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.6f, 0.8f, 0.2f);
-			glTranslatef(-0.2f, -0.2f, 0.0f);
+			glTranslatef(0.8f,0.2f,0.0f);
+			glScalef(0.2f,0.8f,1.0f);
+			drawColoredCube(brown, black, dbrown, black, black, black);
 		glPopMatrix();
-	
+		//Far Side
+		glPushMatrix();
+			glTranslatef(0.2f,0.2f,0.0f);
+			glScalef(0.6f,0.8f,0.2f);
+			drawColoredCube(brown, black, black, black, dbrown, black);
+		glPopMatrix();
+
 		//curved inside
 		glPushMatrix();
 			glTranslatef(0.5f,1.0f,0.5f);
@@ -83,6 +100,7 @@ void PitModel::drawPitTop()
 				glClipPlane(GL_CLIP_PLANE0, coordinate);
 				glEnable(GL_CLIP_PLANE0);
 					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					glColor3fv(dbrown);
 					gluCylinder(quadratic, .33, .33, 1.0, 6, 4);
 					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 				glDisable(GL_CLIP_PLANE0);
@@ -95,6 +113,7 @@ void PitModel::drawPitTop()
 				glClipPlane(GL_CLIP_PLANE0, coordinate);
 				glEnable(GL_CLIP_PLANE0);
 					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					glColor3fv(brown);
 					gluDisk(quadratic, 0.325, 0.5, 6, 3);
 					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 				glDisable(GL_CLIP_PLANE0);
@@ -107,35 +126,47 @@ void PitModel::drawPitTop()
 void PitModel::drawPitBottom()
 {
 	GLUquadricObj *quadratic = gluNewQuadric();
-	//Pit Outside
-	glTranslatef(1.5,-.5,1.5);
-	glRotatef(180,0,1,0);
+	GLfloat black[3] = {0.0f, 0.0f, 0.0f}; //How do I delete????
+	GLfloat brown[3] = {0.7f, 0.3f, 0.0f};
+	GLfloat dbrown[3] = {0.6f, 0.2f, 0.0f};
+
 	glPushMatrix();
-		drawBase(0.0f, 0.0f, 0.0f, 1.0f, 0.2f, 1.0f);
+		glTranslatef(1.0f,0.0f,1.0f);
+		glRotatef(180,0,1,0);
+		//Base
 		glPushMatrix();
-			glTranslatef(0.0f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
-			glTranslatef(0.0f, -0.2f, 0.0f);
+			glScalef(1.0f, 0.2f, 1.0f);
+			drawColoredCube(black, black, black, black, black, black);
 		glPopMatrix();
+		//Left Side
 		glPushMatrix();
-			glTranslatef(0.8f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, 0.8f, 1.0f);
-			glTranslatef(0.0f, -0.2f, 0.0f);
+			glTranslatef(0.0f,0.2f,0.0f);
+			glScalef(0.2f,0.8f,1.0f);
+			drawColoredCube(brown, black, black, dbrown, black, black);
 		glPopMatrix();
+		//Right Side
 		glPushMatrix();
-			glTranslatef(0.2f, 0.2f, 0.0f);
-			GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.6f, 0.8f, 0.2f);
-			glTranslatef(-0.2f, -0.2f, 0.0f);
+			glTranslatef(0.8f,0.2f,0.0f);
+			glScalef(0.2f,0.8f,1.0f);
+			drawColoredCube(brown, black, dbrown, black, black, black);
 		glPopMatrix();
+		//Far Side
+		glPushMatrix();
+			glTranslatef(0.2f,0.2f,0.0f);
+			glScalef(0.6f,0.8f,0.2f);
+			drawColoredCube(brown, black, black, black, dbrown, black);
+		glPopMatrix();
+
 		//curved inside
 		glPushMatrix();
 			glTranslatef(0.5f,1.0f,0.5f);
 			glPushMatrix();
 				glRotatef(90.0f, 1.0f,0.0f,0.0f);
-				GLdouble coordinate[4] = {0,-1,0,0};
+				GLdouble coordinate[4] = {0.0, -1.0, 0.0, 0.0};
 				glClipPlane(GL_CLIP_PLANE0, coordinate);
 				glEnable(GL_CLIP_PLANE0);
 					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					glColor3fv(dbrown);
 					gluCylinder(quadratic, .33, .33, 1.0, 6, 4);
 					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 				glDisable(GL_CLIP_PLANE0);
@@ -148,6 +179,7 @@ void PitModel::drawPitBottom()
 				glClipPlane(GL_CLIP_PLANE0, coordinate);
 				glEnable(GL_CLIP_PLANE0);
 					gluQuadricOrientation(quadratic, GLU_INSIDE);
+					glColor3fv(brown);
 					gluDisk(quadratic, 0.325, 0.5, 6, 3);
 					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 				glDisable(GL_CLIP_PLANE0);
@@ -160,7 +192,7 @@ void PitModel::drawPitBottom()
 void PitModel::render() 
 {
 	glPushMatrix();
-		glTranslatef(-0.5f, -0.5f, -0.5f);
+		glTranslatef(0.0f, -1.0f, 0.0f);
 		if (pitType == 0)
 			drawPitTop();
 		else if (pitType == 1)	
@@ -170,156 +202,58 @@ void PitModel::render()
 	glPopMatrix();
 }
 
-void PitModel::drawBase(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend)
-{
-   // glPushMatrix();
-    glBegin(GL_TRIANGLES);
-        //                  X     Y     Z
-        // Square 1 -- ALONG THE X AXIS
-        glColor3f(0.0f, 1.0f, 1.0f);
-                //Lower Triangle
-                glColor3f(0.8f, 1.0f, 1.0f); // LIGHT BLUE
-                glNormal3f(0.0, 0.0, -1.0);
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-        // Square 2 -- ALONG THE Z AXIS
-               // glColor3f(0.0f, 1.0f, 1.0f); // DARKER BLUE
-                glNormal3f(-1.0, 0.0, 0.0);
-                 //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xOrigin, yExtend, zExtend);
-        // Square 3 -- ALONG THE X AXIS, extended off Z
-               // glColor3f(1.0f, 0.0f, 1.0f); //PURPLE
-                 glNormal3f(0.0, 0.0, 1.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-        // Square 4 -- Along the X AND Z AXIS
-               // glColor3f(1.0f, 0.0f, 0.0f); //RED
-                glNormal3f(1.0, 0.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-        // Square 5 -- TOP OF CUBE
-                glColor3f(0.0f, 0.0f, 0.0f); //BROWN
-                glNormal3f(0.0, 1.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-        // Square 6 -- BOTTOM OF CUBE
-                //glColor3f(1.0f, 0.5f, 0.5f); //PINK
-                 glNormal3f(0.0, -1.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-	glEnd();
-        
-      //  glPopMatrix;
+void PitModel::drawSquare(){
+	glPushMatrix();
+		glBegin(GL_TRIANGLES);
+			glVertex3f(0.0f,0.0f,0.0f);
+			glVertex3f(0.0f,0.0f,1.0f);
+			glVertex3f(1.0f,0.0f,1.0f);
+
+			glVertex3f(0.0f,0.0f,0.0f);
+			glVertex3f(1.0f,0.0f,1.0f);
+			glVertex3f(1.0f,0.0f,0.0f);
+		glEnd();
+	glPopMatrix();
 }
-/*
-void PitModel::drawSide(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend)
-{
-   // glPushMatrix();
-    glBegin(GL_TRIANGLES);
-        //                  X     Y     Z
-        // Square 1 -- ALONG THE X AXIS
-        glColor3f(0.0f, 1.0f, 1.0f);
-                //Lower Triangle
-                glColor3f(0.8f, 1.0f, 1.0f); // LIGHT BLUE
-                glNormal3f(0.0, 0.0, -1.0);
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-        // Square 2 -- ALONG THE Z AXIS
-               // glColor3f(0.0f, 1.0f, 1.0f); // DARKER BLUE
-                glNormal3f(-1.0, 0.0, 0.0);
-                 //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xOrigin, yExtend, zExtend);
-        // Square 3 -- ALONG THE X AXIS, extended off Z
-               // glColor3f(1.0f, 0.0f, 1.0f); //PURPLE
-                 glNormal3f(0.0, 0.0, 1.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-        // Square 4 -- Along the X AND Z AXIS
-               // glColor3f(1.0f, 0.0f, 0.0f); //RED
-                glNormal3f(1.0, 0.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-        // Square 5 -- TOP OF CUBE
-                glColor3f(.5f, .2f, 0.1f); //BROWN
-                glNormal3f(0.0, 1.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-        // Square 6 -- BOTTOM OF CUBE
-                //glColor3f(1.0f, 0.5f, 0.5f); //PINK
-                 glNormal3f(0.0, -1.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-	glEnd();
-        
-      //  glPopMatrix;
-}*/
+
+void PitModel::drawColoredCube(GLfloat* tColor, GLfloat* bColor, GLfloat* lColor, GLfloat* rColor, GLfloat* nColor, GLfloat* fColor){
+	glPushMatrix();
+		//bottom
+		glPushMatrix();
+			glColor3fv(bColor);
+			drawSquare();
+		glPopMatrix();
+		//top
+		glPushMatrix();
+			glColor3fv(tColor);
+			glTranslatef(0.0f,1.0f,0.0f);
+			drawSquare();
+		glPopMatrix();
+		//left
+		glPushMatrix();
+			glColor3fv(lColor);
+			glRotatef(90.f, 0.0f,0.0f,1.0f);
+			drawSquare();
+		glPopMatrix();
+		//right
+		glPushMatrix();
+			glColor3fv(rColor);
+			glTranslatef(1.0f, 1.0f, 0.0f);
+			glRotatef(-90.f, 0.0f,0.0f,1.0f);
+			drawSquare();
+		glPopMatrix();
+		//near
+		glPushMatrix();
+			glColor3fv(nColor);
+			glRotatef(-90.f, 1.0f,0.0f,0.0f);
+			drawSquare();
+		glPopMatrix();
+		//far
+		glPushMatrix();
+			glColor3fv(nColor);
+			glTranslatef(0.0f,1.0f,1.0f);
+			glRotatef(90.f, 1.0f,0.0f,0.0f);
+			drawSquare();
+		glPopMatrix();
+	glPopMatrix();
+}
