@@ -28,22 +28,31 @@ static double fovy = 60.0;
 //camera rotation
 static GLint rot = 0;
 //camera location
-static const GLfloat RADIUS = 20.0f;
-static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
-//static const GLfloat LOC_Y_INITIAL = 0;
+static const GLfloat DEFAULT_RADIUS = 10.0f;
+static const GLfloat BIRD_SIGHT_RADIUS = 45.0f;
+static GLfloat currentRadius = DEFAULT_RADIUS;
 static GLfloat locX = 25.0f;
-static GLfloat locY = LOC_Y_INITIAL;
-static GLfloat locZ = 25.0f + RADIUS;
+static GLfloat locY = 0.0f;
+static GLfloat locZ = 25.0f + DEFAULT_RADIUS;
 
 static bool wireframeView;
+static bool birdSightView;
 
-bool* keyStates = new bool[256];
-bool* funcKeyStates = new bool[256];
+bool keyStates[256];
+bool funcKeyStates[256];
+
+static GLfloat denom = 4.0f; //used for zoom effect
 
 Player player;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
+
+
+void calculate45DegreesForLocY()
+{
+	locY = currentRadius * tan(GL_PI / 4);
+}
 
 void commanderCamera()
 {
@@ -51,8 +60,8 @@ void commanderCamera()
 	glLoadIdentity();
 	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
 
-	gluLookAt(locX + RADIUS * sin(rot * 1.0f / 8), locY, locZ - RADIUS + RADIUS * cos(rot * 1.0f / 8),
-		locX, 0, locZ - RADIUS, 0, 1, 0);
+	gluLookAt(locX + currentRadius * sin(rot * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(rot * 1.0f / 8),
+		locX, 0, locZ - currentRadius, 0, 1, 0);
 }
 
 
@@ -79,7 +88,7 @@ void funcKeyOperations()
 	}
 	else if (funcKeyStates[GLUT_KEY_DOWN])
 	{
-		GLfloat moveVector[] = { 0 + 1 * sin(rot * 1.0f / 8), 0 + 1 * cos(rot * 1.0f / 8)};
+		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
 		locZ += moveVector[1];
 		locX += moveVector[0];
 	}
@@ -92,22 +101,28 @@ void funcKeyOperations()
 		rot = 0;
 }
 
-static GLfloat denom = 4.0f;
-
 void keyOperations()
 {
-	if (keyStates[(int)'z'])
+	if (keyStates[122]) //z
 	{
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
-
-		GLfloat newRadius = 65.0f;
-		gluLookAt(newRadius, newRadius/2 * tan(GL_PI / 4), newRadius,
-			25, 0, 25, 0, 1, 0);
+		birdSightView = !birdSightView;
+		
+		GLfloat zeeDistanze = BIRD_SIGHT_RADIUS - DEFAULT_RADIUS;
+		if (birdSightView)
+		{
+			currentRadius = BIRD_SIGHT_RADIUS;
+			locZ += zeeDistanze;
+		}
+		else
+		{
+			currentRadius = DEFAULT_RADIUS;
+			locZ -= zeeDistanze;
+		}
+		
+		calculate45DegreesForLocY();
 	}
 		
-	if (keyStates[(int)'w']){
+	if (keyStates[119]){ //w
 		wireframeView = !wireframeView;
 		if(wireframeView){
 			glPolygonMode(GL_BACK, GL_LINE);
@@ -119,42 +134,45 @@ void keyOperations()
 
 	}
 		
-    if (keyStates[(int)'t']) {
+    if (keyStates[116]) { //t
         robot.changeTop();
     }
   
-    if (keyStates[(int)'y']) {
+    if (keyStates[121]) { //y
         robot.changeMiddle();
     }
 
       
-    if (keyStates[(int)'u']) {
+    if (keyStates[117]) { //u
         robot.changeBottom();
     }
     
-	if (keyStates[(int)'-'])
+	if (keyStates[45]) //-
 	{
 		if (denom != 4.0f)
 		{
 			fovy++;
 			denom -= 0.25f;
-			locY = RADIUS * tan(GL_PI / denom);
+			locY = currentRadius * tan(GL_PI / denom);
 		}
 	}
-	else if (keyStates[(int)'='])
+	else if (keyStates[61]) //=
 	{
-		fovy--;
-		denom += 0.25f;
-		locY = RADIUS * tan(GL_PI / denom);
+		if (fovy > 10)
+		{
+			fovy--;
+			denom += 0.25f;
+			locY = currentRadius * tan(GL_PI / denom);
+		}
 	}
-	else if (keyStates[(int)'0'])
+	else if (keyStates[48]) //0
 	{
 		fovy = 60.0f;
-		locY = LOC_Y_INITIAL;
+		calculate45DegreesForLocY();
 		denom = 4.0f;
 	}	
 
-	if (keyStates[27])
+	if (keyStates[27]) //escape
 		exit(0);
 	
 }
@@ -212,12 +230,22 @@ void functionKeys(int key, int x, int y)
 void keyUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
+
+	//Checks for uppercase
+	if (key >= 65 && key <= 90)
+		keyStates[key + 32] = false;
+
 	glutPostRedisplay();
 }
 
 void keyboardKeys(unsigned char key, int x, int y)
 {
-	keyStates[key] = true;	
+	keyStates[key] = true;
+
+	//Checks for uppercase
+	if (key >= 65 && key <= 90)
+		keyStates[key + 32] = true;
+
 	glutPostRedisplay();
 }
 
@@ -225,12 +253,15 @@ void init()
 {
 	glEnable(GL_DEPTH_TEST);
 	wireframeView = false;
+	birdSightView = false;
 
 	for (int i = 0; i < 256; i++)
 	{
 		keyStates[i] = false;
 		funcKeyStates[i] = false;
 	}
+
+	calculate45DegreesForLocY();
 }
 
 
@@ -253,9 +284,6 @@ int main (int argc, char **argv)
 	init();
 
 	glutMainLoop();
-
-	delete keyStates;
-	delete funcKeyStates;
 
 	return 0;
 }

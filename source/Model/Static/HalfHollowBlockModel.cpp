@@ -14,16 +14,14 @@
 
 #include "HalfHollowBlockModel.h"
 
-HalfHollowBlockModel::HalfHollowBlockModel() {
+HalfHollowBlockModel::HalfHollowBlockModel() 
+{
 }
 
 void HalfHollowBlockModel::render() {
-	glTranslatef(.5,.25,.5);
 	glPushMatrix();
-		GeoHelper::drawCube(-0.5f, -0.25f, -0.5f, 0.5f, 0.25f, -0.25f);
-		GeoHelper::drawCube(-0.5f, -0.25f, -0.25f, -0.25f, 0.25f, 0.25f);
-		GeoHelper::drawCube(-0.5f, -0.25f, 0.25f, 0.5f, 0.25f, 0.5f);
-		GeoHelper::drawCube(0.25f, -0.25f, -0.25f, 0.5f, 0.25f, 0.5f);
+		glScalef(1.0f, 0.5f, 1.0f);
+		HollowBlockModel::render();
 	glPopMatrix();
 }
 

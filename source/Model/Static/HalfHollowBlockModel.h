@@ -8,9 +8,10 @@
 #ifndef HALFHOLLOWBLOCKMODEL_H
 #define	HALFHOLLOWBLOCKMODEL_H
 
-#include "Model.h"
+//#include "Model.h"
+#include "HollowBlockModel.h"
 
-class HalfHollowBlockModel : Model {
+class HalfHollowBlockModel : HollowBlockModel {
 public:
     HalfHollowBlockModel();        
 private:
