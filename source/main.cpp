@@ -230,12 +230,22 @@ void functionKeys(int key, int x, int y)
 void keyUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
+
+	//Checks for uppercase
+	if (key >= 65 && key <= 90)
+		keyStates[key + 32] = false;
+
 	glutPostRedisplay();
 }
 
 void keyboardKeys(unsigned char key, int x, int y)
 {
-	keyStates[key] = true;	
+	keyStates[key] = true;
+
+	//Checks for uppercase
+	if (key >= 65 && key <= 90)
+		keyStates[key + 32] = true;
+
 	glutPostRedisplay();
 }
 

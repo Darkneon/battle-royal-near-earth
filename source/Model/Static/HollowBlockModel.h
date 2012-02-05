@@ -13,7 +13,7 @@
 class HollowBlockModel : Model {
 public:
     HollowBlockModel();        
-private:
+protected:
     void render();
 };
 

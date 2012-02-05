@@ -4,7 +4,6 @@ Robert   Jakubowicz	6045707
 Stefanie Lavoie		1951750
 Addison  Rodomista	1967568
 
-Key mappings:
 w --------------- toggle wireframe
 z --------------- toggle bird view
 arrows ---------- move camera around
