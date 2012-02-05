@@ -4,6 +4,10 @@ Robert   Jakubowicz	6045707
 Stefanie Lavoie		1951750
 Addison  Rodomista	1967568
 
+This version works on windows, mac and linux.
+
+Key bindings:
+
 w --------------- toggle wireframe
 z --------------- toggle bird view
 arrows ---------- move camera around
