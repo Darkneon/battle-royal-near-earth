@@ -5,18 +5,17 @@ Stefanie Lavoie		1951750
 Addison  Rodomista	1967568
 
 Key mappings:
-
 w --------------- toggle wireframe
-q --------------- change models (remove before demo)
-
-** The robot can be found near the bottom of the map **
-t --------------- changes robot's head
-y --------------- changes robot's body
-u --------------- chanegs robot's legs
-
+z --------------- toggle bird view
 arrows ---------- move camera around
 page up/down ---- rotate
 end ------------- reset rotation angle to 0
 = --------------- zoom in
 - --------------- zoom out
 0 --------------- reset zoom
+
+The following keys interchange robot parts.
+** The robot can be found near the bottom of the map around where the base and factory are**
+t --------------- changes robot's head
+y --------------- changes robot's body
+u --------------- chanegs robot's legs
