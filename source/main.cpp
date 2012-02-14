@@ -24,7 +24,8 @@ double nearPlane =  1.0;
 double farPlane  = 100.0;
 
 // Viewing angle.
-static double fovy = 60.0;
+const static double DEFAULT_FOVY = 60.0;
+static double fovy = DEFAULT_FOVY;
 
 //camera rotation
 static GLint rot = 0;
@@ -70,61 +71,106 @@ void commanderCamera()
 
 void freeLookCamera()
 {
+	GLfloat toAddY = pitch / 128.0f;
 
-	gluLookAt(locX, locY, locZ, locX + sin(yaw * 1.0f / 64), locY - sin(pitch * 1.0f / 64), locZ - cos(yaw * 1.0f / 64)/*- 99.0f */,  0.0f, 1.0f, 0.0f);
-	//yaw = pitch = 0.0f;
+	gluLookAt(locX, locY, locZ, locX - sin(yaw * 1.0f / 64), locY - toAddY, locZ + cos(yaw * 1.0f / 64),  
+		0.0f, 1.0f, 0.0f);
 }
 
 void funcKeyOperations()
 {
 	if (funcKeyStates[GLUT_KEY_LEFT])
 	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ += moveVector[0];
-		locX -= moveVector[1];	
+		if (!mouseLook)
+		{
+			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
+			locZ += moveVector[0];
+			locX -= moveVector[1];
+		}
+		else
+		{	
+			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64)};
+			locX -= moveVector[1];
+			locZ += moveVector[0];
+		}
+
 		glutPostRedisplay();
 	}
 	else if (funcKeyStates[GLUT_KEY_RIGHT])
 	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ -= moveVector[0];
-		locX += moveVector[1];
+		if (!mouseLook)
+		{
+			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
+			locZ -= moveVector[0];
+			locX += moveVector[1];
+		}
+		else
+		{	
+			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64)};
+			locX += moveVector[1];
+			locZ -= moveVector[0];
+		}
+
 		glutPostRedisplay();
 	}
 
 	if (funcKeyStates[GLUT_KEY_UP])
 	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ -= moveVector[1];
-		locX -= moveVector[0];
+		if (!mouseLook)
+		{
+			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
+			locZ -= moveVector[1];
+			locX -= moveVector[0];
+		}
+		else
+		{
+			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64), sin(pitch * 1.0f / 64)};
+			locX -= moveVector[0];
+			locZ -= moveVector[1];
+			locY -= moveVector[2];
+		}
 		glutPostRedisplay();
 	}
 	else if (funcKeyStates[GLUT_KEY_DOWN])
 	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ += moveVector[1];
-		locX += moveVector[0];
+		if (!mouseLook)
+		{
+			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
+			locZ += moveVector[1];
+			locX += moveVector[0];
+		}
+		else
+		{
+			
+			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64), sin(pitch * 1.0f / 64)};
+			locX += moveVector[0];
+			locZ += moveVector[1];
+			locY += moveVector[2];
+		}
 		glutPostRedisplay();
 	}
+	
 
 	if (funcKeyStates[GLUT_KEY_PAGE_UP])
 	{
 		if (!mouseLook)
+		{
 			rot++;
-		glutPostRedisplay();
+			glutPostRedisplay();
+		}
 	}
 	else if (funcKeyStates[GLUT_KEY_PAGE_DOWN])
 	{
 		if (!mouseLook)
+		{
 			rot--;
-		glutPostRedisplay();
+			glutPostRedisplay();
+		}
 	}
 	else if (funcKeyStates[GLUT_KEY_END])
 	{
 		rot = 0;
-		glutPostRedisplay();
 	}
-
 }
 
 void keyOperations()
@@ -133,6 +179,9 @@ void keyOperations()
 	if (keyStates[99]) //c
 	{
 		mouseLook = !mouseLook;
+		fovy = DEFAULT_FOVY;
+		calculate45DegreesForLocY();
+		denom = 4.0f;
 	}
 
 	if (keyStates[122]) //z
@@ -177,25 +226,22 @@ void keyOperations()
     if (keyStates[116]) //t
 	{ 
         robot.changeTop();
-		glutPostRedisplay();
     }
   
     if (keyStates[121]) //y
 	{ 
         robot.changeMiddle();
-		glutPostRedisplay();
     }
 
       
     if (keyStates[117]) //u
 	{ 
         robot.changeBottom();
-		glutPostRedisplay();
     }
     
 	if (keyStates[45]) //-
 	{
-		if (denom != 4.0f)
+		if (denom != 4.0f && !mouseLook)
 		{
 			fovy++;
 			denom -= 0.25f;
@@ -203,7 +249,7 @@ void keyOperations()
 			glutPostRedisplay();
 		}
 	}
-	else if (keyStates[61]) //=
+	else if (keyStates[61] && !mouseLook) //=
 	{
 		if (fovy > 10)
 		{
@@ -215,18 +261,13 @@ void keyOperations()
 	}
 	else if (keyStates[48]) //0
 	{
-		fovy = 60.0f;
+		fovy = DEFAULT_FOVY;
 		calculate45DegreesForLocY();
 		denom = 4.0f;
-		glutPostRedisplay();
 	}	
-
 
 	if (keyStates[27]) //escape
 		exit(0);
-
-	
-	
 }
 
 void render()
@@ -324,6 +365,7 @@ void init()
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 }
+
 
 void passiveMotionFunc(int x, int y)
 {
