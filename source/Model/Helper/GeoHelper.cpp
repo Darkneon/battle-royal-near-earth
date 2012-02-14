@@ -10,14 +10,12 @@ void GeoHelper::drawTriangularPrism()
 			glVertex3f(0.0f, 0.0f, 0.0f);
 			glVertex3f(1.0f, 0.0f, 0.0f);
 			glVertex3f(0.5f, 0.5f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
 
 		glBegin(GL_TRIANGLES); //base 2
 			glVertex3f(0.0f, 0.0f, -1.0f);
 			glVertex3f(1.0f, 0.0f, -1.0f);
 			glVertex3f(0.5f, 0.5f, -1.0f);
-			glVertex3f(0.0f, 0.0f, -1.0f);
 		glEnd();
 
 		glBegin(GL_TRIANGLES); //the "under part"

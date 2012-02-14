@@ -1,4 +1,5 @@
 #include <math.h>
+
 #include "GameIncludes.h"
 
 #ifdef __APPLE__
@@ -35,13 +36,20 @@ static GLfloat locX = 25.0f;
 static GLfloat locY = 0.0f;
 static GLfloat locZ = 25.0f + DEFAULT_RADIUS;
 
+static GLfloat yaw = 0.0f;
+static GLfloat pitch = 0.0f;
+
 static bool wireframeView;
 static bool birdSightView;
+static bool mouseLook;
 
 bool keyStates[256];
 bool funcKeyStates[256];
 
 static GLfloat denom = 4.0f; //used for zoom effect
+
+const static int CENTER_X = width / 2;
+const static int CENTER_Y = height / 2;
 
 Player player;
 LevelRenderer levelRenderer;
@@ -56,14 +64,16 @@ void calculate45DegreesForLocY()
 
 void commanderCamera()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
-
 	gluLookAt(locX + currentRadius * sin(rot * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(rot * 1.0f / 8),
 		locX, 0, locZ - currentRadius, 0, 1, 0);
 }
 
+void freeLookCamera()
+{
+
+	gluLookAt(locX, locY, locZ, locX + sin(yaw * 1.0f / 64), locY - sin(pitch * 1.0f / 64), locZ - cos(yaw * 1.0f / 64)/*- 99.0f */,  0.0f, 1.0f, 0.0f);
+	//yaw = pitch = 0.0f;
+}
 
 void funcKeyOperations()
 {
@@ -72,12 +82,14 @@ void funcKeyOperations()
 		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
 		locZ += moveVector[0];
 		locX -= moveVector[1];	
+		glutPostRedisplay();
 	}
 	else if (funcKeyStates[GLUT_KEY_RIGHT])
 	{
 		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
 		locZ -= moveVector[0];
 		locX += moveVector[1];
+		glutPostRedisplay();
 	}
 
 	if (funcKeyStates[GLUT_KEY_UP])
@@ -85,27 +97,48 @@ void funcKeyOperations()
 		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
 		locZ -= moveVector[1];
 		locX -= moveVector[0];
+		glutPostRedisplay();
 	}
 	else if (funcKeyStates[GLUT_KEY_DOWN])
 	{
 		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
 		locZ += moveVector[1];
 		locX += moveVector[0];
+		glutPostRedisplay();
 	}
 
 	if (funcKeyStates[GLUT_KEY_PAGE_UP])
-		rot++;
+	{
+		if (!mouseLook)
+			rot++;
+		glutPostRedisplay();
+	}
 	else if (funcKeyStates[GLUT_KEY_PAGE_DOWN])
-		rot--;
+	{
+		if (!mouseLook)
+			rot--;
+		glutPostRedisplay();
+	}
 	else if (funcKeyStates[GLUT_KEY_END])
+	{
 		rot = 0;
+		glutPostRedisplay();
+	}
+
 }
 
 void keyOperations()
 {
+	
+	if (keyStates[99]) //c
+	{
+		mouseLook = !mouseLook;
+	}
+
 	if (keyStates[122]) //z
 	{
 		birdSightView = !birdSightView;
+		mouseLook = false;
 		
 		GLfloat zeeDistanze = BIRD_SIGHT_RADIUS - DEFAULT_RADIUS;
 		if (birdSightView)
@@ -122,29 +155,42 @@ void keyOperations()
 		calculate45DegreesForLocY();
 	}
 		
-	if (keyStates[119]){ //w
+	if (keyStates[119])//w
+	{ 
 		wireframeView = !wireframeView;
-		if(wireframeView){
+		if(wireframeView)
+		{
+			glDisable(GL_DEPTH_TEST);
 			glPolygonMode(GL_BACK, GL_LINE);
 			glPolygonMode(GL_FRONT, GL_LINE);
-		}else{
+			
+		}
+		else
+		{
+			glEnable(GL_DEPTH_TEST);
 			glPolygonMode(GL_BACK, GL_FILL);
 			glPolygonMode(GL_FRONT, GL_FILL);
 		}
 
 	}
 		
-    if (keyStates[116]) { //t
+    if (keyStates[116]) //t
+	{ 
         robot.changeTop();
+		glutPostRedisplay();
     }
   
-    if (keyStates[121]) { //y
+    if (keyStates[121]) //y
+	{ 
         robot.changeMiddle();
+		glutPostRedisplay();
     }
 
       
-    if (keyStates[117]) { //u
+    if (keyStates[117]) //u
+	{ 
         robot.changeBottom();
+		glutPostRedisplay();
     }
     
 	if (keyStates[45]) //-
@@ -154,6 +200,7 @@ void keyOperations()
 			fovy++;
 			denom -= 0.25f;
 			locY = currentRadius * tan(GL_PI / denom);
+			glutPostRedisplay();
 		}
 	}
 	else if (keyStates[61]) //=
@@ -163,6 +210,7 @@ void keyOperations()
 			fovy--;
 			denom += 0.25f;
 			locY = currentRadius * tan(GL_PI / denom);
+			glutPostRedisplay();
 		}
 	}
 	else if (keyStates[48]) //0
@@ -170,10 +218,14 @@ void keyOperations()
 		fovy = 60.0f;
 		calculate45DegreesForLocY();
 		denom = 4.0f;
+		glutPostRedisplay();
 	}	
+
 
 	if (keyStates[27]) //escape
 		exit(0);
+
+	
 	
 }
 
@@ -197,10 +249,18 @@ void render()
 		base.draw();
 		glTranslatef(7,0,5);
 		robot.draw();
-
 	glPopMatrix();
     
-	commanderCamera();
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
+
+	if (!mouseLook)
+		commanderCamera();
+	else
+		freeLookCamera();
+
 	glutSwapBuffers();
 }
 
@@ -211,8 +271,6 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	width = newWidth;
 	height = newHeight;
 	glViewport(0, 0, width, height);
-
-	commanderCamera();
 }
 
 void functionKeyUp(int key, int x, int y)
@@ -254,6 +312,7 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 	wireframeView = false;
 	birdSightView = false;
+	mouseLook = false;
 
 	for (int i = 0; i < 256; i++)
 	{
@@ -262,7 +321,29 @@ void init()
 	}
 
 	calculate45DegreesForLocY();
+	glutSetCursor(GLUT_CURSOR_NONE);
+
 }
+
+void passiveMotionFunc(int x, int y)
+{
+	int diffX, diffY;
+
+	diffX = x - CENTER_X;
+	diffY = y - CENTER_Y;
+
+	if (diffX != 0 || diffY != 0)
+	{
+		//SetCursorPos(CENTER_X + glutGet(GLUT_WINDOW_X), CENTER_Y + glutGet(GLUT_WINDOW_Y));
+		glutWarpPointer(CENTER_X, CENTER_Y);
+		yaw += diffX;
+		pitch += diffY;
+		glutPostRedisplay();
+	}
+}
+
+
+void motionFunc(int x, int y){}
 
 
 int main (int argc, char **argv)
@@ -281,6 +362,10 @@ int main (int argc, char **argv)
 	glutSpecialUpFunc(functionKeyUp);
 	glutDisplayFunc(render);
 
+	//mouse motion
+	glutMotionFunc(motionFunc);
+	glutPassiveMotionFunc(passiveMotionFunc);
+	
 	init();
 
 	glutMainLoop();
