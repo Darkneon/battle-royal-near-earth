@@ -12,12 +12,17 @@
 // PI
 #define GL_PI 3.14159f
 
-// Initial size of graphics window.
-const int WIDTH  = 600;
-const int HEIGHT = 400;
 // Current size of window.
-int width  = WIDTH;
-int height = HEIGHT;
+int width  = 600;
+int height = 400;
+
+//	old values for the window (used to come back from fullscreen)
+int oldWidth = width;
+int oldHeight = height;
+
+// Current position of the window
+int winPosX;
+int winPosY;
 
 // Bounds of viewing frustum.
 double nearPlane =  1.0;
@@ -46,6 +51,9 @@ static bool mouseLook;
 
 bool keyStates[256];
 bool funcKeyStates[256];
+int keyModifier = NULL;
+
+static bool isInFullScreenMode;
 
 static GLfloat denom = 4.0f; //used for zoom effect
 
@@ -76,6 +84,16 @@ void freeLookCamera()
 	gluLookAt(locX, locY, locZ, locX - sin(yaw * 1.0f / 64), locY - toAddY, locZ + cos(yaw * 1.0f / 64),  
 		0.0f, 1.0f, 0.0f);
 }
+
+// Respond to window resizing, preserving proportions.
+void reshapeMainWindow (int newWidth, int newHeight)
+{
+	width = newWidth;
+	height = newHeight;
+
+	glViewport(0, 0, width, height);
+}
+
 
 void funcKeyOperations()
 {
@@ -174,8 +192,26 @@ void funcKeyOperations()
 }
 
 void keyOperations()
-{
-	
+{	
+	if (keyModifier == GLUT_ACTIVE_ALT && keyStates[13])
+	{
+		isInFullScreenMode = !isInFullScreenMode;
+
+		if (isInFullScreenMode)
+		{
+			oldWidth = width;
+			oldHeight = height;
+			winPosX = glutGet(GLUT_WINDOW_X);
+			winPosY = glutGet(GLUT_WINDOW_Y);
+			glutFullScreen();
+		}
+		else
+		{
+			glutPositionWindow(winPosX, winPosY);
+			glutReshapeWindow(oldWidth, oldHeight);
+		}
+	}
+
 	if (keyStates[99]) //c
 	{
 		mouseLook = !mouseLook;
@@ -305,15 +341,6 @@ void render()
 	glutSwapBuffers();
 }
 
-
-// Respond to window resizing, preserving proportions.
-void reshapeMainWindow (int newWidth, int newHeight)
-{
-	width = newWidth;
-	height = newHeight;
-	glViewport(0, 0, width, height);
-}
-
 void functionKeyUp(int key, int x, int y)
 {
 	funcKeyStates[key] = false;
@@ -329,7 +356,7 @@ void functionKeys(int key, int x, int y)
 void keyUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
-
+	keyModifier = NULL;
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
@@ -340,7 +367,7 @@ void keyUp(unsigned char key, int x, int y)
 void keyboardKeys(unsigned char key, int x, int y)
 {
 	keyStates[key] = true;
-
+	keyModifier = glutGetModifiers();
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = true;
@@ -354,6 +381,7 @@ void init()
 	wireframeView = false;
 	birdSightView = false;
 	mouseLook = false;
+	isInFullScreenMode = false;
 
 	for (int i = 0; i < 256; i++)
 	{
@@ -363,7 +391,6 @@ void init()
 
 	calculate45DegreesForLocY();
 	glutSetCursor(GLUT_CURSOR_NONE);
-
 }
 
 
