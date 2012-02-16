@@ -116,9 +116,16 @@
           <incDir>
             <pElem>source/Model</pElem>
             <pElem>source/Logic</pElem>
+            <pElem>include/TweakAnt/include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
+          <linkerAddLib>
+            <pElem>library</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerLibFileItem>library/libAntTweakBar.dylib</linkerLibFileItem>
+          </linkerLibItems>
           <commandLine>-framework OpenGL -framework glut</commandLine>
         </linkerTool>
       </compileType>

@@ -9,6 +9,8 @@
     #include <GL/glut.h>
 #endif
 
+#include "AntTweakBar.h"
+
 // PI
 #define GL_PI 3.14159f
 
@@ -21,8 +23,8 @@ int oldWidth = width;
 int oldHeight = height;
 
 // Current position of the window
-int winPosX;
-int winPosY;
+int winPosX = 1;
+int winPosY = 1;
 
 // Bounds of viewing frustum.
 double nearPlane =  1.0;
@@ -44,6 +46,8 @@ static GLfloat locZ = 25.0f + DEFAULT_RADIUS;
 
 static GLfloat yaw = 0.0f;
 static GLfloat pitch = 0.0f;
+
+GLfloat color[] = { 0.0f, 1.0f, 0.0f};
 
 static bool wireframeView;
 static bool birdSightView;
@@ -338,7 +342,9 @@ void render()
 	else
 		freeLookCamera();
 
+    TwDraw();
 	glutSwapBuffers();
+    glutPostRedisplay();
 }
 
 void functionKeyUp(int key, int x, int y)
@@ -390,7 +396,7 @@ void init()
 	}
 
 	calculate45DegreesForLocY();
-	glutSetCursor(GLUT_CURSOR_NONE);
+	//glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 
@@ -404,7 +410,7 @@ void passiveMotionFunc(int x, int y)
 	if (diffX != 0 || diffY != 0)
 	{
 		//SetCursorPos(CENTER_X + glutGet(GLUT_WINDOW_X), CENTER_Y + glutGet(GLUT_WINDOW_Y));
-		glutWarpPointer(CENTER_X, CENTER_Y);
+		//glutWarpPointer(CENTER_X, CENTER_Y);
 		yaw += diffX;
 		pitch += diffY;
 		glutPostRedisplay();
@@ -417,12 +423,15 @@ void motionFunc(int x, int y){}
 
 int main (int argc, char **argv)
 {
+    
+    
+    
 	// GLUT initialization.
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Battle Royale Near Earth");
-
+        
 	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);
 	glutSpecialFunc(functionKeys);
@@ -431,6 +440,17 @@ int main (int argc, char **argv)
 	glutSpecialUpFunc(functionKeyUp);
 	glutDisplayFunc(render);
 
+    TwInit(TW_OPENGL, NULL);
+    TwWindowSize(400, height);
+    TwBar *myBar;
+    myBar = TwNewBar("Debugging");
+    TwAddVarRW(myBar, "Rotation", TW_TYPE_INT32, &rot, "step=1 keyIncr=r keyDecr=R");
+    TwAddVarRW(myBar, "Color", TW_TYPE_COLOR3F, &color, "");
+
+    glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
+    glutKeyboardFunc((GLUTkeyboardfun)TwEventKeyboardGLUT);
+
+      
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
