@@ -474,15 +474,15 @@ int main (int argc, char **argv)
     TwBar *myBar;
     myBar = TwNewBar("Debugging");	
 	TwWindowSize(width, height);
-    TwDefine(" Debugging alpha=150 ");
+    TwDefine(" Debugging size='250 500' alpha=150 ");
     
 	//Camera
 	TwAddVarRW(myBar, "Radius", TW_TYPE_FLOAT, &currentRadius, " group=Camera");	
-	TwAddVarRW(myBar, "(M)ouseLook", TW_TYPE_BOOLCPP, &mouseLook, "group=Camera true=Yes false=No key=m");	
+	TwAddVarRW(myBar, "MouseLook (C)", TW_TYPE_BOOLCPP, &mouseLook, "group=Camera true=Yes false=No key=c key=C");	
 	//Location
-	TwAddVarRW(myBar, "Location (X)", TW_TYPE_FLOAT, &locX, " group=Location step=1 keyIncr=x keyDecr=X");
-	TwAddVarRW(myBar, "Location (Y)", TW_TYPE_FLOAT, &locY, " group=Location step=1 keyIncr=y keyDecr=Y");
-	TwAddVarRW(myBar, "Location (Z)", TW_TYPE_FLOAT, &locZ, " group=Location step=1 keyIncr=z keyDecr=Z");
+	TwAddVarRW(myBar, "Location X (B)", TW_TYPE_FLOAT, &locX, " group=Location step=1 keyIncr=b keyDecr=B");
+	TwAddVarRW(myBar, "Location Y (N)", TW_TYPE_FLOAT, &locY, " group=Location step=1 keyIncr=n keyDecr=N");
+	TwAddVarRW(myBar, "Location Z (M)", TW_TYPE_FLOAT, &locZ, " group=Location step=1 keyIncr=m keyDecr=M");
 	//Rotation
 	TwAddVarRW(myBar, "(R)otation", TW_TYPE_INT32, &rot, " group=Rotation step=1 keyIncr=r keyDecr=R min=0 max=360");
 	TwAddVarRW(myBar, "Yaw", TW_TYPE_FLOAT, &yaw, " group=Rotation");

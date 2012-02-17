@@ -22,3 +22,5 @@ The following keys interchange robot parts.
 t --------------- changes robot's head
 y --------------- changes robot's body
 u --------------- chanegs robot's legs
+
+AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
