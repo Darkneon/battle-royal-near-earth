@@ -474,7 +474,8 @@ int main (int argc, char **argv)
     TwBar *myBar;
     myBar = TwNewBar("Debugging");	
 	TwWindowSize(width, height);
-
+    TwDefine(" Debugging alpha=150 ");
+    
 	//Camera
 	TwAddVarRW(myBar, "Radius", TW_TYPE_FLOAT, &currentRadius, " group=Camera");	
 	TwAddVarRW(myBar, "(M)ouseLook", TW_TYPE_BOOLCPP, &mouseLook, "group=Camera true=Yes false=No key=m");	
