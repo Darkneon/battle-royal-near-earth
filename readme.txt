@@ -8,8 +8,10 @@ This version works on windows, mac and linux.
 
 Key bindings:
 
-w --------------- toggle wireframe
-z --------------- toggle bird view
+f1 --------------- toggle wireframe
+f2 --------------- mouse look (freelook)
+f3 --------------- commander camera
+z --------------- toggle bird view (disabled for now)
 arrows ---------- move camera around
 page up/down ---- rotate
 end ------------- reset rotation angle to 0
@@ -22,3 +24,12 @@ The following keys interchange robot parts.
 t --------------- changes robot's head
 y --------------- changes robot's body
 u --------------- chanegs robot's legs
+
+AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
+
+Installation 
+------------
+
+OSX:
+cd includei/TweakAnt/src/
+make -f Makefile.osx
