@@ -437,10 +437,11 @@ void passiveMotionFunc(int x, int y)
 		if (!isDebugMode) {
 			//SetCursorPos(CENTER_X + glutGet(GLUT_WINDOW_X), CENTER_Y + glutGet(GLUT_WINDOW_Y));
 			glutWarpPointer(CENTER_X, CENTER_Y);
-		}
-
-		yaw += diffX;
-		pitch += diffY;
+		
+            yaw += diffX;
+            pitch += diffY;
+        }
+        
 		glutPostRedisplay();
 	}
 }
