@@ -24,3 +24,10 @@ y --------------- changes robot's body
 u --------------- chanegs robot's legs
 
 AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
+
+Installation 
+------------
+
+OSX:
+cd includei/TweakAnt/src/
+make -f Makefile.osx
