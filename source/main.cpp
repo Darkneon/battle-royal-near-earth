@@ -1,6 +1,7 @@
-#include <math.h>
-
-#include "GameIncludes.h"
+#include "Game.h"
+#include "LevelRenderer.h"
+#include "Base.h"
+#include "Robot.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -13,77 +14,31 @@
 #define GL_PI 3.14159f
 
 // Current size of window.
-int width  = 600;
-int height = 400;
+GLint width  = 600;
+GLint height = 400;
 
 //	old values for the window (used to come back from fullscreen)
-int oldWidth = width;
-int oldHeight = height;
+GLint oldWidth = width;
+GLint oldHeight = height;
 
-// Current position of the window
+// Current position of the window (used to come back from fullscreen)
 int winPosX;
 int winPosY;
 
+bool isInFullScreenMode;
+
 // Bounds of viewing frustum.
-double nearPlane =  1.0;
-double farPlane  = 100.0;
-
-// Viewing angle.
-const static double DEFAULT_FOVY = 60.0;
-static double fovy = DEFAULT_FOVY;
-
-//camera rotation
-static GLint rot = 0;
-//camera location
-static const GLfloat DEFAULT_RADIUS = 10.0f;
-static const GLfloat BIRD_SIGHT_RADIUS = 45.0f;
-static GLfloat currentRadius = DEFAULT_RADIUS;
-static GLfloat locX = 25.0f;
-static GLfloat locY = 0.0f;
-static GLfloat locZ = 25.0f + DEFAULT_RADIUS;
-
-static GLfloat yaw = 0.0f;
-static GLfloat pitch = 0.0f;
-
-static bool wireframeView;
-static bool birdSightView;
-static bool mouseLook;
+GLfloat nearPlane =  1.0f;
+GLfloat farPlane  = 100.0f;
 
 bool keyStates[256];
 bool funcKeyStates[256];
-int keyModifier = NULL;
+int keyModifier = 0;
 
-static bool isInFullScreenMode;
-
-static GLfloat denom = 4.0f; //used for zoom effect
-
-const static int CENTER_X = width / 2;
-const static int CENTER_Y = height / 2;
-
-Player player;
+Game* game;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
-
-
-void calculate45DegreesForLocY()
-{
-	locY = currentRadius * tan(GL_PI / 4);
-}
-
-void commanderCamera()
-{
-	gluLookAt(locX + currentRadius * sin(rot * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(rot * 1.0f / 8),
-		locX, 0, locZ - currentRadius, 0, 1, 0);
-}
-
-void freeLookCamera()
-{
-	GLfloat toAddY = pitch / 128.0f;
-
-	gluLookAt(locX, locY, locZ, locX - sin(yaw * 1.0f / 64), locY - toAddY, locZ + cos(yaw * 1.0f / 64),  
-		0.0f, 1.0f, 0.0f);
-}
 
 // Respond to window resizing, preserving proportions.
 void reshapeMainWindow (int newWidth, int newHeight)
@@ -91,228 +46,32 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	width = newWidth;
 	height = newHeight;
 
-	glViewport(0, 0, width, height);
+	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 }
 
-
-void funcKeyOperations()
+void toggleFullScreen()
 {
-	if (funcKeyStates[GLUT_KEY_LEFT])
-	{
-		if (!mouseLook)
-		{
-			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
-			locZ += moveVector[0];
-			locX -= moveVector[1];
-		}
-		else
-		{	
-			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64)};
-			locX -= moveVector[1];
-			locZ += moveVector[0];
-		}
+	isInFullScreenMode = !isInFullScreenMode;
 
-		glutPostRedisplay();
-	}
-	else if (funcKeyStates[GLUT_KEY_RIGHT])
+	if (isInFullScreenMode)
 	{
-		if (!mouseLook)
-		{
-			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
-			locZ -= moveVector[0];
-			locX += moveVector[1];
-		}
-		else
-		{	
-			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64)};
-			locX += moveVector[1];
-			locZ -= moveVector[0];
-		}
-
-		glutPostRedisplay();
+		oldWidth = width;
+		oldHeight = height;
+		winPosX = glutGet(GLUT_WINDOW_X);
+		winPosY = glutGet(GLUT_WINDOW_Y);
+		glutFullScreen();
 	}
-
-	if (funcKeyStates[GLUT_KEY_UP])
+	else
 	{
-		if (!mouseLook)
-		{
-			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
-			locZ -= moveVector[1];
-			locX -= moveVector[0];
-		}
-		else
-		{
-			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64), sin(pitch * 1.0f / 64)};
-			locX -= moveVector[0];
-			locZ -= moveVector[1];
-			locY -= moveVector[2];
-		}
-		glutPostRedisplay();
+		glutPositionWindow(winPosX, winPosY);
+		glutReshapeWindow(oldWidth, oldHeight);
 	}
-	else if (funcKeyStates[GLUT_KEY_DOWN])
-	{
-		if (!mouseLook)
-		{
-			GLfloat moveVector[] = {sin(rot * 1.0f / 8), cos(rot * 1.0f / 8)};
-			locZ += moveVector[1];
-			locX += moveVector[0];
-		}
-		else
-		{
-			
-			GLfloat moveVector[] = {sin(yaw * 1.0f / 64), -cos(yaw * 1.0f / 64), sin(pitch * 1.0f / 64)};
-			locX += moveVector[0];
-			locZ += moveVector[1];
-			locY += moveVector[2];
-		}
-		glutPostRedisplay();
-	}
-	
-
-	if (funcKeyStates[GLUT_KEY_PAGE_UP])
-	{
-		if (!mouseLook)
-		{
-			rot++;
-			glutPostRedisplay();
-		}
-	}
-	else if (funcKeyStates[GLUT_KEY_PAGE_DOWN])
-	{
-		if (!mouseLook)
-		{
-			rot--;
-			glutPostRedisplay();
-		}
-	}
-	else if (funcKeyStates[GLUT_KEY_END])
-	{
-		rot = 0;
-	}
-}
-
-void keyOperations()
-{	
-	if (keyModifier == GLUT_ACTIVE_ALT && keyStates[13])
-	{
-		isInFullScreenMode = !isInFullScreenMode;
-
-		if (isInFullScreenMode)
-		{
-			oldWidth = width;
-			oldHeight = height;
-			winPosX = glutGet(GLUT_WINDOW_X);
-			winPosY = glutGet(GLUT_WINDOW_Y);
-			glutFullScreen();
-		}
-		else
-		{
-			glutPositionWindow(winPosX, winPosY);
-			glutReshapeWindow(oldWidth, oldHeight);
-		}
-	}
-
-	if (keyStates[99]) //c
-	{
-		mouseLook = !mouseLook;
-		fovy = DEFAULT_FOVY;
-		calculate45DegreesForLocY();
-		denom = 4.0f;
-	}
-
-	if (keyStates[122]) //z
-	{
-		birdSightView = !birdSightView;
-		mouseLook = false;
-		
-		GLfloat zeeDistanze = BIRD_SIGHT_RADIUS - DEFAULT_RADIUS;
-		if (birdSightView)
-		{
-			currentRadius = BIRD_SIGHT_RADIUS;
-			locZ += zeeDistanze;
-		}
-		else
-		{
-			currentRadius = DEFAULT_RADIUS;
-			locZ -= zeeDistanze;
-		}
-		
-		calculate45DegreesForLocY();
-	}
-		
-	if (keyStates[119])//w
-	{ 
-		wireframeView = !wireframeView;
-		if(wireframeView)
-		{
-			glDisable(GL_DEPTH_TEST);
-			glPolygonMode(GL_BACK, GL_LINE);
-			glPolygonMode(GL_FRONT, GL_LINE);
-			
-		}
-		else
-		{
-			glEnable(GL_DEPTH_TEST);
-			glPolygonMode(GL_BACK, GL_FILL);
-			glPolygonMode(GL_FRONT, GL_FILL);
-		}
-
-	}
-		
-    if (keyStates[116]) //t
-	{ 
-        robot.changeTop();
-    }
-  
-    if (keyStates[121]) //y
-	{ 
-        robot.changeMiddle();
-    }
-
-      
-    if (keyStates[117]) //u
-	{ 
-        robot.changeBottom();
-    }
-    
-	if (keyStates[45]) //-
-	{
-		if (denom != 4.0f && !mouseLook)
-		{
-			fovy++;
-			denom -= 0.25f;
-			locY = currentRadius * tan(GL_PI / denom);
-			glutPostRedisplay();
-		}
-	}
-	else if (keyStates[61] && !mouseLook) //=
-	{
-		if (fovy > 10)
-		{
-			fovy--;
-			denom += 0.25f;
-			locY = currentRadius * tan(GL_PI / denom);
-			glutPostRedisplay();
-		}
-	}
-	else if (keyStates[48]) //0
-	{
-		fovy = DEFAULT_FOVY;
-		calculate45DegreesForLocY();
-		denom = 4.0f;
-	}	
-
-	if (keyStates[27]) //escape
-		exit(0);
 }
 
 void render()
 {
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	funcKeyOperations();
-	keyOperations();
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -321,25 +80,20 @@ void render()
 	//Drawing robot models on map
 	glPushMatrix();
 		glTranslatef(15,0,40);
-		player.draw();
+		game->p1->draw();
 		glTranslatef(1,0,0);
 		base.draw();
 		glTranslatef(7,0,5);
 		robot.draw();
 	glPopMatrix();
-    
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
-
-	if (!mouseLook)
-		commanderCamera();
-	else
-		freeLookCamera();
+	game->p1->view(); // Camera update (leave as it is for now)
+	game->getInput(keyModifier); // Gets user input
 
 	glutSwapBuffers();
+	glutPostRedisplay();
 }
+
 
 void functionKeyUp(int key, int x, int y)
 {
@@ -347,16 +101,43 @@ void functionKeyUp(int key, int x, int y)
 	glutPostRedisplay();
 }
 
-void functionKeys(int key, int x, int y)
+void functionKeysPressed(int key, int x, int y)
 {
 	funcKeyStates[key] = true;
 	glutPostRedisplay();
 }
 
-void keyUp(unsigned char key, int x, int y)
+
+void windowKeyOps()
+{
+	if (keyModifier == GLUT_ACTIVE_ALT && keyStates[13]) //alt + enter
+	{
+		toggleFullScreen();
+	}
+	if (keyStates[116]) //t
+	{ 
+        robot.changeTop();
+    }
+  
+    if (keyStates[121]) //y
+	{ 
+        robot.changeMiddle();
+    }
+      
+    if (keyStates[117]) //u
+	{ 
+        robot.changeBottom();
+    }
+
+}
+
+
+
+void keyboardKeysUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
 	keyModifier = NULL;
+
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
@@ -364,23 +145,25 @@ void keyUp(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
-void keyboardKeys(unsigned char key, int x, int y)
+void keyboardKeysPressed(unsigned char key, int x, int y)
 {
 	keyStates[key] = true;
 	keyModifier = glutGetModifiers();
+
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = true;
 
+	windowKeyOps();
+
 	glutPostRedisplay();
 }
 
+
 void init()
 {
+	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
-	wireframeView = false;
-	birdSightView = false;
-	mouseLook = false;
 	isInFullScreenMode = false;
 
 	for (int i = 0; i < 256; i++)
@@ -389,30 +172,17 @@ void init()
 		funcKeyStates[i] = false;
 	}
 
-	calculate45DegreesForLocY();
 	glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 
 void passiveMotionFunc(int x, int y)
 {
-	int diffX, diffY;
-
-	diffX = x - CENTER_X;
-	diffY = y - CENTER_Y;
-
-	if (diffX != 0 || diffY != 0)
-	{
-		//SetCursorPos(CENTER_X + glutGet(GLUT_WINDOW_X), CENTER_Y + glutGet(GLUT_WINDOW_Y));
-		glutWarpPointer(CENTER_X, CENTER_Y);
-		yaw += diffX;
-		pitch += diffY;
-		glutPostRedisplay();
-	}
+	game->playerInput1->mousePassiveOperations(x, y);
 }
 
 
-void motionFunc(int x, int y){}
+//void motionFunc(int x, int y){}
 
 
 int main (int argc, char **argv)
@@ -425,19 +195,17 @@ int main (int argc, char **argv)
 
 	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);
-	glutSpecialFunc(functionKeys);
-	glutKeyboardFunc(keyboardKeys);
-	glutKeyboardUpFunc(keyUp);
+	glutSpecialFunc(functionKeysPressed);
 	glutSpecialUpFunc(functionKeyUp);
+	glutKeyboardFunc(keyboardKeysPressed);
+	glutKeyboardUpFunc(keyboardKeysUp);
 	glutDisplayFunc(render);
 
 	//mouse motion
-	glutMotionFunc(motionFunc);
+	//glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
 	
 	init();
-
 	glutMainLoop();
-
 	return 0;
 }
