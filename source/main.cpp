@@ -9,22 +9,22 @@
     #include <GL/glut.h>
 #endif
 
-#include "AntTweakBar.h"
+#include "TweakAnt/AntTweakBar.h"
 
 // PI
 #define GL_PI 3.14159f
 
 // Current size of window.
 int width  = 600;
-int height = 400;
+int height = 600;
 
 //	old values for the window (used to come back from fullscreen)
 int oldWidth = width;
 int oldHeight = height;
 
 // Current position of the window
-int winPosX = 1;
-int winPosY = 1;
+int winPosX = 0;
+int winPosY = 0;
 
 // Bounds of viewing frustum.
 double nearPlane =  1.0;
@@ -58,6 +58,7 @@ bool funcKeyStates[256];
 int keyModifier = NULL;
 
 static bool isInFullScreenMode;
+static bool isDebugMode = true;
 
 static GLfloat denom = 4.0f; //used for zoom effect
 
@@ -68,7 +69,6 @@ Player player;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
-
 
 void calculate45DegreesForLocY()
 {
@@ -96,6 +96,7 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	height = newHeight;
 
 	glViewport(0, 0, width, height);
+	TwWindowSize(width, height);
 }
 
 
@@ -259,8 +260,7 @@ void keyOperations()
 			glEnable(GL_DEPTH_TEST);
 			glPolygonMode(GL_BACK, GL_FILL);
 			glPolygonMode(GL_FRONT, GL_FILL);
-		}
-
+		}		
 	}
 		
     if (keyStates[116]) //t
@@ -305,9 +305,25 @@ void keyOperations()
 		calculate45DegreesForLocY();
 		denom = 4.0f;
 	}	
+	else if (keyStates['d']) 
+	{
+		isDebugMode = !isDebugMode;
+		if (isDebugMode) {
+			glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+			TwDefine(" Debugging visible=true "); 
+		} else {
+			glutSetCursor(GLUT_CURSOR_NONE);
+			TwDefine(" Debugging visible=false "); 
+		}
+		
+	}
 
-	if (keyStates[27]) //escape
+	if (keyStates[27]) { //escape
+		TwTerminate();
 		exit(0);
+	}
+		
+	memset(keyStates, 0, sizeof(keyStates));
 }
 
 void render()
@@ -328,7 +344,7 @@ void render()
 		player.draw();
 		glTranslatef(1,0,0);
 		base.draw();
-		glTranslatef(7,0,5);
+		glTranslatef(7,0,5);	
 		robot.draw();
 	glPopMatrix();
     
@@ -342,7 +358,10 @@ void render()
 	else
 		freeLookCamera();
 
-    TwDraw();
+	if (isDebugMode) {
+		TwDraw();
+	}
+
 	glutSwapBuffers();
     glutPostRedisplay();
 }
@@ -381,6 +400,13 @@ void keyboardKeys(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
+void OnKey(unsigned char key, int x, int y)  {
+	TwEventKeyboardGLUT(key, x, y);		
+	keyboardKeys(key, x, y);	
+}
+
+
+
 void init()
 {
 	glEnable(GL_DEPTH_TEST);
@@ -396,7 +422,6 @@ void init()
 	}
 
 	calculate45DegreesForLocY();
-	//glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 
@@ -409,8 +434,11 @@ void passiveMotionFunc(int x, int y)
 
 	if (diffX != 0 || diffY != 0)
 	{
-		//SetCursorPos(CENTER_X + glutGet(GLUT_WINDOW_X), CENTER_Y + glutGet(GLUT_WINDOW_Y));
-		//glutWarpPointer(CENTER_X, CENTER_Y);
+		if (!isDebugMode) {
+			//SetCursorPos(CENTER_X + glutGet(GLUT_WINDOW_X), CENTER_Y + glutGet(GLUT_WINDOW_Y));
+			glutWarpPointer(CENTER_X, CENTER_Y);
+		}
+
 		yaw += diffX;
 		pitch += diffY;
 		glutPostRedisplay();
@@ -431,26 +459,43 @@ int main (int argc, char **argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Battle Royale Near Earth");
-        
+       
+    TwInit(TW_OPENGL, NULL);	
+
+
 	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);
-	glutSpecialFunc(functionKeys);
-	glutKeyboardFunc(keyboardKeys);
+	glutSpecialFunc(functionKeys);	
 	glutKeyboardUpFunc(keyUp);
 	glutSpecialUpFunc(functionKeyUp);
 	glutDisplayFunc(render);
 
-    TwInit(TW_OPENGL, NULL);
-    TwWindowSize(400, height);
+	
     TwBar *myBar;
-    myBar = TwNewBar("Debugging");
-    TwAddVarRW(myBar, "Rotation", TW_TYPE_INT32, &rot, "step=1 keyIncr=r keyDecr=R");
-    TwAddVarRW(myBar, "Color", TW_TYPE_COLOR3F, &color, "");
+    myBar = TwNewBar("Debugging");	
+	TwWindowSize(width, height);
+
+	//Camera
+	TwAddVarRW(myBar, "Radius", TW_TYPE_FLOAT, &currentRadius, " group=Camera");	
+	TwAddVarRW(myBar, "(M)ouseLook", TW_TYPE_BOOLCPP, &mouseLook, "group=Camera true=Yes false=No key=m");	
+	//Location
+	TwAddVarRW(myBar, "Location (X)", TW_TYPE_FLOAT, &locX, " group=Location step=1 keyIncr=x keyDecr=X");
+	TwAddVarRW(myBar, "Location (Y)", TW_TYPE_FLOAT, &locY, " group=Location step=1 keyIncr=y keyDecr=Y");
+	TwAddVarRW(myBar, "Location (Z)", TW_TYPE_FLOAT, &locZ, " group=Location step=1 keyIncr=z keyDecr=Z");
+	//Rotation
+	TwAddVarRW(myBar, "(R)otation", TW_TYPE_INT32, &rot, " group=Rotation step=1 keyIncr=r keyDecr=R min=0 max=360");
+	TwAddVarRW(myBar, "Yaw", TW_TYPE_FLOAT, &yaw, " group=Rotation");
+	TwAddVarRW(myBar, "Pitch", TW_TYPE_FLOAT, &pitch, " group=Rotation");
+    
+	TwAddVarRW(myBar, "Color", TW_TYPE_COLOR3F, &color, "");
+	
+	
+	TwDefine(" Debugging/Location group=Camera \n Debugging/Rotation group=Camera ");
 
     glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
-    glutKeyboardFunc((GLUTkeyboardfun)TwEventKeyboardGLUT);
+    glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
+    
 
-      
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);

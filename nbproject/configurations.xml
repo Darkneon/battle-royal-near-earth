@@ -116,7 +116,7 @@
           <incDir>
             <pElem>source/Model</pElem>
             <pElem>source/Logic</pElem>
-            <pElem>include/TweakAnt/include</pElem>
+            <pElem>include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
