@@ -7,7 +7,7 @@ SO_VERSION	= 1
 #---- Release
 CXXCFG   	= -O3
 LFLAGS		= 
-OUT_DIR		= ../lib
+OUT_DIR		= ../../../library
 #---- Debug
 #CXXCFG   	= -g -D_DEBUG
 #LFLAGS		= 
@@ -16,7 +16,7 @@ OUT_DIR		= ../lib
 
 CXX      	= gcc
 CXXFLAGS 	= $(CXXCFG) -Wall -fPIC -fno-strict-aliasing -D_UNIX -D__PLACEMENT_NEW_INLINE
-INCPATH  	= -I../include -I/usr/local/include -I/usr/X11R6/include -I/usr/include
+INCPATH  	= -I../ -I/usr/local/include -I/usr/X11R6/include -I/usr/include
 LINK     	= gcc
 #LIBS     	= -L/usr/X11R6/lib -L. -lglfw -lGL -lGLU -lX11 -lXxf86vm -lXext -lpthread -lm
 #LIBS     	= -L/usr/X11R6/lib -lGL -lX11 -lXxf86vm -lXext -lpthread -lm
@@ -65,8 +65,8 @@ all: 	Makefile $(TARGET)
 
 $(TARGET): $(OBJS)
 	@echo "===== Link $@ ====="
-	$(LINK) $(LFLAGS) -shared -Wl,-soname,lib$(TARGET)$(SO_EXT).$(SO_VERSION) -o $(OUT_DIR)/lib$(TARGET)$(SO_EXT) $(OBJS) $(LIBS)
-	$(SYMLINK) $(OUT_DIR)/lib$(TARGET)$(SO_EXT) $(OUT_DIR)/lib$(TARGET)$(SO_EXT).$(SO_VERSION)
+	$(LINK) $(LFLAGS) -shared -Wl -o $(OUT_DIR)/lib$(TARGET)$(SO_EXT) $(OBJS) $(LIBS)
+	#$(SYMLINK) $(OUT_DIR)/lib$(TARGET)$(SO_EXT) $(OUT_DIR)/lib$(TARGET)$(SO_EXT).$(SO_VERSION)
 
 .cpp.o:
 	@echo "===== Compile $< ====="
@@ -85,14 +85,14 @@ clean:
 ####### DEPENDENCIES
 
 TwColors.o:    TwPrecomp.h TwColors.h
-TwFonts.o:     TwPrecomp.h ../include/AntTweakBar.h TwFonts.h TwMgr.h TwColors.h TwGraph.h AntPerfTimer.h
-TwOpenGL.o:    TwPrecomp.h ../include/AntTweakBar.h TwOpenGL.h LoadOGL.h TwGraph.h TwColors.h TwFonts.h TwMgr.h AntPerfTimer.h
-TwBar.o:       TwPrecomp.h ../include/AntTweakBar.h TwBar.h TwMgr.h TwColors.h TwFonts.h TwGraph.h AntPerfTimer.h
-TwMgr.o:       TwPrecomp.h ../include/AntTweakBar.h TwMgr.h TwColors.h TwFonts.h TwGraph.h AntPerfTimer.h TwBar.h TwOpenGL.h res/TwXCursors.h
+TwFonts.o:     TwPrecomp.h ../AntTweakBar.h TwFonts.h TwMgr.h TwColors.h TwGraph.h AntPerfTimer.h
+TwOpenGL.o:    TwPrecomp.h ../AntTweakBar.h TwOpenGL.h LoadOGL.h TwGraph.h TwColors.h TwFonts.h TwMgr.h AntPerfTimer.h
+TwBar.o:       TwPrecomp.h ..//AntTweakBar.h TwBar.h TwMgr.h TwColors.h TwFonts.h TwGraph.h AntPerfTimer.h
+TwMgr.o:       TwPrecomp.h ../AntTweakBar.h TwMgr.h TwColors.h TwFonts.h TwGraph.h AntPerfTimer.h TwBar.h TwOpenGL.h res/TwXCursors.h
 TwPrecomp.o:   TwPrecomp.h
 LoadOGL.o:     TwPrecomp.h LoadOGL.h
-TwEventGLFW.o: ../include/AntTweakBar.h MiniGLFW.h
-TwEventGLUT.o: ../include/AntTweakBar.h MiniGLUT.h
-TwEventSDL.o:  ../include/AntTweakBar.h
-TwEventSDL12.o:  ../include/AntTweakBar.h MiniSDL12.h
-TwEventSDL13.o:  ../include/AntTweakBar.h MiniSDL13.h
+TwEventGLFW.o: ../AntTweakBar.h MiniGLFW.h
+TwEventGLUT.o: ../AntTweakBar.h MiniGLUT.h
+TwEventSDL.o:  ../AntTweakBar.h
+TwEventSDL12.o:  ../AntTweakBar.h MiniSDL12.h
+TwEventSDL13.o:  ../AntTweakBar.h MiniSDL13.h

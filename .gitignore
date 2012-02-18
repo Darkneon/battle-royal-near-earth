@@ -12,5 +12,7 @@ nbproject/private
 *.opensdf
 *.orig
 *.o
+*.so 
+*.dylib
 battle-royale-near-earth-linux
 *.swp

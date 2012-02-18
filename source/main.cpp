@@ -55,7 +55,7 @@ static bool mouseLook;
 
 bool keyStates[256];
 bool funcKeyStates[256];
-int keyModifier = NULL;
+int keyModifier = 0;
 
 static bool isInFullScreenMode;
 static bool isDebugMode = true;
@@ -323,7 +323,7 @@ void keyOperations()
 		exit(0);
 	}
 		
-	memset(keyStates, 0, sizeof(keyStates));
+	//memset(keyStates, 0, sizeof(keyStates));
 }
 
 void render()
@@ -381,7 +381,7 @@ void functionKeys(int key, int x, int y)
 void keyUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
-	keyModifier = NULL;
+	keyModifier = 0;
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
