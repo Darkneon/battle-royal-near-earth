@@ -16,6 +16,7 @@
 #endif
 
 #include "math.h"
+#include "AntTweakHelper.h"
 
 //static const GLfloat BIRD_SIGHT_RADIUS = 45.0f;
 
@@ -24,6 +25,8 @@ static const GLfloat DEFAULT_FOVY = 60.0f;
 class Camera
 {
 public:
+  friend class AntTweakHelper;
+
 	Camera(){}
 	virtual ~Camera(){}
 	virtual void view() = 0;
