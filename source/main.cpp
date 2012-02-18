@@ -37,7 +37,6 @@ bool keyStates[256];
 bool funcKeyStates[256];
 int keyModifier = 0;
 
-static bool isInFullScreenMode;
 static bool isDebugMode = true;
 
 Game* game;
