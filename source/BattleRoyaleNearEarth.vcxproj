@@ -85,9 +85,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Logic\Base.cpp" />
+    <ClCompile Include="Logic\Camera.cpp" />
+    <ClCompile Include="Logic\CommanderCamera.cpp" />
     <ClCompile Include="Logic\Factory.cpp" />
+    <ClCompile Include="Logic\FreeLookCamera.cpp" />
+    <ClCompile Include="Logic\Game.cpp" />
     <ClCompile Include="Logic\LevelRenderer.cpp" />
     <ClCompile Include="Logic\Player.cpp" />
+    <ClCompile Include="Logic\PlayerInput.cpp" />
     <ClCompile Include="Logic\Robot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
@@ -120,11 +125,15 @@
     <Library Include="..\library\freeglut_static.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameIncludes.h" />
     <ClInclude Include="Logic\Base.h" />
+    <ClInclude Include="Logic\Camera.h" />
+    <ClInclude Include="Logic\CommanderCamera.h" />
     <ClInclude Include="Logic\Factory.h" />
+    <ClInclude Include="Logic\FreeLookCamera.h" />
+    <ClInclude Include="Logic\Game.h" />
     <ClInclude Include="Logic\LevelRenderer.h" />
     <ClInclude Include="Logic\Player.h" />
+    <ClInclude Include="Logic\PlayerInput.h" />
     <ClInclude Include="Logic\Robot.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
