@@ -13,7 +13,7 @@
     #include <GL/glut.h>
 #endif
 
-#include "Helper/AntTweakHelper.h"
+#include "AntTweakHelper.h"
 #include <cstring>
 
 // PI

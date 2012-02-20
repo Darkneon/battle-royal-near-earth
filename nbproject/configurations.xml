@@ -136,6 +136,7 @@
             <pElem>source/Model</pElem>
             <pElem>source/Logic</pElem>
             <pElem>include</pElem>
+            <pElem>source/Helper</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
