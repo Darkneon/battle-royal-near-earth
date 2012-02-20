@@ -20,6 +20,7 @@
 BaseModel::BaseModel()
 {
    teamNumber = new TeamNumberModel();
+   teamNumber2 = new TeamNumberModel();
 }
 
 void BaseModel::render() 
@@ -28,8 +29,11 @@ void BaseModel::render()
     glPushMatrix();
         //Draw Base
         drawBase(0.0f, 0.0f, 0.0f);
+        drawBase(-300.0f, 0.0f, 0.0f);
         glTranslatef(1.75f, 1.15f, 2.2f);
         teamNumber->render();
+        glTranslatef(-7.2f, 0, 0.0f);
+        teamNumber2->render();
     glPopMatrix();
   
   

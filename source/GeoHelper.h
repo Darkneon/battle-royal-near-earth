@@ -22,6 +22,7 @@ public:
 	static void drawMidBuilding(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
 	static void drawMidBuildingFront(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
 	static void drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
+        static void drawAxis(GLfloat length);
 };
 
 #endif

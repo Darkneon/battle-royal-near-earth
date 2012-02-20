@@ -18,3 +18,4 @@
 #include "LevelRenderer.h"
 #include "Base.h"
 #include "Robot.h"
+#include "LightPost.h"

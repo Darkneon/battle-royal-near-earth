@@ -49,6 +49,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Fence.o \
 	${OBJECTDIR}/source/Grass.o \
 	${OBJECTDIR}/source/NuclearModel.o \
+	${OBJECTDIR}/source/SpotLight.o \
 	${OBJECTDIR}/source/PlayerModel.o \
 	${OBJECTDIR}/source/AntennaModel.o \
 	${OBJECTDIR}/source/CannonModel.o \
@@ -65,6 +66,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Tracks.o \
 	${OBJECTDIR}/source/Base.o \
 	${OBJECTDIR}/source/AntiGrav.o \
+	${OBJECTDIR}/source/LightPost.o \
 	${OBJECTDIR}/source/FenceModel.o \
 	${OBJECTDIR}/source/TeamNumberModel.o \
 	${OBJECTDIR}/source/HalfHollowBlock.o \
@@ -181,6 +183,11 @@ ${OBJECTDIR}/source/NuclearModel.o: source/NuclearModel.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/NuclearModel.o source/NuclearModel.cpp
 
+${OBJECTDIR}/source/SpotLight.o: source/SpotLight.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/SpotLight.o source/SpotLight.cpp
+
 ${OBJECTDIR}/source/PlayerModel.o: source/PlayerModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
@@ -260,6 +267,11 @@ ${OBJECTDIR}/source/AntiGrav.o: source/AntiGrav.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/AntiGrav.o source/AntiGrav.cpp
+
+${OBJECTDIR}/source/LightPost.o: source/LightPost.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/LightPost.o source/LightPost.cpp
 
 ${OBJECTDIR}/source/FenceModel.o: source/FenceModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
