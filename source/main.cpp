@@ -1,10 +1,10 @@
 #include <math.h>
-#include "GameIncludes.h"
-#include "SpotLight.h"
 #include "Game.h"
 #include "LevelRenderer.h"
 #include "Base.h"
 #include "Robot.h"
+#include "SpotLight.h"
+#include "LightPost.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -13,7 +13,7 @@
     #include <GL/glut.h>
 #endif
 
-#include "AntTweakHelper.h"
+#include "Helper/AntTweakHelper.h"
 #include <cstring>
 
 // PI
@@ -53,7 +53,7 @@ AntTweakHelper antTweakHelper;
 
 //Initialize light objects
 SpotLight *spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
-LightPost *light0 = new LightPost(locX, 5.0f, locZ-RADIUS, 15.0f, -10.0f, 10.0f);
+//LightPost *light0 = new LightPost(locX, 5.0f, locZ-RADIUS, 15.0f, -10.0f, 10.0f);
 LightPost *light1 = new LightPost(0.0f, 5.0f, 0.0f, 10.0f, -15.0f, 10.0f);
 LightPost *light2 = new LightPost(50.0f, 5.0f, 0.0f, -10.0f, -15.0f, 10.0f);
 LightPost *light3 = new LightPost(50.0f, 5.0f, 50.0f, -10.0f, -15.0f, -10.0f);
@@ -65,13 +65,13 @@ void renderLights()
         glEnable(GL_LIGHTING);
         glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
         //Set up a new light, namely... light0
-        glLightfv(GL_LIGHT0, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
+        /*glLightfv(GL_LIGHT0, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
         glLightfv(GL_LIGHT0, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
         glLightfv(GL_LIGHT0, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT0, GL_POSITION, light0->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 25.0f);
         glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0);
-        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light0->getDirectionArray());
+        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light0->getDirectionArray());*/
         //New light... Light1
         glLightfv(GL_LIGHT1, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
         glLightfv(GL_LIGHT1, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
@@ -105,7 +105,7 @@ void renderLights()
         glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light4->getDirectionArray());
         //TURN ON LIGHTING
-        glEnable(GL_LIGHT0);
+        //glEnable(GL_LIGHT0);
         glEnable(GL_LIGHT1);
         glEnable(GL_LIGHT2);
         glEnable(GL_LIGHT3);
@@ -120,30 +120,19 @@ void renderLights()
         light4->render();
 }
 
-void lightCamera(LightPost* light)
+/*void lightCamera(LightPost* light)
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
     gluLookAt(light->getPosX(),light->getPosY(),light->getPosZ(),light->getLookX()+light->getPosX(), light->getLookY()+light->getPosY(), light->getLookZ()+light->getPosZ(),  0, 1, 0);
 
-}
-void commanderCamera()
-// Respond to window resizing, preserving proportions.
+}*/
+
 void reshapeMainWindow (int newWidth, int newHeight)
 {
-        
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
-	//gluLookAt(locX + RADIUS * sin(rot * 1.0f / 8), locY, locZ - RADIUS + RADIUS * cos(rot * 1.0f / 8),
-	//	locX, 0, locZ - RADIUS, 0, 1, 0);
-        //Update the position of the camera light
-        lightCamera(light0);
-        light0->updatePosition(locX, 2.5, locZ-RADIUS);
 	width = newWidth;
 	height = newHeight;
-
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	TwWindowSize(width, height);
 }
@@ -180,8 +169,6 @@ void render()
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-	funcKeyOperations();
-	keyOperations();
         renderLights();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

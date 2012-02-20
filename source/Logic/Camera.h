@@ -16,7 +16,7 @@
 #endif
 
 #include "math.h"
-#include "AntTweakHelper.h"
+#include "../Helper/AntTweakHelper.h"
 
 //static const GLfloat BIRD_SIGHT_RADIUS = 45.0f;
 

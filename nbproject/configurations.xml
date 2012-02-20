@@ -12,17 +12,33 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
+        <itemPath>source/Helper/AntTweakHelper.cpp</itemPath>
+        <itemPath>source/Helper/AntTweakHelper.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="Logic" displayName="Logic" projectFiles="true">
         <itemPath>source/Logic/Base.cpp</itemPath>
         <itemPath>source/Logic/Base.h</itemPath>
+        <itemPath>source/Logic/Camera.cpp</itemPath>
+        <itemPath>source/Logic/Camera.h</itemPath>
+        <itemPath>source/Logic/CommanderCamera.cpp</itemPath>
+        <itemPath>source/Logic/CommanderCamera.h</itemPath>
         <itemPath>source/Logic/Factory.cpp</itemPath>
         <itemPath>source/Logic/Factory.h</itemPath>
+        <itemPath>source/Logic/FreeLookCamera.cpp</itemPath>
+        <itemPath>source/Logic/FreeLookCamera.h</itemPath>
+        <itemPath>source/Logic/Game.cpp</itemPath>
+        <itemPath>source/Logic/Game.h</itemPath>
         <itemPath>source/Logic/LevelRenderer.cpp</itemPath>
         <itemPath>source/Logic/LevelRenderer.h</itemPath>
         <itemPath>source/Logic/Player.cpp</itemPath>
         <itemPath>source/Logic/Player.h</itemPath>
+        <itemPath>source/Logic/PlayerInput.cpp</itemPath>
+        <itemPath>source/Logic/PlayerInput.h</itemPath>
         <itemPath>source/Logic/Robot.cpp</itemPath>
         <itemPath>source/Logic/Robot.h</itemPath>
+        <itemPath>source/Logic/SpotLight.cpp</itemPath>
+        <itemPath>source/Logic/SpotLight.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Model" displayName="Model" projectFiles="true">
         <logicalFolder name="Buildings" displayName="Buildings" projectFiles="true">
@@ -34,6 +50,10 @@
         <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
           <itemPath>source/Model/Helper/GeoHelper.cpp</itemPath>
           <itemPath>source/Model/Helper/GeoHelper.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="Light" displayName="Light" projectFiles="true">
+          <itemPath>source/Model/Light/LightPost.cpp</itemPath>
+          <itemPath>source/Model/Light/LightPost.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Player" displayName="Player" projectFiles="true">
           <itemPath>source/Model/Player/AntennaModel.cpp</itemPath>
@@ -86,7 +106,6 @@
         <itemPath>source/Model/Model.cpp</itemPath>
         <itemPath>source/Model/Model.h</itemPath>
       </logicalFolder>
-      <itemPath>source/GameIncludes.h</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"

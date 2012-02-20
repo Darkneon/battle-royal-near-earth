@@ -7,6 +7,7 @@
 
 #ifndef SPOTLIGHT_H
 #define	SPOTLIGHT_H
+ #include <Glut/glut.h>
 
 class SpotLight {
 public:
@@ -16,10 +17,10 @@ public:
     GLfloat* getSpecular();
     GLfloat* getSpecref();
 private:
-        GLfloat ambientLight[4];
-        GLfloat diffuseLight[4];
-        GLfloat specular[4];
-        GLfloat specref[4];       
+    GLfloat ambientLight[4];
+    GLfloat diffuseLight[4];
+    GLfloat specular[4];
+    GLfloat specref[4];       
 };
 
 #endif	/* SPOTLIGHT_H */
