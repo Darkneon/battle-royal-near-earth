@@ -38,7 +38,7 @@ public:
 	virtual void zoom(bool zoomIn) = 0;
 	virtual void resetZoom() = 0;
 
-	void toggleWireframeView();
+	void toggleDifferentView();
 	void resetCameraAngle(); //reset the camera angle to 0
 	
 	
@@ -48,7 +48,7 @@ protected:
 	GLfloat viewNearPlane, viewFarPlane;
 	int centerX, centerY;
 
-	bool wireframeView;
+	int viewStates;
 
 	GLfloat fovy; //Zooming variable
 	GLfloat locX, locY, locZ; //camera location

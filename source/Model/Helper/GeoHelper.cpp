@@ -291,19 +291,3 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin, yOrigin+55, zOrigin+50);
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin+50, yOrigin+55, zOrigin+50);
 }
-
-//Code to draw a circle took from:
-//http://steinsoft.net/index.php?site=Programming/Code%20Snippets/OpenGL/no5
-void GeoHelper::drawCircle(float radius)
-{
-	float DEG2RAD = 3.14159f/180;
-	glBegin(GL_TRIANGLE_FAN);
- 
-	for (int i=0; i<360; i++)
-	{
-		float degInRad = i*DEG2RAD;
-		glVertex2f(cos(degInRad)*radius,sin(degInRad)*radius);
-	}
- 
-	glEnd();
-}

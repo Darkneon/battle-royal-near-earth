@@ -29,12 +29,8 @@ void PlayerInput::keyOperations(int keyModifier)
 void PlayerInput::functionKeyOperations(int keyModifier)
 {
 
-	if (funcKeyStates[GLUT_KEY_F1])
-	{
-		player->getCurrentCamera()->toggleWireframeView();
-		glutPostRedisplay();
-	}
-	else if (funcKeyStates[GLUT_KEY_F2])
+	
+	if (funcKeyStates[GLUT_KEY_F2])
 	{
 		player->changeCamera(CAMERA_FREELOOK);
 		glutPostRedisplay();

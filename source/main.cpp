@@ -40,6 +40,8 @@ int keyModifier = 0;
 
 static bool isDebugMode = true;
 
+int viewStates = 0; //states of the camera views
+
 Game* game;
 LevelRenderer levelRenderer;
 Base base;
@@ -118,12 +120,43 @@ void functionKeyUp(int key, int x, int y)
 	glutPostRedisplay();
 }
 
+void toggleDifferentView(){
+	++viewStates;
+
+	//normal settings
+	glShadeModel(GL_FLAT);
+	glEnable(GL_DEPTH_TEST);
+	glPolygonMode(GL_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT, GL_FILL);
+
+	if(viewStates==1){ //wireFrame
+		glDisable(GL_DEPTH_TEST);
+		glPolygonMode(GL_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT, GL_LINE);
+	}
+
+	else if(viewStates==2){ //smoothShading
+		glShadeModel(GL_SMOOTH);
+	}
+
+	else{//back to normal
+		viewStates=0;
+	}
+}
+
+void windowFuncKeyOps(){
+	if (funcKeyStates[GLUT_KEY_F1])
+	{
+		toggleDifferentView();
+	}
+}
+
 void functionKeysPressed(int key, int x, int y)
 {
 	funcKeyStates[key] = true;
+	windowFuncKeyOps();
 	glutPostRedisplay();
 }
-
 
 void windowKeyOps()
 {

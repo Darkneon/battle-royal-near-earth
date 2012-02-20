@@ -53,20 +53,19 @@ void TracksModel::drawTrack(){
 
 		//rectangle
 		glPushMatrix();
-			glBegin(GL_QUAD_STRIP);
-				glVertex3f(0.5, 0, 0);
-				glVertex3f(0.5, 0, 0.5);
-				glVertex3f(0.5, 1, 0);
+			glBegin(GL_QUADS);
+				glNormal3f(0,1,0);
 				glVertex3f(0.5, 1, 0.5);
-				
+				glVertex3f(1.5, 1, 0.5);			
 				glVertex3f(1.5, 1, 0);
-				glVertex3f(1.5, 1, 0.5);
+				glVertex3f(0.5, 1, 0);
 
-				glVertex3f(1.5, 0, 0);
-				glVertex3f(1.5, 0, 0.5);
-
-				glVertex3f(0.5, 0, 0);
+				glNormal3f(0,-1,0);
 				glVertex3f(0.5, 0, 0.5);
+				glVertex3f(1.5, 0, 0.5);
+				glVertex3f(1.5, 0, 0);
+				glVertex3f(0.5, 0, 0);
+
 			glEnd();
 		glPopMatrix();
 
@@ -74,10 +73,11 @@ void TracksModel::drawTrack(){
 		//circles and squares to finish model
 		glPushMatrix();
 			glTranslatef(0.5,0.5,0);
-			GeoHelper::drawCircle(0.5);
+			gluDisk(quadratic,0,0.5,15,15);
 			glTranslatef(-0.5,-0.5,0);
 
 			glBegin(GL_QUADS);
+				glNormal3f(-1,0,0);
 				glVertex3f(0.5, 0, 0);
 				glVertex3f(0.5, 1, 0);
 				glVertex3f(1.5, 1, 0);
@@ -85,16 +85,17 @@ void TracksModel::drawTrack(){
 			glEnd();
 
 			glTranslatef(1.5,0.5,0);
-			GeoHelper::drawCircle(0.5);
+			gluDisk(quadratic,0,0.5,15,15);
 			glTranslatef(-1.5,-0.5,0);
 		glPopMatrix();
 
 		glPushMatrix();
 			glTranslatef(0.5,0.5,0.5);
-			GeoHelper::drawCircle(0.5);
+			gluDisk(quadratic,0,0.5,15,15);
 			glTranslatef(-0.5,-0.5,-0.5);
 
 			glBegin(GL_QUADS);
+				glNormal3f(0,0,1);
 				glVertex3f(0.5, 0, 0.5);
 				glVertex3f(0.5, 1, 0.5);
 				glVertex3f(1.5, 1, 0.5);
@@ -102,7 +103,7 @@ void TracksModel::drawTrack(){
 			glEnd();
 
 			glTranslatef(1.5,0.5,0.5);
-			GeoHelper::drawCircle(0.5);
+			gluDisk(quadratic,0,0.5,15,15);
 			glTranslatef(-1.5,-0.5,-0.5);
 		glPopMatrix();
 
