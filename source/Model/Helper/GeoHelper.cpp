@@ -306,3 +306,17 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin, yOrigin+55, zOrigin+50);
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin+50, yOrigin+55, zOrigin+50);
 }
+
+
+GLfloat* GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3)
+{
+	GLfloat usedVector1[3] = { vector1[0] - vector3[0], vector1[1] - vector3[1], vector1[2] - vector3[2] };
+	GLfloat usedVector2[3] = { vector2[0] - vector3[0], vector2[1] - vector3[1], vector1[2] - vector3[2] };
+
+	GLfloat* answerVector = new GLfloat[3];
+	answerVector[0] = usedVector1[1] * usedVector2[2] - usedVector2[1] * usedVector1[2];
+	answerVector[1] = -(usedVector1[0] * usedVector2[2] - usedVector2[0] * usedVector1[2]);
+	answerVector[2] = usedVector1[0] * usedVector2[1] - usedVector2[0] * usedVector1[1];
+
+	return answerVector;
+}
