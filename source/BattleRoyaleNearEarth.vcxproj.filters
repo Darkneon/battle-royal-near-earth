@@ -107,6 +107,9 @@
     <ClCompile Include="Logic\PlayerInput.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Helper\AntTweakHelper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -214,6 +217,9 @@
     <ClInclude Include="Logic\PlayerInput.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="Helper\AntTweakHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -239,6 +245,9 @@
     </Filter>
     <Filter Include="Model\Buildings">
       <UniqueIdentifier>{0ad8302d-d3d7-43bd-a05f-d6cd863fc91f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{ac287395-8245-4754-8712-82fbc41a6b3f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

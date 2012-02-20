@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\Logic\;.\Model\;..\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\Helper\;.\Logic\;.\Model\;..\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
     <LibraryPath>..\library;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Helper\AntTweakHelper.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
     <ClCompile Include="Logic\Camera.cpp" />
     <ClCompile Include="Logic\CommanderCamera.cpp" />
@@ -125,6 +126,7 @@
     <Library Include="..\library\freeglut_static.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Helper\AntTweakHelper.h" />
     <ClInclude Include="Logic\Base.h" />
     <ClInclude Include="Logic\Camera.h" />
     <ClInclude Include="Logic\CommanderCamera.h" />
