@@ -18,7 +18,8 @@ public:
     
 private:
 	void drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos);
-        TeamNumberModel *teamNumber; //Addison
+        TeamNumberModel *teamNumber;
+        TeamNumberModel *teamNumber2;//Addison
 };
 
 #endif
