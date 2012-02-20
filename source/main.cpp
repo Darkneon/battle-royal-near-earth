@@ -59,15 +59,25 @@ LightPost *light2 = new LightPost(50.0f, 5.0f, 0.0f, -10.0f, -15.0f, 10.0f);
 LightPost *light3 = new LightPost(50.0f, 5.0f, 50.0f, -10.0f, -15.0f, -10.0f);
 LightPost *light4 = new LightPost(0.0f, 5.0f, 50.0f, 10.0f, -15.0f, -10.0f);
 
+bool ambientLight = true;
+
 
 void renderLights()
 {		
-		GLfloat ambient_light[ ] = {0.4, 0.4, 0.4, 1.0};
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
+		//ambient light
+		GLfloat light0_ambient[ ] = {0.4, 0.4, 0.4, 1.0};
+		GLfloat light0_position[ ] = {0.0, 0.0, 0.0, 1.0};
+		glLightfv(GL_LIGHT7, GL_POSITION, light0_position);
+		glLightfv(GL_LIGHT7, GL_AMBIENT, light0_ambient);
+		
+		if(ambientLight){
+			glEnable(GL_LIGHT7);
+		}else{
+			glDisable(GL_LIGHT7);
+		}
 
         glEnable(GL_LIGHTING);
         glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
-
 		//Set up a new light, namely... light0
         /*glLightfv(GL_LIGHT0, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
         glLightfv(GL_LIGHT0, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
@@ -110,7 +120,9 @@ void renderLights()
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light4->getDirectionArray());
         //TURN ON LIGHTING
         //glEnable(GL_LIGHT0);
-        glEnable(GL_LIGHT1);
+        if(ambientLight){
+			glEnable(GL_LIGHT1);
+		}
         glEnable(GL_LIGHT2);
         glEnable(GL_LIGHT3);
         glEnable(GL_LIGHT4);
@@ -264,6 +276,10 @@ void windowKeyOps()
 	{ 
         robot.changeBottom();
     }
+
+	if(keyStates[97] || keyStates[65]){
+		ambientLight = !ambientLight;
+	}
 
 }
 
