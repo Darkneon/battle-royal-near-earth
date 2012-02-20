@@ -110,6 +110,12 @@
     <ClCompile Include="Helper\AntTweakHelper.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Light\LightPost.cpp">
+      <Filter>Model\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\SpotLight.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -220,6 +226,12 @@
     <ClInclude Include="Helper\AntTweakHelper.h">
       <Filter>Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Model\Light\LightPost.h">
+      <Filter>Model\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\SpotLight.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -248,6 +260,9 @@
     </Filter>
     <Filter Include="Helper">
       <UniqueIdentifier>{ac287395-8245-4754-8712-82fbc41a6b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Light">
+      <UniqueIdentifier>{77469393-b200-4e59-8a66-a3bdfff0fbc5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

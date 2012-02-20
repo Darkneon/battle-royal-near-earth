@@ -3,8 +3,8 @@
 #include "LevelRenderer.h"
 #include "Base.h"
 #include "Robot.h"
-#include "SpotLight.h"
-#include "LightPost.h"
+#include "Logic\SpotLight.h"
+#include "Model\Light\LightPost.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -61,10 +61,14 @@ LightPost *light4 = new LightPost(0.0f, 5.0f, 50.0f, 10.0f, -15.0f, -10.0f);
 
 
 void renderLights()
-{
+{		
+		GLfloat ambient_light[ ] = {0.4, 0.4, 0.4, 1.0};
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
+
         glEnable(GL_LIGHTING);
         glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
-        //Set up a new light, namely... light0
+
+		//Set up a new light, namely... light0
         /*glLightfv(GL_LIGHT0, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
         glLightfv(GL_LIGHT0, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
         glLightfv(GL_LIGHT0, GL_SPECULAR, spotLight->getSpecular());

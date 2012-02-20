@@ -95,10 +95,12 @@
     <ClCompile Include="Logic\Player.cpp" />
     <ClCompile Include="Logic\PlayerInput.cpp" />
     <ClCompile Include="Logic\Robot.cpp" />
+    <ClCompile Include="Logic\SpotLight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
+    <ClCompile Include="Model\Light\LightPost.cpp" />
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Model\Player\AntennaModel.cpp" />
     <ClCompile Include="Model\Player\PlayerModel.cpp" />
@@ -137,9 +139,11 @@
     <ClInclude Include="Logic\Player.h" />
     <ClInclude Include="Logic\PlayerInput.h" />
     <ClInclude Include="Logic\Robot.h" />
+    <ClInclude Include="Logic\SpotLight.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
+    <ClInclude Include="Model\Light\LightPost.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Model\Player\AntennaModel.h" />
     <ClInclude Include="Model\Player\PlayerModel.h" />

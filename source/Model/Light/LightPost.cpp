@@ -95,6 +95,7 @@ void LightPost::render() {
                                 glVertex3f(0, 0, 0);
                                 glVertex3f(lookX, lookY, lookZ);
                         glEnd();
+						glLineWidth(1);
                 if (lookX > 0 )
                         glRotatef(acos(lookX/(sqrt((lookX*lookX)+(lookZ*lookZ))))*(180/GL_PI), 0, -1, 0);
                 else if (lookX < 0 || lookZ < 0)
