@@ -1,69 +1,53 @@
 #include <math.h>
 #include "GameIncludes.h"
 #include "SpotLight.h"
+#include "Game.h"
+#include "LevelRenderer.h"
+#include "Base.h"
+#include "Robot.h"
+
 #ifdef __APPLE__
-    #include <OpenGL/gl.h>
-    #include <OpenGL/glu.h>
     #include <Glut/glut.h>
 #else
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
 
+#include "AntTweakHelper.h"
+#include <cstring>
+
 // PI
 #define GL_PI 3.14159f
 
-// Initial size of graphics window.
-const int WIDTH  = 600;
-const int HEIGHT = 400;
 // Current size of window.
-int width  = WIDTH;
-int height = HEIGHT;
+GLint width  = 600;
+GLint height = 400;
+
+//	old values for the window (used to come back from fullscreen)
+GLint oldWidth = width;
+GLint oldHeight = height;
+
+// Current position of the window (used to come back from fullscreen)
+int winPosX = 0;
+int winPosY = 0;
+
+bool isInFullScreenMode;
 
 // Bounds of viewing frustum.
-double nearPlane =  1.0;
-double farPlane  = 85.0;
+GLfloat nearPlane =  1.0f;
+GLfloat farPlane  = 100.0f;
 
-// Viewing angle.
-static double fovy = 90.0;
+bool keyStates[256];
+bool funcKeyStates[256];
+int keyModifier = 0;
 
-//camera rotation
-static GLint rot = 0;
-//camera location
-static const GLfloat RADIUS = 10.0f;
-static const GLfloat LOC_Y_INITIAL = RADIUS * tan(GL_PI / 4);
-//static const GLfloat LOC_Y_INITIAL = 0;
-static GLfloat locX = 0.0f;
-static GLfloat locY = LOC_Y_INITIAL;
-static GLfloat locZ = RADIUS;
+static bool isDebugMode = true;
 
-static bool wireframeView;
-
-//demo purposes only   -jon
-static int choice = 0;
-static int nbOfChoices = 13;
-//===================
-
-bool* keyStates = new bool[256];
-bool* funcKeyStates = new bool[256];
-Player player;
-Fence fence;
-Mountain mountain;
-Phaser phaser;
-Cannon cannon;
-HollowBlock hollowBlock;
-HalfHollowBlock halfHollowBlock;
-PlainBlock plainBlock;
-HalfPlainBlock halfPlainBlock;
-MissileLauncher missileLauncher;
-Pit pit;
-Pit pit2;
-Electronics electronics;
-Nuclear nuclear;
-Grass grass;
+Game* game;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
+AntTweakHelper antTweakHelper;
 
 //Initialize light objects
 SpotLight *spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
@@ -143,6 +127,8 @@ void lightCamera(LightPost* light)
 
 }
 void commanderCamera()
+// Respond to window resizing, preserving proportions.
+void reshapeMainWindow (int newWidth, int newHeight)
 {
         
 	glMatrixMode(GL_PROJECTION);
@@ -153,120 +139,36 @@ void commanderCamera()
         //Update the position of the camera light
         lightCamera(light0);
         light0->updatePosition(locX, 2.5, locZ-RADIUS);
+	width = newWidth;
+	height = newHeight;
 
+	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+	TwWindowSize(width, height);
 }
 
-
-void funcKeyOperations()
+void toggleFullScreen()
 {
-	if (funcKeyStates[GLUT_KEY_LEFT])
-	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ += moveVector[0];
-		locX -= moveVector[1];	
-                glutPostRedisplay();
+	isInFullScreenMode = !isInFullScreenMode;
 
+	if (isInFullScreenMode)
+	{
+		oldWidth = width;
+		oldHeight = height;
+		winPosX = glutGet(GLUT_WINDOW_X);
+		winPosY = glutGet(GLUT_WINDOW_Y);
+		glutFullScreen();
 	}
-	else if (funcKeyStates[GLUT_KEY_RIGHT])
+	else
 	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ -= moveVector[0];
-		locX += moveVector[1];
-                glutPostRedisplay();
-
-	}
-
-	if (funcKeyStates[GLUT_KEY_UP])
-	{
-		GLfloat moveVector[] = {1 * sin(rot * 1.0f / 8), 1 * cos(rot * 1.0f / 8)};
-		locZ -= moveVector[1];
-		locX -= moveVector[0];
-                glutPostRedisplay();
-
-	}
-	else if (funcKeyStates[GLUT_KEY_DOWN])
-	{
-		GLfloat moveVector[] = { 0 + 1 * sin(rot * 1.0f / 8), 0 + 1 * cos(rot * 1.0f / 8)};
-		locZ += moveVector[1];
-		locX += moveVector[0];
-                glutPostRedisplay();
-
+		glutPositionWindow(winPosX, winPosY);
+		glutReshapeWindow(oldWidth, oldHeight);
 	}
 
-	if (funcKeyStates[GLUT_KEY_PAGE_UP])
-        {
-		rot++;
-                glutPostRedisplay();
-        }
-	else if (funcKeyStates[GLUT_KEY_PAGE_DOWN])
-        {
-		rot--;
-                glutPostRedisplay();
-        }
-	else if (funcKeyStates[GLUT_KEY_END])
-        {
-		rot = 0;
-                glutPostRedisplay();
-        }
-}
-
-static GLfloat denom = 4.0f;
-
-void keyOperations()
-{
-	if (keyStates[(int)'q'])
-		choice = ++choice % nbOfChoices; 
-		
-	if (keyStates[(int)'w']){
-		wireframeView = !wireframeView;
-		if(wireframeView){
-			glPolygonMode(GL_BACK, GL_LINE);
-			glPolygonMode(GL_FRONT, GL_LINE);
-		}else{
-			glPolygonMode(GL_BACK, GL_FILL);
-			glPolygonMode(GL_FRONT, GL_FILL);
-		}
-
-	}
-		
-    if (keyStates[(int)'t']) {
-        robot.changeTop();
-    }
-  
-    if (keyStates[(int)'y']) {
-        robot.changeMiddle();
-    }
-
-      
-    if (keyStates[(int)'u']) {
-        robot.changeBottom();
-    }
-    
-	if (keyStates[(int)'-'])
-	{
-		if (denom != 4.0f)
-		{
-			fovy++;
-			denom -= 0.25f;
-			locY = RADIUS * tan(GL_PI / denom);
-		}
-	}
-	else if (keyStates[(int)'='])
-	{
-		fovy--;
-		denom += 0.25f;
-		locY = RADIUS * tan(GL_PI / denom);
-	}
-	else if (keyStates[(int)'0'])
-	{
-		fovy = 60.0f;
-		locY = LOC_Y_INITIAL;
-		denom = 4.0f;
-	}	
-
-	if (keyStates[27])
+	if (keyStates[27]) { //escape
 		exit(0);
-	
+	}
+		
+	memset(keyStates, 0, sizeof(keyStates));
 }
 
 
@@ -282,73 +184,28 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	switch (choice)
-	{
-	case 3:
-		levelRenderer.render();
-		break;
-	case 1:
-		missileLauncher.draw();
-		break;
-	case 2:
-		phaser.draw();
-		break;
-	case 0:
-		levelRenderer.render();
-		//Drawing robot models on map
-		glPushMatrix();
-			glTranslatef(15,0,40);
-			player.draw();
-			glTranslatef(1,0,0);
-			base.draw();
-			glTranslatef(7,0,5);
-			robot.draw();
-
-		glPopMatrix();
-        break;
-	case 4:
-		plainBlock.draw();
-		break;
-	case 5:
-		halfPlainBlock.draw();
-		break;
-	case 6:
-		hollowBlock.draw();
-		break;
-	case 7:
-		halfHollowBlock.draw();
-		break;
-	case 8:
-		pit.draw();
-		break;
-	case 9:
-		pit2.draw();
-		break;
-	case 10:
-		electronics.draw();
-		break;
-	case 11:
-		nuclear.draw();
-		break;
-	case 12:
+	levelRenderer.render();
+	//Drawing robot models on map
+	glPushMatrix();
+		glTranslatef(15,0,40);
+		game->p1->draw();
+		glTranslatef(1,0,0);
 		base.draw();
-		break;
+		glTranslatef(7,0,5);	
+		robot.draw();
+	glPopMatrix();
+
+	game->p1->view(); // Camera update (leave as it is for now)
+	game->getInput(keyModifier); // Gets user input
+
+	if (isDebugMode) {
+		antTweakHelper.draw();
 	}
 
-	commanderCamera();
-        //lightCamera(light3);
-        glutSwapBuffers();
+	glutSwapBuffers();
+  glutPostRedisplay();
 }
 
-
-// Respond to window resizing, preserving proportions.
-void reshapeMainWindow (int newWidth, int newHeight)
-{
-	width = newWidth;
-	height = newHeight;
-	glViewport(0, 0, width, height);
-        commanderCamera();
-}
 
 void functionKeyUp(int key, int x, int y)
 {
@@ -356,36 +213,96 @@ void functionKeyUp(int key, int x, int y)
 	glutPostRedisplay();
 }
 
-void functionKeys(int key, int x, int y)
+void functionKeysPressed(int key, int x, int y)
 {
 	funcKeyStates[key] = true;
 	glutPostRedisplay();
 }
 
-void keyUp(unsigned char key, int x, int y)
+
+void windowKeyOps()
+{
+	if (keyModifier == GLUT_ACTIVE_ALT && keyStates[13]) //alt + enter
+	{
+		toggleFullScreen();
+	}
+	if (keyStates[116]) //t
+	{ 
+        robot.changeTop();
+    }
+  
+    if (keyStates[121]) //y
+	{ 
+        robot.changeMiddle();
+    }
+      
+    if (keyStates[117]) //u
+	{ 
+        robot.changeBottom();
+    }
+
+}
+
+
+
+void keyboardKeysUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
+	keyModifier = 0;
+	//Checks for uppercase
+	if (key >= 65 && key <= 90)
+		keyStates[key + 32] = false;
+
 	glutPostRedisplay();
 }
 
-void keyboardKeys(unsigned char key, int x, int y)
+void keyboardKeysPressed(unsigned char key, int x, int y)
 {
-	keyStates[key] = true;	
+	keyStates[key] = true;
+	keyModifier = glutGetModifiers();
+
+	//Checks for uppercase
+	if (key >= 65 && key <= 90)
+		keyStates[key + 32] = true;
+
+	windowKeyOps();
+
 	glutPostRedisplay();
+}
+
+void OnKey(unsigned char key, int x, int y)  {
+	TwEventKeyboardGLUT(key, x, y);		
+	keyboardKeysPressed(key, x, y);	
+}
+
+void initAntTweak() {
+  antTweakHelper.bindCamera(game->p1->getCurrentCamera());
 }
 
 void init()
 {
+	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
-	wireframeView = false;
-	pit2.switchPitType();
+	isInFullScreenMode = false;
 
 	for (int i = 0; i < 256; i++)
 	{
 		keyStates[i] = false;
 		funcKeyStates[i] = false;
 	}
+
+	glutSetCursor(GLUT_CURSOR_NONE);
+
+  initAntTweak();
 }
+
+
+void passiveMotionFunc(int x, int y)
+{
+	game->playerInput1->mousePassiveOperations(x, y);
+}
+
+//void motionFunc(int x, int y){}
 
 
 int main (int argc, char **argv)
@@ -395,21 +312,25 @@ int main (int argc, char **argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Battle Royale Near Earth");
-
+       
 	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);
-	glutSpecialFunc(functionKeys);
-	glutKeyboardFunc(keyboardKeys);
-	glutKeyboardUpFunc(keyUp);
+	glutSpecialFunc(functionKeysPressed);
 	glutSpecialUpFunc(functionKeyUp);
+	glutKeyboardFunc(keyboardKeysPressed);
+	glutKeyboardUpFunc(keyboardKeysUp);
 	glutDisplayFunc(render);
 
+	
+  glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
+  glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
+    
+
+	//mouse motion
+	//glutMotionFunc(motionFunc);
+	glutPassiveMotionFunc(passiveMotionFunc);
+	
 	init();
-
 	glutMainLoop();
-
-	delete keyStates;
-	delete funcKeyStates;
-
 	return 0;
 }

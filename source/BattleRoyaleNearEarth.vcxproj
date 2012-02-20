@@ -39,7 +39,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\Helper\;.\Logic\;.\Model\;..\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath)</SourcePath>
+    <LibraryPath>..\library;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -51,11 +53,18 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libc.lib;libcmt.lib;libcd.lib;libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>copy ..\library\AntTweakBar.dll ..\Debug /Y</Command>
+      <Message>Copy AntTweakBar to .exe directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -75,105 +84,84 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AntennaModel.cpp" />
-    <ClCompile Include="AntiGrav.cpp" />
-    <ClCompile Include="AntiGravModel.cpp" />
-    <ClCompile Include="Base.cpp" />
-    <ClCompile Include="BaseModel.cpp" />
-    <ClCompile Include="Bipod.cpp" />
-    <ClCompile Include="BipodModel.cpp" />
-    <ClCompile Include="Cannon.cpp" />
-    <ClCompile Include="CannonModel.cpp" />
-    <ClCompile Include="Electronics.cpp" />
-    <ClCompile Include="ElectronicsModel.cpp" />
-    <ClCompile Include="Factory.cpp" />
-    <ClCompile Include="FactoryModel.cpp" />
-    <ClCompile Include="Fence.cpp" />
-    <ClCompile Include="FenceModel.cpp" />
-    <ClCompile Include="GeoHelper.cpp" />
-    <ClCompile Include="HalfHollowBlock.cpp" />
-    <ClCompile Include="HalfHollowBlockModel.cpp" />
-    <ClCompile Include="HalfPlainBlock.cpp" />
-    <ClCompile Include="HalfPlainBlockModel.cpp" />
-    <ClCompile Include="HillsModel.cpp" />
-    <ClCompile Include="HollowBlock.cpp" />
-    <ClCompile Include="HollowBlockModel.cpp" />
-    <ClCompile Include="Grass.cpp" />
-    <ClCompile Include="GrassModel.cpp" />
-    <ClCompile Include="LevelRenderer.cpp" />
-    <ClCompile Include="LightRubbleModel.cpp" />
+    <ClCompile Include="Helper\AntTweakHelper.cpp" />
+    <ClCompile Include="Logic\Base.cpp" />
+    <ClCompile Include="Logic\Camera.cpp" />
+    <ClCompile Include="Logic\CommanderCamera.cpp" />
+    <ClCompile Include="Logic\Factory.cpp" />
+    <ClCompile Include="Logic\FreeLookCamera.cpp" />
+    <ClCompile Include="Logic\Game.cpp" />
+    <ClCompile Include="Logic\LevelRenderer.cpp" />
+    <ClCompile Include="Logic\Player.cpp" />
+    <ClCompile Include="Logic\PlayerInput.cpp" />
+    <ClCompile Include="Logic\Robot.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MissileLauncher.cpp" />
-    <ClCompile Include="MissileLauncherModel.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Mountain.cpp" />
-    <ClCompile Include="MountainModel.cpp" />
-    <ClCompile Include="Nuclear.cpp" />
-    <ClCompile Include="NuclearModel.cpp" />
-    <ClCompile Include="Phaser.cpp" />
-    <ClCompile Include="PhaserModel.cpp" />
-    <ClCompile Include="Pit.cpp" />
-    <ClCompile Include="PitModel.cpp" />
-    <ClCompile Include="PlainBlock.cpp" />
-    <ClCompile Include="PlainBlockModel.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerModel.cpp" />
-    <ClCompile Include="Robot.cpp" />
-    <ClCompile Include="TeamNumberModel.cpp" />
-    <ClCompile Include="Tracks.cpp" />
-    <ClCompile Include="TracksModel.cpp" />
+    <ClCompile Include="Model\Buildings\BaseModel.cpp" />
+    <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
+    <ClCompile Include="Model\Helper\GeoHelper.cpp" />
+    <ClCompile Include="Model\Model.cpp" />
+    <ClCompile Include="Model\Player\AntennaModel.cpp" />
+    <ClCompile Include="Model\Player\PlayerModel.cpp" />
+    <ClCompile Include="Model\Robot\AntiGravModel.cpp" />
+    <ClCompile Include="Model\Robot\BipodModel.cpp" />
+    <ClCompile Include="Model\Robot\CannonModel.cpp" />
+    <ClCompile Include="Model\Robot\ElectronicsModel.cpp" />
+    <ClCompile Include="Model\Robot\MissileLauncherModel.cpp" />
+    <ClCompile Include="Model\Robot\NuclearModel.cpp" />
+    <ClCompile Include="Model\Robot\PhaserModel.cpp" />
+    <ClCompile Include="Model\Robot\TracksModel.cpp" />
+    <ClCompile Include="Model\Static\FenceModel.cpp" />
+    <ClCompile Include="Model\Static\GrassModel.cpp" />
+    <ClCompile Include="Model\Static\HalfHollowBlockModel.cpp" />
+    <ClCompile Include="Model\Static\HalfPlainBlockModel.cpp" />
+    <ClCompile Include="Model\Static\HillsModel.cpp" />
+    <ClCompile Include="Model\Static\HollowBlockModel.cpp" />
+    <ClCompile Include="Model\Static\LightRubbleModel.cpp" />
+    <ClCompile Include="Model\Static\MountainModel.cpp" />
+    <ClCompile Include="Model\Static\PitModel.cpp" />
+    <ClCompile Include="Model\Static\PlainBlockModel.cpp" />
+    <ClCompile Include="Model\Static\TeamNumberModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AntennaModel.h" />
-    <ClInclude Include="AntiGrav.h" />
-    <ClInclude Include="AntiGravModel.h" />
-    <ClInclude Include="Base.h" />
-    <ClInclude Include="BaseModel.h" />
-    <ClInclude Include="Bipod.h" />
-    <ClInclude Include="BipodModel.h" />
-    <ClInclude Include="Cannon.h" />
-    <ClInclude Include="CannonModel.h" />
-    <ClInclude Include="Electronics.h" />
-    <ClInclude Include="ElectronicsModel.h" />
-    <ClInclude Include="Factory.h" />
-    <ClInclude Include="FactoryModel.h" />
-    <ClInclude Include="Fence.h" />
-    <ClInclude Include="FenceModel.h" />
-    <ClInclude Include="GameIncludes.h" />
-    <ClInclude Include="GeoHelper.h" />
-    <ClInclude Include="HalfHollowBlock.h" />
-    <ClInclude Include="HalfHollowBlockModel.h" />
-    <ClInclude Include="HalfPlainBlock.h" />
-    <ClInclude Include="HalfPlainBlockModel.h" />
-    <ClInclude Include="HillsModel.h" />
-    <ClInclude Include="HollowBlock.h" />
-    <ClInclude Include="HollowBlockModel.h" />
-    <ClInclude Include="LightRubbleModel.h" />
-    <ClInclude Include="MissileLauncher.h" />
-    <ClInclude Include="MissileLauncherModel.h" />
-    <ClInclude Include="Grass.h" />
-    <ClInclude Include="GrassModel.h" />
-    <ClInclude Include="LevelRenderer.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Mountain.h" />
-    <ClInclude Include="MountainModel.h" />
-    <ClInclude Include="Nuclear.h" />
-    <ClInclude Include="NuclearModel.h" />
-    <ClInclude Include="Phaser.h" />
-    <ClInclude Include="PhaserModel.h" />
-    <ClInclude Include="Pit.h" />
-    <ClInclude Include="PitModel.h" />
-    <ClInclude Include="PlainBlock.h" />
-    <ClInclude Include="PlainBlockModel.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerModel.h" />
-    <ClInclude Include="Robot.h" />
-    <ClInclude Include="TeamNumberModel.h" />
-    <ClInclude Include="Tracks.h" />
-    <ClInclude Include="TracksModel.h" />
+    <ClInclude Include="Helper\AntTweakHelper.h" />
+    <ClInclude Include="Logic\Base.h" />
+    <ClInclude Include="Logic\Camera.h" />
+    <ClInclude Include="Logic\CommanderCamera.h" />
+    <ClInclude Include="Logic\Factory.h" />
+    <ClInclude Include="Logic\FreeLookCamera.h" />
+    <ClInclude Include="Logic\Game.h" />
+    <ClInclude Include="Logic\LevelRenderer.h" />
+    <ClInclude Include="Logic\Player.h" />
+    <ClInclude Include="Logic\PlayerInput.h" />
+    <ClInclude Include="Logic\Robot.h" />
+    <ClInclude Include="Model\Buildings\BaseModel.h" />
+    <ClInclude Include="Model\Buildings\FactoryModel.h" />
+    <ClInclude Include="Model\Helper\GeoHelper.h" />
+    <ClInclude Include="Model\Model.h" />
+    <ClInclude Include="Model\Player\AntennaModel.h" />
+    <ClInclude Include="Model\Player\PlayerModel.h" />
+    <ClInclude Include="Model\Robot\AntiGravModel.h" />
+    <ClInclude Include="Model\Robot\BipodModel.h" />
+    <ClInclude Include="Model\Robot\CannonModel.h" />
+    <ClInclude Include="Model\Robot\ElectronicsModel.h" />
+    <ClInclude Include="Model\Robot\MissileLauncherModel.h" />
+    <ClInclude Include="Model\Robot\NuclearModel.h" />
+    <ClInclude Include="Model\Robot\PhaserModel.h" />
+    <ClInclude Include="Model\Robot\TracksModel.h" />
+    <ClInclude Include="Model\Static\FenceModel.h" />
+    <ClInclude Include="Model\Static\GrassModel.h" />
+    <ClInclude Include="Model\Static\HalfHollowBlockModel.h" />
+    <ClInclude Include="Model\Static\HalfPlainBlockModel.h" />
+    <ClInclude Include="Model\Static\HillsModel.h" />
+    <ClInclude Include="Model\Static\HollowBlockModel.h" />
+    <ClInclude Include="Model\Static\LightRubbleModel.h" />
+    <ClInclude Include="Model\Static\MountainModel.h" />
+    <ClInclude Include="Model\Static\PitModel.h" />
+    <ClInclude Include="Model\Static\PlainBlockModel.h" />
+    <ClInclude Include="Model\Static\TeamNumberModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
