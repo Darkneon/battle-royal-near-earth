@@ -3,8 +3,8 @@
 #include "LevelRenderer.h"
 #include "Base.h"
 #include "Robot.h"
-#include "Logic\SpotLight.h"
-#include "Model\Light\LightPost.h"
+#include "SpotLight.h"
+#include "Light/LightPost.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -324,7 +324,7 @@ void OnKey(unsigned char key, int x, int y)  {
 
 void initAntTweak() {
   antTweakHelper.bindCamera(game->p1->getCurrentCamera());
-  antTweakHelper.bindLightPost(light1);
+  antTweakHelper.bindLightPosts(light1, light2, light3, light4);
 }
 
 void init()
