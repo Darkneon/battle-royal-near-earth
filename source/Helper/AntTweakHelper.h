@@ -14,7 +14,7 @@ public:
     AntTweakHelper();
     void draw();
     void bindCamera(Camera *c);
-	void bindLightPost(LightPost * p);
+	void bindLightPosts(LightPost *l1, LightPost *l2, LightPost *l3, LightPost *l4);
 private:
     TwBar *bar;
 };
