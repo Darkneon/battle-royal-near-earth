@@ -11,6 +11,7 @@
 #include "Model.h"
 #include "CommanderCamera.h"
 #include "FreeLookCamera.h"
+#include "CirclingCamera.h"
 
 class Player 
 {
@@ -27,7 +28,7 @@ public:
 private:
 	int currentCamera;
     Model *model;
-	Camera *availableCams[2];
+	Camera *availableCams[3];
 };
 
 #endif	/* PLAYER_H */

@@ -7,6 +7,7 @@
 
 #define CAMERA_COMMANDER 0
 #define CAMERA_FREELOOK  1
+#define CAMERA_CIRCULAR	 2
 
 #ifdef __APPLE__
     #include <Glut/glut.h>

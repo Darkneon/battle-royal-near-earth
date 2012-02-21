@@ -41,7 +41,7 @@ bool keyStates[256];
 bool funcKeyStates[256];
 int keyModifier = 0;
 
-static bool isDebugMode = true;
+static bool isDebugMode = false;
 
 int viewStates = 0; //states of the camera views
 
@@ -65,8 +65,8 @@ bool ambientLight = true;
 void renderLights()
 {		
 		//ambient light
-		GLfloat light0_ambient[ ] = {0.4, 0.4, 0.4, 1.0};
-		GLfloat light0_position[ ] = {0.0, 0.0, 0.0, 1.0};
+		GLfloat light0_ambient[ ] = {0.4f, 0.4f, 0.4f, 1.0f};
+		GLfloat light0_position[ ] = {0.0f, 0.0f, 0.0f, 1.0f};
 		glLightfv(GL_LIGHT7, GL_POSITION, light0_position);
 		glLightfv(GL_LIGHT7, GL_AMBIENT, light0_ambient);
 		
@@ -266,17 +266,23 @@ void windowKeyOps()
 	if (keyStates[116]) //t
 	{ 
         robot.changeTop();
+		glutPostRedisplay();
     }
   
     if (keyStates[121]) //y
 	{ 
         robot.changeMiddle();
+		glutPostRedisplay();
     }
       
     if (keyStates[117]) //u
 	{ 
         robot.changeBottom();
+		glutPostRedisplay();
     }
+
+	if (keyStates[96]) //b
+		isDebugMode = !isDebugMode;
 
 	if(keyStates[97] || keyStates[65]){
 		ambientLight = !ambientLight;
@@ -364,8 +370,8 @@ int main (int argc, char **argv)
 	glutDisplayFunc(render);
 
 	
-  glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
-  glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
+	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
+	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
     
 
 	//mouse motion

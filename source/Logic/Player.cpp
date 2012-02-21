@@ -8,6 +8,7 @@ Player::Player(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat
 
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 
 	currentCamera = CAMERA_COMMANDER;
 }

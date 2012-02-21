@@ -29,8 +29,12 @@ void PlayerInput::keyOperations(int keyModifier)
 void PlayerInput::functionKeyOperations(int keyModifier)
 {
 
-	
-	if (funcKeyStates[GLUT_KEY_F2])
+	if (funcKeyStates[GLUT_KEY_F4])
+	{
+		player->changeCamera(CAMERA_CIRCULAR);
+		glutPostRedisplay();
+	}
+	else if (funcKeyStates[GLUT_KEY_F2])
 	{
 		player->changeCamera(CAMERA_FREELOOK);
 		glutPostRedisplay();
