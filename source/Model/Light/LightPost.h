@@ -9,8 +9,12 @@
 #define	LIGHTPOST_H
 
 #include "Model.h"
+#include "AntTweakHelper.h"
+
 class LightPost { 
 public:
+	friend class AntTweakHelper;
+
     LightPost(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
     void render();
     GLfloat getPosX();
@@ -34,6 +38,9 @@ private:
     GLfloat lookZ;
     GLfloat lightPos[4];
     GLfloat spotDir[3];
+
+	GLfloat axis[3];
+	GLfloat rot;
 };
 
 #endif	/* LIGHTPOST_H */

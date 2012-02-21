@@ -87,6 +87,7 @@
     <ClCompile Include="Helper\AntTweakHelper.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
     <ClCompile Include="Logic\Camera.cpp" />
+    <ClCompile Include="Logic\CirclingCamera.cpp" />
     <ClCompile Include="Logic\CommanderCamera.cpp" />
     <ClCompile Include="Logic\Factory.cpp" />
     <ClCompile Include="Logic\FreeLookCamera.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Helper\AntTweakHelper.h" />
     <ClInclude Include="Logic\Base.h" />
     <ClInclude Include="Logic\Camera.h" />
+    <ClInclude Include="Logic\CirclingCamera.h" />
     <ClInclude Include="Logic\CommanderCamera.h" />
     <ClInclude Include="Logic\Factory.h" />
     <ClInclude Include="Logic\FreeLookCamera.h" />

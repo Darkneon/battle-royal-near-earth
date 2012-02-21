@@ -24,3 +24,10 @@ void AntTweakHelper::bindCamera(Camera *c) {
 
    TwDefine(" Debugging/Location group=Camera \n Debugging/Rotation group=Camera ");
 }
+
+void AntTweakHelper::bindLightPost(LightPost *p) { 
+	TwAddVarRW(bar, "rot", TW_TYPE_FLOAT, &(p->rot), " group=LightPost");
+	TwAddVarRW(bar, "axisx", TW_TYPE_FLOAT, &(p->axis[0]), " group=Axis X");
+	TwAddVarRW(bar, "axisy", TW_TYPE_FLOAT, &(p->axis[1]), " group=Axis Y");
+	TwAddVarRW(bar, "axisz", TW_TYPE_FLOAT, &(p->axis[2]), " group=Axis Z");
+}

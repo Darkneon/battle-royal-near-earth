@@ -26,6 +26,11 @@ LightPost::LightPost(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GL
     spotDir[0] = this->lookX;
     spotDir[1] = this->lookY;
     spotDir[2] = this->lookZ;
+
+	rot = 0.0f;
+	axis[0] = 1.0f;
+	axis[1] = 0.0f;
+	axis[2] = 0.0f;
 }
 
 GLfloat LightPost::getPosX()
@@ -86,26 +91,32 @@ GLfloat* LightPost::getDirectionArray()
    return spotDir;
 }
 void LightPost::render() {
+	
+    glPushMatrix();
+	
+        glTranslatef(posX, posY, posZ);
+		
+        //Draw a cylinder at the camera position
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glLineWidth(5);
+
+        glBegin(GL_LINES);
+            glVertex3f(0, 0, 0);
+            glVertex3f(lookX, lookY, lookZ);
+        glEnd();
+		glLineWidth(1);
+
+        //glRotatef(acos(abs(lookX)/(sqrt((lookX*lookX)+(lookZ*lookZ))))*(180/GL_PI), 0, -1, 0);
+		//glRotatef(acos(abs(lookY)/(sqrt((lookX*lookX)+(lookY*lookY))))*(180/GL_PI), 0.0f, 0.0f, -1.0f); ;
+        //glRotatef(66, 1, 0, 0);
+      //  GeoHelper::drawAxis(5);
+		
         glPushMatrix();
-                glTranslatef(posX, posY, posZ);
-                //Draw a cylinder at the camera position
-                glColor3f(1.0f, 1.0f, 1.0f);
-                        glLineWidth(5);
-                        glBegin(GL_LINES);
-                                glVertex3f(0, 0, 0);
-                                glVertex3f(lookX, lookY, lookZ);
-                        glEnd();
-						glLineWidth(1);
-                if (lookX > 0 )
-                        glRotatef(acos(lookX/(sqrt((lookX*lookX)+(lookZ*lookZ))))*(180/GL_PI), 0, -1, 0);
-                else if (lookX < 0 || lookZ < 0)
-                        glRotatef(-acos(lookX/(sqrt((lookX*lookX)+(lookZ*lookZ))))*(180/GL_PI), 0, -1, 0);
-                glRotatef(acos(lookY/(sqrt((lookX*lookX)+(lookY*lookY))))*(180/GL_PI), 0, 0, -1);      
-                //glRotatef(66, 1, 0, 0);
-                GeoHelper::drawAxis(5);
-                glPushMatrix();
-                glColor3f(0.0f, 0.0f, 1.0f);
-                GeoHelper::drawCylinder(360);
-                glPopMatrix();
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glRotatef(rot, axis[0], axis[1], axis[2]);
+			
+			
+			GeoHelper::drawCylinder(360);
         glPopMatrix();
+    glPopMatrix();
 }

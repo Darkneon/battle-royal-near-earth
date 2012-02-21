@@ -116,6 +116,9 @@
     <ClCompile Include="Logic\SpotLight.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\CirclingCamera.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -230,6 +233,9 @@
       <Filter>Model\Light</Filter>
     </ClInclude>
     <ClInclude Include="Logic\SpotLight.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\CirclingCamera.h">
       <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,15 +3,18 @@
 
 #include "TweakAnt/AntTweakBar.h"
 #include "Camera.h"
+#include "Light/LightPost.h"
 
 // Forward dependencies
 class Camera;
+class LightPost;
 
 class AntTweakHelper {
 public:
     AntTweakHelper();
     void draw();
     void bindCamera(Camera *c);
+	void bindLightPost(LightPost * p);
 private:
     TwBar *bar;
 };

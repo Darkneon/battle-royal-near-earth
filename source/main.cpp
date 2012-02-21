@@ -184,12 +184,13 @@ void render()
 {
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-        renderLights();
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+        
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	levelRenderer.render();
+	renderLights();
 	//Drawing robot models on map
 	glPushMatrix();
 		glTranslatef(15,0,40);
@@ -317,6 +318,7 @@ void OnKey(unsigned char key, int x, int y)  {
 
 void initAntTweak() {
   antTweakHelper.bindCamera(game->p1->getCurrentCamera());
+  antTweakHelper.bindLightPost(light1);
 }
 
 void init()
@@ -324,7 +326,7 @@ void init()
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
 	isInFullScreenMode = false;
-
+	
 	for (int i = 0; i < 256; i++)
 	{
 		keyStates[i] = false;

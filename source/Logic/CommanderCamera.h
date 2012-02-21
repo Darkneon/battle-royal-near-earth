@@ -24,7 +24,7 @@ public:
 private:
 	GLfloat currentRadius; //radius from lookat point
 	GLfloat heightDenom; //used for zoom effect
-	void calculate45DegreesForLocY(); //45 degrees for cams (useful for more than one class
+	void calculate45DegreesForLocY(); //45 degrees for cams (useful for more than one class)
 };
 
 #endif

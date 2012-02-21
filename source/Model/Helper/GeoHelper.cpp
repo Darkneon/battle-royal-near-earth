@@ -196,7 +196,6 @@ void GeoHelper::drawAxis(GLfloat length)
         glVertex3f(0.0f, 0.0f, 0.0f);
         glVertex3f(0.0f, 0.0f, length);
     glPopMatrix();
-    glLoadIdentity();
 }
 void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend)
 {
