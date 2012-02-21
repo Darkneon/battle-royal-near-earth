@@ -38,6 +38,7 @@ public:
 	virtual void modifyYaw(bool negateTheValue, int x, int y) = 0; //negate to go counter-clockwise
 	virtual void zoom(bool zoomIn) = 0;
 	virtual void resetZoom() = 0;
+	virtual void toggleLight() = 0;
 
 	void toggleDifferentView();
 	void resetCameraAngle(); //reset the camera angle to 0
@@ -55,6 +56,8 @@ protected:
 	GLfloat locX, locY, locZ; //camera location
 	GLfloat yaw, pitch, roll; //camera rotation
 	
+	bool isLightOn;
+
 	void initialize(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
 };
 

@@ -20,6 +20,7 @@ public:
 	void modifyYaw(bool negateTheValue, int x, int y);
 	void zoom(bool zoomIn);
 	void resetZoom();
+	void toggleLight() { return; }
 
 private:
 	GLfloat currentRadius; //radius from lookat point

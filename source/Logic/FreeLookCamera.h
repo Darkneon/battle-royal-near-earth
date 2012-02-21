@@ -20,8 +20,9 @@ public:
 	void moveCameraForwards(bool negateTheValue);
 	void moveCameraStrafe(bool negateTheValue);
 	void modifyYaw(bool negateTheValue, int x, int y);
-	void zoom(bool zoomIn){ return; } //<============================== DO THESE LATER
+	void zoom(bool zoomIn){ return; }
 	void resetZoom(){ return; }
+	void toggleLight() { return; }
 
 private:
 	GLfloat mouseSensitivity;

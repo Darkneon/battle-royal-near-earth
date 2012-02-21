@@ -22,6 +22,12 @@ void PlayerInput::keyOperations(int keyModifier)
 		player->getCurrentCamera()->resetZoom();
 	}
 
+	if (keyStates[108]) //l
+	{
+		player->getCurrentCamera()->toggleLight();
+		glutPostRedisplay();
+	}
+
 	if (keyStates[27]) //ESC
 		exit(0);
 }

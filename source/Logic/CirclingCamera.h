@@ -5,7 +5,7 @@
 
 #include "Camera.h"
 
-static const GLfloat DEFAULT_CIRCLING_RADIUS = 15.0f;
+static const GLfloat DEFAULT_CIRCLING_RADIUS = 20.0f;
 static const GLfloat CENTER_OF_MAP = 25.0f;
 
 class CirclingCamera : public Camera
@@ -20,8 +20,10 @@ public:
 	void modifyYaw(bool negateTheValue, int x, int y) { return; }
 	void zoom(bool zoomIn) { return; }
 	void resetZoom() { return; }
+	void toggleLight();
 
 private:
+	bool hasLight;
 	GLfloat currentRadius; //radius from lookat point
 	void calculate45DegreesForLocY(); //45 degrees for cams (useful for more than one class)
 };
