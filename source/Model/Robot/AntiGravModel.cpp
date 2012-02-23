@@ -19,6 +19,7 @@ AntiGravModel::AntiGravModel(void)
 
 void AntiGravModel::render(){
 	GLUquadricObj *quadratic = gluNewQuadric();
+	gluQuadricNormals(quadratic, GLU_SMOOTH);
 
 	glPushMatrix();
         glTranslatef(0.125f, 0.2f, 0.125f);
@@ -47,11 +48,13 @@ void AntiGravModel::render(){
 		glPushMatrix();
 			glColor3f(0.4f, 0.4f, 0.4f);
 			glBegin(GL_QUADS);
+				glNormal3f(0.0f, 0.0f, -1.0f);
 				glVertex3f(0.2f, 0.0f, 0.2f);
 				glVertex3f(0.2f, 0.2f, 0.2f);
 				glVertex3f(1.3f, 0.2f, 0.2f);
 				glVertex3f(1.3f, 0.0f, 0.2f);
 
+				glNormal3f(0.0f, 0.0f, 1.0f);
 				glVertex3f(0.2f, 0.0f, 1.3f);
 				glVertex3f(0.2f, 0.2f, 1.3f);
 				glVertex3f(1.3f, 0.2f, 1.3f);
@@ -59,17 +62,21 @@ void AntiGravModel::render(){
 			glEnd();
 	
 			glBegin(GL_QUAD_STRIP);
+				glNormal3f(-1.0f, 0.0f, 0.0f);
 				glVertex3f(0.2f, 0.0f, 0.2f);
 				glVertex3f(0.2f, 0.0f, 1.3f);
 				glVertex3f(0.2f, 0.2f, 0.2f);
 				glVertex3f(0.2f, 0.2f, 1.3f);
 
+				glNormal3f(0.0f, 1.0f, 0.0f);
 				glVertex3f(1.3f, 0.2f, 0.2f);
 				glVertex3f(1.3f, 0.2f, 1.3f);
 
+				glNormal3f(1.0f, 0.0f, 0.0f);
 				glVertex3f(1.3f, 0.0f, 0.2f);
 				glVertex3f(1.3f, 0.0f, 1.3f);
 
+				glNormal3f(0.0f, -1.0f, 0.0f);
 				glVertex3f(0.2f, 0.0f, 0.2f);
 				glVertex3f(0.2f, 0.0f, 1.3f);
 			glEnd();
@@ -125,30 +132,32 @@ void AntiGravModel::render(){
 void AntiGravModel::drawMachineCube(){
 	glPushMatrix();
 		glPushMatrix();
-			glColor3f(0, 0, 10);
-			//first side
-			drawRectangle();
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glBegin(GL_QUAD_STRIP);
+				glNormal3f(0.0f, 0.0f, -1.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.3f, 0.0f);
+				glVertex3f(0.5f, 0.0f, 0.0f);
+				glVertex3f(0.5f, 0.3f, 0.0f);
 
-			//second side
-			glTranslatef(0.0f, 0.0f, 0.4f);
-			drawRectangle();
-			glTranslatef(0.0f, 0.0f, -0.4f);
+				glNormal3f(1.0f, 0.0f, 0.0f);
+				glVertex3f(0.5f, 0.0f, 0.5f);
+				glVertex3f(0.5f, 0.3f, 0.5f);
 
-			//third side
-			glRotated(-90,0.0,1.0,0.0);
-			drawRectangle();
-			glRotated(90,0.0,1.0,0.0);
+				glNormal3f(0.0f, 0.0f, 1.0f);
+				glVertex3f(0.0f, 0.0f, 0.5f);
+				glVertex3f(0.0f, 0.3f, 0.5f);
 
-			//fourth side
-			glRotated(-90,0.0,1.0,0.0);
-			glTranslatef(0.0f,0.0f,-0.5f);
-			drawRectangle();
-			glTranslatef(0.0f,0.0f,0.5f);
-			glRotated(90,0.0,1.0,0.0);
+				glNormal3f(-1.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.0f, 0.0f);
+				glVertex3f(0.0f, 0.3f, 0.0f);
+
+			glEnd();
 		glPopMatrix();
 
 		//top
 		glBegin(GL_QUADS);
+			glNormal3f(0.0f, 1.0f, 0.0f);
 			glColor3f(0.0f, 0.0f, 1.0f);
 			glVertex3f(0.0f, 0.3f, 0.0f);
 			glVertex3f(0.5f, 0.3f, 0.0f);
@@ -158,44 +167,13 @@ void AntiGravModel::drawMachineCube(){
 
 		//bottom
 		glBegin(GL_QUADS);
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.1f, 0.05f, 0.0f);
-			glVertex3f(0.4f, 0.05f, 0.0f);
-			glVertex3f(0.4f, 0.05f, 0.4f);
-			glVertex3f(0.1f, 0.05f, 0.4f);
-		glEnd();
-
-	glPopMatrix();
-}
-
-void AntiGravModel::drawRectangle(){
-	glPushMatrix();
-		glBegin(GL_QUADS);
+			glNormal3f(0.0f, -1.0f, 0.0f);
+			glColor3f(0.0f, 0.0f, 1.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.3f, 0.0f);
-			glVertex3f(0.5f, 0.3f, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0.5f);
+			glVertex3f(0.5f, 0.0f, 0.5f);
 			glVertex3f(0.5f, 0.0f, 0.0f);
-
-			glVertex3f(0.0f, 0.0f, 0.1f);
-			glVertex3f(0.0f, 0.3f, 0.1f);
-			glVertex3f(0.5f, 0.3f, 0.1f);
-			glVertex3f(0.5f, 0.0f, 0.1f);
 		glEnd();
-	
-		glBegin(GL_QUAD_STRIP);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.1f);
-			glVertex3f(0.0f, 0.3f, 0.0f);
-			glVertex3f(0.0f, 0.3f, 0.1f);
 
-			glVertex3f(0.5f, 0.3f, 0.0f);
-			glVertex3f(0.5f, 0.3f, 0.1f);
-
-			glVertex3f(0.5f, 0.0f, 0.0f);
-			glVertex3f(0.5f, 0.0f, 0.1f);
-
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.1f);
-		glEnd();
 	glPopMatrix();
 }

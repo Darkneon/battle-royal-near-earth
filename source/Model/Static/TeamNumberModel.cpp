@@ -19,6 +19,7 @@ void TeamNumberModel::render() {
         glTranslatef(0.25f, 0.01f, -0.25f);
 		glScalef(0.5, 1, 0.5);
         glBegin(GL_TRIANGLES);
+			glNormal3f(0.0f,1.0f,0.0);
             //bottom
             glVertex3f(0, 0, 0);
             glVertex3f(1, 0, 0);
