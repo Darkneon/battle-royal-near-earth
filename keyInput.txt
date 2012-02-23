@@ -1,0 +1,17 @@
+Help Menu
+f1 --------------- toggle wireframe/smooth shading
+f2 --------------- mouse look (freelook)
+f3 --------------- commander camera
+z ---------------- toggle bird view (disabled for now)
+arrows ----------- move camera around
+page up/down ----- rotate
+end -------------- reset rotation angle to 0
+= ---------------- zoom in
+- ---------------- zoom out
+0 ---------------- reset zoom
+a ---------------- toggle ambient light
+The following keys interchange robot parts.
+t ---------------- changes robot's head
+y ---------------- changes robot's body
+u ---------------- chanegs robot's legs
+** The robot can be found near the bottom of the map around where the base and factory are**

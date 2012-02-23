@@ -15,6 +15,8 @@
 
 #include "AntTweakHelper.h"
 #include <cstring>
+#include <fstream>
+#include <string>
 
 // PI
 #define GL_PI 3.14159f
@@ -60,11 +62,17 @@ LightPost *light3 = new LightPost(50.0f, 5.0f, 50.0f, -10.0f, -15.0f, -10.0f);
 LightPost *light4 = new LightPost(0.0f, 5.0f, 50.0f, 10.0f, -15.0f, -10.0f);
 
 bool ambientLight = true;
+bool showHelpWindow = false;
 
+//second window for help menu
+int mainWindow = 0;
+int helpWindow = 0;
 
 void renderLights()
 {		
 		//ambient light
+
+		
 		GLfloat light0_ambient[ ] = {0.4f, 0.4f, 0.4f, 1.0f};
 		GLfloat light0_position[ ] = {0.0f, 0.0f, 0.0f, 1.0f};
 		glLightfv(GL_LIGHT7, GL_POSITION, light0_position);
@@ -75,6 +83,8 @@ void renderLights()
 		}else{
 			glDisable(GL_LIGHT7);
 		}
+		//GLfloat ambient_light[ ] = {0.2, 0.2, 0.2, 1.0};
+		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
 
         glEnable(GL_LIGHTING);
         glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
@@ -147,10 +157,15 @@ void renderLights()
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
+	glutSetWindow(mainWindow);
 	width = newWidth;
 	height = newHeight;
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	TwWindowSize(width, height);
+
+	glutSetWindow(helpWindow);
+	glutPositionWindow(10,10);
+	glutReshapeWindow(width-5,height-5);
 }
 
 void toggleFullScreen()
@@ -182,6 +197,7 @@ void toggleFullScreen()
 
 void render()
 {
+	glutSetWindow(mainWindow);
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
@@ -210,6 +226,55 @@ void render()
 
 	glutSwapBuffers();
   glutPostRedisplay();
+}
+
+
+void rasterText(int x, int y, void *font, char *c, int cWidth){
+	glPushMatrix();
+		glLoadIdentity();
+		glRasterPos2i(x,y);
+		for (int i=0; i<cWidth; i++){
+			glutBitmapCharacter(font, c[i]);
+		}
+	glPopMatrix();
+}
+
+void help_display(){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+		glLoadIdentity();
+		//creating ortho view since text is only 2D
+		glOrtho(0, width-5, 0, height-5, 0.0, 0.1);
+		glMatrixMode(GL_MODELVIEW);
+
+		int lineSpace = 20;
+		int lineHeight = height-25;
+		
+		ifstream openfile;
+		openfile.open("../keyInput.txt", ios::in);
+		if (openfile.is_open()) {
+			string s;
+			getline(openfile, s);
+			char *title = (char*)s.c_str();
+			rasterText(width/2-35,lineHeight,GLUT_BITMAP_HELVETICA_18, title,s.size());
+			lineHeight -= lineSpace;
+
+			while(!openfile.eof())
+			{
+				getline(openfile, s);
+				char *readLine = (char*)s.c_str();
+				lineHeight -= lineSpace;
+				rasterText(10,lineHeight,GLUT_BITMAP_HELVETICA_12, readLine,s.size());
+			}
+			openfile.close();
+		}
+
+		glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+     
+    glutSwapBuffers();
 }
 
 
@@ -281,11 +346,24 @@ void windowKeyOps()
 		glutPostRedisplay();
     }
 
-	if (keyStates[96]) //b
+	if (keyStates[98]) //b
 		isDebugMode = !isDebugMode;
 
-	if(keyStates[97] || keyStates[65]){
+	if(keyStates[97] || keyStates[65]){ //a
 		ambientLight = !ambientLight;
+	}
+
+	if(keyStates[72] || keyStates[104]){//h
+		showHelpWindow = !showHelpWindow;
+		if(showHelpWindow){
+			glutSetWindow(helpWindow); 
+			glutShowWindow();
+			glutSetWindow(mainWindow);
+		}else{
+			glutSetWindow(helpWindow); 
+			glutHideWindow();
+			glutSetWindow(mainWindow);
+		}
 	}
 
 }
@@ -359,7 +437,7 @@ int main (int argc, char **argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
-	glutCreateWindow("Battle Royale Near Earth");
+	mainWindow = glutCreateWindow("Battle Royale Near Earth");
        
 	//callbacks	
 	glutReshapeFunc(reshapeMainWindow);
@@ -377,8 +455,18 @@ int main (int argc, char **argv)
 	//mouse motion
 	//glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
-	
 	init();
+
+	//helpWindow
+	helpWindow = glutCreateSubWindow(mainWindow, 10,10,width-5,height-5);
+	glutDisplayFunc(help_display);
+	init();
+
+	//hiding the subwindow for now
+	glutSetWindow(helpWindow); 
+	glutHideWindow();
+	glutSetWindow(mainWindow);
+
 	glutMainLoop();
 	return 0;
 }

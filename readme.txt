@@ -8,7 +8,7 @@ This version works on windows, mac and linux.
 
 Key bindings:
 
-f1 --------------- toggle wireframe
+f1 --------------- toggle wireframe/smooth shading
 f2 --------------- mouse look (freelook)
 f3 --------------- commander camera
 z --------------- toggle bird view (disabled for now)
@@ -18,6 +18,7 @@ end ------------- reset rotation angle to 0
 = --------------- zoom in
 - --------------- zoom out
 0 --------------- reset zoom
+a --------------- toggle ambient light
 
 The following keys interchange robot parts.
 ** The robot can be found near the bottom of the map around where the base and factory are**
