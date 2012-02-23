@@ -12,7 +12,6 @@ public:
 	void render();
 private:
 	void drawMachineCube();
-	void drawRectangle();
 };
 
 #endif	/* ANTIGRAVMODEL_H */

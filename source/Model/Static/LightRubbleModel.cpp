@@ -61,6 +61,7 @@ void LightRubbleModel::drawRock() {
 	glPushMatrix();
 		glScalef(0.15f,0.15f,0.2f);
         GLUquadric *quadratic=gluNewQuadric();
+		gluQuadricNormals(quadratic, GLU_SMOOTH);
 		gluSphere(quadratic,0.5,10,10);
 	glPopMatrix();
 }
@@ -69,6 +70,7 @@ void LightRubbleModel::drawBRock() {
 	glPushMatrix();
 		glScalef(0.25f,0.2f,0.3f);
         GLUquadric *quadratic=gluNewQuadric();
+		gluQuadricNormals(quadratic, GLU_SMOOTH);
 		gluSphere(quadratic,0.5,10,10);
 	glPopMatrix();
 }

@@ -35,6 +35,8 @@ void TracksModel::render(){
 
 void TracksModel::drawTrack(){
 	GLUquadricObj *quadratic = gluNewQuadric();
+	gluQuadricNormals(quadratic, GLU_SMOOTH);
+
 	glPushMatrix();
 		//first track cylinder
 		glColor3f(128, 128, 128);
@@ -77,7 +79,7 @@ void TracksModel::drawTrack(){
 			glTranslatef(-0.5,-0.5,0);
 
 			glBegin(GL_QUADS);
-				glNormal3f(-1,0,0);
+				glNormal3f(0,0,-1);
 				glVertex3f(0.5, 0, 0);
 				glVertex3f(0.5, 1, 0);
 				glVertex3f(1.5, 1, 0);
