@@ -21,6 +21,8 @@
         <itemPath>source/Logic/Base.h</itemPath>
         <itemPath>source/Logic/Camera.cpp</itemPath>
         <itemPath>source/Logic/Camera.h</itemPath>
+        <itemPath>source/Logic/CirclingCamera.cpp</itemPath>
+        <itemPath>source/Logic/CirclingCamera.h</itemPath>
         <itemPath>source/Logic/CommanderCamera.cpp</itemPath>
         <itemPath>source/Logic/CommanderCamera.h</itemPath>
         <itemPath>source/Logic/Factory.cpp</itemPath>

@@ -57,6 +57,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
 	${OBJECTDIR}/source/Model/Robot/PhaserModel.o \
+	${OBJECTDIR}/source/Logic/CirclingCamera.o \
 	${OBJECTDIR}/source/Model/Model.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
 	${OBJECTDIR}/source/Logic/PlayerInput.o \
@@ -213,6 +214,11 @@ ${OBJECTDIR}/source/Model/Robot/PhaserModel.o: source/Model/Robot/PhaserModel.cp
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/PhaserModel.o source/Model/Robot/PhaserModel.cpp
+
+${OBJECTDIR}/source/Logic/CirclingCamera.o: source/Logic/CirclingCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/CirclingCamera.o source/Logic/CirclingCamera.cpp
 
 ${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model
