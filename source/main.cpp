@@ -290,12 +290,10 @@ void toggleDifferentView(){
 	//normal settings
 	glShadeModel(GL_FLAT);
 	glEnable(GL_DEPTH_TEST);
-	glPolygonMode(GL_BACK, GL_FILL);
 	glPolygonMode(GL_FRONT, GL_FILL);
 
 	if(viewStates==1){ //wireFrame
 		glDisable(GL_DEPTH_TEST);
-		glPolygonMode(GL_BACK, GL_LINE);
 		glPolygonMode(GL_FRONT, GL_LINE);
 	}
 
@@ -376,8 +374,6 @@ void windowKeyOps()
 	}
 }
 
-
-
 void keyboardKeysUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
@@ -418,6 +414,9 @@ void init()
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
 	isInFullScreenMode = false;
+
+	glCullFace( GL_BACK );
+	glEnable( GL_CULL_FACE );
 	
 	for (int i = 0; i < 256; i++)
 	{
@@ -430,14 +429,16 @@ void init()
   initAntTweak();
 }
 
-
+//mouse movement functions, primarily used to modify the view
 void passiveMotionFunc(int x, int y)
 {
 	game->playerInput1->mousePassiveOperations(x, y);
 }
 
-//void motionFunc(int x, int y){}
-
+void motionFunc(int x, int y)
+{
+	game->playerInput1->mousePassiveOperations(x, y);
+}
 
 int main (int argc, char **argv)
 {
@@ -455,20 +456,18 @@ int main (int argc, char **argv)
 	glutKeyboardUpFunc(keyboardKeysUp);
 	glutDisplayFunc(render);
 
-	
 	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
 	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
     
 
 	//mouse motion
-	//glutMotionFunc(motionFunc);
+	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
 	init();
 
 	//helpWindow
 	helpWindow = glutCreateSubWindow(mainWindow, 0,0,width,height);
 	glutDisplayFunc(help_display);
-	//init();
 
 	//hiding the subwindow for now
 	glutSetWindow(helpWindow); 
