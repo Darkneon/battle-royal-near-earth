@@ -28,8 +28,7 @@ void PlayerInput::keyOperations(int keyModifier)
 		glutPostRedisplay();
 	}
 
-	if (keyStates[27]) //ESC
-		exit(0);
+	
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)

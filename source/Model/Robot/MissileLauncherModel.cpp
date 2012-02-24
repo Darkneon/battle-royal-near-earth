@@ -37,7 +37,7 @@ void MissileLauncherModel::render() {
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
 
 		glPushMatrix();
-			glColor3f(1.0f, 4.0f, 0.0f);
+			glColor3f(1.0f, 1.0f, 0.0f);
 			glScalef(1.1f, 0.9f, 0.8f);
 			GeoHelper::drawRectangle();
 		glPopMatrix();

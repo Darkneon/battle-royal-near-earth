@@ -164,8 +164,8 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	TwWindowSize(width, height);
 
 	glutSetWindow(helpWindow);
-	glutPositionWindow(10,10);
-	glutReshapeWindow(width-5,height-5);
+	glutPositionWindow(0,0);
+	glutReshapeWindow(width,height);
 }
 
 void toggleFullScreen()
@@ -349,11 +349,11 @@ void windowKeyOps()
 	if (keyStates[98]) //b
 		isDebugMode = !isDebugMode;
 
-	if(keyStates[97] || keyStates[65]){ //a
+	if(keyStates[97]){ //a
 		ambientLight = !ambientLight;
 	}
 
-	if(keyStates[72] || keyStates[104]){//h
+	if(keyStates[104]){//h
 		showHelpWindow = !showHelpWindow;
 		if(showHelpWindow){
 			glutSetWindow(helpWindow); 
@@ -366,6 +366,14 @@ void windowKeyOps()
 		}
 	}
 
+	if (keyStates[27]) //ESC
+	{
+		if (game != NULL)
+		{
+			delete game;
+		}
+		exit(0);
+	}
 }
 
 
@@ -458,9 +466,9 @@ int main (int argc, char **argv)
 	init();
 
 	//helpWindow
-	helpWindow = glutCreateSubWindow(mainWindow, 10,10,width-5,height-5);
+	helpWindow = glutCreateSubWindow(mainWindow, 0,0,width,height);
 	glutDisplayFunc(help_display);
-	init();
+	//init();
 
 	//hiding the subwindow for now
 	glutSetWindow(helpWindow); 
