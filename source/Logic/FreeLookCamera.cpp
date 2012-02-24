@@ -23,6 +23,10 @@ FreeLookCamera::FreeLookCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNe
 
 	for (int i = 0; i < 3; i++)
 		rotationVector[i] = 0.0f;
+
+	upVector[0] = 0.0f;
+	upVector[1] = 1.0f;
+	upVector[2] = 0.0f;
 }
 
 void FreeLookCamera::view()
@@ -33,7 +37,7 @@ void FreeLookCamera::view()
 
 	gluLookAt(locX, locY, locZ,
 		locX + rotationVector[0], locY - rotationVector[1], locZ + rotationVector[2],  
-		0.0f, 1.0f, 0.0f);
+		upVector[0], upVector[1], upVector[2]);
 }
 
 void FreeLookCamera::moveCameraForwards(bool negateTheValue)
@@ -85,5 +89,12 @@ void FreeLookCamera::modifyYaw(bool negateTheValue, int x, int y)
 		rotationVector[0] = sin(yaw * DegreesToRadians) * RadiansToDegrees;
 		rotationVector[1] = pitch;//sin(pitch * DegreesToRadians) * RadiansToDegrees;
 		rotationVector[2] = -cos(yaw * DegreesToRadians) * RadiansToDegrees;
+
+		
 	}
+}
+
+void FreeLookCamera::roll(bool negateTheValue)
+{
+
 }

@@ -28,7 +28,14 @@ void PlayerInput::keyOperations(int keyModifier)
 		glutPostRedisplay();
 	}
 
-	
+	if (keyStates[91]) // [
+	{
+		
+	}
+	else if (keyStates[93]) // ]
+	{
+		
+	}
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)

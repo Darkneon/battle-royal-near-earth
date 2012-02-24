@@ -24,10 +24,14 @@ public:
 	void resetZoom(){ return; }
 	void toggleLight() { return; }
 
+	//specific to freelook (roll rotation)
+	void roll(bool negateTheValue);
+
 private:
 	GLfloat mouseSensitivity;
 	GLfloat movementSensitivity;
 	GLfloat rotationVector[3];
+	GLfloat upVector[3];
 };
 
 #endif
