@@ -25,6 +25,9 @@ public:
     static void drawAxis(GLfloat length);
 
 	static GLfloat* findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3);
+    static GLfloat* findNormal3f(GLfloat u1, GLfloat u2, GLfloat u3,
+                                 GLfloat v1, GLfloat v2, GLfloat v3,
+                                 GLfloat w1, GLfloat w2, GLfloat w3);
 };
 
 #endif

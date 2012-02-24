@@ -310,12 +310,22 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 GLfloat* GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3)
 {
 	GLfloat usedVector1[3] = { vector1[0] - vector3[0], vector1[1] - vector3[1], vector1[2] - vector3[2] };
-	GLfloat usedVector2[3] = { vector2[0] - vector3[0], vector2[1] - vector3[1], vector1[2] - vector3[2] };
+	GLfloat usedVector2[3] = { vector2[0] - vector3[0], vector2[1] - vector3[1], vector2[2] - vector3[2] };
 
 	GLfloat* answerVector = new GLfloat[3];
 	answerVector[0] = usedVector1[1] * usedVector2[2] - usedVector2[1] * usedVector1[2];
 	answerVector[1] = -(usedVector1[0] * usedVector2[2] - usedVector2[0] * usedVector1[2]);
-	answerVector[2] = usedVector1[0] * usedVector2[1] - usedVector2[0] * usedVector1[1];
-
+	answerVector[2] = usedVector1[0] * usedVector2[1] - usedVector2[0] * usedVector1[1];       
+    
 	return answerVector;
 }
+
+ GLfloat* GeoHelper::findNormal3f(GLfloat u1, GLfloat u2, GLfloat u3,
+                                  GLfloat v1, GLfloat v2, GLfloat v3,
+                                  GLfloat w1, GLfloat w2, GLfloat w3) {
+     GLfloat u[3] = {u1, u2, u3};
+     GLfloat v[3] = {v1, v2, v3};
+     GLfloat w[3] = {w1, w2, w3};
+     
+     return findNormal3f(u, v, w);     
+ }

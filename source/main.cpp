@@ -43,7 +43,7 @@ bool keyStates[256];
 bool funcKeyStates[256];
 int keyModifier = 0;
 
-static bool isDebugMode = false;
+static bool isDebugMode = true;
 
 int viewStates = 0; //states of the camera views
 

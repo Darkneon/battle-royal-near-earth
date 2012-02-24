@@ -14,6 +14,7 @@
 
 #include <cstdlib>
 #include "FenceModel.h"
+#include "Helper/GeoHelper.h"
 
 FenceModel::FenceModel() {
 }
@@ -43,62 +44,89 @@ void FenceModel::render() {
 
 void FenceModel::drawBottom() {
     glBegin(GL_TRIANGLES);
-        glVertex3f(0, 0 ,0);
-        glVertex3f(1, 0 ,0);
-        glVertex3f(0, 0 ,1);
+        
+        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f) );   
+        
+        glVertex3f(0.0f, 0.0f ,0.0f);        
+        glVertex3f(0.0f, 0.0f ,1.0f);
+        glVertex3f(1.0f, 0.0f ,0.0f);
     
-        glVertex3f(0, 0 ,1);
-        glVertex3f(1, 0 ,0);
-        glVertex3f(1, 0 ,1);
+        glVertex3f(0.0f, 0.0f ,1.0f);
+        glVertex3f(1.0f, 0.0f ,1.0f);
+        glVertex3f(1.0f, 0.0f ,0.0f);        
     glEnd();
 }
 
 void FenceModel::drawSection() {
-    glBegin(GL_TRIANGLES);
-        //top
+    glBegin(GL_TRIANGLES);    
+        //bottom
+        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f) );
+            
         glVertex3f(0, 0 ,0);
-        glVertex3f(1, 0 ,0);
-        glVertex3f(0, 0 ,1);
-    
         glVertex3f(0, 0 ,1);
         glVertex3f(1, 0 ,0);
+            
+        glVertex3f(0, 0 ,1);
         glVertex3f(1, 0 ,1);
+        glVertex3f(1, 0 ,0);        
+        
+        //top
+        glNormal3fv( GeoHelper::findNormal3f(0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f) );
+        
+        glVertex3f(0, 1 ,0);
+        glVertex3f(0, 1 ,1);
+        glVertex3f(1, 1 ,0);
+       
+        glVertex3f(0, 1 ,1);
+        glVertex3f(1, 1 ,1);
+        glVertex3f(1, 1 ,0); 
         
         //side 1        
+        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f) );
+        
         glVertex3f(0, 0 ,0);
-        glVertex3f(0, 1 ,0);
         glVertex3f(0, 0 ,1);
+        glVertex3f(0, 1 ,0);
+        
     
         glVertex3f(0, 1 ,0);
         glVertex3f(0, 0 ,1);
         glVertex3f(0, 1 ,1);   
         
         //side 2
-        glVertex3f(1, 0 ,0);
-        glVertex3f(1, 1 ,0);
-        glVertex3f(1, 0 ,1);
-    
-        glVertex3f(1, 1 ,0);
-        glVertex3f(1, 0 ,1);
-        glVertex3f(1, 1 ,1);    
+        glNormal3fv( GeoHelper::findNormal3f(1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f) );
         
+        glVertex3f(1, 0 ,0);
+        glVertex3f(1, 1 ,0);
+        glVertex3f(1, 0 ,1);
+                    
+        glVertex3f(1, 0 ,1);
+        glVertex3f(1, 1 ,0);
+        glVertex3f(1, 1 ,1);        
+            
         //front
-        glVertex3f(0, 0 ,0);
-        glVertex3f(1, 0 ,0);
-        glVertex3f(0, 1 ,0);
-    
-        glVertex3f(0, 1 ,0);
-        glVertex3f(1, 0 ,0);
-        glVertex3f(1, 1 ,0);    
-
-        //back
+        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f) );
+        
         glVertex3f(0, 0 ,1);
         glVertex3f(1, 0 ,1);
         glVertex3f(0, 1 ,1);
     
         glVertex3f(0, 1 ,1);
         glVertex3f(1, 0 ,1);
-        glVertex3f(1, 1 ,1);          
+        glVertex3f(1, 1 ,1);    
+
+        //back
+        //ToDo
+//        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f) );
+        glNormal3f(0.0f, 0.0f, 1.0f);
+        
+        glVertex3f(0, 0 ,0);        
+        glVertex3f(0, 1 ,0);
+        glVertex3f(1, 0 ,0);
+    
+        glVertex3f(1, 0 ,0);
+        glVertex3f(0, 1 ,0);     
+        glVertex3f(1, 1 ,0);          
     glEnd();    
 }
 
