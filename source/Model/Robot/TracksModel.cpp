@@ -39,28 +39,28 @@ void TracksModel::drawTrack(){
 
 	glPushMatrix();
 		//first track cylinder
-		glColor3f(128, 128, 128);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glPushMatrix();
-			glTranslatef(0.5,0.5,0);
+			glTranslatef(0.5f, 0.5f, 0.0f);
 			gluCylinder(quadratic, 0.5, 0.5, 0.5, 15, 15);
-			glTranslatef(-0.5,-0.5,0);
+			glTranslatef(-0.5f, -0.5f, 0.0f);
 		glPopMatrix();
 
 		//second track cylinder
 		glPushMatrix();
-			glTranslatef(1.5,0.5,0);
+			glTranslatef(1.5f, 0.5f, 0.0f);
 			gluCylinder(quadratic, 0.5, 0.5, 0.5, 15, 15);
-			glTranslatef(-1.5,-0.5,0);
+			glTranslatef(-1.5f, -0.5f, 0.0f);
 		glPopMatrix();
 
 		//rectangle
 		glPushMatrix();
 			glBegin(GL_QUADS);
-				glNormal3f(0,1,0);
-				glVertex3f(0.5, 1, 0.5);
-				glVertex3f(1.5, 1, 0.5);			
-				glVertex3f(1.5, 1, 0);
-				glVertex3f(0.5, 1, 0);
+				glNormal3f(0.0f, 1.0f, 0.0f);
+				glVertex3f(0.5f, 1.0f, 0.5f);
+				glVertex3f(1.5f, 1.0f, 0.5f);			
+				glVertex3f(1.5f, 1.0f, 0.0f);
+				glVertex3f(0.5f, 1.0f, 0.0f);
 
 				glNormal3f(0,-1,0);
 				glVertex3f(0.5, 0, 0.5);
@@ -71,7 +71,7 @@ void TracksModel::drawTrack(){
 			glEnd();
 		glPopMatrix();
 
-		glColor3f(0,0,50);
+		glColor3f(0.0f, 0.0f, 1.0f);
 		//circles and squares to finish model
 		glPushMatrix();
 			glTranslatef(0.5,0.5,0);
