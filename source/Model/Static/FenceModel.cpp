@@ -15,8 +15,11 @@
 #include <cstdlib>
 #include "FenceModel.h"
 #include "Helper/GeoHelper.h"
+#include "Material/MetalMaterial.h"
+#include "Material/RockMaterial.h"
 
 FenceModel::FenceModel() {
+    material = (Material*)(new RockMaterial());
 }
 
 void FenceModel::render() {

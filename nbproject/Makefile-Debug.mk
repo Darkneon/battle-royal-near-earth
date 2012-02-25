@@ -35,10 +35,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/Model/Material/Material.o \
 	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
+	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Helper/AntTweakHelper.o \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
 	${OBJECTDIR}/source/Logic/Base.o \
+	${OBJECTDIR}/source/Model/Material/RockMaterial.o \
 	${OBJECTDIR}/source/Logic/SpotLight.o \
 	${OBJECTDIR}/source/Logic/Player.o \
 	${OBJECTDIR}/source/Model/Robot/CannonModel.o \
@@ -49,16 +52,18 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
-	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
 	${OBJECTDIR}/source/Model/Light/LightPost.o \
-	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
+	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
+	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Player/AntennaModel.o \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
 	${OBJECTDIR}/source/Model/Robot/PhaserModel.o \
-	${OBJECTDIR}/source/Model/Model.o \
 	${OBJECTDIR}/source/Logic/CirclingCamera.o \
+	${OBJECTDIR}/source/Model/Material/OrganicMaterial.o \
+	${OBJECTDIR}/source/Model/Material/MetalMaterial.o \
+	${OBJECTDIR}/source/Model/Model.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
 	${OBJECTDIR}/source/Logic/PlayerInput.o \
 	${OBJECTDIR}/source/Model/Static/HillsModel.o \
@@ -107,10 +112,20 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
+${OBJECTDIR}/source/Model/Material/Material.o: source/Model/Material/Material.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/Material.o source/Model/Material/Material.cpp
+
 ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/MissileLauncherModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o source/Model/Robot/MissileLauncherModel.cpp
+
+${OBJECTDIR}/source/Model/Material/DefaultMaterial.o: source/Model/Material/DefaultMaterial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/DefaultMaterial.o source/Model/Material/DefaultMaterial.cpp
 
 ${OBJECTDIR}/source/Helper/AntTweakHelper.o: source/Helper/AntTweakHelper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Helper
@@ -126,6 +141,11 @@ ${OBJECTDIR}/source/Logic/Base.o: source/Logic/Base.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Base.o source/Logic/Base.cpp
+
+${OBJECTDIR}/source/Model/Material/RockMaterial.o: source/Model/Material/RockMaterial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/RockMaterial.o source/Model/Material/RockMaterial.cpp
 
 ${OBJECTDIR}/source/Logic/SpotLight.o: source/Logic/SpotLight.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
@@ -177,25 +197,25 @@ ${OBJECTDIR}/source/Model/Helper/GeoHelper.o: source/Model/Helper/GeoHelper.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/GeoHelper.o source/Model/Helper/GeoHelper.cpp
 
-${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
-
 ${OBJECTDIR}/source/Model/Light/LightPost.o: source/Model/Light/LightPost.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Light
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Light/LightPost.o source/Model/Light/LightPost.cpp
 
-${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
-
 ${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
+
+${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
+
+${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
 
 ${OBJECTDIR}/source/Model/Player/AntennaModel.o: source/Model/Player/AntennaModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
@@ -217,15 +237,25 @@ ${OBJECTDIR}/source/Model/Robot/PhaserModel.o: source/Model/Robot/PhaserModel.cp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/PhaserModel.o source/Model/Robot/PhaserModel.cpp
 
-${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
-
 ${OBJECTDIR}/source/Logic/CirclingCamera.o: source/Logic/CirclingCamera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/CirclingCamera.o source/Logic/CirclingCamera.cpp
+
+${OBJECTDIR}/source/Model/Material/OrganicMaterial.o: source/Model/Material/OrganicMaterial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/OrganicMaterial.o source/Model/Material/OrganicMaterial.cpp
+
+${OBJECTDIR}/source/Model/Material/MetalMaterial.o: source/Model/Material/MetalMaterial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/MetalMaterial.o source/Model/Material/MetalMaterial.cpp
+
+${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
 
 ${OBJECTDIR}/source/Model/Static/MountainModel.o: source/Model/Static/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static

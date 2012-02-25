@@ -16,13 +16,16 @@
 #include "Robot/CannonModel.h"
 #include "Robot/NuclearModel.h"
 #include "Static/TeamNumberModel.h"
+#include "Material/MetalMaterial.h"
 
-CannonModel::CannonModel() {
+CannonModel::CannonModel() {    
     NuclearModel *model = new NuclearModel();
     setNextChild( (Model*)model );
-}
+    
+    material = (Material*)(new MetalMaterial());
+}    
 
-void CannonModel::render() {
+void CannonModel::render() {    
 	glPushMatrix();
 		glPushMatrix();
 			glTranslatef(0.5f ,0.1f,0.5f); //by Jeff

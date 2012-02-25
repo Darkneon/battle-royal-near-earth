@@ -93,8 +93,7 @@ LevelRenderer::LevelRenderer() {
 	models[15]->removeAllChildren();
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
-	map1();
-
+	map1();    
 } 
 
 LevelRenderer::~LevelRenderer() {
@@ -165,6 +164,9 @@ void LevelRenderer::map1(){
 
 	}
 
+    level[45][45] = 14;
+    level[46][46] = 3;
+    
 	/*level[25][5] = 4;
 	level[25][10] = 5;
 	level[25][15] = 6;
@@ -178,5 +180,5 @@ void LevelRenderer::map1(){
 	level[35][8] = 10;
 
 	level[40][10] = 2;
-	level[40][15] = 11;*/
+	*/
 }

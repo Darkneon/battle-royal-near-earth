@@ -54,7 +54,7 @@ Robot robot;
 AntTweakHelper antTweakHelper;
 
 //Initialize light objects
-SpotLight *spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
+SpotLight *spotLight = new SpotLight(0.9f, 0.9f, 0.9f, 1.0f);
 //LightPost *light0 = new LightPost(locX, 5.0f, locZ-RADIUS, 15.0f, -10.0f, 10.0f);
 LightPost *light1 = new LightPost(0.0f, 5.0f, 0.0f, 10.0f, -15.0f, 10.0f);
 LightPost *light2 = new LightPost(50.0f, 5.0f, 0.0f, -10.0f, -15.0f, 10.0f);
@@ -102,7 +102,7 @@ void renderLights()
         glLightfv(GL_LIGHT1, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT1, GL_POSITION, light1->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0);
+        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 1);
         glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1->getDirectionArray());
         //New light... Light2
         glLightfv(GL_LIGHT2, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
@@ -110,7 +110,7 @@ void renderLights()
         glLightfv(GL_LIGHT2, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT2, GL_POSITION, light2->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 0);
+        glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 1);
         glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, light2->getDirectionArray());
         //New light... Light3
         glLightfv(GL_LIGHT3, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
@@ -118,7 +118,7 @@ void renderLights()
         glLightfv(GL_LIGHT3, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT3, GL_POSITION, light3->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 1);
+        glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 50);
         glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, light3->getDirectionArray());
         //New light... Light4
         glLightfv(GL_LIGHT4, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
@@ -126,7 +126,7 @@ void renderLights()
         glLightfv(GL_LIGHT4, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT4, GL_POSITION, light4->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 0);
+        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 1);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light4->getDirectionArray());
         //TURN ON LIGHTING
         //glEnable(GL_LIGHT0);
@@ -427,6 +427,7 @@ void init()
 	glutSetCursor(GLUT_CURSOR_NONE);
 
   initAntTweak();
+  glEnable(GL_NORMALIZE);
 }
 
 //mouse movement functions, primarily used to modify the view

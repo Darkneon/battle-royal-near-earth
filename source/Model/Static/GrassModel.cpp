@@ -7,10 +7,13 @@
 
 #include "GrassModel.h"
 #include "TeamNumberModel.h"
+#include "Material/OrganicMaterial.h"
 
 GrassModel::GrassModel() {
     TeamNumberModel* child = new TeamNumberModel();
     setNextChild( (Model*)child );
+    
+    material = (Material*)(new OrganicMaterial());
 }
 
 void GrassModel::render() {

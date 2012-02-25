@@ -19,14 +19,22 @@
 #include <vector>
 
 #include "Helper/GeoHelper.h"
+#include "Material/DefaultMaterial.h"
+
 using namespace std;
 
 class Model {
 public:
     Model() {
-        parent = NULL;
+        parent   = NULL;
+        material = (Material*)(new DefaultMaterial());        
     }
     
+    Model(Material *m) {   
+        parent   = NULL;
+        material = m;
+    }
+       
     virtual ~Model();
 
     virtual void render() = 0;
@@ -64,6 +72,9 @@ public:
     
 	void removeAllChildren();
 
+protected:
+    Material *material;
+    
 private:
     Model *parent;
     vector<Model *> children;

@@ -4,9 +4,18 @@
 
 Model::~Model() {
    removeAllChildren();
+   
+   if (material != NULL) {
+       delete material;
+       material = NULL;
+   }
 }
 
 void Model::draw() {
+    if (material != NULL) {
+        material->apply();
+    }
+    
     render();
 
 	//keep drawing until all the children are done

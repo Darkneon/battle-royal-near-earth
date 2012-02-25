@@ -7,12 +7,15 @@
 
 #include "Robot/TracksModel.h"
 #include "Robot/PhaserModel.h"
+//#include "Material/MetalMaterial.h"
 
-TracksModel::TracksModel(void)
+TracksModel::TracksModel()
 {
     PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
 	teamNumber = new TeamNumberModel();
+    
+    //material = (Material*)(new MetalMaterial());   
 }
 
 void TracksModel::render(){

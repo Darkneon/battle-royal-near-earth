@@ -1,4 +1,5 @@
 #include "AntTweakHelper.h"
+#include "Robot/TracksModel.h"
 
 AntTweakHelper::AntTweakHelper() {
     TwInit(TW_OPENGL, NULL);

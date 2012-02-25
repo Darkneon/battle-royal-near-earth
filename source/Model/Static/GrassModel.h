@@ -10,7 +10,7 @@
 
 #include "Model.h"
 
-class GrassModel : Model {
+class GrassModel : public Model {
 public:
     GrassModel();
     void render();

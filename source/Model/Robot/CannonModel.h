@@ -10,11 +10,11 @@
 
 #include "Model.h"
 
-class CannonModel : Model {
+class CannonModel : public Model {
 public:
     CannonModel();
 private:
-	void render();
+	void render();    
 };
 
 #endif
