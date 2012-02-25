@@ -32,5 +32,9 @@ Installation
 ------------
 
 OSX:
-cd includei/TweakAnt/src/
+cd include/TweakAnt/src/
 make -f Makefile.osx
+
+Linux:
+cd include/TweakAnt/src/
+make
