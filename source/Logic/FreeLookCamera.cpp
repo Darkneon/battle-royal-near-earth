@@ -86,7 +86,7 @@ void FreeLookCamera::modifyYaw(bool negateTheValue, int x, int y)
 			pitch = MIN_PITCH;
 
 		directionVector[0] = cos(yaw);
-		directionVector[1] = -pitch;
+		directionVector[1] = -sin(pitch);
 		directionVector[2] = sin(yaw);
 	}
 }

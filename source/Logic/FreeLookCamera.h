@@ -4,7 +4,7 @@
 #define FREELOOK_CAMERA_H
 
 #include "Camera.h"
-static const GLfloat MAX_PITCH = 180.0f;
+static const GLfloat MAX_PITCH = GL_PI / 2;
 static const GLfloat MIN_PITCH = -MAX_PITCH;
 static const GLfloat DEFAULT_MOUSE_SENSITIVITY = 0.0025f;
 static const GLfloat DEFAULT_MOVEMENT_SENSITIVITY = 0.35f;

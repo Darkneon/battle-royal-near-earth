@@ -48,7 +48,6 @@ void CirclingCamera::view()
         glLightf(GL_LIGHT6, GL_SPOT_EXPONENT, 10.0f); 
 		
 		glEnable(GL_LIGHT6);
-		glutPostRedisplay();
 	}
 }
 

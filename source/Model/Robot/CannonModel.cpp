@@ -25,10 +25,11 @@ CannonModel::CannonModel() {
 void CannonModel::render() {
 	glPushMatrix();
 		glPushMatrix();
-			glTranslatef(0.5f ,0.1f,0.5f); //by Jeff
+			glTranslatef(0.5f, 0.1f, 0.5f); //by Jeff
 			glScalef(.3f,.4f,.3f);//by Jeff
 			glPushMatrix();
 				glColor3f(1.0f, 0.0f, 0.0f);
+				//glTranslatef(7.5f, 0.0f, 0.0f);
 				GeoHelper::drawTrapezoidalPrism();
 			glPopMatrix();
 

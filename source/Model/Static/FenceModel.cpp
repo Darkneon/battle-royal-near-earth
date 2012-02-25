@@ -45,7 +45,7 @@ void FenceModel::render() {
 void FenceModel::drawBottom() {
     glBegin(GL_TRIANGLES);
         
-        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f) );   
+        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f) );  
         
         glVertex3f(0.0f, 0.0f ,0.0f);        
         glVertex3f(0.0f, 0.0f ,1.0f);
