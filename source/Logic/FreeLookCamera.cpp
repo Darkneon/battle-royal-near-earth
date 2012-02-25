@@ -102,7 +102,7 @@ void FreeLookCamera::incrementRoll(bool negateTheValue)
 	//http://www.gamedev.net/topic/546975-calculating-the-up-vector/
 	upVector[0] = cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll);
 	upVector[1] = sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll);
-	upVector[2] = cos(pitch) * sin(roll);
+	upVector[2] = /*cos(pitch) */ sin(roll);
 }
 
 void FreeLookCamera::resetPitchAndRoll()
