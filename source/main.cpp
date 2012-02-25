@@ -22,8 +22,8 @@
 #define GL_PI 3.14159f
 
 // Current size of window.
-GLint width  = 600;
-GLint height = 400;
+GLint width  = 700;
+GLint height = 500;
 
 //	old values for the window (used to come back from fullscreen)
 GLint oldWidth = width;

@@ -340,18 +340,22 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 //Used to draw the peaks for the mountains and hills
  void GeoHelper::drawPeak() {
     glBegin(GL_TRIANGLES);
+		glNormal3fv( GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f) );
         glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(0.5f, 1, 0.5f);
         glVertex3f(1.0f, 0.0f, 0.0f);
         
+		glNormal3fv( GeoHelper::findNormal3f(1.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 1.0f) );
         glVertex3f(1.0f, 0.0f, 0.0f);
 		glVertex3f(0.5f, 1.0f, 0.5f);
         glVertex3f(1.0f, 0.0f, 1.0f);
         
+		glNormal3fv( GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 1.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f) );
         glVertex3f(0.0f, 0.0f, 1.0f);
 		glVertex3f(1.0f, 0.0f, 1.0f);
         glVertex3f(0.5f, 1.0f, 0.5f);
         
+		glNormal3fv( GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f) );
 		glVertex3f(0.0f, 0.0f, 0.0f);
         glVertex3f(0.0f, 0.0f, 1.0f);
         glVertex3f(0.5f, 1.0f, 0.5f);
