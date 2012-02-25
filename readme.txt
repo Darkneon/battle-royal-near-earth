@@ -11,6 +11,7 @@ Key bindings:
 f1 --------------- toggle wireframe/smooth shading
 f2 --------------- mouse look (freelook)
 f3 --------------- commander camera
+f5 --------------- robot camera (need to attach robot first, with 't')
 z --------------- toggle bird view (disabled for now)
 arrows ---------- move camera around
 page up/down ---- rotate
@@ -22,9 +23,15 @@ a --------------- toggle ambient light
 
 The following keys interchange robot parts.
 ** The robot can be found near the bottom of the map around where the base and factory are**
-t --------------- changes robot's head
-y --------------- changes robot's body
-u --------------- chanegs robot's legs
+t --------------- attach robot to Robot camera
+y --------------- cycle through selection of robot parts
+u --------------- toggle selected robot part
+
+Robot View buttons:
+arrows L/R ------ spin robot
+arrows U/D ------ pitch
+page up/down ---- yaw
+l --------------- light
 
 AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
 
