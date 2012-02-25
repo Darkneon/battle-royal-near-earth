@@ -56,9 +56,9 @@ void AntiGravModel::render(){
 
 				glNormal3f(0.0f, 0.0f, 1.0f);
 				glVertex3f(0.2f, 0.0f, 1.3f);
-				glVertex3f(0.2f, 0.2f, 1.3f);
-				glVertex3f(1.3f, 0.2f, 1.3f);
 				glVertex3f(1.3f, 0.0f, 1.3f);
+				glVertex3f(1.3f, 0.2f, 1.3f);
+				glVertex3f(0.2f, 0.2f, 1.3f);
 			glEnd();
 	
 			glBegin(GL_QUAD_STRIP);
@@ -160,9 +160,9 @@ void AntiGravModel::drawMachineCube(){
 			glNormal3f(0.0f, 1.0f, 0.0f);
 			glColor3f(0.0f, 0.0f, 1.0f);
 			glVertex3f(0.0f, 0.3f, 0.0f);
-			glVertex3f(0.5f, 0.3f, 0.0f);
-			glVertex3f(0.5f, 0.3f, 0.5f);
 			glVertex3f(0.0f, 0.3f, 0.5f);
+			glVertex3f(0.5f, 0.3f, 0.5f);
+			glVertex3f(0.5f, 0.3f, 0.0f);
 		glEnd();
 
 		//bottom
@@ -170,9 +170,9 @@ void AntiGravModel::drawMachineCube(){
 			glNormal3f(0.0f, -1.0f, 0.0f);
 			glColor3f(0.0f, 0.0f, 1.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.5f);
-			glVertex3f(0.5f, 0.0f, 0.5f);
 			glVertex3f(0.5f, 0.0f, 0.0f);
+			glVertex3f(0.5f, 0.0f, 0.5f);
+			glVertex3f(0.0f, 0.0f, 0.5f);
 		glEnd();
 
 	glPopMatrix();

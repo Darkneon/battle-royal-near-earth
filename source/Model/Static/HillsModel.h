@@ -8,8 +8,6 @@ class HillsModel : Model
 public:
 	HillsModel(void);
 	void render();
-private:    
-    void drawPeak();
 };
 
 #endif	/* HILLSMODEL_H */

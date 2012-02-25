@@ -14,8 +14,6 @@ class MountainModel : Model {
 public:
     MountainModel();
     void render();
-private:    
-    void drawPeak();
     
 };
 
