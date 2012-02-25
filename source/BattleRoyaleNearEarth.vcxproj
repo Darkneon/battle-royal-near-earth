@@ -102,6 +102,11 @@
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
     <ClCompile Include="Model\Light\LightPost.cpp" />
+    <ClCompile Include="Model\Material\DefaultMaterial.cpp" />
+    <ClCompile Include="Model\Material\Material.cpp" />
+    <ClCompile Include="Model\Material\MetalMaterial.cpp" />
+    <ClCompile Include="Model\Material\OrganicMaterial.cpp" />
+    <ClCompile Include="Model\Material\RockMaterial.cpp" />
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Model\Player\AntennaModel.cpp" />
     <ClCompile Include="Model\Player\PlayerModel.cpp" />
@@ -146,6 +151,11 @@
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
     <ClInclude Include="Model\Light\LightPost.h" />
+    <ClInclude Include="Model\Material\DefaultMaterial.h" />
+    <ClInclude Include="Model\Material\Material.h" />
+    <ClInclude Include="Model\Material\MetalMaterial.h" />
+    <ClInclude Include="Model\Material\OrganicMaterial.h" />
+    <ClInclude Include="Model\Material\RockMaterial.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Model\Player\AntennaModel.h" />
     <ClInclude Include="Model\Player\PlayerModel.h" />
