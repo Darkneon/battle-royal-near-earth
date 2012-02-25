@@ -353,12 +353,6 @@ void windowKeyOps()
 			glutSetCursor(GLUT_CURSOR_NONE);
 	}
 
-		if (isDebugMode)
-			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
-		else
-			glutSetCursor(GLUT_CURSOR_NONE);
-	}
-
 	if(keyStates[97]){ //a
 		ambientLight = !ambientLight;
 	}
