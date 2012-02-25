@@ -43,7 +43,7 @@ bool keyStates[256];
 bool funcKeyStates[256];
 int keyModifier = 0;
 
-static bool isDebugMode = true;
+static bool isDebugMode = false;
 
 int viewStates = 0; //states of the camera views
 
@@ -345,7 +345,13 @@ void windowKeyOps()
     }
 
 	if (keyStates[98]) //b
+	{
 		isDebugMode = !isDebugMode;
+		if (isDebugMode)
+			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
+		else
+			glutSetCursor(GLUT_CURSOR_NONE);
+	}
 
 	if(keyStates[97]){ //a
 		ambientLight = !ambientLight;
