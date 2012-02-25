@@ -43,7 +43,7 @@ bool keyStates[256];
 bool funcKeyStates[256];
 int keyModifier = 0;
 
-static bool isDebugMode = true;
+static bool isDebugMode = false;
 
 int viewStates = 0; //states of the camera views
 
@@ -164,8 +164,8 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	TwWindowSize(width, height);
 
 	glutSetWindow(helpWindow);
-	glutPositionWindow(0,0);
-	glutReshapeWindow(width,height);
+	glutPositionWindow(10,10);
+	glutReshapeWindow(width-5,height-5);
 }
 
 void toggleFullScreen()
@@ -265,7 +265,7 @@ void help_display(){
 				getline(openfile, s);
 				char *readLine = (char*)s.c_str();
 				lineHeight -= lineSpace;
-				rasterText(10,lineHeight,GLUT_BITMAP_HELVETICA_12, readLine,s.size());
+				rasterText(15,lineHeight,GLUT_BITMAP_HELVETICA_12, readLine,s.size());
 			}
 			openfile.close();
 		}
@@ -345,7 +345,13 @@ void windowKeyOps()
     }
 
 	if (keyStates[98]) //b
+	{
 		isDebugMode = !isDebugMode;
+		if (isDebugMode)
+			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
+		else
+			glutSetCursor(GLUT_CURSOR_NONE);
+	}
 
 	if(keyStates[97]){ //a
 		ambientLight = !ambientLight;
@@ -467,7 +473,7 @@ int main (int argc, char **argv)
 	init();
 
 	//helpWindow
-	helpWindow = glutCreateSubWindow(mainWindow, 0,0,width,height);
+	helpWindow = glutCreateSubWindow(mainWindow, 10, 10,width-5,height-5);
 	glutDisplayFunc(help_display);
 
 	//hiding the subwindow for now
