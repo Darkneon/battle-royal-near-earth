@@ -10,6 +10,7 @@ FreeLookCamera::FreeLookCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNe
 	//camera rotation
 	yaw = 0.0f;
 	pitch = 0.0f;
+	roll = 0.0f;
 
 	//camera location
 	locX = 25.0f;
@@ -22,7 +23,7 @@ FreeLookCamera::FreeLookCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNe
 	movementSensitivity = DEFAULT_MOVEMENT_SENSITIVITY;
 
 	for (int i = 0; i < 3; i++)
-		rotationVector[i] = 0.0f;
+		directionVector[i] = 0.0;
 
 	upVector[0] = 0.0f;
 	upVector[1] = 1.0f;
@@ -36,7 +37,7 @@ void FreeLookCamera::view()
 	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
 
 	gluLookAt(locX, locY, locZ,
-		locX + rotationVector[0], locY - rotationVector[1], locZ + rotationVector[2],  
+		locX + directionVector[0], locY + directionVector[1], locZ + directionVector[2],  
 		upVector[0], upVector[1], upVector[2]);
 }
 
@@ -47,22 +48,20 @@ void FreeLookCamera::moveCameraForwards(bool negateTheValue)
 	if (negateTheValue)
 		multiplier *= -1.0f;
 
-	locX += rotationVector[0] * multiplier * movementSensitivity;
-	locY -= rotationVector[1] * multiplier * movementSensitivity;
-	locZ += rotationVector[2] * multiplier * movementSensitivity;
-	
-	
+	locX += directionVector[0] * multiplier * movementSensitivity;
+	locY += directionVector[1] * multiplier * movementSensitivity;
+	locZ += directionVector[2] * multiplier * movementSensitivity;
 }
 
 void FreeLookCamera::moveCameraStrafe(bool negateTheValue)
 {
-	GLfloat multiplier = 1.0f;
+	GLfloat multiplier = 1.0;
 
 	if (negateTheValue)
-		multiplier *= -1.0f;
+		multiplier *= -1.0;
 
-	locX -= rotationVector[2] * multiplier * movementSensitivity;
-	locZ += rotationVector[0] * multiplier * movementSensitivity;
+	locX -= directionVector[2] * multiplier * movementSensitivity;
+	locZ += directionVector[0] * multiplier * movementSensitivity;
 	
 	glutPostRedisplay();
 }
@@ -86,15 +85,38 @@ void FreeLookCamera::modifyYaw(bool negateTheValue, int x, int y)
 		else if (pitch < MIN_PITCH)
 			pitch = MIN_PITCH;
 
-		rotationVector[0] = sin(yaw * DegreesToRadians) * RadiansToDegrees;
-		rotationVector[1] = pitch;//sin(pitch * DegreesToRadians) * RadiansToDegrees;
-		rotationVector[2] = -cos(yaw * DegreesToRadians) * RadiansToDegrees;
-
-		
+		directionVector[0] = cos(yaw);
+		directionVector[1] = -pitch;
+		directionVector[2] = sin(yaw);
 	}
 }
 
-void FreeLookCamera::roll(bool negateTheValue)
+void FreeLookCamera::incrementRoll(bool negateTheValue)
 {
+	if (negateTheValue)
+		roll -= 0.4f;
+	else
+		roll += 0.4f;
 
+
+	//http://www.gamedev.net/topic/546975-calculating-the-up-vector/
+	upVector[0] = cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll);
+	upVector[1] = sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll);
+	upVector[2] = cos(pitch) * sin(roll);
+}
+
+void FreeLookCamera::resetPitchAndRoll()
+{
+	pitch = 0.0f;
+	roll = 0.0f;
+
+	directionVector[0] = cos(yaw);
+	directionVector[1] = pitch;
+	directionVector[2] = sin(yaw);
+
+	upVector[0] = 0.0f;
+	upVector[1] = 1.0f;
+	upVector[2] = 0.0f;
+
+	
 }

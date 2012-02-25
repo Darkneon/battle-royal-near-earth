@@ -54,7 +54,7 @@ protected:
 
 	GLfloat fovy; //Zooming variable
 	GLfloat locX, locY, locZ; //camera location
-	GLfloat yaw, pitch, roll; //camera rotation
+	GLdouble yaw, pitch, roll; //camera rotation
 	
 	bool isLightOn;
 

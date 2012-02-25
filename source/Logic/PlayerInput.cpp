@@ -30,12 +30,23 @@ void PlayerInput::keyOperations(int keyModifier)
 
 	if (keyStates[91]) // [
 	{
-		
+		if (player->getCurrentCameraType() == CAMERA_FREELOOK)
+			((FreeLookCamera*)player->getCurrentCamera())->incrementRoll(false);
+		glutPostRedisplay();
 	}
 	else if (keyStates[93]) // ]
 	{
-		
+		if (player->getCurrentCameraType() == CAMERA_FREELOOK)
+			((FreeLookCamera*)player->getCurrentCamera())->incrementRoll(true);
+		glutPostRedisplay();
 	}
+	else if (keyStates[47]) // '/'
+	{
+		if (player->getCurrentCameraType() == CAMERA_FREELOOK)
+			((FreeLookCamera*)player->getCurrentCamera())->resetPitchAndRoll();
+		glutPostRedisplay();
+	}
+
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)
@@ -103,26 +114,3 @@ void PlayerInput::mousePassiveOperations(int x, int y)
 
 	glutPostRedisplay();
 }
-
-
-
-/* keep this for now ==========================================================================================
-	if (keyStates[122]) //z
-	{
-		birdSightView = !birdSightView;
-		mouseLook = false;
-		
-		GLfloat zeeDistanze = BIRD_SIGHT_RADIUS - DEFAULT_RADIUS;
-		if (birdSightView)
-		{
-			currentRadius = BIRD_SIGHT_RADIUS;
-			locZ += zeeDistanze;
-		}
-		else
-		{
-			currentRadius = DEFAULT_RADIUS;
-			locZ -= zeeDistanze;
-		}
-		
-		calculate45DegreesForLocY();
-	}*/
