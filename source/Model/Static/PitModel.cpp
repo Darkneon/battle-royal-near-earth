@@ -13,10 +13,12 @@
 #endif
 
 #include "Static/PitModel.h"
+#include "Material/RockMaterial.h"
 
 PitModel::PitModel() 
 {
 	this->pitType = 0;
+    material = (Material*)(new RockMaterial());
 }
 
 PitModel::PitModel(bool isEndingPit) 

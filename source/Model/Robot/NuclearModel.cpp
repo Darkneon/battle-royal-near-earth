@@ -16,8 +16,10 @@
 #include "Robot/NuclearModel.h"
 #include "Robot/PhaserModel.h"
 #include "Static/TeamNumberModel.h"
+#include "Material/MetalMaterial.h"
 
 NuclearModel::NuclearModel() { 
+    material = (Material*)(new MetalMaterial());
 }
 
 void NuclearModel::render() 

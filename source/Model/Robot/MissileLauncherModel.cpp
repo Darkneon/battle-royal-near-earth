@@ -14,12 +14,13 @@
 
 #include "MissileLauncherModel.h"
 #include "NuclearModel.h"
+#include "Material/MetalMaterial.h"
 
 MissileLauncherModel::MissileLauncherModel() {
     NuclearModel *model = new NuclearModel();
-    setNextChild( (Model*)model );
-	//height approx. .3
-        teamNumber = new TeamNumberModel();
+    setNextChild( (Model*)model );	
+    teamNumber = new TeamNumberModel();
+    material = (Material*)(new MetalMaterial());
 }
 
 void MissileLauncherModel::render() {

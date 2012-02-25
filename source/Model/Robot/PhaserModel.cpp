@@ -15,11 +15,14 @@
 
 #include "Robot/PhaserModel.h"
 #include "Robot/NuclearModel.h"
+#include "Material/MetalMaterial.h"
 
 PhaserModel::PhaserModel() {
     NuclearModel *model = new NuclearModel();
     setNextChild( (Model*)model );
     teamNumber = new TeamNumberModel();
+    
+    material = (Material*)(new MetalMaterial());
 }
 
 void PhaserModel::render() {

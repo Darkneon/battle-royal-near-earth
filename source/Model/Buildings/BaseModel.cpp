@@ -16,11 +16,13 @@
 
 #include "Model.h"
 #include "BaseModel.h"
+#include "Material/MetalMaterial.h"
 
 BaseModel::BaseModel()
 {
    teamNumber = new TeamNumberModel();
    teamNumber2 = new TeamNumberModel();
+   material = (Material*)(new MetalMaterial());
 }
 
 void BaseModel::render() 

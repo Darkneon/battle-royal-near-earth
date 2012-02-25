@@ -8,11 +8,14 @@
 #include "Robot/BipodModel.h"
 #include "Robot/PhaserModel.h"
 #include "Static/TeamNumberModel.h"
+#include "Material/MetalMaterial.h"
 
 BipodModel::BipodModel(void)
 {
     PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
+    
+    material = (Material*)(new MetalMaterial());
 }
 
 

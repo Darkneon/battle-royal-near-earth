@@ -14,8 +14,10 @@
 #endif
 
 #include "ElectronicsModel.h"
+#include "Material/MetalMaterial.h"
 
-ElectronicsModel::ElectronicsModel() {
+ElectronicsModel::ElectronicsModel() {    
+    material = (Material*)(new MetalMaterial());
 }
 
 void ElectronicsModel::render() {

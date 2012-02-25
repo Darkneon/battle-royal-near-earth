@@ -12,15 +12,13 @@
 #endif
 
 #include "FactoryModel.h"
+#include "Material/MetalMaterial.h"
 
 
-FactoryModel::FactoryModel(void)
-{}
+FactoryModel::FactoryModel(void) {
+    material = (Material*)(new MetalMaterial());
+}
 
-/*
-FactoryModel::~FactoryModel(void)
-{}
-*/
 void FactoryModel::render() 
 {
     glPushMatrix();

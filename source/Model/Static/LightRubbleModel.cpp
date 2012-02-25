@@ -8,11 +8,14 @@
 #include <cstdlib>
 #include "LightRubbleModel.h"
 #include "GrassModel.h"
+#include "Material/RockMaterial.h"
 
 LightRubbleModel::LightRubbleModel(void)
 {
 	GrassModel* child = new GrassModel;
 	setNextChild( (Model*)child );
+    
+    material = (Material*)(new RockMaterial());
 }
 
 void LightRubbleModel::render() {
