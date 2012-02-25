@@ -57,6 +57,18 @@
           <itemPath>source/Model/Light/LightPost.cpp</itemPath>
           <itemPath>source/Model/Light/LightPost.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="Material" displayName="Material" projectFiles="true">
+          <itemPath>source/Model/Material/DefaultMaterial.cpp</itemPath>
+          <itemPath>source/Model/Material/DefaultMaterial.h</itemPath>
+          <itemPath>source/Model/Material/Material.cpp</itemPath>
+          <itemPath>source/Model/Material/Material.h</itemPath>
+          <itemPath>source/Model/Material/MetalMaterial.cpp</itemPath>
+          <itemPath>source/Model/Material/MetalMaterial.h</itemPath>
+          <itemPath>source/Model/Material/OrganicMaterial.cpp</itemPath>
+          <itemPath>source/Model/Material/OrganicMaterial.h</itemPath>
+          <itemPath>source/Model/Material/RockMaterial.cpp</itemPath>
+          <itemPath>source/Model/Material/RockMaterial.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="Player" displayName="Player" projectFiles="true">
           <itemPath>source/Model/Player/AntennaModel.cpp</itemPath>
           <itemPath>source/Model/Player/AntennaModel.h</itemPath>

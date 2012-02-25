@@ -23,6 +23,7 @@ public:
 	static void drawMidBuildingFront(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
 	static void drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin);
     static void drawAxis(GLfloat length);
+	static void drawPeak();
 
 	static GLfloat* findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3);
     static GLfloat* findNormal3f(GLfloat u1, GLfloat u2, GLfloat u3,

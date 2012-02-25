@@ -9,7 +9,7 @@
 #define	FENCEMODEL_H
 
 #include "Model.h"
-class FenceModel : Model {
+class FenceModel : public Model {
 public:
     FenceModel();        
 private:

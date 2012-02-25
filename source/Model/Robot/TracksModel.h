@@ -8,10 +8,10 @@
 #include "Static/TeamNumberModel.h"
 #include <math.h>
 
-class TracksModel : Model
+class TracksModel : public Model
 {
 public:
-	TracksModel(void);
+	TracksModel();
 	void render();
 
 private:

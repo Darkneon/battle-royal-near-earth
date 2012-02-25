@@ -7,12 +7,15 @@
 
 #include "Robot/TracksModel.h"
 #include "Robot/PhaserModel.h"
+//#include "Material/MetalMaterial.h"
 
-TracksModel::TracksModel(void)
+TracksModel::TracksModel()
 {
     PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
 	teamNumber = new TeamNumberModel();
+    
+    //material = (Material*)(new MetalMaterial());   
 }
 
 void TracksModel::render(){
@@ -64,9 +67,9 @@ void TracksModel::drawTrack(){
 
 				glNormal3f(0,-1,0);
 				glVertex3f(0.5, 0, 0.5);
-				glVertex3f(1.5, 0, 0.5);
-				glVertex3f(1.5, 0, 0);
 				glVertex3f(0.5, 0, 0);
+				glVertex3f(1.5, 0, 0);
+				glVertex3f(1.5, 0, 0.5);
 
 			glEnd();
 		glPopMatrix();
@@ -74,16 +77,19 @@ void TracksModel::drawTrack(){
 		glColor3f(0.0f, 0.0f, 1.0f);
 		//circles and squares to finish model
 		glPushMatrix();
+			glRotatef(180, 0.0f,1.0f, 0.0f);
+			glTranslatef(-2.0f, 0.0f, 0.0f);
+
 			glTranslatef(0.5,0.5,0);
 			gluDisk(quadratic,0,0.5,15,15);
 			glTranslatef(-0.5,-0.5,0);
 
 			glBegin(GL_QUADS);
-				glNormal3f(0,0,-1);
-				glVertex3f(0.5, 0, 0);
-				glVertex3f(0.5, 1, 0);
-				glVertex3f(1.5, 1, 0);
-				glVertex3f(1.5, 0, 0);
+				glNormal3f(0,0,1);
+				glVertex3f(0.5, 0, 0.0);
+				glVertex3f(1.5, 0, 0.0);
+				glVertex3f(1.5, 1, 0.0);
+				glVertex3f(0.5, 1, 0.0);
 			glEnd();
 
 			glTranslatef(1.5,0.5,0);
@@ -99,9 +105,9 @@ void TracksModel::drawTrack(){
 			glBegin(GL_QUADS);
 				glNormal3f(0,0,1);
 				glVertex3f(0.5, 0, 0.5);
-				glVertex3f(0.5, 1, 0.5);
-				glVertex3f(1.5, 1, 0.5);
 				glVertex3f(1.5, 0, 0.5);
+				glVertex3f(1.5, 1, 0.5);
+				glVertex3f(0.5, 1, 0.5);
 			glEnd();
 
 			glTranslatef(1.5,0.5,0.5);

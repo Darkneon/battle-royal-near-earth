@@ -42,10 +42,10 @@ void BipodModel::render(){
 				glVertex3f(1.0f, 0.0f, 0.0f);
 
 				glNormal3f(0.0f, 0.0f, 1.0f);
-				glVertex3f(0.0f, 0.0f, 1.5f);
-				glVertex3f(0.0f, 0.2f, 1.5f);
-				glVertex3f(1.0f, 0.2f, 1.5f);
 				glVertex3f(1.0f, 0.0f, 1.5f);
+				glVertex3f(1.0f, 0.2f, 1.5f);
+				glVertex3f(0.0f, 0.2f, 1.5f);
+				glVertex3f(0.0f, 0.0f, 1.5f);
 			glEnd();
 	
 			glBegin(GL_QUAD_STRIP);
@@ -126,9 +126,9 @@ void BipodModel::drawLeg(){
 
 			glNormal3f(0.0f, 0.0f, 1.0f);
 			glVertex3f(0.0f, 0.0f, 0.5f);
-			glVertex3f(0.0f, 0.5f, 0.5f);
-			glVertex3f(0.5f, 0.5f, 0.5f);
 			glVertex3f(1.0f, 0.0f, 0.5f);
+			glVertex3f(0.5f, 0.5f, 0.5f);
+			glVertex3f(0.0f, 0.5f, 0.5f);
 		glEnd();
 
 		glBegin(GL_QUAD_STRIP);

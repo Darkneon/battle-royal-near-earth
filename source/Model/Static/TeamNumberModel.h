@@ -9,12 +9,11 @@
 #define	TEAMNUMBERMODEL_H
 
 #include "Model.h"
+
 class TeamNumberModel : Model {
 public:
     TeamNumberModel();
     void render();
-private:
-
 };
 
 #endif	/* TEAMNUMBERMODEL_H */

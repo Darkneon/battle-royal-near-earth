@@ -7,10 +7,13 @@ public:
     LevelRenderer();
     ~LevelRenderer();
     void render();
+    
+
 private:	
     static const int NUM_MODELS = 21;
-    int level[50][50];
     Model* models[NUM_MODELS];
+    int level[50][50];
+    
 	void map1();
 };
 #endif
