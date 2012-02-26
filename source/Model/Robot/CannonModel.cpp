@@ -28,7 +28,6 @@ void CannonModel::render() {
 	glPushMatrix();
 		glTranslatef(-0.1f,0.0f,0.0f);
 		glPushMatrix();
-			glTranslatef(0.5f ,0.1f,0.5f); 
 			glTranslatef(0.5f, 0.1f, 0.5f);
 			glScalef(.3f,.4f,.3f);
 			glPushMatrix();
