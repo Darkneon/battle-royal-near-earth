@@ -41,14 +41,16 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Helper/AntTweakHelper.o \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
 	${OBJECTDIR}/source/Logic/Base.o \
+	${OBJECTDIR}/source/Model/Robot/HeadlightModel.o \
 	${OBJECTDIR}/source/Model/Material/RockMaterial.o \
-	${OBJECTDIR}/source/Logic/SpotLight.o \
 	${OBJECTDIR}/source/Logic/Player.o \
+	${OBJECTDIR}/source/Logic/SpotLight.o \
 	${OBJECTDIR}/source/Model/Robot/CannonModel.o \
 	${OBJECTDIR}/source/Logic/CommanderCamera.o \
 	${OBJECTDIR}/source/Model/Static/HollowBlockModel.o \
 	${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
+	${OBJECTDIR}/source/Logic/LightCamera.o \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
@@ -66,6 +68,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Model.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
 	${OBJECTDIR}/source/Logic/PlayerInput.o \
+	${OBJECTDIR}/source/Logic/RobotCamera.o \
 	${OBJECTDIR}/source/Model/Static/HillsModel.o \
 	${OBJECTDIR}/source/Model/Robot/NuclearModel.o \
 	${OBJECTDIR}/source/Model/Static/LightRubbleModel.o \
@@ -140,20 +143,25 @@ ${OBJECTDIR}/source/Logic/Base.o: source/Logic/Base.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Base.o source/Logic/Base.cpp
 
+${OBJECTDIR}/source/Model/Robot/HeadlightModel.o: source/Model/Robot/HeadlightModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/HeadlightModel.o source/Model/Robot/HeadlightModel.cpp
+
 ${OBJECTDIR}/source/Model/Material/RockMaterial.o: source/Model/Material/RockMaterial.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/RockMaterial.o source/Model/Material/RockMaterial.cpp
 
-${OBJECTDIR}/source/Logic/SpotLight.o: source/Logic/SpotLight.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Logic
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/SpotLight.o source/Logic/SpotLight.cpp
-
 ${OBJECTDIR}/source/Logic/Player.o: source/Logic/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Player.o source/Logic/Player.cpp
+
+${OBJECTDIR}/source/Logic/SpotLight.o: source/Logic/SpotLight.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/SpotLight.o source/Logic/SpotLight.cpp
 
 ${OBJECTDIR}/source/Model/Robot/CannonModel.o: source/Model/Robot/CannonModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
@@ -179,6 +187,11 @@ ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o: source/Model/Static/PlainBlo
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o source/Model/Static/PlainBlockModel.cpp
+
+${OBJECTDIR}/source/Logic/LightCamera.o: source/Logic/LightCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/LightCamera.o source/Logic/LightCamera.cpp
 
 ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o: source/Model/Static/TeamNumberModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
@@ -264,6 +277,11 @@ ${OBJECTDIR}/source/Logic/PlayerInput.o: source/Logic/PlayerInput.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/PlayerInput.o source/Logic/PlayerInput.cpp
+
+${OBJECTDIR}/source/Logic/RobotCamera.o: source/Logic/RobotCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/RobotCamera.o source/Logic/RobotCamera.cpp
 
 ${OBJECTDIR}/source/Model/Static/HillsModel.o: source/Model/Static/HillsModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static

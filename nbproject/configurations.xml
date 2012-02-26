@@ -33,12 +33,16 @@
         <itemPath>source/Logic/Game.h</itemPath>
         <itemPath>source/Logic/LevelRenderer.cpp</itemPath>
         <itemPath>source/Logic/LevelRenderer.h</itemPath>
+        <itemPath>source/Logic/LightCamera.cpp</itemPath>
+        <itemPath>source/LightCamera.h</itemPath>
         <itemPath>source/Logic/Player.cpp</itemPath>
         <itemPath>source/Logic/Player.h</itemPath>
         <itemPath>source/Logic/PlayerInput.cpp</itemPath>
         <itemPath>source/Logic/PlayerInput.h</itemPath>
         <itemPath>source/Logic/Robot.cpp</itemPath>
         <itemPath>source/Logic/Robot.h</itemPath>
+        <itemPath>source/Logic/RobotCamera.cpp</itemPath>
+        <itemPath>source/Logic/RobotCamera.h</itemPath>
         <itemPath>source/Logic/SpotLight.cpp</itemPath>
         <itemPath>source/Logic/SpotLight.h</itemPath>
       </logicalFolder>
@@ -84,6 +88,8 @@
           <itemPath>source/Model/Robot/CannonModel.h</itemPath>
           <itemPath>source/Model/Robot/ElectronicsModel.cpp</itemPath>
           <itemPath>source/Model/Robot/ElectronicsModel.h</itemPath>
+          <itemPath>source/Model/Robot/HeadlightModel.cpp</itemPath>
+          <itemPath>source/Model/Robot/HeadlightModel.h</itemPath>
           <itemPath>source/Model/Robot/MissileLauncherModel.cpp</itemPath>
           <itemPath>source/Model/Robot/MissileLauncherModel.h</itemPath>
           <itemPath>source/Model/Robot/NuclearModel.cpp</itemPath>

@@ -9,6 +9,10 @@
 #define CAMERA_FREELOOK  1
 #define CAMERA_CIRCULAR	 2
 #define CAMERA_ROBOT 3
+#define CAMERA_LIGHT1 4
+#define CAMERA_LIGHT2 5
+#define CAMERA_LIGHT3 6
+#define CAMERA_LIGHT4 7
 
 #ifdef __APPLE__
     #include <Glut/glut.h>

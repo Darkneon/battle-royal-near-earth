@@ -57,15 +57,18 @@ AntTweakHelper antTweakHelper;
 GLUquadricObj *quadratic = gluNewQuadric();
 
 //Initialize light objects
-SpotLight *spotLight = new SpotLight(0.9f, 0.9f, 0.9f, 1.0f);
-//LightPost *light0 = new LightPost(locX, 5.0f, locZ-RADIUS, 15.0f, -10.0f, 10.0f);
-LightPost *light1 = new LightPost(0.0f, 5.0f, 0.0f, 10.0f, -15.0f, 10.0f);
-LightPost *light2 = new LightPost(50.0f, 5.0f, 0.0f, -10.0f, -15.0f, 10.0f);
-LightPost *light3 = new LightPost(50.0f, 5.0f, 50.0f, -10.0f, -15.0f, -10.0f);
-LightPost *light4 = new LightPost(0.0f, 5.0f, 50.0f, 10.0f, -15.0f, -10.0f);
+SpotLight *spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
+LightPost *light1 = new LightPost(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
+LightPost *light2 = new LightPost(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
+LightPost *light3 = new LightPost(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f);
+LightPost *light4 = new LightPost(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f);
 
 bool ambientLight = true;
 bool showHelpWindow = false;
+bool spotLight1 = true;
+bool spotLight2 = true;
+bool spotLight3 = true;
+bool spotLight4 = true;
 
 //second window for help menu
 int mainWindow = 0;
@@ -92,20 +95,13 @@ void renderLights()
         glEnable(GL_LIGHTING);
         glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
 		//Set up a new light, namely... light0
-        /*glLightfv(GL_LIGHT0, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
-        glLightfv(GL_LIGHT0, GL_SPECULAR, spotLight->getSpecular());
-        glLightfv(GL_LIGHT0, GL_POSITION, light0->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0);
-        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light0->getDirectionArray());*/
         //New light... Light1
         glLightfv(GL_LIGHT1, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
         glLightfv(GL_LIGHT1, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
         glLightfv(GL_LIGHT1, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT1, GL_POSITION, light1->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 1);
+        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0);
         glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1->getDirectionArray());
         //New light... Light2
         glLightfv(GL_LIGHT2, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
@@ -113,7 +109,7 @@ void renderLights()
         glLightfv(GL_LIGHT2, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT2, GL_POSITION, light2->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 1);
+        glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 0);
         glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, light2->getDirectionArray());
         //New light... Light3
         glLightfv(GL_LIGHT3, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
@@ -121,7 +117,7 @@ void renderLights()
         glLightfv(GL_LIGHT3, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT3, GL_POSITION, light3->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 50);
+        glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 1);
         glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, light3->getDirectionArray());
         //New light... Light4
         glLightfv(GL_LIGHT4, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
@@ -129,34 +125,41 @@ void renderLights()
         glLightfv(GL_LIGHT4, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT4, GL_POSITION, light4->getPositionArray()); // Setup the lighting 
         glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 1);
+        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light4->getDirectionArray());
-        //TURN ON LIGHTING
-        //glEnable(GL_LIGHT0);
-        if(ambientLight){
-			glEnable(GL_LIGHT1);
-		}
-        glEnable(GL_LIGHT2);
-        glEnable(GL_LIGHT3);
-        glEnable(GL_LIGHT4);
-        //Don't need reflection now
-        //glMaterialfv(GL_FRONT, GL_SPECULAR, spotLight->getSpecular()); //Applys the reflection
-        //glMateriali(GL_FRONT, GL_SHININESS, 20); // Sets up the specular component of lighting
-        //light0->render();
+        //For enabling / disabling lights
+        if(!spotLight1)
+        {
+                glDisable(GL_LIGHT1);
+	} else {
+            glEnable(GL_LIGHT1);
+        }
+        if(!spotLight2)
+        {
+                glDisable(GL_LIGHT2);
+	} else {
+            glEnable(GL_LIGHT2);
+        }
+        if(!spotLight3)
+        {
+                glDisable(GL_LIGHT3);
+	} else {
+            glEnable(GL_LIGHT3);
+        }
+        if(!spotLight4)
+        {
+                glDisable(GL_LIGHT4);
+	} else {
+            glEnable(GL_LIGHT4);
+        }
         light1->render();
         light2->render();
         light3->render();
         light4->render();
+        
 }
 
-/*void lightCamera(LightPost* light)
-{
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(fovy, GLfloat(width) / GLfloat(height), nearPlane, farPlane);
-    gluLookAt(light->getPosX(),light->getPosY(),light->getPosZ(),light->getLookX()+light->getPosX(), light->getLookY()+light->getPosY(), light->getLookZ()+light->getPosZ(),  0, 1, 0);
 
-}*/
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
@@ -385,6 +388,30 @@ void windowKeyOps()
 	if(keyStates[97]){ //a
 		ambientLight = !ambientLight;
 	}
+        if(keyStates[53]) //5
+    {
+        spotLight1 = !spotLight1;
+    }
+        if(keyStates[54]) // 6
+    {
+        spotLight2 = !spotLight2;
+    }    
+        if(keyStates[55]) // 7
+    {
+        spotLight3 = !spotLight3;
+    }
+         if(keyStates[56]) // 8
+    {
+        spotLight4 = !spotLight4;
+    }
+         if(keyStates[57]) // 9
+    {
+        spotLight1 = false;
+        spotLight2 = false;
+        spotLight3 = false;
+        spotLight4 = false;
+    }
+        
 
 	if(keyStates[104]){//h
 		showHelpWindow = !showHelpWindow;

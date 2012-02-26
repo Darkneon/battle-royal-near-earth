@@ -139,9 +139,8 @@ void GeoHelper::drawCylinder(GLint degrees)
 	GLfloat radius = 1.0f;
 	GLfloat height = 1.5f;
 	GLint increment = 10;
-	
 	glPushMatrix();
-
+                
 		glTranslatef(-radius/2, -height/2, -radius/2);
 
 		glBegin(GL_POLYGON);
@@ -216,16 +215,17 @@ void GeoHelper::drawCylinder(GLint degrees)
 void GeoHelper::drawAxis(GLfloat length)
 {
     glPushMatrix();
-    glBegin(GL_LINES);
-        glColor3f(1.0f, 1.0f, 0.0f); //X--RED 
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(length, 0.0f, 0.0f);
-       // glColor3f(0.0f, 1.0f, 0.0f); //Y--GREEN
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(0.0f, length, 0.0f);
-       // glColor3f(0.0f, 0.0f, 1.0f); //Z--BLUE
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(0.0f, 0.0f, length);
+        glBegin(GL_LINES);
+            glColor3f(1.0f, 0.0f, 0.0f); //X--RED 
+            glVertex3f(0.0f, 0.0f, 0.0f);
+            glVertex3f(length, 0.0f, 0.0f);
+            glColor3f(0.0f, 1.0f, 0.0f); //Y--GREEN
+            glVertex3f(0.0f, 0.0f, 0.0f);
+            glVertex3f(0.0f, length, 0.0f);
+            glColor3f(0.0f, 0.0f, 1.0f); //Z--BLUE
+            glVertex3f(0.0f, 0.0f, 0.0f);
+            glVertex3f(0.0f, 0.0f, length);
+        glEnd();
     glPopMatrix();
 }
 void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend)
@@ -243,8 +243,9 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
                 glVertex3f(xExtend, yExtend, zOrigin);
                 //Upper Triangle
                 glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
                 glVertex3f(xExtend, yExtend, zOrigin);
+                glVertex3f(xOrigin, yExtend, zOrigin);
+                
         // Square 2 -- ALONG THE Z AXIS
                 glColor3f(0.0f, 1.0f, 1.0f); // DARKER BLUE
                 glNormal3f(-1.0, 0.0, 0.0);

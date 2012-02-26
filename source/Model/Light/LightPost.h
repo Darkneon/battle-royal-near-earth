@@ -19,16 +19,21 @@ public:
 
     LightPost(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
     void render();
+    void drawHeadLamp();
+    void rotateLamp();
     GLfloat getPosX();
     GLfloat getPosY();
     GLfloat getPosZ();
-    void setPosX(GLfloat);
-    void setPosY(GLfloat);
-    void setPosZ(GLfloat);
-    void updatePosition(GLfloat, GLfloat, GLfloat);
     GLfloat getLookX();
     GLfloat getLookY();
     GLfloat getLookZ();
+    void setPosX(GLfloat);
+    void setPosY(GLfloat);
+    void setPosZ(GLfloat);
+    void setLookX(GLfloat);
+    void setLookY(GLfloat);
+    void setLookZ(GLfloat);
+    void updatePosition(GLfloat, GLfloat, GLfloat);
     GLfloat* getPositionArray(); //NEED HELP GETTING THESE TO WORK
     GLfloat* getDirectionArray();
 private:

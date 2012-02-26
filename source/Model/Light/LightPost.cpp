@@ -57,6 +57,18 @@ void LightPost::setPosZ(GLfloat z)
 {
     posZ = z;
 }
+void LightPost::setLookX(GLfloat x)
+{
+    lookX = x;
+}
+void LightPost::setLookY(GLfloat y)
+{
+    lookY = y;
+}
+void LightPost::setLookZ(GLfloat z)
+{
+    lookZ = z;
+}
 void LightPost::updatePosition(GLfloat x, GLfloat y, GLfloat z)
 {
     posX = x;
@@ -90,33 +102,59 @@ GLfloat* LightPost::getDirectionArray()
 {
    return spotDir;
 }
-void LightPost::render() {
-	
+void LightPost::drawHeadLamp()
+{
     glPushMatrix();
-	
-        glTranslatef(posX, posY, posZ);
-		
-        //Draw a cylinder at the camera position
-        glColor3f(1.0f, 1.0f, 1.0f);
-        glLineWidth(5);
-
-        glBegin(GL_LINES);
-            glVertex3f(0, 0, 0);
-            glVertex3f(lookX, lookY, lookZ);
-        glEnd();
-		glLineWidth(1);
-
-        //glRotatef(acos(abs(lookX)/(sqrt((lookX*lookX)+(lookZ*lookZ))))*(180/GL_PI), 0, -1, 0);
-		//glRotatef(acos(abs(lookY)/(sqrt((lookX*lookX)+(lookY*lookY))))*(180/GL_PI), 0.0f, 0.0f, -1.0f); ;
-        //glRotatef(66, 1, 0, 0);
-      //  GeoHelper::drawAxis(5);
-		
+    glTranslatef(posX, posY, posZ); //Position to the source of the light
+    rotateLamp();
         glPushMatrix();
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glRotatef(rot, axis[0], axis[1], axis[2]);
-			
-			
-			GeoHelper::drawCylinder(360);
+                GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.2f, -6.0f, 0.2f); //Draw the lamppost
+                glRotatef(45, -1, 0, 1); //Rotate 45 degrees
+                glColor3f(0.0f, 0.0f, 1.0f);
+                glTranslatef(-0.0f, -0.5f, 0.0f);
+            GeoHelper::drawCube(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f); //Draw the head of the lamp
+            GeoHelper::drawCube(-0.2f, -0.2f, -0.2f, 1.2f, 1.2f, 1.2f);
+            //Lightbulb 1
+            glPushMatrix();
+                glColor3f(1.0f, 1.0f, 1.0f);
+                glTranslatef(0.0f, -0.5f, 0.0f);
+                glutSolidSphere(0.25, 10, 10);
+            glPopMatrix();
+            //Lightbulb 2
+            glPushMatrix();
+                glTranslatef(0.6f, -0.5f, 0.0f);
+                glutSolidSphere(0.25, 10, 10);
+            glPopMatrix();
+            //Lightbulb 3
+            glPushMatrix();
+                glTranslatef(0.6f, -0.5f, 0.5f);
+                glutSolidSphere(0.25, 10, 10);
+            glPopMatrix();
+            //Lightbulb 4
+            glPushMatrix();
+                glTranslatef(0.0f, -0.5f, 0.5f);
+                glutSolidSphere(0.25, 10, 10);
+            glPopMatrix();//Lightbulb 3
+            glPushMatrix();
+                glTranslatef(0.6f, -0.5f, 0.5f);
+                glutSolidSphere(0.25, 10, 10);
+            glPopMatrix();
         glPopMatrix();
-    glPopMatrix();
+     glPopMatrix();
+
+}
+void LightPost::rotateLamp()
+{
+    if (lookX < 0 && lookZ > 0)
+        glRotatef(90, 0, -1, 0);
+    else if (lookX < 0 && lookZ < 0)
+        glRotatef(180, 0, 1, 0);
+    else if (lookX > 0 && lookZ < 0)
+        glRotatef(90, 0, 1, 0);
+}
+void LightPost::render() 
+{
+   glPushMatrix();
+   drawHeadLamp();
+   glPopMatrix();
 }

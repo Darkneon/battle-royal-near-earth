@@ -21,6 +21,26 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->getCurrentCamera()->resetZoom();
 	}
+        else if (keyStates[49]) //1
+	{
+		player->changeCamera(CAMERA_LIGHT1);
+                glutPostRedisplay();
+	}
+        else if (keyStates[50]) //2
+	{
+		player->changeCamera(CAMERA_LIGHT2);
+                glutPostRedisplay();
+	}
+        else if (keyStates[51]) //3
+	{
+		player->changeCamera(CAMERA_LIGHT3);
+                glutPostRedisplay();
+	}
+        else if (keyStates[52]) //4
+	{
+		player->changeCamera(CAMERA_LIGHT4);
+                glutPostRedisplay();
+	}
 
 	if (keyStates[108]) //l
 	{
