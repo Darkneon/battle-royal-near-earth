@@ -239,12 +239,14 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
                 glColor3f(0.8f, 1.0f, 1.0f); // LIGHT BLUE
                 glNormal3f(0.0, 0.0, -1.0);
                 glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
                 glVertex3f(xExtend, yExtend, zOrigin);
+                glVertex3f(xExtend, yOrigin, zOrigin);
+                
                 //Upper Triangle
                 glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
                 glVertex3f(xOrigin, yExtend, zOrigin);
+                glVertex3f(xExtend, yExtend, zOrigin);
+               
                 
         // Square 2 -- ALONG THE Z AXIS
                 glColor3f(0.0f, 1.0f, 1.0f); // DARKER BLUE
@@ -255,8 +257,9 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
                 glVertex3f(xOrigin, yExtend, zExtend);
                 //Upper Triangle
                 glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
                 glVertex3f(xOrigin, yExtend, zExtend);
+                glVertex3f(xOrigin, yExtend, zOrigin);
+                
         // Square 3 -- ALONG THE X AXIS, extended off Z
                 glColor3f(1.0f, 0.0f, 1.0f); //PURPLE
                  glNormal3f(0.0, 0.0, 1.0);
@@ -266,15 +269,17 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
                 glVertex3f(xExtend, yExtend, zExtend);
                 //Upper Triangle
                 glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
                 glVertex3f(xExtend, yExtend, zExtend);
+                glVertex3f(xOrigin, yExtend, zExtend);
+                
         // Square 4 -- Along the X AND Z AXIS
                 glColor3f(1.0f, 0.0f, 0.0f); //RED
                 glNormal3f(1.0, 0.0, 0.0);
                 //Lower Triangle
                 glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
                 glVertex3f(xExtend, yExtend, zExtend);
+                glVertex3f(xExtend, yOrigin, zExtend);
+                
                 //Upper Triangle
                 glVertex3f(xExtend, yOrigin, zOrigin);
                 glVertex3f(xExtend, yExtend, zOrigin);
@@ -284,12 +289,14 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
                 glNormal3f(0.0, 1.0, 0.0);
                 //Lower Triangle
                 glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
                 glVertex3f(xOrigin, yExtend, zExtend);
+                glVertex3f(xExtend, yExtend, zExtend);
+                
                 //Upper Triangle
                 glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
                 glVertex3f(xExtend, yExtend, zExtend);
+                glVertex3f(xExtend, yExtend, zOrigin);
+                
         // Square 6 -- BOTTOM OF CUBE
                 glColor3f(1.0f, 0.5f, 0.5f); //PINK
                  glNormal3f(0.0, -1.0, 0.0);

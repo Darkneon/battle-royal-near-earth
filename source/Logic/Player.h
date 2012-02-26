@@ -13,7 +13,7 @@
 #include "FreeLookCamera.h"
 #include "CirclingCamera.h"
 #include "RobotCamera.h"
-#include "../LightCamera.h"
+#include "LightCamera.h"
 
 class Player 
 {
