@@ -1,8 +1,9 @@
 #include "HeadlightModel.h"
-
+#include "Material/MetalMaterial.h"
 
 HeadlightModel::HeadlightModel(void)
 {
+	material = (Material*)(new MetalMaterial());
 }
 
 
@@ -31,20 +32,32 @@ void HeadlightModel::render(void)
 			glColor3f(0.2f, 0.2f, 0.2f);
 			drawCube();
 		glPopMatrix();
+		//lamp head
 		glPushMatrix();
 			glTranslatef(0.23f,0.35f,0.5f);
 			glRotatef(20.0f, 0.0f, 0.0f, 1.0f);
 			glRotatef(270.0f, 0.0f, 1.0f, 0.0f);
 			glColor4f(0.2f, 0.2f, 0.2f, 0.0f);
+			//outside cylinder
 			gluCylinder(quadratic, 0.1f, 0.2f, 0.2f, 15, 15);
+			//inside cylinder
+			gluQuadricOrientation(quadratic, GLU_INSIDE);
+			gluCylinder(quadratic, 0.1f, 0.2f, 0.2f, 15, 15);
+			gluQuadricOrientation(quadratic, GLU_OUTSIDE);
+
+			//bulb cylinder
 			glColor4f(0.4f, 0.4f, 0.4f, 0.4f);
+			gluCylinder(quadratic, 0.1f, 0.1f, 0.1f, 15, 15);
+			gluQuadricOrientation(quadratic, GLU_INSIDE);
 			gluDisk(quadratic, 0.0f, 0.1f, 15, 5);
+			gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 			
 			glPushMatrix();
 				glTranslatef(0.0f,0.0f,0.1f);
 				glColor4f(0.4f, 0.4f, 0.4f, 0.4f);
 				gluDisk(quadratic, 0.0f,0.1f,15,5);
 			glPopMatrix();
+			
 		glPopMatrix();
 	glPopMatrix();
 	gluDeleteQuadric(quadratic);
