@@ -261,8 +261,8 @@ void help_display(){
 		glOrtho(0, width-5, 0, height-5, 0.0, 0.1);
 		glMatrixMode(GL_MODELVIEW);
 
-		int lineSpace = 20;
-		int lineHeight = height-25;
+		int lineSpace = 15;
+		int lineHeight = height-20;
 		
 		ifstream openfile;
 		openfile.open("../keyInput.txt", ios::in);
@@ -270,15 +270,15 @@ void help_display(){
 			string s;
 			getline(openfile, s);
 			char *title = (char*)s.c_str();
-			rasterText(width/2-35,lineHeight,GLUT_BITMAP_HELVETICA_18, title,s.size());
-			lineHeight -= lineSpace;
+			rasterText(width/2-35,lineHeight,GLUT_BITMAP_HELVETICA_12, title,s.size());
+			lineHeight -= 5;
 
 			while(!openfile.eof())
 			{
 				getline(openfile, s);
 				char *readLine = (char*)s.c_str();
 				lineHeight -= lineSpace;
-				rasterText(15,lineHeight,GLUT_BITMAP_HELVETICA_12, readLine,s.size());
+				rasterText(15,lineHeight,GLUT_BITMAP_HELVETICA_10, readLine,s.size());
 			}
 			openfile.close();
 		}

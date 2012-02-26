@@ -20,6 +20,15 @@ end ------------- reset rotation angle to 0
 - --------------- zoom out
 0 --------------- reset zoom
 a --------------- toggle ambient light
+1 --------------- camera of light 1
+2 --------------- camera of light 2
+3 --------------- camera of light 3
+4 --------------- camera of light 4
+5 --------------- on/off light 1
+6 --------------- on/off light 2
+7 --------------- on/off light 3
+8 --------------- on/off light 4
+9 --------------- on/off all lights
 
 The following keys interchange robot parts.
 ** The robot can be found near the bottom of the map around where the base and factory are**
