@@ -140,6 +140,9 @@
     <ClCompile Include="Model\Material\RockMaterial.cpp">
       <Filter>Model\Material</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\LightCamera.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -279,6 +282,9 @@
     </ClInclude>
     <ClInclude Include="Model\Material\RockMaterial.h">
       <Filter>Model\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\LightCamera.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

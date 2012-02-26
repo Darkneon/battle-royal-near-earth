@@ -89,6 +89,7 @@ void RobotCamera::synchLookAtPosition(){
 	lookAt[0] = i[0];
 	lookAt[1] = i[1];
 	lookAt[2] = i[2];
+	delete [] i;
 }
 
 void RobotCamera::update(){

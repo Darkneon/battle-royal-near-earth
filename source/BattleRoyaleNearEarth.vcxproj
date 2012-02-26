@@ -54,6 +54,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,6 +94,7 @@
     <ClCompile Include="Logic\FreeLookCamera.cpp" />
     <ClCompile Include="Logic\Game.cpp" />
     <ClCompile Include="Logic\LevelRenderer.cpp" />
+    <ClCompile Include="Logic\LightCamera.cpp" />
     <ClCompile Include="Logic\Player.cpp" />
     <ClCompile Include="Logic\PlayerInput.cpp" />
     <ClCompile Include="Logic\Robot.cpp" />
@@ -145,6 +147,7 @@
     <ClInclude Include="Logic\FreeLookCamera.h" />
     <ClInclude Include="Logic\Game.h" />
     <ClInclude Include="Logic\LevelRenderer.h" />
+    <ClInclude Include="Logic\LightCamera.h" />
     <ClInclude Include="Logic\Player.h" />
     <ClInclude Include="Logic\PlayerInput.h" />
     <ClInclude Include="Logic\Robot.h" />

@@ -237,31 +237,31 @@ void Robot::incrementSpinDegrees(bool pos){
 GLfloat Robot::getEyeX(){
 	//original position after translated to y-axis (-.2,0,0)
 	//rotation + translation
-	GLfloat rotatedPosX = -.2*cos(spinDegrees*GL_PI/180.0f) + 0.5;
+	GLfloat rotatedPosX = -.2f*cos(spinDegrees*GL_PI/180.0f) + 0.5f;
 	return xPos+rotatedPosX;
 }
 
 GLfloat Robot::getEyeY(){
-	return calculateHeight(8)+0.15;
+	return calculateHeight(8)+0.15f;
 }
 
 GLfloat Robot::getEyeZ(){
 	//original position after translated to y-axis (-.2,0,0)
 	//rotation + translation
-	GLfloat rotatedPosZ = .2*sin(spinDegrees*GL_PI/180.0f)+0.5;
+	GLfloat rotatedPosZ = .2f*sin(spinDegrees*GL_PI/180.0f)+0.5f;
 	return zPos+rotatedPosZ;
 }
 
 GLfloat* Robot::getLookAt(){
 	GLfloat pitched[3];
 	//Adjust for pitch & yaw
-	pitched[0] = 0.3-sin(pitchAngle*GL_PI/180.0f)-sin(yawAngle*GL_PI/180.0f)-0.5;
-	pitched[1] = calculateHeight(8)+0.15-cos(pitchAngle*GL_PI/180.0f);
+	pitched[0] = 0.3f-sin(pitchAngle*GL_PI/180.0f)-sin(yawAngle*GL_PI/180.0f)-0.5f;
+	pitched[1] = calculateHeight(8)+0.15f-cos(pitchAngle*GL_PI/180.0f);
 	pitched[2] = 0.5f+cos(yawAngle*GL_PI/180.0f)-0.5f;
-	GLfloat rotated[3];
-	rotated[0] = pitched[0]*cos(spinDegrees*GL_PI/180.0f)+ pitched[2]*sin(spinDegrees*GL_PI/180.0f) + 0.5 +xPos;
+	GLfloat* rotated = new GLfloat[3];
+	rotated[0] = pitched[0]*cos(spinDegrees*GL_PI/180.0f)+ pitched[2]*sin(spinDegrees*GL_PI/180.0f) + 0.5f +xPos;
 	rotated[1] = pitched[1];
-	rotated[2] = pitched[0]*-sin(spinDegrees*GL_PI/180.0f)+ pitched[2]*cos(spinDegrees*GL_PI/180.0f) + 0.5 +zPos;
+	rotated[2] = pitched[0]*-sin(spinDegrees*GL_PI/180.0f)+ pitched[2]*cos(spinDegrees*GL_PI/180.0f) + 0.5f +zPos;
 	
 	return rotated;
 }
@@ -269,13 +269,14 @@ GLfloat* Robot::getLookAt(){
 GLfloat* Robot::getLightLookAt(){
 	GLfloat pitched[3];
 	//Adjust for pitch & yaw
-	pitched[0] = 0.3-sin(70*GL_PI/180.0f)-0.5;
-	pitched[1] = calculateHeight(8)+0.15-cos(70*GL_PI/180.0f);
+	pitched[0] = 0.3f-sin(70*GL_PI/180.0f)-0.5f;
+	pitched[1] = calculateHeight(8)+0.15f-cos(70*GL_PI/180.0f);
 	pitched[2] = 0.5f-0.5f;
-	GLfloat rotated[3];
-	rotated[0] = pitched[0]*cos(spinDegrees*GL_PI/180.0f)+ pitched[2]*sin(spinDegrees*GL_PI/180.0f) + 0.5 +xPos;
+
+	GLfloat* rotated = new GLfloat[3];
+	rotated[0] = pitched[0]*cos(spinDegrees*GL_PI/180.0f)+ pitched[2]*sin(spinDegrees*GL_PI/180.0f) + 0.5f +xPos;
 	rotated[1] = pitched[1];
-	rotated[2] = pitched[0]*-sin(spinDegrees*GL_PI/180.0f)+ pitched[2]*cos(spinDegrees*GL_PI/180.0f) + 0.5 +zPos;
+	rotated[2] = pitched[0]*-sin(spinDegrees*GL_PI/180.0f)+ pitched[2]*cos(spinDegrees*GL_PI/180.0f) + 0.5f +zPos;
 	
 	return rotated;
 }
@@ -423,6 +424,7 @@ void Robot::refreshLight(){
 	
 		glEnable(GL_LIGHT5);
 
+		delete [] lookTemp;
 	}
 }
 

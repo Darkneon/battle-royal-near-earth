@@ -48,9 +48,9 @@ void FreeLookCamera::moveCameraForwards(bool negateTheValue)
 	if (negateTheValue)
 		multiplier *= -1.0f;
 
-	locX += directionVector[0] * multiplier * movementSensitivity;
-	locY += directionVector[1] * multiplier * movementSensitivity;
-	locZ += directionVector[2] * multiplier * movementSensitivity;
+	locX += (GLfloat)directionVector[0] * multiplier * movementSensitivity;
+	locY += (GLfloat)directionVector[1] * multiplier * movementSensitivity;
+	locZ += (GLfloat)directionVector[2] * multiplier * movementSensitivity;
 }
 
 void FreeLookCamera::moveCameraStrafe(bool negateTheValue)
@@ -60,8 +60,8 @@ void FreeLookCamera::moveCameraStrafe(bool negateTheValue)
 	if (negateTheValue)
 		multiplier *= -1.0;
 
-	locX -= directionVector[2] * multiplier * movementSensitivity;
-	locZ += directionVector[0] * multiplier * movementSensitivity;
+	locX -= (GLfloat)directionVector[2] * multiplier * movementSensitivity;
+	locZ += (GLfloat)directionVector[0] * multiplier * movementSensitivity;
 	
 	glutPostRedisplay();
 }

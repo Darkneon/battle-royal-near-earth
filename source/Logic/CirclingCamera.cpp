@@ -22,11 +22,11 @@ void CirclingCamera::view()
 	glLoadIdentity();
 	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
 
-	GLfloat lookAtX = CENTER_OF_MAP + currentRadius * sin(yaw * 0.0625);
-	GLfloat lookAtZ = CENTER_OF_MAP + currentRadius * cos(yaw * 0.0625);
+	GLfloat lookAtX = CENTER_OF_MAP + currentRadius * (GLfloat)sin(yaw * 0.0625);
+	GLfloat lookAtZ = CENTER_OF_MAP + currentRadius * (GLfloat)cos(yaw * 0.0625);
 
-	GLfloat fromX = (currentRadius * sin(yaw * 0.0625)) + lookAtX;
-	GLfloat fromZ = (currentRadius * cos(yaw * 0.0625)) + lookAtZ;
+	GLfloat fromX = (currentRadius * (GLfloat)sin(yaw * 0.0625)) + lookAtX;
+	GLfloat fromZ = (currentRadius * (GLfloat)cos(yaw * 0.0625)) + lookAtZ;
 
 	gluLookAt(fromX, locY, fromZ,
 		lookAtX, 0.0, lookAtZ, 0.0, 1.0, 0.0);
@@ -37,7 +37,7 @@ void CirclingCamera::view()
 		GLfloat light6_diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 		GLfloat light6_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		GLfloat light6_position[] = { fromX, locY, fromZ, 1.0f };
-		GLfloat light6_direction[] = { -sin(yaw  * 0.0625), -1.0f, -cos(yaw * 0.0625) };
+		GLfloat light6_direction[] = { (GLfloat)-sin(yaw  * 0.0625), -1.0f, (GLfloat)-cos(yaw * 0.0625) };
 		
 		glLightfv(GL_LIGHT6, GL_AMBIENT, light6_ambient);
 		glLightfv(GL_LIGHT6, GL_DIFFUSE, light6_diffuse);

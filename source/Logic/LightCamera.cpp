@@ -11,7 +11,7 @@ LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX
 {
     Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     fovy = DEFAULT_FOVY;
-    offset = 0.9;
+    offset = 0.9f;
     this->posX = posX;
     this->posY = posY*offset;
     this->posZ = posZ;

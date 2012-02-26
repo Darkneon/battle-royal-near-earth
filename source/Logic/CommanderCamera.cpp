@@ -31,30 +31,30 @@ void CommanderCamera::view()
 
 void CommanderCamera::moveCameraForwards(bool negateTheValue)
 {
-	GLfloat moveVector[] = {sin(yaw * 1.0f / 8), cos(yaw * 1.0f / 8)};
+	GLdouble moveVector[] = {sin(yaw * 1.0 / 8), cos(yaw * 1.0 / 8)};
 
 	if (negateTheValue)
 	{
-		moveVector[0] *= -1.0f;
-		moveVector[1] *= -1.0f;
+		moveVector[0] *= -1.0;
+		moveVector[1] *= -1.0;
 	}
 
-	locX -= moveVector[0];
-	locZ -= moveVector[1];
+	locX -= (GLfloat)moveVector[0];
+	locZ -= (GLfloat)moveVector[1];
 }
 
 void CommanderCamera::moveCameraStrafe(bool negateTheValue)
 {
-	GLfloat moveVector[] = {sin(yaw / 8.0f), cos(yaw / 8.0f)};
+	GLdouble moveVector[] = {sin(yaw / 8.0), cos(yaw / 8.0)};
 
 	if (negateTheValue)
 	{
-		moveVector[0] *= -1.0f;
-		moveVector[1] *= -1.0f;
+		moveVector[0] *= -1.0;
+		moveVector[1] *= -1.0;
 	}
 
-	locX += moveVector[1];
-	locZ -= moveVector[0];
+	locX += (GLfloat)moveVector[1];
+	locZ -= (GLfloat)moveVector[0];
 }
 
 void CommanderCamera::zoom(bool zoomIn)

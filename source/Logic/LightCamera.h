@@ -7,7 +7,7 @@
 
 #ifndef LIGHTCAMERA_H
 #define	LIGHTCAMERA_H
-#include "../Model/Light/LightPost.h"
+#include "Light/LightPost.h"
 #include "Camera.h"
 
 
