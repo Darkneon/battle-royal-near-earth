@@ -14,6 +14,12 @@ Game::~Game()
 		delete p1;
 		p1 = NULL;
 	}
+
+	if (playerInput1 != NULL)
+	{
+		delete playerInput1;
+		playerInput1 = NULL;
+	}
 }
 
 void Game::updateGameState()

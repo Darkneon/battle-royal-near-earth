@@ -89,8 +89,8 @@ void AntiGravModel::render(){
 
 		glPushMatrix();
 			glTranslatef(0.3f,1.0f,1.2f);
-			TeamNumberModel *teamNumber = new TeamNumberModel();
-			teamNumber->render();
+			TeamNumberModel teamNumber;
+			teamNumber.render();
 		glPopMatrix();
 
 		//cylinder

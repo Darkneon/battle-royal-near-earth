@@ -211,8 +211,10 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	
 	levelRenderer.render();
 	renderLights();
+	
 	//Drawing robot models on map
 	glPushMatrix();
 		glTranslatef(15,0,40);

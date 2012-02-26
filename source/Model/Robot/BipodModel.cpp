@@ -113,8 +113,8 @@ void BipodModel::drawLeg(){
 			glScalef(.5f,.5f,.5f);
 			glRotatef(-90, 0.0f,1.0f, 0.0f);
 			glRotatef(90, 1.0f,0.0f, 0.0f);
-			TeamNumberModel *teamNumber = new TeamNumberModel();
-			teamNumber->render();
+			TeamNumberModel teamNumber;
+			teamNumber.render();
 		glPopMatrix();
 
 		glColor3f(0.0f, 1.0f, 1.0f);
