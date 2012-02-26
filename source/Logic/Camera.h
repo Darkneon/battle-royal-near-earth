@@ -8,6 +8,7 @@
 #define CAMERA_COMMANDER 0
 #define CAMERA_FREELOOK  1
 #define CAMERA_CIRCULAR	 2
+#define CAMERA_ROBOT 3
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -41,7 +42,7 @@ public:
 	virtual void toggleLight() = 0;
 
 	void toggleDifferentView();
-	void resetCameraAngle(); //reset the camera angle to 0
+	virtual void resetCameraAngle(); //reset the camera angle to 0
 	
 	
 protected:

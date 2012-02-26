@@ -10,7 +10,7 @@ public:
     
 
 private:	
-    static const int NUM_MODELS = 21;
+    static const int NUM_MODELS = 22;
     Model* models[NUM_MODELS];
     int level[50][50];
     

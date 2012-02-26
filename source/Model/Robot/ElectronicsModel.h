@@ -13,6 +13,7 @@
 class ElectronicsModel : Model {
 public:
     ElectronicsModel();
+
 private:
 	void render();
 };

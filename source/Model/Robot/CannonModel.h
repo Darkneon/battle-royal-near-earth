@@ -13,6 +13,7 @@
 class CannonModel : public Model {
 public:
     CannonModel();
+
 private:
 	void render();    
 };

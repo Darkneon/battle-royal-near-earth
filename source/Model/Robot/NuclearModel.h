@@ -13,6 +13,7 @@
 class NuclearModel : Model {
 public:
     NuclearModel();
+	//GLfloat height;
 private:
 	void render();
 };

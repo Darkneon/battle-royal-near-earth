@@ -10,8 +10,10 @@ class AntiGravModel : Model
 public:
 	AntiGravModel(void);
 	void render();
+
 private:
 	void drawMachineCube();
+	
 };
 
 #endif	/* ANTIGRAVMODEL_H */

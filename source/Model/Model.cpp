@@ -38,3 +38,9 @@ void Model::removeAllChildren(){
 
 	children.clear();
 }
+
+void Model::eraseChildren(){
+	if(children.size()>0){
+		children.erase(children.begin());
+	}
+}

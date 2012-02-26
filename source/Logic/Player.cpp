@@ -5,11 +5,11 @@
 Player::Player(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane) {
     PlayerModel *pm = new PlayerModel;
     model = (Model*)pm;
-
+	//r = new Robot;
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-
+	availableCams[CAMERA_ROBOT] = new RobotCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	currentCamera = CAMERA_COMMANDER;
 }
 
@@ -35,8 +35,14 @@ void Player::draw() {
 
 void Player::changeCamera(int CAMERA)
 {
+	if(CAMERA == CAMERA_ROBOT){
+		if(!((RobotCamera*)availableCams[CAMERA_ROBOT])->getHasRobot()){
+			return;
+		}
+	}
 	currentCamera = CAMERA;
 }
+
 
 void Player::view()
 {
@@ -51,4 +57,8 @@ Camera* Player::getCurrentCamera()
 int Player::getCurrentCameraType()
 {
 	return currentCamera;
+}
+
+void Player::selectRobot(Robot* robo){
+	((RobotCamera*)availableCams[CAMERA_ROBOT])->attachToRobot(robo);
 }

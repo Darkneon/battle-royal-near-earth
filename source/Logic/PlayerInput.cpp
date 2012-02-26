@@ -67,6 +67,11 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 		player->changeCamera(CAMERA_COMMANDER);	
 		glutPostRedisplay();
 	}
+	else if (funcKeyStates[GLUT_KEY_F5])
+	{
+		player->changeCamera(CAMERA_ROBOT);	
+		glutPostRedisplay();
+	}
 
 	if (funcKeyStates[GLUT_KEY_LEFT])
 	{

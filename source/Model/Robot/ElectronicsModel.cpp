@@ -18,6 +18,7 @@
 
 ElectronicsModel::ElectronicsModel() {    
     material = (Material*)(new MetalMaterial());
+	
 }
 
 void ElectronicsModel::render() {
@@ -33,17 +34,17 @@ void ElectronicsModel::render() {
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
 			glColor3f(.2f,.2f,.2f);
-			gluCylinder(quadratic, .8, .8, .1, 8, 3);
+			gluCylinder(quadratic, .5, .5, .1, 8, 3);
 
 			// Bottom of Base
 			glColor3f(.2f,.2f,.2f);
 			glTranslatef(0.0f,0.0f,0.0f);
-			gluDisk(quadratic, 0, .8, 8, 5);
+			gluDisk(quadratic, 0, .5, 8, 5);
 		
 			// Top of Base
 			glColor3f(.2f,.2f,.2f);
 			glTranslatef(0.0f,0.0f,.1f);
-			gluDisk(quadratic, 0, .8, 8, 5);
+			gluDisk(quadratic, 0, .5, 8, 5);
 			
 			//Team #
 			glPushMatrix();

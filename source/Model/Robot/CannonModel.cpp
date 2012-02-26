@@ -19,17 +19,18 @@
 #include "Material/MetalMaterial.h"
 
 CannonModel::CannonModel() {    
-    NuclearModel *model = new NuclearModel();
-    setNextChild( (Model*)model );
+
     
     material = (Material*)(new MetalMaterial());
 }    
 
 void CannonModel::render() {    
 	glPushMatrix();
+		glTranslatef(-0.1f,0.0f,0.0f);
 		glPushMatrix();
-			glTranslatef(0.5f, 0.1f, 0.5f); //by Jeff
-			glScalef(.3f,.4f,.3f);//by Jeff
+			glTranslatef(0.5f ,0.1f,0.5f); 
+			glTranslatef(0.5f, 0.1f, 0.5f);
+			glScalef(.3f,.4f,.3f);
 			glPushMatrix();
 				glColor3f(1.0f, 0.0f, 0.0f);
 				//glTranslatef(7.5f, 0.0f, 0.0f);
@@ -62,5 +63,5 @@ void CannonModel::render() {
 			teamNumber->render();
 		glPopMatrix();
     glPopMatrix();
-    glTranslatef(0, 0.4f, 0);
+    glTranslatef(0.0f, 0.4f, 0.0f);
 }

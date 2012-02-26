@@ -28,7 +28,7 @@ void NuclearModel::render()
 	GLUquadricObj *quadratic = gluNewQuadric();
     glPushMatrix();
 		glTranslatef(0.5f,0.0f,0.5f);
-		glScalef(0.6f, 0.6f, 0.6f);
+		glScalef(0.5f, 0.7f, 0.5f);
         glRotatef(-90, 1,0,0);
 		glColor3f(0.4f,0.4f,0.4f);
 		gluCylinder(quadratic, .45, .45, .5, 8, 5);
@@ -65,7 +65,7 @@ void NuclearModel::render()
 				glEnd();
 			glPopMatrix();
     glPopMatrix();
-	
+	glTranslatef(0, 0.355f, 0);
     
 
 	gluDeleteQuadric(quadratic);

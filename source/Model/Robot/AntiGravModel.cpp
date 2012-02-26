@@ -13,8 +13,9 @@
 
 AntiGravModel::AntiGravModel(void)
 {
-    PhaserModel *child = new PhaserModel();
+    /*PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
+	*/
     
     material = (Material*)(new MetalMaterial());
 }

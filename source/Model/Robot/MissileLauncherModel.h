@@ -14,6 +14,7 @@
 class MissileLauncherModel : Model {
 public:
     MissileLauncherModel();
+
 private:
 	void render();
         TeamNumberModel *teamNumber; //Addison

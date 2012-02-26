@@ -17,8 +17,7 @@
 #include "Material/MetalMaterial.h"
 
 MissileLauncherModel::MissileLauncherModel() {
-    NuclearModel *model = new NuclearModel();
-    setNextChild( (Model*)model );	
+        teamNumber = new TeamNumberModel();
     teamNumber = new TeamNumberModel();
     material = (Material*)(new MetalMaterial());
 }

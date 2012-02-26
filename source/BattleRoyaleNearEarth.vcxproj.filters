@@ -119,6 +119,12 @@
     <ClCompile Include="Logic\CirclingCamera.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Robot\HeadlightModel.cpp">
+      <Filter>Model\Robot</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\RobotCamera.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
     <ClCompile Include="Model\Material\DefaultMaterial.cpp">
       <Filter>Model\Material</Filter>
     </ClCompile>
@@ -251,6 +257,12 @@
       <Filter>Logic</Filter>
     </ClInclude>
     <ClInclude Include="Logic\CirclingCamera.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Robot\HeadlightModel.h">
+      <Filter>Model\Robot</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\RobotCamera.h">
       <Filter>Logic</Filter>
     </ClInclude>
     <ClInclude Include="Model\Material\DefaultMaterial.h">

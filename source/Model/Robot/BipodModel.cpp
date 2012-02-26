@@ -12,8 +12,6 @@
 
 BipodModel::BipodModel(void)
 {
-    PhaserModel *child = new PhaserModel();
-	setNextChild( (Model*)child );
     
     material = (Material*)(new MetalMaterial());
 }

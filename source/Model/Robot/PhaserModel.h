@@ -14,6 +14,7 @@
 class PhaserModel : Model {
 public:
     PhaserModel();
+	//GLfloat height;
 private:
 	void render();
         TeamNumberModel *teamNumber;

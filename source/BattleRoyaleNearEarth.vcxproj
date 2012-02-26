@@ -96,6 +96,7 @@
     <ClCompile Include="Logic\Player.cpp" />
     <ClCompile Include="Logic\PlayerInput.cpp" />
     <ClCompile Include="Logic\Robot.cpp" />
+    <ClCompile Include="Logic\RobotCamera.cpp" />
     <ClCompile Include="Logic\SpotLight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="Model\Robot\BipodModel.cpp" />
     <ClCompile Include="Model\Robot\CannonModel.cpp" />
     <ClCompile Include="Model\Robot\ElectronicsModel.cpp" />
+    <ClCompile Include="Model\Robot\HeadlightModel.cpp" />
     <ClCompile Include="Model\Robot\MissileLauncherModel.cpp" />
     <ClCompile Include="Model\Robot\NuclearModel.cpp" />
     <ClCompile Include="Model\Robot\PhaserModel.cpp" />
@@ -146,6 +148,7 @@
     <ClInclude Include="Logic\Player.h" />
     <ClInclude Include="Logic\PlayerInput.h" />
     <ClInclude Include="Logic\Robot.h" />
+    <ClInclude Include="Logic\RobotCamera.h" />
     <ClInclude Include="Logic\SpotLight.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
@@ -163,6 +166,7 @@
     <ClInclude Include="Model\Robot\BipodModel.h" />
     <ClInclude Include="Model\Robot\CannonModel.h" />
     <ClInclude Include="Model\Robot\ElectronicsModel.h" />
+    <ClInclude Include="Model\Robot\HeadlightModel.h" />
     <ClInclude Include="Model\Robot\MissileLauncherModel.h" />
     <ClInclude Include="Model\Robot\NuclearModel.h" />
     <ClInclude Include="Model\Robot\PhaserModel.h" />

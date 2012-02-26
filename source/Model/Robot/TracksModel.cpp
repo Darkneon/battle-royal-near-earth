@@ -11,8 +11,6 @@
 
 TracksModel::TracksModel()
 {
-    PhaserModel *child = new PhaserModel();
-	setNextChild( (Model*)child );
 	teamNumber = new TeamNumberModel();
     
     //material = (Material*)(new MetalMaterial());   
@@ -33,7 +31,7 @@ void TracksModel::render(){
 	
 	glPopMatrix();
     
-    glTranslatef(0, 0.5f, 0);
+    glTranslatef(0, 0.42f, 0);
 }
 
 void TracksModel::drawTrack(){

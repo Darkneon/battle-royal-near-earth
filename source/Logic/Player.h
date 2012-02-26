@@ -12,6 +12,7 @@
 #include "CommanderCamera.h"
 #include "FreeLookCamera.h"
 #include "CirclingCamera.h"
+#include "RobotCamera.h"
 
 class Player 
 {
@@ -24,11 +25,13 @@ public:
 	void view();
 	int getCurrentCameraType();
 	Camera *getCurrentCamera();
+	void selectRobot(Robot* robo);
 	
 private:
 	int currentCamera;
     Model *model;
-	Camera *availableCams[3];
+	Camera *availableCams[4];
+	//Robot *r;
 };
 
 #endif	/* PLAYER_H */

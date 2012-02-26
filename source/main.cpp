@@ -51,7 +51,10 @@ Game* game;
 LevelRenderer levelRenderer;
 Base base;
 Robot robot;
+Robot robot2;
+bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
+GLUquadricObj *quadratic = gluNewQuadric();
 
 //Initialize light objects
 SpotLight *spotLight = new SpotLight(0.9f, 0.9f, 0.9f, 1.0f);
@@ -211,10 +214,17 @@ void render()
 	glPushMatrix();
 		glTranslatef(15,0,40);
 		game->p1->draw();
-		glTranslatef(1,0,0);
 		base.draw();
-		glTranslatef(7,0,5);	
+	glPopMatrix();
+	
+	glPushMatrix();
+		robot.translateTo(25.0f,45.0f);
 		robot.draw();
+	glPopMatrix();
+
+	glPushMatrix();
+		robot2.translateTo(30.0f,45.0f);
+		robot2.draw();
 	glPopMatrix();
 
 	game->p1->view(); // Camera update (leave as it is for now)
@@ -328,20 +338,39 @@ void windowKeyOps()
 	}
 	if (keyStates[116]) //t
 	{ 
-        robot.changeTop();
+		if(!toggleRobot){
+			game->p1->selectRobot(&robot);
+			toggleRobot = true;
+		}
+		else {
+			game->p1->selectRobot(&robot2);
+			toggleRobot = false;
+		}
 		glutPostRedisplay();
     }
   
     if (keyStates[121]) //y
 	{ 
-        robot.changeMiddle();
-		glutPostRedisplay();
+		if(toggleRobot){
+			robot.cycleIndex();
+			glutPostRedisplay();
+		}
+		else {
+			robot2.cycleIndex();
+			glutPostRedisplay();
+		}
     }
       
     if (keyStates[117]) //u
 	{ 
-        robot.changeBottom();
-		glutPostRedisplay();
+		if(toggleRobot){
+			robot.turnSelectedOn();
+			glutPostRedisplay();
+		}
+		else{
+			robot2.turnSelectedOn();
+			glutPostRedisplay();
+		}
     }
 
 	if (keyStates[98]) //b

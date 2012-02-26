@@ -28,6 +28,7 @@
 #include "Robot/PhaserModel.h"
 #include "Robot/ElectronicsModel.h"
 #include "Robot/NuclearModel.h"
+#include "Robot/HeadlightModel.h"
 
 
 LevelRenderer::LevelRenderer() {	
@@ -53,6 +54,7 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
 	FactoryModel *factoryModel = new FactoryModel;
+	HeadlightModel *headlightModel = new HeadlightModel;
 
 	//Robot Models
 	AntiGravModel *antiGravModel = new AntiGravModel;
@@ -85,7 +87,7 @@ LevelRenderer::LevelRenderer() {
 	models[18] = (Model*)electronicsModel;
 	models[19] = (Model*)nuclearModel;
 	models[20] = (Model*)factoryModel;
-
+	models[21] = (Model*)headlightModel;
 	//Remove children from hierarchy so we can render these models individually
 	models[12]->removeAllChildren(); 
 	models[13]->removeAllChildren();
@@ -115,6 +117,7 @@ void LevelRenderer::render() {
 			glPopMatrix();
 		}
 	}
+
 	//Added by Jeff to see axes
 	glPushMatrix();
 		glBegin(GL_LINES);
@@ -132,6 +135,7 @@ void LevelRenderer::render() {
 		glEnd();
 	glPopMatrix();
 	
+	//TO UNCOMMENT
 	for(int i = 1; i != 49; i++) {
 		for(int j = 23; j != 48; j++) {	
 			glPushMatrix();
@@ -143,17 +147,12 @@ void LevelRenderer::render() {
 }
 
 void LevelRenderer::map1(){
-	
+
 	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {	
 			if(i == 0 || i == 49 || j == 0 || j == 49){
 				level[i][j] = 3;
 			}
-			/*if(i > 1 && i < 18 && j > 1 && j < 18){
-				if ((i+j)<25){
-					level[i][j] = 1;
-				}
-			}*/
 		}
 	}
 	level[25][40] = 20;

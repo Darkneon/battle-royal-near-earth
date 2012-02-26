@@ -71,6 +71,8 @@ public:
     }
     
 	void removeAllChildren();
+	void eraseChildren();
+
 
 protected:
     Material *material;
