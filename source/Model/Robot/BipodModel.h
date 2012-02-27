@@ -5,6 +5,7 @@
 #define	BIPODMODEL_H
 
 #include "Model.h"
+#include "Static/TeamNumberModel.h"
 
 class BipodModel : Model
 {
@@ -14,5 +15,6 @@ public:
 
 private:
 	void drawLeg();
+	TeamNumberModel *teamNumber;
 };
 #endif	/* BIPODMODEL_H */

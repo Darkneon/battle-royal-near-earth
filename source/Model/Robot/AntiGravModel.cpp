@@ -7,7 +7,6 @@
 
 #include "Robot/AntiGravModel.h"
 #include "Robot/PhaserModel.h"
-#include "Static/TeamNumberModel.h"
 #include "Material/MetalMaterial.h"
 
 
@@ -16,7 +15,7 @@ AntiGravModel::AntiGravModel(void)
     /*PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
 	*/
-    
+    teamNumber = new TeamNumberModel();
     material = (Material*)(new MetalMaterial());
 }
 

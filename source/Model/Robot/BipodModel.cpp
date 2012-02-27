@@ -7,12 +7,11 @@
 
 #include "Robot/BipodModel.h"
 #include "Robot/PhaserModel.h"
-#include "Static/TeamNumberModel.h"
 #include "Material/MetalMaterial.h"
 
 BipodModel::BipodModel(void)
 {
-    
+    teamNumber = new TeamNumberModel();
     material = (Material*)(new MetalMaterial());
 }
 

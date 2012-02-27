@@ -1,9 +1,12 @@
 Help Menu
-f1 --------------- toggle wireframe/smooth shading
+f1 --------------- cycle wireframe/smooth shading/flat shading
 f2 --------------- mouse look (freelook)
 f3 --------------- commander camera
+f4 ---------------- toggle bird view
 f5 --------------- robot camera (need to attach robot first, with 't')
-z ---------------- toggle bird view (disabled for now)
+[ ] -------------- roll camera
+/ ---------------- reset roll/pitch
+l ---------------- toggle light (in bird view)
 arrows ----------- move camera around
 page up/down ----- rotate
 end -------------- reset rotation angle to 0

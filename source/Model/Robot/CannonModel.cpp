@@ -15,12 +15,10 @@
 
 #include "Robot/CannonModel.h"
 #include "Robot/NuclearModel.h"
-#include "Static/TeamNumberModel.h"
 #include "Material/MetalMaterial.h"
 
 CannonModel::CannonModel() {    
-
-    
+	teamNumber = new TeamNumberModel();
     material = (Material*)(new MetalMaterial());
 }    
 
@@ -58,7 +56,6 @@ void CannonModel::render() {
 			glScalef(0.5f, 0.5f, 0.5f);
 			glRotatef(90, 0.0f,1.0f, 0.0f);
 			glRotatef(90, 1.0f,0.0f, 0.0f);
-			TeamNumberModel *teamNumber = new TeamNumberModel();
 			teamNumber->render();
 		glPopMatrix();
     glPopMatrix();

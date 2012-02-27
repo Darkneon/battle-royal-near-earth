@@ -4,6 +4,7 @@
 #define	ANTIGRAVMODEL_H
 
 #include "Model.h"
+#include "Static/TeamNumberModel.h"
 
 class AntiGravModel : Model
 {
@@ -13,7 +14,7 @@ public:
 
 private:
 	void drawMachineCube();
-	
+	TeamNumberModel *teamNumber;
 };
 
 #endif	/* ANTIGRAVMODEL_H */
