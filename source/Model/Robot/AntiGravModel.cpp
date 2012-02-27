@@ -7,7 +7,6 @@
 
 #include "Robot/AntiGravModel.h"
 #include "Robot/PhaserModel.h"
-#include "Static/TeamNumberModel.h"
 #include "Material/MetalMaterial.h"
 
 
@@ -16,7 +15,7 @@ AntiGravModel::AntiGravModel(void)
     /*PhaserModel *child = new PhaserModel();
 	setNextChild( (Model*)child );
 	*/
-    
+    teamNumber = new TeamNumberModel();
     material = (Material*)(new MetalMaterial());
 }
 
@@ -89,7 +88,6 @@ void AntiGravModel::render(){
 
 		glPushMatrix();
 			glTranslatef(0.3f,1.0f,1.2f);
-			TeamNumberModel *teamNumber = new TeamNumberModel();
 			teamNumber->render();
 		glPopMatrix();
 

@@ -5,35 +5,41 @@ void GeoHelper::drawTriangularPrism()
 	glPushMatrix();
 		glRotatef(-135.0f, 0.0f, 0.0f, 1.0f);
 		glTranslatef(-0.5f, -0.25f, 0.5f);
-		
+		GLfloat* normal = new GLfloat[3];
 		glBegin(GL_TRIANGLES); //side 1
-			glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, 0.5f, 0.0f) );
+			GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, 0.5f, 0.0f, normal);
+			glNormal3fv(normal);
 			glVertex3f(0.0f, 0.0f, 0.0f);
 			glVertex3f(1.0f, 0.0f, 0.0f);
 			glVertex3f(0.5f, 0.5f, 0.0f);
-			
 		glEnd();
+
 		
 		glBegin(GL_TRIANGLES); //side 2
-			glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, -1.0f, 0.5f, 0.5f, -1.0f, 1.0f, 0.0f, -1.0f) );
+			GeoHelper::findNormal3f(0.0f, 0.0f, -1.0f, 0.5f, 0.5f, -1.0f, 1.0f, 0.0f, -1.0f, normal);
+			glNormal3fv(normal);
 			glVertex3f(0.0f, 0.0f, -1.0f);
 			glVertex3f(0.5f, 0.5f, -1.0f);
 			glVertex3f(1.0f, 0.0f, -1.0f);
 		glEnd();
 
 		glBegin(GL_TRIANGLES); //the "top left part"
-			glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f) );
+			GeoHelper::findNormal3f(0.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, normal);
+			glNormal3fv(normal);
 			glVertex3f(0.0f, 0.0f, -1.0f);
 			glVertex3f(1.0f, 0.0f, -1.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
 
 		glBegin(GL_TRIANGLES); //the "top right part"
-			glNormal3fv( GeoHelper::findNormal3f(1.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f) );
+			GeoHelper::findNormal3f(1.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, normal);
+			glNormal3fv(normal);
 			glVertex3f(1.0f, 0.0f, -1.0f);
 			glVertex3f(1.0f, 0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
 		glEnd();
+
+		delete [] normal;
 
 	glPopMatrix();
 }
@@ -60,44 +66,52 @@ void GeoHelper::drawTrapezoidalPrism()
 void GeoHelper::drawRectangle()
 {
 	//phaser base
+	GLfloat* normal = new GLfloat[3];
 	glBegin(GL_TRIANGLES);
-
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f, -0.5f,  1.0f, 1.0f, -0.5f,  1.0f, -1.0f,  0.5f,  1.0f) );
+		GeoHelper::findNormal3f(-1.0f, -0.5f,  1.0f, 1.0f, -0.5f,  1.0f, -1.0f,  0.5f,  1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f, -0.5f,  1.0f);
 		glVertex3f(1.0f, -0.5f,  1.0f);
 		glVertex3f(-1.0f,  0.5f,  1.0f);
 
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f,  0.5f,  1.0f, 1.0f, -0.5f,  1.0f, 1.0f,  0.5f,  1.0f) );
+		GeoHelper::findNormal3f(-1.0f,  0.5f,  1.0f, 1.0f, -0.5f,  1.0f, 1.0f,  0.5f,  1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f,  0.5f,  1.0f);
 		glVertex3f(1.0f, -0.5f,  1.0f);
 		glVertex3f(1.0f,  0.5f,  1.0f);
 		
-		glNormal3fv( GeoHelper::findNormal3f(1.0f,  0.5f,  1.0f, -1.0f,  0.5f, -1.0f, -1.0f,  0.5f,  1.0f) );
+		GeoHelper::findNormal3f(1.0f,  0.5f,  1.0f, -1.0f,  0.5f, -1.0f, -1.0f,  0.5f,  1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(1.0f,  0.5f,  1.0f);
 		glVertex3f(-1.0f,  0.5f, -1.0f);
 		glVertex3f(-1.0f,  0.5f,  1.0f);
 		
-		glNormal3fv( GeoHelper::findNormal3f(1.0f,  0.5f, 1.0f, 1.0f,  0.5f, -1.0f, -1.0f,  0.5f, -1.0f) );
+		GeoHelper::findNormal3f(1.0f,  0.5f, 1.0f, 1.0f,  0.5f, -1.0f, -1.0f,  0.5f, -1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(1.0f,  0.5f, 1.0f);
 		glVertex3f(1.0f,  0.5f, -1.0f);
 		glVertex3f(-1.0f,  0.5f, -1.0f);
 		
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f,  -0.5f, 1.0f, -1.0f, -0.5f, -1.0f, 1.0f, -0.5f, 1.0f) );
+		GeoHelper::findNormal3f(-1.0f,  -0.5f, 1.0f, -1.0f, -0.5f, -1.0f, 1.0f, -0.5f, 1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f,  -0.5f, 1.0f);
 		glVertex3f(-1.0f,  -0.5f, -1.0f);
 		glVertex3f(1.0f,  -0.5f, 1.0f);
 
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f,  -0.5f, -1.0f, 1.0f, -0.5f, -1.0f, 1.0f, -0.5f, 1.0f) );
+		GeoHelper::findNormal3f(-1.0f,  -0.5f, -1.0f, 1.0f, -0.5f, -1.0f, 1.0f, -0.5f, 1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f,  -0.5f, -1.0f);
 		glVertex3f(1.0f,  -0.5f, -1.0f);
 		glVertex3f(1.0f,  -0.5f, 1.0f);
 
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f,  -0.5f, -1.0f, -1.0f, 0.5f, -1.0f, 1.0f, -0.5f, -1.0f) );
+		GeoHelper::findNormal3f(-1.0f,  -0.5f, -1.0f, -1.0f, 0.5f, -1.0f, 1.0f, -0.5f, -1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f,  -0.5f, -1.0f);
 		glVertex3f(-1.0f,  0.5f, -1.0f);
 		glVertex3f(1.0f,  -0.5f, -1.0f);
 
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f,  0.5f, -1.0f, 1.0f,  0.5f, -1.0f, 1.0f,  -0.5f, -1.0f) );
+		GeoHelper::findNormal3f(-1.0f,  0.5f, -1.0f, 1.0f,  0.5f, -1.0f, 1.0f,  -0.5f, -1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f,  0.5f, -1.0f);
 		glVertex3f(1.0f,  0.5f, -1.0f);
 		glVertex3f(1.0f,  -0.5f, -1.0f);
@@ -106,12 +120,14 @@ void GeoHelper::drawRectangle()
 
 	
 	glBegin(GL_TRIANGLES);
-		glNormal3fv( GeoHelper::findNormal3f(1.0f, -0.5f, -1.0f, 1.0f,  0.5f, -1.0f, 1.0f,  0.5f,  1.0f) );
+		GeoHelper::findNormal3f(1.0f, -0.5f, -1.0f, 1.0f,  0.5f, -1.0f, 1.0f,  0.5f,  1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(1.0f, -0.5f, -1.0f);
 		glVertex3f(1.0f,  0.5f, -1.0f);
 		glVertex3f(1.0f,  0.5f,  1.0f);
 
-		glNormal3fv( GeoHelper::findNormal3f(1.0f, -0.5f, -1.0f, 1.0f,  0.5f,  1.0f, 1.0f, -0.5f,  1.0f) );
+		GeoHelper::findNormal3f(1.0f, -0.5f, -1.0f, 1.0f,  0.5f,  1.0f, 1.0f, -0.5f,  1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(1.0f, -0.5f, -1.0f);
 		glVertex3f(1.0f,  0.5f,  1.0f);
 		glVertex3f(1.0f, -0.5f,  1.0f);
@@ -119,16 +135,20 @@ void GeoHelper::drawRectangle()
 	
 	
 	glBegin(GL_TRIANGLES);
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f,  0.5f,  1.0f, -1.0f,  0.5f, -1.0f, -1.0f, -0.5f, -1.0f) );
+		GeoHelper::findNormal3f(-1.0f,  0.5f,  1.0f, -1.0f,  0.5f, -1.0f, -1.0f, -0.5f, -1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f,  0.5f,  1.0f);
 		glVertex3f(-1.0f,  0.5f, -1.0f);
 		glVertex3f(-1.0f, -0.5f, -1.0f);
 		
-		glNormal3fv( GeoHelper::findNormal3f(-1.0f, -0.5f,  1.0f, -1.0f,  0.5f,  1.0f, -1.0f, -0.5f, -1.0f) );
+		GeoHelper::findNormal3f(-1.0f, -0.5f,  1.0f, -1.0f,  0.5f,  1.0f, -1.0f, -0.5f, -1.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(-1.0f, -0.5f,  1.0f);
 		glVertex3f(-1.0f,  0.5f,  1.0f);
 		glVertex3f(-1.0f, -0.5f, -1.0f);
 	glEnd();
+
+	delete [] normal;
 
 }
 
@@ -175,18 +195,6 @@ void GeoHelper::drawCylinder(GLint degrees)
 			glVertex3f(0.0f, height, -radius);
 		glEnd();
 
-		/*
-		glBegin(GL_TRIANGLES); // 2 triangles on X
-			glVertex3f(radius, 0.0f, 0.0f);
-			glVertex3f(0.0f, height, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(radius, 0.0f, 0.0f);
-			glVertex3f(radius, height, 0.0f);
-			glVertex3f(0.0f, height, 0.0f);
-			glVertex3f(radius, height, 0.0f);
-		glEnd();
-		*/
-
 		for (int i = 0; i < degrees; i += increment) //all the triangles along the perimeter
 		{
 			GLint angleNext = i + increment;
@@ -197,17 +205,23 @@ void GeoHelper::drawCylinder(GLint degrees)
 			GLfloat z0 = cos(angle * PI_TO_DEGREE_RATIO) * radius;
 			GLfloat z1 = cos(angleNext * PI_TO_DEGREE_RATIO) * radius;
 
+			GLfloat* normal = new GLfloat[3];
+
 			glBegin(GL_POLYGON);
-				glNormal3fv( GeoHelper::findNormal3f(x1, 0.0f, z1, x0, height, z0, x0, 0.0f, z0) );
+				GeoHelper::findNormal3f(x1, 0.0f, z1, x0, height, z0, x0, 0.0f, z0, normal);
+				glNormal3fv(normal);
 				glVertex3f(x1, 0.0f, z1);
 				glVertex3f(x0, height, z0);
 				glVertex3f(x0, 0.0f, z0);
 
-				glNormal3fv( GeoHelper::findNormal3f(x1, 0.0f, z1, x1, height, z1, x0, height, z0) );
+				GeoHelper::findNormal3f(x1, 0.0f, z1, x1, height, z1, x0, height, z0, normal);
+				glNormal3fv(normal);
 				glVertex3f(x1, 0.0f, z1);
 				glVertex3f(x1, height, z1);
 				glVertex3f(x0, height, z0);
 			glEnd();
+
+			delete [] normal;
 		}
 
 	glPopMatrix();
@@ -347,49 +361,53 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 
 //Used to draw the peaks for the mountains and hills
  void GeoHelper::drawPeak() {
+	GLfloat* normal = new GLfloat[3];
     glBegin(GL_TRIANGLES);
-		glNormal3fv( GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f) );
+		GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f, normal);
+		glNormal3fv(normal);
         glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(0.5f, 1, 0.5f);
         glVertex3f(1.0f, 0.0f, 0.0f);
         
-		glNormal3fv( GeoHelper::findNormal3f(1.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 1.0f) );
+		GeoHelper::findNormal3f(1.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 1.0f, normal);
+		glNormal3fv(normal);
         glVertex3f(1.0f, 0.0f, 0.0f);
 		glVertex3f(0.5f, 1.0f, 0.5f);
         glVertex3f(1.0f, 0.0f, 1.0f);
         
-		glNormal3fv( GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 1.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f) );
+		GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 1.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f, normal);
+		glNormal3fv(normal);
         glVertex3f(0.0f, 0.0f, 1.0f);
 		glVertex3f(1.0f, 0.0f, 1.0f);
         glVertex3f(0.5f, 1.0f, 0.5f);
         
-		glNormal3fv( GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f) );
+		GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f, normal);
+		glNormal3fv(normal);
 		glVertex3f(0.0f, 0.0f, 0.0f);
         glVertex3f(0.0f, 0.0f, 1.0f);
         glVertex3f(0.5f, 1.0f, 0.5f);
     glEnd();
+	delete [] normal;
 }
 
 
-GLfloat* GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3)
+void GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3, GLfloat* result)
 {
 	GLfloat usedVector1[3] = { vector1[0] - vector3[0], vector1[1] - vector3[1], vector1[2] - vector3[2] };
 	GLfloat usedVector2[3] = { vector2[0] - vector3[0], vector2[1] - vector3[1], vector2[2] - vector3[2] };
 
-	GLfloat* answerVector = new GLfloat[3];
-	answerVector[0] = usedVector1[1] * usedVector2[2] - usedVector2[1] * usedVector1[2];
-	answerVector[1] = -(usedVector1[0] * usedVector2[2] - usedVector2[0] * usedVector1[2]);
-	answerVector[2] = usedVector1[0] * usedVector2[1] - usedVector2[0] * usedVector1[1];       
-    
-	return answerVector;
+	result[0] = usedVector1[1] * usedVector2[2] - usedVector2[1] * usedVector1[2];
+	result[1] = -(usedVector1[0] * usedVector2[2] - usedVector2[0] * usedVector1[2]);
+	result[2] = usedVector1[0] * usedVector2[1] - usedVector2[0] * usedVector1[1];       
+
 }
 
- GLfloat* GeoHelper::findNormal3f(GLfloat u1, GLfloat u2, GLfloat u3,
+ void GeoHelper::findNormal3f(GLfloat u1, GLfloat u2, GLfloat u3,
                                   GLfloat v1, GLfloat v2, GLfloat v3,
-                                  GLfloat w1, GLfloat w2, GLfloat w3) {
+                                  GLfloat w1, GLfloat w2, GLfloat w3, GLfloat* result) {
      GLfloat u[3] = {u1, u2, u3};
      GLfloat v[3] = {v1, v2, v3};
      GLfloat w[3] = {w1, w2, w3};
      
-     return findNormal3f(u, v, w);     
+     findNormal3f(u, v, w, result);     
  }

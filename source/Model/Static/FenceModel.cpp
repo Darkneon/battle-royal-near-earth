@@ -46,9 +46,11 @@ void FenceModel::render() {
 }
 
 void FenceModel::drawBottom() {
+	GLfloat* normal = new GLfloat[3];
+
     glBegin(GL_TRIANGLES);
-        
-        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f) );  
+        GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, normal);
+		glNormal3fv(normal); 
         
         glVertex3f(0.0f, 0.0f ,0.0f);        
         glVertex3f(0.0f, 0.0f ,1.0f);
@@ -58,12 +60,16 @@ void FenceModel::drawBottom() {
         glVertex3f(1.0f, 0.0f ,1.0f);
         glVertex3f(1.0f, 0.0f ,0.0f);        
     glEnd();
+
+	delete [] normal;
 }
 
 void FenceModel::drawSection() {
+	GLfloat* normal = new GLfloat[3];
     glBegin(GL_TRIANGLES);    
         //bottom
-        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f) );
+		GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, normal);
+		glNormal3fv(normal); 
             
         glVertex3f(0, 0 ,0);
         glVertex3f(0, 0 ,1);
@@ -74,7 +80,8 @@ void FenceModel::drawSection() {
         glVertex3f(1, 0 ,0);        
         
         //top
-        glNormal3fv( GeoHelper::findNormal3f(0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f) );
+		GeoHelper::findNormal3f(0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, normal);
+		glNormal3fv(normal); 
         
         glVertex3f(0, 1 ,0);
         glVertex3f(0, 1 ,1);
@@ -85,7 +92,8 @@ void FenceModel::drawSection() {
         glVertex3f(1, 1 ,0); 
         
         //side 1        
-        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f) );
+		GeoHelper::findNormal3f(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, normal);
+		glNormal3fv(normal); 
         
         glVertex3f(0, 0 ,0);
         glVertex3f(0, 0 ,1);
@@ -97,7 +105,8 @@ void FenceModel::drawSection() {
         glVertex3f(0, 1 ,1);   
         
         //side 2
-        glNormal3fv( GeoHelper::findNormal3f(1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f) );
+		GeoHelper::findNormal3f(1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, normal);
+		glNormal3fv(normal); 
         
         glVertex3f(1, 0 ,0);
         glVertex3f(1, 1 ,0);
@@ -108,7 +117,9 @@ void FenceModel::drawSection() {
         glVertex3f(1, 1 ,1);        
             
         //front
-        glNormal3fv( GeoHelper::findNormal3f(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f) );
+		GeoHelper::findNormal3f(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, normal);
+		glNormal3fv(normal); 
+
         
         glVertex3f(0, 0 ,1);
         glVertex3f(1, 0 ,1);
@@ -131,6 +142,8 @@ void FenceModel::drawSection() {
         glVertex3f(0, 1 ,0);     
         glVertex3f(1, 1 ,0);          
     glEnd();    
+
+	delete [] normal;
 }
 
 
