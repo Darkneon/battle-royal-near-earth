@@ -133,6 +133,10 @@
     <ClCompile Include="Model\Static\PitModel.cpp" />
     <ClCompile Include="Model\Static\PlainBlockModel.cpp" />
     <ClCompile Include="Model\Static\TeamNumberModel.cpp" />
+    <ClCompile Include="Model\Texture\imageloader.cpp" />
+    <ClCompile Include="Model\Texture\TextureEntry.cpp" />
+    <ClCompile Include="Model\Texture\TextureManager.cpp" />
+    <ClCompile Include="Model\Texture\TextureTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
@@ -185,6 +189,10 @@
     <ClInclude Include="Model\Static\PitModel.h" />
     <ClInclude Include="Model\Static\PlainBlockModel.h" />
     <ClInclude Include="Model\Static\TeamNumberModel.h" />
+    <ClInclude Include="Model\Texture\imageloader.h" />
+    <ClInclude Include="Model\Texture\TextureEntry.h" />
+    <ClInclude Include="Model\Texture\TextureManager.h" />
+    <ClInclude Include="Model\Texture\TextureTable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

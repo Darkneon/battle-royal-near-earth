@@ -143,6 +143,18 @@
     <ClCompile Include="Logic\LightCamera.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Texture\imageloader.cpp">
+      <Filter>Model\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Texture\TextureManager.cpp">
+      <Filter>Model\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Texture\TextureEntry.cpp">
+      <Filter>Model\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Texture\TextureTable.cpp">
+      <Filter>Model\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -286,6 +298,18 @@
     <ClInclude Include="Logic\LightCamera.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="Model\Texture\imageloader.h">
+      <Filter>Model\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Texture\TextureManager.h">
+      <Filter>Model\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Texture\TextureEntry.h">
+      <Filter>Model\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Texture\TextureTable.h">
+      <Filter>Model\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -320,6 +344,9 @@
     </Filter>
     <Filter Include="Model\Material">
       <UniqueIdentifier>{80fa8087-eb1c-40ce-9783-55f2f581e487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Texture">
+      <UniqueIdentifier>{77ef7903-430f-4093-a082-cc5972d880d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

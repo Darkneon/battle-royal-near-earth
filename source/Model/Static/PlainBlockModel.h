@@ -15,6 +15,8 @@ public:
     PlainBlockModel();        
 private:
     void render();
+	void drawSquare();
+	void drawCube();
 };
 
 #endif
