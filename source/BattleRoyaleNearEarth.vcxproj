@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Helper\AntTweakHelper.cpp" />
+    <ClCompile Include="Helper\DirectoryManipHelper.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
     <ClCompile Include="Logic\Camera.cpp" />
     <ClCompile Include="Logic\CirclingCamera.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="Logic\RobotCamera.cpp" />
     <ClCompile Include="Logic\SpotLight.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Managers\TextureManager.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
@@ -139,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\AntTweakHelper.h" />
+    <ClInclude Include="Helper\DirectoryManipHelper.h" />
     <ClInclude Include="Logic\Base.h" />
     <ClInclude Include="Logic\Camera.h" />
     <ClInclude Include="Logic\CirclingCamera.h" />
@@ -153,6 +156,7 @@
     <ClInclude Include="Logic\Robot.h" />
     <ClInclude Include="Logic\RobotCamera.h" />
     <ClInclude Include="Logic\SpotLight.h" />
+    <ClInclude Include="Managers\TextureManager.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />

@@ -143,6 +143,12 @@
     <ClCompile Include="Logic\LightCamera.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Helper\DirectoryManipHelper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\TextureManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -286,6 +292,12 @@
     <ClInclude Include="Logic\LightCamera.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="Helper\DirectoryManipHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\TextureManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -320,6 +332,9 @@
     </Filter>
     <Filter Include="Model\Material">
       <UniqueIdentifier>{80fa8087-eb1c-40ce-9783-55f2f581e487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{81599fcd-2db6-417b-b4be-f25596df8a77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

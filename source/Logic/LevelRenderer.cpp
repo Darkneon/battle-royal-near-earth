@@ -37,6 +37,10 @@ LevelRenderer::LevelRenderer() {
 			level[i][j] = 0;
 		}
 	}
+
+	//Loading textures
+	//DirectoryManipHelper::getDirectoryListing(".");
+
 	//Terrain Models
 	GrassModel *grassModel = new GrassModel; //0
     HillsModel *hillsModel = new HillsModel; //1
@@ -95,7 +99,7 @@ LevelRenderer::LevelRenderer() {
 	models[15]->removeAllChildren();
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
-	map1();    
+	map1();   
 } 
 
 LevelRenderer::~LevelRenderer() {
