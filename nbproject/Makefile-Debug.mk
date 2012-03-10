@@ -37,6 +37,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Material/Material.o \
 	${OBJECTDIR}/source/main.o \
 	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
+	${OBJECTDIR}/source/Model/Texture/TextureManager.o \
 	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Helper/AntTweakHelper.o \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
@@ -54,10 +55,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
-	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
 	${OBJECTDIR}/source/Model/Light/LightPost.o \
-	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
+	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
+	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Player/AntennaModel.o \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
@@ -66,6 +67,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Material/OrganicMaterial.o \
 	${OBJECTDIR}/source/Model/Material/MetalMaterial.o \
 	${OBJECTDIR}/source/Model/Model.o \
+	${OBJECTDIR}/source/Helper/DirectoryManipHelper.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
 	${OBJECTDIR}/source/Logic/PlayerInput.o \
 	${OBJECTDIR}/source/Logic/RobotCamera.o \
@@ -80,8 +82,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Robot/TracksModel.o \
 	${OBJECTDIR}/source/Model/Static/GrassModel.o \
 	${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o \
+	${OBJECTDIR}/source/Logic/Camera.o \
+	${OBJECTDIR}/source/Model/Texture/imageloader.o \
 	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
-	${OBJECTDIR}/source/Logic/Camera.o
+	${OBJECTDIR}/source/Managers/TextureManager.o
 
 
 # C Compiler Flags
@@ -124,6 +128,11 @@ ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/Missi
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o source/Model/Robot/MissileLauncherModel.cpp
+
+${OBJECTDIR}/source/Model/Texture/TextureManager.o: source/Model/Texture/TextureManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/TextureManager.o source/Model/Texture/TextureManager.cpp
 
 ${OBJECTDIR}/source/Model/Material/DefaultMaterial.o: source/Model/Material/DefaultMaterial.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
@@ -210,25 +219,25 @@ ${OBJECTDIR}/source/Model/Helper/GeoHelper.o: source/Model/Helper/GeoHelper.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/GeoHelper.o source/Model/Helper/GeoHelper.cpp
 
-${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
-
 ${OBJECTDIR}/source/Model/Light/LightPost.o: source/Model/Light/LightPost.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Light
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Light/LightPost.o source/Model/Light/LightPost.cpp
 
-${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
-
 ${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
+
+${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
+
+${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
 
 ${OBJECTDIR}/source/Model/Player/AntennaModel.o: source/Model/Player/AntennaModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
@@ -269,6 +278,11 @@ ${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Model
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
+
+${OBJECTDIR}/source/Helper/DirectoryManipHelper.o: source/Helper/DirectoryManipHelper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/DirectoryManipHelper.o source/Helper/DirectoryManipHelper.cpp
 
 ${OBJECTDIR}/source/Model/Static/MountainModel.o: source/Model/Static/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
@@ -340,15 +354,25 @@ ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o: source/Model/Static/Hal
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o source/Model/Static/HalfHollowBlockModel.cpp
 
+${OBJECTDIR}/source/Logic/Camera.o: source/Logic/Camera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Camera.o source/Logic/Camera.cpp
+
+${OBJECTDIR}/source/Model/Texture/imageloader.o: source/Model/Texture/imageloader.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/imageloader.o source/Model/Texture/imageloader.cpp
+
 ${OBJECTDIR}/source/Logic/FreeLookCamera.o: source/Logic/FreeLookCamera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FreeLookCamera.o source/Logic/FreeLookCamera.cpp
 
-${OBJECTDIR}/source/Logic/Camera.o: source/Logic/Camera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Logic
+${OBJECTDIR}/source/Managers/TextureManager.o: source/Managers/TextureManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Managers
 	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Camera.o source/Logic/Camera.cpp
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Managers/TextureManager.o source/Managers/TextureManager.cpp
 
 # Subprojects
 .build-subprojects:

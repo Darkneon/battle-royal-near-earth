@@ -15,6 +15,8 @@
       <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
         <itemPath>source/Helper/AntTweakHelper.cpp</itemPath>
         <itemPath>source/Helper/AntTweakHelper.h</itemPath>
+        <itemPath>source/Helper/DirectoryManipHelper.cpp</itemPath>
+        <itemPath>source/Helper/DirectoryManipHelper.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Logic" displayName="Logic" projectFiles="true">
         <itemPath>source/Logic/Base.cpp</itemPath>
@@ -45,6 +47,10 @@
         <itemPath>source/Logic/RobotCamera.h</itemPath>
         <itemPath>source/Logic/SpotLight.cpp</itemPath>
         <itemPath>source/Logic/SpotLight.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="Managers" displayName="Manager" projectFiles="true">
+        <itemPath>source/Managers/TextureManager.cpp</itemPath>
+        <itemPath>source/Managers/TextureManager.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Model" displayName="Model" projectFiles="true">
         <logicalFolder name="Buildings" displayName="Buildings" projectFiles="true">
@@ -122,6 +128,12 @@
           <itemPath>source/Model/Static/PlainBlockModel.h</itemPath>
           <itemPath>source/Model/Static/TeamNumberModel.cpp</itemPath>
           <itemPath>source/Model/Static/TeamNumberModel.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="Texture" displayName="Texture" projectFiles="true">
+          <itemPath>source/Model/Texture/TextureManager.cpp</itemPath>
+          <itemPath>source/Model/Texture/TextureManager.h</itemPath>
+          <itemPath>source/Model/Texture/imageloader.cpp</itemPath>
+          <itemPath>source/Model/Texture/imageloader.h</itemPath>
         </logicalFolder>
         <itemPath>source/Model/Model.cpp</itemPath>
         <itemPath>source/Model/Model.h</itemPath>

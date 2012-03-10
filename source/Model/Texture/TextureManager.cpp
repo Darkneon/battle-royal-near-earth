@@ -1,11 +1,20 @@
 #include "TextureManager.h"
 
+#ifdef __APPLE__
+	#include <dirent.h>
+#elif __linux__
+	#include <dirent.h>
+#else
+    #include "..\..\include\WinDirent\dirent.h"
+#endif
+
 
 TextureManager* TextureManager::instance = NULL;
+string TextureManager::resourcePath;
 
 TextureManager::TextureManager(void)
 {
-	glEnable(GL_TEXTURE_2D);
+	
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	//hash_map
@@ -17,11 +26,11 @@ TextureManager::TextureManager(void)
 	glGenTextures(nbTextures, textureID);
 
 	Image* image = NULL;
-
+    
 	for(int i = 0; i < nbTextures; i++){
 		// takes file name, looks at file and converts to image
 		string bmpToLoad = directoryListing.at(i);
-		image = loadBMP(bmpToLoad.c_str());
+		image = loadBMP( (getResourcePath() + bmpToLoad).c_str() );
 		glBindTexture(GL_TEXTURE_2D, textureID[i]);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -37,6 +46,18 @@ TextureManager::TextureManager(void)
 	}
 
 	delete image;
+}
+
+string TextureManager::getResourcePath() {
+    if (resourcePath == "") {
+        char *cwd = new char[255];
+        getcwd(cwd, 255);
+        strcat(cwd, "/resource/");
+        resourcePath.assign(cwd);
+        delete[] cwd;
+    }
+    
+    return resourcePath;
 }
 
 TextureManager* TextureManager::getInstance(){

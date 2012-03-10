@@ -33,13 +33,14 @@ class TextureManager
 public:
 	static TextureManager* getInstance();
 	GLuint getTextures(string fileName);
-	//TextureTable table;
 
+    static string getResourcePath();
 private:
 	TextureManager();
 	static TextureManager* instance;
 	map<string, GLuint> textures;
 	vector<string> directoryListing;
+    static string resourcePath;
 };
 
 #endif

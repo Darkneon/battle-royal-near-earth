@@ -4,8 +4,15 @@
 #include<string>
 #include<vector>
 #include<fstream>
-#include "..\..\include\WinDirent\dirent.h"
 #include<cstdlib>
+
+#ifdef __APPLE__
+	#include <dirent.h>
+#elif __linux__
+	#include <dirent.h>
+#else
+    #include "..\..\include\WinDirent\dirent.h"
+#endif
 
 using namespace std;
 

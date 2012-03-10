@@ -2,7 +2,7 @@
 #define LEVELRENDERER_H
 
 #include "Model.h"
-#include "..\Helper\DirectoryManipHelper.h"
+#include "DirectoryManipHelper.h"
 
 class LevelRenderer {
 public:

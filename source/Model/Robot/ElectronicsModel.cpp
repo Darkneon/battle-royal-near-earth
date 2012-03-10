@@ -22,6 +22,7 @@ ElectronicsModel::ElectronicsModel() {
 }
 
 void ElectronicsModel::render() {
+    glEnable(GL_TEXTURE_2D);
 
 	glPushMatrix();
         glTranslatef(.5f, 0, 0.5f);
@@ -132,4 +133,6 @@ void ElectronicsModel::render() {
     glPopMatrix();
 
 	gluDeleteQuadric(quadratic);
+    glDisable(GL_TEXTURE_2D);
+
 }
