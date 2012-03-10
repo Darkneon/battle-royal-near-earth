@@ -51,10 +51,10 @@ int viewStates = 0; //states of the camera views
 
 Game* game;
 LevelRenderer levelRenderer;
-//Base base;
-//Robot robot;
-//Robot robot2;
-//bool toggleRobot = false;
+Base base;
+Robot robot;
+Robot robot2;
+bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
 GLUquadricObj *quadratic = gluNewQuadric();
 
@@ -219,7 +219,7 @@ void render()
 	glPushMatrix();
 		game->p1->draw();
 	glPopMatrix();
-	/*glPushMatrix();
+	glPushMatrix();
 		glTranslatef(15,0,40);
 		game->p1->draw();
 		base.draw();
@@ -233,7 +233,7 @@ void render()
 	glPushMatrix();
 		robot2.translateTo(30.0f,45.0f);
 		robot2.draw();
-	glPopMatrix();*/
+	glPopMatrix();
 
 	game->p1->view(); // Camera update (leave as it is for now)
 	game->getInput(keyModifier); // Gets user input
@@ -344,7 +344,7 @@ void windowKeyOps()
 	{
 		toggleFullScreen();
 	}
-	/*if (keyStates[116]) //t
+	if (keyStates[116]) //t
 	{ 
 		if(!toggleRobot){
 			game->p1->selectRobot(&robot);
@@ -379,7 +379,7 @@ void windowKeyOps()
 			robot2.turnSelectedOn();
 			glutPostRedisplay();
 		}
-    }*/
+    }
 
 	if (keyStates[98]) //b
 	{
