@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 
+/*
 #ifdef __APPLE__
 	#include <dirent.h>
 #elif __linux__
@@ -7,7 +8,16 @@
 #else
     #include "..\..\include\WinDirent\dirent.h"
 #endif
+	*/
 
+#ifdef WIN32_LEAN_AND_MEAN
+	#include "..\..\include\WinDirent\dirent.h"
+	#include <direct.h>
+#else
+	#include <dirent.h>
+#endif
+
+#include <cstring>
 
 TextureManager* TextureManager::instance = NULL;
 string TextureManager::resourcePath;
@@ -18,7 +28,7 @@ TextureManager::TextureManager(void)
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	//hash_map
-	DirectoryManipHelper::getDirectoryListing("../textures", &directoryListing);
+	DirectoryManipHelper::getDirectoryListing(getResourcePath(), &directoryListing);
 	
 	//generates array of GLUints that represent textures
 	int nbTextures = directoryListing.size();
@@ -51,9 +61,15 @@ TextureManager::TextureManager(void)
 string TextureManager::getResourcePath() {
     if (resourcePath == "") {
         char *cwd = new char[255];
-        getcwd(cwd, 255);
-        strcat(cwd, "/resource/");
-        resourcePath.assign(cwd);
+
+#if WIN32_LEAN_AND_MEAN 
+        _getcwd(cwd, 255);		
+		strcat_s(cwd, 255, "/resource/");
+#else
+		getcwd(cwd, 255);
+		strcat(cwd, "/resource/");
+#endif
+		resourcePath.assign(cwd);
         delete[] cwd;
     }
     

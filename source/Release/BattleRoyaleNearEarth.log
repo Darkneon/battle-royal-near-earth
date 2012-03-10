@@ -1,0 +1,131 @@
+﻿Build started 3/10/2012 2:53:57 PM.
+     1>Project "C:\Users\Jonathan\Documents\battle-royal-near-earth\source\BattleRoyaleNearEarth.vcxproj" on node 2 (rebuild target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\BattleRoyaleNearEarth.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Helper\AntTweakHelper.cpp Helper\DirectoryManipHelper.cpp Logic\Base.cpp Logic\Camera.cpp Logic\CirclingCamera.cpp Logic\CommanderCamera.cpp Logic\Factory.cpp Logic\FreeLookCamera.cpp Logic\Game.cpp Logic\LevelRenderer.cpp Logic\LightCamera.cpp Logic\Player.cpp Logic\PlayerInput.cpp Logic\Robot.cpp Logic\RobotCamera.cpp Logic\SpotLight.cpp main.cpp Model\Buildings\BaseModel.cpp Model\Buildings\FactoryModel.cpp Model\Helper\GeoHelper.cpp Model\Light\LightPost.cpp Model\Material\DefaultMaterial.cpp Model\Material\Material.cpp Model\Material\MetalMaterial.cpp Model\Material\OrganicMaterial.cpp Model\Material\RockMaterial.cpp Model\Model.cpp Model\Player\AntennaModel.cpp Model\Player\PlayerModel.cpp Model\Robot\AntiGravModel.cpp Model\Robot\BipodModel.cpp Model\Robot\CannonModel.cpp Model\Robot\ElectronicsModel.cpp Model\Robot\HeadlightModel.cpp Model\Robot\MissileLauncherModel.cpp Model\Robot\NuclearModel.cpp Model\Robot\PhaserModel.cpp Model\Robot\TracksModel.cpp Model\Static\FenceModel.cpp Model\Static\GrassModel.cpp Model\Static\HalfHollowBlockModel.cpp Model\Static\HalfPlainBlockModel.cpp Model\Static\HillsModel.cpp Model\Static\HollowBlockModel.cpp Model\Static\LightRubbleModel.cpp Model\Static\MountainModel.cpp Model\Static\PitModel.cpp Model\Static\PlainBlockModel.cpp Model\Static\TeamNumberModel.cpp Model\Texture\imageloader.cpp Model\Texture\TextureManager.cpp
+         AntTweakHelper.cpp
+         DirectoryManipHelper.cpp
+         Base.cpp
+         Camera.cpp
+         CirclingCamera.cpp
+         CommanderCamera.cpp
+         Factory.cpp
+         FreeLookCamera.cpp
+         Game.cpp
+         LevelRenderer.cpp
+         LightCamera.cpp
+         Player.cpp
+         PlayerInput.cpp
+         Robot.cpp
+         RobotCamera.cpp
+         SpotLight.cpp
+         main.cpp
+         BaseModel.cpp
+         FactoryModel.cpp
+         GeoHelper.cpp
+         Compiling...
+         LightPost.cpp
+         DefaultMaterial.cpp
+         Material.cpp
+         MetalMaterial.cpp
+         OrganicMaterial.cpp
+         RockMaterial.cpp
+         Model.cpp
+         AntennaModel.cpp
+         PlayerModel.cpp
+         AntiGravModel.cpp
+         BipodModel.cpp
+         CannonModel.cpp
+         ElectronicsModel.cpp
+         HeadlightModel.cpp
+         MissileLauncherModel.cpp
+         NuclearModel.cpp
+         PhaserModel.cpp
+         TracksModel.cpp
+         FenceModel.cpp
+         GrassModel.cpp
+         Compiling...
+         HalfHollowBlockModel.cpp
+         HalfPlainBlockModel.cpp
+         HillsModel.cpp
+         HollowBlockModel.cpp
+         LightRubbleModel.cpp
+         MountainModel.cpp
+         PitModel.cpp
+         PlainBlockModel.cpp
+         TeamNumberModel.cpp
+         imageloader.cpp
+         TextureManager.cpp
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jonathan\Documents\battle-royal-near-earth\Release\BattleRoyaleNearEarth.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\BattleRoyaleNearEarth.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Jonathan\Documents\battle-royal-near-earth\Release\BattleRoyaleNearEarth.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jonathan\Documents\battle-royal-near-earth\Release\BattleRoyaleNearEarth.lib" /MACHINE:X86 Release\AntTweakHelper.obj
+         Release\DirectoryManipHelper.obj
+         Release\Base.obj
+         Release\Camera.obj
+         Release\CirclingCamera.obj
+         Release\CommanderCamera.obj
+         Release\Factory.obj
+         Release\FreeLookCamera.obj
+         Release\Game.obj
+         Release\LevelRenderer.obj
+         Release\LightCamera.obj
+         Release\Player.obj
+         Release\PlayerInput.obj
+         Release\Robot.obj
+         Release\RobotCamera.obj
+         Release\SpotLight.obj
+         Release\main.obj
+         Release\BaseModel.obj
+         Release\FactoryModel.obj
+         Release\GeoHelper.obj
+         Release\LightPost.obj
+         Release\DefaultMaterial.obj
+         Release\Material.obj
+         Release\MetalMaterial.obj
+         Release\OrganicMaterial.obj
+         Release\RockMaterial.obj
+         Release\Model.obj
+         Release\AntennaModel.obj
+         Release\PlayerModel.obj
+         Release\AntiGravModel.obj
+         Release\BipodModel.obj
+         Release\CannonModel.obj
+         Release\ElectronicsModel.obj
+         Release\HeadlightModel.obj
+         Release\MissileLauncherModel.obj
+         Release\NuclearModel.obj
+         Release\PhaserModel.obj
+         Release\TracksModel.obj
+         Release\FenceModel.obj
+         Release\GrassModel.obj
+         Release\HalfHollowBlockModel.obj
+         Release\HalfPlainBlockModel.obj
+         Release\HillsModel.obj
+         Release\HollowBlockModel.obj
+         Release\LightRubbleModel.obj
+         Release\MountainModel.obj
+         Release\PitModel.obj
+         Release\PlainBlockModel.obj
+         Release\TeamNumberModel.obj
+         Release\imageloader.obj
+         Release\TextureManager.obj
+         ..\library\freeglut_static.lib
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+         Generating code
+         Finished generating code
+         BattleRoyaleNearEarth.vcxproj -> C:\Users\Jonathan\Documents\battle-royal-near-earth\Release\BattleRoyaleNearEarth.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Jonathan\Documents\battle-royal-near-earth\Release\BattleRoyaleNearEarth.exe;#1" /manifest Release\BattleRoyaleNearEarth.exe.intermediate.manifest
+       PostBuildEvent:
+         Description: Copy AntTweakBar to .exe directory
+         copy ..\library\AntTweakBar.dll ..\Release /Y
+         :VCEnd
+                 1 file(s) copied.
+       FinalizeBuildStatus:
+         Deleting file "Release\BattleRoyaleNearEarth.unsuccessfulbuild".
+         Touching "Release\BattleRoyaleNearEarth.lastbuildstate".
+     1>Done Building Project "C:\Users\Jonathan\Documents\battle-royal-near-earth\source\BattleRoyaleNearEarth.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:36.48
