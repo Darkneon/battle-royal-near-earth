@@ -34,6 +34,8 @@ void ElectronicsModel::render() {
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
 			glColor3f(.2f,.2f,.2f);
+			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
+			gluQuadricTexture(quadratic,true);
 			gluCylinder(quadratic, .5, .5, .1, 8, 3);
 
 			// Bottom of Base

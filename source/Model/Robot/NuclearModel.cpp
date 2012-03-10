@@ -26,6 +26,9 @@ void NuclearModel::render()
 {
     
 	GLUquadricObj *quadratic = gluNewQuadric();
+	GLuint temp = TextureManager::getInstance()->getTextures("nuclearTexture64.bmp");
+	glBindTexture(GL_TEXTURE_2D, temp);
+	gluQuadricTexture(quadratic,true);
     glPushMatrix();
 		glTranslatef(0.5f,0.0f,0.5f);
 		glScalef(0.5f, 0.7f, 0.5f);

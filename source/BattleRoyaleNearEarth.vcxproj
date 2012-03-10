@@ -102,7 +102,6 @@
     <ClCompile Include="Logic\RobotCamera.cpp" />
     <ClCompile Include="Logic\SpotLight.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Managers\TextureManager.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
@@ -135,6 +134,8 @@
     <ClCompile Include="Model\Static\PitModel.cpp" />
     <ClCompile Include="Model\Static\PlainBlockModel.cpp" />
     <ClCompile Include="Model\Static\TeamNumberModel.cpp" />
+    <ClCompile Include="Model\Texture\imageloader.cpp" />
+    <ClCompile Include="Model\Texture\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
@@ -156,7 +157,6 @@
     <ClInclude Include="Logic\Robot.h" />
     <ClInclude Include="Logic\RobotCamera.h" />
     <ClInclude Include="Logic\SpotLight.h" />
-    <ClInclude Include="Managers\TextureManager.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
@@ -189,6 +189,8 @@
     <ClInclude Include="Model\Static\PitModel.h" />
     <ClInclude Include="Model\Static\PlainBlockModel.h" />
     <ClInclude Include="Model\Static\TeamNumberModel.h" />
+    <ClInclude Include="Model\Texture\imageloader.h" />
+    <ClInclude Include="Model\Texture\TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,10 +1,10 @@
 #include "DirectoryManipHelper.h"
 
-//#include <iostream>
-//static const char* FILE_FORMAT_USED = ".bmp";
+#include <iostream>
 
 void DirectoryManipHelper::getDirectoryListing(string directoryName, vector<string> *directoryListing)
 {
+	//string type = ".bmp";
 	DIR *pDIR;
     struct dirent *entry;
 
@@ -13,10 +13,12 @@ void DirectoryManipHelper::getDirectoryListing(string directoryName, vector<stri
         while(entry = readdir(pDIR))
 		{
 			string currentFileName = entry->d_name;
-			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0)
-				if (directoryListing != NULL)
-					directoryListing->push_back(entry->d_name);
-				//cout << entry->d_name << "\n";
+			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 
+				&& !S_ISDIR(entry->d_type) && currentFileName.find(FILE_FORMAT_BMP) != string::npos)
+			{
+				directoryListing->push_back(entry->d_name);
+				cout << entry->d_name << "\n";
+			}
         }
         closedir(pDIR);
     }

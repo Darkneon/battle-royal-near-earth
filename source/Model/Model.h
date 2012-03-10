@@ -20,6 +20,7 @@
 
 #include "Helper/GeoHelper.h"
 #include "Material/DefaultMaterial.h"
+#include "Texture/TextureManager.h"
 
 using namespace std;
 
@@ -80,7 +81,7 @@ protected:
 private:
     Model *parent;
     vector<Model *> children;
-    
+   
 };
 
 #endif	/* MODEL_H */

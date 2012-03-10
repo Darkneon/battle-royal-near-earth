@@ -5,6 +5,7 @@
 #include "Robot.h"
 #include "SpotLight.h"
 #include "Light/LightPost.h"
+#include "Model/Texture/TextureManager.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -42,6 +43,7 @@ GLfloat farPlane  = 100.0f;
 bool keyStates[256];
 bool funcKeyStates[256];
 int keyModifier = 0;
+TextureManager *te;
 
 static bool isDebugMode = false;
 
@@ -49,10 +51,10 @@ int viewStates = 0; //states of the camera views
 
 Game* game;
 LevelRenderer levelRenderer;
-Base base;
-Robot robot;
-Robot robot2;
-bool toggleRobot = false;
+//Base base;
+//Robot robot;
+//Robot robot2;
+//bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
 GLUquadricObj *quadratic = gluNewQuadric();
 
@@ -159,8 +161,6 @@ void renderLights()
         
 }
 
-
-
 void reshapeMainWindow (int newWidth, int newHeight)
 {
 	glutSetWindow(mainWindow);
@@ -217,6 +217,9 @@ void render()
 	
 	//Drawing robot models on map
 	glPushMatrix();
+		game->p1->draw();
+	glPopMatrix();
+	/*glPushMatrix();
 		glTranslatef(15,0,40);
 		game->p1->draw();
 		base.draw();
@@ -230,7 +233,7 @@ void render()
 	glPushMatrix();
 		robot2.translateTo(30.0f,45.0f);
 		robot2.draw();
-	glPopMatrix();
+	glPopMatrix();*/
 
 	game->p1->view(); // Camera update (leave as it is for now)
 	game->getInput(keyModifier); // Gets user input
@@ -341,7 +344,7 @@ void windowKeyOps()
 	{
 		toggleFullScreen();
 	}
-	if (keyStates[116]) //t
+	/*if (keyStates[116]) //t
 	{ 
 		if(!toggleRobot){
 			game->p1->selectRobot(&robot);
@@ -376,7 +379,7 @@ void windowKeyOps()
 			robot2.turnSelectedOn();
 			glutPostRedisplay();
 		}
-    }
+    }*/
 
 	if (keyStates[98]) //b
 	{
@@ -475,6 +478,7 @@ void initAntTweak() {
 
 void init()
 {
+	te = TextureManager::getInstance();
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
 	isInFullScreenMode = false;
@@ -489,9 +493,11 @@ void init()
 	}
 
 	glutSetCursor(GLUT_CURSOR_NONE);
-
+	
   initAntTweak();
   glEnable(GL_NORMALIZE);
+  
+  
 }
 
 //mouse movement functions, primarily used to modify the view
