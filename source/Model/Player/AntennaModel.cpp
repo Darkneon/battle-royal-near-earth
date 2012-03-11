@@ -14,9 +14,12 @@ AntennaModel::AntennaModel() {
 }
 
 void AntennaModel::render() {
+    glEnable(GL_TEXTURE_2D);
     GLUquadric *quadratic = gluNewQuadric(); 
 	gluQuadricNormals(quadratic, GLU_SMOOTH);
 
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("gold.bmp"));
+    
 	glPushMatrix();
 		glScalef(0.3f,0.3f,0.3f);
 		glTranslatef(1.5f, 2.0f, 1.5f);
@@ -25,4 +28,6 @@ void AntennaModel::render() {
 	glPopMatrix();
     
     gluDeleteQuadric(quadratic);
+    
+    glDisable(GL_TEXTURE_2D);
 }
