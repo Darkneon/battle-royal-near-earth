@@ -26,8 +26,7 @@ void NuclearModel::render()
 {
     glEnable(GL_TEXTURE_2D);
 	GLUquadricObj *quadratic = gluNewQuadric();
-	GLuint temp = TextureManager::getInstance()->getTextures("nuclearTexture64.bmp");
-	glBindTexture(GL_TEXTURE_2D, temp);
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp"));
 	gluQuadricTexture(quadratic,true);
     glPushMatrix();
 		glTranslatef(0.5f,0.0f,0.5f);
@@ -36,6 +35,8 @@ void NuclearModel::render()
 		glColor3f(0.4f,0.4f,0.4f);
 		gluCylinder(quadratic, .45, .45, .5, 8, 5);
 
+		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("nuclearTexture64.bmp"));
+		gluQuadricTexture(quadratic,true);
 		// Bottom
 		glColor3f(0.6f,0.6f,0.6f);
 		gluDisk(quadratic, 0, .45, 8, 5);

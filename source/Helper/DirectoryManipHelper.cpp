@@ -8,8 +8,8 @@ void DirectoryManipHelper::getDirectoryListing(string directoryName, vector<stri
 {
 	DIR *pDIR;
     struct dirent *entry;
-    string dir = TextureManager::getResourcePath();
-    if( pDIR = opendir(dir.c_str()) )
+    
+    if( pDIR = opendir(directoryName.c_str()) )
 	{
         while(entry = readdir(pDIR))
 		{

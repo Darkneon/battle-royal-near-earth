@@ -52,7 +52,7 @@ TextureManager::TextureManager(void)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 
 		//adds to hashtable
-		textures.insert( texturePair(bmpToLoad, textureID[i]));
+		textures.insert(texturePair(bmpToLoad, textureID[i]));
 	}
 
 	delete image;
