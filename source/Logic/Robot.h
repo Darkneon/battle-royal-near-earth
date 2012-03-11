@@ -13,7 +13,7 @@
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
-static const GLfloat PHASER_HEIGHT = 0.85f;
+static const GLfloat PHASER_HEIGHT = 0.9f;
 static const GLfloat CANNON_HEIGHT = 0.4f;
 static const GLfloat BIPOD_HEIGHT = 1.0f;
 static const GLfloat MISSILE_LAUNCHER_HEIGHT = 0.3f;

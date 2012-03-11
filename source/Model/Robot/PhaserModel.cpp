@@ -27,7 +27,7 @@ PhaserModel::PhaserModel() {
 
 void PhaserModel::render() {
 	glPushMatrix();
-    glTranslatef(-0.1f,0.0f,0.0f);    
+    glTranslatef(-0.1f,0.05f,0.0f);    
 	//Draw number -- Addison
         glPushMatrix();
                 glTranslatef(0.4f, 0.85f, 0.6f);
@@ -63,5 +63,5 @@ void PhaserModel::render() {
 			glPopMatrix();
 		glPopMatrix();
     glPopMatrix();
-    glTranslatef(0, 0.85f, 0);
+    glTranslatef(0, 0.9f, 0);
 }
