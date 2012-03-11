@@ -221,8 +221,9 @@ void render()
 	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(15,0,40);
-		game->p1->draw();
 		base.draw();
+        glTranslatef(-5,0,5);
+        game->p1->draw();
 	glPopMatrix();
 	
 	glPushMatrix();
