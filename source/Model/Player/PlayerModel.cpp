@@ -37,7 +37,6 @@ void PlayerModel::render() {
             renderPlane();
         glPopMatrix();
 
-        glColor3f(1, 1, 0);
         //front
         renderOneSide();
 

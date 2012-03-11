@@ -82,9 +82,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Robot/TracksModel.o \
 	${OBJECTDIR}/source/Model/Static/GrassModel.o \
 	${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o \
+	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
-	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Managers/TextureManager.o
 
 
@@ -354,6 +354,11 @@ ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o: source/Model/Static/Hal
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o source/Model/Static/HalfHollowBlockModel.cpp
 
+${OBJECTDIR}/source/Logic/FreeLookCamera.o: source/Logic/FreeLookCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FreeLookCamera.o source/Logic/FreeLookCamera.cpp
+
 ${OBJECTDIR}/source/Logic/Camera.o: source/Logic/Camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
@@ -363,11 +368,6 @@ ${OBJECTDIR}/source/Model/Texture/imageloader.o: source/Model/Texture/imageloade
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/imageloader.o source/Model/Texture/imageloader.cpp
-
-${OBJECTDIR}/source/Logic/FreeLookCamera.o: source/Logic/FreeLookCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Logic
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FreeLookCamera.o source/Logic/FreeLookCamera.cpp
 
 ${OBJECTDIR}/source/Managers/TextureManager.o: source/Managers/TextureManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Managers
