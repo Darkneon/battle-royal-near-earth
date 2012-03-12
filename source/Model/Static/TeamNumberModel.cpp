@@ -12,10 +12,10 @@ TeamNumberModel::TeamNumberModel() {
 }
 
 void TeamNumberModel::render() {
-	glEnable (GL_BLEND);
+	/*glEnable (GL_BLEND);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glColor4f(0, 0.5f, 0, 0.3f);
+    glColor4f(0, 0.5f, 0, 0.3f);*/
     
     GLfloat distance = -1.0f / 5.0f;
     glPushMatrix();
@@ -70,5 +70,5 @@ void TeamNumberModel::render() {
         glEnd();
     glPopMatrix();
 
-	glDisable(GL_BLEND);
+	//glDisable(GL_BLEND);
 }
