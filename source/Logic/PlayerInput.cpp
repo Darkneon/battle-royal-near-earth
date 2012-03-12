@@ -47,6 +47,11 @@ void PlayerInput::keyOperations(int keyModifier)
 		player->getCurrentCamera()->toggleLight();
 		glutPostRedisplay();
 	}
+	if (keyStates[111]) //o
+	{
+		TextureManager::getInstance()->toggleTextures();
+		glutPostRedisplay();
+	}
 
 	if (keyStates[91]) // [
 	{

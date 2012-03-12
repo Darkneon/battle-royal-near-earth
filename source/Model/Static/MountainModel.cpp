@@ -20,7 +20,7 @@ MountainModel::MountainModel() {
 }
 
 void MountainModel::render() {
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("snow.bmp"));
 
 	glPushMatrix();

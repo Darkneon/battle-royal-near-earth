@@ -14,7 +14,7 @@ AntennaModel::AntennaModel() {
 }
 
 void AntennaModel::render() {
-    glEnable(GL_TEXTURE_2D);
+    TextureManager::getInstance()->enableTexture();
     GLUquadric *quadratic = gluNewQuadric(); 
 	gluQuadricNormals(quadratic, GLU_SMOOTH);
 
