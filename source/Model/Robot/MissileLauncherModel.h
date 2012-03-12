@@ -17,7 +17,8 @@ public:
 
 private:
 	void render();
-        TeamNumberModel *teamNumber; //Addison
+	void drawMissileLauncher(GLUquadricObj*);
+    TeamNumberModel *teamNumber; //Addison
 };
 
 #endif

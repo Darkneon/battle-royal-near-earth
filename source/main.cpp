@@ -79,8 +79,6 @@ int helpWindow = 0;
 void renderLights()
 {		
 		//ambient light
-
-		
 		GLfloat light0_ambient[ ] = {0.4f, 0.4f, 0.4f, 1.0f};
 		GLfloat light0_position[ ] = {0.0f, 0.0f, 0.0f, 1.0f};
 		glLightfv(GL_LIGHT7, GL_POSITION, light0_position);
