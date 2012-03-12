@@ -17,6 +17,8 @@ BipodModel::BipodModel(void)
 
 
 void BipodModel::render(){
+	TextureManager::getInstance()->enableTexture();
+
 	glPushMatrix();
 		glTranslatef(.8f, 0.0f, 1.0f);
 		glRotatef(180,0,1,0);
@@ -33,38 +35,56 @@ void BipodModel::render(){
 		glTranslatef(0.f, 1.3f, 0.f);
 		//rectangle
 		glPushMatrix();
-			glColor3f(0.5f, 0.0f, 0.5f);
+			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rustymetal.bmp"));
 			glBegin(GL_QUADS);
 				glNormal3f(0.0f, 0.0f, -1.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(0.0f, 0.0f, 0.0f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(0.0f, 0.2f, 0.0f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(1.0f, 0.2f, 0.0f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(1.0f, 0.0f, 0.0f);
 
 				glNormal3f(0.0f, 0.0f, 1.0f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(1.0f, 0.0f, 1.5f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(1.0f, 0.2f, 1.5f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(0.0f, 0.2f, 1.5f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(0.0f, 0.0f, 1.5f);
 			glEnd();
 	
 			glBegin(GL_QUAD_STRIP);
 				glNormal3f(-1.0f, 0.0f, 0.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(0.0f, 0.0f, 0.0f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(0.0f, 0.0f, 1.5f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(0.0f, 0.2f, 0.0f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(0.0f, 0.2f, 1.5f);
 				
 				glNormal3f(0.0f, 1.0f, 0.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(1.0f, 0.2f, 0.0f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(1.0f, 0.2f, 1.5f);
 
 				glNormal3f(1.0f, 0.0f, 0.0f);
+				glTexCoord2f(0.0f, 1.0f);
 				glVertex3f(1.0f, 0.0f, 0.0f);
+				glTexCoord2f(1.0f, 1.0f);
 				glVertex3f(1.0f, 0.0f, 1.5f);
 
 				glNormal3f(0.0f, -1.0f, 0.0f);
+				glTexCoord2f(0.0f, 0.0f);
 				glVertex3f(0.0f, 0.0f, 0.0f);
+				glTexCoord2f(1.0f, 0.0f);
 				glVertex3f(0.0f, 0.0f, 1.5f);
 			glEnd();
 		glPopMatrix();
@@ -73,34 +93,41 @@ void BipodModel::render(){
 }
 
 void BipodModel::drawLeg(){
-	GLUquadricObj *quadratic = gluNewQuadric();
-	gluQuadricNormals(quadratic, GLU_SMOOTH);
+	GLUquadricObj *qbipod = gluNewQuadric();
+	gluQuadricNormals(qbipod, GLU_SMOOTH);
 
 	glPushMatrix();
 		glTranslatef(0.25f,0.4f,0.25f);
 		glPushMatrix();
 			//thigh
-			glColor3f(0.0f, 0.0f, 2.0f);
 			glTranslatef(0.0f,1.0f,0.0f);
 			glPushMatrix();
+				glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("steel.bmp"));
+				gluQuadricTexture(qbipod,true);
+
 				glRotatef(90, 0.0f, 1.0f, 0.0f);
 				glRotatef(45, 1.0f, 0.0f, 0.0f);
-				gluCylinder(quadratic, 0.1, 0.1, 0.6, 15, 15);
+				gluCylinder(qbipod, 0.1, 0.1, 0.6, 15, 15);
 			glPopMatrix();
 			glTranslatef(0.0f,-1.0f,0.0f);
 
 			//leg
 			glPushMatrix();
+				glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("steel.bmp"));
+				gluQuadricTexture(qbipod,true);
+
 				glRotatef(90, 0.0f, 1.0f, 0.0f);
 				glRotatef(-45, 1.0f, 0.0f, 0.0f);
-				gluCylinder(quadratic, 0.1, 0.1, 0.6, 15, 15);
+				gluCylinder(qbipod, 0.1, 0.1, 0.6, 15, 15);
 			glPopMatrix();
 
 			//knee
 			glTranslatef(0.45f, 0.5f, 0.0f);
 			glPushMatrix();
-				glColor3f(1.0f, 1.0f, 1.0f);
-				gluSphere(quadratic,0.15,15,15);
+				glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("steel.bmp"));
+				gluQuadricTexture(qbipod,true);
+
+				gluSphere(qbipod,0.15,15,15);
 			glPopMatrix();
 			glTranslatef(-0.45f, -0.5f, 0.0f);
 		glPopMatrix();
@@ -116,40 +143,58 @@ void BipodModel::drawLeg(){
 			teamNumber.render();
 		glPopMatrix();
 
-		glColor3f(0.0f, 1.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("bipodf.bmp"));
 		glBegin(GL_QUADS);
 			glNormal3f(0.0f, 0.0f, -1.0f);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0.0f, 0.5f, 0.0f);
+			glTexCoord2f(0.5f, 1.0f);
 			glVertex3f(0.5f, 0.5f, 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(1.0f, 0.0f, 0.0f);
 
 			glNormal3f(0.0f, 0.0f, 1.0f);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.5f);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(1.0f, 0.0f, 0.5f);
+			glTexCoord2f(0.5f, 1.0f);
 			glVertex3f(0.5f, 0.5f, 0.5f);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0.0f, 0.5f, 0.5f);
 		glEnd();
 
 		glBegin(GL_QUAD_STRIP);
 			glNormal3f(-1.0f, 0.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.5f);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(0.0f, 0.5f, 0.0f);
+			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(0.0f, 0.5f, 0.5f);
 
 			glNormal3f(0.0f, 1.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.5f, 0.5f, 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(0.5f, 0.5f, 0.5f);
 
 			glNormal3f(1.0f, 1.0f, 0.0f);
+			glTexCoord2f(0.0f, 1.0f);
 			glVertex3f(1.0f, 0.0f, 0.0f);
+			glTexCoord2f(1.0f, 1.0f);
 			glVertex3f(1.0f, 0.0f, 0.5f);
 
 			glNormal3f(0.0f, -1.0f, 0.0f);
+			glTexCoord2f(0.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.0f);
+			glTexCoord2f(1.0f, 0.0f);
 			glVertex3f(0.0f, 0.0f, 0.5f);
 		glEnd();
 	glPopMatrix();
-	gluDeleteQuadric(quadratic);
+	gluDeleteQuadric(qbipod);
 }
