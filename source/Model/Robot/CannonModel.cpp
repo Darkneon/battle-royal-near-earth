@@ -113,7 +113,8 @@ void CannonModel::drawBarrel(GLUquadricObj* quadratic)
 	gluCylinder(quadratic, 0.125, 0.125, 1.0, 10, 10);
 	glTranslatef(0.0f, 0.0f, 1.0f);
 	gluCylinder(quadratic, 0.07, 0.07, 0.5, 10, 10);
-	
+	gluDisk(quadratic, 0.0f, 0.125f, 10, 10);
+
 	glTranslatef(0.0f, 0.0f, 0.5f);
 	gluCylinder(quadratic, 0.07, 0.14, 0.1, 10, 10);
 

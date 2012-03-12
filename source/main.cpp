@@ -239,7 +239,7 @@ void render()
 	}
 
 	glutSwapBuffers();
-  glutPostRedisplay();
+    glutPostRedisplay();
 }
 
 
