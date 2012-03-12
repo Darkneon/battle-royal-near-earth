@@ -22,7 +22,7 @@ ElectronicsModel::ElectronicsModel() {
 }
 
 void ElectronicsModel::render() {
-    glEnable(GL_TEXTURE_2D);
+    TextureManager::getInstance()->enableTexture();
 
 	glPushMatrix();
         glTranslatef(.5f, 0, 0.5f);

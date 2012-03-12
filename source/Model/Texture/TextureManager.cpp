@@ -21,6 +21,7 @@
 
 TextureManager* TextureManager::instance = NULL;
 string TextureManager::resourcePath;
+bool TextureManager::texturesEnabled = false;
 
 TextureManager::TextureManager(void)
 {
@@ -87,3 +88,12 @@ GLuint TextureManager::getTextures(string fileName){
 	return textures[fileName];
 }
 
+void TextureManager::toggleTextures(){
+	texturesEnabled = !texturesEnabled;
+}
+
+void TextureManager::enableTexture(){
+	if(texturesEnabled){
+		glEnable(GL_TEXTURE_2D);
+	}
+}

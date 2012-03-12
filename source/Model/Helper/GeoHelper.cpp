@@ -1,5 +1,5 @@
 #include "GeoHelper.h"
-
+#include "Texture/TextureManager.h"
 void GeoHelper::drawTriangularPrism()
 {
 	glPushMatrix();
@@ -435,33 +435,47 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
 //Used to draw a middle smaller building
 void GeoHelper::drawMidBuilding(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 {
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
     drawCube(xOrigin, yOrigin, zOrigin, xOrigin+50, yOrigin+25, zOrigin+50);
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
+
     drawCube(xOrigin, yOrigin+25, zOrigin, xOrigin+5, yOrigin+30, zOrigin+50);
     drawCube(xOrigin+45, yOrigin+25, zOrigin, xOrigin+50, yOrigin+30, zOrigin+50);
+    glDisable(GL_TEXTURE_2D);
 }
 
 
 //Draws the front of the smaller building
 void GeoHelper::drawMidBuildingFront(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 {
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
     drawCube(xOrigin, yOrigin, zOrigin, xOrigin+50, yOrigin+25, zOrigin+50);
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
     drawCube(xOrigin, yOrigin+25, zOrigin, xOrigin+5, yOrigin+30, zOrigin+50);
     drawCube(xOrigin+45, yOrigin+25, zOrigin, xOrigin+50, yOrigin+30, zOrigin+50);
     //Draw the roofing
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
     drawCube(xOrigin, yOrigin+25, zOrigin+45, xOrigin, yOrigin+30, zOrigin+50);
     drawCube(xOrigin, yOrigin+25, zOrigin+45, xOrigin+50, yOrigin+30, zOrigin+50);
+    glDisable(GL_TEXTURE_2D);
 }
 
 //Used to draw a garage(Block with hole in it)
 void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 {
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
     drawCube(xOrigin, yOrigin + 15, zOrigin, xOrigin + 50, yOrigin + 50, zOrigin + 50);
     drawCube(xOrigin, yOrigin, zOrigin, xOrigin + 16.66f, yOrigin + 20.0f, zOrigin + 50.0f);
     drawCube(xOrigin + 33.33f, yOrigin, zOrigin, xOrigin + 50.0f, yOrigin + 20.0f, zOrigin + 50.0f);
     drawCube(xOrigin, yOrigin, zOrigin, xOrigin+50, yOrigin+50, zOrigin+20);
     //Draw the roofing
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin, yOrigin+55, zOrigin+50);
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin+50, yOrigin+55, zOrigin+50);
+    glEnable(GL_TEXTURE_2D);
 }
 
 //Used to draw the peaks for the mountains and hills

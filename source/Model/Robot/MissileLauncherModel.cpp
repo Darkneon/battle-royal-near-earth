@@ -32,7 +32,7 @@ void MissileLauncherModel::render() {
 
 
      GLUquadricObj *quadratic = gluNewQuadric();
-	 glEnable(GL_TEXTURE_2D);
+	 TextureManager::getInstance()->enableTexture();
 
     glPushMatrix();
         glTranslatef(0.5f, 0.175f, 0.5f);//by jeff

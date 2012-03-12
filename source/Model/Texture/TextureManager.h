@@ -33,6 +33,9 @@ class TextureManager
 public:
 	static TextureManager* getInstance();
 	GLuint getTextures(string fileName);
+	void toggleTextures();
+	void enableTexture();
+	
 
     static string getResourcePath();
 private:
@@ -41,6 +44,7 @@ private:
 	map<string, GLuint> textures;
 	vector<string> directoryListing;
     static string resourcePath;
+	static bool texturesEnabled;
 };
 
 #endif

@@ -23,7 +23,7 @@ FenceModel::FenceModel() {
 }
 
 void FenceModel::render() {
-    glEnable(GL_TEXTURE_2D);
+    TextureManager::getInstance()->enableTexture();
     
 	glScalef(.5,.5,.5);
     glTranslatef(4,2,0);
