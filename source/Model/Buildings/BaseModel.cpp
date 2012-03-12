@@ -27,6 +27,7 @@ BaseModel::BaseModel()
 
 void BaseModel::render() 
 {
+   glEnable(GL_TEXTURE_2D);
      //Draw number -- Addison
     glPushMatrix();
         //Draw Base
@@ -37,7 +38,7 @@ void BaseModel::render()
         glTranslatef(-7.2f, 0, 0.0f);
         teamNumber2->render();
     glPopMatrix();
-  
+   glDisable(GL_TEXTURE_2D);
   
 }
 
