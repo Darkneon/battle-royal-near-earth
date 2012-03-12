@@ -16,7 +16,8 @@ public:
     CannonModel();
 
 private:
-	void render();    
+	void render();
+	void drawBarrel(GLUquadricObj*);
 	TeamNumberModel *teamNumber;
 };
 

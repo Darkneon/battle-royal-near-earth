@@ -35,21 +35,21 @@ void MissileLauncherModel::render() {
 	 glEnable(GL_TEXTURE_2D);
 
     glPushMatrix();
-        glTranslatef(0.5f,0.175f,0.5f);//by jeff
-        glScalef(.27f,.27f,.27f);//by jeff
+        glTranslatef(0.5f, 0.175f, 0.5f);//by jeff
+        glScalef(0.27f, 0.27f, 0.27f);//by jeff
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
+		glColor3f(0.7f, 0.7f, 0.7f);
 
-		//chasis
+		//Chasis
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smooth_metal.bmp"));
 		glPushMatrix();
-			glColor3f(0.7f, 0.7f, 0.7f);
 			glScalef(1.1f, 0.9f, 0.8f);
 			GeoHelper::drawRectangle();
 		glPopMatrix();
 
-		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp")); //for missile tubes
+		//Missile tubes
+		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp")); 
 		glPushMatrix();
-			glColor3f(0.7f, 0.7f, 0.7f);
 			glTranslatef(0.0f, -0.25f, -1.25f);
 			glPushMatrix();
 				glTranslatef(-1.3f, 0.0f, 0.0f);
