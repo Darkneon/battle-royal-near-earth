@@ -19,7 +19,7 @@ HollowBlockModel::HollowBlockModel() {
 }
 
 void HollowBlockModel::render() {
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal3.bmp"));
 	glPushMatrix();
 		glTranslatef(.5,.5,.5);

@@ -19,7 +19,7 @@ HalfHollowBlockModel::HalfHollowBlockModel()
 }
 
 void HalfHollowBlockModel::render() {
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("marble.bmp"));
 	glPushMatrix();
 		glTranslatef(.5,.25,.5);

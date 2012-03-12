@@ -19,7 +19,7 @@ PlainBlockModel::PlainBlockModel() {
 }
 
 void PlainBlockModel::render() {
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("brick.bmp"));
 	glPushMatrix();
 		drawCube();
@@ -30,7 +30,7 @@ void PlainBlockModel::render() {
 void PlainBlockModel::drawSquare(){
 	glPushMatrix();
 	glEnable(GL_BLEND);
-	glColor4f(0.5f,0.5f,0.5f,0.5f);
+	glColor4f(0.5f,0.5f,0.5f,1.0f);
 		glBegin(GL_TRIANGLES);
 			glTexCoord2f(0.0f,0.0f); glVertex3f(0.0f,0.0f,0.0f);
 			glTexCoord2f(0.0f,1.0f); glVertex3f(0.0f,0.0f,1.0f);

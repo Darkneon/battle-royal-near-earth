@@ -20,7 +20,7 @@ void GrassModel::render() {
     glTranslatef(0,0,1);
 	
 	glColor3f(0.8f, 0.8f, 0.8f);
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
     glPushMatrix();		
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rusty_floor.bmp"));
         glBegin(GL_TRIANGLES);

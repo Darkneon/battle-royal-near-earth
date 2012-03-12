@@ -23,7 +23,7 @@ PlayerModel::PlayerModel() {
 }
 
 void PlayerModel::render() {
-    glEnable(GL_TEXTURE_2D);	
+    TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("gold.bmp"));
 	
     glPushMatrix();

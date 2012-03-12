@@ -79,18 +79,19 @@ int helpWindow = 0;
 void renderLights()
 {		
 		//ambient light
-		GLfloat light0_ambient[ ] = {0.4f, 0.4f, 0.4f, 1.0f};
-		GLfloat light0_position[ ] = {0.0f, 0.0f, 0.0f, 1.0f};
-		glLightfv(GL_LIGHT7, GL_POSITION, light0_position);
-		glLightfv(GL_LIGHT7, GL_AMBIENT, light0_ambient);
-		
+		GLfloat ambient_light[4];
+
 		if(ambientLight){
-			glEnable(GL_LIGHT7);
+			for(int i = 0; i<3;i++){
+				ambient_light[i] = 0.45f;
+			}
 		}else{
-			glDisable(GL_LIGHT7);
+			for(int i = 0; i<3;i++){
+				ambient_light[i] = 0.2f;
+			}
 		}
-		//GLfloat ambient_light[ ] = {0.2, 0.2, 0.2, 1.0};
-		//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
+		ambient_light[3]=1.0f;
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
 
         glEnable(GL_LIGHTING);
         glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
@@ -266,7 +267,8 @@ void help_display(){
 		int lineHeight = height-20;
 		
 		ifstream openfile;
-		openfile.open("../keyInput.txt", ios::in);
+		string fileLoad = "keyInput.txt";
+		openfile.open((TextureManager::getResourcePath() + fileLoad).c_str(), ios::in);
 		if (openfile.is_open()) {
 			string s;
 			getline(openfile, s);
@@ -511,7 +513,7 @@ int main (int argc, char **argv)
 {
 	// GLUT initialization.
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	mainWindow = glutCreateWindow("Battle Royale Near Earth");
        
