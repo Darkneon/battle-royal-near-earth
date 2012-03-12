@@ -79,8 +79,6 @@ int helpWindow = 0;
 void renderLights()
 {		
 		//ambient light
-
-		
 		GLfloat light0_ambient[ ] = {0.4f, 0.4f, 0.4f, 1.0f};
 		GLfloat light0_position[ ] = {0.0f, 0.0f, 0.0f, 1.0f};
 		glLightfv(GL_LIGHT7, GL_POSITION, light0_position);
@@ -216,9 +214,6 @@ void render()
 	renderLights();
 	
 	//Drawing robot models on map
-	glPushMatrix();
-		game->p1->draw();
-	glPopMatrix();
 	glPushMatrix();
 		glTranslatef(15,0,40);
 		base.draw();
@@ -516,7 +511,7 @@ int main (int argc, char **argv)
 {
 	// GLUT initialization.
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	mainWindow = glutCreateWindow("Battle Royale Near Earth");
        

@@ -29,44 +29,60 @@ void MissileLauncherModel::render() {
 			 glScalef(0.5f, 0.5f, 0.5f);
 			 teamNumber->render();
 	 glPopMatrix();
+
+
      GLUquadricObj *quadratic = gluNewQuadric();
 	 glEnable(GL_TEXTURE_2D);
 
     glPushMatrix();
-        glTranslatef(0.5f,0.175f,0.5f);//by jeff
-        glScalef(.27f,.27f,.27f);//by jeff
+        glTranslatef(0.5f, 0.175f, 0.5f);//by jeff
+        glScalef(0.27f, 0.27f, 0.27f);//by jeff
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
+		glColor3f(0.7f, 0.7f, 0.7f);
 
-		//chasis
+		//Chasis
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smooth_metal.bmp"));
 		glPushMatrix();
-			glColor3f(0.7f, 0.7f, 0.7f);
 			glScalef(1.1f, 0.9f, 0.8f);
 			GeoHelper::drawRectangle();
 		glPopMatrix();
 
-		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp")); //for missile tubes
+		//Missile tubes
+		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp")); 
 		glPushMatrix();
-			glColor3f(0.7f, 0.7f, 0.7f);
+			glTranslatef(0.0f, -0.25f, -1.25f);
 			glPushMatrix();
-				glTranslatef(-1.2f, -0.5f, 0.0f);
-				glRotatef(90, 1.0f, 0.0f, 0.0f);
-				//glScalef(0.3f, 1.7f, 0.3f);
-				gluQuadricTexture(quadratic,true);
-				gluCylinder(quadratic, 0.25, 0.25, 1.5, 10, 10);
-
-				//GeoHelper::drawCylinder(360);
+				glTranslatef(-1.3f, 0.0f, 0.0f);
+				drawMissileLauncher(quadratic);
 			glPopMatrix();
 
+			
 			glPushMatrix();
-				glTranslatef(1.5f, -0.5f, 0.0f);
-				glRotatef(90, 1.0f, 0.0f, 0.0f);
-				glScalef(0.3f, 1.7f, 0.3f);
-				GeoHelper::drawCylinder(360);
+				glTranslatef(1.3f, 0.0f, 0.0f);
+				drawMissileLauncher(quadratic);
 			glPopMatrix();
+
 		glPopMatrix();
-		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
-    glTranslatef(0, 0.3f, 0);
+
+	glDisable(GL_TEXTURE_2D);
 	gluDeleteQuadric(quadratic);
+}
+
+void MissileLauncherModel::drawMissileLauncher(GLUquadricObj* quadratic)
+{
+	gluQuadricTexture(quadratic,true);
+	gluCylinder(quadratic, 0.25, 0.25, 2.5, 10, 10);
+
+	//disk 1
+	glPushMatrix();
+		glRotatef(180, 0.0f, 1.0f, 0.0f);
+		gluDisk(quadratic, 0.0, 0.25, 10, 10);
+	glPopMatrix();
+
+	//disk 2
+	glPushMatrix();
+		glTranslatef(0.0f, 0.0f, 2.5f);
+		gluDisk(quadratic, 0.0, 0.25, 10, 10);
+	glPopMatrix();
 }
