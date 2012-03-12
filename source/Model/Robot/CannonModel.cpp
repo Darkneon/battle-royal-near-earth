@@ -23,7 +23,7 @@ CannonModel::CannonModel() {
 
 void CannonModel::render() 
 {
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 
 	glPushMatrix();
 		glTranslatef(-0.1f, 0.0f, 0.0f);

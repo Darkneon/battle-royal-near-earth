@@ -196,7 +196,7 @@ void PitModel::drawPitBottom()
 
 void PitModel::render() 
 {	
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("dirt.bmp"));
 	glPushMatrix();
 		glTranslatef(0.0f, -1.0f, 0.0f);

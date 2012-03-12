@@ -24,7 +24,7 @@ NuclearModel::NuclearModel() {
 
 void NuclearModel::render() 
 {
-    glEnable(GL_TEXTURE_2D);
+    TextureManager::getInstance()->enableTexture();
 	GLUquadricObj *quadratic = gluNewQuadric();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp"));
 	gluQuadricTexture(quadratic,true);
