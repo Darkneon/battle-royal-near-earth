@@ -215,9 +215,6 @@ void render()
 	
 	//Drawing robot models on map
 	glPushMatrix();
-		game->p1->draw();
-	glPopMatrix();
-	glPushMatrix();
 		glTranslatef(15,0,40);
 		base.draw();
         glTranslatef(-5,0,5);
@@ -514,7 +511,7 @@ int main (int argc, char **argv)
 {
 	// GLUT initialization.
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
 	mainWindow = glutCreateWindow("Battle Royale Near Earth");
        
