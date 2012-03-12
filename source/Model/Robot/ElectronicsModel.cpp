@@ -35,7 +35,7 @@ void ElectronicsModel::render() {
 			GLUquadricObj *quadratic = gluNewQuadric();
 			//Base
 			glColor3f(.2f,.2f,.2f);
-			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
+			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("concrete_bare.bmp"));
 			gluQuadricTexture(quadratic,true);
 			gluCylinder(quadratic, .5, .5, .1, 8, 3);
 
@@ -77,13 +77,8 @@ void ElectronicsModel::render() {
 		
 		glPushMatrix();
 			//Neck
-			glColor3f(.7f,.7f,.7f);
+			glColor3f(.4f,.4f,.4f);
 			gluCylinder(quadratic, .2, .2, .475, 8, 4);
-		
-			// Top of Base
-			//glColor3f(.7f,.7f,.7f);
-			//glTranslatef(0.0f,0.0f,.45f);
-			//gluDisk(quadratic, 0, .2, 8, 4);
 		glPopMatrix();
 		
 		glPushMatrix();
@@ -100,12 +95,19 @@ void ElectronicsModel::render() {
 				glEnable(GL_CLIP_PLANE0);
 					//outer sphere
 					glColor3f(.5,.5,.5);
-					gluSphere(quadratic, .6, 10,10);
-					
+					glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal4.bmp"));
+					gluQuadricTexture(quadratic,true);
+					glPushMatrix();
+						glRotatef(180,1.0f,0.0f,0.0f);
+						gluSphere(quadratic, .6, 10,10);
+					glPopMatrix();
 					//inner sphere
 					gluQuadricOrientation(quadratic, GLU_INSIDE);
 					glColor3f(.55f, .55f, .55f);
-					gluSphere(quadratic, .5, 10, 10);
+					glPushMatrix();
+						glRotatef(180,1.0f,0.0f,0.0f);
+						gluSphere(quadratic, .5, 10, 10);
+					glPopMatrix();
 					gluQuadricOrientation(quadratic, GLU_OUTSIDE);
 				glDisable(GL_CLIP_PLANE0);
 				glPushMatrix();

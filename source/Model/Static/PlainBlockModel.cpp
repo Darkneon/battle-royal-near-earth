@@ -19,37 +19,28 @@ PlainBlockModel::PlainBlockModel() {
 }
 
 void PlainBlockModel::render() {
-
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("brick.bmp"));
 	glPushMatrix();
 		drawCube();
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 
 void PlainBlockModel::drawSquare(){
-    glEnable(GL_TEXTURE_2D);
-	GLuint temp = TextureManager::getInstance()->getTextures("brick.bmp");
-	glBindTexture(GL_TEXTURE_2D, temp);
 	glPushMatrix();
 	glEnable(GL_BLEND);
 	glColor4f(0.5f,0.5f,0.5f,0.5f);
-		/*glBegin(GL_TRIANGLES);
+		glBegin(GL_TRIANGLES);
 			glTexCoord2f(0.0f,0.0f); glVertex3f(0.0f,0.0f,0.0f);
 			glTexCoord2f(0.0f,1.0f); glVertex3f(0.0f,0.0f,1.0f);
 			glTexCoord2f(1.0f,1.0f); glVertex3f(1.0f,0.0f,1.0f);
 
 			glTexCoord2f(0.0f,0.0f); glVertex3f(0.0f,0.0f,0.0f);
-			glTexCoord2f(1.0f,1.0f); glVertex3f(1.0f,0.0f,1.0f);
-			glTexCoord2f(1.0f,0.0f); glVertex3f(1.0f,0.0f,0.0f);
-		glEnd();*/
-		glBegin(GL_QUADS);
-			glTexCoord2f(0.0f,0.0f); glVertex3f(0.0f,0.0f,0.0f);
-			glTexCoord2f(0.0f,1.0f); glVertex3f(0.0f,0.0f,1.0f);
 			glTexCoord2f(1.0f,1.0f); glVertex3f(1.0f,0.0f,1.0f);
 			glTexCoord2f(1.0f,0.0f); glVertex3f(1.0f,0.0f,0.0f);
 		glEnd();
 	glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
-
 }
 
 void PlainBlockModel::drawCube(){

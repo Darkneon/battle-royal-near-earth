@@ -64,6 +64,7 @@ void PitModel::drawPitIn()
 void PitModel::drawPitTop()
 {
 	GLUquadricObj *quadratic = gluNewQuadric();
+	gluQuadricTexture(quadratic,true);
 	GLfloat black[3] = {0.0f, 0.0f, 0.0f}; //How do I delete????
 	GLfloat brown[3] = {0.7f, 0.3f, 0.0f};
 	GLfloat dbrown[3] = {0.6f, 0.2f, 0.0f};
@@ -128,6 +129,8 @@ void PitModel::drawPitTop()
 void PitModel::drawPitBottom()
 {
 	GLUquadricObj *quadratic = gluNewQuadric();
+	gluQuadricTexture(quadratic,true);
+
 	GLfloat black[3] = {0.0f, 0.0f, 0.0f}; //How do I delete????
 	GLfloat brown[3] = {0.7f, 0.3f, 0.0f};
 	GLfloat dbrown[3] = {0.6f, 0.2f, 0.0f};
@@ -192,7 +195,9 @@ void PitModel::drawPitBottom()
 }
 
 void PitModel::render() 
-{
+{	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("dirt.bmp"));
 	glPushMatrix();
 		glTranslatef(0.0f, -1.0f, 0.0f);
 		if (pitType == 0)
@@ -202,25 +207,25 @@ void PitModel::render()
 		else
 			drawPitBottom();
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 
 void PitModel::drawSquare(){
-	//GLuint temp = TextureManager::getInstance()->getTextures("brick.bmp");
-	//glBindTexture(GL_TEXTURE_2D, temp);
+	
 	glPushMatrix();
 		glBegin(GL_TRIANGLES);
-			//glTexCoord2f(0.0f,0.0f); 
+			glTexCoord2f(0.0f,0.0f); 
 			glVertex3f(0.0f,0.0f,0.0f);
-			//glTexCoord2f(0.0f,1.0f);
+			glTexCoord2f(0.0f,1.0f);
 			glVertex3f(0.0f,0.0f,1.0f);
-			//glTexCoord2f(1.0f,1.0f); 
+			glTexCoord2f(1.0f,1.0f); 
 			glVertex3f(1.0f,0.0f,1.0f);
 
-			//glTexCoord2f(0.0f,0.0f); 
+			glTexCoord2f(0.0f,0.0f); 
 			glVertex3f(0.0f,0.0f,0.0f);
-			//glTexCoord2f(1.0f,1.0f); 
+			glTexCoord2f(1.0f,1.0f); 
 			glVertex3f(1.0f,0.0f,1.0f);
-			//glTexCoord2f(1.0f,0.0f); 
+			glTexCoord2f(1.0f,0.0f); 
 			glVertex3f(1.0f,0.0f,0.0f);
 		glEnd();
 	glPopMatrix();

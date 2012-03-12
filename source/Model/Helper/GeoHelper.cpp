@@ -328,87 +328,80 @@ void GeoHelper::drawAxis(GLfloat length)
 }
 void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend)
 {
-   // glPushMatrix();
     glBegin(GL_TRIANGLES);
         //                  X     Y     Z
-        // Square 1 -- ALONG THE X AXIS
-        glColor3f(0.0f, 1.0f, 1.0f);
-                //Lower Triangle
-                glColor3f(0.8f, 1.0f, 1.0f); // LIGHT BLUE
-                glNormal3f(0.0, 0.0, -1.0);
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
+        // Square 1 -- ALONG THE X AXIS (BACK)
+        glColor3f(0.5f, 0.5f, 0.5f);
+        //Lower Triangle
+        glNormal3f(0.0, 0.0, -1.0);
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xOrigin, yOrigin, zOrigin);
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xExtend, yExtend, zOrigin);
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xExtend, yOrigin, zOrigin);
                 
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
+        //Upper Triangle
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xOrigin, yOrigin, zOrigin);
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xOrigin, yExtend, zOrigin);
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xExtend, yExtend, zOrigin);
                
                 
-        // Square 2 -- ALONG THE Z AXIS
-                glColor3f(0.0f, 1.0f, 1.0f); // DARKER BLUE
-                glNormal3f(-1.0, 0.0, 0.0);
-                 //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                glVertex3f(xOrigin, yExtend, zOrigin);
+        // Square 2 -- ALONG THE Z AXIS (LEFT)
+        glNormal3f(-1.0, 0.0, 0.0);
+        //Lower Triangle
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zOrigin); 
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xOrigin, yOrigin, zExtend); 
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xOrigin, yExtend, zExtend); 
+        //Upper Triangle
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zOrigin); 
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xOrigin, yExtend, zExtend); 
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zOrigin);
                 
-        // Square 3 -- ALONG THE X AXIS, extended off Z
-                glColor3f(1.0f, 0.0f, 1.0f); //PURPLE
-                 glNormal3f(0.0, 0.0, 1.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
-                glVertex3f(xOrigin, yExtend, zExtend);
+        // Square 3 -- ALONG THE X AXIS, extended off Z (FRONT)
+        glNormal3f(0.0, 0.0, 1.0); 
+        //Lower Triangle
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zExtend); //c
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend); //d
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yExtend, zExtend);//b
+        //Upper Triangle
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zExtend);//c
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yExtend, zExtend);//b
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zExtend);//a
                 
-        // Square 4 -- Along the X AND Z AXIS
-                glColor3f(1.0f, 0.0f, 0.0f); //RED
-                glNormal3f(1.0, 0.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-                glVertex3f(xExtend, yOrigin, zExtend);
+        // Square 4 -- Along the X AND Z AXIS (RIGHT)
+        glNormal3f(1.0, 0.0, 0.0);
+        //Lower Triangle
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zOrigin);
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xExtend, yExtend, zExtend);
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend);
                 
-                //Upper Triangle
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
+        //Upper Triangle
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zOrigin);
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yExtend, zOrigin);
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xExtend, yExtend, zExtend);
+
+
         // Square 5 -- TOP OF CUBE
-                glColor3f(1.0f, 1.0f, 0.0f); //YELLOW
-                glNormal3f(0.0, 1.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xOrigin, yExtend, zExtend);
-                glVertex3f(xExtend, yExtend, zExtend);
+        glNormal3f(0.0, 1.0, 0.0);
+        //Lower Triangle
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zOrigin);
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yExtend, zExtend);
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yExtend, zExtend);
                 
-                //Upper Triangle
-                glVertex3f(xOrigin, yExtend, zOrigin);
-                glVertex3f(xExtend, yExtend, zExtend);
-                glVertex3f(xExtend, yExtend, zOrigin);
+        //Upper Triangle
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zOrigin);
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yExtend, zExtend);
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yExtend, zOrigin);
                 
         // Square 6 -- BOTTOM OF CUBE
-                glColor3f(1.0f, 0.5f, 0.5f); //PINK
-                 glNormal3f(0.0, -1.0, 0.0);
-                //Lower Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
-                glVertex3f(xOrigin, yOrigin, zExtend);
-                //Upper Triangle
-                glVertex3f(xOrigin, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zOrigin);
-                glVertex3f(xExtend, yOrigin, zExtend);
+        glNormal3f(0.0, -1.0, 0.0);
+        //Lower Triangle
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yOrigin, zOrigin);
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend);
+        glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zExtend);
+        //Upper Triangle
+        glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yOrigin, zOrigin);
+        glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yOrigin, zOrigin);
+        glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend);
 	glEnd();
-        
-      //  glPopMatrix;
 }
 
 //Used to draw a middle smaller building

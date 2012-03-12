@@ -19,9 +19,17 @@ HalfHollowBlockModel::HalfHollowBlockModel()
 }
 
 void HalfHollowBlockModel::render() {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("marble.bmp"));
 	glPushMatrix();
+		glTranslatef(.5,.25,.5);
 		glScalef(1.0f, 0.5f, 1.0f);
-		HollowBlockModel::render();
+		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+		GeoHelper::drawCube(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.25f);
+		GeoHelper::drawCube(-0.5f, -0.5f, -0.25f, -0.25f, 0.5f, 0.25f);
+		GeoHelper::drawCube(-0.5f, -0.5f, 0.25f, 0.5f, 0.5f, 0.5f);
+		GeoHelper::drawCube(0.25f, -0.5f, -0.25f, 0.5f, 0.5f, 0.5f);
 	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 

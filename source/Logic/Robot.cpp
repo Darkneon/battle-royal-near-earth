@@ -149,13 +149,13 @@ void Robot::refreshRobot(){
 			tempChild = temp;
 			switch(i){
 				case 3:
-					temp = phaserM;
-					break;
-				case 4:
 					temp = cannonM;
 					break;
-				case 5:
+				case 4:
 					temp = missileM;
+					break;
+				case 5:
+					temp = phaserM;
 					break;
 				case 6:
 					temp = nuclearM;
@@ -296,13 +296,13 @@ GLfloat Robot::calculateHeight(int index){
 					h += ANTIGRAV_HEIGHT;
 					break;
 				case 3:
-					h += PHASER_HEIGHT;
-					break;
-				case 4:
 					h += CANNON_HEIGHT;
 					break;
-				case 5:
+				case 4:
 					h += MISSILE_LAUNCHER_HEIGHT;
+					break;
+				case 5:
+					h += PHASER_HEIGHT;
 					break;
 				case 6:
 					h += NUCLEAR_HEIGHT;
