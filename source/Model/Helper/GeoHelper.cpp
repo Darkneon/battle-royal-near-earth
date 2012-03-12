@@ -470,31 +470,54 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
     glBegin(GL_TRIANGLES);
 		GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f, normal);
 		glNormal3fv(normal);
+
+		glTexCoord2f(0.0f, 0.0f);   
         glVertex3f(0.0f, 0.0f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);   
 		glVertex3f(0.5f, 1, 0.5f);
+
+		glTexCoord2f(0.0f, 1.0f);   
         glVertex3f(1.0f, 0.0f, 0.0f);
         
 		GeoHelper::findNormal3f(1.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 1.0f, normal);
 		glNormal3fv(normal);
+
+		glTexCoord2f(1.0f, 0.0f);   
         glVertex3f(1.0f, 0.0f, 0.0f);
+
+		glTexCoord2f(0.5f, 1.0f);   
 		glVertex3f(0.5f, 1.0f, 0.5f);
+
+		glTexCoord2f(0.0f, 1.0f);   
         glVertex3f(1.0f, 0.0f, 1.0f);
         
 		GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 1.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f, normal);
 		glNormal3fv(normal);
+		
+		glTexCoord2f(0.0f, 1.0f);   
         glVertex3f(0.0f, 0.0f, 1.0f);
+
+		glTexCoord2f(1.0f, 0.0f);   
 		glVertex3f(1.0f, 0.0f, 1.0f);
+
+		glTexCoord2f(0.5f, 1.0f);   
         glVertex3f(0.5f, 1.0f, 0.5f);
         
 		GeoHelper::findNormal3f(0.0f,  0.0f, 0.0f, 0.5f,  1.0f, 0.5f, 1.0f,  0.0f, 0.0f, normal);
 		glNormal3fv(normal);
+		
+		glTexCoord2f(0.0f, 0.0f);   
 		glVertex3f(0.0f, 0.0f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);   
         glVertex3f(0.0f, 0.0f, 1.0f);
+
+		glTexCoord2f(0.5f, 1.0f);   
         glVertex3f(0.5f, 1.0f, 0.5f);
     glEnd();
 	delete [] normal;
-}
-
+ }
 
 void GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3, GLfloat* result)
 {
