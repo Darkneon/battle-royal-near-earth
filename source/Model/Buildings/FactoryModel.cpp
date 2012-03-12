@@ -21,9 +21,12 @@ FactoryModel::FactoryModel(void) {
 
 void FactoryModel::render() 
 {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo2.bmp"));
     glPushMatrix();
         drawFactory(0.0f, 0.0f, 0.0f);
     glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }
 
 //Uses the previous methods to draw a base

@@ -80,6 +80,7 @@ void CannonModel::render()
 			glPushMatrix();
 				glTranslatef(-0.2f, 0.35f, 0.0f);
 				glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+				glRotatef(-10.0f, 1.0f, 0.0f, 0.0f);
 
 				glPushMatrix();
 					glTranslatef(0.5f, 0.0f, 0.0f);
@@ -109,11 +110,19 @@ void CannonModel::render()
 
 void CannonModel::drawBarrel(GLUquadricObj* quadratic)
 {
-	gluCylinder(quadratic, 0.125, 0.125, 1.5, 10, 10);
-	glTranslatef(0.0f, 0.0f, 1.5f);
-	gluCylinder(quadratic, 0.125, 0.18, 0.1, 10, 10);
+	gluCylinder(quadratic, 0.125, 0.125, 1.0, 10, 10);
+	glTranslatef(0.0f, 0.0f, 1.0f);
+	gluCylinder(quadratic, 0.07, 0.07, 0.5, 10, 10);
+	
+	glTranslatef(0.0f, 0.0f, 0.5f);
+	gluCylinder(quadratic, 0.07, 0.14, 0.1, 10, 10);
+
 	glTranslatef(0.0f, 0.0f, 0.1f);
-	gluCylinder(quadratic, 0.18, 0.18, 0.1, 10, 10);
+	gluCylinder(quadratic, 0.14, 0.14, 0.1, 10, 10);
+
 	glTranslatef(0.0f, 0.0f, 0.1f);
-	gluDisk(quadratic, 0.0, 0.18, 10, 10);
+	gluCylinder(quadratic, 0.14, 0.07, 0.1, 10, 10);
+
+	glTranslatef(0.0f, 0.0f, 0.1f);
+	gluDisk(quadratic, 0.0, 0.07, 10, 10);
 }

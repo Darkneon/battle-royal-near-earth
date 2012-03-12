@@ -27,7 +27,12 @@ BaseModel::BaseModel()
 
 void BaseModel::render() 
 {
+<<<<<<< HEAD
    glEnable(GL_TEXTURE_2D);
+=======
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
+>>>>>>> 861170016eb968b620ee3f3a4628e48d8614a0b3
      //Draw number -- Addison
     glPushMatrix();
         //Draw Base
@@ -38,7 +43,12 @@ void BaseModel::render()
         glTranslatef(-7.2f, 0, 0.0f);
         teamNumber2->render();
     glPopMatrix();
+<<<<<<< HEAD
    glDisable(GL_TEXTURE_2D);
+=======
+	glEnable(GL_TEXTURE_2D);
+  
+>>>>>>> 861170016eb968b620ee3f3a4628e48d8614a0b3
   
 }
 

@@ -159,7 +159,7 @@ void LevelRenderer::map1(){
 			}
 		}
 	}
-	level[25][40] = 20;
+	level[35][40] = 20;
 	for(int model = 1; model < 20; model++){
 		for(int i = 5; i < 50; i += 5){
 			level[i][model*2] = model;
