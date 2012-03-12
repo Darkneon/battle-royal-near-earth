@@ -20,7 +20,7 @@ LightRubbleModel::LightRubbleModel(void)
 
 void LightRubbleModel::render() {
 	glColor3f(.7f,.7f,.7f);
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glPushMatrix();
 		glTranslatef(0.15f,0.0f,0.2f);
 			drawRock();
@@ -59,7 +59,6 @@ void LightRubbleModel::render() {
 			drawRock();
 		glTranslatef(-0.65f, 0.0f, -0.7f);
 	glPopMatrix();
-	glDisable(GL_TEXTURE_2D);
 }
 
 void LightRubbleModel::drawRock() {

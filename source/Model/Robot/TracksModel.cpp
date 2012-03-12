@@ -35,7 +35,7 @@ void TracksModel::render(){
 }
 
 void TracksModel::drawTrack(){
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
 
 	GLUquadricObj *qTracks = gluNewQuadric();
@@ -164,5 +164,4 @@ void TracksModel::drawTrack(){
 	glPopMatrix();
 	gluDeleteQuadric(qTracks);
 	gluDeleteQuadric(qDisk);
-	glDisable(GL_TEXTURE_2D);
 }

@@ -18,7 +18,7 @@ AntiGravModel::AntiGravModel(void)
 
 
 void AntiGravModel::render(){
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 
 	GLUquadricObj *qGrav = gluNewQuadric();
 	gluQuadricNormals(qGrav, GLU_SMOOTH);
@@ -150,7 +150,6 @@ void AntiGravModel::render(){
 
     glTranslatef(0, 0.7f, 0);
 	gluDeleteQuadric(qGrav);
-	glDisable(GL_TEXTURE_2D);
 }
 
 void AntiGravModel::drawMachineCube(){
