@@ -56,16 +56,34 @@ void PhaserModel::render() {
 					GLdouble coordinate[4] = {0.0, 1.0, 0.0, 0.0};
 					glClipPlane(GL_CLIP_PLANE0, coordinate);
 					glEnable(GL_CLIP_PLANE0);
-
 					gluCylinder(quadratic, 1.0, 1.0, 1.5, 12, 12);
 
+					//closing thing for phaser
+					GLfloat* normal = new GLfloat[3];
+
 					glBegin(GL_TRIANGLES);
+						GeoHelper::findNormal3f(-1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.5f, normal);
+						glNormal3fv(normal);
+
+						glTexCoord2f(0.0f, 0.0f);
 						glVertex3f(-1.0f, 0.0f, 0.0f);
+
+						glTexCoord2f(1.0f, 0.0f);
 						glVertex3f(1.0f, 0.0f, 0.0f);
+
+						glTexCoord2f(0.0f, 1.0f);
 						glVertex3f(-1.0f, 0.0f, 1.5f);
 
+						GeoHelper::findNormal3f(-1.0f, 0.0f, 1.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.5f, normal);
+						glNormal3fv(normal);
+
+						glTexCoord2f(0.0f, 1.0f);
 						glVertex3f(-1.0f, 0.0f, 1.5f);
+
+						glTexCoord2f(1.0f, 0.0f);
 						glVertex3f(1.0f, 0.0f, 0.0f);
+
+						glTexCoord2f(1.0f, 1.0f);
 						glVertex3f(1.0f, 0.0f, 1.5f);
 					glEnd();
 
@@ -96,8 +114,6 @@ void PhaserModel::render() {
 				glTranslatef(-1.01f, 0.0f, 0.0f);
 				glScalef(1.0f, 1.0f, 2.0f);
 
-				
-				GLfloat* normal = new GLfloat[3];
 
 				glBegin(GL_TRIANGLES);
 					GeoHelper::findNormal3f(0.0f, -0.5f, -0.5f, 0.0f, -0.5f, 0.5f, 0.0f, 0.5f, -0.5f, normal);
