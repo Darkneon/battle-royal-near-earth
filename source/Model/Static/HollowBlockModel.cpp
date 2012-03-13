@@ -20,7 +20,7 @@ HollowBlockModel::HollowBlockModel() {
 
 void HollowBlockModel::render() {
 	TextureManager::getInstance()->enableTexture();
-	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("ink.bmp"));
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("ink2.bmp"));
 	glPushMatrix();
 		glTranslatef(.5,.5,.5);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
