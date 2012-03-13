@@ -9,6 +9,7 @@
 #define	NUCLEARMODEL_H
 
 #include "Model.h"
+#include "Static/TeamNumberModel.h"
 
 class NuclearModel : Model {
 public:
@@ -16,6 +17,7 @@ public:
 	//GLfloat height;
 private:
 	void render();
+	TeamNumberModel *teamNumber;
 };
 
 #endif

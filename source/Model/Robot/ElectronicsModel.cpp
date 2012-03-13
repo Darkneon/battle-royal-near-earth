@@ -18,7 +18,7 @@
 
 ElectronicsModel::ElectronicsModel() {    
     material = (Material*)(new MetalMaterial());
-	
+	teamNumber = new TeamNumberModel();
 }
 
 void ElectronicsModel::render() {
@@ -44,13 +44,22 @@ void ElectronicsModel::render() {
 			glTranslatef(0.0f,0.0f,0.0f);
 			gluDisk(quadratic, 0, .5, 8, 5);
 		
-			// Top of Base
+			// Top of Base with Team Number
 			glColor3f(.2f,.2f,.2f);
 			glTranslatef(0.0f,0.0f,.1f);
 			gluDisk(quadratic, 0, .5, 8, 5);
+			glPushMatrix();
+				glColor3f(1.0f,1.0f,1.0f);
+				glScalef(0.4f,0.4f,0.4f);
+				glTranslatef(-0.5f,-1.3f,0.0f);
+				glRotatef(90,1.0f,0.0f,0.0f);
+				teamNumber->render();
+			glPopMatrix();
+
+		glPopMatrix();
 			
 			//Team #
-			glPushMatrix();
+			/*glPushMatrix();
 				glColor3f(1.0f,0.0f,0.0f);
 				glTranslatef(0.0f,-0.3f,0.01f);
 				glScalef(0.25f, 0.25f, 0.25f);
@@ -73,7 +82,7 @@ void ElectronicsModel::render() {
 				glEnd();
 			glPopMatrix();
 		glPopMatrix();
-		glTranslatef(0.0f,.1f,.1f);
+		glTranslatef(0.0f,.1f,.1f);*/
 		
 		glPushMatrix();
 			//Neck

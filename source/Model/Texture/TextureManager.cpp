@@ -21,7 +21,7 @@
 
 TextureManager* TextureManager::instance = NULL;
 string TextureManager::resourcePath;
-bool TextureManager::texturesEnabled = false;
+bool TextureManager::texturesEnabled = true;
 
 TextureManager::TextureManager(void)
 {

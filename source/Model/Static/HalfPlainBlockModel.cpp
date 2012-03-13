@@ -20,7 +20,7 @@ HalfPlainBlockModel::HalfPlainBlockModel() {
 
 void HalfPlainBlockModel::render() {
 	TextureManager::getInstance()->enableTexture();
-	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("ink.bmp"));
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("blackDesign.bmp"));
 	glTranslatef(.5,.25,.5);
 	glPushMatrix();
 		GeoHelper::drawCube(-0.5f, -0.25, -0.5f, 0.5f, 0.25, 0.5f);

@@ -9,6 +9,7 @@
 #define	ELECTRONICSMODEL_H
 
 #include "Model.h"
+#include "Static/TeamNumberModel.h"
 
 class ElectronicsModel : Model {
 public:
@@ -16,6 +17,7 @@ public:
 
 private:
 	void render();
+	TeamNumberModel *teamNumber;
 };
 
 #endif

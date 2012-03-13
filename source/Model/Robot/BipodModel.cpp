@@ -139,8 +139,7 @@ void BipodModel::drawLeg(){
 			glScalef(.5f,.5f,.5f);
 			glRotatef(-90, 0.0f,1.0f, 0.0f);
 			glRotatef(90, 1.0f,0.0f, 0.0f);
-			TeamNumberModel teamNumber;
-			teamNumber.render();
+			teamNumber->render();
 		glPopMatrix();
 
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("bipodf.bmp"));
