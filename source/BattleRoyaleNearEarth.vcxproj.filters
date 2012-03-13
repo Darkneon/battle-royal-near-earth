@@ -152,6 +152,9 @@
     <ClCompile Include="Helper\DirectoryManipHelper.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Skybox\CubicSkybox.cpp">
+      <Filter>Model\Skybox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -304,6 +307,9 @@
     <ClInclude Include="Helper\DirectoryManipHelper.h">
       <Filter>Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Model\Skybox\CubicSkybox.h">
+      <Filter>Model\Skybox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -341,6 +347,9 @@
     </Filter>
     <Filter Include="Model\Texture">
       <UniqueIdentifier>{77ef7903-430f-4093-a082-cc5972d880d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Skybox">
+      <UniqueIdentifier>{f2a0aa64-cb07-493e-a6a8-e8cdaf819b6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

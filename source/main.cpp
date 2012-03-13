@@ -6,6 +6,7 @@
 #include "SpotLight.h"
 #include "Light/LightPost.h"
 #include "Model/Texture/TextureManager.h"
+#include "..\Model\Skybox\CubicSkybox.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -37,7 +38,7 @@ int winPosY = 0;
 bool isInFullScreenMode;
 
 // Bounds of viewing frustum.
-GLfloat nearPlane =  1.0f;
+GLfloat nearPlane =  0.0f;
 GLfloat farPlane  = 100.0f;
 
 bool keyStates[256];
@@ -54,6 +55,7 @@ LevelRenderer levelRenderer;
 Base base;
 Robot robot;
 Robot robot2;
+CubicSkybox cubicSkyBox;
 bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
 GLUquadricObj *quadratic = gluNewQuadric();
@@ -210,10 +212,9 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	
 	levelRenderer.render();
 	renderLights();
-	
+
 	//Drawing robot models on map
 	glPushMatrix();
 		glTranslatef(15,0,40);
@@ -232,6 +233,7 @@ void render()
 		robot2.draw();
 	glPopMatrix();
 
+	cubicSkyBox.render();
 	game->p1->view(); // Camera update (leave as it is for now)
 	game->getInput(keyModifier); // Gets user input
 
