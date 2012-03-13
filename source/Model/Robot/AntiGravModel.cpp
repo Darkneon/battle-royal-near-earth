@@ -105,10 +105,9 @@ void AntiGravModel::render(){
 
 		glPushMatrix();
 			glTranslatef(0.3f,1.0f,1.2f);
-			TeamNumberModel teamNumber;
-			teamNumber.render();
+			teamNumber->render();
 		glPopMatrix();
-
+		TextureManager::getInstance()->enableTexture();
 		//cylinder
 		glTranslatef(1.0f,0.8f,1.0f);
 		glColor3f(1.0f,1.0f,1.0f);

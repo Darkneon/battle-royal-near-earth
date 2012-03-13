@@ -17,8 +17,8 @@ BipodModel::BipodModel(void)
 
 
 void BipodModel::render(){
+	
 	TextureManager::getInstance()->enableTexture();
-
 	glPushMatrix();
 		glTranslatef(.8f, 0.0f, 1.0f);
 		glRotatef(180,0,1,0);
@@ -95,7 +95,7 @@ void BipodModel::render(){
 void BipodModel::drawLeg(){
 	GLUquadricObj *qbipod = gluNewQuadric();
 	gluQuadricNormals(qbipod, GLU_SMOOTH);
-
+	TextureManager::getInstance()->enableTexture();
 	glPushMatrix();
 		glTranslatef(0.25f,0.4f,0.25f);
 		glPushMatrix();
@@ -141,7 +141,7 @@ void BipodModel::drawLeg(){
 			glRotatef(90, 1.0f,0.0f, 0.0f);
 			teamNumber->render();
 		glPopMatrix();
-
+		TextureManager::getInstance()->enableTexture();
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("bipodf.bmp"));
 		glBegin(GL_QUADS);
 			glNormal3f(0.0f, 0.0f, -1.0f);
