@@ -86,9 +86,42 @@ void MissileLauncherModel::drawMissileLauncher(GLUquadricObj* quadratic)
 	glPopMatrix();
 
 	//Front
-	//glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("mechanical.bmp")); 
+	
 	glPushMatrix();
 		glTranslatef(0.0f, 0.0f, 2.5f);
 		GeoHelper::drawCube(-0.26f, -0.26f, -0.26f, 0.26f, 0.26f, 0.26f);
+		GLfloat* normal = new GLfloat[3];
+		
+		glTranslatef(0.0f, 0.0f, 0.27f);
+
+		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("missile_face.bmp")); 
+		glBegin(GL_TRIANGLES);
+		GeoHelper::findNormal3f(-0.26f,  -0.26f, 0.0f, 0.26f,  -0.26f, 0.0f, -0.26f,  0.26f, 0.0f, normal);
+		glNormal3fv(normal);
+
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(-0.26f,  -0.26f, 0.0f);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(0.26f,  -0.26f, 0.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-0.26f,  0.26f, 0.0f);
+
+		GeoHelper::findNormal3f(0.26f, -0.26f, 0.0f, 0.26f, 0.26f, 0.0f, -0.26f,  0.26f, 0.0f, normal);
+		glNormal3fv(normal);
+
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(0.26f, -0.26f, 0.0f);
+
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(0.26f, 0.26f, 0.0f);
+
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-0.26f,  0.26f, 0.0f);
+
+		glEnd();
+
+		delete [] normal;
 	glPopMatrix();
 }

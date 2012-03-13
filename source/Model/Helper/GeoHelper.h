@@ -15,7 +15,6 @@ class GeoHelper
 {
 public:
 	static void drawRectangle();
-	static void drawCylinder(GLint degrees);
 	static void drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xEnd, GLfloat yEnd, GLfloat zEnd);
 	static void drawTrapezoidalPrism();
 	static void drawTriangularPrism();
