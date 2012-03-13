@@ -7,6 +7,7 @@ f5 --------------- robot camera (need to attach robot first, with 't')
 [ ] -------------- roll camera
 / ---------------- reset roll/pitch
 l ---------------- toggle light (in bird view)
+o ---------------- toggle texture
 arrows ----------- move camera around
 page up/down ----- rotate
 end -------------- reset rotation angle to 0
