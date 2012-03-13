@@ -27,7 +27,7 @@ PhaserModel::PhaserModel() {
 
 void PhaserModel::render() {
 
-	TextureManager::getInstance()->enableTexture();
+	
 
 	glPushMatrix();
     glTranslatef(-0.1f,0.05f,0.0f);    
@@ -37,7 +37,7 @@ void PhaserModel::render() {
                 glScalef(0.5f, 0.5f, 0.5f);
                 teamNumber->render();
         glPopMatrix();
-
+		TextureManager::getInstance()->enableTexture();
 		glColor3f(0.7f, 0.7f, 0.7f);
 		GLUquadricObj *quadratic = gluNewQuadric();
 

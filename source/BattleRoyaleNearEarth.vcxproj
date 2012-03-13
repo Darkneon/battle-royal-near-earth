@@ -10,6 +10,10 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB691659-6BE1-45EA-B889-DCF0AE7FC7EB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -202,6 +206,9 @@
     <ClInclude Include="Model\Static\TeamNumberModel.h" />
     <ClInclude Include="Model\Texture\imageloader.h" />
     <ClInclude Include="Model\Texture\TextureManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

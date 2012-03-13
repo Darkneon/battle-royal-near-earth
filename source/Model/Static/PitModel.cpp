@@ -39,8 +39,9 @@ void PitModel::drawPitIn()
 	//Pit Inside
 	glPushMatrix();
 		GLfloat black[3] = {0.0f, 0.0f, 0.0f}; 
-		GLfloat brown[3] = {0.7f, 0.3f, 0.0f};
-		GLfloat dbrown[3] = {0.6f, 0.2f, 0.0f};
+		GLfloat brown[3] = {0.8f, 0.4f, 0.0f};
+		GLfloat dbrown[3] = {0.7f, 0.3f, 0.0f};
+
 		//Base
 		glPushMatrix();
 			glScalef(1.0f, 0.2f, 1.0f);

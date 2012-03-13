@@ -27,8 +27,6 @@ BaseModel::BaseModel()
 
 void BaseModel::render() 
 {
-	TextureManager::getInstance()->enableTexture();
-	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
      //Draw number -- Addison
     glPushMatrix();
         //Draw Base
