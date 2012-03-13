@@ -113,6 +113,7 @@ LevelRenderer::~LevelRenderer() {
 
 //Todo: will probably change while we get more requirements
 void LevelRenderer::render() {
+
 	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {	
 			glPushMatrix();
@@ -122,6 +123,7 @@ void LevelRenderer::render() {
 			glPopMatrix();
 		}
 	}
+	
 
 	//Added by Jeff to see axes
 	glPushMatrix();

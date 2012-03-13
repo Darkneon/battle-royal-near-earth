@@ -52,7 +52,7 @@ void PhaserModel::render() {
 				glTranslatef(0.5f, -0.745f, -0.55f);
 				glPushMatrix();
 					glRotatef(-90, 0.0f, 1.0f, 0.0f);
-					glRotatef(-90, 1.0f, 0.0f, 0.0f);	
+					glRotatef(-90, 1.0f, 0.0f, 0.0f);
 					GLdouble coordinate[4] = {0.0, 1.0, 0.0, 0.0};
 					glClipPlane(GL_CLIP_PLANE0, coordinate);
 					glEnable(GL_CLIP_PLANE0);

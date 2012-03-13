@@ -136,6 +136,7 @@
     <ClCompile Include="Model\Robot\NuclearModel.cpp" />
     <ClCompile Include="Model\Robot\PhaserModel.cpp" />
     <ClCompile Include="Model\Robot\TracksModel.cpp" />
+    <ClCompile Include="Model\Skybox\CubicSkybox.cpp" />
     <ClCompile Include="Model\Static\FenceModel.cpp" />
     <ClCompile Include="Model\Static\GrassModel.cpp" />
     <ClCompile Include="Model\Static\HalfHollowBlockModel.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Model\Robot\NuclearModel.h" />
     <ClInclude Include="Model\Robot\PhaserModel.h" />
     <ClInclude Include="Model\Robot\TracksModel.h" />
+    <ClInclude Include="Model\Skybox\CubicSkybox.h" />
     <ClInclude Include="Model\Static\FenceModel.h" />
     <ClInclude Include="Model\Static\GrassModel.h" />
     <ClInclude Include="Model\Static\HalfHollowBlockModel.h" />
