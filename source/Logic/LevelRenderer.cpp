@@ -100,6 +100,7 @@ LevelRenderer::LevelRenderer() {
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
 	map1();   
+
 } 
 
 LevelRenderer::~LevelRenderer() {

@@ -21,7 +21,7 @@ FactoryModel::FactoryModel(void) {
 
 void FactoryModel::render() 
 {
-	glEnable(GL_TEXTURE_2D);
+	TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo2.bmp"));
     glPushMatrix();
         drawFactory(0.0f, 0.0f, 0.0f);
