@@ -60,3 +60,4 @@ Fence: http://vortex-x.deviantart.com/art/green-white-metal-wall-118983148
 Mountain: http://www.pixelperfectdigital.com/free_stock_photos/showfull.php?photo=7419
 Floor: http://www.mb3d.co.uk/mb3d/Metal_Rusty_and_Patterned_Seamless_and_Tileable_High_Res_Textures.html
 Team Number: http://free4illustrator.com/2009/04/seamless-reptile-textures-and-photoshop-patterns/
+Player: http://www.psdgraphics.com/textures/brushed-gold-metal-texture/
