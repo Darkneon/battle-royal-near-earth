@@ -104,6 +104,8 @@ GLfloat* LightPost::getDirectionArray()
 }
 void LightPost::drawHeadLamp()
 {
+    TextureManager::getInstance()->enableTexture();
+    glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("lightpost.bmp"));
     glPushMatrix();
     glTranslatef(posX, posY, posZ); //Position to the source of the light
     rotateLamp();
@@ -141,6 +143,7 @@ void LightPost::drawHeadLamp()
             glPopMatrix();
         glPopMatrix();
      glPopMatrix();
+     glDisable(GL_TEXTURE_2D);
 
 }
 void LightPost::rotateLamp()

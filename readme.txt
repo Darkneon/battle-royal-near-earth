@@ -63,3 +63,5 @@ Team Number: http://free4illustrator.com/2009/04/seamless-reptile-textures-and-p
 Player: http://www.psdgraphics.com/textures/brushed-gold-metal-texture/
 MetalVerticalLines: www.webtexture.net/textures/6-high-resolution-metal-texture/
 Concrete_bare, Dirt, Ink, Marble, Metal1, Metal2, Metal 3, Metal4: www.cgtextures.com
+Lightpost: http://media.moddb.com/legacy/images/tutorials/30/308/gallery/t_508.jpg
+Camo: http://farm4.static.flickr.com/3324/3628571124_51e7bbdff6.jpg
