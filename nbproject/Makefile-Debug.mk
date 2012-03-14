@@ -37,6 +37,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Material/Material.o \
 	${OBJECTDIR}/source/main.o \
 	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
+	${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o \
 	${OBJECTDIR}/source/Model/Texture/TextureManager.o \
 	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Helper/AntTweakHelper.o \
@@ -85,6 +86,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
+	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o \
 	${OBJECTDIR}/source/Managers/TextureManager.o
 
 
@@ -128,6 +130,11 @@ ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/Missi
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o source/Model/Robot/MissileLauncherModel.cpp
+
+${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o: source/Model/Skybox/CubicSkybox.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o source/Model/Skybox/CubicSkybox.cpp
 
 ${OBJECTDIR}/source/Model/Texture/TextureManager.o: source/Model/Texture/TextureManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
@@ -368,6 +375,11 @@ ${OBJECTDIR}/source/Model/Texture/imageloader.o: source/Model/Texture/imageloade
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/imageloader.o source/Model/Texture/imageloader.cpp
+
+${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o: source/Model/Skybox/SphericSkybox.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o source/Model/Skybox/SphericSkybox.cpp
 
 ${OBJECTDIR}/source/Managers/TextureManager.o: source/Managers/TextureManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Managers

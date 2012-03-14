@@ -6,8 +6,8 @@
 #include "SpotLight.h"
 #include "Light/LightPost.h"
 #include "Model/Texture/TextureManager.h"
-#include "Model\Skybox\CubicSkybox.h"
-#include "Model\Skybox\SphericSkybox.h"
+#include "Model/Skybox/CubicSkybox.h"
+#include "Model/Skybox/SphericSkybox.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>

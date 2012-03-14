@@ -105,6 +105,12 @@
           <itemPath>source/Model/Robot/TracksModel.cpp</itemPath>
           <itemPath>source/Model/Robot/TracksModel.h</itemPath>
         </logicalFolder>
+        <logicalFolder name="Skybox" displayName="Skybox" projectFiles="true">
+          <itemPath>source/Model/Skybox/CubicSkybox.cpp</itemPath>
+          <itemPath>source/Model/Skybox/CubicSkybox.h</itemPath>
+          <itemPath>source/Model/Skybox/SphericSkybox.cpp</itemPath>
+          <itemPath>source/Model/Skybox/SphericSkybox.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="Static" displayName="Static" projectFiles="true">
           <itemPath>source/Model/Static/FenceModel.cpp</itemPath>
           <itemPath>source/Model/Static/FenceModel.h</itemPath>
