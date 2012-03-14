@@ -28,6 +28,7 @@ The following keys interchange robot parts.
 t --------------- attach robot to Robot camera
 y --------------- cycle through selection of robot parts
 u --------------- toggle selected robot part
+s --------------- toggle skyboxes
 ** The robot can be found near the bottom of the map around where the base and factory are**
 Robot View buttons:
 arrows L/R ------ spin robot

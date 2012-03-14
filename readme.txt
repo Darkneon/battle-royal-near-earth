@@ -4,13 +4,13 @@ Robert   Jakubowicz	6045707
 Stefanie Lavoie		1951750
 Addison  Rodomista	1967568
 
-This version works on windows, mac and linux.
+This version works on windows, mac and linux?.
 
 Key bindings:
 
-f1 --------------- toggle wireframe/smooth shading
+f1 --------------- toggle wireframe/smooth shading/flat shading
 f2 --------------- mouse look (freelook)
-f3 --------------- commander camera
+f3 --------------- commander camera (toggle light with 'l')
 f5 --------------- robot camera (need to attach robot first, with 't')
 z --------------- toggle bird view (disabled for now)
 arrows ---------- move camera around
@@ -35,6 +35,9 @@ The following keys interchange robot parts.
 t --------------- attach robot to Robot camera
 y --------------- cycle through selection of robot parts
 u --------------- toggle selected robot part
+s --------------- Toggle SkyBox/SkySphere
+h --------------- help
+o --------------- toggle textures
 
 Robot View buttons:
 arrows L/R ------ spin robot
@@ -43,6 +46,8 @@ page up/down ---- yaw
 l --------------- light
 
 AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
+Dirent API for windows http://www.softagalleria.net/dirent.php
+
 
 Installation 
 ------------
@@ -65,3 +70,15 @@ MetalVerticalLines: www.webtexture.net/textures/6-high-resolution-metal-texture/
 Concrete_bare, Dirt, Ink, Marble, Metal1, Metal2, Metal 3, Metal4: www.cgtextures.com
 Lightpost: http://media.moddb.com/legacy/images/tutorials/30/308/gallery/t_508.jpg
 Camo: http://farm4.static.flickr.com/3324/3628571124_51e7bbdff6.jpg
+smooth_metal.bmp: http://hhh316.deviantart.com/art/Seamless-metal-texture-smooth-164165216
+skull: http://bestpooltablesreview.blogspot.com/2011/04/buy-2d-glitter-skull-flights-100-micron.html
+Titanium: http://www.jbdesign.it/idesignpro/metal.html
+mechanical: http://www.svgopen.org/2003/papers/UsingSVGFor2DContentInMobile3DGames/index.html
+energy: http://www.123rf.com/photo_9298276_glowing-energy-streaks-abstract-seamless-background-texture.html
+earth and moon : http://frank.mtsu.edu/~njsmith/astr/lab02.shtml
+sun: http://www.dailymail.co.uk/sciencetech/article-1290919/First-photo-planet-circling-distant-sun-outside-solar-system.html
+nebula: http://cs.astronomy.com/asycs/media/p/474777.aspx
+stars1.bmp: http://www.khilafatworld.com/2012/01/poem-look-in-stars.html
+stars2.bmp: http://www.therealfun.com/Stars-in-night-10535.html
+milky way: http://www.moonphases.info/the-stars.html
+
