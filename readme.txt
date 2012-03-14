@@ -13,6 +13,7 @@ f2 --------------- mouse look (freelook)
 f3 --------------- commander camera (toggle light with 'l')
 f5 --------------- robot camera (need to attach robot first, with 't')
 z --------------- toggle bird view (disabled for now)
+o --------------- toggle textures
 arrows ---------- move camera around
 page up/down ---- rotate
 end ------------- reset rotation angle to 0
