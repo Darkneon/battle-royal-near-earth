@@ -15,7 +15,7 @@ void SphericSkybox::render()
     TextureManager::getInstance()->enableTexture();
 
 	glCullFace( GL_FRONT );
-
+	
 	GLUquadricObj *quadratic = gluNewQuadric();
 
 	gluQuadricTexture(quadratic,true);

@@ -320,13 +320,24 @@ void toggleDifferentView(){
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT, GL_FILL);
 
+	if (isSphereSkyBox)
+		glPolygonMode(GL_BACK, GL_FILL);
+
 	if(viewStates==1){ //wireFrame
 		glDisable(GL_DEPTH_TEST);
 		glPolygonMode(GL_FRONT, GL_LINE);
+
+		if (isSphereSkyBox)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
 	else if(viewStates==2){ //smoothShading
 		glShadeModel(GL_SMOOTH);
+
+		glPolygonMode(GL_FRONT, GL_FILL);
+
+		if (isSphereSkyBox)
+			glPolygonMode(GL_BACK, GL_FILL);
 	}
 
 	else{//back to normal
