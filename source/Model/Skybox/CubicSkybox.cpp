@@ -22,12 +22,12 @@ void CubicSkybox::render()
 	GLfloat* normal = new GLfloat[3];
 	
 	glColor3f(0.7f, 0.7f, 0.7f);
-
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("moon.bmp"));
 	glBegin(GL_TRIANGLES);
 		GeoHelper::findNormal3f(LEFT, BOTTOM, 0.0f, RIGHT, BOTTOM, 0.0f, LEFT, TOP, 0.0f, normal);
 		glNormal3fv(normal);
 
-		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("moon.bmp"));
+		
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, BOTTOM, 0.0f);
@@ -92,6 +92,6 @@ void CubicSkybox::render()
 		glVertex3f(50.0f, TOP, 0.0f);
 	glEnd();
 	
-
+	glDisable(GL_TEXTURE_2D);
 	delete [] normal;
 }

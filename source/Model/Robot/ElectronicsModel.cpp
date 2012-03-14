@@ -55,35 +55,10 @@ void ElectronicsModel::render() {
 				glRotatef(90,1.0f,0.0f,0.0f);
 				teamNumber->render();
 			glPopMatrix();
-
 		glPopMatrix();
-			
-			//Team #
-			/*glPushMatrix();
-				glColor3f(1.0f,0.0f,0.0f);
-				glTranslatef(0.0f,-0.3f,0.01f);
-				glScalef(0.25f, 0.25f, 0.25f);
-				glBegin(GL_LINES);
-					glLineWidth(1.0f);
-					glVertex3f(-0.25f, -0.25f, 0.0f);
-					glVertex3f(0.25f, -0.25f, 0.0f);
 
-					glVertex3f(-0.25f, -0.25f, 0.0f);
-					glVertex3f(-0.25f, 0.0f, 0.0f);
-
-					glVertex3f(0.25f, 0.0f, 0.0f);
-					glVertex3f(-0.25f, 0.0f, 0.0f);
-
-					glVertex3f(0.25f, 0.0f, 0.0f);
-					glVertex3f(0.25f, 0.25f, 0.0f);
-
-					glVertex3f(-0.25f, 0.25f, 0.0f);
-					glVertex3f(0.25f, 0.25f, 0.0f);
-				glEnd();
-			glPopMatrix();
-		glPopMatrix();
-		glTranslatef(0.0f,.1f,.1f);*/
-		
+		TextureManager::getInstance()->enableTexture();
+		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("concrete_bare.bmp"));
 		glPushMatrix();
 			//Neck
 			glColor3f(.4f,.4f,.4f);
