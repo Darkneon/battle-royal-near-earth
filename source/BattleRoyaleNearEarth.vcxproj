@@ -209,9 +209,6 @@
     <ClInclude Include="Model\Texture\imageloader.h" />
     <ClInclude Include="Model\Texture\TextureManager.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
