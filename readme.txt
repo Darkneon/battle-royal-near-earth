@@ -4,6 +4,12 @@ Robert   Jakubowicz	6045707
 Stefanie Lavoie		1951750
 Addison  Rodomista	1967568
 
+Compile Directions: 
+1. In Microsoft Visual Studio, click on the project.
+2. Click on Properties
+3. Click on Debugging
+4. Change Working Directory to $(SolutionDir)
+
 This version works on windows, mac and linux?.
 
 Key bindings:
