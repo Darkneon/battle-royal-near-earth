@@ -61,3 +61,5 @@ Mountain: http://www.pixelperfectdigital.com/free_stock_photos/showfull.php?phot
 Floor: http://www.mb3d.co.uk/mb3d/Metal_Rusty_and_Patterned_Seamless_and_Tileable_High_Res_Textures.html
 Team Number: http://free4illustrator.com/2009/04/seamless-reptile-textures-and-photoshop-patterns/
 Player: http://www.psdgraphics.com/textures/brushed-gold-metal-texture/
+MetalVerticalLines: www.webtexture.net/textures/6-high-resolution-metal-texture/
+Concrete_bare, Dirt, Ink, Marble, Metal1, Metal2, Metal 3, Metal4: www.cgtextures.com
