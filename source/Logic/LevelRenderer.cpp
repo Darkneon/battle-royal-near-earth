@@ -99,10 +99,7 @@ LevelRenderer::LevelRenderer() {
 	models[15]->removeAllChildren();
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
-	//map1();   
-
-	level [15][15] = 18;
-
+	map1();   
 } 
 
 LevelRenderer::~LevelRenderer() {
@@ -146,7 +143,7 @@ void LevelRenderer::render() {
 	
 	//TO UNCOMMENT
 	for(int i = 1; i != 49; i++) {
-		for(int j = 1; j != 48; j++) {	
+		for(int j = 23; j != 48; j++) {	
 			glPushMatrix();
 				glTranslatef((GLfloat)i, 0.0f, (GLfloat)j);
 				models[0]->draw();

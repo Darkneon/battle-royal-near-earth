@@ -169,6 +169,7 @@ void PhaserModel::render() {
     glTranslatef(0, 0.9f, 0);
 
 	gluDeleteQuadric(quadratic);
+	glDisable(GL_TEXTURE_2D);
 
 	delete [] normal;
 }
