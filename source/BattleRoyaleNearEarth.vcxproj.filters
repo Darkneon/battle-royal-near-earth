@@ -155,6 +155,9 @@
     <ClCompile Include="Model\Skybox\CubicSkybox.cpp">
       <Filter>Model\Skybox</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Skybox\SphericSkybox.cpp">
+      <Filter>Model\Skybox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -310,6 +313,9 @@
     <ClInclude Include="Model\Skybox\CubicSkybox.h">
       <Filter>Model\Skybox</Filter>
     </ClInclude>
+    <ClInclude Include="Model\Skybox\SphericSkybox.h">
+      <Filter>Model\Skybox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -356,5 +362,8 @@
     <Library Include="..\library\freeglut_static.lib">
       <Filter>Libraries</Filter>
     </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

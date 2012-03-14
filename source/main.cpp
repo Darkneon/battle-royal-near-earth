@@ -6,7 +6,8 @@
 #include "SpotLight.h"
 #include "Light/LightPost.h"
 #include "Model/Texture/TextureManager.h"
-#include "..\Model\Skybox\CubicSkybox.h"
+#include "Model\Skybox\CubicSkybox.h"
+#include "Model\Skybox\SphericSkybox.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -37,6 +38,8 @@ int winPosY = 0;
 
 bool isInFullScreenMode;
 
+bool isSphereSkyBox = false;
+
 // Bounds of viewing frustum.
 GLfloat nearPlane =  1.0f;
 GLfloat farPlane  = 100.0f;
@@ -55,7 +58,10 @@ LevelRenderer levelRenderer;
 Base base;
 Robot robot;
 Robot robot2;
+
 CubicSkybox cubicSkyBox;
+SphericSkybox sphericSkyBox;
+
 bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
 GLUquadricObj *quadratic = gluNewQuadric();
@@ -233,7 +239,11 @@ void render()
 		robot2.draw();
 	glPopMatrix();
 
-	cubicSkyBox.render();
+	if (!isSphereSkyBox)
+		cubicSkyBox.render();
+	else
+		sphericSkyBox.render();
+	
 	game->p1->view(); // Camera update (leave as it is for now)
 	game->getInput(keyModifier); // Gets user input
 
@@ -429,6 +439,11 @@ void windowKeyOps()
 			glutHideWindow();
 			glutSetWindow(mainWindow);
 		}
+	}
+
+	if (keyStates[115])//s
+	{
+		isSphereSkyBox = !isSphereSkyBox;
 	}
 
 	if (keyStates[27]) //ESC
