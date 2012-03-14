@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Model">
+    <Position X="30.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BQAAAAAAAIQAAARAAAIAAAAAAEAAAgAAAEgAAABQIAA=</HashCode>
+      <FileName>Model\Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AntiGravModel">
+    <Position X="21.75" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAIAAAAAAAAAAAAAAAAAAAAAAAACAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\AntiGravModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BipodModel">
+    <Position X="26" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAgAEAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\BipodModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CannonModel">
+    <Position X="29.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAEAAAAAAAAAAAAYAAA=</HashCode>
+      <FileName>Model\Robot\CannonModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ElectronicsModel">
+    <Position X="32.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\ElectronicsModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeadlightModel">
+    <Position X="35.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\HeadlightModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MissileLauncherModel">
+    <Position X="37.75" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\MissileLauncherModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NuclearModel">
+    <Position X="41.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\NuclearModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhaserModel">
+    <Position X="18.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAA=</HashCode>
+      <FileName>Model\Robot\PhaserModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TracksModel">
+    <Position X="23" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAACAAAAACAAAAQAAA=</HashCode>
+      <FileName>Model\Robot\TracksModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FenceModel">
+    <Position X="27" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAQAAAAABAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\FenceModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrassModel">
+    <Position X="30.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\GrassModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HalfHollowBlockModel">
+    <Position X="43.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\HalfHollowBlockModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HalfPlainBlockModel">
+    <Position X="36.5" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\HalfPlainBlockModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HillsModel">
+    <Position X="39.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAQAAA=</HashCode>
+      <FileName>Model\Static\HillsModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HollowBlockModel">
+    <Position X="42.75" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\HollowBlockModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightRubbleModel">
+    <Position X="19.5" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\LightRubbleModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MountainModel">
+    <Position X="24" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\MountainModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PitModel">
+    <Position X="27.75" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAIBAAAAAAEBAAAACAAAAAAAAAAAAAAAAACQAAE=</HashCode>
+      <FileName>Model\Static\PitModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlainBlockModel">
+    <Position X="31.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\PlainBlockModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TeamNumberModel">
+    <Position X="33.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Static\TeamNumberModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeoHelper" Collapsed="true">
+    <Position X="43" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCYAAAAAEAgAAAAAAAAAAAAAABAABAAAAAAAAAAQAE=</HashCode>
+      <FileName>Model\Helper\GeoHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AntennaModel">
+    <Position X="40.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAg=</HashCode>
+      <FileName>Model\Player\AntennaModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerModel">
+    <Position X="45.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAA=</HashCode>
+      <FileName>Model\Player\PlayerModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseModel">
+    <Position X="20.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAIAAAAAAAAAAQAAAAAAAAAAAgAAAAAAQAAA=</HashCode>
+      <FileName>Model\Buildings\BaseModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FactoryModel">
+    <Position X="25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAgAQAAA=</HashCode>
+      <FileName>Model\Buildings\FactoryModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightPost" Collapsed="true">
+    <Position X="41.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAESBAAAAESAAAAAAEACEACBAggACAAAABpwIIWAAA=</HashCode>
+      <FileName>Model\Light\LightPost.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DefaultMaterial">
+    <Position X="27" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Material\DefaultMaterial.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Material">
+    <Position X="30.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEABEAAAAAAAAAAAAAAAAAIAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Material\Material.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetalMaterial">
+    <Position X="29.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Model\Material\MetalMaterial.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrganicMaterial">
+    <Position X="31.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Material\OrganicMaterial.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockMaterial">
+    <Position X="33.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Material\RockMaterial.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Image" Collapsed="true">
+    <Position X="44.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAUAQAAAAAAAAAAAABIAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Texture\imageloader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextureManager" Collapsed="true">
+    <Position X="43" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQEAAUAAABAAAQAAAAARAAAQAAAAAAAAQAAA=</HashCode>
+      <FileName>Model\Texture\TextureManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CubicSkybox">
+    <Position X="34.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAg=</HashCode>
+      <FileName>Model\Skybox\CubicSkybox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Base" Collapsed="true">
+    <Position X="43" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAAAIQAA=</HashCode>
+      <FileName>Logic\Base.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera">
+    <Position X="13.75" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IDACAgIAAQIAABAAbAEgABggABAAAEBAAQEAAAAAAAA=</HashCode>
+      <FileName>Logic\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CirclingCamera">
+    <Position X="19.25" Y="17" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAAAAIAABAAAAAAABAAADAAAABAAQAABAAAAAA=</HashCode>
+      <FileName>Logic\CirclingCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommanderCamera">
+    <Position X="7.75" Y="17" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAIAABCAAAAAAFAAADAAAABAAQAAAAAAAAA=</HashCode>
+      <FileName>Logic\CommanderCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Factory" Collapsed="true">
+    <Position X="39.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAIBAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Logic\Factory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FreeLookCamera">
+    <Position X="13.5" Y="17" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAJQABAAAAABgBAAQBABAABAAQAAAABAAAA=</HashCode>
+      <FileName>Logic\FreeLookCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="41.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAACAAAAAAAQAAAAAiAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelRenderer" Collapsed="true">
+    <Position X="39.5" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAMAAAAAAAAAAAAAEAAAAAAAAAAAAYAAg=</HashCode>
+      <FileName>Logic\LevelRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightCamera">
+    <Position X="16.25" Y="17" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AASEAhAAAAICABAAAAAAABAAADIAAABAAQAAwAIAAAA=</HashCode>
+      <FileName>Logic\LightCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="43" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAgAAAABAAAAAAAIAAIAAAAAACAAABQAAAQAIABA=</HashCode>
+      <FileName>Logic\Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerInput" Collapsed="true">
+    <Position X="44.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAQAAAAAAAAAAAAAFAAAAAAQAAAAABAAAAAAAAAIA=</HashCode>
+      <FileName>Logic\PlayerInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Robot" Collapsed="true">
+    <Position X="39.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAEAmCADgIAoAAAAAqwRHAABxgCuIgYADSAQAAIBIg=</HashCode>
+      <FileName>Logic\Robot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotCamera">
+    <Position X="10.75" Y="17" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAABAgAAAAIAABAAAAAEABAAgBgAAABAIQAAAAAEIAI=</HashCode>
+      <FileName>Logic\RobotCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpotLight" Collapsed="true">
+    <Position X="41.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABABEAAAAAAAAAIAAAAAABAAIAAAABAAAA=</HashCode>
+      <FileName>Logic\SpotLight.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AntTweakHelper" Collapsed="true">
+    <Position X="39.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAASAAAABAAAAAAAAIAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Helper\AntTweakHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DirectoryManipHelper" Collapsed="true">
+    <Position X="44.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper\DirectoryManipHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="`anonymous-namespace'::auto_array&lt;T&gt;" Collapsed="true">
+    <Position X="41.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAEAAAAAAAAAAgAQgAAAAEAAAIAAAAiAIAAAAA=</HashCode>
+      <FileName>Model\Texture\imageloader.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="StringComparerForMap" Collapsed="true">
+    <Position X="39.5" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Texture\TextureManager.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="texturePair" Collapsed="true">
+    <Position X="39.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Texture\TextureManager.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
