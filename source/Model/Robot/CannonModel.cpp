@@ -106,6 +106,7 @@ void CannonModel::render()
 
 	gluDeleteQuadric(quadratic);
 	glDisable(GL_TEXTURE_2D);
+
 }
 
 void CannonModel::drawBarrel(GLUquadricObj* quadratic)

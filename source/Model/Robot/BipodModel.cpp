@@ -90,6 +90,8 @@ void BipodModel::render(){
 		glPopMatrix();
 	glPopMatrix();
 	glTranslated(0,1,0);
+	glDisable(GL_TEXTURE_2D);
+
 }
 
 void BipodModel::drawLeg(){

@@ -143,14 +143,14 @@ void LevelRenderer::render() {
 	glPopMatrix();
 	
 	//TO UNCOMMENT
-	/*for(int i = 1; i != 49; i++) {
+		for(int i = 1; i != 49; i++) {
 		for(int j = 23; j != 48; j++) {	
 			glPushMatrix();
 				glTranslatef((GLfloat)i, 0.0f, (GLfloat)j);
 				models[0]->draw();
 			glPopMatrix();
 		}
-	}*/
+	}
 }
 
 void LevelRenderer::map1(){

@@ -38,7 +38,7 @@ int winPosY = 0;
 bool isInFullScreenMode;
 
 // Bounds of viewing frustum.
-GLfloat nearPlane =  0.0f;
+GLfloat nearPlane =  1.0f;
 GLfloat farPlane  = 100.0f;
 
 bool keyStates[256];
