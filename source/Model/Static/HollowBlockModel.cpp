@@ -20,14 +20,14 @@ HollowBlockModel::HollowBlockModel() {
 
 void HollowBlockModel::render() {
 	TextureManager::getInstance()->enableTexture();
-	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("ink2.bmp"));
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("ink.bmp"));
 	glPushMatrix();
 		glTranslatef(.5,.5,.5);
 		glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
 		GeoHelper::drawCube(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.25f);
 		GeoHelper::drawCube(-0.5f, -0.5f, -0.25f, -0.25f, 0.5f, 0.25f);
 		GeoHelper::drawCube(-0.5f, -0.5f, 0.25f, 0.5f, 0.5f, 0.5f);
-		GeoHelper::drawCube(0.25f, -0.5f, -0.25f, 0.5f, 0.5f, 0.5f);
+		GeoHelper::drawCube(0.25f, -0.5f, -0.25f, 0.5f, 0.5f, 0.25f);
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 }

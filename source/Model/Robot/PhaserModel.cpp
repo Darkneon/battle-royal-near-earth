@@ -57,7 +57,7 @@ void PhaserModel::render() {
 					glClipPlane(GL_CLIP_PLANE0, coordinate);
 					glEnable(GL_CLIP_PLANE0);
 					gluCylinder(quadratic, 1.0, 1.0, 1.5, 12, 12);
-
+					glDisable(GL_CLIP_PLANE0);
 					//closing thing for phaser
 					GLfloat* normal = new GLfloat[3];
 
@@ -90,8 +90,9 @@ void PhaserModel::render() {
 
 					glPushMatrix();
 						glTranslatef(0.0f, 0.0f, 1.5f);
+						glEnable(GL_CLIP_PLANE0);
 						gluDisk(quadratic, 0.0, 1.0, 12, 12);
-
+						glDisable(GL_CLIP_PLANE0);
 						glTranslatef(0.0f, 0.0f, -1.5f);
 						glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
 						gluDisk(quadratic, 0.0, 1.0, 12, 12);
@@ -99,7 +100,7 @@ void PhaserModel::render() {
 				glPopMatrix();
 			glPopMatrix();
 
-			glDisable(GL_CLIP_PLANE0);
+			
 			
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("mech.bmp"));
 
