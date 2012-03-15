@@ -211,9 +211,10 @@ void toggleFullScreen()
 
 void render()
 {
-	static GLuint fps = 0;
-	static time_t currentTime = time(NULL);
+	
 	static time_t lastUpdate = time(NULL);
+	static time_t currentTime = time(NULL);
+	static GLuint fps = 0;
 
 
 	glutSetWindow(mainWindow);
@@ -261,12 +262,12 @@ void render()
 	glutSwapBuffers();
 	fps++;
 	currentTime = time(NULL);
-
-	if (currentTime >= lastUpdate)
+	
+	if ((currentTime - lastUpdate) >= 1.0f)
 	{
-		lastUpdate = time(NULL);
+		lastUpdate = currentTime;
+		cout << fps << endl;
 		fps = 0;
-		cout << fps;
 	}
 
     glutPostRedisplay();
@@ -488,7 +489,7 @@ void keyboardKeysUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
 	keyModifier = 0;
-	Checks for uppercase
+	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
 
