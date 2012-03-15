@@ -488,7 +488,7 @@ void keyboardKeysUp(unsigned char key, int x, int y)
 {
 	keyStates[key] = false;
 	keyModifier = 0;
-	Checks for uppercase
+	/Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
 
@@ -497,6 +497,7 @@ void keyboardKeysUp(unsigned char key, int x, int y)
 
 void keyboardKeysPressed(unsigned char key, int x, int y)
 {
+	cout << keyStates[key];
 	keyStates[key] = true;
 	keyModifier = glutGetModifiers();
 

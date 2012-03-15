@@ -130,6 +130,23 @@ void LevelRenderer::buildMap()
 	}
 
 	glEndList();
+
+
+	glNewList(5, GL_COMPILE);
+
+	TextureManager::getInstance()->toggleTextures();
+
+	for(int i = 0; i != 50; i++) {
+		for(int j = 0; j != 50; j++) {	
+			glPushMatrix();
+				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+				models[ level[i][j] ]->draw();
+
+			glPopMatrix();
+		}
+	}
+
+	glEndList();
 }
 
 //Todo: will probably change while we get more requirements
@@ -147,7 +164,10 @@ void LevelRenderer::render() {
 	}
 	*/
 
-	glCallList(2);
+	if (TextureManager::getInstance()->texturesEnabled == true)
+		glCallList(2);
+	else
+		glCallList(5);
 
 	//Added by Jeff to see axes
 	glPushMatrix();

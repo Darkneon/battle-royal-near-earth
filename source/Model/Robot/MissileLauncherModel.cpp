@@ -86,7 +86,6 @@ void MissileLauncherModel::drawMissileLauncher(GLUquadricObj* quadratic)
 	glPopMatrix();
 
 	//Front
-	
 	glPushMatrix();
 		glTranslatef(0.0f, 0.0f, 2.5f);
 		GeoHelper::drawCube(-0.26f, -0.26f, -0.26f, 0.26f, 0.26f, 0.26f);

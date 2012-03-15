@@ -50,7 +50,7 @@ void PlayerInput::keyOperations(int keyModifier)
 	if (keyStates[111]) //o
 	{
 		TextureManager::getInstance()->toggleTextures();
-		glutPostRedisplay();
+		//glutPostRedisplay();
 	}
 
 	if (keyStates[91]) // [

@@ -38,13 +38,14 @@ public:
 	
 
     static string getResourcePath();
+	static bool texturesEnabled;
 private:
 	TextureManager();
 	static TextureManager* instance;
 	map<string, GLuint> textures;
 	vector<string> directoryListing;
     static string resourcePath;
-	static bool texturesEnabled;
+	
 };
 
 #endif
