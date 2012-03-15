@@ -7,7 +7,7 @@ class SphericSkybox : Model {
 public:
     SphericSkybox();
     void render();
-
+	void build();
 };
 
 #endif

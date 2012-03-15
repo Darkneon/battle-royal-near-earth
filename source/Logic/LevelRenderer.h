@@ -16,6 +16,7 @@ private:
     Model* models[NUM_MODELS];
     int level[50][50];
     
+	void buildMap();
 	void map1();
 };
 #endif

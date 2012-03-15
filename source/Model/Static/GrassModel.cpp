@@ -14,15 +14,17 @@ GrassModel::GrassModel() {
     setNextChild( (Model*)child );
     
     material = (Material*)(new OrganicMaterial());
+
+	build();
 }
 
-void GrassModel::render() {
-    glTranslatef(0,0,1);
+void GrassModel::build()
+{
+	glNewList(1, GL_COMPILE);
 	
-	glColor3f(0.8f, 0.8f, 0.8f);
-	TextureManager::getInstance()->enableTexture();
-    glPushMatrix();		
-		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rusty_floor.bmp"));
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rusty_floor.bmp"));
+	glPushMatrix();		
+		
         glBegin(GL_TRIANGLES);
 			glNormal3f(0.0f,1.0f,0.0f);
 
@@ -45,6 +47,15 @@ void GrassModel::render() {
             glVertex3f(0, 0, -1);
         glEnd();
     glPopMatrix();
+	glEndList();
+}
+
+void GrassModel::render() {
+    glTranslatef(0,0,1);
+	glColor3f(0.8f, 0.8f, 0.8f);
+	TextureManager::getInstance()->enableTexture();
+
+	glCallList(1);
 	glDisable(GL_TEXTURE_2D);
 }
 

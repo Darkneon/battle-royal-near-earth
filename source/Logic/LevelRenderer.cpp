@@ -31,7 +31,9 @@
 #include "Robot/HeadlightModel.h"
 
 
-LevelRenderer::LevelRenderer() {	
+LevelRenderer::LevelRenderer() {
+
+
 	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {	
 			level[i][j] = 0;
@@ -100,6 +102,7 @@ LevelRenderer::LevelRenderer() {
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
 	map1();   
+	buildMap();
 } 
 
 LevelRenderer::~LevelRenderer() {
@@ -108,10 +111,13 @@ LevelRenderer::~LevelRenderer() {
             delete models[i];
         }
     }
+
+	glDeleteLists(1, 1);
 }
 
-//Todo: will probably change while we get more requirements
-void LevelRenderer::render() {
+void LevelRenderer::buildMap()
+{
+	glNewList(2, GL_COMPILE);
 
 	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {	
@@ -122,7 +128,26 @@ void LevelRenderer::render() {
 			glPopMatrix();
 		}
 	}
-	
+
+	glEndList();
+}
+
+//Todo: will probably change while we get more requirements
+void LevelRenderer::render() {
+
+	/*
+	for(int i = 0; i != 50; i++) {
+		for(int j = 0; j != 50; j++) {	
+			glPushMatrix();
+				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+				models[ level[i][j] ]->draw();
+
+			glPopMatrix();
+		}
+	}
+	*/
+
+	glCallList(2);
 
 	//Added by Jeff to see axes
 	glPushMatrix();
@@ -142,14 +167,14 @@ void LevelRenderer::render() {
 	glPopMatrix();
 	
 	//TO UNCOMMENT
-	for(int i = 1; i != 49; i++) {
+	/*for(int i = 1; i != 49; i++) {
 		for(int j = 23; j != 48; j++) {	
 			glPushMatrix();
 				glTranslatef((GLfloat)i, 0.0f, (GLfloat)j);
 				models[0]->draw();
 			glPopMatrix();
 		}
-	}
+	}*/
 }
 
 void LevelRenderer::map1(){

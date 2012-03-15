@@ -54,17 +54,17 @@ static bool isDebugMode = false;
 int viewStates = 0; //states of the camera views
 
 Game* game;
-LevelRenderer levelRenderer;
+LevelRenderer* levelRenderer;
 Base base;
 Robot robot;
 Robot robot2;
 
-CubicSkybox cubicSkyBox;
-SphericSkybox sphericSkyBox;
+CubicSkybox *cubicSkyBox;
+SphericSkybox *sphericSkyBox;
 
 bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
-GLUquadricObj *quadratic = gluNewQuadric();
+//GLUquadricObj *quadratic = gluNewQuadric();
 
 //Initialize light objects
 SpotLight *spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
@@ -218,31 +218,31 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	levelRenderer.render();
+	levelRenderer->render();
 	renderLights();
 
 	//Drawing robot models on map
 	glPushMatrix();
 		glTranslatef(15,0,40);
-		base.draw();
+		//base.draw();
         glTranslatef(-5,0,5);
         game->p1->draw();
 	glPopMatrix();
 	
 	glPushMatrix();
-		robot.translateTo(25.0f,45.0f);
-		robot.draw();
+		//robot.translateTo(25.0f,45.0f);
+		//robot.draw();
 	glPopMatrix();
 
 	glPushMatrix();
-		robot2.translateTo(30.0f,45.0f);
-		robot2.draw();
+		//robot2.translateTo(30.0f,45.0f);
+		//robot2.draw();
 	glPopMatrix();
 
 	if (!isSphereSkyBox)
-		cubicSkyBox.render();
+		cubicSkyBox->render();
 	else
-		sphericSkyBox.render();
+		sphericSkyBox->render();
 	
 	game->p1->view(); // Camera update (leave as it is for now)
 	game->getInput(keyModifier); // Gets user input
@@ -504,7 +504,15 @@ void initAntTweak() {
 
 void init()
 {
+	glGenLists(4);
+
 	te = TextureManager::getInstance();
+
+	levelRenderer = new LevelRenderer();
+	cubicSkyBox = new CubicSkybox();
+	sphericSkyBox = new SphericSkybox();
+
+	
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
 	isInFullScreenMode = false;

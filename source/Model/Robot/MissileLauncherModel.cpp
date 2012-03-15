@@ -73,7 +73,7 @@ void MissileLauncherModel::drawMissileLauncher(GLUquadricObj* quadratic)
 	gluQuadricTexture(quadratic,true);
 
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("tubes.bmp")); 
-	gluCylinder(quadratic, 0.25, 0.25, 2.5, 10, 10);
+	gluCylinder(quadratic, 0.25, 0.25, 2.5, 8, 8);
 
 	//some cubes
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("warning.bmp")); 

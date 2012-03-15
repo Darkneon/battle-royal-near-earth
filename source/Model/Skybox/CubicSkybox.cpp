@@ -8,11 +8,12 @@
 #include "CubicSkybox.h"
 
 CubicSkybox::CubicSkybox() {	
+	build();
 }
 
-void CubicSkybox::render() 
+void CubicSkybox::build()
 {
-    TextureManager::getInstance()->enableTexture();
+	glNewList(3, GL_COMPILE);
 
 	GLfloat* normal = new GLfloat[3];
 	
@@ -194,6 +195,17 @@ void CubicSkybox::render()
 		glVertex3f(LEFT, FLOOR, LEFT);
 	glEnd();
 
-	glDisable(GL_TEXTURE_2D);
+	glEndList();
+
 	delete [] normal;
+}
+
+void CubicSkybox::render() 
+{
+    TextureManager::getInstance()->enableTexture();
+
+	glCallList(3);
+
+	glDisable(GL_TEXTURE_2D);
+	
 }

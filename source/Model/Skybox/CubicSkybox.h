@@ -7,7 +7,7 @@ class CubicSkybox : Model {
 public:
     CubicSkybox();
     void render();
-
+	void build();
 };
 
 #endif

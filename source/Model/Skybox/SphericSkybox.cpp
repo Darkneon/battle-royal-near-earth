@@ -8,12 +8,14 @@
 #include "SphericSkybox.h"
 
 SphericSkybox::SphericSkybox() {	
+	build();
 }
 
-void SphericSkybox::render() 
-{
-    TextureManager::getInstance()->enableTexture();
 
+void SphericSkybox::build()
+{
+	glNewList(4, GL_COMPILE);
+	
 	glCullFace( GL_FRONT );
 	
 	GLUquadricObj *quadratic = gluNewQuadric();
@@ -28,8 +30,20 @@ void SphericSkybox::render()
 
 	glPopMatrix();
 
-	glDisable(GL_TEXTURE_2D);
+	
 	gluDeleteQuadric(quadratic);
 
 	glCullFace( GL_BACK );
+
+	glEndList();
+}
+
+void SphericSkybox::render() 
+{
+    TextureManager::getInstance()->enableTexture();
+
+	glCallList(4);
+
+	glDisable(GL_TEXTURE_2D);
+
 }

@@ -15,7 +15,7 @@ public:
     GrassModel();
     void render();
 private:
-
+	void build();
 };
 
 #endif	/* GRASSMODEL_H */
