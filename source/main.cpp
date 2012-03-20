@@ -208,6 +208,21 @@ void toggleFullScreen()
 	//memset(keyStates, 0, sizeof(keyStates));
 }
 
+void rasterText(GLfloat x, GLfloat y, void *font, char *c, int cWidth){
+
+	glDisable(GL_TEXTURE_2D);
+	
+	glPushMatrix();
+		glLoadIdentity();	
+		glRasterPos2f(x, y);
+
+		for (int i = 0; i < cWidth; i++)
+		{
+			glutBitmapCharacter(font, c[i]);
+		}
+
+	glPopMatrix();
+}
 
 void render()
 {
@@ -215,13 +230,14 @@ void render()
 	static time_t lastUpdate = time(NULL);
 	static time_t currentTime = time(NULL);
 	static GLuint fps = 0;
-
+	static GLuint prevFps = 0;
 
 	glutSetWindow(mainWindow);
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-        
+
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -251,38 +267,49 @@ void render()
 	else
 		sphericSkyBox->render();
 	
-	game->p1->view(); // Camera update (leave as it is for now)
+	
 	game->getInput(keyModifier); // Gets user input
-
+	game->p1->view(); // Camera update (leave as it is for now)
 
 	if (isDebugMode) {
 		antTweakHelper.draw();
 	}
 
-	glutSwapBuffers();
+	
 	fps++;
 	currentTime = time(NULL);
 	
 	if ((currentTime - lastUpdate) >= 1.0f)
 	{
 		lastUpdate = currentTime;
-		cout << fps << endl;
+
+		prevFps = fps;
 		fps = 0;
 	}
+	
+	char *sFps = new char[4];
+	_itoa_s(prevFps, sFps, 4, 10);
 
+	char *sFpsPrefix = "FPS: ";
+
+	char *prefixAndFps;
+	int len = strlen(sFps) + 1 + strlen(sFpsPrefix);
+
+	prefixAndFps = (char*)malloc(len);
+
+	strcpy_s(prefixAndFps, sizeof(char) * len, sFpsPrefix);
+	strcat_s(prefixAndFps, sizeof(char) * len, sFps);
+	
+	glColor3f(1.0f, 1.0f, 1.0f);
+	rasterText(-1.0f, 0.8f, GLUT_BITMAP_HELVETICA_18, prefixAndFps, 10);
+
+	delete [] prefixAndFps;
+	delete [] sFps;
+
+	glutSwapBuffers();
     glutPostRedisplay();
 }
 
-
-void rasterText(int x, int y, void *font, char *c, int cWidth){
-	glPushMatrix();
-		glLoadIdentity();
-		glRasterPos2i(x,y);
-		for (int i=0; i<cWidth; i++){
-			glutBitmapCharacter(font, c[i]);
-		}
-	glPopMatrix();
-}
 
 void help_display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -303,7 +330,7 @@ void help_display(){
 			string s;
 			getline(openfile, s);
 			char *title = (char*)s.c_str();
-			rasterText(width/2-35,lineHeight,GLUT_BITMAP_HELVETICA_12, title,s.size());
+			rasterText((GLfloat)width/2-35,(GLfloat)lineHeight,GLUT_BITMAP_HELVETICA_12, title,s.size());
 			lineHeight -= 5;
 
 			while(!openfile.eof())
@@ -311,7 +338,7 @@ void help_display(){
 				getline(openfile, s);
 				char *readLine = (char*)s.c_str();
 				lineHeight -= lineSpace;
-				rasterText(15,lineHeight,GLUT_BITMAP_HELVETICA_10, readLine,s.size());
+				rasterText(15.0f,(GLfloat)lineHeight,GLUT_BITMAP_HELVETICA_10, readLine,s.size());
 			}
 			openfile.close();
 		}

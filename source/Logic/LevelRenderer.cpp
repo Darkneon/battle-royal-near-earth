@@ -163,11 +163,12 @@ void LevelRenderer::render() {
 		}
 	}
 	*/
-
-	if (TextureManager::getInstance()->texturesEnabled == true)
+	
+	if (TextureManager::getInstance()->texturesEnabled)
 		glCallList(2);
 	else
 		glCallList(5);
+		
 
 	//Added by Jeff to see axes
 	glPushMatrix();
