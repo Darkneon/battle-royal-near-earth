@@ -384,7 +384,7 @@ void windowFuncKeyOps(){
 	if (funcKeyStates[GLUT_KEY_F1]) {
 		toggleDifferentView();
     } 
-    else if (funcKeyStates[GLUT_KEY_F5]) {
+    else if (funcKeyStates[GLUT_KEY_F6]) {
         TextureManager::getInstance()->toggleSkins();
     }
 }

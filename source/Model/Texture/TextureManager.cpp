@@ -46,7 +46,7 @@ TextureManager::TextureManager(void)
     addTexturesFromFolder(getResourcePath() + "skins/0/", textures, textureID, 0);
     addTexturesFromFolder(getResourcePath() + "skins/1/", textures, textureID, 1);
     
-    
+    delete[] textureID;
 }
 
 void TextureManager::addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs) {
