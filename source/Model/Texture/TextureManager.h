@@ -44,9 +44,11 @@ private:
     static const int NUM_SKINS = 2;
     
     void addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs);
-    void addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs, int skinNum);
+    int getLoadedTextureCount();
     
 	TextureManager();
+    ~TextureManager();
+    
 	static TextureManager* instance;
 	map<string, GLuint> textures;
 	vector<string> directoryListing;

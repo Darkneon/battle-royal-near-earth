@@ -47,28 +47,33 @@ TextureManager::TextureManager(void)
     
     //IMPORTANT: skins must be loaded in ascending order or else
     //           the start calculation will fail!
-    addTexturesFromFolder(getResourcePath() + "skins/0/", textures, textureID, 0);
-    addTexturesFromFolder(getResourcePath() + "skins/1/", textures, textureID, 1);
+    addTexturesFromFolder(getResourcePath() + "skins/0/", skinTextures[0], textureID);
+    addTexturesFromFolder(getResourcePath() + "skins/1/", skinTextures[1], textureID);
     
     delete[] textureID;
+  
 }
 
-void TextureManager::addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs) {
-    addTexturesFromFolder(folder, textureList, textureIDs, -1);
+TextureManager::~TextureManager() {
+    map<string, GLuint>::iterator iter;
+    for(iter = textures.begin(); iter != textures.end(); iter++) {                
+        glDeleteTextures(1, &iter->second);
+    }
+    
+    for (int i = 0; i != NUM_SKINS; i++) {
+        for(iter = skinTextures[i].begin(); iter != skinTextures[i].end(); iter++) {                
+            glDeleteTextures(1, &iter->second);
+        }
+    }
 }
 
-void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& textureList, GLuint* textureIDs, int skinNum) {
+void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& textureList, GLuint* textureIDs) {
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		
 	DirectoryManipHelper::getDirectoryListing(folder, &directoryListing);	
 	Image* image = NULL;
-    
-    //start = calculate whatever we have loaded so far
-    int start = textureList.size();    
-    for (int s = 0; s != NUM_SKINS - 1; s++) {
-        start += skinTextures[s].size();
-    }
 
+    int start = getLoadedTextureCount();
     int end = start + directoryListing.size();
     
 	for(int i = start; i < end; i++){		
@@ -85,17 +90,21 @@ void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& te
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 		
         cout << i << endl;
-        
-        //TO DO: review if using two maps is the best solution
-        if (skinNum == -1) {
-            textureList.insert(texturePair(bmpToLoad, textureIDs[i]));
-        } 
-        else {
-            skinTextures[skinNum].insert(texturePair(bmpToLoad, textureIDs[i]));
-        }
+
+        textureList.insert(texturePair(bmpToLoad, textureIDs[i]));
 	}        
 
 	delete image;  
+}
+
+int TextureManager::getLoadedTextureCount() {
+    int result = textures.size();   
+    
+    for (int s = 0; s != NUM_SKINS - 1; s++) {
+        result += skinTextures[s].size();
+    }
+    
+    return result;
 }
 
 string TextureManager::getResourcePath() {

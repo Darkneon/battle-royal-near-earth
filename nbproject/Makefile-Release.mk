@@ -86,8 +86,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
-	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o \
-	${OBJECTDIR}/source/Managers/TextureManager.o
+	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o
 
 
 # C Compiler Flags
@@ -378,11 +377,6 @@ ${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o: source/Model/Skybox/SphericSky
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o source/Model/Skybox/SphericSkybox.cpp
-
-${OBJECTDIR}/source/Managers/TextureManager.o: source/Managers/TextureManager.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Managers
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Managers/TextureManager.o source/Managers/TextureManager.cpp
 
 # Subprojects
 .build-subprojects:

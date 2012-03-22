@@ -48,10 +48,6 @@
         <itemPath>source/Logic/SpotLight.cpp</itemPath>
         <itemPath>source/Logic/SpotLight.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="Managers" displayName="Manager" projectFiles="true">
-        <itemPath>source/Managers/TextureManager.cpp</itemPath>
-        <itemPath>source/Managers/TextureManager.h</itemPath>
-      </logicalFolder>
       <logicalFolder name="Model" displayName="Model" projectFiles="true">
         <logicalFolder name="Buildings" displayName="Buildings" projectFiles="true">
           <itemPath>source/Model/Buildings/BaseModel.cpp</itemPath>
