@@ -34,18 +34,27 @@ public:
 	static TextureManager* getInstance();
 	GLuint getTextures(string fileName);
 	void toggleTextures();
+    void toggleSkins();
 	void enableTexture();
-	
+    int getCurrentSkin() { return currentSkin; };
 
     static string getResourcePath();
 	static bool texturesEnabled;
 private:
+    static const int NUM_SKINS = 2;
+    
+    void addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs);
+    void addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs, int skinNum);
+    
 	TextureManager();
 	static TextureManager* instance;
 	map<string, GLuint> textures;
 	vector<string> directoryListing;
+    map<string, GLuint> skinTextures[NUM_SKINS];
+    
     static string resourcePath;
-	
+    static int currentSkin;
+    static int maxSkins;
 };
 
 #endif

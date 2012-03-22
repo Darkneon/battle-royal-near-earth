@@ -131,7 +131,21 @@ void LevelRenderer::buildMap()
 
 	glEndList();
 
+    glNewList(6, GL_COMPILE);
+    TextureManager::getInstance()->toggleSkins();
 
+	for(int i = 0; i != 50; i++) {
+		for(int j = 0; j != 50; j++) {	
+			glPushMatrix();
+				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+				models[ level[i][j] ]->draw();
+
+			glPopMatrix();
+		}
+	}
+
+	glEndList();
+    
 	glNewList(5, GL_COMPILE);
 
 	TextureManager::getInstance()->toggleTextures();
@@ -147,27 +161,36 @@ void LevelRenderer::buildMap()
 	}
 
 	glEndList();
+    
+  
 }
 
 //Todo: will probably change while we get more requirements
 void LevelRenderer::render() {
 
-	/*
-	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {	
-			glPushMatrix();
-				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
-				models[ level[i][j] ]->draw();
-
-			glPopMatrix();
-		}
-	}
-	*/
+	
+//	for(int i = 0; i != 50; i++) {
+//		for(int j = 0; j != 50; j++) {	
+//			glPushMatrix();
+//				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+//				models[ level[i][j] ]->draw();
+//
+//			glPopMatrix();
+//		}
+//	}
+	
 	
 	if (TextureManager::getInstance()->texturesEnabled)
-		glCallList(2);
-	else
-		glCallList(5);
+		 if (TextureManager::getInstance()->getCurrentSkin() == 0) {
+            glCallList(2);
+        }
+        else {
+            glCallList(6);
+        }
+	else {
+          glCallList(5);
+    }
+		
 		
 
 	//Added by Jeff to see axes

@@ -8,6 +8,7 @@ void DirectoryManipHelper::getDirectoryListing(string directoryName, vector<stri
 {
 	DIR *pDIR;
     struct dirent *entry;
+    directoryListing->clear();
     
     if( pDIR = opendir(directoryName.c_str()) )
 	{

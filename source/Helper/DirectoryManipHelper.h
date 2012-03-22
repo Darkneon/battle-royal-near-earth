@@ -21,7 +21,7 @@ const string FILE_FORMAT_BMP = ".bmp";
 class DirectoryManipHelper
 {
 public:
-	static void getDirectoryListing(string directoryName, vector<string> *directoryListing);
+	static void getDirectoryListing(string directoryName, vector<string> *directoryListing);    
 };
 
 #endif

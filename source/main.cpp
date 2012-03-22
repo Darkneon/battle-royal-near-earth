@@ -2,7 +2,8 @@
 #include <fstream>
 #include <string>
 #include <time.h>
-
+#include <sstream>
+        
 #include "Game.h"
 #include "LevelRenderer.h"
 #include "Base.h"
@@ -287,24 +288,13 @@ void render()
 		fps = 0;
 	}
 	
-	char *sFps = new char[4];
-	_itoa_s(prevFps, sFps, 4, 10);
-
-	char *sFpsPrefix = "FPS: ";
-
-	char *prefixAndFps;
-	int len = strlen(sFps) + 1 + strlen(sFpsPrefix);
-
-	prefixAndFps = (char*)malloc(len);
-
-	strcpy_s(prefixAndFps, sizeof(char) * len, sFpsPrefix);
-	strcat_s(prefixAndFps, sizeof(char) * len, sFps);
-	
+    stringstream sFps;
+    sFps << prevFps;    	
+    
+	string prefixAndFps = "FPS: " + sFps.str();
+    
 	glColor3f(1.0f, 1.0f, 1.0f);
-	rasterText(-1.0f, 0.8f, GLUT_BITMAP_HELVETICA_18, prefixAndFps, 10);
-
-	delete [] prefixAndFps;
-	delete [] sFps;
+	rasterText(-1.0f, 0.8f, GLUT_BITMAP_HELVETICA_18, (char *)prefixAndFps.c_str(), prefixAndFps.size());
 
 	glutSwapBuffers();
     glutPostRedisplay();
@@ -391,10 +381,12 @@ void toggleDifferentView(){
 }
 
 void windowFuncKeyOps(){
-	if (funcKeyStates[GLUT_KEY_F1])
-	{
+	if (funcKeyStates[GLUT_KEY_F1]) {
 		toggleDifferentView();
-	}
+    } 
+    else if (funcKeyStates[GLUT_KEY_F5]) {
+        TextureManager::getInstance()->toggleSkins();
+    }
 }
 
 void functionKeysPressed(int key, int x, int y)
@@ -549,7 +541,7 @@ void initAntTweak() {
 
 void init()
 {
-	glGenLists(5);
+	glGenLists(6);
 
 	te = TextureManager::getInstance();
 
