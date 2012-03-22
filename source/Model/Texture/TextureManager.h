@@ -53,8 +53,7 @@ private:
     map<string, GLuint> skinTextures[NUM_SKINS];
     
     static string resourcePath;
-    static int currentSkin;
-    static int maxSkins;
+    static int currentSkin;    
 };
 
 #endif

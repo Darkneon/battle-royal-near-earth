@@ -23,11 +23,11 @@ TextureManager* TextureManager::instance = NULL;
 string TextureManager::resourcePath;
 bool TextureManager::texturesEnabled = true;
 int TextureManager::currentSkin = 0;
-//int TextureManager::NUM_SKINS = 2;
 
 TextureManager::TextureManager(void)
 {
-    
+        
+    //Calculate the total number of textures we will need
     int nbTextures = 0;
     DirectoryManipHelper::getDirectoryListing(getResourcePath(), &directoryListing);
     nbTextures += directoryListing.size();
@@ -38,11 +38,15 @@ TextureManager::TextureManager(void)
     DirectoryManipHelper::getDirectoryListing(getResourcePath() + "skins/1/", &directoryListing);
     nbTextures += directoryListing.size();
     
-    //generates array of GLUints that represent textures	
+    //use total number of textures to create an empty array of GLuints for opengl
 	GLuint* textureID = new GLuint[nbTextures];
 	glGenTextures(nbTextures, textureID);
     
+    //Load images and assign texture IDs
     addTexturesFromFolder(getResourcePath(), textures, textureID);	
+    
+    //IMPORTANT: skins must be loaded in ascending order or else
+    //           the start calculation will fail!
     addTexturesFromFolder(getResourcePath() + "skins/0/", textures, textureID, 0);
     addTexturesFromFolder(getResourcePath() + "skins/1/", textures, textureID, 1);
     
@@ -55,15 +59,19 @@ void TextureManager::addTexturesFromFolder(string folder, map<string, GLuint> &t
 
 void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& textureList, GLuint* textureIDs, int skinNum) {
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	
-	//hash_map
+		
 	DirectoryManipHelper::getDirectoryListing(folder, &directoryListing);	
 	Image* image = NULL;
     
-    int start = textureList.size() + skinTextures[0].size();
+    //start = calculate whatever we have loaded so far
+    int start = textureList.size();    
+    for (int s = 0; s != NUM_SKINS - 1; s++) {
+        start += skinTextures[s].size();
+    }
+
     int end = start + directoryListing.size();
-	for(int i = start; i < end; i++){
-		// takes file name, looks at file and converts to image
+    
+	for(int i = start; i < end; i++){		
 		string bmpToLoad = directoryListing.at(i-start);
 		image = loadBMP( (folder + bmpToLoad).c_str() );
 		glBindTexture(GL_TEXTURE_2D, textureIDs[i]);
@@ -77,15 +85,17 @@ void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& te
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 		
         cout << i << endl;
+        
+        //TO DO: review if using two maps is the best solution
         if (skinNum == -1) {
             textureList.insert(texturePair(bmpToLoad, textureIDs[i]));
-        } else {
+        } 
+        else {
             skinTextures[skinNum].insert(texturePair(bmpToLoad, textureIDs[i]));
         }
 	}        
 
-	delete image;
-  //  delete[] textureID;
+	delete image;  
 }
 
 string TextureManager::getResourcePath() {
@@ -115,11 +125,11 @@ TextureManager* TextureManager::getInstance(){
 
 GLuint TextureManager::getTextures(string fileName){
     
-    if (textures.end() != textures.find(fileName)) {
+    bool containsFilename = (textures.end() != textures.find(fileName));
+    if (containsFilename) {
         return textures[fileName];
     }
-    else {
-        
+    else {        
         return skinTextures[currentSkin][fileName];
     }
 }
