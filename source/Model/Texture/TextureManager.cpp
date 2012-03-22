@@ -45,10 +45,9 @@ TextureManager::TextureManager(void)
     //Load images and assign texture IDs
     addTexturesFromFolder(getResourcePath(), textures, textureID);	
     
-    //IMPORTANT: skins must be loaded in ascending order or else
-    //           the start calculation will fail!
-    addTexturesFromFolder(getResourcePath() + "skins/0/", skinTextures[0], textureID);
     addTexturesFromFolder(getResourcePath() + "skins/1/", skinTextures[1], textureID);
+    addTexturesFromFolder(getResourcePath() + "skins/0/", skinTextures[0], textureID);
+    
     
     delete[] textureID;
   
@@ -73,7 +72,7 @@ void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& te
 	DirectoryManipHelper::getDirectoryListing(folder, &directoryListing);	
 	Image* image = NULL;
 
-    int start = getLoadedTextureCount();
+    int start = getLoadedTexturesCount();
     int end = start + directoryListing.size();
     
 	for(int i = start; i < end; i++){		
@@ -97,10 +96,10 @@ void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& te
 	delete image;  
 }
 
-int TextureManager::getLoadedTextureCount() {
+int TextureManager::getLoadedTexturesCount() {
     int result = textures.size();   
     
-    for (int s = 0; s != NUM_SKINS - 1; s++) {
+    for (int s = 0; s != NUM_SKINS; s++) {
         result += skinTextures[s].size();
     }
     
