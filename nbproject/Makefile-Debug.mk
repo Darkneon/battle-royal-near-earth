@@ -56,10 +56,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
-	${OBJECTDIR}/source/Model/Light/LightPost.o \
-	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
 	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
+	${OBJECTDIR}/source/Model/Light/LightPost.o \
 	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
+	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
 	${OBJECTDIR}/source/Model/Player/AntennaModel.o \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
@@ -225,25 +225,25 @@ ${OBJECTDIR}/source/Model/Helper/GeoHelper.o: source/Model/Helper/GeoHelper.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/GeoHelper.o source/Model/Helper/GeoHelper.cpp
 
-${OBJECTDIR}/source/Model/Light/LightPost.o: source/Model/Light/LightPost.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Light
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Light/LightPost.o source/Model/Light/LightPost.cpp
-
-${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
-
 ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
 
+${OBJECTDIR}/source/Model/Light/LightPost.o: source/Model/Light/LightPost.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Light
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Light/LightPost.o source/Model/Light/LightPost.cpp
+
 ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
+
+${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
 
 ${OBJECTDIR}/source/Model/Player/AntennaModel.o: source/Model/Player/AntennaModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
