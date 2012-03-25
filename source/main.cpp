@@ -149,9 +149,21 @@ void render()
     
 	string prefixAndFps = "FPS: " + sFps.str();
     
-	glColor3f(1.0f, 1.0f, 1.0f);
-	rasterText(-1.0f, 0.8f, GLUT_BITMAP_HELVETICA_18, (char *)prefixAndFps.c_str(), prefixAndFps.size());
+	 glPushMatrix();        
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0, width, 0, height, 0.0f, 0.1f);
 
+        glMatrixMode(GL_MODELVIEW); 
+        glDisable(GL_LIGHTING);
+
+        glColor3f(1.0f, 1.0f, 1.0f);
+        rasterText(20.0f, 20.0f, GLUT_BITMAP_HELVETICA_18, (char *)prefixAndFps.c_str(), prefixAndFps.size());
+        
+        glEnable(GL_LIGHTING);
+        glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    
 	glutSwapBuffers();
     glutPostRedisplay();
 }

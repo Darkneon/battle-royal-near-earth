@@ -33,10 +33,12 @@
         <itemPath>source/Logic/FreeLookCamera.h</itemPath>
         <itemPath>source/Logic/Game.cpp</itemPath>
         <itemPath>source/Logic/Game.h</itemPath>
+        <itemPath>source/Logic/HumanPlayer.cpp</itemPath>
+        <itemPath>source/Logic/HumanPlayer.h</itemPath>
         <itemPath>source/Logic/LevelRenderer.cpp</itemPath>
         <itemPath>source/Logic/LevelRenderer.h</itemPath>
         <itemPath>source/Logic/LightCamera.cpp</itemPath>
-        <itemPath>source/LightCamera.h</itemPath>
+        <itemPath>source/Logic/LightCamera.h</itemPath>
         <itemPath>source/Logic/Player.cpp</itemPath>
         <itemPath>source/Logic/Player.h</itemPath>
         <itemPath>source/Logic/PlayerInput.cpp</itemPath>
