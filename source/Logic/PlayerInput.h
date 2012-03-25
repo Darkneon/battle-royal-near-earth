@@ -1,7 +1,7 @@
 #ifndef PLAYER_INPUT_H
 #define PLAYER_INPUT_H
 
-#include "Player.h"
+#include "HumanPlayer.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -13,13 +13,13 @@
 class PlayerInput
 {
 public:
-	PlayerInput(Player* player, bool *keyStates, bool *funcKeyStates);
+	PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates);
 	void functionKeyOperations(int keyModifier);
 	void keyOperations(int keyModifier);
 	void mousePassiveOperations(int x, int y);
 
 private:
-	Player* player;
+	HumanPlayer* player;
 	bool *keyStates;
 	bool *funcKeyStates;
 	int *keyModifier;

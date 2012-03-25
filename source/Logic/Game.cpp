@@ -3,8 +3,10 @@
 Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane,
 	bool *keyStates, bool *funcKeyStates)
 {
-	p1 = new Player(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+	//p1 = (Player*)new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
+	lr = new LevelRenderer();
 }
 
 Game::~Game()
@@ -31,4 +33,10 @@ void Game::getInput(int keyModifier)
 {
 	playerInput1->functionKeyOperations(keyModifier);
 	playerInput1->keyOperations(keyModifier);
+}
+
+void Game::render(){
+	lr->render();
+	p1->render();
+	p1->view();
 }

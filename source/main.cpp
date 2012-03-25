@@ -5,14 +5,9 @@
 #include <sstream>
         
 #include "Game.h"
-#include "LevelRenderer.h"
-#include "Base.h"
-#include "Robot.h"
 #include "SpotLight.h"
 #include "Light/LightPost.h"
 #include "Model/Texture/TextureManager.h"
-#include "Model/Skybox/CubicSkybox.h"
-#include "Model/Skybox/SphericSkybox.h"
 
 #include "AntTweakHelper.h"
 
@@ -22,7 +17,6 @@
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
-
 
 // PI
 #define GL_PI 3.14159f
@@ -40,8 +34,7 @@ int winPosX = 0;
 int winPosY = 0;
 
 bool isInFullScreenMode;
-
-bool isSphereSkyBox = false;
+bool showHelpWindow = false;
 
 // Bounds of viewing frustum.
 GLfloat nearPlane =  1.0f;
@@ -57,119 +50,11 @@ static bool isDebugMode = false;
 int viewStates = 0; //states of the camera views
 
 Game* game;
-LevelRenderer* levelRenderer;
-Base base;
-Robot robot;
-Robot robot2;
-
-CubicSkybox *cubicSkyBox;
-SphericSkybox *sphericSkyBox;
-
-bool toggleRobot = false;
 AntTweakHelper antTweakHelper;
-//GLUquadricObj *quadratic = gluNewQuadric();
-
-//Initialize light objects
-SpotLight *spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
-LightPost *light1 = new LightPost(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
-LightPost *light2 = new LightPost(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
-LightPost *light3 = new LightPost(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f);
-LightPost *light4 = new LightPost(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f);
-
-bool ambientLight = true;
-bool showHelpWindow = false;
-bool spotLight1 = true;
-bool spotLight2 = true;
-bool spotLight3 = true;
-bool spotLight4 = true;
 
 //second window for help menu
 int mainWindow = 0;
 int helpWindow = 0;
-
-void renderLights()
-{		
-		//ambient light
-		GLfloat ambient_light[4];
-
-		if(ambientLight){
-			for(int i = 0; i<3;i++){
-				ambient_light[i] = 0.45f;
-			}
-		}else{
-			for(int i = 0; i<3;i++){
-				ambient_light[i] = 0.2f;
-			}
-		}
-		ambient_light[3]=1.0f;
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
-
-        glEnable(GL_LIGHTING);
-        glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
-		//Set up a new light, namely... light0
-        //New light... Light1
-        glLightfv(GL_LIGHT1, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
-        glLightfv(GL_LIGHT1, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
-        glLightfv(GL_LIGHT1, GL_SPECULAR, spotLight->getSpecular());
-        glLightfv(GL_LIGHT1, GL_POSITION, light1->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0);
-        glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1->getDirectionArray());
-        //New light... Light2
-        glLightfv(GL_LIGHT2, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
-        glLightfv(GL_LIGHT2, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
-        glLightfv(GL_LIGHT2, GL_SPECULAR, spotLight->getSpecular());
-        glLightfv(GL_LIGHT2, GL_POSITION, light2->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 0);
-        glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, light2->getDirectionArray());
-        //New light... Light3
-        glLightfv(GL_LIGHT3, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
-        glLightfv(GL_LIGHT3, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
-        glLightfv(GL_LIGHT3, GL_SPECULAR, spotLight->getSpecular());
-        glLightfv(GL_LIGHT3, GL_POSITION, light3->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 1);
-        glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, light3->getDirectionArray());
-        //New light... Light4
-        glLightfv(GL_LIGHT4, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
-        glLightfv(GL_LIGHT4, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
-        glLightfv(GL_LIGHT4, GL_SPECULAR, spotLight->getSpecular());
-        glLightfv(GL_LIGHT4, GL_POSITION, light4->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 0);
-        glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light4->getDirectionArray());
-        //For enabling / disabling lights
-        if(!spotLight1)
-        {
-                glDisable(GL_LIGHT1);
-	} else {
-            glEnable(GL_LIGHT1);
-        }
-        if(!spotLight2)
-        {
-                glDisable(GL_LIGHT2);
-	} else {
-            glEnable(GL_LIGHT2);
-        }
-        if(!spotLight3)
-        {
-                glDisable(GL_LIGHT3);
-	} else {
-            glEnable(GL_LIGHT3);
-        }
-        if(!spotLight4)
-        {
-                glDisable(GL_LIGHT4);
-	} else {
-            glEnable(GL_LIGHT4);
-        }
-        light1->render();
-        light2->render();
-        light3->render();
-        light4->render();
-        
-}
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
@@ -227,7 +112,6 @@ void rasterText(GLfloat x, GLfloat y, void *font, char *c, int cWidth){
 
 void render()
 {
-	
 	static time_t lastUpdate = time(NULL);
 	static time_t currentTime = time(NULL);
 	static GLuint fps = 0;
@@ -238,44 +122,16 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
-
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	levelRenderer->render();
-	renderLights();
-
-	//Drawing robot models on map
-	glPushMatrix();
-		glTranslatef(15,0,40);
-		//base.draw();
-        glTranslatef(-5,0,5);
-        game->p1->draw();
-	glPopMatrix();
-	
-	glPushMatrix();
-		//robot.translateTo(25.0f,45.0f);
-		//robot.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-		//robot2.translateTo(30.0f,45.0f);
-		//robot2.draw();
-	glPopMatrix();
-
-	if (!isSphereSkyBox)
-		cubicSkyBox->render();
-	else
-		sphericSkyBox->render();
-	
-	
+	game->render();
 	game->getInput(keyModifier); // Gets user input
-	game->p1->view(); // Camera update (leave as it is for now)
-
+	//((HumanPlayer*)(game->p1))->view(); // Camera update (leave as it is for now)
+	
 	if (isDebugMode) {
 		antTweakHelper.draw();
 	}
-
 	
 	fps++;
 	currentTime = time(NULL);
@@ -355,14 +211,14 @@ void toggleDifferentView(){
 	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT, GL_FILL);
 
-	if (isSphereSkyBox)
+	if (game->lr->getIsSkySphere())
 		glPolygonMode(GL_BACK, GL_FILL);
 
 	if(viewStates==1){ //wireFrame
 		glDisable(GL_DEPTH_TEST);
 		glPolygonMode(GL_FRONT, GL_LINE);
 
-		if (isSphereSkyBox)
+		if (game->lr->getIsSkySphere())
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
@@ -371,7 +227,7 @@ void toggleDifferentView(){
 
 		glPolygonMode(GL_FRONT, GL_FILL);
 
-		if (isSphereSkyBox)
+		if (game->lr->getIsSkySphere())
 			glPolygonMode(GL_BACK, GL_FILL);
 	}
 
@@ -402,43 +258,6 @@ void windowKeyOps()
 	{
 		toggleFullScreen();
 	}
-	if (keyStates[116]) //t
-	{ 
-		if(!toggleRobot){
-			game->p1->selectRobot(&robot);
-			toggleRobot = true;
-		}
-		else {
-			game->p1->selectRobot(&robot2);
-			toggleRobot = false;
-		}
-		//glutPostRedisplay();
-    }
-  
-    if (keyStates[121]) //y
-	{ 
-		if(toggleRobot){
-			robot.cycleIndex();
-			glutPostRedisplay();
-		}
-		else {
-			robot2.cycleIndex();
-			glutPostRedisplay();
-		}
-    }
-      
-    if (keyStates[117]) //u
-	{ 
-		if(toggleRobot){
-			robot.turnSelectedOn();
-			glutPostRedisplay();
-		}
-		else{
-			robot2.turnSelectedOn();
-			glutPostRedisplay();
-		}
-    }
-
 	if (keyStates[98]) //b
 	{
 		isDebugMode = !isDebugMode;
@@ -448,7 +267,7 @@ void windowKeyOps()
 			glutSetCursor(GLUT_CURSOR_NONE);
 	}
 
-	if(keyStates[97]){ //a
+	/*if(keyStates[97]){ //a
 		ambientLight = !ambientLight;
 	}
         if(keyStates[53]) //5
@@ -473,7 +292,7 @@ void windowKeyOps()
         spotLight2 = false;
         spotLight3 = false;
         spotLight4 = false;
-    }
+    }*/
         
 
 	if(keyStates[104]){//h
@@ -491,7 +310,7 @@ void windowKeyOps()
 
 	if (keyStates[115])//s
 	{
-		isSphereSkyBox = !isSphereSkyBox;
+		game->lr->toggleSkySphere();
 	}
 
 	if (keyStates[27]) //ESC
@@ -535,8 +354,8 @@ void OnKey(unsigned char key, int x, int y)  {
 }
 
 void initAntTweak() {
-  antTweakHelper.bindCamera(game->p1->getCurrentCamera());
-  antTweakHelper.bindLightPosts(light1, light2, light3, light4);
+ // antTweakHelper.bindCamera(game->p1->getCurrentCamera());
+  //antTweakHelper.bindLightPosts(light1, light2, light3, light4);
 }
 
 void init()
@@ -545,11 +364,6 @@ void init()
 
 	te = TextureManager::getInstance();
 
-	levelRenderer = new LevelRenderer();
-	cubicSkyBox = new CubicSkybox();
-	sphericSkyBox = new SphericSkybox();
-
-	
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
 	isInFullScreenMode = false;
@@ -567,7 +381,6 @@ void init()
 	
   initAntTweak();
   glEnable(GL_NORMALIZE);
-  
   
 }
 

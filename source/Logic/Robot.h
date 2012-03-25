@@ -11,6 +11,8 @@
 #include "Static/TeamNumberModel.h"
 #include "RobotCamera.h"
 
+#define MAX_LIFE 3
+
 static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
 static const GLfloat PHASER_HEIGHT = 0.9f;
@@ -99,6 +101,8 @@ private:
 	void refreshRobot(); //refreshes model to contain correct robot components
 	void clearChildren(); //initialization for refreshRobot()
 	void turnIndexOn(int index); //helper function for toggling components (updates isPartOn[])
+
+	int robotLife;
 
 public:
 

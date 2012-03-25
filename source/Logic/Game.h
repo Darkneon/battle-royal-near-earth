@@ -5,6 +5,8 @@
 
 #include "Player.h"
 #include "PlayerInput.h"
+#include "HumanPlayer.h"
+#include "LevelRenderer.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -20,9 +22,12 @@ public:
 		bool *keyStates, bool *funcKeyStates);
 	~Game();
 	
-	Player* p1;
+	HumanPlayer* p1;
+	//Player* p1;
 	PlayerInput* playerInput1;
+	LevelRenderer* lr;
 
+	void render();
 	void updateGameState(); // Modification to the game logic here, no drawing here
 	void getInput(int keyModifier); //gets user input
 

@@ -3,7 +3,7 @@
 
 
 Player::Player(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane) {
-    PlayerModel *pm = new PlayerModel;
+    /*PlayerModel *pm = new PlayerModel;
     model = (Model*)pm;
 	//r = new Robot;
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
@@ -14,11 +14,26 @@ Player::Player(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat
         availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
         availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
         availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	currentCamera = CAMERA_COMMANDER;
+	currentCamera = CAMERA_COMMANDER;*/
+	selectedRobot = 0;
+	Robot* newRobot = new Robot;
+	robots.push_back(newRobot);
+	newRobot = NULL;
+	delete newRobot;
+}
+
+Player::Player() {
+	selectedRobot = 0;
+	Robot* newRobot = new Robot;
+	robots.push_back(newRobot);
+	newRobot = NULL;
+	delete newRobot;
 }
 
 Player::~Player() {    
-	if (model != NULL) {
+	robots.clear();
+	
+	/*if (model != NULL) {
 		delete model;
 		model = NULL;
 	}
@@ -30,9 +45,36 @@ Player::~Player() {
 			delete availableCams[i];
 			availableCams[i] = NULL;
 		}
+	}*/
+}
+
+bool Player::addRobot(){
+	if(robots.size() < MAX_ROBOTS){
+		//if enough room -> push robot
+		Robot* newRobot = new Robot;
+		robots.push_back(newRobot);
+		//delete pointer
+		newRobot = NULL;
+		delete newRobot;
+		return true;
+	}
+	else{
+		return false;
 	}
 }
 
+void Player::selectRobot(int i){
+	selectedRobot = i;
+}
+
+void Player::render(){
+	//keep drawing until all the children are done
+    for(int j = 0; j < (int)robots.size(); j++){
+		robots.at(j)->draw();
+	}
+}
+
+/*
 void Player::draw() {
     model->draw();
 }
@@ -65,4 +107,4 @@ int Player::getCurrentCameraType()
 
 void Player::selectRobot(Robot* robo){
 	((RobotCamera*)availableCams[CAMERA_ROBOT])->attachToRobot(robo);
-}
+}*/

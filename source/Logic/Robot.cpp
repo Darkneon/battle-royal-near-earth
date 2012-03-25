@@ -31,6 +31,8 @@ Robot::Robot() {
 	yawAngle = 90.0f;
 	isMyLightOn = false;
 
+	robotLife = MAX_LIFE;
+
 	//BiPod is on
 	isPartOn[0] = true;
 	selectedIndex = 0;

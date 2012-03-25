@@ -30,15 +30,33 @@
 #include "Robot/NuclearModel.h"
 #include "Robot/HeadlightModel.h"
 
-
 LevelRenderer::LevelRenderer() {
 
+	//skyboxes
+	cubicSkyBox = new CubicSkybox();
+	sphericSkyBox = new SphericSkybox();
+	isSkySphere = false;
 
 	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {	
 			level[i][j] = 0;
 		}
 	}
+
+	//LIGHT
+	//Initialize light objects
+	spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
+	light1 = new LightPost(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
+	light2 = new LightPost(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
+	light3 = new LightPost(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f);
+	light4 = new LightPost(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f);
+
+	ambientLight = true;
+
+	spotLight1 = true;
+	spotLight2 = true;
+	spotLight3 = true;
+	spotLight4 = true;
 
 	//Loading textures
 	//DirectoryManipHelper::getDirectoryListing(".");
@@ -101,7 +119,7 @@ LevelRenderer::LevelRenderer() {
 	models[15]->removeAllChildren();
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
-	map1();   
+	//map1();   
 	buildMap();
 } 
 
@@ -179,7 +197,13 @@ void LevelRenderer::render() {
 //		}
 //	}
 	
-	
+	if (!isSkySphere)
+		cubicSkyBox->render();
+	else
+		sphericSkyBox->render();
+
+	renderLights();
+
 	if (TextureManager::getInstance()->texturesEnabled)
 		 if (TextureManager::getInstance()->getCurrentSkin() == 0) {
             glCallList(2);
@@ -255,4 +279,96 @@ void LevelRenderer::map1(){
 
 	level[40][10] = 2;
 	*/
+}
+
+bool LevelRenderer::getIsSkySphere(){
+	return isSkySphere;
+}
+
+void LevelRenderer::toggleSkySphere(){
+	isSkySphere = !isSkySphere;
+}
+
+void LevelRenderer::renderLights()
+{		
+		//ambient light
+		GLfloat ambient_light[4];
+
+		if(ambientLight){
+			for(int i = 0; i<3;i++){
+				ambient_light[i] = 0.45f;
+			}
+		}else{
+			for(int i = 0; i<3;i++){
+				ambient_light[i] = 0.2f;
+			}
+		}
+		ambient_light[3]=1.0f;
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
+
+        glEnable(GL_LIGHTING);
+        glEnable(GL_COLOR_MATERIAL);// Allows color to reflect light
+		//Set up a new light, namely... light0
+        //New light... Light1
+        glLightfv(GL_LIGHT1, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
+        glLightfv(GL_LIGHT1, GL_SPECULAR, spotLight->getSpecular());
+        glLightfv(GL_LIGHT1, GL_POSITION, light1->getPositionArray()); // Setup the lighting 
+        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0f);
+        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0);
+        glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1->getDirectionArray());
+        //New light... Light2
+        glLightfv(GL_LIGHT2, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
+        glLightfv(GL_LIGHT2, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
+        glLightfv(GL_LIGHT2, GL_SPECULAR, spotLight->getSpecular());
+        glLightfv(GL_LIGHT2, GL_POSITION, light2->getPositionArray()); // Setup the lighting 
+        glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 25.0f);
+        glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 0);
+        glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, light2->getDirectionArray());
+        //New light... Light3
+        glLightfv(GL_LIGHT3, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
+        glLightfv(GL_LIGHT3, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
+        glLightfv(GL_LIGHT3, GL_SPECULAR, spotLight->getSpecular());
+        glLightfv(GL_LIGHT3, GL_POSITION, light3->getPositionArray()); // Setup the lighting 
+        glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, 25.0f);
+        glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 1);
+        glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, light3->getDirectionArray());
+        //New light... Light4
+        glLightfv(GL_LIGHT4, GL_AMBIENT, spotLight->getAmbient()); //Setup ambient lighting
+        glLightfv(GL_LIGHT4, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
+        glLightfv(GL_LIGHT4, GL_SPECULAR, spotLight->getSpecular());
+        glLightfv(GL_LIGHT4, GL_POSITION, light4->getPositionArray()); // Setup the lighting 
+        glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 25.0f);
+        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 0);
+        glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light4->getDirectionArray());
+        //For enabling / disabling lights
+        if(!spotLight1)
+        {
+                glDisable(GL_LIGHT1);
+	} else {
+            glEnable(GL_LIGHT1);
+        }
+        if(!spotLight2)
+        {
+                glDisable(GL_LIGHT2);
+	} else {
+            glEnable(GL_LIGHT2);
+        }
+        if(!spotLight3)
+        {
+                glDisable(GL_LIGHT3);
+	} else {
+            glEnable(GL_LIGHT3);
+        }
+        if(!spotLight4)
+        {
+                glDisable(GL_LIGHT4);
+	} else {
+            glEnable(GL_LIGHT4);
+        }
+        light1->render();
+        light2->render();
+        light3->render();
+        light4->render();
+        
 }

@@ -1,6 +1,6 @@
 #include "PlayerInput.h"
 
-PlayerInput::PlayerInput(Player* player, bool *keyStates, bool *funcKeyStates)
+PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates)
 {
 	this->player = player;
 	this->keyStates = keyStates;
@@ -21,7 +21,7 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->getCurrentCamera()->resetZoom();
 	}
-        else if (keyStates[49]) //1
+    /*    else if (keyStates[49]) //1
 	{
 		player->changeCamera(CAMERA_LIGHT1);
                 glutPostRedisplay();
@@ -40,7 +40,7 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->changeCamera(CAMERA_LIGHT4);
                 glutPostRedisplay();
-	}
+	}*/
 
 	if (keyStates[108]) //l
 	{
