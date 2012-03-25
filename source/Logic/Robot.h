@@ -1,6 +1,5 @@
 //ROBERT'S CLASS
 
-
 #ifndef ROBOT_H
 #define ROBOT_H
 #define GL_PI 3.14159f //PI

@@ -22,6 +22,7 @@ PlayerModel::PlayerModel() {
     setNextChild( (Model*)child );
 }
 
+
 void PlayerModel::render() {
     TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("gold.bmp"));

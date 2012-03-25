@@ -24,7 +24,8 @@ public:
     ~Player();
 	bool addRobot();
 	void selectRobot(int i);
-	void render();
+	virtual void render();
+	
 
 	vector<Robot *> robots;
 	int selectedRobot;

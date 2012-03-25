@@ -3,8 +3,6 @@
 
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane){
-    PlayerModel *pm = new PlayerModel;
-    model = (Model*)pm;
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
@@ -14,14 +12,12 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);*/
 	currentCamera = CAMERA_COMMANDER;
-	ufoXPos = spawnPtX;
-	ufoZPos = spawnPtZ+5.0f;
+	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 }
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ)
 					: Player(spawnX,spawnZ){
-    PlayerModel *pm = new PlayerModel;
-    model = (Model*)pm;
+    
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
@@ -31,14 +27,13 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);*/
 	currentCamera = CAMERA_COMMANDER;
-	ufoXPos = spawnPtX;
-	ufoZPos = spawnPtZ+5.0f;
+	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 }
 
 HumanPlayer::~HumanPlayer() {    
-	if (model != NULL) {
-		delete model;
-		model = NULL;
+	if (ufo != NULL) {
+		delete ufo;
+		ufo = NULL;
 	}
 
 	for (int i = 0; i < 2; i++)
@@ -51,11 +46,13 @@ HumanPlayer::~HumanPlayer() {
 	}
 }
 
-void HumanPlayer::draw() {
-	glPushMatrix();
-		glTranslatef(ufoXPos,0.0f,ufoZPos);
-		model->draw();
-	glPopMatrix();
+void HumanPlayer::render(){
+	base->draw();
+	ufo->draw();
+	//keep drawing until all the children are done
+    for(int j = 0; j < (int)robots.size(); j++){
+		robots.at(j)->draw();
+	}
 }
 
 void HumanPlayer::changeCamera(int CAMERA)
@@ -67,7 +64,6 @@ void HumanPlayer::changeCamera(int CAMERA)
 	}
 	currentCamera = CAMERA;
 }
-
 
 void HumanPlayer::view()
 {
@@ -86,4 +82,8 @@ int HumanPlayer::getCurrentCameraType()
 
 void HumanPlayer::selectRobotView(Robot* robo){
 	((RobotCamera*)availableCams[CAMERA_ROBOT])->attachToRobot(robo);
+}
+
+void HumanPlayer::levitateUFO(){
+	ufo->incrementHeight(true);
 }

@@ -113,6 +113,7 @@
     <ClCompile Include="Logic\LightCamera.cpp" />
     <ClCompile Include="Logic\Player.cpp" />
     <ClCompile Include="Logic\PlayerInput.cpp" />
+    <ClCompile Include="Logic\PlayerUFO.cpp" />
     <ClCompile Include="Logic\Robot.cpp" />
     <ClCompile Include="Logic\RobotCamera.cpp" />
     <ClCompile Include="Logic\SpotLight.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Logic\LightCamera.h" />
     <ClInclude Include="Logic\Player.h" />
     <ClInclude Include="Logic\PlayerInput.h" />
+    <ClInclude Include="Logic\PlayerUFO.h" />
     <ClInclude Include="Logic\Robot.h" />
     <ClInclude Include="Logic\RobotCamera.h" />
     <ClInclude Include="Logic\SpotLight.h" />

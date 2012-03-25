@@ -21,6 +21,9 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->getCurrentCamera()->resetZoom();
 	}
+	else if (keyStates[32]){ //space
+		player->levitateUFO();
+	}
     /*    else if (keyStates[49]) //1
 	{
 		player->changeCamera(CAMERA_LIGHT1);

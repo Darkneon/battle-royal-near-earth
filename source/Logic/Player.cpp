@@ -62,3 +62,4 @@ void Player::render(){
 		robots.at(j)->draw();
 	}
 }
+

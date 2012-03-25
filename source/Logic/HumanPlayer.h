@@ -14,6 +14,8 @@
 #include "RobotCamera.h"
 #include "LightCamera.h"
 #include "Player.h"
+#include "PlayerUFO.h"
+
 
 class HumanPlayer : public Player
 {
@@ -21,21 +23,21 @@ public:
     HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF);
 	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ);
     ~HumanPlayer();
-    void draw();
+    void render();
 
 	void changeCamera(int CAMERA);
 	void view();
 	int getCurrentCameraType();
 	Camera *getCurrentCamera();
 	void selectRobotView(Robot* robo);
-	
+	void levitateUFO();
 private:
 	int currentCamera;
-    Model *model;
+   // Model *model;
 	Camera *availableCams[8];
+	PlayerUFO* ufo;
 
-	GLfloat ufoXPos;
-	GLfloat ufoZPos;
+
 };
 
 #endif	/* HUMANPLAYER_H */

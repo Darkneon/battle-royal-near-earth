@@ -164,6 +164,9 @@
     <ClCompile Include="Logic\AIPlayer.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\PlayerUFO.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -326,6 +329,9 @@
       <Filter>Logic</Filter>
     </ClInclude>
     <ClInclude Include="Logic\AIPlayer.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\PlayerUFO.h">
       <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
