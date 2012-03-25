@@ -51,6 +51,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/CommanderCamera.o \
 	${OBJECTDIR}/source/Model/Static/HollowBlockModel.o \
 	${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o \
+	${OBJECTDIR}/source/Logic/HumanPlayer.o \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/LightCamera.o \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
@@ -197,6 +198,11 @@ ${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o: source/Model/Static/Half
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o source/Model/Static/HalfPlainBlockModel.cpp
+
+${OBJECTDIR}/source/Logic/HumanPlayer.o: source/Logic/HumanPlayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/HumanPlayer.o source/Logic/HumanPlayer.cpp
 
 ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o: source/Model/Static/PlainBlockModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
