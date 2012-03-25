@@ -3,7 +3,7 @@
 Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane,
 	bool *keyStates, bool *funcKeyStates)
 {
-	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane,25.0f,25.0f);
+	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane,30.0f,30.0f);
 	p2 = new Player(40.0f,35.0f);
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
 	lr = new LevelRenderer();

@@ -10,7 +10,7 @@
 #include "Static/TeamNumberModel.h"
 #include "RobotCamera.h"
 
-#define MAX_LIFE 3
+#define MAX_LIFE 100
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -84,6 +84,7 @@ private:
     Model* tracksM;
     Model* antiGravM;
 	Model* headlight;
+	Model* rubble;
 	TeamNumberModel teamNumberModel;
 
 	//Camera
@@ -112,7 +113,7 @@ private:
 	void clearChildren(); //initialization for refreshRobot()
 	void turnIndexOn(int index); //helper function for toggling components (updates isPartOn[])
 
-	int robotLife;
+	GLfloat robotLife;
 
 	//used for moving robot
 	GLfloat calcDestinationAngle();
@@ -128,6 +129,8 @@ private:
 	void setDestination(GLfloat x, GLfloat z);
 	bool checkXDestination();
 	bool checkZDestination();
+
+	bool deadState;
 public:
 
 

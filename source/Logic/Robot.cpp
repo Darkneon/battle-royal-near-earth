@@ -8,10 +8,12 @@
 #include "Robot/ElectronicsModel.h"
 #include "Robot/NuclearModel.h"
 #include "Robot/HeadlightModel.h"
+#include "../Model/Static/LightRubbleModel.h"
 
 bool Robot::isARobotLightOn = false;
 
 Robot::Robot() {
+	rubble = (Model*)(new LightRubbleModel());
     nuclearM = (Model*)(new NuclearModel()); 
     electronicsM = (Model*)(new ElectronicsModel()); 
     phaserM = (Model*)(new PhaserModel);
@@ -48,6 +50,7 @@ Robot::Robot() {
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
+	rubble = (Model*)(new LightRubbleModel());
     nuclearM = (Model*)(new NuclearModel()); 
     electronicsM = (Model*)(new ElectronicsModel()); 
     phaserM = (Model*)(new PhaserModel);
@@ -62,8 +65,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	
 	xPos = x;
 	zPos = y;
-	xDestination = x;
-	zDestination = y;
+	xDestination = 5.0f;
+	zDestination = 5.0f;
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
 	pitchAngle = 90.0f;
@@ -99,25 +102,35 @@ Robot::~Robot() {
 }
 
 void Robot::draw() {
-	glPushMatrix();
-		goToDestination();
-		//Translate()
-		glTranslatef(xPos,0.0f,zPos);
-		
-		//Spin()
-		glTranslatef(0.5f, 0.0f, 0.5f);
-		glRotatef(spinDegrees,0.0f,1.0f,0.0f);
-		glTranslatef(-0.5f,0.0f,-0.5f);
-
-		//Draw Headlight
+	if(robotLife > 0){
 		glPushMatrix();
-			glTranslatef(0.0f,calculateHeight(8),0.0f);
-			headlight->draw();
-		glPopMatrix();
+			goToDestination();
+			//Translate()
+			glTranslatef(xPos,0.0f,zPos);
+		
+			//Spin()
+			glTranslatef(0.5f, 0.0f, 0.5f);
+			glRotatef(spinDegrees,0.0f,1.0f,0.0f);
+			glTranslatef(-0.5f,0.0f,-0.5f);
 
-		//Draw Model
-		model->draw();
-	glPopMatrix();
+			//Draw Headlight
+			glPushMatrix();
+				glTranslatef(0.0f,calculateHeight(8),0.0f);
+				headlight->draw();
+			glPopMatrix();
+
+			//Draw Model
+			model->draw();
+		glPopMatrix();
+	}
+	else{
+		glPushMatrix();
+			//Translate()
+			glTranslatef(xPos,0.0f,zPos);
+			rubble->draw();
+		glPopMatrix();
+	}
+	robotLife = robotLife -0.5f;
 
 }
 
