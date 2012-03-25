@@ -12,22 +12,15 @@
 #include <vector>
 
 #include "Robot.h"
-
-/*
-#include "Model.h"
-#include "CommanderCamera.h"
-#include "FreeLookCamera.h"
-#include "CirclingCamera.h"
-#include "RobotCamera.h"
-#include "LightCamera.h"*/
+#include "Base.h"
 
 #define MAX_ROBOTS 2
 
 class Player 
 {
 public:
-    Player(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
 	Player();
+	Player(GLfloat spawnX, GLfloat spawnZ);
     ~Player();
 	bool addRobot();
 	void selectRobot(int i);
@@ -35,19 +28,13 @@ public:
 
 	vector<Robot *> robots;
 	int selectedRobot;
+	Base* base;
 
-    /*void draw();
+protected:
+	GLfloat spawnPtX;
+	GLfloat spawnPtZ;
 
-	void changeCamera(int CAMERA);
-	void view();
-	int getCurrentCameraType();
-	Camera *getCurrentCamera();
-	void selectRobot(Robot* robo);
-	
-private:
-	int currentCamera;
-    Model *model;
-	Camera *availableCams[8];*/
+
 };
 
 #endif	/* PLAYER_H */

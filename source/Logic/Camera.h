@@ -48,7 +48,6 @@ public:
 	void toggleDifferentView();
 	virtual void resetCameraAngle(); //reset the camera angle to 0
 	
-	
 protected:
 	//perspective variables
 	GLint viewWidth, viewHeight;

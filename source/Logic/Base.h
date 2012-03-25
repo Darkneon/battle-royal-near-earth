@@ -13,10 +13,13 @@
 class Base {
 public:
     Base();
+	Base(GLfloat x, GLfloat z);
     ~Base();
     void draw();
 private:
     Model *model;
+	GLfloat xPos;
+	GLfloat zPos;
 };
 
 #endif

@@ -43,7 +43,7 @@ TextureManager::TextureManager(void)
 	glGenTextures(nbTextures, textureID);
     
     //Load images and assign texture IDs
-    addTexturesFromFolder(getResourcePath(), textures, textureID);	
+    addTexturesFromFolder(getResourcePath(), textures, textureID);
     
     addTexturesFromFolder(getResourcePath() + "skins/1/", skinTextures[1], textureID);
     addTexturesFromFolder(getResourcePath() + "skins/0/", skinTextures[0], textureID);

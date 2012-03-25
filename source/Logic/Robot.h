@@ -24,11 +24,19 @@ static const GLfloat TRACKS_HEIGHT = 0.42f;
 static const GLfloat light8_ambient[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
 static const GLfloat light8_diffuse[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 static const GLfloat light8_specular[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+//DIRECTIONAL CONSTANTS
+static const GLfloat NORTH = 270.0f;
+static const GLfloat EAST = 180.0f;
+static const GLfloat SOUTH = 90.0f;
+static const GLfloat WEST = 0.0f;
+
 class RobotCamera;
 
 class Robot {
 public:
 	Robot();
+	Robot(GLfloat x, GLfloat y);
 	~Robot();
 	void draw();
 
@@ -88,9 +96,12 @@ private:
 	GLfloat lookAtX;
 	GLfloat lookAtY;
 	GLfloat lookAtZ;
-	GLfloat spinDegrees;
+	GLfloat spinDegrees; //0 -> west, 90 -> south
 	GLfloat pitchAngle;
 	GLfloat yawAngle;
+	GLfloat xDestination;
+	GLfloat zDestination;
+	GLfloat spinDestination;
 	
 	//Lighting
 	bool isMyLightOn;
@@ -104,6 +115,20 @@ private:
 
 	int robotLife;
 
+	//used for moving robot
+	GLfloat calcDestinationAngle();
+	void normalizeSpinDegrees();
+	void normalizeSpinDestination();
+	void timedSpin();
+
+	bool timedXWalk();
+	bool timedZWalk();
+	void incrementXPos(bool pos);
+	void incrementZPos(bool pos);
+	void goToDestination();
+	void setDestination(GLfloat x, GLfloat z);
+	bool checkXDestination();
+	bool checkZDestination();
 public:
 
 

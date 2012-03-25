@@ -18,7 +18,8 @@
 class HumanPlayer : public Player
 {
 public:
-    HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
+    HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF);
+	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ);
     ~HumanPlayer();
     void draw();
 
@@ -32,6 +33,9 @@ private:
 	int currentCamera;
     Model *model;
 	Camera *availableCams[8];
+
+	GLfloat ufoXPos;
+	GLfloat ufoZPos;
 };
 
 #endif	/* HUMANPLAYER_H */

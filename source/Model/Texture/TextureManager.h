@@ -17,7 +17,7 @@
 
 using namespace std;
 
-typedef std::pair<string, GLuint> texturePair;
+typedef std::pair<string, GLuint> texturePair; 
 
 struct StringComparerForMap
 {
@@ -41,21 +41,22 @@ public:
     static string getResourcePath();
 	static bool texturesEnabled;
 private:
-    static const int NUM_SKINS = 2;
-    
+	TextureManager();
+    ~TextureManager();
+
     void addTexturesFromFolder(string folder, map<string, GLuint> &textureList, GLuint* textureIDs);
     int getLoadedTexturesCount();
     
-	TextureManager();
-    ~TextureManager();
-    
+    static const int NUM_SKINS = 2;
 	static TextureManager* instance;
-	map<string, GLuint> textures;
+	static string resourcePath;
+    static int currentSkin;   
+
 	vector<string> directoryListing;
+	map<string, GLuint> textures;
     map<string, GLuint> skinTextures[NUM_SKINS];
     
-    static string resourcePath;
-    static int currentSkin;    
+     
 };
 
 #endif

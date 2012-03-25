@@ -25,8 +25,11 @@ Robot::Robot() {
 	roboCam = NULL;
 	
 	xPos = 0.0f;
-	zPos =0.0f;
-	spinDegrees = 0.0f;
+	zPos = 0.0f;
+	xDestination = 0.0f;
+	zDestination = 0.0f;
+	spinDegrees = SOUTH;
+	spinDestination = SOUTH;
 	pitchAngle = 90.0f;
 	yawAngle = 90.0f;
 	isMyLightOn = false;
@@ -44,6 +47,44 @@ Robot::Robot() {
 	refreshRobot();
 }
 
+Robot::Robot(GLfloat x, GLfloat y) {
+    nuclearM = (Model*)(new NuclearModel()); 
+    electronicsM = (Model*)(new ElectronicsModel()); 
+    phaserM = (Model*)(new PhaserModel);
+    cannonM = (Model*)(new CannonModel); 
+    missileM = (Model*)(new MissileLauncherModel); 
+    bipodM = (Model*)(new BipodModel); 
+    tracksM = (Model*)(new TracksModel); 
+    antiGravM = (Model*)(new AntiGravModel); 
+	headlight = (Model*)(new HeadlightModel);
+    model = bipodM;
+	roboCam = NULL;
+	
+	xPos = x;
+	zPos = y;
+	xDestination = x;
+	zDestination = y;
+	spinDegrees = SOUTH;
+	spinDestination = SOUTH;
+	pitchAngle = 90.0f;
+	yawAngle = 90.0f;
+	isMyLightOn = false;
+
+	robotLife = MAX_LIFE;
+
+	//BiPod is on
+	isPartOn[0] = true;
+	selectedIndex = 0;
+
+	for(int i = 1; i < 8; i++){
+		isPartOn[i]=false;
+	}
+
+	turnIndexOn(1);
+	turnIndexOn(3);
+	refreshRobot();
+}
+
 Robot::~Robot() {
     //Deleting the head frees up its children as well 
     /*if (head1 != NULL) {
@@ -58,7 +99,8 @@ Robot::~Robot() {
 }
 
 void Robot::draw() {
-		
+	glPushMatrix();
+		goToDestination();
 		//Translate()
 		glTranslatef(xPos,0.0f,zPos);
 		
@@ -75,6 +117,7 @@ void Robot::draw() {
 
 		//Draw Model
 		model->draw();
+	glPopMatrix();
 
 }
 
@@ -206,29 +249,19 @@ void Robot::translateTo(GLfloat xDestination, GLfloat zDestination){
 
 void Robot::spin(GLfloat degrees){
 	spinDegrees += degrees;
-	if(spinDegrees >= 360){
-		spinDegrees -= 360;
-	}
-	if(spinDegrees < 0){
-		spinDegrees += 360;
-	}
+	normalizeSpinDegrees();
 }
 
 void Robot::incrementSpinDegrees(bool pos){
 
 	if(pos){
-		spinDegrees++;
+		spinDegrees++; //true increases angle by one
 	}
 	else{
 		spinDegrees--;
 	}
 
-	if(spinDegrees >= 360){
-		spinDegrees -= 360;
-	}
-	if(spinDegrees < 0){
-		spinDegrees += 360;
-	}
+	normalizeSpinDegrees();
 	notifyCamera();
 }
 
@@ -427,6 +460,180 @@ void Robot::refreshLight(){
 		glEnable(GL_LIGHT5);
 
 		delete [] lookTemp;
+	}
+}
+
+//checks angle between spinDestination and spinDegrees
+GLfloat Robot::calcDestinationAngle(){
+	GLfloat angle;
+	if(spinDestination >= spinDegrees){
+		angle = spinDestination - spinDegrees;
+	}
+	else{
+		angle = 360.0f - spinDegrees + spinDestination;
+	}
+	return angle;
+}
+
+//Makes angles within 0 to 360 degrees
+void Robot::normalizeSpinDegrees(){
+	while(spinDegrees >= 360){
+		spinDegrees -= 360;
+	}
+	while(spinDegrees < 0){
+		spinDegrees += 360;
+	}
+}
+
+//Makes angles within 0 to 360 degrees
+void Robot::normalizeSpinDestination(){
+	while(spinDestination >= 360){
+		spinDestination -= 360;
+	}
+	while(spinDestination < 0){
+		spinDestination += 360;
+	}
+}
+
+//spins over time (as called by render)
+void Robot::timedSpin(){
+	//takes direction of shortest angle
+	if(calcDestinationAngle() == 0){
+		return;
+	}
+	else if(calcDestinationAngle()<=180){
+		incrementSpinDegrees(true);
+	}
+	else{
+		incrementSpinDegrees(false);
+	}
+}
+
+//walks in X-direction, returns true if walking
+bool Robot::timedXWalk(){
+	GLfloat xDistance = xDestination - xPos;
+	if(xDistance == 0){
+		return false;
+	}
+	else if(xDistance > 0){
+		incrementXPos(true);
+		return true;
+	}
+	else{
+		incrementXPos(false);
+		return true;
+	}
+}
+
+bool Robot::timedZWalk(){
+	GLfloat zDistance = zDestination - zPos;
+	if(zDistance == 0){
+		return false;
+	}
+	else if(zDistance > 0){
+		incrementZPos(true);
+		return true;
+	}
+	else{
+		incrementZPos(false);
+		return true;
+	}
+}
+
+void Robot::incrementXPos(bool pos){
+	if(pos){
+		xPos += 0.05f;
+	}
+	else{
+		xPos -= 0.05f;
+	}
+}
+
+void Robot::incrementZPos(bool pos){
+	if(pos){
+		zPos += 0.05f;
+	}
+	else{
+		zPos -= 0.05f;
+	}
+}
+
+void Robot::setDestination(GLfloat x, GLfloat z){
+	xDestination = x;
+	zDestination = z;
+}
+
+void Robot::goToDestination(){
+	if(checkXDestination() && checkZDestination()){
+		return;
+	}
+
+	//Orient
+	if(!checkXDestination()){
+		if(spinDestination != spinDegrees){
+			//Spins until facing correct angle
+			timedSpin();
+		}
+		else{
+			//translates east or west
+			if(spinDegrees == EAST){
+				incrementXPos(true);
+			}
+			else{
+				incrementXPos(false);
+			}
+		}
+		return;
+	}
+	
+	if(!checkZDestination()){
+		if(spinDestination != spinDegrees){
+			//Spins until facing correct angle
+			timedSpin();
+		}
+		else{
+			//translates north or south
+			if(spinDegrees == SOUTH){
+				incrementZPos(true);
+			}
+			else{
+				incrementZPos(false);
+			}
+		}
+		return;
+	}
+}
+
+bool Robot::checkXDestination(){
+	GLfloat diff = xDestination - xPos;
+	if(diff > -0.05f && diff < 0.05f){
+		xPos = xDestination;
+		return true;
+	}
+	else if(diff > 0){
+		spinDestination = EAST;
+		return false;
+	}
+	else{
+		spinDestination = WEST;
+		return false;
+	}
+
+}
+
+bool Robot::checkZDestination(){
+	GLfloat diff = zDestination - zPos;
+	if(diff > -0.05f && diff < 0.05f){
+		zPos = zDestination;
+		return true;
+	}
+	else if(diff > 0){
+		spinDestination = SOUTH;
+		return false;
+	}
+	else{
+		spinDestination = NORTH;
+		return false;
 	}
 }
 

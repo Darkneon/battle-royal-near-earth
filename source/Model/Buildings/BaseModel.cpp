@@ -21,7 +21,6 @@
 BaseModel::BaseModel()
 {
    teamNumber = new TeamNumberModel();
-   teamNumber2 = new TeamNumberModel();
    material = (Material*)(new MetalMaterial());
 }
 
@@ -31,11 +30,8 @@ void BaseModel::render()
     glPushMatrix();
         //Draw Base
         drawBase(0.0f, 0.0f, 0.0f);
-        drawBase(-300.0f, 0.0f, 0.0f);
         glTranslatef(1.75f, 1.15f, 2.2f);
         teamNumber->render();
-        glTranslatef(-7.2f, 0, 0.0f);
-        teamNumber2->render();
     glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
   
@@ -46,8 +42,8 @@ void BaseModel::render()
 void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos) 
 {
     glPushMatrix();
-    glTranslatef(0.0f,0.0f,0.3f);
-    glScalef(0.012f * 1.5f, 0.015f * 1.5f, 0.012f * 1.5f); //scale enlarged x3 by Jeff
+    glTranslatef(0.025f,0.0f,0.475f);
+    glScalef(0.012f * 1.65f, 0.015f * 1.65f, 0.012f * 1.65f); //scale enlarged x3 by Jeff
     //Start Drawing the buildings
     //First step
     GeoHelper::drawGarage(xPos+0.0f, yPos+0.0f, zPos+0.0f);

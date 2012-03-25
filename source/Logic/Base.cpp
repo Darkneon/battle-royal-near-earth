@@ -10,9 +10,15 @@
 
 Base::Base() {
     model = (Model*)(new BaseModel);
-    
+    xPos = 0;
+	zPos = 0;
 }
 
+Base::Base(GLfloat x, GLfloat z){
+	model = (Model*)(new BaseModel);
+    xPos = x;
+	zPos = z;
+}
 Base::~Base() {
     if (model != NULL) {
 		delete model;
@@ -21,5 +27,8 @@ Base::~Base() {
 }
 
 void Base::draw() {
-    model->draw();
+	glPushMatrix();
+		glTranslatef(xPos,0.0f,zPos);
+		model->draw();
+	glPopMatrix();
 }

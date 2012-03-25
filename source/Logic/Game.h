@@ -7,6 +7,7 @@
 #include "PlayerInput.h"
 #include "HumanPlayer.h"
 #include "LevelRenderer.h"
+#include "AIPlayer.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -23,7 +24,7 @@ public:
 	~Game();
 	
 	HumanPlayer* p1;
-	//Player* p1;
+	Player* p2;
 	PlayerInput* playerInput1;
 	LevelRenderer* lr;
 

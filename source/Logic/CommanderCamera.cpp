@@ -20,12 +20,10 @@ CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLfloat view
 
 void CommanderCamera::view()
 {
-	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
 	
-
 	gluLookAt(locX + currentRadius * sin(yaw * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(yaw * 1.0f / 8),
 		locX, 0, locZ - currentRadius, 0, 1, 0);
 }
@@ -61,7 +59,14 @@ void CommanderCamera::moveCameraStrafe(bool negateTheValue)
 
 void CommanderCamera::zoom(bool zoomIn)
 {
-	if (fovy > 10 && fovy < DEFAULT_FOVY + 1.0f)
+	GLfloat sum;
+	if(zoomIn){
+		sum = fovy-1;
+	}
+	else{
+		sum = fovy+1;
+	}
+	if (sum > 10 && sum < DEFAULT_FOVY + 1.0f)
 	{
 		if (zoomIn)
 		{
