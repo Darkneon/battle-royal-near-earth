@@ -71,6 +71,7 @@ public:
 	void toggleLight();
 	void refreshLight();
 
+	GLfloat directionVector[3];
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	//models
@@ -130,7 +131,7 @@ private:
 	bool checkXDestination();
 	bool checkZDestination();
 
-	bool deadState;
+	void spinDirectionVector();
 
 };
 
