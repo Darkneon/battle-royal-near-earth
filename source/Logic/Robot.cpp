@@ -30,6 +30,7 @@ Robot::Robot() {
 	zPos = 0.0f;
 	xDestination = 0.0f;
 	zDestination = 0.0f;
+
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
 	pitchAngle = 90.0f;
@@ -37,6 +38,10 @@ Robot::Robot() {
 	isMyLightOn = false;
 
 	robotLife = MAX_LIFE;
+
+	directionVector[1] = 0.0f;
+	directionVector[2] = 0.0f;
+	directionVector[3] = 1.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -262,6 +267,7 @@ void Robot::translateTo(GLfloat xDestination, GLfloat zDestination){
 
 void Robot::spin(GLfloat degrees){
 	spinDegrees += degrees;
+	spinDirectionVector();
 	normalizeSpinDegrees();
 }
 
@@ -274,6 +280,7 @@ void Robot::incrementSpinDegrees(bool pos){
 		spinDegrees--;
 	}
 
+	spinDirectionVector();
 	normalizeSpinDegrees();
 	notifyCamera();
 }
@@ -428,6 +435,9 @@ void Robot::resetOrientation(){
 	spinDegrees = 0.0f;
 	pitchAngle = 90.0f;
 	yawAngle = 90.0f;
+	directionVector[1] = 0.0f;
+	directionVector[2] = 0.0f;
+	directionVector[3] = 1.0f;
 	notifyCamera();
 }
 
@@ -650,3 +660,20 @@ bool Robot::checkZDestination(){
 	}
 }
 
+
+
+void Robot::spinDirectionVector(){
+	/*LOGIC FOR ROTATION
+	GLfloat* spinMatrix = new GLfloat[9];
+	spinMatrix[1] = spinMatrix[3] = spinMatrix[5] = spinMatrix[7] = 0;
+	spinMatrix[4] = 1;
+	spinMatrix[0] = spinMatrix[8] = cos(spinDegrees*DegreesToRadians);
+	spinMatrix[2] = sin(spinDegrees*DegreesToRadians);
+	spinMatrix[6] = -sin(spinDegrees*DegreesToRadians);
+	(spinMatrix[0] * 0.0f) + (spinMatrix[1] * 0.0f) + (spinMatrix[2] * 1.0f);
+	(spinMatrix[3] * 0.0f) + (spinMatrix[4] * 0.0f) + (spinMatrix[5] * 1.0f);
+	(spinMatrix[6] * 0.0f) + (spinMatrix[7] * 0.0f) + (spinMatrix[8] * 1.0f);*/
+	
+	directionVector[0] = sin(spinDegrees*DegreesToRadians);
+	directionVector[2] = cos(spinDegrees*DegreesToRadians);
+}
