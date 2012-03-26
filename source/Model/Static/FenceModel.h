@@ -9,7 +9,9 @@
 #define	FENCEMODEL_H
 
 #include "Model.h"
-class FenceModel : public Model {
+#include "StaticModel.h"
+
+class FenceModel : public StaticModel {
 public:
     FenceModel();        
 private:

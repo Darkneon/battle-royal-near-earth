@@ -120,6 +120,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
+    <ClCompile Include="Model\Helper\BoundingBox.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
     <ClCompile Include="Model\Light\LightPost.cpp" />
     <ClCompile Include="Model\Material\DefaultMaterial.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Model\Static\MountainModel.cpp" />
     <ClCompile Include="Model\Static\PitModel.cpp" />
     <ClCompile Include="Model\Static\PlainBlockModel.cpp" />
+    <ClCompile Include="Model\Static\StaticModel.cpp" />
     <ClCompile Include="Model\Static\TeamNumberModel.cpp" />
     <ClCompile Include="Model\Texture\imageloader.cpp" />
     <ClCompile Include="Model\Texture\TextureManager.cpp" />
@@ -180,6 +182,7 @@
     <ClInclude Include="Logic\SpotLight.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
+    <ClInclude Include="Model\Helper\BoundingBox.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
     <ClInclude Include="Model\Light\LightPost.h" />
     <ClInclude Include="Model\Material\DefaultMaterial.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="Model\Static\MountainModel.h" />
     <ClInclude Include="Model\Static\PitModel.h" />
     <ClInclude Include="Model\Static\PlainBlockModel.h" />
+    <ClInclude Include="Model\Static\StaticModel.h" />
     <ClInclude Include="Model\Static\TeamNumberModel.h" />
     <ClInclude Include="Model\Texture\imageloader.h" />
     <ClInclude Include="Model\Texture\TextureManager.h" />

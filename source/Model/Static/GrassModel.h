@@ -9,8 +9,9 @@
 #define	GRASSMODEL_H
 
 #include "Model.h"
+#include "StaticModel.h"
 
-class GrassModel : public Model {
+class GrassModel : public StaticModel {
 public:
     GrassModel();
     void render();

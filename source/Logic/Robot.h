@@ -10,7 +10,7 @@
 #include "Static/TeamNumberModel.h"
 #include "RobotCamera.h"
 
-#define MAX_LIFE 100
+#define MAX_LIFE 150
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -131,8 +131,6 @@ private:
 	bool checkZDestination();
 
 	bool deadState;
-public:
-
 
 };
 

@@ -2,8 +2,9 @@
 #define	HILLSMODEL_H
 
 #include "Model.h"
+#include "StaticModel.h"
 
-class HillsModel : Model
+class HillsModel : StaticModel
 {
 public:
 	HillsModel(void);

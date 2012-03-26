@@ -31,13 +31,12 @@ public:
 	Camera *getCurrentCamera();
 	void selectRobotView(Robot* robo);
 	void levitateUFO();
+
 private:
 	int currentCamera;
    // Model *model;
 	Camera *availableCams[8];
 	PlayerUFO* ufo;
-
-
 };
 
 #endif	/* HUMANPLAYER_H */

@@ -167,6 +167,12 @@
     <ClCompile Include="Logic\PlayerUFO.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Static\StaticModel.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Helper\BoundingBox.cpp">
+      <Filter>Model\Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -333,6 +339,12 @@
     </ClInclude>
     <ClInclude Include="Logic\PlayerUFO.h">
       <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Static\StaticModel.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Helper\BoundingBox.h">
+      <Filter>Model\Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

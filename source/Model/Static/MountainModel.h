@@ -9,8 +9,9 @@
 #define	MOUNTAINMODEL_H
 
 #include "Model.h"
+#include "StaticModel.h"
 
-class MountainModel : Model {
+class MountainModel : StaticModel {
 public:
     MountainModel();
     void render();

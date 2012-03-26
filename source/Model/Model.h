@@ -28,7 +28,7 @@ class Model {
 public:
     Model() {
         parent   = NULL;
-        material = (Material*)(new DefaultMaterial());        
+        material = (Material*)(new DefaultMaterial());
     }
     
     Model(Material *m) {   

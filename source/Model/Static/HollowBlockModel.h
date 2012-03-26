@@ -9,8 +9,9 @@
 #define	HOLLOWBLOCKMODEL_H
 
 #include "Model.h"
+#include "StaticModel.h"
 
-class HollowBlockModel : Model {
+class HollowBlockModel : StaticModel {
 public:
     HollowBlockModel();        
 protected:
