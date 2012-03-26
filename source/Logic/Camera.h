@@ -13,6 +13,7 @@
 #define CAMERA_LIGHT2 5
 #define CAMERA_LIGHT3 6
 #define CAMERA_LIGHT4 7
+#define CAMERA_FOLLOW 8
 
 #ifdef __APPLE__
     #include <Glut/glut.h>

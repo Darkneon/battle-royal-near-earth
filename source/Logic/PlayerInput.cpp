@@ -100,7 +100,12 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 		player->changeCamera(CAMERA_ROBOT);	
 		glutPostRedisplay();
 	}
-
+	else if (funcKeyStates[GLUT_KEY_F7])
+	{
+		player->changeCamera(CAMERA_FOLLOW);	
+		glutPostRedisplay();
+	}
+    
 	if (funcKeyStates[GLUT_KEY_LEFT])
 	{
 		player->getCurrentCamera()->moveCameraStrafe(true);

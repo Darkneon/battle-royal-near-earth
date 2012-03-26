@@ -18,10 +18,10 @@ public:
 	virtual ~PlayerUFO(void);
 	void draw();
 	void incrementHeight(bool positive);
+	GLfloat* pos;
 
 private:
 	Model* pModel;
-	GLfloat* pos;
 };
 
 #endif

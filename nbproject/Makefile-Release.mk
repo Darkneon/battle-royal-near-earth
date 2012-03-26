@@ -89,6 +89,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
+	${OBJECTDIR}/source/Logic/FollowCamera.o \
 	${OBJECTDIR}/source/Model/Helper/BoundingBox.o \
 	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o
 
@@ -391,6 +392,11 @@ ${OBJECTDIR}/source/Model/Texture/imageloader.o: source/Model/Texture/imageloade
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/imageloader.o source/Model/Texture/imageloader.cpp
+
+${OBJECTDIR}/source/Logic/FollowCamera.o: source/Logic/FollowCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FollowCamera.o source/Logic/FollowCamera.cpp
 
 ${OBJECTDIR}/source/Model/Helper/BoundingBox.o: source/Model/Helper/BoundingBox.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Helper
