@@ -43,6 +43,8 @@
         <itemPath>source/Logic/Player.h</itemPath>
         <itemPath>source/Logic/PlayerInput.cpp</itemPath>
         <itemPath>source/Logic/PlayerInput.h</itemPath>
+        <itemPath>source/Logic/PlayerUFO.cpp</itemPath>
+        <itemPath>source/Logic/PlayerUFO.h</itemPath>
         <itemPath>source/Logic/Robot.cpp</itemPath>
         <itemPath>source/Logic/Robot.h</itemPath>
         <itemPath>source/Logic/RobotCamera.cpp</itemPath>
@@ -58,6 +60,8 @@
           <itemPath>source/Model/Buildings/FactoryModel.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
+          <itemPath>source/Model/Helper/BoundingBox.cpp</itemPath>
+          <itemPath>source/Model/Helper/BoundingBox.h</itemPath>
           <itemPath>source/Model/Helper/GeoHelper.cpp</itemPath>
           <itemPath>source/Model/Helper/GeoHelper.h</itemPath>
         </logicalFolder>
@@ -130,6 +134,8 @@
           <itemPath>source/Model/Static/PitModel.h</itemPath>
           <itemPath>source/Model/Static/PlainBlockModel.cpp</itemPath>
           <itemPath>source/Model/Static/PlainBlockModel.h</itemPath>
+          <itemPath>source/Model/Static/StaticModel.cpp</itemPath>
+          <itemPath>source/Model/Static/StaticModel.h</itemPath>
           <itemPath>source/Model/Static/TeamNumberModel.cpp</itemPath>
           <itemPath>source/Model/Static/TeamNumberModel.h</itemPath>
         </logicalFolder>

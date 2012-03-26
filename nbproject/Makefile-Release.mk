@@ -34,8 +34,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/source/Model/Material/Material.o \
 	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/Model/Material/Material.o \
 	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
 	${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o \
 	${OBJECTDIR}/source/Model/Texture/TextureManager.o \
@@ -53,14 +53,16 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/HumanPlayer.o \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
+	${OBJECTDIR}/source/Logic/PlayerUFO.o \
 	${OBJECTDIR}/source/Logic/LightCamera.o \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
-	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
 	${OBJECTDIR}/source/Model/Light/LightPost.o \
-	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Buildings/BaseModel.o \
+	${OBJECTDIR}/source/Model/Static/StaticModel.o \
+	${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o \
+	${OBJECTDIR}/source/Model/Buildings/FactoryModel.o \
 	${OBJECTDIR}/source/Model/Player/AntennaModel.o \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
@@ -87,6 +89,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
+	${OBJECTDIR}/source/Model/Helper/BoundingBox.o \
 	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o
 
 
@@ -114,15 +117,15 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/battle-royal-near-earth: ${OBJECTFILE
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/battle-royal-near-earth ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/source/Model/Material/Material.o: source/Model/Material/Material.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/Material.o source/Model/Material/Material.cpp
-
 ${OBJECTDIR}/source/main.o: source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+
+${OBJECTDIR}/source/Model/Material/Material.o: source/Model/Material/Material.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/Material.o source/Model/Material/Material.cpp
 
 ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/MissileLauncherModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
@@ -209,6 +212,11 @@ ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o: source/Model/Static/PlainBlo
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o source/Model/Static/PlainBlockModel.cpp
 
+${OBJECTDIR}/source/Logic/PlayerUFO.o: source/Logic/PlayerUFO.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/PlayerUFO.o source/Logic/PlayerUFO.cpp
+
 ${OBJECTDIR}/source/Logic/LightCamera.o: source/Logic/LightCamera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
@@ -229,25 +237,30 @@ ${OBJECTDIR}/source/Model/Helper/GeoHelper.o: source/Model/Helper/GeoHelper.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/GeoHelper.o source/Model/Helper/GeoHelper.cpp
 
-${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
-
 ${OBJECTDIR}/source/Model/Light/LightPost.o: source/Model/Light/LightPost.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Light
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Light/LightPost.o source/Model/Light/LightPost.cpp
 
-${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
-
 ${OBJECTDIR}/source/Model/Buildings/BaseModel.o: source/Model/Buildings/BaseModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/BaseModel.o source/Model/Buildings/BaseModel.cpp
+
+${OBJECTDIR}/source/Model/Static/StaticModel.o: source/Model/Static/StaticModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/StaticModel.o source/Model/Static/StaticModel.cpp
+
+${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o: source/Model/Robot/ElectronicsModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/ElectronicsModel.o source/Model/Robot/ElectronicsModel.cpp
+
+${OBJECTDIR}/source/Model/Buildings/FactoryModel.o: source/Model/Buildings/FactoryModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FactoryModel.o source/Model/Buildings/FactoryModel.cpp
 
 ${OBJECTDIR}/source/Model/Player/AntennaModel.o: source/Model/Player/AntennaModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Player
@@ -378,6 +391,11 @@ ${OBJECTDIR}/source/Model/Texture/imageloader.o: source/Model/Texture/imageloade
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/imageloader.o source/Model/Texture/imageloader.cpp
+
+${OBJECTDIR}/source/Model/Helper/BoundingBox.o: source/Model/Helper/BoundingBox.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/BoundingBox.o source/Model/Helper/BoundingBox.cpp
 
 ${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o: source/Model/Skybox/SphericSkybox.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox
