@@ -29,6 +29,8 @@
         <itemPath>source/Logic/CommanderCamera.h</itemPath>
         <itemPath>source/Logic/Factory.cpp</itemPath>
         <itemPath>source/Logic/Factory.h</itemPath>
+        <itemPath>source/Logic/FollowCamera.cpp</itemPath>
+        <itemPath>source/Logic/FollowCamera.h</itemPath>
         <itemPath>source/Logic/FreeLookCamera.cpp</itemPath>
         <itemPath>source/Logic/FreeLookCamera.h</itemPath>
         <itemPath>source/Logic/Game.cpp</itemPath>

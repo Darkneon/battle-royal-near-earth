@@ -11,7 +11,9 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);*/
-	currentCamera = CAMERA_COMMANDER;
+    availableCams[CAMERA_FOLLOW] = new FollowCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+    
+    currentCamera = CAMERA_COMMANDER;
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 }
 
@@ -26,7 +28,9 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);*/
-	currentCamera = CAMERA_COMMANDER;
+	availableCams[CAMERA_FOLLOW] = new FollowCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+
+    currentCamera = CAMERA_COMMANDER;
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 }
 
@@ -68,6 +72,10 @@ void HumanPlayer::changeCamera(int CAMERA)
 void HumanPlayer::view()
 {
 	availableCams[currentCamera]->view();
+    
+    if (currentCamera == CAMERA_FOLLOW) {
+        ((FollowCamera *)availableCams[currentCamera])->setLookAt(ufo->pos[0], ufo->pos[1], ufo->pos[2]);
+    }
 }
 
 Camera* HumanPlayer::getCurrentCamera()

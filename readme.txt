@@ -19,6 +19,7 @@ f2 --------------- mouse look (freelook)
 f3 --------------- commander camera (toggle light with 'l')
 f5 --------------- robot camera (need to attach robot first, with 't')
 f6 ______________ toggle robot skins
+f7 ______________ switch to follow camera 
 z --------------- toggle bird view (disabled for now)
 o --------------- toggle textures
 arrows ---------- move camera around
