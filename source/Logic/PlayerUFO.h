@@ -8,6 +8,7 @@
 #define	PLAYERUFO_H
 
 #include "../Model/Player/PlayerModel.h"
+#include "../Model/Helper/BoundingBox.h"
 #define MAX_PLAYER_HEIGHT 2
 #define MIN_PLAYER_HEIGHT 0
 
@@ -19,6 +20,10 @@ public:
 	void draw();
 	void incrementHeight(bool positive);
 	GLfloat* pos;
+	BoundingBox* box;
+
+	void incrementXPos(bool positive);
+	void incrementZPos(bool positive);
 
 private:
 	Model* pModel;

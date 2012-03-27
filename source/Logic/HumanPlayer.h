@@ -32,6 +32,8 @@ public:
 	Camera *getCurrentCamera();
 	void selectRobotView(Robot* robo);
 	void levitateUFO();
+	void moveUFOX(bool direction);
+	void moveUFOZ(bool direction);
 
 private:
 	int currentCamera;

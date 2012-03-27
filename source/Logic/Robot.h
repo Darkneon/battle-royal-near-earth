@@ -139,7 +139,7 @@ private:
 	//returns true if facing correct direction already
 	bool checkZDestination();
 
-	//BoundingBox* box;
+	BoundingBox* box;
 
 };
 

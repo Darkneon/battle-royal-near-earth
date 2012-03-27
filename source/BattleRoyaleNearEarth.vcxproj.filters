@@ -170,6 +170,9 @@
     <ClCompile Include="Model\Helper\BoundingBox.cpp">
       <Filter>Model\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\FollowCamera.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -339,6 +342,9 @@
     </ClInclude>
     <ClInclude Include="Model\Helper\BoundingBox.h">
       <Filter>Model\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\FollowCamera.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

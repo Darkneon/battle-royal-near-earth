@@ -106,6 +106,7 @@
     <ClCompile Include="Logic\CirclingCamera.cpp" />
     <ClCompile Include="Logic\CommanderCamera.cpp" />
     <ClCompile Include="Logic\Factory.cpp" />
+    <ClCompile Include="Logic\FollowCamera.cpp" />
     <ClCompile Include="Logic\FreeLookCamera.cpp" />
     <ClCompile Include="Logic\Game.cpp" />
     <ClCompile Include="Logic\HumanPlayer.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Logic\CirclingCamera.h" />
     <ClInclude Include="Logic\CommanderCamera.h" />
     <ClInclude Include="Logic\Factory.h" />
+    <ClInclude Include="Logic\FollowCamera.h" />
     <ClInclude Include="Logic\FreeLookCamera.h" />
     <ClInclude Include="Logic\Game.h" />
     <ClInclude Include="Logic\HumanPlayer.h" />
