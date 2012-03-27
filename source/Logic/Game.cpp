@@ -4,8 +4,12 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat vie
 	bool *keyStates, bool *funcKeyStates)
 {
 	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane,30.0f,30.0f);
-	p2 = new Player(40.0f,35.0f);
+	//p2 = new Player(40.0f, 35.0f);
+	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 0.0f, 0.0f);
+		
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
+	playerInput2 = new JoystickInput(p2);
+
 	lr = new LevelRenderer();
 
 	this->viewHeight = viewHeight;
@@ -45,28 +49,24 @@ void Game::getInput(int keyModifier)
 	playerInput1->keyOperations(keyModifier);
 }
 
-void Game::render(){
-	
-	/*lr->render();
-	p1->render();
-	p2->render();*/
-
+void Game::render()
+{
 	if (isTwoPlayerGame)
 	{
+		p1->view();
 		renderScene();
 		glViewport(0, 0, (GLsizei)viewWidth, (GLsizei)viewHeight / 2);
-		p1->view();
 		
+		p2->view();
 		renderScene();
 		glViewport(0, (GLint)viewHeight / 2, (GLsizei)viewWidth, (GLsizei)viewHeight / 2);
-		p1->view();
+		
 	}
 	else
 	{
 		renderScene();
 		p1->view();	
-	}
-	
+	}	
 }
 
 void Game::renderScene()
