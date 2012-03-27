@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "PlayerInput.h"
+#include "JoystickInput.h"
 #include "HumanPlayer.h"
 #include "LevelRenderer.h"
 #include "AIPlayer.h"
@@ -24,8 +25,9 @@ public:
 	~Game();
 	
 	HumanPlayer* p1;
-	Player* p2;
+	HumanPlayer* p2;
 	PlayerInput* playerInput1;
+	JoystickInput* playerInput2;
 	LevelRenderer* lr;
 
 	void render();

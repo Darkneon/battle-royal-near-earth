@@ -78,15 +78,12 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	}
 	*/
 
-
-	
 	TwWindowSize(width, height);
 
 	glutSetWindow(helpWindow);
 	glutPositionWindow(10,10);
 	glutReshapeWindow(width-5,height-5);
 }
-
 
 void toggleTwoPlayerSplitscreen()
 {
@@ -436,6 +433,11 @@ void motionFunc(int x, int y)
 	game->playerInput1->mousePassiveOperations(x, y);
 }
 
+void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
+{
+	game->playerInput2->joystickOperations(button, xaxis, yaxis, zaxis);
+}
+
 int main (int argc, char **argv)
 {
 	// GLUT initialization.
@@ -458,6 +460,7 @@ int main (int argc, char **argv)
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
+	glutJoystickFunc(joystickFunc, 150);
 	init();
 
 	//helpWindow

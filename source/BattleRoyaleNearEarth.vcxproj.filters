@@ -173,6 +173,9 @@
     <ClCompile Include="Logic\FollowCamera.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\JoystickInput.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -344,6 +347,9 @@
       <Filter>Model\Helper</Filter>
     </ClInclude>
     <ClInclude Include="Logic\FollowCamera.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\JoystickInput.h">
       <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -110,6 +110,7 @@
     <ClCompile Include="Logic\FreeLookCamera.cpp" />
     <ClCompile Include="Logic\Game.cpp" />
     <ClCompile Include="Logic\HumanPlayer.cpp" />
+    <ClCompile Include="Logic\JoystickInput.cpp" />
     <ClCompile Include="Logic\LevelRenderer.cpp" />
     <ClCompile Include="Logic\LightCamera.cpp" />
     <ClCompile Include="Logic\Player.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Logic\FreeLookCamera.h" />
     <ClInclude Include="Logic\Game.h" />
     <ClInclude Include="Logic\HumanPlayer.h" />
+    <ClInclude Include="Logic\JoystickInput.h" />
     <ClInclude Include="Logic\LevelRenderer.h" />
     <ClInclude Include="Logic\LightCamera.h" />
     <ClInclude Include="Logic\Player.h" />
