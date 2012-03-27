@@ -8,6 +8,7 @@
 #include "DirectoryManipHelper.h"
 #include "SpotLight.h"
 #include "../Model/Light/LightPost.h"
+#include "../Model/Helper/BoundingBox.h"
 
 class LevelRenderer {
 public:
@@ -16,6 +17,7 @@ public:
     void render();
     bool getIsSkySphere();
 	void toggleSkySphere();
+	vector<BoundingBox *> lrBoxes;
 
 private:	
     static const int NUM_MODELS = 22;

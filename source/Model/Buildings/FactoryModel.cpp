@@ -17,10 +17,12 @@
 
 FactoryModel::FactoryModel(void) {
     material = (Material*)(new MetalMaterial());
+	//box->resize(3.0f,1.25f,2.0f);
 }
 
 void FactoryModel::render() 
 {
+	//draw factory
     glPushMatrix();
         drawFactory(0.0f, 0.0f, 0.0f);
     glPopMatrix();

@@ -119,7 +119,7 @@ LevelRenderer::LevelRenderer() {
 	models[15]->removeAllChildren();
 	models[16]->removeAllChildren();
 	models[17]->removeAllChildren();
-	//map1();   
+	map1();   
 	buildMap();
 } 
 
@@ -135,20 +135,19 @@ LevelRenderer::~LevelRenderer() {
 
 void LevelRenderer::buildMap()
 {
+	//SKIN1
 	glNewList(2, GL_COMPILE);
-
 	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {	
+		for(int j = 0; j != 50; j++) {
 			glPushMatrix();
 				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
 				models[ level[i][j] ]->draw();
-
 			glPopMatrix();
 		}
 	}
-
 	glEndList();
 
+	//SKIN2
     glNewList(6, GL_COMPILE);
     TextureManager::getInstance()->toggleSkins();
 
@@ -157,13 +156,13 @@ void LevelRenderer::buildMap()
 			glPushMatrix();
 				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
 				models[ level[i][j] ]->draw();
-
 			glPopMatrix();
 		}
 	}
-
 	glEndList();
     
+	//LIST FOR NO TEXTURES
+	BoundingBox* tempBox;
 	glNewList(5, GL_COMPILE);
 
 	TextureManager::getInstance()->toggleTextures();
@@ -173,14 +172,36 @@ void LevelRenderer::buildMap()
 			glPushMatrix();
 				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
 				models[ level[i][j] ]->draw();
-
 			glPopMatrix();
+			switch(level[i][j]){
+				case 1: case 6: case 7: //hills, plain and holloy block
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1), 1.0f, (GLfloat)(j+1));
+					lrBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 4: case 5: //half blocks
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1),0.5f, (GLfloat)(j+1));
+					lrBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 2: //mountains
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+2),3.75f, (GLfloat)(j+1));
+					lrBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 3: //fence
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1),2.75f, (GLfloat)(j+1));
+					lrBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				default:
+					break;
+			}
 		}
 	}
-
 	glEndList();
+	delete tempBox;
     
-  
 }
 
 //Todo: will probably change while we get more requirements

@@ -9,9 +9,8 @@
 #define	PITMODEL_H
 
 #include "Model.h"
-#include "StaticModel.h"
 
-class PitModel : StaticModel {
+class PitModel : Model {
 public:
     PitModel();
 	PitModel(bool isEndingPit);

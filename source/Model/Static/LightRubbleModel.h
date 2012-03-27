@@ -2,9 +2,9 @@
 #define	LIGHTRUBBLE_H
 
 #include "Model.h"
-#include "StaticModel.h"
 
-class LightRubbleModel : StaticModel
+
+class LightRubbleModel : Model
 {
 public:
 	LightRubbleModel(void);

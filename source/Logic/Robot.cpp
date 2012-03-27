@@ -46,10 +46,12 @@ Robot::Robot() {
 	//BiPod is on
 	isPartOn[0] = true;
 	selectedIndex = 0;
-
+	
 	for(int i = 1; i < 8; i++){
 		isPartOn[i]=false;
 	}
+
+	//box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
 
 	refreshRobot();
 }
@@ -91,6 +93,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	turnIndexOn(1);
 	turnIndexOn(3);
 	refreshRobot();
+
+	//box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
 }
 
 Robot::~Robot() {
@@ -108,6 +112,12 @@ Robot::~Robot() {
 
 void Robot::draw() {
 	if(robotLife > 0){
+		//draw bounding box
+		glPushMatrix();
+//			box->draw();
+		glPopMatrix();
+
+		//draw robot
 		glPushMatrix();
 			goToDestination();
 			//Translate()
@@ -628,6 +638,7 @@ void Robot::goToDestination(){
 }
 
 bool Robot::checkXDestination(){
+	//If difference in position -> spin towards left or right
 	GLfloat diff = xDestination - xPos;
 	if(diff > -0.05f && diff < 0.05f){
 		xPos = xDestination;
@@ -645,6 +656,7 @@ bool Robot::checkXDestination(){
 }
 
 bool Robot::checkZDestination(){
+	//If difference in position -> spin towards left or right
 	GLfloat diff = zDestination - zPos;
 	if(diff > -0.05f && diff < 0.05f){
 		zPos = zDestination;

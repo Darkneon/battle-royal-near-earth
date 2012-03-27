@@ -9,7 +9,7 @@
 
 #include "Model.h"
 
-class FactoryModel: Model
+class FactoryModel:Model
 {
 public:
 	FactoryModel(void);

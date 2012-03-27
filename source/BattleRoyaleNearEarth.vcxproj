@@ -152,7 +152,6 @@
     <ClCompile Include="Model\Static\MountainModel.cpp" />
     <ClCompile Include="Model\Static\PitModel.cpp" />
     <ClCompile Include="Model\Static\PlainBlockModel.cpp" />
-    <ClCompile Include="Model\Static\StaticModel.cpp" />
     <ClCompile Include="Model\Static\TeamNumberModel.cpp" />
     <ClCompile Include="Model\Texture\imageloader.cpp" />
     <ClCompile Include="Model\Texture\TextureManager.cpp" />
@@ -214,7 +213,6 @@
     <ClInclude Include="Model\Static\MountainModel.h" />
     <ClInclude Include="Model\Static\PitModel.h" />
     <ClInclude Include="Model\Static\PlainBlockModel.h" />
-    <ClInclude Include="Model\Static\StaticModel.h" />
     <ClInclude Include="Model\Static\TeamNumberModel.h" />
     <ClInclude Include="Model\Texture\imageloader.h" />
     <ClInclude Include="Model\Texture\TextureManager.h" />

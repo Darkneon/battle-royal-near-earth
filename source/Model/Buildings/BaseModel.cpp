@@ -22,6 +22,7 @@ BaseModel::BaseModel()
 {
    teamNumber = new TeamNumberModel();
    material = (Material*)(new MetalMaterial());
+   //box->resize(5.0f,1.25f,4.0f);
 }
 
 void BaseModel::render() 
@@ -29,8 +30,9 @@ void BaseModel::render()
      //Draw number -- Addison
     glPushMatrix();
         //Draw Base
+		glTranslatef(0.0f,0.0f,0.05f);
         drawBase(0.0f, 0.0f, 0.0f);
-        glTranslatef(1.75f, 1.15f, 2.2f);
+        //glTranslatef(1.75f, 1.15f, 2.2f);
         teamNumber->render();
     glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
