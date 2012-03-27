@@ -16,6 +16,7 @@ public:
     ElectronicsModel();
 
 private:
+	void build();
 	void render();
 	TeamNumberModel *teamNumber;
 };

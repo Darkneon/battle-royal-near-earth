@@ -7,6 +7,11 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat vie
 	p2 = new Player(40.0f,35.0f);
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
 	lr = new LevelRenderer();
+
+	this->viewHeight = viewHeight;
+	this->viewWidth = viewWidth;
+
+	isTwoPlayerGame = false;
 }
 
 Game::~Game()
@@ -24,6 +29,11 @@ Game::~Game()
 	}
 }
 
+void Game::toggleTwoPlayerMode()
+{
+	isTwoPlayerGame = !isTwoPlayerGame;
+}
+
 void Game::updateGameState()
 {
 	
@@ -36,9 +46,32 @@ void Game::getInput(int keyModifier)
 }
 
 void Game::render(){
+	
+	/*lr->render();
+	p1->render();
+	p2->render();*/
+
+	if (isTwoPlayerGame)
+	{
+		renderScene();
+		glViewport(0, 0, (GLsizei)viewWidth, (GLsizei)viewHeight / 2);
+		p1->view();
+		
+		renderScene();
+		glViewport(0, (GLint)viewHeight / 2, (GLsizei)viewWidth, (GLsizei)viewHeight / 2);
+		p1->view();
+	}
+	else
+	{
+		renderScene();
+		p1->view();	
+	}
+	
+}
+
+void Game::renderScene()
+{
 	lr->render();
 	p1->render();
 	p2->render();
-	p1->view();
-	
 }
