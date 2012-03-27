@@ -63,7 +63,7 @@ LevelRenderer::LevelRenderer() {
 
 	//Terrain Models
 	GrassModel *grassModel = new GrassModel; //0
-    HillsModel *hillsModel = new HillsModel; //1
+        HillsModel *hillsModel = new HillsModel; //1
 	MountainModel *mountainModel = new MountainModel; //2
 	FenceModel *fenceModel = new FenceModel;
 	HalfHollowBlockModel *halfHollowModel = new HalfHollowBlockModel;
@@ -358,7 +358,7 @@ void LevelRenderer::renderLights()
         {
                 glDisable(GL_LIGHT3);
 	} else {
-            glEnable(GL_LIGHT3);
+       //     glEnable(GL_LIGHT3);
         }
         if(!spotLight4)
         {

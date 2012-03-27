@@ -265,12 +265,15 @@ void GeoHelper::drawAxis(GLfloat length)
 }
 void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLfloat xExtend, GLfloat yExtend, GLfloat zExtend)
 {
+    GLfloat* normal = new GLfloat[3];
     glBegin(GL_TRIANGLES);
         //                  X     Y     Z
         // Square 1 -- ALONG THE X AXIS (BACK)
         glColor3f(0.5f, 0.5f, 0.5f);
         //Lower Triangle
-        glNormal3f(0.0, 0.0, -1.0);
+        //glNormal3f(0.0, 0.0, -1.0);
+        findNormal3f(xOrigin, yOrigin, zOrigin, xExtend, yExtend, zOrigin, xExtend, yOrigin, zOrigin, normal);
+        glNormal3fv(normal);
         glTexCoord2f(1.0f,1.0f); glVertex3f(xOrigin, yOrigin, zOrigin);
         glTexCoord2f(0.0f,0.0f); glVertex3f(xExtend, yExtend, zOrigin);
         glTexCoord2f(0.0f,1.0f); glVertex3f(xExtend, yOrigin, zOrigin);
@@ -282,7 +285,8 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
                
                 
         // Square 2 -- ALONG THE Z AXIS (LEFT)
-        glNormal3f(-1.0, 0.0, 0.0);
+        findNormal3f(xOrigin, yOrigin, zOrigin, xOrigin, yOrigin, zExtend, xOrigin, yExtend, zExtend, normal);
+        glNormal3fv(normal);
         //Lower Triangle
         glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zOrigin); 
         glTexCoord2f(1.0f,1.0f); glVertex3f(xOrigin, yOrigin, zExtend); 
@@ -293,7 +297,8 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
         glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zOrigin);
                 
         // Square 3 -- ALONG THE X AXIS, extended off Z (FRONT)
-        glNormal3f(0.0, 0.0, 1.0); 
+        findNormal3f(xOrigin, yOrigin, zExtend, xExtend, yOrigin, zExtend, xExtend, yExtend, zExtend, normal);
+        glNormal3fv(normal);
         //Lower Triangle
         glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yOrigin, zExtend); //c
         glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend); //d
@@ -304,7 +309,8 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
         glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zExtend);//a
                 
         // Square 4 -- Along the X AND Z AXIS (RIGHT)
-        glNormal3f(1.0, 0.0, 0.0);
+        findNormal3f(xExtend, yOrigin, zOrigin, xExtend, yExtend, zExtend, xExtend, yOrigin, zExtend, normal);
+        glNormal3fv(normal);
         //Lower Triangle
         glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zOrigin);
         glTexCoord2f(0.0f,0.0f); glVertex3f(xExtend, yExtend, zExtend);
@@ -317,7 +323,8 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
 
 
         // Square 5 -- TOP OF CUBE
-        glNormal3f(0.0, 1.0, 0.0);
+        findNormal3f(xOrigin, yExtend, zOrigin, xOrigin, yExtend, zExtend, xExtend, yExtend, zExtend, normal);
+        glNormal3fv(normal);
         //Lower Triangle
         glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yExtend, zOrigin);
         glTexCoord2f(0.0f,1.0f); glVertex3f(xOrigin, yExtend, zExtend);
@@ -329,7 +336,8 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
         glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yExtend, zOrigin);
                 
         // Square 6 -- BOTTOM OF CUBE
-        glNormal3f(0.0, -1.0, 0.0);
+        findNormal3f(xOrigin, yOrigin, zOrigin, xExtend, yOrigin, zExtend, xOrigin, yOrigin, zExtend, normal);
+        glNormal3fv(normal);
         //Lower Triangle
         glTexCoord2f(0.0f,0.0f); glVertex3f(xOrigin, yOrigin, zOrigin);
         glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend);
@@ -339,6 +347,8 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
         glTexCoord2f(1.0f,0.0f); glVertex3f(xExtend, yOrigin, zOrigin);
         glTexCoord2f(1.0f,1.0f); glVertex3f(xExtend, yOrigin, zExtend);
 	glEnd();
+        
+        delete [] normal;
 }
 
 //Used to draw a middle smaller building

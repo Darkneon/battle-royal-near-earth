@@ -17,6 +17,7 @@ public:
     void render();
 private:
 	void build();
+        void build(GLfloat x);
 };
 
 #endif	/* GRASSMODEL_H */
