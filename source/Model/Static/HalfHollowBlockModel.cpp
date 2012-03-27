@@ -15,8 +15,7 @@
 #include "HalfHollowBlockModel.h"
 
 HalfHollowBlockModel::HalfHollowBlockModel() 
-{
-}
+{}
 
 void HalfHollowBlockModel::render() {
 	TextureManager::getInstance()->enableTexture();

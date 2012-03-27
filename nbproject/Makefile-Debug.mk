@@ -82,6 +82,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/Robot.o \
 	${OBJECTDIR}/source/Model/Static/PitModel.o \
 	${OBJECTDIR}/source/Model/Robot/BipodModel.o \
+	${OBJECTDIR}/source/Logic/JoystickInput.o \
 	${OBJECTDIR}/source/Model/Robot/AntiGravModel.o \
 	${OBJECTDIR}/source/Model/Robot/TracksModel.o \
 	${OBJECTDIR}/source/Model/Static/GrassModel.o \
@@ -90,6 +91,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
 	${OBJECTDIR}/source/Model/Helper/BoundingBox.o \
+	${OBJECTDIR}/source/Logic/FollowCamera.o \
 	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o
 
 
@@ -359,6 +361,11 @@ ${OBJECTDIR}/source/Model/Robot/BipodModel.o: source/Model/Robot/BipodModel.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BipodModel.o source/Model/Robot/BipodModel.cpp
 
+${OBJECTDIR}/source/Logic/JoystickInput.o: source/Logic/JoystickInput.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/JoystickInput.o source/Logic/JoystickInput.cpp
+
 ${OBJECTDIR}/source/Model/Robot/AntiGravModel.o: source/Model/Robot/AntiGravModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
@@ -398,6 +405,11 @@ ${OBJECTDIR}/source/Model/Helper/BoundingBox.o: source/Model/Helper/BoundingBox.
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Helper
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/BoundingBox.o source/Model/Helper/BoundingBox.cpp
+
+${OBJECTDIR}/source/Logic/FollowCamera.o: source/Logic/FollowCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FollowCamera.o source/Logic/FollowCamera.cpp
 
 ${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o: source/Model/Skybox/SphericSkybox.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox

@@ -30,6 +30,7 @@ Robot::Robot() {
 	zPos = 0.0f;
 	xDestination = 0.0f;
 	zDestination = 0.0f;
+
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
 	pitchAngle = 90.0f;
@@ -38,13 +39,19 @@ Robot::Robot() {
 
 	robotLife = MAX_LIFE;
 
+	directionVector[1] = 0.0f;
+	directionVector[2] = 0.0f;
+	directionVector[3] = 1.0f;
+
 	//BiPod is on
 	isPartOn[0] = true;
 	selectedIndex = 0;
-
+	
 	for(int i = 1; i < 8; i++){
 		isPartOn[i]=false;
 	}
+
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
 
 	refreshRobot();
 }
@@ -85,7 +92,11 @@ Robot::Robot(GLfloat x, GLfloat y) {
 
 	turnIndexOn(1);
 	turnIndexOn(3);
+	turnIndexOn(4);
+	turnIndexOn(5);
 	refreshRobot();
+
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
 }
 
 Robot::~Robot() {
@@ -103,6 +114,12 @@ Robot::~Robot() {
 
 void Robot::draw() {
 	if(robotLife > 0){
+		//draw bounding box
+		glPushMatrix();
+			box->draw();
+		glPopMatrix();
+
+		//draw robot
 		glPushMatrix();
 			goToDestination();
 			//Translate()
@@ -262,6 +279,7 @@ void Robot::translateTo(GLfloat xDestination, GLfloat zDestination){
 
 void Robot::spin(GLfloat degrees){
 	spinDegrees += degrees;
+	spinDirectionVector();
 	normalizeSpinDegrees();
 }
 
@@ -274,6 +292,7 @@ void Robot::incrementSpinDegrees(bool pos){
 		spinDegrees--;
 	}
 
+	spinDirectionVector();
 	normalizeSpinDegrees();
 	notifyCamera();
 }
@@ -428,6 +447,9 @@ void Robot::resetOrientation(){
 	spinDegrees = 0.0f;
 	pitchAngle = 90.0f;
 	yawAngle = 90.0f;
+	directionVector[1] = 0.0f;
+	directionVector[2] = 0.0f;
+	directionVector[3] = 1.0f;
 	notifyCamera();
 }
 
@@ -556,18 +578,22 @@ bool Robot::timedZWalk(){
 void Robot::incrementXPos(bool pos){
 	if(pos){
 		xPos += 0.05f;
+		box->moveBox(0.05f,0.0f,0.0f);
 	}
 	else{
 		xPos -= 0.05f;
+		box->moveBox(-0.05f,0.0f,0.0f);
 	}
 }
 
 void Robot::incrementZPos(bool pos){
 	if(pos){
 		zPos += 0.05f;
+		box->moveBox(0.0f,0.0f,0.05f);
 	}
 	else{
 		zPos -= 0.05f;
+		box->moveBox(0.0f,0.0f,-0.05f);
 	}
 }
 
@@ -618,6 +644,7 @@ void Robot::goToDestination(){
 }
 
 bool Robot::checkXDestination(){
+	//If difference in position -> spin towards left or right
 	GLfloat diff = xDestination - xPos;
 	if(diff > -0.05f && diff < 0.05f){
 		xPos = xDestination;
@@ -635,6 +662,7 @@ bool Robot::checkXDestination(){
 }
 
 bool Robot::checkZDestination(){
+	//If difference in position -> spin towards left or right
 	GLfloat diff = zDestination - zPos;
 	if(diff > -0.05f && diff < 0.05f){
 		zPos = zDestination;
@@ -650,3 +678,20 @@ bool Robot::checkZDestination(){
 	}
 }
 
+
+
+void Robot::spinDirectionVector(){
+	/*LOGIC FOR ROTATION
+	GLfloat* spinMatrix = new GLfloat[9];
+	spinMatrix[1] = spinMatrix[3] = spinMatrix[5] = spinMatrix[7] = 0;
+	spinMatrix[4] = 1;
+	spinMatrix[0] = spinMatrix[8] = cos(spinDegrees*DegreesToRadians);
+	spinMatrix[2] = sin(spinDegrees*DegreesToRadians);
+	spinMatrix[6] = -sin(spinDegrees*DegreesToRadians);
+	(spinMatrix[0] * 0.0f) + (spinMatrix[1] * 0.0f) + (spinMatrix[2] * 1.0f);
+	(spinMatrix[3] * 0.0f) + (spinMatrix[4] * 0.0f) + (spinMatrix[5] * 1.0f);
+	(spinMatrix[6] * 0.0f) + (spinMatrix[7] * 0.0f) + (spinMatrix[8] * 1.0f);*/
+	
+	directionVector[0] = sin(spinDegrees*DegreesToRadians);
+	directionVector[2] = cos(spinDegrees*DegreesToRadians);
+}

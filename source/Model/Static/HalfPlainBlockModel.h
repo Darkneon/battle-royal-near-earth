@@ -9,9 +9,8 @@
 #define	HALFPLAINBLOCKMODEL_H
 
 #include "Model.h"
-#include "StaticModel.h"
 
-class HalfPlainBlockModel : StaticModel {
+class HalfPlainBlockModel : Model {
 public:
     HalfPlainBlockModel();        
 private:

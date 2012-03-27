@@ -10,6 +10,7 @@
 #include "../Model/Player/PlayerModel.h"
 #include "SpotLight.h"
 #include "../Model/Light/LightPost.h"
+#include "../Model/Helper/BoundingBox.h"
 #define MAX_PLAYER_HEIGHT 8
 #define MIN_PLAYER_HEIGHT 0
 
@@ -21,10 +22,14 @@ public:
 	void draw();
         void updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos);
 	void incrementHeight(bool positive);
+	GLfloat* pos;
+	BoundingBox* box;
+
+	void incrementXPos(bool positive);
+	void incrementZPos(bool positive);
 
 private:
 	Model* pModel;
-	GLfloat* pos;
         SpotLight* spotLight;
         LightPost* light;
         

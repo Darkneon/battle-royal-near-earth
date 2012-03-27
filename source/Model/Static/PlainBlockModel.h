@@ -9,9 +9,8 @@
 #define	PLAINBLOCKMODEL_H
 
 #include "Model.h"
-#include "StaticModel.h"
 
-class PlainBlockModel : StaticModel {
+class PlainBlockModel : Model {
 public:
     PlainBlockModel();        
 private:

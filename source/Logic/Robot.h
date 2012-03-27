@@ -2,15 +2,16 @@
 
 #ifndef ROBOT_H
 #define ROBOT_H
+
 #define GL_PI 3.14159f //PI
 #define RadiansToDegrees 180.0f/GL_PI
 #define DegreesToRadians GL_PI/180.0f
+#define MAX_LIFE 150
 
 #include "Model.h"
 #include "Static/TeamNumberModel.h"
 #include "RobotCamera.h"
-
-#define MAX_LIFE 150
+#include "../Model/Helper/BoundingBox.h"
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -71,6 +72,7 @@ public:
 	void toggleLight();
 	void refreshLight();
 
+	GLfloat directionVector[3];
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	//models
@@ -115,22 +117,29 @@ private:
 
 	GLfloat robotLife;
 
-	//used for moving robot
+	//Robot Spinning -> Helper Functions
 	GLfloat calcDestinationAngle();
 	void normalizeSpinDegrees();
 	void normalizeSpinDestination();
 	void timedSpin();
+	void spinDirectionVector();
 
+	//Robot Walking -> Helper Functions
 	bool timedXWalk();
 	bool timedZWalk();
 	void incrementXPos(bool pos);
 	void incrementZPos(bool pos);
 	void goToDestination();
 	void setDestination(GLfloat x, GLfloat z);
+
+	//spins robot EAST or WEST depending on destination... 
+	//returns true if facing correct direction already
 	bool checkXDestination();
+	//spins robot NORTH or SOUTH depending on destination... 
+	//returns true if facing correct direction already
 	bool checkZDestination();
 
-	bool deadState;
+	BoundingBox* box;
 
 };
 

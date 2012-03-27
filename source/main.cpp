@@ -61,12 +61,33 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	glutSetWindow(mainWindow);
 	width = newWidth;
 	height = newHeight;
+
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+
+	/*
+	if (!altPlayerRender)
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+	else
+	{
+		if (isPlayer1TurnView)
+			glViewport(0, 0, (GLsizei)width / 2, (GLsizei)height / 2);
+		else
+			glViewport(0, (GLint)height / 2, (GLsizei)width / 2, (GLsizei)height / 2);
+
+			isPlayer1TurnView = !isPlayer1TurnView;
+	}
+	*/
+
 	TwWindowSize(width, height);
 
 	glutSetWindow(helpWindow);
 	glutPositionWindow(10,10);
 	glutReshapeWindow(width-5,height-5);
+}
+
+void toggleTwoPlayerSplitscreen()
+{
+	game->toggleTwoPlayerMode();
 }
 
 void toggleFullScreen()
@@ -166,6 +187,9 @@ void render()
     
 	glutSwapBuffers();
     glutPostRedisplay();
+
+
+	
 }
 
 void help_display(){
@@ -254,6 +278,9 @@ void windowFuncKeyOps(){
     else if (funcKeyStates[GLUT_KEY_F6]) {
         TextureManager::getInstance()->toggleSkins();
     }
+
+	if (funcKeyStates[GLUT_KEY_F8])
+		toggleTwoPlayerSplitscreen();
 }
 
 void functionKeysPressed(int key, int x, int y)
@@ -371,7 +398,7 @@ void initAntTweak() {
 
 void init()
 {
-	glGenLists(6);
+	glGenLists(7);
 
 	te = TextureManager::getInstance();
 
@@ -406,6 +433,11 @@ void motionFunc(int x, int y)
 	game->playerInput1->mousePassiveOperations(x, y);
 }
 
+void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
+{
+	game->playerInput2->joystickOperations(button, xaxis, yaxis, zaxis);
+}
+
 int main (int argc, char **argv)
 {
 	// GLUT initialization.
@@ -428,6 +460,7 @@ int main (int argc, char **argv)
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
+	glutJoystickFunc(joystickFunc, 150);
 	init();
 
 	//helpWindow

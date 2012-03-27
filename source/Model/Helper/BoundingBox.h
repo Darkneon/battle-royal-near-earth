@@ -15,21 +15,38 @@
     #include <GL/glut.h>
 #endif
 
+#include <cstdlib>
+#include <vector>
+using namespace std;
+
 struct V3{
 	GLfloat x;
 	GLfloat y;
 	GLfloat z;
 };
 
-class BoundingBox
-{
+class BoundingBox {
+
 public:
+
+	//static vector<BoundingBox *> boxes;
+	static bool showBoxes;
+
 	BoundingBox(void);
 	BoundingBox(V3 min, V3 max);
 	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ);
 	virtual ~BoundingBox(void);
 	V3 min;
 	V3 max;
+	V3 size;
+	void draw();
+	void draw2();
+	void resize(GLfloat xa, GLfloat ya, GLfloat za);
+	void moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist);
+
+private:
+	void drawSquare();
+	void drawCube();
 };
 
-#endif
+#endif /*BOUNDING_BOX_H*/

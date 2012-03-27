@@ -13,6 +13,7 @@
 #include "CirclingCamera.h"
 #include "RobotCamera.h"
 #include "LightCamera.h"
+#include "FollowCamera.h"
 #include "Player.h"
 #include "PlayerUFO.h"
 
@@ -31,11 +32,13 @@ public:
 	Camera *getCurrentCamera();
 	void selectRobotView(Robot* robo);
 	void levitateUFO();
+	void moveUFOX(bool direction);
+	void moveUFOZ(bool direction);
 
 private:
 	int currentCamera;
    // Model *model;
-	Camera *availableCams[8];
+	Camera *availableCams[9];
 	PlayerUFO* ufo;
 };
 
