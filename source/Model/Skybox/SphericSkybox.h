@@ -5,9 +5,9 @@
 
 class SphericSkybox : Model {
 public:
-    SphericSkybox();
+    SphericSkybox(int height, int width);
     void render();
-	void build();
+	void build(int height, int width);
 };
 
 #endif

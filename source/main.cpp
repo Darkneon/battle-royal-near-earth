@@ -54,11 +54,9 @@ AntTweakHelper antTweakHelper;
 
 //second window for help menu
 int mainWindow = 0;
-int helpWindow = 0;
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
-	glutSetWindow(mainWindow);
 	width = newWidth;
 	height = newHeight;
 
@@ -79,10 +77,6 @@ void reshapeMainWindow (int newWidth, int newHeight)
 	*/
 
 	TwWindowSize(width, height);
-
-	glutSetWindow(helpWindow);
-	glutPositionWindow(10,10);
-	glutReshapeWindow(width-5,height-5);
 }
 
 void toggleTwoPlayerSplitscreen()
@@ -131,6 +125,52 @@ void rasterText(GLfloat x, GLfloat y, void *font, char *c, int cWidth){
 	glPopMatrix();
 }
 
+void help_display(){
+    glPushMatrix();
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		//creating ortho view since text is only 2D
+		glOrtho(0, width-5, 0, height-5, 0.0, 0.1);
+		glMatrixMode(GL_MODELVIEW);
+		glDisable(GL_LIGHTING);
+
+		int lineSpace = 15;
+		int lineHeight = height-20;
+		
+		ifstream openfile;
+		string fileLoad = "keyInput.txt";
+		openfile.open((TextureManager::getResourcePath() + fileLoad).c_str(), ios::in);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		if (openfile.is_open()) {
+			string s;
+			getline(openfile, s);
+			char *title = (char*)s.c_str();
+			rasterText((GLfloat)width/2-35,(GLfloat)lineHeight,GLUT_BITMAP_HELVETICA_12, title,s.size());
+			lineHeight -= 5;
+
+			while(!openfile.eof())
+			{
+				getline(openfile, s);
+				char *readLine = (char*)s.c_str();
+				lineHeight -= lineSpace;
+				rasterText(15.0f,(GLfloat)lineHeight,GLUT_BITMAP_HELVETICA_10, readLine,s.size());
+			}
+			openfile.close();
+		}
+		
+		glColor4f(0.0f, 0.0f, 0.0f, 0.5f);
+		glBegin(GL_QUADS);
+			glVertex2f(0.0f, 0.0f);
+			glVertex2f((GLfloat)width, 0.0f);
+			glVertex2f((GLfloat)width, (GLfloat)height);
+			glVertex2f(0.0f, (GLfloat)height);
+		glEnd();
+
+		glEnable(GL_LIGHTING);
+		glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+}
+
 void render()
 {
 	static time_t lastUpdate = time(NULL);
@@ -138,13 +178,16 @@ void render()
 	static GLuint fps = 0;
 	static GLuint prevFps = 0;
 
-	glutSetWindow(mainWindow);
 	//clears the buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	if(showHelpWindow){
+		help_display();
+	}
 
 	game->render();
 	game->getInput(keyModifier); // Gets user input
@@ -191,46 +234,6 @@ void render()
 
 	
 }
-
-void help_display(){
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-		glLoadIdentity();
-		//creating ortho view since text is only 2D
-		glOrtho(0, width-5, 0, height-5, 0.0, 0.1);
-		glMatrixMode(GL_MODELVIEW);
-
-		int lineSpace = 15;
-		int lineHeight = height-20;
-		
-		ifstream openfile;
-		string fileLoad = "keyInput.txt";
-		openfile.open((TextureManager::getResourcePath() + fileLoad).c_str(), ios::in);
-		if (openfile.is_open()) {
-			string s;
-			getline(openfile, s);
-			char *title = (char*)s.c_str();
-			rasterText((GLfloat)width/2-35,(GLfloat)lineHeight,GLUT_BITMAP_HELVETICA_12, title,s.size());
-			lineHeight -= 5;
-
-			while(!openfile.eof())
-			{
-				getline(openfile, s);
-				char *readLine = (char*)s.c_str();
-				lineHeight -= lineSpace;
-				rasterText(15.0f,(GLfloat)lineHeight,GLUT_BITMAP_HELVETICA_10, readLine,s.size());
-			}
-			openfile.close();
-		}
-
-		glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-     
-    glutSwapBuffers();
-}
-
 
 void functionKeyUp(int key, int x, int y)
 {
@@ -303,47 +306,10 @@ void windowKeyOps()
 			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
 		else
 			glutSetCursor(GLUT_CURSOR_NONE);
-	}
-
-	/*if(keyStates[97]){ //a
-		ambientLight = !ambientLight;
-	}
-        if(keyStates[53]) //5
-    {
-        spotLight1 = !spotLight1;
-    }
-        if(keyStates[54]) // 6
-    {
-        spotLight2 = !spotLight2;
-    }    
-        if(keyStates[55]) // 7
-    {
-        spotLight3 = !spotLight3;
-    }
-         if(keyStates[56]) // 8
-    {
-        spotLight4 = !spotLight4;
-    }
-         if(keyStates[57]) // 9
-    {
-        spotLight1 = false;
-        spotLight2 = false;
-        spotLight3 = false;
-        spotLight4 = false;
-    }*/
-        
+	} 
 
 	if(keyStates[104]){//h
 		showHelpWindow = !showHelpWindow;
-		if(showHelpWindow){
-			glutSetWindow(helpWindow); 
-			glutShowWindow();
-			glutSetWindow(mainWindow);
-		}else{
-			glutSetWindow(helpWindow); 
-			glutHideWindow();
-			glutSetWindow(mainWindow);
-		}
 	}
 
 	if (keyStates[115])//s
@@ -462,15 +428,6 @@ int main (int argc, char **argv)
 	glutPassiveMotionFunc(passiveMotionFunc);
 	glutJoystickFunc(joystickFunc, 150);
 	init();
-
-	//helpWindow
-	helpWindow = glutCreateSubWindow(mainWindow, 10, 10,width-5,height-5);
-	glutDisplayFunc(help_display);
-
-	//hiding the subwindow for now
-	glutSetWindow(helpWindow); 
-	glutHideWindow();
-	glutSetWindow(mainWindow);
 
 	glutMainLoop();
 	return 0;

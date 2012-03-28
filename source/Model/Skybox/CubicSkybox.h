@@ -5,9 +5,9 @@
 
 class CubicSkybox : Model {
 public:
-    CubicSkybox();
+    CubicSkybox(int height, int width);
     void render();
-	void build();
+	void build(int height, int width);
 };
 
 #endif
