@@ -9,6 +9,7 @@
 
 #include "../Model/Player/PlayerModel.h"
 #include "../Model/Helper/BoundingBox.h"
+#include "../Logic/LevelRenderer.h"
 #define MAX_PLAYER_HEIGHT 2
 #define MIN_PLAYER_HEIGHT 0
 
@@ -25,8 +26,11 @@ public:
 	void incrementXPos(bool positive);
 	void incrementZPos(bool positive);
 
+	bool ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z);
+
 private:
 	Model* pModel;
+	CollisionTester* ct;
 };
 
 #endif

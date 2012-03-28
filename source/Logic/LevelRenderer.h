@@ -9,6 +9,7 @@
 #include "SpotLight.h"
 #include "../Model/Light/LightPost.h"
 #include "../Model/Helper/BoundingBox.h"
+#include "../Model/Helper/CollisionTester.h"
 
 class LevelRenderer {
 public:
@@ -17,10 +18,11 @@ public:
     void render();
     bool getIsSkySphere();
 	void toggleSkySphere();
-	vector<BoundingBox *> lrBoxes;
-
+	//vector<BoundingBox *> lrBoxes;
+	CollisionTester* lrBoxes;
+	
 private:	
-    static const int NUM_MODELS = 22;
+    static const int NUM_MODELS = 14;
     Model* models[NUM_MODELS];
     int level[50][50];
 

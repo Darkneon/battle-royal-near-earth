@@ -176,6 +176,9 @@
     <ClCompile Include="Logic\JoystickInput.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Helper\CollisionTester.cpp">
+      <Filter>Model\Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -351,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="Logic\JoystickInput.h">
       <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Helper\CollisionTester.h">
+      <Filter>Model\Helper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,12 +6,13 @@
 #define GL_PI 3.14159f //PI
 #define RadiansToDegrees 180.0f/GL_PI
 #define DegreesToRadians GL_PI/180.0f
-#define MAX_LIFE 150
+#define MAX_LIFE 1000
 
 #include "Model.h"
 #include "Static/TeamNumberModel.h"
 #include "RobotCamera.h"
 #include "../Model/Helper/BoundingBox.h"
+#include "../Model/Helper/CollisionTester.h"
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -45,8 +46,6 @@ public:
 	void turnSelectedOn();
 
 	//interface robot transformations
-	void translate(GLfloat x, GLfloat z);
-	void translateTo(GLfloat x, GLfloat z);
 	void spin(GLfloat degrees);
 	void incrementSpinDegrees(bool pos);
 
@@ -104,7 +103,8 @@ private:
 	GLfloat xDestination;
 	GLfloat zDestination;
 	GLfloat spinDestination;
-	
+	GLfloat height;
+
 	//Lighting
 	bool isMyLightOn;
 
@@ -140,7 +140,9 @@ private:
 	bool checkZDestination();
 
 	BoundingBox* box;
+	CollisionTester* ct;
 
+	bool robotCollisionTest(GLfloat x, GLfloat y, GLfloat z);
 };
 
 #endif

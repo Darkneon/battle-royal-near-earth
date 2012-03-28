@@ -123,6 +123,7 @@
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
     <ClCompile Include="Model\Helper\BoundingBox.cpp" />
+    <ClCompile Include="Model\Helper\CollisionTester.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
     <ClCompile Include="Model\Light\LightPost.cpp" />
     <ClCompile Include="Model\Material\DefaultMaterial.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
     <ClInclude Include="Model\Helper\BoundingBox.h" />
+    <ClInclude Include="Model\Helper\CollisionTester.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
     <ClInclude Include="Model\Light\LightPost.h" />
     <ClInclude Include="Model\Material\DefaultMaterial.h" />

@@ -20,6 +20,7 @@ private:
     Model *model;
 	GLfloat xPos;
 	GLfloat zPos;
+
 };
 
 #endif

@@ -20,7 +20,7 @@
 #include "Buildings/BaseModel.h"
 
 //Robot Model includes
-#include "Robot/AntiGravModel.h"
+/*#include "Robot/AntiGravModel.h"
 #include "Robot/BipodModel.h"
 #include "Robot/TracksModel.h"
 #include "Robot/CannonModel.h"
@@ -28,7 +28,7 @@
 #include "Robot/PhaserModel.h"
 #include "Robot/ElectronicsModel.h"
 #include "Robot/NuclearModel.h"
-#include "Robot/HeadlightModel.h"
+#include "Robot/HeadlightModel.h"*/
 
 LevelRenderer::LevelRenderer() {
 
@@ -78,17 +78,7 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
 	FactoryModel *factoryModel = new FactoryModel;
-	HeadlightModel *headlightModel = new HeadlightModel;
-
-	//Robot Models
-	AntiGravModel *antiGravModel = new AntiGravModel;
-	BipodModel *bipodModel = new BipodModel;
-	TracksModel *tracksModel = new TracksModel;
-	CannonModel *cannonModel = new CannonModel;
-	MissileLauncherModel *missileLauncherModel = new MissileLauncherModel;
-	PhaserModel *phaserModel = new PhaserModel;
-	ElectronicsModel *electronicsModel = new ElectronicsModel;
-	NuclearModel *nuclearModel = new NuclearModel;
+	BaseModel *baseModel = new BaseModel;
 
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
@@ -102,23 +92,9 @@ LevelRenderer::LevelRenderer() {
 	models[9] = (Model*)pitInsideModel;
 	models[10] = (Model*)pitBottomModel;
 	models[11] = (Model*)lightRubbleModel;
-	models[12] = (Model*)antiGravModel;
-	models[13] = (Model*)bipodModel;
-	models[14] = (Model*)tracksModel;
-	models[15] = (Model*)cannonModel;
-	models[16] = (Model*)missileLauncherModel;
-	models[17] = (Model*)phaserModel;
-	models[18] = (Model*)electronicsModel;
-	models[19] = (Model*)nuclearModel;
-	models[20] = (Model*)factoryModel;
-	models[21] = (Model*)headlightModel;
-	//Remove children from hierarchy so we can render these models individually
-	models[12]->removeAllChildren(); 
-	models[13]->removeAllChildren();
-	models[14]->removeAllChildren();
-	models[15]->removeAllChildren();
-	models[16]->removeAllChildren();
-	models[17]->removeAllChildren();
+	models[12] = (Model*)baseModel;
+	models[13] = (Model*)factoryModel;
+	
 	map1();   
 	buildMap();
 } 
@@ -139,6 +115,9 @@ void LevelRenderer::buildMap()
 	glNewList(2, GL_COMPILE);
 	for(int i = 0; i != 50; i++) {
 		for(int j = 0; j != 50; j++) {
+			if(i == 35 && j == 40){
+				int k = 9;
+			}
 			glPushMatrix();
 				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
 				models[ level[i][j] ]->draw();
@@ -176,24 +155,40 @@ void LevelRenderer::buildMap()
 			switch(level[i][j]){
 				case 1: case 6: case 7: //hills, plain and holloy block
 					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1), 1.0f, (GLfloat)(j+1));
-					lrBoxes.push_back(tempBox);
+					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
 				case 4: case 5: //half blocks
 					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1),0.5f, (GLfloat)(j+1));
-					lrBoxes.push_back(tempBox);
+					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
 				case 2: //mountains
 					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+2),3.75f, (GLfloat)(j+1));
-					lrBoxes.push_back(tempBox);
+					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
 				case 3: //fence
 					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1),2.75f, (GLfloat)(j+1));
-					lrBoxes.push_back(tempBox);
+					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
+				case 12://base
+					//5.0f,1.25f,4.0f
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+5.0f),1.25f, (GLfloat)(j+2.5f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					tempBox = new BoundingBox((GLfloat)(i+1.0f), 0.0f, (GLfloat)(j+2.5f), (GLfloat)(i+4.0f),0.75f, (GLfloat)(j+4.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+				case 13://factory
+					//3.0f,1.25f,2.0f
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
 				default:
 					break;
 			}
@@ -275,31 +270,13 @@ void LevelRenderer::map1(){
 			}
 		}
 	}
-	level[35][40] = 20;
 	for(int model = 1; model < 12; model++){
 		for(int i = 5; i < 50; i += 5){
 			level[i][model*2] = model;
 		}
-
 	}
-
-    level[45][45] = 14;
-    level[46][46] = 3;
-    
-	/*level[25][5] = 4;
-	level[25][10] = 5;
-	level[25][15] = 6;
-	level[30][5] = 7;
-	level[30][10] = 3;
-	level[30][15] = 1;
-
-	level[35][5] = 8;
-	level[35][6] = 9;
-	level[35][7] = 9;
-	level[35][8] = 10;
-
-	level[40][10] = 2;
-	*/
+	//level[30][30] = 12;
+	//level[40][40] = 13;
 }
 
 bool LevelRenderer::getIsSkySphere(){

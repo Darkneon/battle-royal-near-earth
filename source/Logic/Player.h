@@ -26,7 +26,6 @@ public:
 	void selectRobot(int i);
 	virtual void render();
 	
-
 	vector<Robot *> robots;
 	int selectedRobot;
 	Base* base;
@@ -34,7 +33,6 @@ public:
 protected:
 	GLfloat spawnPtX;
 	GLfloat spawnPtZ;
-
 
 };
 

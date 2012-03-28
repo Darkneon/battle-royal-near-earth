@@ -24,18 +24,18 @@ void PlayerInput::keyOperations(int keyModifier)
 	else if (keyStates[32]){ //space
 		player->levitateUFO();
 	}
-   /*     else if (keyStates[49]) //1
+    /*    else if (keyStates[49]) //1
 	{
-		player->changeCamera(CAMERA_LIGHT1);
-                glutPostRedisplay();
-		//player->moveUFOX(true);
+		//player->changeCamera(CAMERA_LIGHT1);
+               // glutPostRedisplay();
+		player->moveUFOX(true);
 
 	}
         else if (keyStates[50]) //2
 	{
-		player->changeCamera(CAMERA_LIGHT2);
-                glutPostRedisplay();
-		//player->moveUFOZ(true);
+		//player->changeCamera(CAMERA_LIGHT2);
+                //glutPostRedisplay();
+		player->moveUFOZ(false);
 	}*/
      /*   else if (keyStates[51]) //3
 	{
@@ -77,6 +77,22 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_FREELOOK)
 			((FreeLookCamera*)player->getCurrentCamera())->resetPitchAndRoll();
 		glutPostRedisplay();
+	}
+	
+	if (keyStates[100]) //d
+	{
+		player->moveUFOX(true);
+	}
+	else if(keyStates[97]){ //a
+		player->moveUFOX(false);
+	}
+
+	if (keyStates[115]) //s
+	{
+		player->moveUFOZ(true);
+	}
+	else if(keyStates[119]){//w
+		player->moveUFOZ(false);
 	}
 
 }

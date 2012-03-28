@@ -1,7 +1,7 @@
 #include "BoundingBox.h"
 
-//vector<BoundingBox *> BoundingBox::boxes;
 bool BoundingBox::showBoxes = true;
+GLuint BoundingBox::movingCount = 0;
 
 BoundingBox::BoundingBox(void)
 {
@@ -14,7 +14,7 @@ BoundingBox::BoundingBox(void)
 	size.x = 1.0f;
 	size.y = 1.0f;
 	size.z = 1.0f;
-	//boxes.push_back(this);
+	movingBoxId = 0;
 }
 
 BoundingBox::BoundingBox(V3 min, V3 max){
@@ -23,7 +23,7 @@ BoundingBox::BoundingBox(V3 min, V3 max){
 	size.x = max.x-min.x;
 	size.y = max.y-min.y;
 	size.z = max.z-min.z;
-	//boxes.push_back(this);
+	movingBoxId = 0;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ){
@@ -36,12 +36,31 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	size.x = max.x-min.x;
 	size.y = max.y-min.y;
 	size.z = max.z-min.z;
-	//boxes.push_back(this);
+	movingBoxId = 0;
+}
+
+BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving){
+	min.x = minX;
+	min.y = minY;
+	min.z = minZ;
+	max.x = maxX;
+	max.y = maxY;
+	max.z = maxZ;
+	size.x = max.x-min.x;
+	size.y = max.y-min.y;
+	size.z = max.z-min.z;
+	if(moving){
+		movingCount++;
+		movingBoxId = movingCount;
+	}
+	else{
+		movingBoxId = 0;
+	}
 }
 
 BoundingBox::~BoundingBox(void)
 {
-	//boxes.clear();
+
 }
 
 void BoundingBox::draw2(){
@@ -145,15 +164,6 @@ void BoundingBox::draw(){
 	}
 }
 
-/*void BoundingBox::translate(GLfloat minX, GLfloat minY, GLfloat minZ){
-	min.x = minX;
-	min.y = minY;
-	min.z = minZ;
-	max.x = min.x + size.x;
-	max.y = min.y + size.y;
-	max.y = min.y + size.y;
-}*/
-
 void BoundingBox::moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist){
 	min.x = min.x+ xDist;
 	min.y = min.y+ yDist;
@@ -162,4 +172,15 @@ void BoundingBox::moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist){
 	max.y = max.y+ yDist;
 	max.z = max.z+ zDist;
 
+}
+
+bool BoundingBox::collision(GLfloat x, GLfloat y, GLfloat z){
+	if(x < max.x && x > min.x &&
+		y < max.y && y > min.y &&
+		z < max.z && z > min.z){
+		return true;
+	}
+	else{
+		return false;
+	}
 }

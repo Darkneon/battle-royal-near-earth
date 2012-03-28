@@ -29,12 +29,14 @@ class BoundingBox {
 
 public:
 
-	//static vector<BoundingBox *> boxes;
 	static bool showBoxes;
-
+	static GLuint movingCount;
+	GLuint movingBoxId;
+	
 	BoundingBox(void);
 	BoundingBox(V3 min, V3 max);
 	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ);
+	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving);
 	virtual ~BoundingBox(void);
 	V3 min;
 	V3 max;
@@ -43,6 +45,8 @@ public:
 	void draw2();
 	void resize(GLfloat xa, GLfloat ya, GLfloat za);
 	void moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist);
+	bool collision(GLfloat x, GLfloat y, GLfloat z);
+
 
 private:
 	void drawSquare();

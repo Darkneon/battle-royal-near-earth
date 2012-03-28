@@ -51,8 +51,10 @@ Robot::Robot() {
 		isPartOn[i]=false;
 	}
 
-	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
-
+	calculateHeight(8);
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
+	ct = new CollisionTester;
+	ct->staticBoxes.push_back(box);
 	refreshRobot();
 }
 
@@ -72,7 +74,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	
 	xPos = x;
 	zPos = y;
-	xDestination = 5.0f;
+	xDestination = x;
 	zDestination = 5.0f;
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
@@ -96,7 +98,10 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	turnIndexOn(5);
 	refreshRobot();
 
-	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
+	calculateHeight(8);
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
+	ct = new CollisionTester;
+	ct->staticBoxes.push_back(box);
 }
 
 Robot::~Robot() {
@@ -132,7 +137,7 @@ void Robot::draw() {
 
 			//Draw Headlight
 			glPushMatrix();
-				glTranslatef(0.0f,calculateHeight(8),0.0f);
+				glTranslatef(0.0f,height,0.0f);
 				headlight->draw();
 			glPopMatrix();
 
@@ -267,16 +272,6 @@ void Robot::clearChildren(){
 //						ROBOT TRANSFORMATIONS
 //-------------------------------------------------------------
 
-void Robot::translate(GLfloat xDist, GLfloat zDist){
-	xPos += xDist;
-	zPos += zDist;
-}
-
-void Robot::translateTo(GLfloat xDestination, GLfloat zDestination){
-	xPos = xDestination;
-	zPos = zDestination;
-}
-
 void Robot::spin(GLfloat degrees){
 	spinDegrees += degrees;
 	spinDirectionVector();
@@ -309,7 +304,7 @@ GLfloat Robot::getEyeX(){
 }
 
 GLfloat Robot::getEyeY(){
-	return calculateHeight(8)+0.15f;
+	return height+0.15f;
 }
 
 GLfloat Robot::getEyeZ(){
@@ -323,7 +318,8 @@ GLfloat* Robot::getLookAt(){
 	GLfloat pitched[3];
 	//Adjust for pitch & yaw
 	pitched[0] = 0.3f-sin(pitchAngle*GL_PI/180.0f)-sin(yawAngle*GL_PI/180.0f)-0.5f;
-	pitched[1] = calculateHeight(8)+0.15f-cos(pitchAngle*GL_PI/180.0f);
+	//pitched[1] = calculateHeight(8)+0.15f-cos(pitchAngle*GL_PI/180.0f);
+	pitched[1] = height+0.15f-cos(pitchAngle*GL_PI/180.0f);
 	pitched[2] = 0.5f+cos(yawAngle*GL_PI/180.0f)-0.5f;
 	GLfloat* rotated = new GLfloat[3];
 	rotated[0] = pitched[0]*cos(spinDegrees*GL_PI/180.0f)+ pitched[2]*sin(spinDegrees*GL_PI/180.0f) + 0.5f +xPos;
@@ -337,7 +333,8 @@ GLfloat* Robot::getLightLookAt(){
 	GLfloat pitched[3];
 	//Adjust for pitch & yaw
 	pitched[0] = 0.3f-sin(70*GL_PI/180.0f)-0.5f;
-	pitched[1] = calculateHeight(8)+0.15f-cos(70*GL_PI/180.0f);
+	//pitched[1] = calculateHeight(8)+0.15f-cos(70*GL_PI/180.0f);
+	pitched[1] = height+0.15f-cos(70*GL_PI/180.0f);
 	pitched[2] = 0.5f-0.5f;
 
 	GLfloat* rotated = new GLfloat[3];
@@ -382,6 +379,7 @@ GLfloat Robot::calculateHeight(int index){
 			}
 		}
 	}
+	height = h;
 	return h;
 }
 
@@ -577,23 +575,31 @@ bool Robot::timedZWalk(){
 
 void Robot::incrementXPos(bool pos){
 	if(pos){
-		xPos += 0.05f;
-		box->moveBox(0.05f,0.0f,0.0f);
+		if(!robotCollisionTest(xPos+0.05f,0.0f,zPos)){
+			xPos += 0.05f;
+			box->moveBox(0.05f,0.0f,0.0f);
+		}
 	}
 	else{
-		xPos -= 0.05f;
-		box->moveBox(-0.05f,0.0f,0.0f);
+		if(!robotCollisionTest(xPos-0.05f,0.0f,zPos)){
+			xPos -= 0.05f;
+			box->moveBox(-0.05f,0.0f,0.0f);
+		}
 	}
 }
 
-void Robot::incrementZPos(bool pos){
-	if(pos){
-		zPos += 0.05f;
-		box->moveBox(0.0f,0.0f,0.05f);
+void Robot::incrementZPos(bool positive){
+	if(positive){
+		if(!robotCollisionTest(xPos,0.0f,zPos+0.05f)){
+			zPos += 0.05f;
+			box->moveBox(0.0f,0.0f,0.05f);
+		}
 	}
 	else{
-		zPos -= 0.05f;
-		box->moveBox(0.0f,0.0f,-0.05f);
+		if(!robotCollisionTest(xPos,0.0f,zPos-0.05f)){
+			zPos -= 0.05f;
+			box->moveBox(0.0f,0.0f,-0.05f);
+		}
 	}
 }
 
@@ -694,4 +700,35 @@ void Robot::spinDirectionVector(){
 	
 	directionVector[0] = sin(spinDegrees*DegreesToRadians);
 	directionVector[2] = cos(spinDegrees*DegreesToRadians);
+}
+
+//-------------------------------------------------------------------------
+
+bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
+		if(ct->collisionTest(x,y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+
+		return false;
 }
