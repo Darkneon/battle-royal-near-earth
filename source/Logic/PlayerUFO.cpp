@@ -15,7 +15,6 @@ PlayerUFO::PlayerUFO(void)
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
         updateLights(pos[0], pos[1], pos[2]);
-
 }
 
 PlayerUFO::PlayerUFO(GLfloat x, GLfloat z)
@@ -32,7 +31,6 @@ PlayerUFO::PlayerUFO(GLfloat x, GLfloat z)
 
         //LIGHTING
         updateLights(pos[0], pos[1], pos[2]);
-        
 }
 
 PlayerUFO::~PlayerUFO(void)
@@ -66,16 +64,14 @@ void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
 //---------------------------------------------------------------
 void PlayerUFO::draw(){
 	incrementHeight(false);
-
 	glPushMatrix();
-			box->draw();
+                box->draw();
 	glPopMatrix();
-
 	glPushMatrix();
 		glTranslatef(pos[0],pos[1],pos[2]);
 		pModel->draw();
 	glPopMatrix();
-                updateLights(pos[0], pos[1], pos[2]);
+        updateLights(pos[0], pos[1], pos[2]);
 }
 
 //---------------------------------------------------------------
@@ -83,16 +79,20 @@ void PlayerUFO::draw(){
 //---------------------------------------------------------------
 void PlayerUFO::incrementHeight(bool positive){
 	if(positive){
-		if(pos[1]+0.05f <= MAX_PLAYER_HEIGHT){
+		if(pos[1]+0.5f <= MAX_PLAYER_HEIGHT){
 			pos[1] += 0.5f;
-			box->moveBox(0.0f,0.5f,0.0f);
+			box->lockBox(pos[0],pos[1],pos[2]);
 		}
+                if(pos[1]+0.3 > MAX_PLAYER_HEIGHT){
+                    pos[1] = MAX_PLAYER_HEIGHT-0.3;
+                   box->lockBox(pos[0],pos[1],pos[2]);
+                }
 	}
 	else{
 		if(pos[1]-0.02f >= MIN_PLAYER_HEIGHT&&
 		!ufoCollisionTest(pos[0],pos[1]-0.02f,pos[2])){
 			pos[1] -= 0.2f;
-			box->moveBox(0.0f,-0.2f,0.00f);
+			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
         updateLights(pos[0], pos[1], pos[2]);
