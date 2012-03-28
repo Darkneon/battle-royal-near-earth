@@ -37,10 +37,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
 	${OBJECTDIR}/source/Model/Material/Material.o \
 	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
-	${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o \
+	${OBJECTDIR}/source/Model/Helper/CollisionTester.o \
 	${OBJECTDIR}/source/Model/Texture/TextureManager.o \
-	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Helper/AntTweakHelper.o \
+	${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o \
+	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
 	${OBJECTDIR}/source/Logic/Base.o \
 	${OBJECTDIR}/source/Model/Robot/HeadlightModel.o \
@@ -134,25 +135,30 @@ ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/Missi
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o source/Model/Robot/MissileLauncherModel.cpp
 
-${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o: source/Model/Skybox/CubicSkybox.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox
+${OBJECTDIR}/source/Model/Helper/CollisionTester.o: source/Model/Helper/CollisionTester.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Helper
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o source/Model/Skybox/CubicSkybox.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Helper/CollisionTester.o source/Model/Helper/CollisionTester.cpp
 
 ${OBJECTDIR}/source/Model/Texture/TextureManager.o: source/Model/Texture/TextureManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/TextureManager.o source/Model/Texture/TextureManager.cpp
 
-${OBJECTDIR}/source/Model/Material/DefaultMaterial.o: source/Model/Material/DefaultMaterial.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/DefaultMaterial.o source/Model/Material/DefaultMaterial.cpp
-
 ${OBJECTDIR}/source/Helper/AntTweakHelper.o: source/Helper/AntTweakHelper.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Helper
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/AntTweakHelper.o source/Helper/AntTweakHelper.cpp
+
+${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o: source/Model/Skybox/CubicSkybox.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Skybox
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o source/Model/Skybox/CubicSkybox.cpp
+
+${OBJECTDIR}/source/Model/Material/DefaultMaterial.o: source/Model/Material/DefaultMaterial.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/DefaultMaterial.o source/Model/Material/DefaultMaterial.cpp
 
 ${OBJECTDIR}/source/Model/Static/FenceModel.o: source/Model/Static/FenceModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static

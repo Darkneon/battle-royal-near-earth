@@ -66,6 +66,8 @@
         <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
           <itemPath>source/Model/Helper/BoundingBox.cpp</itemPath>
           <itemPath>source/Model/Helper/BoundingBox.h</itemPath>
+          <itemPath>source/Model/Helper/CollisionTester.cpp</itemPath>
+          <itemPath>source/Model/Helper/CollisionTester.h</itemPath>
           <itemPath>source/Model/Helper/GeoHelper.cpp</itemPath>
           <itemPath>source/Model/Helper/GeoHelper.h</itemPath>
         </logicalFolder>

@@ -49,6 +49,7 @@ public:
 	void draw();
 	void resize(GLfloat xa, GLfloat ya, GLfloat za);
 	void moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist);
+        void lockBox(GLfloat xPos, GLfloat yPos, GLfloat zPos);
 
 private:
 	//drawing the box

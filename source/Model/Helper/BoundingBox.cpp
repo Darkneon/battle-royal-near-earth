@@ -140,3 +140,12 @@ void BoundingBox::moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist){
 	max.z = max.z+ zDist;
 
 }
+//Added by Addison, allows to set the actual position of the collision box... Used for having it follow the position of a specific object
+void BoundingBox::lockBox(GLfloat xPos, GLfloat yPos, GLfloat zPos){
+	min.x = xPos;
+	min.y = yPos;
+	min.z = zPos;
+	max.x = xPos+size.x;
+	max.y = yPos+size.y;
+	max.z = zPos+size.z;
+}
