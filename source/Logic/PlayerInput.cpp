@@ -24,17 +24,20 @@ void PlayerInput::keyOperations(int keyModifier)
 	else if (keyStates[32]){ //space
 		player->levitateUFO();
 	}
-    /*    else if (keyStates[49]) //1
+   /*     else if (keyStates[49]) //1
 	{
 		player->changeCamera(CAMERA_LIGHT1);
                 glutPostRedisplay();
+		//player->moveUFOX(true);
+
 	}
         else if (keyStates[50]) //2
 	{
 		player->changeCamera(CAMERA_LIGHT2);
                 glutPostRedisplay();
-	}
-        else if (keyStates[51]) //3
+		//player->moveUFOZ(true);
+	}*/
+     /*   else if (keyStates[51]) //3
 	{
 		player->changeCamera(CAMERA_LIGHT3);
                 glutPostRedisplay();
@@ -53,6 +56,7 @@ void PlayerInput::keyOperations(int keyModifier)
 	if (keyStates[111]) //o
 	{
 		TextureManager::getInstance()->toggleTextures();
+		BoundingBox::showBoxes = !BoundingBox::showBoxes;
 		//glutPostRedisplay();
 	}
 

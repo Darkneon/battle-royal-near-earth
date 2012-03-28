@@ -51,7 +51,7 @@ Robot::Robot() {
 		isPartOn[i]=false;
 	}
 
-	//box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
 
 	refreshRobot();
 }
@@ -92,9 +92,11 @@ Robot::Robot(GLfloat x, GLfloat y) {
 
 	turnIndexOn(1);
 	turnIndexOn(3);
+	turnIndexOn(4);
+	turnIndexOn(5);
 	refreshRobot();
 
-	//box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
 }
 
 Robot::~Robot() {
@@ -114,7 +116,7 @@ void Robot::draw() {
 	if(robotLife > 0){
 		//draw bounding box
 		glPushMatrix();
-//			box->draw();
+			box->draw();
 		glPopMatrix();
 
 		//draw robot
@@ -576,18 +578,22 @@ bool Robot::timedZWalk(){
 void Robot::incrementXPos(bool pos){
 	if(pos){
 		xPos += 0.05f;
+		box->moveBox(0.05f,0.0f,0.0f);
 	}
 	else{
 		xPos -= 0.05f;
+		box->moveBox(-0.05f,0.0f,0.0f);
 	}
 }
 
 void Robot::incrementZPos(bool pos){
 	if(pos){
 		zPos += 0.05f;
+		box->moveBox(0.0f,0.0f,0.05f);
 	}
 	else{
 		zPos -= 0.05f;
+		box->moveBox(0.0f,0.0f,-0.05f);
 	}
 }
 

@@ -94,3 +94,11 @@ void HumanPlayer::selectRobotView(Robot* robo){
 void HumanPlayer::levitateUFO(){
 	ufo->incrementHeight(true);
 }
+
+void HumanPlayer::moveUFOX(bool direction){
+	ufo->incrementXPos(direction);
+}
+
+void HumanPlayer::moveUFOZ(bool direction){
+	ufo->incrementZPos(direction);
+}

@@ -42,7 +42,7 @@ public:
 	void draw();
 	void draw2();
 	void resize(GLfloat xa, GLfloat ya, GLfloat za);
-	void translate(GLfloat minX, GLfloat minY, GLfloat minZ);
+	void moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist);
 
 private:
 	void drawSquare();

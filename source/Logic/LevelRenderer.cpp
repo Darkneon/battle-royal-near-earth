@@ -259,7 +259,6 @@ void LevelRenderer::map(){
 
 			}
 		}
-
 		openfile.close();
 	}
 
@@ -342,7 +341,7 @@ void LevelRenderer::renderLights()
         {
                 glDisable(GL_LIGHT3);
 	} else {
-            glEnable(GL_LIGHT3);
+           glEnable(GL_LIGHT3);
         }
         if(!spotLight4)
         {

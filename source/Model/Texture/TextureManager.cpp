@@ -1,15 +1,5 @@
 #include "TextureManager.h"
 
-/*
-#ifdef __APPLE__
-	#include <dirent.h>
-#elif __linux__
-	#include <dirent.h>
-#else
-    #include "..\..\include\WinDirent\dirent.h"
-#endif
-	*/
-
 #ifdef WIN32_LEAN_AND_MEAN
 	#include "..\..\include\WinDirent\dirent.h"
 	#include <direct.h>
