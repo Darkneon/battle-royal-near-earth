@@ -1,5 +1,8 @@
 #include "PlayerUFO.h"
 
+//---------------------------------------------------------------
+//						CONSTRUCTORS & DESTRUCTOR
+//---------------------------------------------------------------
 PlayerUFO::PlayerUFO(void)
 {
 	PlayerModel* p = new PlayerModel;
@@ -31,6 +34,18 @@ PlayerUFO::PlayerUFO(GLfloat x, GLfloat z)
         updateLights(pos[0], pos[1], pos[2]);
         
 }
+
+PlayerUFO::~PlayerUFO(void)
+{
+	if (pModel != NULL) {
+		delete pModel;
+		pModel = NULL;
+	}
+}
+
+//---------------------------------------------------------------
+//						LIGHTS
+//---------------------------------------------------------------
 void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
         spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
@@ -45,14 +60,10 @@ void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
         glEnable(GL_LIGHT7);
 }
 
-PlayerUFO::~PlayerUFO(void)
-{
-	if (pModel != NULL) {
-		delete pModel;
-		pModel = NULL;
-	}
-}
 
+//---------------------------------------------------------------
+//						DRAW
+//---------------------------------------------------------------
 void PlayerUFO::draw(){
 	incrementHeight(false);
 
@@ -65,10 +76,11 @@ void PlayerUFO::draw(){
 		pModel->draw();
 	glPopMatrix();
                 updateLights(pos[0], pos[1], pos[2]);
-
-        
 }
 
+//---------------------------------------------------------------
+//			TRANSLATE UFO (AND BOUNDING BOX)
+//---------------------------------------------------------------
 void PlayerUFO::incrementHeight(bool positive){
 	if(positive){
 		if(pos[1]+0.05f <= MAX_PLAYER_HEIGHT){
@@ -118,7 +130,9 @@ void PlayerUFO::incrementZPos(bool positive){
         updateLights(pos[0], pos[1], pos[2]);
 }
 
-
+//---------------------------------------------------------------
+//					COLLISION DETECTION
+//---------------------------------------------------------------
 bool PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 		if(ct->collisionTest(x,y,z,box->movingBoxId)){
 			return true;

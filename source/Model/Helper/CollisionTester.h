@@ -23,13 +23,12 @@ class CollisionTester
 public:
 	CollisionTester(void);
 	virtual ~CollisionTester(void);
+	//list of all boxes (not just static)
 	static vector<BoundingBox *> staticBoxes;
-	static vector<BoundingBox *> movingBoxes;
-	static GLuint movingBoxId;
-	bool collisionTest(GLfloat x, GLfloat y, GLfloat z);
-	bool collisionTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
-	bool collision(BoundingBox* b, GLfloat x, GLfloat y, GLfloat z);
+	//tests collision on one bounding box
 	bool collision(BoundingBox* b, GLfloat x, GLfloat y, GLfloat z, GLuint id);
+	//tests collision on every bounding box
+	bool collisionTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
 };
 
 #endif

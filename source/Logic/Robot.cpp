@@ -51,7 +51,6 @@ Robot::Robot() {
 		isPartOn[i]=false;
 	}
 
-	calculateHeight(8);
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
@@ -96,9 +95,9 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	turnIndexOn(3);
 	turnIndexOn(4);
 	turnIndexOn(5);
+
 	refreshRobot();
 
-	calculateHeight(8);
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
@@ -173,22 +172,23 @@ void Robot::turnSelectedOn(){
 void Robot::turnIndexOn(int index){
 
 	switch(index){
-		case 0:
-			isPartOn[0] = true;
+		case 0: //bipod
+			isPartOn[0] = true; 
 			isPartOn[1] = false;
 			isPartOn[2] = false;
 			break;
-		case 1:
+		case 1: //tracks
 			isPartOn[1] = true;
 			isPartOn[0] = false;
 			isPartOn[2] = false;
 			break;
-		case 2:
+		case 2: //antigrav
 			isPartOn[2] = true;
 			isPartOn[0] = false;
 			isPartOn[1] = false;
 			break;
 		case 3: case 4: case 5: case 6: case 7: 
+	  //cannon  missile phaser  nuclear electronics
 			if(isPartOn[index]){
 				isPartOn[index] = false;
 			}
@@ -205,7 +205,7 @@ void Robot::turnIndexOn(int index){
 void Robot::refreshRobot(){
 	
 	clearChildren();
-	//setup base
+	//setup
 	if(isPartOn[0]){
         model = bipodM;
 	}
@@ -254,6 +254,7 @@ void Robot::refreshRobot(){
 	if(childExists){
 		model->setNextChild(temp);
 	}
+	calculateHeight(8);
 	notifyCamera();
 }
 
@@ -266,30 +267,6 @@ void Robot::clearChildren(){
     tracksM->eraseChildren();
     bipodM->eraseChildren(); 
 	model->eraseChildren();
-}
-
-//-------------------------------------------------------------
-//						ROBOT TRANSFORMATIONS
-//-------------------------------------------------------------
-
-void Robot::spin(GLfloat degrees){
-	spinDegrees += degrees;
-	spinDirectionVector();
-	normalizeSpinDegrees();
-}
-
-void Robot::incrementSpinDegrees(bool pos){
-
-	if(pos){
-		spinDegrees++; //true increases angle by one
-	}
-	else{
-		spinDegrees--;
-	}
-
-	spinDirectionVector();
-	normalizeSpinDegrees();
-	notifyCamera();
 }
 
 //-------------------------------------------------------------
@@ -496,6 +473,23 @@ void Robot::refreshLight(){
 	}
 }
 
+//-------------------------------------------------------------------------------
+//							ROBOT-SPINNING
+//-------------------------------------------------------------------------------
+void Robot::incrementSpinDegrees(bool pos){
+
+	if(pos){
+		spinDegrees++; //true increases angle by one
+	}
+	else{
+		spinDegrees--;
+	}
+
+	spinDirectionVector();
+	normalizeSpinDegrees();
+	notifyCamera();
+}
+
 //checks angle between spinDestination and spinDegrees
 GLfloat Robot::calcDestinationAngle(){
 	GLfloat angle;
@@ -542,6 +536,9 @@ void Robot::timedSpin(){
 	}
 }
 
+//-------------------------------------------------------------------------------
+//							ROBOT-WALKING
+//-------------------------------------------------------------------------------
 //walks in X-direction, returns true if walking
 bool Robot::timedXWalk(){
 	GLfloat xDistance = xDestination - xPos;
@@ -603,6 +600,9 @@ void Robot::incrementZPos(bool positive){
 	}
 }
 
+//-------------------------------------------------------------------------------
+//							DESTINATION-RELATED
+//-------------------------------------------------------------------------------
 void Robot::setDestination(GLfloat x, GLfloat z){
 	xDestination = x;
 	zDestination = z;
@@ -684,26 +684,6 @@ bool Robot::checkZDestination(){
 	}
 }
 
-
-
-void Robot::spinDirectionVector(){
-	/*LOGIC FOR ROTATION
-	GLfloat* spinMatrix = new GLfloat[9];
-	spinMatrix[1] = spinMatrix[3] = spinMatrix[5] = spinMatrix[7] = 0;
-	spinMatrix[4] = 1;
-	spinMatrix[0] = spinMatrix[8] = cos(spinDegrees*DegreesToRadians);
-	spinMatrix[2] = sin(spinDegrees*DegreesToRadians);
-	spinMatrix[6] = -sin(spinDegrees*DegreesToRadians);
-	(spinMatrix[0] * 0.0f) + (spinMatrix[1] * 0.0f) + (spinMatrix[2] * 1.0f);
-	(spinMatrix[3] * 0.0f) + (spinMatrix[4] * 0.0f) + (spinMatrix[5] * 1.0f);
-	(spinMatrix[6] * 0.0f) + (spinMatrix[7] * 0.0f) + (spinMatrix[8] * 1.0f);*/
-	
-	directionVector[0] = sin(spinDegrees*DegreesToRadians);
-	directionVector[2] = cos(spinDegrees*DegreesToRadians);
-}
-
-//-------------------------------------------------------------------------
-
 bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 		if(ct->collisionTest(x,y,z,box->movingBoxId)){
 			return true;
@@ -731,4 +711,10 @@ bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 		}
 
 		return false;
+}
+
+//For Robert
+void Robot::spinDirectionVector(){
+	directionVector[0] = sin(spinDegrees*DegreesToRadians);
+	directionVector[2] = cos(spinDegrees*DegreesToRadians);
 }

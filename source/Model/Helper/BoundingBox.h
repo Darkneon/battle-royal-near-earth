@@ -33,22 +33,25 @@ public:
 	static GLuint movingCount;
 	GLuint movingBoxId;
 	
+	//coordinates
+	V3 min;
+	V3 max;
+	V3 size;
+
+	//Constructors and Destructor
 	BoundingBox(void);
 	BoundingBox(V3 min, V3 max);
 	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ);
 	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving);
 	virtual ~BoundingBox(void);
-	V3 min;
-	V3 max;
-	V3 size;
+	
+	//box size, placement and drawing
 	void draw();
-	void draw2();
 	void resize(GLfloat xa, GLfloat ya, GLfloat za);
 	void moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist);
-	bool collision(GLfloat x, GLfloat y, GLfloat z);
-
 
 private:
+	//drawing the box
 	void drawSquare();
 	void drawCube();
 };

@@ -14,7 +14,7 @@
 #include "../Model/Helper/BoundingBox.h"
 #include "../Model/Helper/CollisionTester.h"
 
-static const GLfloat ELECTRONICS_HEIGHT = 0.63f;
+static const GLfloat ELECTRONICS_HEIGHT = 0.59f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
 static const GLfloat PHASER_HEIGHT = 0.9f;
 static const GLfloat CANNON_HEIGHT = 0.4f;
@@ -39,14 +39,14 @@ public:
 	Robot();
 	Robot(GLfloat x, GLfloat y);
 	~Robot();
+
 	void draw();
 
 	//Used for component toggling
 	void cycleIndex();
 	void turnSelectedOn();
 
-	//interface robot transformations
-	void spin(GLfloat degrees);
+	//Robot Spinning
 	void incrementSpinDegrees(bool pos);
 
 	//Coordinate accessors
@@ -64,17 +64,20 @@ public:
 	//orientation related
 	void incrementPitchAngle(bool pos);
 	void incrementYawAngle(bool pos);
-	void resetOrientation();	
+	void resetOrientation();
 
 	//light related
 	static bool isARobotLightOn;
 	void toggleLight();
 	void refreshLight();
 
+	//For Robert
 	GLfloat directionVector[3];
+	void spinDirectionVector();
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
-	//models
+	//Models
 	Model* model;
     Model* nuclearM;
     Model* electronicsM;
@@ -87,51 +90,71 @@ private:
 	Model* headlight;
 	Model* rubble;
 	TeamNumberModel teamNumberModel;
-
+	
 	//Camera
 	RobotCamera* roboCam;
+	
+	//Collision Detection
+	BoundingBox* box;
+	CollisionTester* ct;
     
 	//State Variables: coordinates and orientation
+	//Position
 	GLfloat xPos;
 	GLfloat zPos;
+	GLfloat height;
+	//Camera & Light
 	GLfloat lookAtX;
 	GLfloat lookAtY;
 	GLfloat lookAtZ;
+	//Orientation
 	GLfloat spinDegrees; //0 -> west, 90 -> south
 	GLfloat pitchAngle;
 	GLfloat yawAngle;
+	//Destination
 	GLfloat xDestination;
 	GLfloat zDestination;
 	GLfloat spinDestination;
-	GLfloat height;
-
 	//Lighting
 	bool isMyLightOn;
-
 	//Used for component toggling
 	bool isPartOn[8];
 	int selectedIndex;
-	void refreshRobot(); //refreshes model to contain correct robot components
-	void clearChildren(); //initialization for refreshRobot()
-	void turnIndexOn(int index); //helper function for toggling components (updates isPartOn[])
-
+	//Life
 	GLfloat robotLife;
 
-	//Robot Spinning -> Helper Functions
+	//-----------------------PRIVATE METHODS---------------------------
+	
+	//Used for component toggling
+	//isPartOn[8] mutator/toggler
+	void turnIndexOn(int index);
+	//refreshes model to contain components that are "Turned On"
+	void refreshRobot();
+	//initialization for refreshRobot()
+	void clearChildren(); 
+	
+	//Robot Spinning
+	//calculates counterclockwise angle between current and destination degrees
 	GLfloat calcDestinationAngle();
+	//ensures degrees are under 360
 	void normalizeSpinDegrees();
 	void normalizeSpinDestination();
+	//called by every render() -> increments/decrements degree until facing destination angle
 	void timedSpin();
-	void spinDirectionVector();
+	
 
 	//Robot Walking -> Helper Functions
+	//called by every render() -> increments/decrements xPos until at xDestination
 	bool timedXWalk();
+	//called by every render() -> increments/decrements xPos until at xDestination
 	bool timedZWalk();
 	void incrementXPos(bool pos);
 	void incrementZPos(bool pos);
+
+	//Destination-Related
+	//Robots orients and moves X, then orients and moves Z
 	void goToDestination();
 	void setDestination(GLfloat x, GLfloat z);
-
 	//spins robot EAST or WEST depending on destination... 
 	//returns true if facing correct direction already
 	bool checkXDestination();
@@ -139,9 +162,7 @@ private:
 	//returns true if facing correct direction already
 	bool checkZDestination();
 
-	BoundingBox* box;
-	CollisionTester* ct;
-
+	//Collision Detection
 	bool robotCollisionTest(GLfloat x, GLfloat y, GLfloat z);
 };
 

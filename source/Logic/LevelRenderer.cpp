@@ -20,16 +20,6 @@
 #include "Buildings/BaseModel.h"
 
 #include <fstream>
-//Robot Model includes
-/*#include "Robot/AntiGravModel.h"
-#include "Robot/BipodModel.h"
-#include "Robot/TracksModel.h"
-#include "Robot/CannonModel.h"
-#include "Robot/MissileLauncherModel.h"
-#include "Robot/PhaserModel.h"
-#include "Robot/ElectronicsModel.h"
-#include "Robot/NuclearModel.h"
-#include "Robot/HeadlightModel.h"*/
 
 LevelRenderer::LevelRenderer() {
 
