@@ -175,9 +175,9 @@ void BoundingBox::moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist){
 }
 
 bool BoundingBox::collision(GLfloat x, GLfloat y, GLfloat z){
-	if(x < max.x && x > min.x &&
-		y < max.y && y > min.y &&
-		z < max.z && z > min.z){
+	if(x <= max.x && x >= min.x &&
+		y <= max.y && y >= min.y &&
+		z <= max.z && z >= min.z){
 		return true;
 	}
 	else{

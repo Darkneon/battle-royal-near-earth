@@ -11,6 +11,7 @@
 #include "SpotLight.h"
 #include "../Model/Light/LightPost.h"
 #include "../Model/Helper/BoundingBox.h"
+#include "../Model/Helper/CollisionTester.h"
 #define MAX_PLAYER_HEIGHT 8
 #define MIN_PLAYER_HEIGHT 0
 

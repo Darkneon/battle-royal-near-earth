@@ -233,8 +233,6 @@ void LevelRenderer::render() {
           glCallList(5);
     }
 		
-		
-
 	//Added by Jeff to see axes
 	glPushMatrix();
 		glBegin(GL_LINES);
