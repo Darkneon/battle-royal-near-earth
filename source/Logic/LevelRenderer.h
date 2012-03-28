@@ -9,6 +9,7 @@
 #include "SpotLight.h"
 #include "../Model/Light/LightPost.h"
 #include "../Model/Helper/BoundingBox.h"
+#include <string>
 
 class LevelRenderer {
 public:
@@ -22,14 +23,16 @@ public:
 private:	
     static const int NUM_MODELS = 22;
     Model* models[NUM_MODELS];
-    int level[50][50];
+    int **level;
+	int rows;
+	int columns;
 
 	CubicSkybox *cubicSkyBox;
 	SphericSkybox *sphericSkyBox;
     bool isSkySphere;
 
 	void buildMap();
-	void map1();
+	void map();
 	void renderLights();
 
 	//Initialize light objects
@@ -43,5 +46,7 @@ private:
 	bool spotLight2;
 	bool spotLight3;
 	bool spotLight4;
+
+	string loadmap;
 };
 #endif

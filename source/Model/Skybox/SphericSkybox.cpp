@@ -7,13 +7,24 @@
 
 #include "SphericSkybox.h"
 
-SphericSkybox::SphericSkybox() {	
-	build();
+SphericSkybox::SphericSkybox(int height, int width) {	
+	build(height, width);
 }
 
 
-void SphericSkybox::build()
+void SphericSkybox::build(int height, int width)
 {
+	int halfWidth = width/2;
+	int halfHeight = height/2;
+
+	int radius;
+
+	if(halfWidth > halfHeight){
+		radius = halfWidth + 15;
+	}else{
+		radius = halfHeight + 15;
+	}
+
 	glNewList(4, GL_COMPILE);
 	
 	glCullFace( GL_FRONT );
@@ -25,8 +36,8 @@ void SphericSkybox::build()
 
 	glPushMatrix();
 
-	glTranslatef(20.0f, 0.0f, 0.0f);
-	gluSphere(quadratic, 60.0, 15, 15);
+	glTranslatef((GLfloat)halfWidth, 0.0f, (GLfloat)halfHeight);
+	gluSphere(quadratic, (GLfloat)radius, 15, 15);
 
 	glPopMatrix();
 

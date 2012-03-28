@@ -7,11 +7,11 @@
 
 #include "CubicSkybox.h"
 
-CubicSkybox::CubicSkybox() {	
-	build();
+CubicSkybox::CubicSkybox(int height, int width) {	
+	build(height, width);
 }
 
-void CubicSkybox::build()
+void CubicSkybox::build(int height, int width)
 {
 	glNewList(3, GL_COMPILE);
 
@@ -20,81 +20,82 @@ void CubicSkybox::build()
 	const GLfloat FLOOR = -5.0f;
 	const GLfloat CEILING = 20.0f;
 	const GLfloat LEFT = -10.0f;
-	const GLfloat RIGHT = 60.0f;
+	const GLfloat RWIDTH = (GLfloat)width + 10;
+	const GLfloat RHEIGHT = (GLfloat)height + 10;
 
 	glColor3f(0.7f, 0.7f, 0.7f);
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("moon.bmp"));
 
 	glBegin(GL_TRIANGLES);
-		GeoHelper::findNormal3f(LEFT, FLOOR, LEFT, RIGHT, FLOOR, LEFT, LEFT, CEILING, LEFT, normal);
+		GeoHelper::findNormal3f(LEFT, FLOOR, LEFT, RWIDTH, FLOOR, LEFT, LEFT, CEILING, LEFT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, FLOOR, LEFT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, LEFT);
+		glVertex3f(RWIDTH, FLOOR, LEFT);
 
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(LEFT, CEILING, LEFT);
 
-		GeoHelper::findNormal3f(LEFT, CEILING, LEFT, RIGHT, FLOOR, LEFT, RIGHT, CEILING, LEFT, normal);
+		GeoHelper::findNormal3f(LEFT, CEILING, LEFT, RWIDTH, FLOOR, LEFT, RWIDTH, CEILING, LEFT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(LEFT, CEILING, LEFT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, LEFT);
+		glVertex3f(RWIDTH, FLOOR, LEFT);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, LEFT);
+		glVertex3f(RWIDTH, CEILING, LEFT);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("sun.bmp"));
 
 	glBegin(GL_TRIANGLES);
-		GeoHelper::findNormal3f(LEFT, FLOOR, RIGHT, LEFT, CEILING, RIGHT, RIGHT, FLOOR, RIGHT, normal);
+		GeoHelper::findNormal3f(LEFT, FLOOR, RHEIGHT, LEFT, CEILING, RHEIGHT, RWIDTH, FLOOR, RHEIGHT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(LEFT, FLOOR, RIGHT);
+		glVertex3f(LEFT, FLOOR, RHEIGHT);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(LEFT, CEILING, RIGHT);
+		glVertex3f(LEFT, CEILING, RHEIGHT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, RIGHT);
+		glVertex3f(RWIDTH, FLOOR, RHEIGHT);
 		
-		GeoHelper::findNormal3f(LEFT, CEILING, RIGHT, RIGHT, CEILING, RIGHT, RIGHT, FLOOR, RIGHT, normal);
+		GeoHelper::findNormal3f(LEFT, CEILING, RHEIGHT, RWIDTH, CEILING, RHEIGHT, RWIDTH, FLOOR, RHEIGHT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(LEFT, CEILING, RIGHT);
+		glVertex3f(LEFT, CEILING, RHEIGHT);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, RIGHT);
+		glVertex3f(RWIDTH, CEILING, RHEIGHT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, RIGHT);
+		glVertex3f(RWIDTH, FLOOR, RHEIGHT);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("nebula.bmp"));
 
 	glBegin(GL_TRIANGLES);
-		GeoHelper::findNormal3f(LEFT, FLOOR, LEFT, LEFT, CEILING, RIGHT, LEFT, FLOOR, RIGHT, normal);
+		GeoHelper::findNormal3f(LEFT, FLOOR, LEFT, LEFT, CEILING, RHEIGHT, LEFT, FLOOR, RHEIGHT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, FLOOR, LEFT);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(LEFT, CEILING, RIGHT);
+		glVertex3f(LEFT, CEILING, RHEIGHT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(LEFT, FLOOR, RIGHT);
+		glVertex3f(LEFT, FLOOR, RHEIGHT);
 		
-		GeoHelper::findNormal3f(LEFT, FLOOR, LEFT, LEFT, CEILING, LEFT, LEFT, CEILING, RIGHT, normal);
+		GeoHelper::findNormal3f(LEFT, FLOOR, LEFT, LEFT, CEILING, LEFT, LEFT, CEILING, RHEIGHT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 0.0f);
@@ -104,35 +105,35 @@ void CubicSkybox::build()
 		glVertex3f(LEFT, CEILING, LEFT);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(LEFT, CEILING, RIGHT);
+		glVertex3f(LEFT, CEILING, RHEIGHT);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("stars1.bmp"));
 
 	glBegin(GL_TRIANGLES);
-		GeoHelper::findNormal3f(RIGHT, FLOOR, LEFT, RIGHT, FLOOR, RIGHT, RIGHT, CEILING, RIGHT, normal);
+		GeoHelper::findNormal3f(RWIDTH, FLOOR, LEFT, RWIDTH, FLOOR, RHEIGHT, RWIDTH, CEILING, RHEIGHT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, LEFT);
+		glVertex3f(RWIDTH, FLOOR, LEFT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, RIGHT);
+		glVertex3f(RWIDTH, FLOOR, RHEIGHT);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, RIGHT);
+		glVertex3f(RWIDTH, CEILING, RHEIGHT);
 		
-		GeoHelper::findNormal3f(RIGHT, FLOOR, LEFT, RIGHT, CEILING, RIGHT, RIGHT, CEILING, LEFT, normal);
+		GeoHelper::findNormal3f(RWIDTH, FLOOR, LEFT, RWIDTH, CEILING, RHEIGHT, RWIDTH, CEILING, LEFT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, LEFT);
+		glVertex3f(RWIDTH, FLOOR, LEFT);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, RIGHT);
+		glVertex3f(RWIDTH, CEILING, RHEIGHT);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, LEFT);
+		glVertex3f(RWIDTH, CEILING, LEFT);
 	glEnd();
 
 
@@ -140,56 +141,56 @@ void CubicSkybox::build()
 
 	glBegin(GL_TRIANGLES);
 
-		GeoHelper::findNormal3f(RIGHT, CEILING, RIGHT, LEFT, CEILING, RIGHT, LEFT, CEILING, LEFT, normal);
+		GeoHelper::findNormal3f(RWIDTH, CEILING, RHEIGHT, LEFT, CEILING, RHEIGHT, LEFT, CEILING, LEFT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, RIGHT);
+		glVertex3f(RWIDTH, CEILING, RHEIGHT);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(LEFT, CEILING, RIGHT);
+		glVertex3f(LEFT, CEILING, RHEIGHT);
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, CEILING, LEFT);
 		
-		GeoHelper::findNormal3f(RIGHT, CEILING, RIGHT, LEFT, CEILING, LEFT, RIGHT, CEILING, LEFT, normal);
+		GeoHelper::findNormal3f(RWIDTH, CEILING, RHEIGHT, LEFT, CEILING, LEFT, RWIDTH, CEILING, LEFT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, CEILING, RIGHT);
+		glVertex3f(RWIDTH, CEILING, RHEIGHT);
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, CEILING, LEFT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, CEILING, LEFT);
+		glVertex3f(RWIDTH, CEILING, LEFT);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("stars2.bmp"));
 
 	glBegin(GL_TRIANGLES);
 
-		GeoHelper::findNormal3f(RIGHT, FLOOR, RIGHT, LEFT, FLOOR, LEFT, LEFT, FLOOR, RIGHT, normal);
+		GeoHelper::findNormal3f(RWIDTH, FLOOR, RHEIGHT, LEFT, FLOOR, LEFT, LEFT, FLOOR, RHEIGHT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, FLOOR, RIGHT);
+		glVertex3f(RWIDTH, FLOOR, RHEIGHT);
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, FLOOR, LEFT);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(LEFT, FLOOR, RIGHT);
+		glVertex3f(LEFT, FLOOR, RHEIGHT);
 
 		
-		GeoHelper::findNormal3f(RIGHT, FLOOR, RIGHT, RIGHT, FLOOR, LEFT, LEFT, FLOOR, LEFT, normal);
+		GeoHelper::findNormal3f(RWIDTH, FLOOR, RHEIGHT, RWIDTH, FLOOR, LEFT, LEFT, FLOOR, LEFT, normal);
 		glNormal3fv(normal);
 
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(RIGHT, FLOOR, RIGHT);
+		glVertex3f(RWIDTH, FLOOR, RHEIGHT);
 
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(RIGHT, FLOOR, LEFT);
+		glVertex3f(RWIDTH, FLOOR, LEFT);
 
 		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(LEFT, FLOOR, LEFT);

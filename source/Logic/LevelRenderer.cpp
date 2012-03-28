@@ -19,37 +19,18 @@
 #include "Buildings/FactoryModel.h"
 #include "Buildings/BaseModel.h"
 
-//Robot Model includes
-#include "Robot/AntiGravModel.h"
-#include "Robot/BipodModel.h"
-#include "Robot/TracksModel.h"
-#include "Robot/CannonModel.h"
-#include "Robot/MissileLauncherModel.h"
-#include "Robot/PhaserModel.h"
-#include "Robot/ElectronicsModel.h"
-#include "Robot/NuclearModel.h"
-#include "Robot/HeadlightModel.h"
+#include <fstream>
 
 LevelRenderer::LevelRenderer() {
 
-	//skyboxes
-	cubicSkyBox = new CubicSkybox();
-	sphericSkyBox = new SphericSkybox();
-	isSkySphere = false;
+	loadmap = "map1.txt";
 
-	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {	
-			level[i][j] = 0;
-		}
-	}
+	//skyboxes
+	isSkySphere = false;
 
 	//LIGHT
 	//Initialize light objects
 	spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
-	light1 = new LightPost(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
-	light2 = new LightPost(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
-	light3 = new LightPost(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f);
-	light4 = new LightPost(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f);
 
 	ambientLight = true;
 
@@ -78,17 +59,7 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
 	FactoryModel *factoryModel = new FactoryModel;
-	HeadlightModel *headlightModel = new HeadlightModel;
-
-	//Robot Models
-	AntiGravModel *antiGravModel = new AntiGravModel;
-	BipodModel *bipodModel = new BipodModel;
-	TracksModel *tracksModel = new TracksModel;
-	CannonModel *cannonModel = new CannonModel;
-	MissileLauncherModel *missileLauncherModel = new MissileLauncherModel;
-	PhaserModel *phaserModel = new PhaserModel;
-	ElectronicsModel *electronicsModel = new ElectronicsModel;
-	NuclearModel *nuclearModel = new NuclearModel;
+	BaseModel *baseModel = new BaseModel;;
 
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
@@ -102,24 +73,10 @@ LevelRenderer::LevelRenderer() {
 	models[9] = (Model*)pitInsideModel;
 	models[10] = (Model*)pitBottomModel;
 	models[11] = (Model*)lightRubbleModel;
-	models[12] = (Model*)antiGravModel;
-	models[13] = (Model*)bipodModel;
-	models[14] = (Model*)tracksModel;
-	models[15] = (Model*)cannonModel;
-	models[16] = (Model*)missileLauncherModel;
-	models[17] = (Model*)phaserModel;
-	models[18] = (Model*)electronicsModel;
-	models[19] = (Model*)nuclearModel;
-	models[20] = (Model*)factoryModel;
-	models[21] = (Model*)headlightModel;
-	//Remove children from hierarchy so we can render these models individually
-	models[12]->removeAllChildren(); 
-	models[13]->removeAllChildren();
-	models[14]->removeAllChildren();
-	models[15]->removeAllChildren();
-	models[16]->removeAllChildren();
-	models[17]->removeAllChildren();
-	map1();   
+	models[12] = (Model*)factoryModel;
+	models[13] = (Model*)baseModel;
+
+	map();   
 	buildMap();
 } 
 
@@ -131,17 +88,30 @@ LevelRenderer::~LevelRenderer() {
     }
 
 	glDeleteLists(1, 1);
+
+	for (int i = 0; i < rows; ++i){
+        delete[] level[i];
+		level[i] = NULL;
+	}
+
+    delete[] level;
+	level = NULL;
 }
 
 void LevelRenderer::buildMap()
 {
 	//SKIN1
 	glNewList(2, GL_COMPILE);
-	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {
 			glPushMatrix();
-				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] !=0 && level[i][j] !=3){
+					models[0]->draw();
+				}
 			glPopMatrix();
 		}
 	}
@@ -151,11 +121,16 @@ void LevelRenderer::buildMap()
     glNewList(6, GL_COMPILE);
     TextureManager::getInstance()->toggleSkins();
 
-	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {	
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {	
 			glPushMatrix();
-				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] !=0 && level[i][j] !=3){
+					models[0]->draw();
+				}
 			glPopMatrix();
 		}
 	}
@@ -167,30 +142,35 @@ void LevelRenderer::buildMap()
 
 	TextureManager::getInstance()->toggleTextures();
 
-	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {	
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {	
 			glPushMatrix();
-				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] !=0 && level[i][j] !=3){
+					models[0]->draw();
+				}
 			glPopMatrix();
 			switch(level[i][j]){
 				case 1: case 6: case 7: //hills, plain and holloy block
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1), 1.0f, (GLfloat)(j+1));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1), 1.0f, (GLfloat)(i+1));
 					lrBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
 				case 4: case 5: //half blocks
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1),0.5f, (GLfloat)(j+1));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),0.5f, (GLfloat)(i+1));
 					lrBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
 				case 2: //mountains
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+2),3.75f, (GLfloat)(j+1));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+2),3.75f, (GLfloat)(i+1));
 					lrBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
 				case 3: //fence
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+1),2.75f, (GLfloat)(j+1));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),2.75f, (GLfloat)(i+1));
 					lrBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
@@ -204,19 +184,7 @@ void LevelRenderer::buildMap()
     
 }
 
-//Todo: will probably change while we get more requirements
 void LevelRenderer::render() {
-
-	
-//	for(int i = 0; i != 50; i++) {
-//		for(int j = 0; j != 50; j++) {	
-//			glPushMatrix();
-//				glTranslatef((GLfloat)i, (GLfloat)0, (GLfloat)j);
-//				models[ level[i][j] ]->draw();
-//
-//			glPopMatrix();
-//		}
-//	}
 	
 	if (!isSkySphere)
 		cubicSkyBox->render();
@@ -255,51 +223,46 @@ void LevelRenderer::render() {
 		glEnd();
 	glPopMatrix();
 	
-	//TO UNCOMMENT
-	/*for(int i = 1; i != 49; i++) {
-		for(int j = 23; j != 48; j++) {	
-			glPushMatrix();
-				glTranslatef((GLfloat)i, 0.0f, (GLfloat)j);
-				models[0]->draw();
-			glPopMatrix();
-		}
-	}*/
 }
 
-void LevelRenderer::map1(){
+void LevelRenderer::map(){
+	
+	ifstream openfile;
+	openfile.open((TextureManager::getResourcePath() +"/maps/" + loadmap).c_str(), ios::in);
+	
+	if (openfile.is_open()) {
+		openfile >> rows;
+		openfile >> columns;
 
-	for(int i = 0; i != 50; i++) {
-		for(int j = 0; j != 50; j++) {	
-			if(i == 0 || i == 49 || j == 0 || j == 49){
-				level[i][j] = 3;
+		//skyboxes
+		cubicSkyBox = new CubicSkybox(rows, columns);
+		sphericSkyBox = new SphericSkybox(rows, columns);
+	
+		//adjusting the lights with the map
+		light1 = new LightPost(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
+		light2 = new LightPost((GLfloat)columns, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
+		light3 = new LightPost((GLfloat)columns, 6.0f, (GLfloat)rows, -2.5f, -2.5f, -2.5f);
+		light4 = new LightPost(0.0f, 6.0f, (GLfloat)rows, 2.5f, -2.5f, -2.5f);
+
+		//creating the map
+		level = new int*[rows];
+		for(int i = 0; i<rows; i++){
+			level[i] = new int[columns];
+		}
+
+		for(int i = 0; i < rows; ++i){
+			for(int j = 0; j < columns; ++j){
+				int temp;
+				openfile >> temp;
+
+				level[i][j] = temp;
+
 			}
 		}
-	}
-	level[35][40] = 20;
-	for(int model = 1; model < 20; model++){
-		for(int i = 5; i < 50; i += 5){
-			level[i][model*2] = model;
-		}
 
+		openfile.close();
 	}
 
-    level[45][45] = 14;
-    level[46][46] = 3;
-    
-	/*level[25][5] = 4;
-	level[25][10] = 5;
-	level[25][15] = 6;
-	level[30][5] = 7;
-	level[30][10] = 3;
-	level[30][15] = 1;
-
-	level[35][5] = 8;
-	level[35][6] = 9;
-	level[35][7] = 9;
-	level[35][8] = 10;
-
-	level[40][10] = 2;
-	*/
 }
 
 bool LevelRenderer::getIsSkySphere(){
