@@ -7,7 +7,6 @@ Player::Player() {
 	spawnPtZ = 25.0f;
 	//init base
 	base = new Base(spawnPtX-2,spawnPtZ-4);
-
 	//init robots
 	selectedRobot = 0;
 	Robot* newRobot = new Robot(spawnPtX, spawnPtZ);
