@@ -33,13 +33,6 @@ public:
 	void render();
 	void updateGameState(); // Modification to the game logic here, no drawing here
 	void getInput(int keyModifier); //gets user input
-
-	void toggleTwoPlayerMode();
-
-private:
-	bool isTwoPlayerGame;
-	void renderScene();
-	GLint viewHeight, viewWidth;
 };
 
 #endif

@@ -47,6 +47,8 @@ TextureManager *te;
 
 static bool isDebugMode = false;
 
+bool isTwoPlayerGame = false;
+
 int viewStates = 0; //states of the camera views
 
 Game* game;
@@ -62,26 +64,26 @@ void reshapeMainWindow (int newWidth, int newHeight)
 
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
-	/*
-	if (!altPlayerRender)
-		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-	else
-	{
-		if (isPlayer1TurnView)
-			glViewport(0, 0, (GLsizei)width / 2, (GLsizei)height / 2);
-		else
-			glViewport(0, (GLint)height / 2, (GLsizei)width / 2, (GLsizei)height / 2);
-
-			isPlayer1TurnView = !isPlayer1TurnView;
-	}
-	*/
-
 	TwWindowSize(width, height);
 }
 
 void toggleTwoPlayerSplitscreen()
 {
-	game->toggleTwoPlayerMode();
+	isTwoPlayerGame = !isTwoPlayerGame;
+
+	if (isTwoPlayerGame)
+	{
+		game->p1->selectRobotView(game->p1->robots.at(0));
+		game->p1->changeCamera(CAMERA_ROBOT);
+
+		game->p2->selectRobotView(game->p2->robots.at(0));
+		game->p2->changeCamera(CAMERA_ROBOT);
+	}
+	else
+	{
+		game->p1->changeCamera(CAMERA_COMMANDER);
+		game->p2->changeCamera(CAMERA_COMMANDER);
+	}
 }
 
 void toggleFullScreen()
@@ -101,12 +103,6 @@ void toggleFullScreen()
 		glutPositionWindow(winPosX, winPosY);
 		glutReshapeWindow(oldWidth, oldHeight);
 	}
-
-	if (keyStates[27]) { //escape
-		exit(0);
-	}
-		
-	//memset(keyStates, 0, sizeof(keyStates));
 }
 
 void rasterText(GLfloat x, GLfloat y, void *font, char *c, int cWidth){
@@ -189,7 +185,24 @@ void render()
 		help_display();
 	}
 
-	game->render();
+	if (isTwoPlayerGame)
+	{
+		game->p1->view();
+		game->render();
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
+	
+		game->p2->view();
+		game->render();
+		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
+	}
+	else
+	{
+		game->render();
+		game->p1->view();
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+	}	
+
+
 	game->getInput(keyModifier); // Gets user input
 	//((HumanPlayer*)(game->p1))->view(); // Camera update (leave as it is for now)
 	
@@ -290,7 +303,6 @@ void functionKeysPressed(int key, int x, int y)
 {
 	funcKeyStates[key] = true;
 	windowFuncKeyOps();
-	glutPostRedisplay();
 }
 
 void windowKeyOps()
@@ -334,8 +346,6 @@ void keyboardKeysUp(unsigned char key, int x, int y)
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
-
-	glutPostRedisplay();
 }
 
 void keyboardKeysPressed(unsigned char key, int x, int y)
@@ -348,8 +358,6 @@ void keyboardKeysPressed(unsigned char key, int x, int y)
 		keyStates[key + 32] = true;
 
 	windowKeyOps();
-
-	//glutPostRedisplay();
 }
 
 void OnKey(unsigned char key, int x, int y)  {

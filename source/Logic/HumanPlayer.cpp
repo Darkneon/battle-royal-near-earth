@@ -52,6 +52,7 @@ HumanPlayer::~HumanPlayer() {
 
 void HumanPlayer::render(){
 	ufo->draw();
+
 	//keep drawing until all the children are done
     for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();

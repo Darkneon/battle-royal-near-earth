@@ -583,6 +583,7 @@ void Robot::incrementXPos(bool pos){
 			box->moveBox(-0.05f,0.0f,0.0f);
 		}
 	}
+	notifyCamera();
 }
 
 void Robot::incrementZPos(bool positive){
@@ -598,6 +599,7 @@ void Robot::incrementZPos(bool positive){
 			box->moveBox(0.0f,0.0f,-0.05f);
 		}
 	}
+	notifyCamera();
 }
 
 //-------------------------------------------------------------------------------
