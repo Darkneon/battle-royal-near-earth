@@ -1,5 +1,8 @@
 #include "PlayerUFO.h"
 
+//---------------------------------------------------------------
+//						CONSTRUCTORS & DESTRUCTOR
+//---------------------------------------------------------------
 PlayerUFO::PlayerUFO(void)
 {
 	PlayerModel* p = new PlayerModel;
@@ -8,7 +11,9 @@ PlayerUFO::PlayerUFO(void)
 	pos[0] = 0.0f;
 	pos[1] = 0.0f;
 	pos[2] = 0.0f;
-	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+1.0f,pos[2]+1.0f);
+	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+0.5f,pos[2]+1.0f, true);
+	ct = new CollisionTester;
+	ct->staticBoxes.push_back(box);
         updateLights(pos[0], pos[1], pos[2]);
 }
 
@@ -20,10 +25,25 @@ PlayerUFO::PlayerUFO(GLfloat x, GLfloat z)
 	pos[0] = x;
 	pos[1] = 0;
 	pos[2] = z;
-	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+1.0f,pos[2]+1.0f);
+	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+0.5f,pos[2]+1.0f, true);
+	ct = new CollisionTester;
+	ct->staticBoxes.push_back(box);
+
         //LIGHTING
         updateLights(pos[0], pos[1], pos[2]);
 }
+
+PlayerUFO::~PlayerUFO(void)
+{
+	if (pModel != NULL) {
+		delete pModel;
+		pModel = NULL;
+	}
+}
+
+//---------------------------------------------------------------
+//						LIGHTS
+//---------------------------------------------------------------
 void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
 {
         spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
@@ -38,14 +58,10 @@ void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
         glEnable(GL_LIGHT7);
 }
 
-PlayerUFO::~PlayerUFO(void)
-{
-	if (pModel != NULL) {
-		delete pModel;
-		pModel = NULL;
-	}
-}
 
+//---------------------------------------------------------------
+//						DRAW
+//---------------------------------------------------------------
 void PlayerUFO::draw(){
 	incrementHeight(false);
 	glPushMatrix();
@@ -55,19 +71,22 @@ void PlayerUFO::draw(){
 		glTranslatef(pos[0],pos[1],pos[2]);
 		pModel->draw();
 	glPopMatrix();
-        updateLights(pos[0], pos[1], pos[2]);
+                updateLights(pos[0], pos[1], pos[2]);
 }
 
+//---------------------------------------------------------------
+//			TRANSLATE UFO (AND BOUNDING BOX)
+//---------------------------------------------------------------
 void PlayerUFO::incrementHeight(bool positive){
 	if(positive){
 		if(pos[1]+0.5f <= MAX_PLAYER_HEIGHT){
 			pos[1] += 0.5f;
 			box->moveBox(0.0f,0.5f,0.0f);
 		}
-                
 	}
 	else{
-		if(pos[1]-0.2f >= MIN_PLAYER_HEIGHT){
+		if(pos[1]-0.02f >= MIN_PLAYER_HEIGHT&&
+		!ufoCollisionTest(pos[0],pos[1]-0.02f,pos[2])){
 			pos[1] -= 0.2f;
 			box->moveBox(0.0f,-0.2f,0.00f);
 		}
@@ -77,24 +96,64 @@ void PlayerUFO::incrementHeight(bool positive){
 
 void PlayerUFO::incrementXPos(bool positive){
 	if(positive){
-		pos[0] += 0.05f;
-		box->moveBox(0.05f,0.0f,0.0f);
+		if(!ufoCollisionTest(pos[0]+0.05f,pos[1],pos[2])){
+			pos[0] += 0.05f;
+			box->moveBox(0.05f,0.0f,0.0f);
+		}
 	}
 	else{
-		pos[0] -= 0.05f;
-		box->moveBox(-0.05f,0.0f,0.0f);
+		if(!ufoCollisionTest(pos[0]-0.05f,pos[1],pos[2])){
+			pos[0] -= 0.05f;
+			box->moveBox(-0.05f,0.0f,0.0f);
+		}
 	}
         updateLights(pos[0], pos[1], pos[2]);
 }
 
 void PlayerUFO::incrementZPos(bool positive){
 	if(positive){
-		pos[2] += 0.05f;
-		box->moveBox(0.0f,0.0f,0.05f);
+		if(!ufoCollisionTest(pos[0],pos[1],pos[2]+0.05f)){
+			pos[2] += 0.05f;
+			box->moveBox(0.0f,0.0f,0.05f);
+		}
 	}
 	else{
-		pos[2] -= 0.05f;
-		box->moveBox(0.0f,0.0f,-0.05f);
+		if(!ufoCollisionTest(pos[0],pos[1],pos[2]-0.05f)){
+			pos[2] -= 0.05f;
+			box->moveBox(0.0f,0.0f,-0.05f);
+		}
 	}
         updateLights(pos[0], pos[1], pos[2]);
+}
+
+//---------------------------------------------------------------
+//					COLLISION DETECTION
+//---------------------------------------------------------------
+bool PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
+		if(ct->collisionTest(x,y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y,	z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y,	z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y,	z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,	z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y,	z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,	z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+
+		return false;
 }

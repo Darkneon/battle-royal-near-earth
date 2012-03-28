@@ -29,22 +29,29 @@ class BoundingBox {
 
 public:
 
-	//static vector<BoundingBox *> boxes;
 	static bool showBoxes;
-
-	BoundingBox(void);
-	BoundingBox(V3 min, V3 max);
-	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ);
-	virtual ~BoundingBox(void);
+	static GLuint movingCount;
+	GLuint movingBoxId;
+	
+	//coordinates
 	V3 min;
 	V3 max;
 	V3 size;
+
+	//Constructors and Destructor
+	BoundingBox(void);
+	BoundingBox(V3 min, V3 max);
+	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ);
+	BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving);
+	virtual ~BoundingBox(void);
+	
+	//box size, placement and drawing
 	void draw();
-	void draw2();
 	void resize(GLfloat xa, GLfloat ya, GLfloat za);
 	void moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist);
 
 private:
+	//drawing the box
 	void drawSquare();
 	void drawCube();
 };

@@ -59,10 +59,9 @@ void MissileLauncherModel::render() {
 				glTranslatef(1.3f, 0.0f, 0.0f);
 				drawMissileLauncher(quadratic);
 			glPopMatrix();
-
 		glPopMatrix();
 	glPopMatrix();
-
+	glTranslatef(0.0f, 0.3f, 0.0f);
 	glDisable(GL_TEXTURE_2D);
 	gluDeleteQuadric(quadratic);
 }

@@ -51,8 +51,9 @@ Robot::Robot() {
 		isPartOn[i]=false;
 	}
 
-	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
-
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
+	ct = new CollisionTester;
+	ct->staticBoxes.push_back(box);
 	refreshRobot();
 }
 
@@ -72,7 +73,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	
 	xPos = x;
 	zPos = y;
-	xDestination = 5.0f;
+	xDestination = x;
 	zDestination = 5.0f;
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
@@ -94,9 +95,12 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	turnIndexOn(3);
 	turnIndexOn(4);
 	turnIndexOn(5);
+
 	refreshRobot();
 
-	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,calculateHeight(8),zPos+1.0f);
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
+	ct = new CollisionTester;
+	ct->staticBoxes.push_back(box);
 }
 
 Robot::~Robot() {
@@ -132,7 +136,7 @@ void Robot::draw() {
 
 			//Draw Headlight
 			glPushMatrix();
-				glTranslatef(0.0f,calculateHeight(8),0.0f);
+				glTranslatef(0.0f,height,0.0f);
 				headlight->draw();
 			glPopMatrix();
 
@@ -168,22 +172,23 @@ void Robot::turnSelectedOn(){
 void Robot::turnIndexOn(int index){
 
 	switch(index){
-		case 0:
-			isPartOn[0] = true;
+		case 0: //bipod
+			isPartOn[0] = true; 
 			isPartOn[1] = false;
 			isPartOn[2] = false;
 			break;
-		case 1:
+		case 1: //tracks
 			isPartOn[1] = true;
 			isPartOn[0] = false;
 			isPartOn[2] = false;
 			break;
-		case 2:
+		case 2: //antigrav
 			isPartOn[2] = true;
 			isPartOn[0] = false;
 			isPartOn[1] = false;
 			break;
 		case 3: case 4: case 5: case 6: case 7: 
+	  //cannon  missile phaser  nuclear electronics
 			if(isPartOn[index]){
 				isPartOn[index] = false;
 			}
@@ -200,7 +205,7 @@ void Robot::turnIndexOn(int index){
 void Robot::refreshRobot(){
 	
 	clearChildren();
-	//setup base
+	//setup
 	if(isPartOn[0]){
         model = bipodM;
 	}
@@ -249,6 +254,7 @@ void Robot::refreshRobot(){
 	if(childExists){
 		model->setNextChild(temp);
 	}
+	calculateHeight(8);
 	notifyCamera();
 }
 
@@ -264,40 +270,6 @@ void Robot::clearChildren(){
 }
 
 //-------------------------------------------------------------
-//						ROBOT TRANSFORMATIONS
-//-------------------------------------------------------------
-
-void Robot::translate(GLfloat xDist, GLfloat zDist){
-	xPos += xDist;
-	zPos += zDist;
-}
-
-void Robot::translateTo(GLfloat xDestination, GLfloat zDestination){
-	xPos = xDestination;
-	zPos = zDestination;
-}
-
-void Robot::spin(GLfloat degrees){
-	spinDegrees += degrees;
-	spinDirectionVector();
-	normalizeSpinDegrees();
-}
-
-void Robot::incrementSpinDegrees(bool pos){
-
-	if(pos){
-		spinDegrees++; //true increases angle by one
-	}
-	else{
-		spinDegrees--;
-	}
-
-	spinDirectionVector();
-	normalizeSpinDegrees();
-	notifyCamera();
-}
-
-//-------------------------------------------------------------
 //						COORDINATE ACCESSORS
 //-------------------------------------------------------------
 
@@ -309,7 +281,7 @@ GLfloat Robot::getEyeX(){
 }
 
 GLfloat Robot::getEyeY(){
-	return calculateHeight(8)+0.15f;
+	return height+0.15f;
 }
 
 GLfloat Robot::getEyeZ(){
@@ -323,7 +295,8 @@ GLfloat* Robot::getLookAt(){
 	GLfloat pitched[3];
 	//Adjust for pitch & yaw
 	pitched[0] = 0.3f-sin(pitchAngle*GL_PI/180.0f)-sin(yawAngle*GL_PI/180.0f)-0.5f;
-	pitched[1] = calculateHeight(8)+0.15f-cos(pitchAngle*GL_PI/180.0f);
+	//pitched[1] = calculateHeight(8)+0.15f-cos(pitchAngle*GL_PI/180.0f);
+	pitched[1] = height+0.15f-cos(pitchAngle*GL_PI/180.0f);
 	pitched[2] = 0.5f+cos(yawAngle*GL_PI/180.0f)-0.5f;
 	GLfloat* rotated = new GLfloat[3];
 	rotated[0] = pitched[0]*cos(spinDegrees*GL_PI/180.0f)+ pitched[2]*sin(spinDegrees*GL_PI/180.0f) + 0.5f +xPos;
@@ -337,7 +310,8 @@ GLfloat* Robot::getLightLookAt(){
 	GLfloat pitched[3];
 	//Adjust for pitch & yaw
 	pitched[0] = 0.3f-sin(70*GL_PI/180.0f)-0.5f;
-	pitched[1] = calculateHeight(8)+0.15f-cos(70*GL_PI/180.0f);
+	//pitched[1] = calculateHeight(8)+0.15f-cos(70*GL_PI/180.0f);
+	pitched[1] = height+0.15f-cos(70*GL_PI/180.0f);
 	pitched[2] = 0.5f-0.5f;
 
 	GLfloat* rotated = new GLfloat[3];
@@ -382,6 +356,7 @@ GLfloat Robot::calculateHeight(int index){
 			}
 		}
 	}
+	height = h;
 	return h;
 }
 
@@ -498,6 +473,23 @@ void Robot::refreshLight(){
 	}
 }
 
+//-------------------------------------------------------------------------------
+//							ROBOT-SPINNING
+//-------------------------------------------------------------------------------
+void Robot::incrementSpinDegrees(bool pos){
+
+	if(pos){
+		spinDegrees++; //true increases angle by one
+	}
+	else{
+		spinDegrees--;
+	}
+
+	spinDirectionVector();
+	normalizeSpinDegrees();
+	notifyCamera();
+}
+
 //checks angle between spinDestination and spinDegrees
 GLfloat Robot::calcDestinationAngle(){
 	GLfloat angle;
@@ -544,6 +536,9 @@ void Robot::timedSpin(){
 	}
 }
 
+//-------------------------------------------------------------------------------
+//							ROBOT-WALKING
+//-------------------------------------------------------------------------------
 //walks in X-direction, returns true if walking
 bool Robot::timedXWalk(){
 	GLfloat xDistance = xDestination - xPos;
@@ -577,26 +572,39 @@ bool Robot::timedZWalk(){
 
 void Robot::incrementXPos(bool pos){
 	if(pos){
-		xPos += 0.05f;
-		box->moveBox(0.05f,0.0f,0.0f);
+		if(!robotCollisionTest(xPos+0.05f,0.0f,zPos)){
+			xPos += 0.05f;
+			box->moveBox(0.05f,0.0f,0.0f);
+		}
 	}
 	else{
-		xPos -= 0.05f;
-		box->moveBox(-0.05f,0.0f,0.0f);
+		if(!robotCollisionTest(xPos-0.05f,0.0f,zPos)){
+			xPos -= 0.05f;
+			box->moveBox(-0.05f,0.0f,0.0f);
+		}
 	}
+	notifyCamera();
 }
 
-void Robot::incrementZPos(bool pos){
-	if(pos){
-		zPos += 0.05f;
-		box->moveBox(0.0f,0.0f,0.05f);
+void Robot::incrementZPos(bool positive){
+	if(positive){
+		if(!robotCollisionTest(xPos,0.0f,zPos+0.05f)){
+			zPos += 0.05f;
+			box->moveBox(0.0f,0.0f,0.05f);
+		}
 	}
 	else{
-		zPos -= 0.05f;
-		box->moveBox(0.0f,0.0f,-0.05f);
+		if(!robotCollisionTest(xPos,0.0f,zPos-0.05f)){
+			zPos -= 0.05f;
+			box->moveBox(0.0f,0.0f,-0.05f);
+		}
 	}
+	notifyCamera();
 }
 
+//-------------------------------------------------------------------------------
+//							DESTINATION-RELATED
+//-------------------------------------------------------------------------------
 void Robot::setDestination(GLfloat x, GLfloat z){
 	xDestination = x;
 	zDestination = z;
@@ -678,20 +686,37 @@ bool Robot::checkZDestination(){
 	}
 }
 
+bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
+		if(ct->collisionTest(x,y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
 
+		return false;
+}
 
+//For Robert
 void Robot::spinDirectionVector(){
-	/*LOGIC FOR ROTATION
-	GLfloat* spinMatrix = new GLfloat[9];
-	spinMatrix[1] = spinMatrix[3] = spinMatrix[5] = spinMatrix[7] = 0;
-	spinMatrix[4] = 1;
-	spinMatrix[0] = spinMatrix[8] = cos(spinDegrees*DegreesToRadians);
-	spinMatrix[2] = sin(spinDegrees*DegreesToRadians);
-	spinMatrix[6] = -sin(spinDegrees*DegreesToRadians);
-	(spinMatrix[0] * 0.0f) + (spinMatrix[1] * 0.0f) + (spinMatrix[2] * 1.0f);
-	(spinMatrix[3] * 0.0f) + (spinMatrix[4] * 0.0f) + (spinMatrix[5] * 1.0f);
-	(spinMatrix[6] * 0.0f) + (spinMatrix[7] * 0.0f) + (spinMatrix[8] * 1.0f);*/
-	
 	directionVector[0] = sin(spinDegrees*DegreesToRadians);
 	directionVector[2] = cos(spinDegrees*DegreesToRadians);
 }

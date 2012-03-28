@@ -11,28 +11,36 @@
 #include "SpotLight.h"
 #include "../Model/Light/LightPost.h"
 #include "../Model/Helper/BoundingBox.h"
+#include "../Model/Helper/CollisionTester.h"
 #define MAX_PLAYER_HEIGHT 8
 #define MIN_PLAYER_HEIGHT 0
 
 class PlayerUFO {
 public:
+	//constructors and destructor
 	PlayerUFO(void);
 	PlayerUFO(GLfloat x, GLfloat z);
 	virtual ~PlayerUFO(void);
-	void draw();
-        void updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos);
-	void incrementHeight(bool positive);
-	GLfloat* pos;
-	BoundingBox* box;
 
+	void draw();
+    void updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos);
+	
+	//translates ufo if no collision
+	void incrementHeight(bool positive);
 	void incrementXPos(bool positive);
 	void incrementZPos(bool positive);
 
+	//collision detection
+	bool ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z);
+
+	GLfloat* pos;
+	BoundingBox* box;
+
 private:
 	Model* pModel;
-        SpotLight* spotLight;
-        LightPost* light;
-        
+    SpotLight* spotLight;
+    LightPost* light;
+	CollisionTester* ct;
 };
 
 #endif

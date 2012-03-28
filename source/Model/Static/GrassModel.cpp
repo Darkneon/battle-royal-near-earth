@@ -13,7 +13,7 @@ GrassModel::GrassModel() {
     TeamNumberModel* child = new TeamNumberModel();
     setNextChild( (Model*)child );
     material = (Material*)(new OrganicMaterial());
-    build(3.0);
+    build();
 }
 
 void GrassModel::build()

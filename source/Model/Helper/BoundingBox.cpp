@@ -1,7 +1,7 @@
 #include "BoundingBox.h"
 
-//vector<BoundingBox *> BoundingBox::boxes;
 bool BoundingBox::showBoxes = true;
+GLuint BoundingBox::movingCount = 0;
 
 BoundingBox::BoundingBox(void)
 {
@@ -14,7 +14,7 @@ BoundingBox::BoundingBox(void)
 	size.x = 1.0f;
 	size.y = 1.0f;
 	size.z = 1.0f;
-	//boxes.push_back(this);
+	movingBoxId = 0;
 }
 
 BoundingBox::BoundingBox(V3 min, V3 max){
@@ -23,7 +23,7 @@ BoundingBox::BoundingBox(V3 min, V3 max){
 	size.x = max.x-min.x;
 	size.y = max.y-min.y;
 	size.z = max.z-min.z;
-	//boxes.push_back(this);
+	movingBoxId = 0;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ){
@@ -36,34 +36,29 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	size.x = max.x-min.x;
 	size.y = max.y-min.y;
 	size.z = max.z-min.z;
-	//boxes.push_back(this);
+	movingBoxId = 0;
 }
 
-BoundingBox::~BoundingBox(void)
-{
-	//boxes.clear();
-}
-
-void BoundingBox::draw2(){
-	if(showBoxes){
-		glPushMatrix();
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			glColor3f(0.0f,0.5f,1.0f);
-			glScalef(size.x,size.y,size.z);
-			drawCube();
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glPopMatrix();
+BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving){
+	min.x = minX;
+	min.y = minY;
+	min.z = minZ;
+	max.x = maxX;
+	max.y = maxY;
+	max.z = maxZ;
+	size.x = max.x-min.x;
+	size.y = max.y-min.y;
+	size.z = max.z-min.z;
+	if(moving){
+		movingCount++;
+		movingBoxId = movingCount;
 	}
 	else{
-		glPushMatrix();
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			glColor3f(1.0f,0.0f,0.0f);
-			glScalef(max.x,max.y,max.z);
-			drawCube();
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glPopMatrix();
+		movingBoxId = 0;
 	}
 }
+
+BoundingBox::~BoundingBox(void){}
 
 void BoundingBox::drawSquare(){
 	glPushMatrix();
@@ -123,15 +118,6 @@ void BoundingBox::resize(GLfloat xa, GLfloat ya, GLfloat za){
 
 }
 
-/*void BoundingBox::translate(GLfloat minX, GLfloat minY, GLfloat minZ){
-	min.x = minX;
-	min.y = minY;
-	min.z = minZ;
-	max.x = min.x + size.x;
-	max.y = min.y + size.y;
-	max.y = min.y + size.y;
-}*/
-
 void BoundingBox::draw(){
 	if(showBoxes){
 		glPushMatrix();
@@ -144,15 +130,6 @@ void BoundingBox::draw(){
 		glPopMatrix();
 	}
 }
-
-/*void BoundingBox::translate(GLfloat minX, GLfloat minY, GLfloat minZ){
-	min.x = minX;
-	min.y = minY;
-	min.z = minZ;
-	max.x = min.x + size.x;
-	max.y = min.y + size.y;
-	max.y = min.y + size.y;
-}*/
 
 void BoundingBox::moveBox(GLfloat xDist, GLfloat yDist, GLfloat zDist){
 	min.x = min.x+ xDist;
