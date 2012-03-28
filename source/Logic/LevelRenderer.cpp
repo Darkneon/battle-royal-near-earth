@@ -112,7 +112,7 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] !=0 && level[i][j] !=3){
+				if(level[i][j] >=12){
 					models[0]->draw();
 				}
 			glPopMatrix();
@@ -131,7 +131,7 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] !=0 && level[i][j] !=3){
+				if(level[i][j] >=12){
 					models[0]->draw();
 				}
 			glPopMatrix();
@@ -152,7 +152,7 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] !=0 && level[i][j] !=3){
+				if(level[i][j] >=12){
 					models[0]->draw();
 				}
 			glPopMatrix();
