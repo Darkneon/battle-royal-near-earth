@@ -31,36 +31,42 @@ void JoystickInput::joystickOperations(unsigned int button, int x, int y, int z)
 
 	if (button == 16) //left trigger
 	{
+		player->robots.at(0)->moveStrafe(true);
 		std::cout << "button left trigger pressed" << endl;
 	}
 	if (button == 32) //right trigger
 	{
+		player->robots.at(0)->moveStrafe(false);
 		std::cout << "button right trigger pressed" << endl;
 	}
-
-	if (button != 0)
-		std::cout << "button " << button << " pressed" << endl;
 
 	if (abs(x - deadZoneFound) > JOYSTICK_SENSITIVITY)
 	{
 		if (x < x_deadZone)
 		{
-			std::cout << "Move to the left : " << x << endl;
+			
+			std::cout << "Move to the left" << endl;
 		}
-		else if (x > x_deadZone)
+		else
 		{
-			std::cout << "Move to the right : " << x << endl;
+			std::cout << "Move to the right" << endl;
 		}
 
-		if (y < y_deadZone)
-		{
-			std::cout << "Move upwards : " << y << endl;
-		}
-		else if (y > y_deadZone)
-		{
-			std::cout << "Move downwards : " << y << endl;
-		}
 	}
+
+	if (abs(y - deadZoneFound) > JOYSTICK_SENSITIVITY)
+	
+		if (y > y_deadZone)
+		{
+			player->robots.at(0)->moveForward(false);
+			std::cout << "Move downwards" << endl;
+		}
+		else
+		{
+			player->robots.at(0)->moveForward(true);
+			std::cout << "Move upwards" << endl;
+		}
+	
 
 	if (!deadZoneFound)
 	{

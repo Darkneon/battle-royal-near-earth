@@ -55,6 +55,8 @@ Robot::Robot() {
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
 	refreshRobot();
+
+	isRobotBeingControlled = false;
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
@@ -101,6 +103,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
+
+	isRobotBeingControlled = false;
 }
 
 Robot::~Robot() {
@@ -125,10 +129,12 @@ void Robot::draw() {
 
 		//draw robot
 		glPushMatrix();
-			goToDestination();
+			if (!isRobotBeingControlled)
+				goToDestination();
+		
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
-		
+			
 			//Spin()
 			glTranslatef(0.5f, 0.0f, 0.5f);
 			glRotatef(spinDegrees,0.0f,1.0f,0.0f);
@@ -476,18 +482,35 @@ void Robot::refreshLight(){
 //-------------------------------------------------------------------------------
 //							ROBOT-SPINNING
 //-------------------------------------------------------------------------------
-void Robot::incrementSpinDegrees(bool pos){
+void Robot::incrementSpinDegrees(bool pos, GLfloat speed){
 
 	if(pos){
-		spinDegrees++; //true increases angle by one
+		spinDegrees += speed; //true increases angle by one
 	}
 	else{
-		spinDegrees--;
+		spinDegrees -= speed;
 	}
 
 	spinDirectionVector();
 	normalizeSpinDegrees();
 	notifyCamera();
+}
+
+//used for mouse control
+void Robot::incrementSpinDegrees(int x, int y)
+{
+	int diffX, centerX, centerY;
+
+	centerX = glutGet(GLUT_WINDOW_WIDTH) / 2;
+	centerY = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+
+	diffX = x - centerX;
+
+	if (diffX != 0)
+	{
+		glutWarpPointer(centerX, centerY);
+		incrementSpinDegrees(false, diffX * MOUSE_SENSITIVITY);
+	}
 }
 
 //checks angle between spinDestination and spinDegrees
@@ -539,6 +562,63 @@ void Robot::timedSpin(){
 //-------------------------------------------------------------------------------
 //							ROBOT-WALKING
 //-------------------------------------------------------------------------------
+void Robot::moveStrafe(bool pos)
+{
+	if(pos){
+		if(!robotCollisionTest(xPos + (GLfloat)directionVector[0], 0.0f,
+			zPos + (GLfloat)directionVector[2])){
+
+			xPos += (GLfloat)directionVector[0];
+			zPos += (GLfloat)directionVector[2];
+
+			box->moveBox((GLfloat)directionVector[0],0.0f,
+				(GLfloat)directionVector[2]);
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos - (GLfloat)directionVector[0],0.0f,
+			zPos - (GLfloat)directionVector[2]))
+		{
+
+			xPos -= (GLfloat)directionVector[0];
+			zPos -= (GLfloat)directionVector[2];
+
+			box->moveBox(-(GLfloat)directionVector[0],0.0f,-(GLfloat)directionVector[2]);
+		}
+	}
+	notifyCamera();
+	
+}
+
+void Robot::moveForward(bool pos)
+{
+	if(pos){
+		if(!robotCollisionTest(xPos - (GLfloat)directionVector[2], 0.0f,
+			zPos + (GLfloat)directionVector[0])){
+
+			xPos -= (GLfloat)directionVector[2];
+			zPos += (GLfloat)directionVector[0];
+
+			box->moveBox((GLfloat)-directionVector[2],0.0f,
+				(GLfloat)directionVector[0]);
+		}
+	}
+	else
+	{
+		if(!robotCollisionTest(xPos + (GLfloat)directionVector[2], 0.0f,
+			zPos - (GLfloat)directionVector[0])){
+
+			xPos += (GLfloat)directionVector[2];
+			zPos -= (GLfloat)directionVector[0];
+
+			box->moveBox((GLfloat)directionVector[2],0.0f,
+				(GLfloat)-directionVector[0]);
+		}
+	}
+
+	notifyCamera();
+}
+
 //walks in X-direction, returns true if walking
 bool Robot::timedXWalk(){
 	GLfloat xDistance = xDestination - xPos;
@@ -715,7 +795,7 @@ bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 		return false;
 }
 
-//For Robert
+//For Robert and first person view movement
 void Robot::spinDirectionVector(){
 	directionVector[0] = sin(spinDegrees*DegreesToRadians);
 	directionVector[2] = cos(spinDegrees*DegreesToRadians);

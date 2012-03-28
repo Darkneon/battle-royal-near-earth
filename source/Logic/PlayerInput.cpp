@@ -76,23 +76,44 @@ void PlayerInput::keyOperations(int keyModifier)
 	
 	if (keyStates[100]) //d
 	{
-		player->moveUFOX(true);
+		if (player->getCurrentCameraType() == CAMERA_ROBOT)
+		{
+			//assume a robot is there for now
+			player->robots.at(0)->moveStrafe(false);
+		}
+		else
+			player->moveUFOX(true);
 	}
-	else if(keyStates[97]){ //a
-		player->moveUFOX(false);
+	else if(keyStates[97])//a
+	{ 
+		if (player->getCurrentCameraType() == CAMERA_ROBOT)
+		{
+			//assume a robot is there for now
+			player->robots.at(0)->moveStrafe(true);
+		}
+		else
+			player->moveUFOX(false);
 	}
 
 	if (keyStates[115]) //s
 	{
-		player->moveUFOZ(true);
+		if (player->getCurrentCameraType() == CAMERA_ROBOT)
+		{
+			//assume a robot is there for now
+			player->robots.at(0)->moveForward(false);
+		}
+		else
+			player->moveUFOZ(true);
 	}
 	else if(keyStates[119]){//w
-		player->moveUFOZ(false);
-	}
 
-	if (keyStates['i'])
-	{
-		
+		if (player->getCurrentCameraType() == CAMERA_ROBOT)
+		{
+			//assume a robot is there for now
+			player->robots.at(0)->moveForward(true);
+		}
+		else
+			player->moveUFOZ(false);
 	}
 
 }
@@ -157,6 +178,11 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 void PlayerInput::mousePassiveOperations(int x, int y)
 {
 	if (player->getCurrentCameraType() == CAMERA_FREELOOK)
+	{
 		player->getCurrentCamera()->modifyYaw(false, x, y);
+	}
+
+	if (player->getCurrentCameraType() == CAMERA_ROBOT)
+		player->robots.at(0)->incrementSpinDegrees(x, y);
 
 }

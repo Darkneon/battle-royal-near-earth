@@ -73,11 +73,8 @@ void toggleTwoPlayerSplitscreen()
 
 	if (isTwoPlayerGame)
 	{
-		game->p1->selectRobotView(game->p1->robots.at(0));
-		game->p1->changeCamera(CAMERA_ROBOT);
-
-		game->p2->selectRobotView(game->p2->robots.at(0));
-		game->p2->changeCamera(CAMERA_ROBOT);
+		game->p1->controlRobotAt(0);
+		game->p2->controlRobotAt(0);
 	}
 	else
 	{
@@ -308,9 +305,8 @@ void functionKeysPressed(int key, int x, int y)
 void windowKeyOps()
 {
 	if (keyModifier == GLUT_ACTIVE_ALT && keyStates[13]) //alt + enter
-	{
 		toggleFullScreen();
-	}
+	
 	if (keyStates[98]) //b
 	{
 		isDebugMode = !isDebugMode;
@@ -392,9 +388,11 @@ void init()
 
 	glutSetCursor(GLUT_CURSOR_NONE);
 	
-  initAntTweak();
-  glEnable(GL_NORMALIZE);
-  
+	initAntTweak();
+	glEnable(GL_NORMALIZE);
+
+	TextureManager::getInstance()->toggleTextures();
+	BoundingBox::showBoxes = !BoundingBox::showBoxes;
 }
 
 //mouse movement functions, primarily used to modify the view
@@ -435,7 +433,7 @@ int main (int argc, char **argv)
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
-	glutJoystickFunc(joystickFunc, 150);
+	glutJoystickFunc(joystickFunc, 75);
 	init();
 
 	glutMainLoop();
