@@ -324,7 +324,8 @@ void windowKeyOps()
 		showHelpWindow = !showHelpWindow;
 	}
 
-	if (keyStates[115])//s
+	
+	if (keyStates['z'])
 	{
 		game->lr->toggleSkySphere();
 	}
