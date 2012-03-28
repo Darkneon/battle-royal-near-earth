@@ -187,7 +187,7 @@ void LevelRenderer::buildMap()
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;
-				case 12://base
+				case 13://base
 					//5.0f,1.25f,4.0f
 					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+5.0f),1.25f, (GLfloat)(j+2.5f));
 					lrBoxes->staticBoxes.push_back(tempBox);
@@ -195,7 +195,7 @@ void LevelRenderer::buildMap()
 					tempBox = new BoundingBox((GLfloat)(i+1.0f), 0.0f, (GLfloat)(j+2.5f), (GLfloat)(i+4.0f),0.75f, (GLfloat)(j+4.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
-				case 13://factory
+				case 12://factory
 					//3.0f,1.25f,2.0f
 					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
