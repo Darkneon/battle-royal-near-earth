@@ -62,8 +62,6 @@ void FreeLookCamera::moveCameraStrafe(bool negateTheValue)
 
 	locX -= (GLfloat)directionVector[2] * multiplier * movementSensitivity;
 	locZ += (GLfloat)directionVector[0] * multiplier * movementSensitivity;
-	
-	glutPostRedisplay();
 }
 
 void FreeLookCamera::modifyYaw(bool negateTheValue, int x, int y)

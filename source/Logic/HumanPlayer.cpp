@@ -15,6 +15,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     
     currentCamera = CAMERA_COMMANDER;
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
+	aRobotIsSelected = false;
 }
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ)
@@ -32,6 +33,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 
     currentCamera = CAMERA_COMMANDER;
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
+	aRobotIsSelected = false;
 }
 
 HumanPlayer::~HumanPlayer() {    
@@ -57,6 +59,16 @@ void HumanPlayer::render(){
     for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();
 	}
+}
+
+void HumanPlayer::controlRobotAt(int index)
+{
+	selectRobotView(robots.at(0));
+	changeCamera(CAMERA_ROBOT);
+
+	selectRobot(index);
+	aRobotIsSelected = true;
+	robots.at(0)->isRobotBeingControlled = true;
 }
 
 void HumanPlayer::changeCamera(int CAMERA)

@@ -79,14 +79,16 @@ void PlayerUFO::draw(){
 //---------------------------------------------------------------
 void PlayerUFO::incrementHeight(bool positive){
 	if(positive){
+		
 		if(pos[1]+0.5f <= MAX_PLAYER_HEIGHT){
 			pos[1] += 0.5f;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
                 if(pos[1]+0.3 > MAX_PLAYER_HEIGHT){
-                    pos[1] = MAX_PLAYER_HEIGHT-0.3;
+                    pos[1] = MAX_PLAYER_HEIGHT-0.3f;
                    box->lockBox(pos[0],pos[1],pos[2]);
                 }
+				
 	}
 	else{
 		if(pos[1]-0.02f >= MIN_PLAYER_HEIGHT&&

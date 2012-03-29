@@ -44,7 +44,7 @@ LevelRenderer::LevelRenderer() {
 
 	//Terrain Models
 	GrassModel *grassModel = new GrassModel; //0
-        HillsModel *hillsModel = new HillsModel; //1
+    HillsModel *hillsModel = new HillsModel; //1
 	MountainModel *mountainModel = new MountainModel; //2
 	FenceModel *fenceModel = new FenceModel;
 	HalfHollowBlockModel *halfHollowModel = new HalfHollowBlockModel;
@@ -82,9 +82,6 @@ LevelRenderer::LevelRenderer() {
         groundplane[3] = 0.0f;
 	map();   
 	buildMap();
-        
-
-        //shadowMat[16];
 } 
 
 LevelRenderer::~LevelRenderer() {
@@ -153,9 +150,9 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				/*if(level[i][j] !=0 && level[i][j] !=3){
+				if(level[i][j] >=12){
 					models[0]->draw();
-				}*/
+				}
 			glPopMatrix();
 		}
 	}
@@ -172,12 +169,11 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				/*if(level[i][j] !=0 && level[i][j] !=3){
+				if(level[i][j] >=12){
 					models[0]->draw();
-				}*/
+				}
 			glPopMatrix();
 		}
-                
 	}
     //SHADOWS-----------------------------------
                 glEnable(GL_BLEND);
@@ -220,11 +216,10 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				/*if(level[i][j] !=0 && level[i][j] !=3){
+				if(level[i][j] >=12){
 					models[0]->draw();
-				}*/
+				}
 			glPopMatrix();
-                        
 			switch(level[i][j]){
 				case 1: case 6: case 7: //hills, plain and holloy block
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1), 1.0f, (GLfloat)(i+1));

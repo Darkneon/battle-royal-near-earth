@@ -34,12 +34,16 @@ public:
 	void levitateUFO();
 	void moveUFOX(bool direction);
 	void moveUFOZ(bool direction);
+	void controlRobotAt(int index);
+
 
 private:
 	int currentCamera;
    // Model *model;
 	Camera *availableCams[9];
 	PlayerUFO* ufo;
+
+	bool aRobotIsSelected;
 };
 
 #endif	/* HUMANPLAYER_H */

@@ -32,6 +32,9 @@ static const GLfloat EAST = 180.0f;
 static const GLfloat SOUTH = 90.0f;
 static const GLfloat WEST = 0.0f;
 
+//MOUSE CONTROL CONSTANTS
+static const GLfloat MOUSE_SENSITIVITY = 0.25f;
+
 class RobotCamera;
 
 class Robot {
@@ -47,7 +50,12 @@ public:
 	void turnSelectedOn();
 
 	//Robot Spinning
-	void incrementSpinDegrees(bool pos);
+	void incrementSpinDegrees(bool pos, GLfloat speed = 1);
+	void incrementSpinDegrees(int x, int y);
+
+	//move commands
+	void moveForward(bool pos);
+	void moveStrafe(bool pos);
 
 	//Coordinate accessors
 	GLfloat getEyeX();
@@ -66,6 +74,7 @@ public:
 	void incrementYawAngle(bool pos);
 	void resetOrientation();
 
+
 	//light related
 	static bool isARobotLightOn;
 	void toggleLight();
@@ -74,6 +83,9 @@ public:
 	//For Robert
 	GLfloat directionVector[3];
 	void spinDirectionVector();
+
+	//Used to know if a player is currently controlling this particular robot
+	bool isRobotBeingControlled;
 
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
@@ -122,6 +134,8 @@ private:
 	int selectedIndex;
 	//Life
 	GLfloat robotLife;
+
+	
 
 	//-----------------------PRIVATE METHODS---------------------------
 	
