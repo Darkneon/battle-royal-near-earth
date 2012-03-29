@@ -269,7 +269,7 @@ void GeoHelper::drawCube(GLfloat xOrigin,GLfloat yOrigin, GLfloat zOrigin, GLflo
     glBegin(GL_TRIANGLES);
         //                  X     Y     Z
         // Square 1 -- ALONG THE X AXIS (BACK)
-        glColor3f(0.5f, 0.5f, 0.5f);
+        //glColor3f(0.5f, 0.5f, 0.5f);
         //Lower Triangle
         //glNormal3f(0.0, 0.0, -1.0);
         findNormal3f(xOrigin, yOrigin, zOrigin, xExtend, yExtend, zOrigin, xExtend, yOrigin, zOrigin, normal);
@@ -450,6 +450,7 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
         glVertex3f(0.5f, 1.0f, 0.5f);
     glEnd();
 	delete [] normal;
+        glDisable(GL_TEXTURE_2D);
  }
 
 void GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3, GLfloat* result)

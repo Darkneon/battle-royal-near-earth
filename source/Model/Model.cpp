@@ -13,7 +13,7 @@ Model::~Model() {
 
 void Model::draw() {
     if (material != NULL) {
-        material->apply();
+       material->apply();
     }
     
     render();
