@@ -185,10 +185,14 @@ void render()
 	if (isTwoPlayerGame)
 	{
 		game->p1->view();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		game->render();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
 	
 		game->p2->view();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		game->render();
 		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
 	}
@@ -372,6 +376,7 @@ void init()
 	glGenLists(7);
 
 	te = TextureManager::getInstance();
+	srand ( (unsigned int)time(NULL) );
 
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);

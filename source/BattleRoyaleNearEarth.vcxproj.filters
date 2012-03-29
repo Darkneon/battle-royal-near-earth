@@ -179,6 +179,9 @@
     <ClCompile Include="Model\Helper\CollisionTester.cpp">
       <Filter>Model\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Model\MissileModel.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -357,6 +360,9 @@
     </ClInclude>
     <ClInclude Include="Model\Helper\CollisionTester.h">
       <Filter>Model\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\MissileModel.h">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

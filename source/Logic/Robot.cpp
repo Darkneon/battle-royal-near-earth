@@ -157,7 +157,7 @@ void Robot::draw() {
 			rubble->draw();
 		glPopMatrix();
 	}
-	robotLife = robotLife -0.5f;
+	//robotLife = robotLife -0.5f;
 
 }
 

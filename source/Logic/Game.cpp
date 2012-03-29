@@ -1,5 +1,6 @@
 #include "Game.h"
 
+
 Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane,
 	bool *keyStates, bool *funcKeyStates)
 {
@@ -40,7 +41,16 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
-	lr->render();
+	/*
+	glPushMatrix();
+		glTranslatef(30.0f, 1.0f, 30.0f);
+
+	mm.render();
+	glPopMatrix();
+
+	*/
+
+	lr->render();	
 	p1->render();
 	p2->render();
 }
