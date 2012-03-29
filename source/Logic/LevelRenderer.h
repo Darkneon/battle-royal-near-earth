@@ -16,6 +16,7 @@ class LevelRenderer {
 public:
     LevelRenderer();
     ~LevelRenderer();
+    void plane();
     void render();
     bool getIsSkySphere();
 	void toggleSkySphere();
@@ -28,7 +29,6 @@ private:
     int **level;
 	int rows;
 	int columns;
-
 	CubicSkybox *cubicSkyBox;
 	SphericSkybox *sphericSkyBox;
     bool isSkySphere;
@@ -36,7 +36,7 @@ private:
 	void buildMap();
 	void map();
 	void renderLights();
-
+        void shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ, GLfloat lightW);
 	//Initialize light objects
 	SpotLight *spotLight;
 	LightPost *light1;
@@ -48,7 +48,8 @@ private:
 	bool spotLight2;
 	bool spotLight3;
 	bool spotLight4;
-
+        GLfloat groundplane[4];
+        GLfloat shadowMat[16];
 	string loadmap;
 };
 #endif

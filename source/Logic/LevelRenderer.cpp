@@ -44,7 +44,7 @@ LevelRenderer::LevelRenderer() {
 
 	//Terrain Models
 	GrassModel *grassModel = new GrassModel; //0
-    HillsModel *hillsModel = new HillsModel; //1
+        HillsModel *hillsModel = new HillsModel; //1
 	MountainModel *mountainModel = new MountainModel; //2
 	FenceModel *fenceModel = new FenceModel;
 	HalfHollowBlockModel *halfHollowModel = new HalfHollowBlockModel;
@@ -76,8 +76,15 @@ LevelRenderer::LevelRenderer() {
 	models[12] = (Model*)factoryModel;
 	models[13] = (Model*)baseModel;
 
+        groundplane[0] = 0.0f;
+        groundplane[1] = 1.0f;
+        groundplane[2] = 0.0f;
+        groundplane[3] = 0.0f;
 	map();   
 	buildMap();
+        
+
+        //shadowMat[16];
 } 
 
 LevelRenderer::~LevelRenderer() {
@@ -97,24 +104,58 @@ LevelRenderer::~LevelRenderer() {
     delete[] level;
 	level = NULL;
 }
+void LevelRenderer::shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ, GLfloat lightW)
+{
+    GLfloat dot;
+    //Find dot product between light position vector and ground plane normal
+    //From openGL.org
+    dot =   groundplane[0]*lightX +
+            groundplane[1]*lightY +
+            groundplane[2]*lightZ +
+            groundplane[3]*lightW;
+    
+    shadowMat[0] = dot-lightX*groundplane[0];
+    shadowMat[4] = 0.0f-lightX*groundplane[1];
+    shadowMat[8] = 0.0f-lightX*groundplane[2];
+    shadowMat[12] = 0.0f-lightX*groundplane[3];
+    
+    shadowMat[1] = 0.0f-lightY*groundplane[0];
+    shadowMat[5] = dot - lightY*groundplane[1]; 
+    shadowMat[9] = 0.0f - lightY*groundplane[2];
+    shadowMat[13] = 0.0f - lightY*groundplane[3];
+    
+    shadowMat[2] = 0.0f - lightZ*groundplane[0];
+    shadowMat[6] = 0.0f - lightZ*groundplane[1];
+    shadowMat[10] = dot - lightZ*groundplane[2];
+    shadowMat[14] = 0.0f - lightZ*groundplane[3];
+    
+    shadowMat[3] = 0.0f - lightW*groundplane[0];
+    shadowMat[7] = 0.0f - lightW*groundplane[1];
+    shadowMat[11] = 0.0f - lightW*groundplane[2];
+    shadowMat[15] = dot - lightW*groundplane[3];
+    
+    glMultMatrixf(shadowMat);
+}
 
 void LevelRenderer::buildMap()
 {
-	//SKIN1
+    
+    //SKIN1
 	glNewList(2, GL_COMPILE);
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
 			if(i == 35 && j == 40){
 				int k = 9;
 			}
-			glPushMatrix();
-				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+			glPushMatrix();	
+                        
+                        glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] !=0 && level[i][j] !=3){
+				/*if(level[i][j] !=0 && level[i][j] !=3){
 					models[0]->draw();
-				}
+				}*/
 			glPopMatrix();
 		}
 	}
@@ -131,12 +172,39 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] !=0 && level[i][j] !=3){
+				/*if(level[i][j] !=0 && level[i][j] !=3){
 					models[0]->draw();
-				}
+				}*/
 			glPopMatrix();
 		}
+                
 	}
+    //SHADOWS-----------------------------------
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glDisable(GL_LIGHTING);
+                glEnable(GL_COLOR_MATERIAL);
+                for(int i = 0; i < rows; i++) {
+                        for(int j = 0; j < columns; j++) {
+                                if(!level[i][j]==0 || !level[i][j]==3){
+                                    glPushMatrix();
+                                        glTranslatef((GLfloat)j, (GLfloat)0+0.01, (GLfloat)i);
+                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        if(i <= rows/2 && j <= columns/2)
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY(), light1->getPosZ()-i, 1.0f);
+                                        else if(i<= rows/2 && j <= columns)
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY(), light2->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j <= columns/2)
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY(), light4->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j <= columns)
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY(), light3->getPosZ()-i, 1.0f);
+                                        models[ level[i][j] ]->draw();
+                                    glPopMatrix();
+                            }
+                        }
+                }
+                glEnable(GL_LIGHTING);
+        //-------------------------------------------
 	glEndList();
     
 	//LIST FOR NO TEXTURES
@@ -152,10 +220,11 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] !=0 && level[i][j] !=3){
+				/*if(level[i][j] !=0 && level[i][j] !=3){
 					models[0]->draw();
-				}
+				}*/
 			glPopMatrix();
+                        
 			switch(level[i][j]){
 				case 1: case 6: case 7: //hills, plain and holloy block
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1), 1.0f, (GLfloat)(i+1));
@@ -198,9 +267,48 @@ void LevelRenderer::buildMap()
 			}
 		}
 	}
+        //SHADOWS-----------------------------------
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glDisable(GL_LIGHTING);
+                glEnable(GL_COLOR_MATERIAL);
+                glStencilOp(GL_KEEP,GL_KEEP,GL_INVERT);
+                for(int i = 0; i < rows; i++) {
+                        for(int j = 0; j < columns; j++) {
+                                if(!level[i][j]==0 || !level[i][j]==3){
+                                    glPushMatrix();
+                                        glTranslatef((GLfloat)j, (GLfloat)0+0.01, (GLfloat)i);
+                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        if(i <= rows/2 && j <= columns/2)
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY(), light1->getPosZ()-i, 1.0f);
+                                        else if(i<= rows/2 && j <= columns)
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY(), light2->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j <= columns/2)
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY(), light4->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j <= columns)
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY(), light3->getPosZ()-i, 1.0f);
+                                        models[ level[i][j] ]->draw();
+                                    glPopMatrix();
+                            }
+                        }
+                }
+                glEnable(GL_LIGHTING);
+        //-------------------------------------------
 	glEndList();
 	delete tempBox;
     
+}
+
+void LevelRenderer::plane()
+{
+    glPushMatrix();
+        glBegin(GL_QUADS);	
+                glVertex3f(0, 0, 0);
+                glVertex3f(50, 0, 0);
+                glVertex3f(50, 0, 50);
+                glVertex3f(0, 0, 50);
+	glEnd();
+    glPopMatrix();
 }
 
 void LevelRenderer::render() {
@@ -220,7 +328,7 @@ void LevelRenderer::render() {
             glCallList(6);
         }
 	else {
-          glCallList(5);
+            glCallList(5);
     }
 		
 	//Added by Jeff to see axes
@@ -238,8 +346,7 @@ void LevelRenderer::render() {
 			glVertex3f(0,0,0);
 			glVertex3f(0,0,1);
 		glEnd();
-	glPopMatrix();
-	
+	glPopMatrix();       
 }
 
 void LevelRenderer::map(){
@@ -260,7 +367,6 @@ void LevelRenderer::map(){
 		light2 = new LightPost((GLfloat)columns, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
 		light3 = new LightPost((GLfloat)columns, 6.0f, (GLfloat)rows, -2.5f, -2.5f, -2.5f);
 		light4 = new LightPost(0.0f, 6.0f, (GLfloat)rows, 2.5f, -2.5f, -2.5f);
-
 		//creating the map
 		level = new int*[rows];
 		for(int i = 0; i<rows; i++){
@@ -275,6 +381,7 @@ void LevelRenderer::map(){
 
 			}
 		}
+                
 		openfile.close();
 	}
 
@@ -288,32 +395,7 @@ void LevelRenderer::toggleSkySphere(){
 	isSkySphere = !isSkySphere;
 }
 
-/*void LevelRenderer::shadowMatrix(GLfloat shadowMat[4][4], GLfloat groundplane[4], GLfloat lightpos[4])
-{
-    GLfloat dot;
-    //Find dot product between light position vector and ground plane normal
-    dot =   groundplane[X]*lightpos[X] +
-            groundplane[Z]*lightpos[Z] +
-            groundplane[Y]*lightpos[Y] +
-            groundplane[W]*lightpos[W];
-    shadowMat[0][0] = dot-lightpos[X]*groundplane[X];
-    shadowMat[1][0] = 0f-lightpos[X]*groundplane[Y];
-    shadowMat[2][0] = 0f-lightpos[X]*groundplane[Z];
-    shadowMat[3][0] = 0f-lightpos[X]*groundplane[X];
-    shadowMat[X][1] = 0f-lightpos[Y]*groundplane[X];
-    shadowMat[1][1] = dot - lightpos[Y]*groundplane[Y]; 
-    shadowMat[2][1] = 0f - lightpos[Y]*groundplane[Z];
-    shadowMat[3][1] = 0f - lightpos[Y]*groundplane[W];
-    shadowMat[X][2] = 0f - lightpos[Z]*groundplane[X];
-    shadowMat[1][2] = 0f - lightpos[Z]*groundplane[Y];
-    shadowMat[2][2] = dot - lightpos[Z]*groundplane[Z];
-    shadowMat[3][2] = 0f - lightpos[Z]*groundplane[W];
-    shadowMat[X][3] = 0f - lightpos[W]*groundplane[X];
-    shadowMat[1][3] = 0f - lightpos[W]*groundplane[Y];
-    shadowMat[2][3] = 0f - lightpos[W]*groundplane[Z];
-    shadowMat[3][3] = dot - lightpos[W]*groundplane[W];
-    
-}*/
+
 void LevelRenderer::renderLights()
 {		
 		//ambient light

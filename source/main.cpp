@@ -175,9 +175,22 @@ void render()
 	static GLuint prevFps = 0;
 
 	//clears the buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+        
+        //Shadow Stuff---------//
+        
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glDepthMask(GL_FALSE);
+        glEnable(GL_STENCIL_TEST);
+        glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDepthMask(GL_TRUE);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+        
 
+        //---------//
+        
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -417,7 +430,7 @@ int main (int argc, char **argv)
 {
 	// GLUT initialization.
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL);
 	glutInitWindowSize(width, height);
 	mainWindow = glutCreateWindow("Battle Royale Near Earth");
        
@@ -432,6 +445,11 @@ int main (int argc, char **argv)
 	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
 	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
     
+        // Initialize stencilling.
+	
+        glClearStencil(0);
+	glEnable(GL_STENCIL_TEST);
+        
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);

@@ -10,8 +10,8 @@
 #include "Material/OrganicMaterial.h"
 
 GrassModel::GrassModel() {
-    TeamNumberModel* child = new TeamNumberModel();
-    setNextChild( (Model*)child );
+    //TeamNumberModel* child = new TeamNumberModel();
+    //setNextChild( (Model*)child );
     material = (Material*)(new OrganicMaterial());
     build();
 }
