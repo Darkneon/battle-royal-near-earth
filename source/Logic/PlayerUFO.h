@@ -14,9 +14,9 @@
 #include "../Model/Helper/CollisionTester.h"
 #define MAX_PLAYER_HEIGHT 3
 #define MIN_PLAYER_HEIGHT 0
-#define SIDE_STEP 0.5f
-#define UP_STEP 0.3f
-#define DOWN_STEP 0.1f
+#define SIDE_STEP 0.2f
+#define UP_STEP 0.2f
+#define DOWN_STEP 0.05f
 
 class PlayerUFO {
 public:

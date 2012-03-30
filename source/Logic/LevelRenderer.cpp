@@ -18,12 +18,12 @@
 #include "Static/LightRubbleModel.h"
 #include "Buildings/FactoryModel.h"
 #include "Buildings/BaseModel.h"
-
+#include "../Model/Robot/BulletModel.h"
 #include <fstream>
 
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "map2.txt";
+	loadmap = "jeffTest.txt";
 
 	//skyboxes
 	isSkySphere = false;
@@ -59,7 +59,8 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
 	FactoryModel *factoryModel = new FactoryModel;
-	BaseModel *baseModel = new BaseModel;;
+	BaseModel *baseModel = new BaseModel;
+	BulletModel *bModel = new BulletModel;
 
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
@@ -75,6 +76,9 @@ LevelRenderer::LevelRenderer() {
 	models[11] = (Model*)lightRubbleModel;
 	models[12] = (Model*)factoryModel;
 	models[13] = (Model*)baseModel;
+
+	bm = new BulletManager;
+	lrBoxes = new CollisionTester;
 
         groundplane[0] = 0.0f;
         groundplane[1] = 1.0f;
@@ -316,6 +320,7 @@ void LevelRenderer::render() {
 		sphericSkyBox->render();
 
 	renderLights();
+	bm->drawBullets();
 
 	if (TextureManager::getInstance()->texturesEnabled)
 		 if (TextureManager::getInstance()->getCurrentSkin() == 0) {

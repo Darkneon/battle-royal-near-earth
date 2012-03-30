@@ -39,9 +39,9 @@ Robot::Robot() {
 
 	robotLife = MAX_LIFE;
 
+	directionVector[0] = 0.0f;
 	directionVector[1] = 0.0f;
-	directionVector[2] = 0.0f;
-	directionVector[3] = 1.0f;
+	directionVector[2] = 1.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -76,7 +76,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	xPos = x;
 	zPos = y;
 	xDestination = x;
-	zDestination = 5.0f;
+	zDestination = y;
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
 	pitchAngle = 90.0f;
@@ -84,6 +84,10 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	isMyLightOn = false;
 
 	robotLife = MAX_LIFE;
+
+	directionVector[0] = 0.0f;
+	directionVector[1] = 0.0f;
+	directionVector[2] = 1.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -94,8 +98,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	}
 
 	turnIndexOn(1);
-	turnIndexOn(3);
-	turnIndexOn(4);
+	//turnIndexOn(3);
+	//turnIndexOn(4);
 	turnIndexOn(5);
 
 	refreshRobot();
@@ -105,6 +109,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	ct->staticBoxes.push_back(box);
 
 	isRobotBeingControlled = false;
+	shootBullet();
 }
 
 Robot::~Robot() {
@@ -157,8 +162,6 @@ void Robot::draw() {
 			rubble->draw();
 		glPopMatrix();
 	}
-	//robotLife = robotLife -0.5f;
-
 }
 
 //-------------------------------------------------------------
@@ -799,4 +802,8 @@ bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 void Robot::spinDirectionVector(){
 	directionVector[0] = sin(spinDegrees*DegreesToRadians);
 	directionVector[2] = cos(spinDegrees*DegreesToRadians);
+}
+
+void Robot::shootBullet(){
+	bm->addBullet(xPos,0.5f,zPos,directionVector[0],directionVector[1],directionVector[2]);
 }

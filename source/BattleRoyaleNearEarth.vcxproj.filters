@@ -182,6 +182,15 @@
     <ClCompile Include="Model\MissileModel.cpp">
       <Filter>Model</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Robot\BulletModel.cpp">
+      <Filter>Model\Robot</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\Bullet.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\BulletManager.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -363,6 +372,15 @@
     </ClInclude>
     <ClInclude Include="Model\MissileModel.h">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Robot\BulletModel.h">
+      <Filter>Model\Robot</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\Bullet.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\BulletManager.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -86,8 +86,8 @@ void PlayerUFO::incrementHeight(bool positive){
 		}		
 	}
 	else{
-		if(pos[1]-DOWN_STEP >= MIN_PLAYER_HEIGHT&&
-		!ufoCollisionTest(pos[0],pos[1]-0.02f,pos[2])){
+		if(pos[1]-DOWN_STEP >= MIN_PLAYER_HEIGHT &&
+		!ufoCollisionTest(pos[0],pos[1]-DOWN_STEP,pos[2])){
 			pos[1] -= DOWN_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
