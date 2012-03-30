@@ -23,7 +23,7 @@
 
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "map1.txt";
+	loadmap = "map3.txt";
 
 	//skyboxes
 	isSkySphere = false;

@@ -410,5 +410,14 @@
     <Library Include="..\library\freeglut_static.lib">
       <Filter>Libraries</Filter>
     </Library>
+    <Library Include="..\library\SDL.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDL_mixer.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDLmain.lib">
+      <Filter>Libraries</Filter>
+    </Library>
   </ItemGroup>
 </Project>
