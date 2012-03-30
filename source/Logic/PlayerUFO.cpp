@@ -80,20 +80,15 @@ void PlayerUFO::draw(){
 void PlayerUFO::incrementHeight(bool positive){
 	if(positive){
 		
-		if(pos[1]+0.5f <= MAX_PLAYER_HEIGHT){
-			pos[1] += 0.5f;
+		if(pos[1]+UP_STEP <= MAX_PLAYER_HEIGHT){
+			pos[1] += UP_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
-		}
-                if(pos[1]+0.3 > MAX_PLAYER_HEIGHT){
-                    pos[1] = MAX_PLAYER_HEIGHT-0.3f;
-                   box->lockBox(pos[0],pos[1],pos[2]);
-                }
-				
+		}		
 	}
 	else{
-		if(pos[1]-0.02f >= MIN_PLAYER_HEIGHT&&
+		if(pos[1]-DOWN_STEP >= MIN_PLAYER_HEIGHT&&
 		!ufoCollisionTest(pos[0],pos[1]-0.02f,pos[2])){
-			pos[1] -= 0.2f;
+			pos[1] -= DOWN_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
@@ -102,14 +97,14 @@ void PlayerUFO::incrementHeight(bool positive){
 
 void PlayerUFO::incrementXPos(bool positive){
 	if(positive){
-		if(!ufoCollisionTest(pos[0]+0.05f,pos[1],pos[2])){
-			pos[0] += 0.5f;
+		if(!ufoCollisionTest(pos[0]+SIDE_STEP,pos[1],pos[2])){
+			pos[0] += SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
 	else{
-		if(!ufoCollisionTest(pos[0]-0.05f,pos[1],pos[2])){
-			pos[0] -= 0.5f;
+		if(!ufoCollisionTest(pos[0]-SIDE_STEP,pos[1],pos[2])){
+			pos[0] -= SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
@@ -118,14 +113,14 @@ void PlayerUFO::incrementXPos(bool positive){
 
 void PlayerUFO::incrementZPos(bool positive){
 	if(positive){
-		if(!ufoCollisionTest(pos[0],pos[1],pos[2]+0.05f)){
-			pos[2] += 0.5f;
+		if(!ufoCollisionTest(pos[0],pos[1],pos[2]+SIDE_STEP)){
+			pos[2] += SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
 	else{
-		if(!ufoCollisionTest(pos[0],pos[1],pos[2]-0.05f)){
-			pos[2] -= 0.5f;
+		if(!ufoCollisionTest(pos[0],pos[1],pos[2]-SIDE_STEP)){
+			pos[2] -= SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}

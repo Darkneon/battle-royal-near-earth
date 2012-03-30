@@ -23,7 +23,7 @@
 
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "map3.txt";
+	loadmap = "map2.txt";
 
 	//skyboxes
 	isSkySphere = false;
@@ -216,9 +216,9 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] >=12){
+				/*if(level[i][j] >=12){
 					models[0]->draw();
-				}
+				}*/
 			glPopMatrix();
 			switch(level[i][j]){
 				case 1: case 6: case 7: //hills, plain and holloy block
@@ -243,18 +243,20 @@ void LevelRenderer::buildMap()
 					break;
 				case 13://base
 					//5.0f,1.25f,4.0f
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+5.0f),1.25f, (GLfloat)(j+2.5f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+5.0f),1.25f, (GLfloat)(i+2.5f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
-					tempBox = new BoundingBox((GLfloat)(i+1.0f), 0.0f, (GLfloat)(j+2.5f), (GLfloat)(i+4.0f),0.75f, (GLfloat)(j+4.0f));
+					tempBox = new BoundingBox((GLfloat)(j+1.0f), 0.0f, (GLfloat)(i+2.5f), (GLfloat)(j+4.0f),0.75f, (GLfloat)(i+4.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 				case 12://factory
 					//3.0f,1.25f,2.0f
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+3.0f),1.25f, (GLfloat)(i+1.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)(i+1.0f), (GLfloat)(j+3.0f),0.75f, (GLfloat)(i+2.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 				default:
