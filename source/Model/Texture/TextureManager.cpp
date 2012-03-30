@@ -77,8 +77,6 @@ void TextureManager::addTexturesFromFolder(string folder, map<string,GLuint>& te
 		
 		// assigns image data to respective texture ID
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
-		
-        cout << i << endl;
 
         textureList.insert(texturePair(bmpToLoad, textureIDs[i]));
 	}        

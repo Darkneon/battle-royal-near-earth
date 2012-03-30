@@ -3,6 +3,9 @@
 #include <string>
 #include <time.h>
 #include <sstream>
+
+#include "..\include\SDL\SDL.h"
+#include "..\include\SDL\SDL_mixer.h"
         
 #include "Game.h"
 #include "SpotLight.h"
@@ -172,9 +175,22 @@ void render()
 	static GLuint prevFps = 0;
 
 	//clears the buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+        
+        //Shadow Stuff---------//
+        
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glDepthMask(GL_FALSE);
+        glEnable(GL_STENCIL_TEST);
+        glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDepthMask(GL_TRUE);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+        
 
+        //---------//
+        
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -185,10 +201,14 @@ void render()
 	if (isTwoPlayerGame)
 	{
 		game->p1->view();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		game->render();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
 	
 		game->p2->view();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		game->render();
 		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
 	}
@@ -367,11 +387,26 @@ void initAntTweak() {
   //antTweakHelper.bindLightPosts(light1, light2, light3, light4);
 }
 
+//http://sites.google.com/site/sdlgamer/beginner/lesson-12
+void initGameMusic()
+{
+	// Inilialize SDL_mixer , exit if fail
+	if( SDL_Init(SDL_INIT_AUDIO) < 0 ) exit(1);
+	// Setup audio mode
+	Mix_OpenAudio(22050,AUDIO_S16SYS,2,640);
+	Mix_Music *mus; // *mus2 ;  // Background Music
+	//Mix_Chunk *wav , *wav2 ;  // For Sounds
+	string track01 = "music/Darkness.mid";
+	mus = Mix_LoadMUS((TextureManager::getResourcePath() + track01).c_str());
+	Mix_PlayMusic(mus,1); //Music loop=1
+}
+
 void init()
 {
 	glGenLists(7);
 
 	te = TextureManager::getInstance();
+	srand ( (unsigned int)time(NULL) );
 
 	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
 	glEnable(GL_DEPTH_TEST);
@@ -393,6 +428,8 @@ void init()
 
 	TextureManager::getInstance()->toggleTextures();
 	BoundingBox::showBoxes = !BoundingBox::showBoxes;
+
+	initGameMusic();
 }
 
 //mouse movement functions, primarily used to modify the view
@@ -411,11 +448,12 @@ void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
 	game->playerInput2->joystickOperations(button, xaxis, yaxis, zaxis);
 }
 
+
 int main (int argc, char **argv)
 {
 	// GLUT initialization.
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL);
 	glutInitWindowSize(width, height);
 	mainWindow = glutCreateWindow("Battle Royale Near Earth");
        
@@ -430,10 +468,16 @@ int main (int argc, char **argv)
 	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
 	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
     
+        // Initialize stencilling.
+	
+        glClearStencil(0);
+	glEnable(GL_STENCIL_TEST);
+        
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
 	glutJoystickFunc(joystickFunc, 75);
+
 	init();
 
 	glutMainLoop();

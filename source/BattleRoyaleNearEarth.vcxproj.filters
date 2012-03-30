@@ -179,6 +179,9 @@
     <ClCompile Include="Model\Helper\CollisionTester.cpp">
       <Filter>Model\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Model\MissileModel.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -358,6 +361,9 @@
     <ClInclude Include="Model\Helper\CollisionTester.h">
       <Filter>Model\Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Model\MissileModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -402,6 +408,15 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDL.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDL_mixer.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDLmain.lib">
       <Filter>Libraries</Filter>
     </Library>
   </ItemGroup>
