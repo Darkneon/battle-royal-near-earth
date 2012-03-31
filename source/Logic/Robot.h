@@ -65,6 +65,7 @@ public:
 	GLfloat* getLookAt();
 	GLfloat* getLightLookAt();
 	GLfloat calculateHeight(int index); //because height varies depending on components
+	GLfloat calculateHeight();
 
 	//Camera attachment and synchronization
 	void attachToCamera(RobotCamera* rc);

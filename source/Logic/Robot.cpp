@@ -102,6 +102,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	//turnIndexOn(4);
 	turnIndexOn(5);
 
+	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
 
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
@@ -263,7 +264,7 @@ void Robot::refreshRobot(){
 	if(childExists){
 		model->setNextChild(temp);
 	}
-	calculateHeight(8);
+	calculateHeight();
 	notifyCamera();
 }
 
@@ -331,9 +332,9 @@ GLfloat* Robot::getLightLookAt(){
 	return rotated;
 }
 
-GLfloat Robot::calculateHeight(int index){
+GLfloat Robot::calculateHeight(){
 	GLfloat h = 0; 
-	for(int i = 0; i < index; i++){
+	for(int i = 0; i <= 7; i++){
 		if(isPartOn[i]){
 			switch(i){
 				case 0:
@@ -366,6 +367,42 @@ GLfloat Robot::calculateHeight(int index){
 		}
 	}
 	height = h;
+	return h;
+}
+GLfloat Robot::calculateHeight(int index){
+	GLfloat h = 0; 
+	for(int i = 0; i <= index; i++){
+		if(isPartOn[i]){
+			switch(i){
+				case 0:
+					h += BIPOD_HEIGHT;
+					break;
+				case 1:
+					h += TRACKS_HEIGHT;
+					break;
+				case 2:
+					h += ANTIGRAV_HEIGHT;
+					break;
+				case 3:
+					h += CANNON_HEIGHT;
+					break;
+				case 4:
+					h += MISSILE_LAUNCHER_HEIGHT;
+					break;
+				case 5:
+					h += PHASER_HEIGHT;
+					break;
+				case 6:
+					h += NUCLEAR_HEIGHT;
+					break;
+				case 7:
+					h += ELECTRONICS_HEIGHT;
+					break;
+				default:
+					break;
+			}
+		}
+	}
 	return h;
 }
 
@@ -805,5 +842,20 @@ void Robot::spinDirectionVector(){
 }
 
 void Robot::shootBullet(){
-	bm->addBullet(xPos,0.5f,zPos,directionVector[0],directionVector[1],directionVector[2]);
+	//check which component is highest
+	int highestIndex = 0;
+	for(int i = 3; i <= 5; i++){
+		if(isPartOn[i]){
+			highestIndex = i;
+		}
+	}
+	GLfloat yPosition = calculateHeight(highestIndex);
+	//need spawn point for robot
+	switch(highestIndex){
+	case 5:
+		bm->addBullet(xPos+0.5f,yPosition-0.3f,zPos+0.5f,directionVector[0],directionVector[1],directionVector[2]);
+		break;
+	default:
+		break;
+	}
 }

@@ -5,8 +5,9 @@
 #include "../Model/Robot/BulletModel.h"
 #include "../Model/Helper/BoundingBox.h"
 
-#define MAX_DURATION 100
+#define MAX_DURATION 300
 #define BULLET_STEP_SIZE 0.05f;
+
 
 class Bullet
 {

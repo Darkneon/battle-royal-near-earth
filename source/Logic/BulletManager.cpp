@@ -22,9 +22,16 @@ void BulletManager::moveBullets(){
 }
 
 void BulletManager::drawBullets(){
+	bool cleanUp = false;
 	for(int i = 0; i < (int)(bullets.size()); i++){
 		bullets.at(i)->draw();
 		bullets.at(i)->moveBullet();
+		if(bullets.at(i)->isBulletDead()){
+			cleanUp = true;
+		}	
+	}
+	if(cleanUp){
+			cleanUpBullets();
 	}
 }
 

@@ -40,6 +40,7 @@ void Bullet::draw(){
 		glPushMatrix();
 			glTranslatef(position.x,position.y,position.z);
 			model->draw();
+			duration--;
 		glPopMatrix();
 	}
 }
