@@ -39,9 +39,9 @@ Robot::Robot() {
 
 	robotLife = MAX_LIFE;
 
-	directionVector[0] = 0.0f;
+	directionVector[0] = -1.0f;
 	directionVector[1] = 0.0f;
-	directionVector[2] = 1.0f;
+	directionVector[2] = 0.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -77,17 +77,17 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	zPos = y;
 	xDestination = x;
 	zDestination = y;
-	spinDegrees = SOUTH;
-	spinDestination = SOUTH;
+	spinDegrees = WEST;
+	spinDestination = WEST;
 	pitchAngle = 90.0f;
 	yawAngle = 90.0f;
 	isMyLightOn = false;
 
 	robotLife = MAX_LIFE;
 
-	directionVector[0] = 0.0f;
+	directionVector[0] = -1.0f;
 	directionVector[1] = 0.0f;
-	directionVector[2] = 1.0f;
+	directionVector[2] = 0.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -605,6 +605,36 @@ void Robot::timedSpin(){
 void Robot::moveStrafe(bool pos)
 {
 	if(pos){
+		if(!robotCollisionTest(xPos - (GLfloat)directionVector[2], 0.0f,
+			zPos + (GLfloat)directionVector[0])){
+
+			xPos -= (GLfloat)directionVector[2];
+			zPos += (GLfloat)directionVector[0];
+
+			box->moveBox((GLfloat)-directionVector[2], 0.0f,
+				(GLfloat)directionVector[0]);
+		}
+	}
+	else
+	{
+		if(!robotCollisionTest(xPos + (GLfloat)directionVector[2], 0.0f,
+			zPos - (GLfloat)directionVector[0])){
+
+			xPos += (GLfloat)directionVector[2];
+			zPos -= (GLfloat)directionVector[0];
+
+			box->moveBox((GLfloat)directionVector[2],0.0f,
+				(GLfloat)-directionVector[0]);
+		}
+	}
+
+	notifyCamera();
+	
+}
+
+void Robot::moveForward(bool pos)
+{
+	if(pos){
 		if(!robotCollisionTest(xPos + (GLfloat)directionVector[0], 0.0f,
 			zPos + (GLfloat)directionVector[2])){
 
@@ -624,35 +654,6 @@ void Robot::moveStrafe(bool pos)
 			zPos -= (GLfloat)directionVector[2];
 
 			box->moveBox(-(GLfloat)directionVector[0],0.0f,-(GLfloat)directionVector[2]);
-		}
-	}
-	notifyCamera();
-	
-}
-
-void Robot::moveForward(bool pos)
-{
-	if(pos){
-		if(!robotCollisionTest(xPos - (GLfloat)directionVector[2], 0.0f,
-			zPos + (GLfloat)directionVector[0])){
-
-			xPos -= (GLfloat)directionVector[2];
-			zPos += (GLfloat)directionVector[0];
-
-			box->moveBox((GLfloat)-directionVector[2],0.0f,
-				(GLfloat)directionVector[0]);
-		}
-	}
-	else
-	{
-		if(!robotCollisionTest(xPos + (GLfloat)directionVector[2], 0.0f,
-			zPos - (GLfloat)directionVector[0])){
-
-			xPos += (GLfloat)directionVector[2];
-			zPos -= (GLfloat)directionVector[0];
-
-			box->moveBox((GLfloat)directionVector[2],0.0f,
-				(GLfloat)-directionVector[0]);
 		}
 	}
 
@@ -837,8 +838,8 @@ bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 
 //For Robert and first person view movement
 void Robot::spinDirectionVector(){
-	directionVector[0] = sin(spinDegrees*DegreesToRadians);
-	directionVector[2] = cos(spinDegrees*DegreesToRadians);
+	directionVector[0] = -cos((spinDegrees)*DegreesToRadians);
+	directionVector[2] = sin((spinDegrees)*DegreesToRadians);
 }
 
 void Robot::shootBullet(){

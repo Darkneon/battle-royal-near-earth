@@ -24,29 +24,25 @@ void PlayerInput::keyOperations(int keyModifier)
 	else if (keyStates[32]){ //space
 		player->levitateUFO();
 	}
-    /*    else if (keyStates[49]) //1
+        else if (keyStates[49]) //1
 	{
-		//player->changeCamera(CAMERA_LIGHT1);
-               // glutPostRedisplay();
+		//player->changeCamera(CAMERA_LIGHT1);               
 		player->moveUFOX(true);
 
 	}
         else if (keyStates[50]) //2
 	{
 		//player->changeCamera(CAMERA_LIGHT2);
-                //glutPostRedisplay();
 		player->moveUFOZ(false);
-	}*/
-     /*   else if (keyStates[51]) //3
+	}
+        else if (keyStates[51]) //3
 	{
-		player->changeCamera(CAMERA_LIGHT3);
-                glutPostRedisplay();
+		//player->changeCamera(CAMERA_LIGHT3);
 	}
         else if (keyStates[52]) //4
 	{
-		player->changeCamera(CAMERA_LIGHT4);
-                glutPostRedisplay();
-	}*/
+		//player->changeCamera(CAMERA_LIGHT4);
+	}
 
 	if (keyStates[108]) //l
 	{
@@ -79,7 +75,7 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveStrafe(false);
+			player->robots.at(0)->moveStrafe(true);
 		}
 		else
 			player->moveUFOX(true);
@@ -89,7 +85,7 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveStrafe(true);
+			player->robots.at(0)->moveStrafe(false);
 		}
 		else
 			player->moveUFOX(false);
@@ -185,4 +181,13 @@ void PlayerInput::mousePassiveOperations(int x, int y)
 	if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		player->robots.at(0)->incrementSpinDegrees(x, y);
 
+}
+
+void PlayerInput::mouseButtons(int button, int state)
+{
+	//0 is left button, 2 is right button, 1 is middle mouse
+	//0 is pressed, 1 is released for STATES
+
+	if (button == 0 && state == 0 && player->getCurrentCameraType() == CAMERA_ROBOT)
+		player->robots.at(0)->shootBullet();
 }

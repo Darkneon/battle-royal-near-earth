@@ -449,6 +449,13 @@ void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
 }
 
 
+void mouseFunc(int button, int state, int x, int y)
+{
+	
+	game->playerInput1->mouseButtons(button, state);
+	game->playerInput1->mousePassiveOperations(x, y);
+}
+
 int main (int argc, char **argv)
 {
 	// GLUT initialization.
@@ -465,19 +472,19 @@ int main (int argc, char **argv)
 	glutKeyboardUpFunc(keyboardKeysUp);
 	glutDisplayFunc(render);
 
-	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
-	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
-    
-        // Initialize stencilling.
-	
-        glClearStencil(0);
+    // Initialize stencilling.
+    glClearStencil(0);
 	glEnable(GL_STENCIL_TEST);
         
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
-	glutJoystickFunc(joystickFunc, 75);
+	glutMouseFunc(mouseFunc);
+	glutJoystickFunc(joystickFunc, 5);
 
+	//glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
+	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
+    
 	init();
 
 	glutMainLoop();

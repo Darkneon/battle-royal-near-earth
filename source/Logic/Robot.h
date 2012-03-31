@@ -89,6 +89,9 @@ public:
 	//Used to know if a player is currently controlling this particular robot
 	bool isRobotBeingControlled;
 
+	//Bullet Related
+	void shootBullet();
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	//Models
@@ -140,8 +143,7 @@ private:
 	//Life
 	GLfloat robotLife;
 
-	//Bullet Related
-	void shootBullet();
+	
 
 
 	//-----------------------PRIVATE METHODS---------------------------
