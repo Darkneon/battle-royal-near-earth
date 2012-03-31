@@ -19,8 +19,14 @@
         <itemPath>source/Helper/DirectoryManipHelper.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Logic" displayName="Logic" projectFiles="true">
+        <itemPath>source/Logic/AIPlayer.cpp</itemPath>
+        <itemPath>source/Logic/AIPlayer.h</itemPath>
         <itemPath>source/Logic/Base.cpp</itemPath>
         <itemPath>source/Logic/Base.h</itemPath>
+        <itemPath>source/Logic/Bullet.cpp</itemPath>
+        <itemPath>source/Logic/Bullet.h</itemPath>
+        <itemPath>source/Logic/BulletManager.cpp</itemPath>
+        <itemPath>source/Logic/BulletManager.h</itemPath>
         <itemPath>source/Logic/Camera.cpp</itemPath>
         <itemPath>source/Logic/Camera.h</itemPath>
         <itemPath>source/Logic/CirclingCamera.cpp</itemPath>
@@ -98,6 +104,8 @@
           <itemPath>source/Model/Robot/AntiGravModel.h</itemPath>
           <itemPath>source/Model/Robot/BipodModel.cpp</itemPath>
           <itemPath>source/Model/Robot/BipodModel.h</itemPath>
+          <itemPath>source/Model/Robot/BulletModel.cpp</itemPath>
+          <itemPath>source/Model/Robot/BulletModel.h</itemPath>
           <itemPath>source/Model/Robot/CannonModel.cpp</itemPath>
           <itemPath>source/Model/Robot/CannonModel.h</itemPath>
           <itemPath>source/Model/Robot/ElectronicsModel.cpp</itemPath>
@@ -151,6 +159,8 @@
           <itemPath>source/Model/Texture/imageloader.cpp</itemPath>
           <itemPath>source/Model/Texture/imageloader.h</itemPath>
         </logicalFolder>
+        <itemPath>source/Model/MissileModel.cpp</itemPath>
+        <itemPath>source/Model/MissileModel.h</itemPath>
         <itemPath>source/Model/Model.cpp</itemPath>
         <itemPath>source/Model/Model.h</itemPath>
       </logicalFolder>
