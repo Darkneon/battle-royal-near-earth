@@ -276,7 +276,7 @@ void LevelRenderer::buildMap()
                 glStencilOp(GL_KEEP,GL_KEEP,GL_INVERT);
                 for(int i = 0; i < rows; i++) {
                         for(int j = 0; j < columns; j++) {
-                                if(!(level[i][j]== 0) || !(level[i][j]== 3)){
+                                if(!(level[i][j]==0) || !(level[i][j]==3)){
                                     glPushMatrix();
                                         glTranslatef((GLfloat)j, (GLfloat)0.01, (GLfloat)i);
                                         glColor4f(0.0, 0.0, 0.0, 0.5f);

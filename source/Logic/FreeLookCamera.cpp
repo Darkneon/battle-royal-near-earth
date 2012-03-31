@@ -86,6 +86,14 @@ void FreeLookCamera::modifyYaw(bool negateTheValue, int x, int y)
 		directionVector[0] = cos(yaw);
 		directionVector[1] = -sin(pitch);
 		directionVector[2] = sin(yaw);
+
+		/*
+		GLdouble vectorNorm = directionVector[0] + directionVector[1] + directionVector[2];
+		vectorNorm = sqrt(vectorNorm);
+		directionVector[0] = directionVector[0] / vectorNorm;
+		directionVector[1] = directionVector[1] / vectorNorm;
+		directionVector[2] = directionVector[2] / vectorNorm;
+		*/
 	}
 }
 
