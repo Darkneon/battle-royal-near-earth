@@ -41,17 +41,7 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
-	
-
-
-	/*
-	glTranslatef(30.0f, 1.0f, 30.0f);
-	mm.render();
-	*/
-
-	
-
 	lr->render();	
 	p1->render();
-	p2->render();
+	p2->render();	
 }
