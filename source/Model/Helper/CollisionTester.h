@@ -14,8 +14,9 @@
     #include <GL/glut.h>
 #endif
 
-#include <vector>
 #include "BoundingBox.h"
+
+#include <vector>
 using namespace std;
 
 class CollisionTester
@@ -29,6 +30,7 @@ public:
 	bool collision(BoundingBox* b, GLfloat x, GLfloat y, GLfloat z, GLuint id);
 	//tests collision on every bounding box
 	bool collisionTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
+	bool bulletCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
 };
 
 #endif

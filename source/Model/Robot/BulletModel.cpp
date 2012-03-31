@@ -30,7 +30,7 @@ void BulletModel::render(){
 		glColor3f(0.0f,0.0f,1.0f);
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal4.bmp"));	
 		gluQuadricTexture(quadratic,true);	
-		gluSphere(quadratic, 0.1f, 10,10);
+		gluSphere(quadratic, BULLET_RADIUS, 10,10);
 		glColor3f(0.5f,0.5f,0.5f);
 	glPopMatrix();
 	gluDeleteQuadric(quadratic);

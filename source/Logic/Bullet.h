@@ -4,10 +4,10 @@
 #include "Model.h"
 #include "../Model/Robot/BulletModel.h"
 #include "../Model/Helper/BoundingBox.h"
+#include "../Model/Helper/CollisionTester.h"
 
-#define MAX_DURATION 300
-#define BULLET_STEP_SIZE 0.05f;
-
+#define MAX_DURATION 5000
+#define BULLET_STEP_SIZE 0.0005f
 
 class Bullet
 {
@@ -19,11 +19,15 @@ public:
 	V3 getPosition();
 	bool isBulletDead();
 	void moveBullet();
+	bool bulletCollisionTest(GLfloat x, GLfloat y, GLfloat z);
+
 private:
 	Model *model;
+	BoundingBox *box;
 	V3 position;
 	V3 direction;
 	GLfloat duration;
+	CollisionTester* ct;
 };
 
 #endif

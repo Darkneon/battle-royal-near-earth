@@ -89,6 +89,9 @@ public:
 	//Used to know if a player is currently controlling this particular robot
 	bool isRobotBeingControlled;
 
+	//damage Robot
+	void takeDamage(GLfloat damage);
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	//Models
@@ -130,8 +133,8 @@ private:
 	GLfloat xDestination;
 	GLfloat zDestination;
 	GLfloat spinDestination;
-	V3 bulletSpawn1;
-	V3 bulletSpawn2;
+//	V3 bulletSpawnPhaser;
+//	V3 bulletSpawn2;
 	//Lighting
 	bool isMyLightOn;
 	//Used for component toggling
@@ -143,6 +146,7 @@ private:
 	//Bullet Related
 	void shootBullet();
 
+	
 
 	//-----------------------PRIVATE METHODS---------------------------
 	
@@ -185,6 +189,7 @@ private:
 	//Collision Detection
 	bool robotCollisionTest(GLfloat x, GLfloat y, GLfloat z);
 
+	
 
 };
 
