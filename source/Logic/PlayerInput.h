@@ -17,6 +17,7 @@ public:
 	void functionKeyOperations(int keyModifier);
 	void keyOperations(int keyModifier);
 	void mousePassiveOperations(int x, int y);
+	void mouseButtons(int button, int state);
 
 private:
 	HumanPlayer* player;

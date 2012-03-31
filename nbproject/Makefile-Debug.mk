@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/source/main.o \
 	${OBJECTDIR}/source/Model/Material/Material.o \
+	${OBJECTDIR}/source/Logic/Bullet.o \
 	${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o \
 	${OBJECTDIR}/source/Model/Helper/CollisionTester.o \
 	${OBJECTDIR}/source/Model/Texture/TextureManager.o \
@@ -49,13 +50,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/Player.o \
 	${OBJECTDIR}/source/Logic/SpotLight.o \
 	${OBJECTDIR}/source/Model/Robot/CannonModel.o \
-	${OBJECTDIR}/source/Logic/CommanderCamera.o \
-	${OBJECTDIR}/source/Model/Static/HollowBlockModel.o \
 	${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/HumanPlayer.o \
+	${OBJECTDIR}/source/Model/MissileModel.o \
+	${OBJECTDIR}/source/Logic/CommanderCamera.o \
+	${OBJECTDIR}/source/Model/Static/HollowBlockModel.o \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/PlayerUFO.o \
 	${OBJECTDIR}/source/Logic/LightCamera.o \
+	${OBJECTDIR}/source/Model/Robot/BulletModel.o \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
@@ -83,14 +86,16 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/Robot.o \
 	${OBJECTDIR}/source/Model/Static/PitModel.o \
 	${OBJECTDIR}/source/Model/Robot/BipodModel.o \
+	${OBJECTDIR}/source/Logic/AIPlayer.o \
 	${OBJECTDIR}/source/Logic/JoystickInput.o \
 	${OBJECTDIR}/source/Model/Robot/AntiGravModel.o \
 	${OBJECTDIR}/source/Model/Robot/TracksModel.o \
 	${OBJECTDIR}/source/Model/Static/GrassModel.o \
+	${OBJECTDIR}/source/Logic/BulletManager.o \
 	${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o \
-	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Logic/Camera.o \
 	${OBJECTDIR}/source/Model/Texture/imageloader.o \
+	${OBJECTDIR}/source/Logic/FreeLookCamera.o \
 	${OBJECTDIR}/source/Model/Helper/BoundingBox.o \
 	${OBJECTDIR}/source/Logic/FollowCamera.o \
 	${OBJECTDIR}/source/Model/Skybox/SphericSkybox.o
@@ -131,6 +136,11 @@ ${OBJECTDIR}/source/Model/Material/Material.o: source/Model/Material/Material.cp
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Material
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Material/Material.o source/Model/Material/Material.cpp
+
+${OBJECTDIR}/source/Logic/Bullet.o: source/Logic/Bullet.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Bullet.o source/Logic/Bullet.cpp
 
 ${OBJECTDIR}/source/Model/Robot/MissileLauncherModel.o: source/Model/Robot/MissileLauncherModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
@@ -197,16 +207,6 @@ ${OBJECTDIR}/source/Model/Robot/CannonModel.o: source/Model/Robot/CannonModel.cp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/CannonModel.o source/Model/Robot/CannonModel.cpp
 
-${OBJECTDIR}/source/Logic/CommanderCamera.o: source/Logic/CommanderCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Logic
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/CommanderCamera.o source/Logic/CommanderCamera.cpp
-
-${OBJECTDIR}/source/Model/Static/HollowBlockModel.o: source/Model/Static/HollowBlockModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HollowBlockModel.o source/Model/Static/HollowBlockModel.cpp
-
 ${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o: source/Model/Static/HalfPlainBlockModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
@@ -216,6 +216,21 @@ ${OBJECTDIR}/source/Logic/HumanPlayer.o: source/Logic/HumanPlayer.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/HumanPlayer.o source/Logic/HumanPlayer.cpp
+
+${OBJECTDIR}/source/Model/MissileModel.o: source/Model/MissileModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/MissileModel.o source/Model/MissileModel.cpp
+
+${OBJECTDIR}/source/Logic/CommanderCamera.o: source/Logic/CommanderCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/CommanderCamera.o source/Logic/CommanderCamera.cpp
+
+${OBJECTDIR}/source/Model/Static/HollowBlockModel.o: source/Model/Static/HollowBlockModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HollowBlockModel.o source/Model/Static/HollowBlockModel.cpp
 
 ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o: source/Model/Static/PlainBlockModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
@@ -231,6 +246,11 @@ ${OBJECTDIR}/source/Logic/LightCamera.o: source/Logic/LightCamera.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/LightCamera.o source/Logic/LightCamera.cpp
+
+${OBJECTDIR}/source/Model/Robot/BulletModel.o: source/Model/Robot/BulletModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BulletModel.o source/Model/Robot/BulletModel.cpp
 
 ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o: source/Model/Static/TeamNumberModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
@@ -367,6 +387,11 @@ ${OBJECTDIR}/source/Model/Robot/BipodModel.o: source/Model/Robot/BipodModel.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BipodModel.o source/Model/Robot/BipodModel.cpp
 
+${OBJECTDIR}/source/Logic/AIPlayer.o: source/Logic/AIPlayer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/AIPlayer.o source/Logic/AIPlayer.cpp
+
 ${OBJECTDIR}/source/Logic/JoystickInput.o: source/Logic/JoystickInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
@@ -387,15 +412,15 @@ ${OBJECTDIR}/source/Model/Static/GrassModel.o: source/Model/Static/GrassModel.cp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/GrassModel.o source/Model/Static/GrassModel.cpp
 
+${OBJECTDIR}/source/Logic/BulletManager.o: source/Logic/BulletManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/BulletManager.o source/Logic/BulletManager.cpp
+
 ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o: source/Model/Static/HalfHollowBlockModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HalfHollowBlockModel.o source/Model/Static/HalfHollowBlockModel.cpp
-
-${OBJECTDIR}/source/Logic/FreeLookCamera.o: source/Logic/FreeLookCamera.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Logic
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FreeLookCamera.o source/Logic/FreeLookCamera.cpp
 
 ${OBJECTDIR}/source/Logic/Camera.o: source/Logic/Camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
@@ -406,6 +431,11 @@ ${OBJECTDIR}/source/Model/Texture/imageloader.o: source/Model/Texture/imageloade
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Texture
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Texture/imageloader.o source/Model/Texture/imageloader.cpp
+
+${OBJECTDIR}/source/Logic/FreeLookCamera.o: source/Logic/FreeLookCamera.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/FreeLookCamera.o source/Logic/FreeLookCamera.cpp
 
 ${OBJECTDIR}/source/Model/Helper/BoundingBox.o: source/Model/Helper/BoundingBox.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Helper

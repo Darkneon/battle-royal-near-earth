@@ -14,12 +14,12 @@ void JoystickInput::joystickOperations(unsigned int button, int x, int y, int z)
 {
 	if (button >= 32) //right trigger
 	{
-		player->robots.at(0)->moveStrafe(false);
+		player->robots.at(0)->moveStrafe(true);
 		button -= 32;
 	}
 	if (button >= 16) //left trigger
 	{
-		player->robots.at(0)->moveStrafe(true);
+		player->robots.at(0)->moveStrafe(false);
 		button -= 16;
 	}
 	if (button >= GLUT_JOYSTICK_BUTTON_D)
@@ -39,7 +39,10 @@ void JoystickInput::joystickOperations(unsigned int button, int x, int y, int z)
 	}
 	if (button >= GLUT_JOYSTICK_BUTTON_A)
 	{
-		std::cout << "button a pressed" << endl;
+		//std::cout << "button a pressed" << endl;
+		if (player->getCurrentCameraType() == CAMERA_ROBOT)
+			player->robots.at(0)->shootBullet();
+
 		button -= GLUT_JOYSTICK_BUTTON_A;
 	}
 

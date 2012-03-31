@@ -4,8 +4,8 @@
 #include <time.h>
 #include <sstream>
 
-#include "..\include\SDL\SDL.h"
-#include "..\include\SDL\SDL_mixer.h"
+//#include "../include/SDL/sdl.h"
+//#include "../include/SDL/SDL_mixer.h"
         
 #include "Game.h"
 #include "SpotLight.h"
@@ -175,21 +175,10 @@ void render()
 	static GLuint prevFps = 0;
 
 	//clears the buffer
+        //glClearStencil(0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
         
-        //Shadow Stuff---------//
-        
-        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-        glDepthMask(GL_FALSE);
-        glEnable(GL_STENCIL_TEST);
-        glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-        glDepthMask(GL_TRUE);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-        
-
-        //---------//
         
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -388,7 +377,7 @@ void initAntTweak() {
 }
 
 //http://sites.google.com/site/sdlgamer/beginner/lesson-12
-void initGameMusic()
+/*void initGameMusic()
 {
 	// Inilialize SDL_mixer , exit if fail
 	if( SDL_Init(SDL_INIT_AUDIO) < 0 ) exit(1);
@@ -399,7 +388,7 @@ void initGameMusic()
 	string track01 = "music/Darkness.mid";
 	mus = Mix_LoadMUS((TextureManager::getResourcePath() + track01).c_str());
 	Mix_PlayMusic(mus,1); //Music loop=1
-}
+}*/
 
 void init()
 {
@@ -429,7 +418,7 @@ void init()
 	TextureManager::getInstance()->toggleTextures();
 	BoundingBox::showBoxes = !BoundingBox::showBoxes;
 
-	initGameMusic();
+//	initGameMusic();
 }
 
 //mouse movement functions, primarily used to modify the view
@@ -449,6 +438,13 @@ void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
 }
 
 
+void mouseFunc(int button, int state, int x, int y)
+{
+	
+	game->playerInput1->mouseButtons(button, state);
+	game->playerInput1->mousePassiveOperations(x, y);
+}
+
 int main (int argc, char **argv)
 {
 	// GLUT initialization.
@@ -465,19 +461,21 @@ int main (int argc, char **argv)
 	glutKeyboardUpFunc(keyboardKeysUp);
 	glutDisplayFunc(render);
 
-	glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
-	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
-    
-        // Initialize stencilling.
-	
-        glClearStencil(0);
+    // Initialize stencilling.
+    glClearStencil(0);
+        glClear(GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_STENCIL_TEST);
         
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
-	glutJoystickFunc(joystickFunc, 75);
+	glutMouseFunc(mouseFunc);
+	glutJoystickFunc(joystickFunc, 5);
 
+	//glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
+	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
+    
 	init();
 
 	glutMainLoop();

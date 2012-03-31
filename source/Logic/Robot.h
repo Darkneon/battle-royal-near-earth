@@ -89,7 +89,10 @@ public:
 	//Used to know if a player is currently controlling this particular robot
 	bool isRobotBeingControlled;
 
+	//Bullet Related
 	//damage Robot
+	void shootBullet();
+
 	void takeDamage(GLfloat damage);
 
 private:
@@ -143,8 +146,7 @@ private:
 	//Life
 	GLfloat robotLife;
 
-	//Bullet Related
-	void shootBullet();
+	
 
 	
 

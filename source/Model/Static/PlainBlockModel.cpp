@@ -24,13 +24,13 @@ void PlainBlockModel::render() {
 	glPushMatrix();
 		drawCube();
 	glPopMatrix();
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 }
 
 void PlainBlockModel::drawSquare(){
 	glPushMatrix();
-	glEnable(GL_BLEND);
-	glColor4f(0.5f,0.5f,0.5f,1.0f);
+	//glEnable(GL_BLEND);
+	//glColor4f(0.5f,0.5f,0.5f,1.0f);
 		glBegin(GL_TRIANGLES);
 			glTexCoord2f(0.0f,0.0f); glVertex3f(0.0f,0.0f,0.0f);
 			glTexCoord2f(0.0f,1.0f); glVertex3f(0.0f,0.0f,1.0f);

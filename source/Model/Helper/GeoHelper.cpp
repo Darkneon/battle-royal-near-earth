@@ -450,7 +450,6 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
         glVertex3f(0.5f, 1.0f, 0.5f);
     glEnd();
 	delete [] normal;
-        glDisable(GL_TEXTURE_2D);
  }
 
 void GeoHelper::findNormal3f(GLfloat* vector1, GLfloat* vector2, GLfloat* vector3, GLfloat* result)
