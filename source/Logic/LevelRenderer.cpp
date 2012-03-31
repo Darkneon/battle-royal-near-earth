@@ -18,12 +18,12 @@
 #include "Static/LightRubbleModel.h"
 #include "Buildings/FactoryModel.h"
 #include "Buildings/BaseModel.h"
-
+#include "../Model/Robot/BulletModel.h"
 #include <fstream>
 
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "map1.txt";
+	loadmap = "jeffTest.txt";
 
 	//skyboxes
 	isSkySphere = false;
@@ -59,7 +59,8 @@ LevelRenderer::LevelRenderer() {
 	pitBottomModel->switchPitType();
 	LightRubbleModel *lightRubbleModel = new LightRubbleModel;
 	FactoryModel *factoryModel = new FactoryModel;
-	BaseModel *baseModel = new BaseModel;;
+	BaseModel *baseModel = new BaseModel;
+	BulletModel *bModel = new BulletModel;
 
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
@@ -75,6 +76,9 @@ LevelRenderer::LevelRenderer() {
 	models[11] = (Model*)lightRubbleModel;
 	models[12] = (Model*)factoryModel;
 	models[13] = (Model*)baseModel;
+
+	bm = new BulletManager;
+	lrBoxes = new CollisionTester;
 
         groundplane[0] = 0.0f;
         groundplane[1] = 1.0f;
@@ -182,9 +186,9 @@ void LevelRenderer::buildMap()
                 glEnable(GL_COLOR_MATERIAL);
                 for(int i = 0; i < rows; i++) {
                         for(int j = 0; j < columns; j++) {
-                                if(!level[i][j]==0 || !level[i][j]==3){
+                                if(!(level[i][j]==0) || !(level[i][j]==3)){
                                     glPushMatrix();
-                                        glTranslatef((GLfloat)j, (GLfloat)0+0.01, (GLfloat)i);
+                                        glTranslatef((GLfloat)j, (GLfloat)0.01, (GLfloat)i);
                                         glColor4f(0.0, 0.0, 0.0, 0.5f);
                                         if(i < rows/2 && j < columns/2)
                                                 shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
@@ -216,9 +220,9 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] >=12){
+				/*if(level[i][j] >=12){
 					models[0]->draw();
-				}
+				}*/
 			glPopMatrix();
 			switch(level[i][j]){
 				case 1: case 6: case 7: //hills, plain and holloy block
@@ -243,18 +247,20 @@ void LevelRenderer::buildMap()
 					break;
 				case 13://base
 					//5.0f,1.25f,4.0f
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+5.0f),1.25f, (GLfloat)(j+2.5f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+5.0f),1.25f, (GLfloat)(i+2.5f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
-					tempBox = new BoundingBox((GLfloat)(i+1.0f), 0.0f, (GLfloat)(j+2.5f), (GLfloat)(i+4.0f),0.75f, (GLfloat)(j+4.0f));
+					tempBox = new BoundingBox((GLfloat)(j+1.0f), 0.0f, (GLfloat)(i+2.5f), (GLfloat)(j+4.0f),0.75f, (GLfloat)(i+4.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 				case 12://factory
 					//3.0f,1.25f,2.0f
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+3.0f),1.25f, (GLfloat)(i+1.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
-					tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)(i+1.0f), (GLfloat)(j+3.0f),0.75f, (GLfloat)(i+2.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 				default:
@@ -270,9 +276,9 @@ void LevelRenderer::buildMap()
                 glStencilOp(GL_KEEP,GL_KEEP,GL_INVERT);
                 for(int i = 0; i < rows; i++) {
                         for(int j = 0; j < columns; j++) {
-                                if(!level[i][j]==0 || !level[i][j]==3){
+                                if(!(level[i][j]== 0) || !(level[i][j]== 3)){
                                     glPushMatrix();
-                                        glTranslatef((GLfloat)j, (GLfloat)0+0.01, (GLfloat)i);
+                                        glTranslatef((GLfloat)j, (GLfloat)0.01, (GLfloat)i);
                                         glColor4f(0.0, 0.0, 0.0, 0.5f);
                                         if(i <= rows/2 && j <= columns/2)
                                                 shadowMatrix(light1->getPosX()-j, light1->getPosY(), light1->getPosZ()-i, 1.0f);
@@ -314,6 +320,7 @@ void LevelRenderer::render() {
 		sphericSkyBox->render();
 
 	renderLights();
+	bm->drawBullets();
 
 	if (TextureManager::getInstance()->texturesEnabled)
 		 if (TextureManager::getInstance()->getCurrentSkin() == 0) {

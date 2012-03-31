@@ -39,9 +39,9 @@ Robot::Robot() {
 
 	robotLife = MAX_LIFE;
 
+	directionVector[0] = 0.0f;
 	directionVector[1] = 0.0f;
-	directionVector[2] = 0.0f;
-	directionVector[3] = 1.0f;
+	directionVector[2] = 1.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -76,7 +76,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	xPos = x;
 	zPos = y;
 	xDestination = x;
-	zDestination = 5.0f;
+	zDestination = y;
 	spinDegrees = SOUTH;
 	spinDestination = SOUTH;
 	pitchAngle = 90.0f;
@@ -84,6 +84,10 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	isMyLightOn = false;
 
 	robotLife = MAX_LIFE;
+
+	directionVector[0] = 0.0f;
+	directionVector[1] = 0.0f;
+	directionVector[2] = 1.0f;
 
 	//BiPod is on
 	isPartOn[0] = true;
@@ -94,10 +98,11 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	}
 
 	turnIndexOn(1);
-	turnIndexOn(3);
-	turnIndexOn(4);
+	//turnIndexOn(3);
+	//turnIndexOn(4);
 	turnIndexOn(5);
 
+	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
 
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
@@ -105,6 +110,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	ct->staticBoxes.push_back(box);
 
 	isRobotBeingControlled = false;
+	shootBullet();
 }
 
 Robot::~Robot() {
@@ -157,8 +163,6 @@ void Robot::draw() {
 			rubble->draw();
 		glPopMatrix();
 	}
-	robotLife = robotLife -0.5f;
-
 }
 
 //-------------------------------------------------------------
@@ -260,7 +264,7 @@ void Robot::refreshRobot(){
 	if(childExists){
 		model->setNextChild(temp);
 	}
-	calculateHeight(8);
+	calculateHeight();
 	notifyCamera();
 }
 
@@ -328,9 +332,9 @@ GLfloat* Robot::getLightLookAt(){
 	return rotated;
 }
 
-GLfloat Robot::calculateHeight(int index){
+GLfloat Robot::calculateHeight(){
 	GLfloat h = 0; 
-	for(int i = 0; i < index; i++){
+	for(int i = 0; i <= 7; i++){
 		if(isPartOn[i]){
 			switch(i){
 				case 0:
@@ -363,6 +367,42 @@ GLfloat Robot::calculateHeight(int index){
 		}
 	}
 	height = h;
+	return h;
+}
+GLfloat Robot::calculateHeight(int index){
+	GLfloat h = 0; 
+	for(int i = 0; i <= index; i++){
+		if(isPartOn[i]){
+			switch(i){
+				case 0:
+					h += BIPOD_HEIGHT;
+					break;
+				case 1:
+					h += TRACKS_HEIGHT;
+					break;
+				case 2:
+					h += ANTIGRAV_HEIGHT;
+					break;
+				case 3:
+					h += CANNON_HEIGHT;
+					break;
+				case 4:
+					h += MISSILE_LAUNCHER_HEIGHT;
+					break;
+				case 5:
+					h += PHASER_HEIGHT;
+					break;
+				case 6:
+					h += NUCLEAR_HEIGHT;
+					break;
+				case 7:
+					h += ELECTRONICS_HEIGHT;
+					break;
+				default:
+					break;
+			}
+		}
+	}
 	return h;
 }
 
@@ -799,4 +839,23 @@ bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 void Robot::spinDirectionVector(){
 	directionVector[0] = sin(spinDegrees*DegreesToRadians);
 	directionVector[2] = cos(spinDegrees*DegreesToRadians);
+}
+
+void Robot::shootBullet(){
+	//check which component is highest
+	int highestIndex = 0;
+	for(int i = 3; i <= 5; i++){
+		if(isPartOn[i]){
+			highestIndex = i;
+		}
+	}
+	GLfloat yPosition = calculateHeight(highestIndex);
+	//need spawn point for robot
+	switch(highestIndex){
+	case 5:
+		bm->addBullet(xPos+0.5f,yPosition-0.3f,zPos+0.5f,directionVector[0],directionVector[1],directionVector[2]);
+		break;
+	default:
+		break;
+	}
 }

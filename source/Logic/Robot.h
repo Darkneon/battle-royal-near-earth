@@ -13,6 +13,7 @@
 #include "RobotCamera.h"
 #include "../Model/Helper/BoundingBox.h"
 #include "../Model/Helper/CollisionTester.h"
+#include "../Logic/BulletManager.h"
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.59f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -64,6 +65,7 @@ public:
 	GLfloat* getLookAt();
 	GLfloat* getLightLookAt();
 	GLfloat calculateHeight(int index); //because height varies depending on components
+	GLfloat calculateHeight();
 
 	//Camera attachment and synchronization
 	void attachToCamera(RobotCamera* rc);
@@ -109,6 +111,7 @@ private:
 	//Collision Detection
 	BoundingBox* box;
 	CollisionTester* ct;
+	BulletManager* bm;
     
 	//State Variables: coordinates and orientation
 	//Position
@@ -127,6 +130,8 @@ private:
 	GLfloat xDestination;
 	GLfloat zDestination;
 	GLfloat spinDestination;
+	V3 bulletSpawn1;
+	V3 bulletSpawn2;
 	//Lighting
 	bool isMyLightOn;
 	//Used for component toggling
@@ -135,7 +140,9 @@ private:
 	//Life
 	GLfloat robotLife;
 
-	
+	//Bullet Related
+	void shootBullet();
+
 
 	//-----------------------PRIVATE METHODS---------------------------
 	
@@ -156,7 +163,6 @@ private:
 	//called by every render() -> increments/decrements degree until facing destination angle
 	void timedSpin();
 	
-
 	//Robot Walking -> Helper Functions
 	//called by every render() -> increments/decrements xPos until at xDestination
 	bool timedXWalk();
@@ -178,6 +184,8 @@ private:
 
 	//Collision Detection
 	bool robotCollisionTest(GLfloat x, GLfloat y, GLfloat z);
+
+
 };
 
 #endif

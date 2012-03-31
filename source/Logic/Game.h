@@ -10,6 +10,9 @@
 #include "LevelRenderer.h"
 #include "AIPlayer.h"
 
+
+#include "..\Model\MissileModel.h"
+
 #ifdef __APPLE__
     #include <Glut/glut.h>
 #else
@@ -29,6 +32,7 @@ public:
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;
+	MissileModel mm;
 
 	void render();
 	void updateGameState(); // Modification to the game logic here, no drawing here

@@ -179,6 +179,18 @@
     <ClCompile Include="Model\Helper\CollisionTester.cpp">
       <Filter>Model\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Model\MissileModel.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Robot\BulletModel.cpp">
+      <Filter>Model\Robot</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\Bullet.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\BulletManager.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -358,6 +370,18 @@
     <ClInclude Include="Model\Helper\CollisionTester.h">
       <Filter>Model\Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Model\MissileModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Robot\BulletModel.h">
+      <Filter>Model\Robot</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\Bullet.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\BulletManager.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -402,6 +426,15 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDL.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDL_mixer.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\SDLmain.lib">
       <Filter>Libraries</Filter>
     </Library>
   </ItemGroup>
