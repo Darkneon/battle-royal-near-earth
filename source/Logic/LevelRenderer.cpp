@@ -186,14 +186,14 @@ void LevelRenderer::buildMap()
                                     glPushMatrix();
                                         glTranslatef((GLfloat)j, (GLfloat)0+0.01, (GLfloat)i);
                                         glColor4f(0.0, 0.0, 0.0, 0.5f);
-                                        if(i <= rows/2 && j <= columns/2)
-                                                shadowMatrix(light1->getPosX()-j, light1->getPosY(), light1->getPosZ()-i, 1.0f);
-                                        else if(i<= rows/2 && j <= columns)
-                                                shadowMatrix(light2->getPosX()-j, light2->getPosY(), light2->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j <= columns/2)
-                                                shadowMatrix(light4->getPosX()-j, light4->getPosY(), light4->getPosZ()-i, 1.0f);
+                                        if(i < rows/2 && j < columns/2)
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                        else if(i< rows/2 && j <= columns)
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j < columns/2)
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
                                         else if(i<= rows && j <= columns)
-                                                shadowMatrix(light3->getPosX()-j, light3->getPosY(), light3->getPosZ()-i, 1.0f);
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
                                         models[ level[i][j] ]->draw();
                                     glPopMatrix();
                             }

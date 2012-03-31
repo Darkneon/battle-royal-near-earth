@@ -42,5 +42,5 @@ void MountainModel::render() {
         
     glPopMatrix();
 
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 }
