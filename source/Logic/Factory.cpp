@@ -10,7 +10,6 @@
 
 Factory::Factory() {
     model = (Model*)(new FactoryModel);
-    
 }
 
 Factory::~Factory() {

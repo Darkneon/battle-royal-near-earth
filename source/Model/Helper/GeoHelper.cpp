@@ -368,7 +368,7 @@ void GeoHelper::drawMidBuilding(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigi
 //Draws the front of the smaller building
 void GeoHelper::drawMidBuildingFront(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
 {
-    TextureManager::getInstance()->enableTexture();
+	TextureManager::getInstance()->enableTexture();
     glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
     drawCube(xOrigin, yOrigin, zOrigin, xOrigin+50, yOrigin+25, zOrigin+50);
     glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));

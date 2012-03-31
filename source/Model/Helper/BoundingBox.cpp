@@ -115,7 +115,6 @@ void BoundingBox::resize(GLfloat xa, GLfloat ya, GLfloat za){
 	size.x = xa;
 	size.y = ya;
 	size.z = za;
-
 }
 
 void BoundingBox::draw(){
@@ -127,6 +126,7 @@ void BoundingBox::draw(){
 			glScalef(size.x,size.y,size.z);
 			drawCube();
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glColor3f(0.5f,0.5f,0.5f);
 		glPopMatrix();
 	}
 }

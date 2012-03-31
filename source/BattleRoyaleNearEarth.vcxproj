@@ -70,7 +70,9 @@
       <IgnoreSpecificDefaultLibraries>libc.lib;libcmt.lib;libcd.lib;libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>copy ..\library\AntTweakBar.dll ..\Debug /Y</Command>
+      <Command>copy ..\library\AntTweakBar.dll ..\Debug /Y
+copy ..\library\SDL.dll ..\Debug /Y
+copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
       <Message>Copy AntTweakBar to .exe directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -102,6 +104,8 @@
     <ClCompile Include="Helper\DirectoryManipHelper.cpp" />
     <ClCompile Include="Logic\AIPlayer.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
+    <ClCompile Include="Logic\Bullet.cpp" />
+    <ClCompile Include="Logic\BulletManager.cpp" />
     <ClCompile Include="Logic\Camera.cpp" />
     <ClCompile Include="Logic\CirclingCamera.cpp" />
     <ClCompile Include="Logic\CommanderCamera.cpp" />
@@ -137,6 +141,7 @@
     <ClCompile Include="Model\Player\PlayerModel.cpp" />
     <ClCompile Include="Model\Robot\AntiGravModel.cpp" />
     <ClCompile Include="Model\Robot\BipodModel.cpp" />
+    <ClCompile Include="Model\Robot\BulletModel.cpp" />
     <ClCompile Include="Model\Robot\CannonModel.cpp" />
     <ClCompile Include="Model\Robot\ElectronicsModel.cpp" />
     <ClCompile Include="Model\Robot\HeadlightModel.cpp" />
@@ -162,12 +167,17 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
+    <Library Include="..\library\SDL.lib" />
+    <Library Include="..\library\SDLmain.lib" />
+    <Library Include="..\library\SDL_mixer.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\AntTweakHelper.h" />
     <ClInclude Include="Helper\DirectoryManipHelper.h" />
     <ClInclude Include="Logic\AIPlayer.h" />
     <ClInclude Include="Logic\Base.h" />
+    <ClInclude Include="Logic\Bullet.h" />
+    <ClInclude Include="Logic\BulletManager.h" />
     <ClInclude Include="Logic\Camera.h" />
     <ClInclude Include="Logic\CirclingCamera.h" />
     <ClInclude Include="Logic\CommanderCamera.h" />
@@ -202,6 +212,7 @@
     <ClInclude Include="Model\Player\PlayerModel.h" />
     <ClInclude Include="Model\Robot\AntiGravModel.h" />
     <ClInclude Include="Model\Robot\BipodModel.h" />
+    <ClInclude Include="Model\Robot\BulletModel.h" />
     <ClInclude Include="Model\Robot\CannonModel.h" />
     <ClInclude Include="Model\Robot\ElectronicsModel.h" />
     <ClInclude Include="Model\Robot\HeadlightModel.h" />

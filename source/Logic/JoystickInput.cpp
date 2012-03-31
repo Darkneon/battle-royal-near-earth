@@ -12,43 +12,50 @@ JoystickInput::JoystickInput(HumanPlayer* player)
 
 void JoystickInput::joystickOperations(unsigned int button, int x, int y, int z)
 {
-	if (button == GLUT_JOYSTICK_BUTTON_A)
-	{
-		std::cout << "button a pressed" << endl;
-	}
-	if (button == GLUT_JOYSTICK_BUTTON_B)
-	{
-		std::cout << "button b pressed" << endl;
-	}
-	if (button == GLUT_JOYSTICK_BUTTON_C)
-	{
-		std::cout << "button x pressed" << endl;
-	}
-	if (button == GLUT_JOYSTICK_BUTTON_D)
-	{
-		std::cout << "button y pressed" << endl;
-	}
-
-	if (button == 16) //left trigger
-	{
-		player->robots.at(0)->moveStrafe(true);
-		std::cout << "button left trigger pressed" << endl;
-	}
-	if (button == 32) //right trigger
+	if (button >= 32) //right trigger
 	{
 		player->robots.at(0)->moveStrafe(false);
-		std::cout << "button right trigger pressed" << endl;
+		button -= 32;
 	}
+	if (button >= 16) //left trigger
+	{
+		player->robots.at(0)->moveStrafe(true);
+		button -= 16;
+	}
+	if (button >= GLUT_JOYSTICK_BUTTON_D)
+	{
+		std::cout << "button y pressed" << endl;
+		button -= GLUT_JOYSTICK_BUTTON_D;
+	}
+	if (button >= GLUT_JOYSTICK_BUTTON_C)
+	{
+		std::cout << "button x pressed" << endl;
+		button -= GLUT_JOYSTICK_BUTTON_C;
+	}
+	if (button >= GLUT_JOYSTICK_BUTTON_B)
+	{
+		std::cout << "button b pressed" << endl;
+		button -= GLUT_JOYSTICK_BUTTON_B;
+	}
+	if (button >= GLUT_JOYSTICK_BUTTON_A)
+	{
+		std::cout << "button a pressed" << endl;
+		button -= GLUT_JOYSTICK_BUTTON_A;
+	}
+
+	if (button != 0)
+		std::cout << "some value at: " << button << endl;
 
 	if (abs(x - deadZoneFound) > JOYSTICK_SENSITIVITY)
 	{
 		if (x < x_deadZone)
 		{
-			
+			player->robots.at(0)->incrementSpinDegrees(true, 8.0f);
 			std::cout << "Move to the left" << endl;
 		}
 		else
 		{
+			player->robots.at(0)->incrementSpinDegrees(false, 8.0f);
 			std::cout << "Move to the right" << endl;
 		}
 
@@ -59,12 +66,10 @@ void JoystickInput::joystickOperations(unsigned int button, int x, int y, int z)
 		if (y > y_deadZone)
 		{
 			player->robots.at(0)->moveForward(false);
-			std::cout << "Move downwards" << endl;
 		}
 		else
 		{
 			player->robots.at(0)->moveForward(true);
-			std::cout << "Move upwards" << endl;
 		}
 	
 

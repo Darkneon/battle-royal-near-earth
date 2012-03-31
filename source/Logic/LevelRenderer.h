@@ -11,6 +11,7 @@
 #include "../Model/Helper/BoundingBox.h"
 #include <string>
 #include "../Model/Helper/CollisionTester.h"
+#include "BulletManager.h"
 
 class LevelRenderer {
 public:
@@ -22,6 +23,7 @@ public:
 	void toggleSkySphere();
 	//vector<BoundingBox *> lrBoxes;
 	CollisionTester* lrBoxes;
+	BulletManager* bm;
 	
 private:	
     static const int NUM_MODELS = 14;
