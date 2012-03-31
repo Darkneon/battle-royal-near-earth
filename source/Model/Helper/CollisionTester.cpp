@@ -1,4 +1,5 @@
 #include "CollisionTester.h"
+#include "../../Logic/Robot.h"
 
 vector<BoundingBox *> CollisionTester::staticBoxes;
 
@@ -21,6 +22,21 @@ bool CollisionTester::collision(BoundingBox* b, GLfloat x, GLfloat y, GLfloat z,
 		z <= b->max.z && z >= b->min.z &&
 		id != b->movingBoxId){
 		return true;
+	}
+	return false;
+}
+
+bool CollisionTester::bulletCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id){
+	for(int i = 0; (i < (int)staticBoxes.size()); i++){
+		//There is a collision
+		if(collision(staticBoxes.at(i),x,y,z,id)){
+			//Collision with robot
+			if(staticBoxes.at(i)->hasRobot){
+				//damage robot
+				staticBoxes.at(i)->robot->takeDamage(0.5f);
+			}
+			return true;
+		}
 	}
 	return false;
 }

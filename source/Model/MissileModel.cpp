@@ -16,20 +16,19 @@
 
 MissileModel::MissileModel() {    
     material = (Material*)(new MetalMaterial());
+	smokeX = smokeY = smokeZ = 0.0f;
 }    
 
 void MissileModel::render() 
-{
-	glDisable(GL_LIGHTING);
-	
-	GLUquadricObj *quadratic = gluNewQuadric();
-	gluQuadricTexture(quadratic, true);
+{	
+	GLUquadricObj *quadric = gluNewQuadric();
+	gluQuadricTexture(quadric, true);
 
 	glPushMatrix();
 		glPushMatrix();
 			//glScalef(1.5f, 1.0f, 1.0f);
 			glColor3f(1.0f, 0.0f, 0.0f);
-			gluSphere(quadratic, 2, 8, 8);
+			gluSphere(quadric, 2, 8, 8);
 		glPopMatrix();
 
 		glPushMatrix();
@@ -37,53 +36,41 @@ void MissileModel::render()
 			glColor3f(.7f,.7f,.7f);
 			TextureManager::getInstance()->enableTexture();
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("missile.bmp"));
-			gluCylinder(quadratic, 2, 2, 10, 8, 8);
-
-
-			glDisable(GL_TEXTURE_2D);
+			gluCylinder(quadric, 2, 2, 10, 8, 8);
 
 			glTranslatef(0.0f, 0.0f, 10.0f);
 			glColor3f(1.0f,.0f,0.0f);
-			gluCylinder(quadratic, 2, 3, 3, 8, 8);
+			gluCylinder(quadric, 2, 3, 3, 8, 8);
 		glPopMatrix();
 
 
-		//smoke effect trial lol
-
-		glDisable(GL_DEPTH_TEST);
-
+		//smoke effect
 		glPushMatrix();
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smoke.bmp"));
-			for (int i = 0; i < 2; i++)
+			glTranslatef(0.0f, 0.0f, 13.0f);
+			for (int i = 1; i < 8; i++)
 			{
-				glTranslatef(0.0f, 0.0f, 13.0f);
+				
 				glPushMatrix();
-					glColor4f(0.7f, 0.7f, 0.7f, 1/(i + 1) * 10.0f);
-					glTranslatef(0.0f, sin((GLfloat)i * rand()), (GLfloat)i * 0.025f);
-					glBegin(GL_TRIANGLES);
-					//std::cout << sin(rand() * 10.0f)* 2.0f << endl;
+					glColor4f(0.7f, 0.7f, 0.7f, 0.3f);
+					glTranslatef(0.0f, 0.0f, (GLfloat)i * 0.5f);
 
-						glTexCoord2f(0.0f, 0.0f);
-						glVertex3f(0.0f, 0.0f, 0.0f);
+					smokeX = cos((GLfloat)i * rand()) + sin((GLfloat)i * rand());
+					smokeY = sin((GLfloat)i * rand()) + cos((GLfloat)i * rand());
+					smokeZ++;
 
-						glTexCoord2f(1.0f, 0.0f);
-						glVertex3f(0.0f, 0.0f, 1.0f);
+					if (smokeZ == 10.0f)
+						smokeZ = 0.0f;
 
-						glTexCoord2f(0.0f, 1.0f);
-						glVertex3f(0.0f, 1.0f, 0.0f);
-
-						glVertex3f(0.0f, 0.0f, 1.0f);
-						glVertex3f(0.0f, 1.0f, 1.0f);
-						glVertex3f(0.0f, 1.0f, 0.0f);
-					glEnd();
+					glTranslatef(smokeX, smokeY, smokeZ);
+					gluSphere(quadric, 1.0f, 5, 5);
+					
 				glPopMatrix();
 			}
 		glPopMatrix();
-		glEnable(GL_DEPTH_TEST);
-
 
 	glPopMatrix();
-	gluDeleteQuadric(quadratic);
-	
 
+	gluDeleteQuadric(quadric);
+	glDisable(GL_TEXTURE_2D);
 }

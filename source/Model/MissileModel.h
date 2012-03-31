@@ -14,8 +14,8 @@ class MissileModel : public Model {
 public:
     MissileModel();
 	void render();
-//private:
-	
+private:
+	GLfloat smokeX, smokeY, smokeZ;
 };
 
 #endif

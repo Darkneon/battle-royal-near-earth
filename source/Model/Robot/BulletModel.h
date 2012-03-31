@@ -8,6 +8,7 @@
 #ifndef BULLET_MODEL_H
 #define	BULLET_MODEL_H
 
+#define BULLET_RADIUS 0.1f
 #include "Model.h"
 class BulletModel :public Model
 {

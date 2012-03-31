@@ -1,4 +1,5 @@
 #include "BoundingBox.h"
+#include "../../Logic/Robot.h"
 
 bool BoundingBox::showBoxes = true;
 GLuint BoundingBox::movingCount = 0;
@@ -15,6 +16,8 @@ BoundingBox::BoundingBox(void)
 	size.y = 1.0f;
 	size.z = 1.0f;
 	movingBoxId = 0;
+	//robot = NULL;
+	hasRobot = false;
 }
 
 BoundingBox::BoundingBox(V3 min, V3 max){
@@ -24,6 +27,8 @@ BoundingBox::BoundingBox(V3 min, V3 max){
 	size.y = max.y-min.y;
 	size.z = max.z-min.z;
 	movingBoxId = 0;
+	//robot = NULL;
+	hasRobot = false;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ){
@@ -37,6 +42,8 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	size.y = max.y-min.y;
 	size.z = max.z-min.z;
 	movingBoxId = 0;
+//	robot = NULL;
+	hasRobot = false;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving){
@@ -56,9 +63,34 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	else{
 		movingBoxId = 0;
 	}
+	//robot = NULL;
+	hasRobot = false;
 }
 
-BoundingBox::~BoundingBox(void){}
+BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving, Robot* r){
+	min.x = minX;
+	min.y = minY;
+	min.z = minZ;
+	max.x = maxX;
+	max.y = maxY;
+	max.z = maxZ;
+	size.x = max.x-min.x;
+	size.y = max.y-min.y;
+	size.z = max.z-min.z;
+	if(moving){
+		movingCount++;
+		movingBoxId = movingCount;
+	}
+	else{
+		movingBoxId = 0;
+	}
+	robot = r;
+	hasRobot = true;
+}
+
+BoundingBox::~BoundingBox(void){
+	//robot = NULL;
+}
 
 void BoundingBox::drawSquare(){
 	glPushMatrix();

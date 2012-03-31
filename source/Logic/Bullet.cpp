@@ -12,6 +12,11 @@ Bullet::Bullet(void)
 	direction.z = 0.0f;
 
 	duration = MAX_DURATION;
+
+	ct = new CollisionTester;
+
+	box = new BoundingBox(position.x - BULLET_RADIUS, position.y - BULLET_RADIUS, position.z - BULLET_RADIUS, 
+		position.x + BULLET_RADIUS, position.y + BULLET_RADIUS, position.z + BULLET_RADIUS, true);
 }
 
 Bullet::Bullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz){
@@ -25,6 +30,11 @@ Bullet::Bullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLflo
 	direction.z = dz;
 
 	duration = MAX_DURATION;
+
+	ct = new CollisionTester;
+
+	box = new BoundingBox(position.x - BULLET_RADIUS, position.y - BULLET_RADIUS, position.z - BULLET_RADIUS, 
+		position.x + BULLET_RADIUS, position.y + BULLET_RADIUS, position.z + BULLET_RADIUS, true);
 }
 
 Bullet::~Bullet(void)
@@ -38,6 +48,7 @@ Bullet::~Bullet(void)
 void Bullet::draw(){
 	if(model != NULL){
 		glPushMatrix();
+			box->draw();
 			glTranslatef(position.x,position.y,position.z);
 			model->draw();
 			duration--;
@@ -54,7 +65,47 @@ bool Bullet::isBulletDead(){
 }
 
 void Bullet::moveBullet(){
-	position.x += direction.x*BULLET_STEP_SIZE;
-	position.y += direction.y*BULLET_STEP_SIZE;
-	position.z += direction.z*BULLET_STEP_SIZE;
+	GLfloat xDist = direction.x*BULLET_STEP_SIZE;
+	GLfloat yDist = direction.y*BULLET_STEP_SIZE;
+	GLfloat zDist = direction.z*BULLET_STEP_SIZE;
+	if(!bulletCollisionTest(position.x + xDist,position.y + yDist,position.z + zDist)){
+		//no potential collision -> move
+		position.x += xDist;
+		position.y += yDist;
+		position.z += zDist;
+		box->moveBox(xDist, yDist, zDist);
+	}
+	else{
+		//potential collision -> die
+		duration = 0;
+	}
+}
+
+bool Bullet::bulletCollisionTest(GLfloat x, GLfloat y, GLfloat z){
+	if(ct->collisionTest(x,y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y, z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+			return true;
+		}
+
+		return false;
 }

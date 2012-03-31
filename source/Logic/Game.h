@@ -3,11 +3,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "LevelRenderer.h"
 #include "Player.h"
 #include "PlayerInput.h"
 #include "JoystickInput.h"
 #include "HumanPlayer.h"
-#include "LevelRenderer.h"
 #include "AIPlayer.h"
 
 
