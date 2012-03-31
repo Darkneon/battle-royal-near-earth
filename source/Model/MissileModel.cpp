@@ -16,20 +16,24 @@
 
 MissileModel::MissileModel() {    
     material = (Material*)(new MetalMaterial());
+	smokeX = smokeY = smokeZ = 0.0f;
+
+	time_t lastUpdate = time(NULL);
+	time_t currentTime = time(NULL);
 }    
 
 void MissileModel::render() 
 {
 	glDisable(GL_LIGHTING);
 	
-	GLUquadricObj *quadratic = gluNewQuadric();
-	gluQuadricTexture(quadratic, true);
+	GLUquadricObj *quadric = gluNewQuadric();
+	gluQuadricTexture(quadric, true);
 
 	glPushMatrix();
 		glPushMatrix();
 			//glScalef(1.5f, 1.0f, 1.0f);
 			glColor3f(1.0f, 0.0f, 0.0f);
-			gluSphere(quadratic, 2, 8, 8);
+			gluSphere(quadric, 2, 8, 8);
 		glPopMatrix();
 
 		glPushMatrix();
@@ -37,29 +41,48 @@ void MissileModel::render()
 			glColor3f(.7f,.7f,.7f);
 			TextureManager::getInstance()->enableTexture();
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("missile.bmp"));
-			gluCylinder(quadratic, 2, 2, 10, 8, 8);
-
-
-			glDisable(GL_TEXTURE_2D);
+			gluCylinder(quadric, 2, 2, 10, 8, 8);
+			
 
 			glTranslatef(0.0f, 0.0f, 10.0f);
 			glColor3f(1.0f,.0f,0.0f);
-			gluCylinder(quadratic, 2, 3, 3, 8, 8);
+			gluCylinder(quadric, 2, 3, 3, 8, 8);
 		glPopMatrix();
 
 
 		//smoke effect trial lol
 
-		glDisable(GL_DEPTH_TEST);
+		//glEnable(GL_ALPHA16);
+		//glDisable(GL_DEPTH_TEST);
 
 		glPushMatrix();
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smoke.bmp"));
-			for (int i = 0; i < 2; i++)
+			glTranslatef(0.0f, 0.0f, 13.0f);
+			for (int i = 1; i < 4; i++)
 			{
-				glTranslatef(0.0f, 0.0f, 13.0f);
+				
 				glPushMatrix();
-					glColor4f(0.7f, 0.7f, 0.7f, 1/(i + 1) * 10.0f);
-					glTranslatef(0.0f, sin((GLfloat)i * rand()), (GLfloat)i * 0.025f);
+					glColor4f(0.7f, 0.7f, 0.7f, 0.3f);
+					
+					currentTime = time(NULL);
+
+					
+					lastUpdate = time(NULL);
+
+					smokeX = 0.0f;//sin((GLfloat)i * rand()) + sin((GLfloat)i * rand());
+					smokeY = sin((GLfloat)i * rand()) + cos((GLfloat)i * rand());
+					smokeZ++;//sin((GLfloat)i * rand()) + cos((GLfloat)i * rand()) * 0.00001f;
+
+					if (smokeZ == 10.0f)
+						smokeZ = 0.0f;
+
+
+					glTranslatef(smokeX, smokeY, smokeZ);
+
+					//glScalef(2.0f, 2.0f, 2.0f);
+					//gluDisk(quadratic, 0.0f, 1.0f, 8, 8);
+					gluSphere(quadric, 1.0f, 8, 8);
+					/*
 					glBegin(GL_TRIANGLES);
 					//std::cout << sin(rand() * 10.0f)* 2.0f << endl;
 
@@ -72,10 +95,16 @@ void MissileModel::render()
 						glTexCoord2f(0.0f, 1.0f);
 						glVertex3f(0.0f, 1.0f, 0.0f);
 
+						glTexCoord2f(1.0f, 0.0f);
 						glVertex3f(0.0f, 0.0f, 1.0f);
+
+						glTexCoord2f(1.0f, 1.0f);
 						glVertex3f(0.0f, 1.0f, 1.0f);
+
+						glTexCoord2f(0.0f, 1.0f);
 						glVertex3f(0.0f, 1.0f, 0.0f);
 					glEnd();
+					*/
 				glPopMatrix();
 			}
 		glPopMatrix();
@@ -83,7 +112,8 @@ void MissileModel::render()
 
 
 	glPopMatrix();
-	gluDeleteQuadric(quadratic);
+	gluDeleteQuadric(quadric);
 	
-
+	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_ALPHA);
 }

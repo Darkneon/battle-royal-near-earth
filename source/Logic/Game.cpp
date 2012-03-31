@@ -41,14 +41,15 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
+	
+
+
 	/*
-	glPushMatrix();
-		glTranslatef(30.0f, 1.0f, 30.0f);
-
+	glTranslatef(30.0f, 1.0f, 30.0f);
 	mm.render();
-	glPopMatrix();
-
 	*/
+
+	
 
 	lr->render();	
 	p1->render();

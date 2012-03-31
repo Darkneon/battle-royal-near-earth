@@ -9,12 +9,16 @@
 #define	MISSILE_MODEL_H
 
 #include "Model.h"
+#include <time.h>
 
 class MissileModel : public Model {
 public:
     MissileModel();
 	void render();
-//private:
+private:
+	GLfloat smokeX, smokeY, smokeZ;
+	time_t lastUpdate;
+	time_t currentTime;
 	
 };
 
