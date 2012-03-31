@@ -6,7 +6,7 @@
 #define GL_PI 3.14159f //PI
 #define RadiansToDegrees 180.0f/GL_PI
 #define DegreesToRadians GL_PI/180.0f
-#define MAX_LIFE 1000
+#define MAX_LIFE 2
 
 #include "Model.h"
 #include "Static/TeamNumberModel.h"

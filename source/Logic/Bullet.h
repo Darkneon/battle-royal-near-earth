@@ -7,7 +7,7 @@
 #include "../Model/Helper/CollisionTester.h"
 
 #define MAX_DURATION 5000
-#define BULLET_STEP_SIZE 0.0005f
+#define BULLET_STEP_SIZE 0.2f;
 
 class Bullet
 {

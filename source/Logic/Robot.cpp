@@ -605,6 +605,9 @@ void Robot::timedSpin(){
 //-------------------------------------------------------------------------------
 void Robot::moveStrafe(bool pos)
 {
+	if (robotLife <= 0.0f)
+		return; //for now
+
 	if(pos){
 		if(!robotCollisionTest(xPos - (GLfloat)directionVector[2], 0.0f,
 			zPos + (GLfloat)directionVector[0])){
@@ -635,6 +638,9 @@ void Robot::moveStrafe(bool pos)
 
 void Robot::moveForward(bool pos)
 {
+	if (robotLife <= 0.0f)
+		return;
+
 	if(pos){
 		if(!robotCollisionTest(xPos + (GLfloat)directionVector[0], 0.0f,
 			zPos + (GLfloat)directionVector[2])){
