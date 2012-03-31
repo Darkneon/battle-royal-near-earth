@@ -2,7 +2,9 @@
 #define	BULLET_MANAGER_H
 
 #include "Bullet.h"
-#include "../Model/Helper/BoundingBox.h"
+#include "../Helper/V3struct.h"
+#include <vector>
+using namespace std;
 
 class BulletManager
 {

@@ -382,6 +382,9 @@
     <ClInclude Include="Logic\BulletManager.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="Helper\V3struct.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">

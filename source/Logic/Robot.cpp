@@ -51,7 +51,7 @@ Robot::Robot() {
 		isPartOn[i]=false;
 	}
 
-	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true, this);
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
 	refreshRobot();
@@ -98,19 +98,20 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	}
 
 	turnIndexOn(1);
-	//turnIndexOn(3);
-	//turnIndexOn(4);
-	turnIndexOn(5);
+	turnIndexOn(3);
+	turnIndexOn(4);
+	//turnIndexOn(5);
 
 	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
 
-	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true);
 	ct = new CollisionTester;
+	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true, this);
 	ct->staticBoxes.push_back(box);
 
 	isRobotBeingControlled = false;
 	shootBullet();
+	
 }
 
 Robot::~Robot() {
@@ -843,6 +844,7 @@ void Robot::spinDirectionVector(){
 }
 
 void Robot::shootBullet(){
+	spinDirectionVector();
 	//check which component is highest
 	int highestIndex = 0;
 	for(int i = 3; i <= 5; i++){
@@ -851,12 +853,43 @@ void Robot::shootBullet(){
 		}
 	}
 	GLfloat yPosition = calculateHeight(highestIndex);
-	//need spawn point for robot
+	GLfloat bulletSpawnOffset[2];
+	GLfloat bulletSpawnOffset2[2];
+	//create bullet at spawn point
 	switch(highestIndex){
 	case 5:
-		bm->addBullet(xPos+0.5f,yPosition-0.3f,zPos+0.5f,directionVector[0],directionVector[1],directionVector[2]);
+		//rotate offset
+		bulletSpawnOffset[0] = -1.0f*cos((spinDegrees)*DegreesToRadians) + 0.5f*sin((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset[1] = 1.0f*sin((spinDegrees)*DegreesToRadians) + 0.5f*cos((spinDegrees)*DegreesToRadians);
+		//Rotate
+		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2]);
 		break;
+	case 4:
+		//rotate offset
+		bulletSpawnOffset[0] = -1.0f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset[1] = 1.0f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset2[0] = -1.0f*cos((spinDegrees)*DegreesToRadians) + 0.85f*sin((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset2[1] = 1.0f*sin((spinDegrees)*DegreesToRadians) + 0.85f*cos((spinDegrees)*DegreesToRadians);
+
+		//spawn point needs to accomodate rotation
+		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2]);
+		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.3f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2]);
+		break;
+	case 3:
+		//offset facing south
+		bulletSpawnOffset[0] = -1.5f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset[1] = 1.5f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset2[0] = -1.5f*cos((spinDegrees)*DegreesToRadians) + 0.65f*sin((spinDegrees)*DegreesToRadians);
+		bulletSpawnOffset2[1] = 1.5f*sin((spinDegrees)*DegreesToRadians) + 0.65f*cos((spinDegrees)*DegreesToRadians);
+
+		//spawn point needs to accomodate rotation
+		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2]);
+		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2]);
 	default:
 		break;
 	}
+}
+
+void Robot::takeDamage(GLfloat damage){
+	robotLife -= damage;
 }
