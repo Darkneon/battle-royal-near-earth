@@ -19,7 +19,7 @@ LightRubbleModel::LightRubbleModel(void)
 }
 
 void LightRubbleModel::render() {
-	glColor3f(.7f,.7f,.7f);
+	//glColor3f(.7f,.7f,.7f);
 	TextureManager::getInstance()->enableTexture();
 	glPushMatrix();
 		glTranslatef(0.15f,0.0f,0.2f);

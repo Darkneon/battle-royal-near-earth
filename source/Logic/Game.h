@@ -11,7 +11,7 @@
 #include "AIPlayer.h"
 
 
-#include "..\Model\MissileModel.h"
+#include "MissileModel.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
