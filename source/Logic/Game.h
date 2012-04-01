@@ -29,13 +29,15 @@ public:
 	
 	HumanPlayer* p1;
 	HumanPlayer* p2;
+	int player1Score;
+	int player2Score;
+
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;
 	MissileModel mm;
 
 	void render();
-	void updateGameState(); // Modification to the game logic here, no drawing here
 	void getInput(int keyModifier); //gets user input
 };
 

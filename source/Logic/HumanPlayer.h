@@ -37,15 +37,11 @@ public:
 	void moveUFOX(bool direction);
 	void moveUFOZ(bool direction);
 	void controlRobotAt(int index);
-	int getScore();
-	void increaseScore(int value = 1);
-
 	void robotStrafe(bool negate, int vectorIndex);
 	void robotForward(bool negate, int vectorIndex);
 	void ufoSetDestination(int vectorIndex);
 	void lockRobotAndUfo();
 private:
-	int score;
 	bool robotUfoLock;
 	int currentCamera;
 	Camera *availableCams[9];

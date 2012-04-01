@@ -17,7 +17,6 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 	aRobotIsSelected = false;
 	robotUfoLock = false;
-	score = 0;
 }
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ)
@@ -37,7 +36,6 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 	aRobotIsSelected = false;
 	robotUfoLock = false;
-	score = 0;
 }
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
@@ -151,11 +149,6 @@ void HumanPlayer::moveUFOZ(bool direction){
 		ufo->incrementZPos(direction);
 	}
 }
-
-int HumanPlayer::getScore() { return score; }
-
-void HumanPlayer::increaseScore(int value) { score += value; }
-
 void HumanPlayer::setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ){
 	ufo->setPosition(setX,setY,setZ);
 }

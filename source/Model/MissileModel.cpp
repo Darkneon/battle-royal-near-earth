@@ -1,5 +1,5 @@
 /* 
- * File:   CannonModel.cpp
+ * File:   MissileModel.cpp
  * Author: Jonathan
  * 
  * Created on January 26, 2012, 6:59 PM
