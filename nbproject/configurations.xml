@@ -17,6 +17,10 @@
         <itemPath>source/Helper/AntTweakHelper.h</itemPath>
         <itemPath>source/Helper/DirectoryManipHelper.cpp</itemPath>
         <itemPath>source/Helper/DirectoryManipHelper.h</itemPath>
+        <itemPath>source/Helper/SoundHelper.cpp</itemPath>
+        <itemPath>source/Helper/SoundHelper.h</itemPath>
+        <itemPath>source/Helper/Wav.cpp</itemPath>
+        <itemPath>source/Helper/Wav.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Logic" displayName="Logic" projectFiles="true">
         <itemPath>source/Logic/AIPlayer.cpp</itemPath>
@@ -204,7 +208,7 @@
           <linkerLibItems>
             <linkerLibFileItem>library/libAntTweakBar.dylib</linkerLibFileItem>
           </linkerLibItems>
-          <commandLine>-framework OpenGL -framework glut</commandLine>
+          <commandLine>-framework OpenGL -framework glut -framework OpenAL</commandLine>
         </linkerTool>
       </compileType>
     </conf>

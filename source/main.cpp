@@ -13,6 +13,7 @@
 #include "Model/Texture/TextureManager.h"
 
 #include "AntTweakHelper.h"
+#include "SoundHelper.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -56,6 +57,7 @@ int viewStates = 0; //states of the camera views
 
 Game* game;
 AntTweakHelper antTweakHelper;
+SoundHelper soundHelper;
 
 //second window for help menu
 int mainWindow = 0;
@@ -477,7 +479,9 @@ int main (int argc, char **argv)
 	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
     
 	init();
-
+    soundHelper.loadWav(TextureManager::getInstance()->getResourcePath() + "music/caja2.wav");
+    soundHelper.play();
+    
 	glutMainLoop();
 	return 0;
 }

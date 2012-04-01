@@ -44,6 +44,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o \
 	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
+	${OBJECTDIR}/source/Helper/Wav.o \
 	${OBJECTDIR}/source/Logic/Base.o \
 	${OBJECTDIR}/source/Model/Robot/HeadlightModel.o \
 	${OBJECTDIR}/source/Model/Material/RockMaterial.o \
@@ -58,8 +59,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/PlayerUFO.o \
 	${OBJECTDIR}/source/Logic/LightCamera.o \
-	${OBJECTDIR}/source/Model/Robot/BulletModel.o \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
+	${OBJECTDIR}/source/Model/Robot/BulletModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
 	${OBJECTDIR}/source/Model/Light/LightPost.o \
@@ -71,6 +72,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Logic/LevelRenderer.o \
 	${OBJECTDIR}/source/Model/Player/PlayerModel.o \
 	${OBJECTDIR}/source/Model/Robot/PhaserModel.o \
+	${OBJECTDIR}/source/Helper/SoundHelper.o \
 	${OBJECTDIR}/source/Logic/CirclingCamera.o \
 	${OBJECTDIR}/source/Model/Material/OrganicMaterial.o \
 	${OBJECTDIR}/source/Model/Material/MetalMaterial.o \
@@ -125,7 +127,7 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/battle-royal-near-earth: library/libA
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/battle-royal-near-earth: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -framework OpenGL -framework glut -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/battle-royal-near-earth ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -framework OpenGL -framework glut -framework OpenAL -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/battle-royal-near-earth ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/source/main.o: source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -176,6 +178,11 @@ ${OBJECTDIR}/source/Model/Static/FenceModel.o: source/Model/Static/FenceModel.cp
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/FenceModel.o source/Model/Static/FenceModel.cpp
+
+${OBJECTDIR}/source/Helper/Wav.o: source/Helper/Wav.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/Wav.o source/Helper/Wav.cpp
 
 ${OBJECTDIR}/source/Logic/Base.o: source/Logic/Base.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
@@ -247,15 +254,15 @@ ${OBJECTDIR}/source/Logic/LightCamera.o: source/Logic/LightCamera.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/LightCamera.o source/Logic/LightCamera.cpp
 
-${OBJECTDIR}/source/Model/Robot/BulletModel.o: source/Model/Robot/BulletModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BulletModel.o source/Model/Robot/BulletModel.cpp
-
 ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o: source/Model/Static/TeamNumberModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o source/Model/Static/TeamNumberModel.cpp
+
+${OBJECTDIR}/source/Model/Robot/BulletModel.o: source/Model/Robot/BulletModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BulletModel.o source/Model/Robot/BulletModel.cpp
 
 ${OBJECTDIR}/source/Logic/Game.o: source/Logic/Game.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
@@ -311,6 +318,11 @@ ${OBJECTDIR}/source/Model/Robot/PhaserModel.o: source/Model/Robot/PhaserModel.cp
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/PhaserModel.o source/Model/Robot/PhaserModel.cpp
+
+${OBJECTDIR}/source/Helper/SoundHelper.o: source/Helper/SoundHelper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/SoundHelper.o source/Helper/SoundHelper.cpp
 
 ${OBJECTDIR}/source/Logic/CirclingCamera.o: source/Logic/CirclingCamera.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
