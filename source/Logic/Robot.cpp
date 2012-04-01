@@ -97,10 +97,12 @@ Robot::Robot(GLfloat x, GLfloat y) {
 		isPartOn[i]=false;
 	}
 
-	turnIndexOn(1);
+	turnIndexOn(0);
 	turnIndexOn(3);
-	//turnIndexOn(4);
-	//turnIndexOn(5);
+	turnIndexOn(4);
+	turnIndexOn(5);
+	turnIndexOn(6);
+	turnIndexOn(7);
 
 	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
@@ -605,27 +607,30 @@ void Robot::timedSpin(){
 //-------------------------------------------------------------------------------
 void Robot::moveStrafe(bool pos)
 {
+	if (robotLife <= 0.0f)
+		return; //for now
+
 	if(pos){
-		if(!robotCollisionTest(xPos - (GLfloat)directionVector[2], 0.0f,
-			zPos + (GLfloat)directionVector[0])){
+		if(!robotCollisionTest(xPos - (GLfloat)directionVector[2]*ROBOT_STEP_SIZE, 0.0f,
+			zPos + (GLfloat)directionVector[0]*ROBOT_STEP_SIZE)){
 
-			xPos -= (GLfloat)directionVector[2];
-			zPos += (GLfloat)directionVector[0];
+			xPos -= (GLfloat)directionVector[2]*ROBOT_STEP_SIZE;
+			zPos += (GLfloat)directionVector[0]*ROBOT_STEP_SIZE;
 
-			box->moveBox((GLfloat)-directionVector[2], 0.0f,
-				(GLfloat)directionVector[0]);
+			box->moveBox((GLfloat)-directionVector[2]*ROBOT_STEP_SIZE, 0.0f,
+				(GLfloat)directionVector[0]*ROBOT_STEP_SIZE);
 		}
 	}
 	else
 	{
-		if(!robotCollisionTest(xPos + (GLfloat)directionVector[2], 0.0f,
-			zPos - (GLfloat)directionVector[0])){
+		if(!robotCollisionTest(xPos + (GLfloat)directionVector[2]*ROBOT_STEP_SIZE, 0.0f,
+			zPos - (GLfloat)directionVector[0]*ROBOT_STEP_SIZE)){
 
-			xPos += (GLfloat)directionVector[2];
-			zPos -= (GLfloat)directionVector[0];
+			xPos += (GLfloat)directionVector[2]*ROBOT_STEP_SIZE;
+			zPos -= (GLfloat)directionVector[0]*ROBOT_STEP_SIZE;
 
-			box->moveBox((GLfloat)directionVector[2],0.0f,
-				(GLfloat)-directionVector[0]);
+			box->moveBox((GLfloat)directionVector[2]*ROBOT_STEP_SIZE,0.0f,
+				(GLfloat)-directionVector[0]*ROBOT_STEP_SIZE);
 		}
 	}
 
@@ -635,26 +640,29 @@ void Robot::moveStrafe(bool pos)
 
 void Robot::moveForward(bool pos)
 {
+	if (robotLife <= 0.0f)
+		return;
+
 	if(pos){
-		if(!robotCollisionTest(xPos + (GLfloat)directionVector[0], 0.0f,
-			zPos + (GLfloat)directionVector[2])){
+		if(!robotCollisionTest(xPos + (GLfloat)directionVector[0]*ROBOT_STEP_SIZE, 0.0f,
+			zPos + (GLfloat)directionVector[2]*ROBOT_STEP_SIZE)){
 
-			xPos += (GLfloat)directionVector[0];
-			zPos += (GLfloat)directionVector[2];
+			xPos += (GLfloat)directionVector[0]*ROBOT_STEP_SIZE;
+			zPos += (GLfloat)directionVector[2]*ROBOT_STEP_SIZE;
 
-			box->moveBox((GLfloat)directionVector[0],0.0f,
-				(GLfloat)directionVector[2]);
+			box->moveBox((GLfloat)directionVector[0]*ROBOT_STEP_SIZE,0.0f,
+				(GLfloat)directionVector[2]*ROBOT_STEP_SIZE);
 		}
 	}
 	else{
-		if(!robotCollisionTest(xPos - (GLfloat)directionVector[0],0.0f,
-			zPos - (GLfloat)directionVector[2]))
+		if(!robotCollisionTest(xPos - (GLfloat)directionVector[0]*ROBOT_STEP_SIZE,0.0f,
+			zPos - (GLfloat)directionVector[2]*ROBOT_STEP_SIZE))
 		{
 
-			xPos -= (GLfloat)directionVector[0];
-			zPos -= (GLfloat)directionVector[2];
+			xPos -= (GLfloat)directionVector[0]*ROBOT_STEP_SIZE;
+			zPos -= (GLfloat)directionVector[2]*ROBOT_STEP_SIZE;
 
-			box->moveBox(-(GLfloat)directionVector[0],0.0f,-(GLfloat)directionVector[2]);
+			box->moveBox(-(GLfloat)directionVector[0]*ROBOT_STEP_SIZE,0.0f,-(GLfloat)directionVector[2]*ROBOT_STEP_SIZE);
 		}
 	}
 

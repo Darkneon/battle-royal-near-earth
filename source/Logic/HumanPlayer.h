@@ -37,8 +37,12 @@ public:
 	void moveUFOZ(bool direction);
 	void controlRobotAt(int index);
 
+	int getScore();
+	void increaseScore(int value = 1);
 
 private:
+	int score;
+
 	int currentCamera;
 	Camera *availableCams[9];
 	PlayerUFO* ufo;

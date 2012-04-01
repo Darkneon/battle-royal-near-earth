@@ -191,6 +191,9 @@
     <ClCompile Include="Logic\BulletManager.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Static\Wall.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -384,6 +387,9 @@
     </ClInclude>
     <ClInclude Include="Helper\V3struct.h">
       <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Static\Wall.h">
+      <Filter>Model\Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
