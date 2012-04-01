@@ -68,11 +68,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libc.lib;libcmt.lib;libcd.lib;libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy ..\library\AntTweakBar.dll ..\Debug /Y
-copy ..\library\SDL.dll ..\Debug /Y
-copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
+copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
       <Message>Copy AntTweakBar to .exe directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -102,6 +102,8 @@ copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
   <ItemGroup>
     <ClCompile Include="Helper\AntTweakHelper.cpp" />
     <ClCompile Include="Helper\DirectoryManipHelper.cpp" />
+    <ClCompile Include="Helper\SoundHelper.cpp" />
+    <ClCompile Include="Helper\Wav.cpp" />
     <ClCompile Include="Logic\AIPlayer.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
     <ClCompile Include="Logic\Bullet.cpp" />
@@ -168,11 +170,14 @@ copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
+    <Library Include="..\library\OpenAL32.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\AntTweakHelper.h" />
     <ClInclude Include="Helper\DirectoryManipHelper.h" />
+    <ClInclude Include="Helper\SoundHelper.h" />
     <ClInclude Include="Helper\V3struct.h" />
+    <ClInclude Include="Helper\Wav.h" />
     <ClInclude Include="Logic\AIPlayer.h" />
     <ClInclude Include="Logic\Base.h" />
     <ClInclude Include="Logic\Bullet.h" />

@@ -10,14 +10,11 @@
 
 #include <string>
 #include <stdio.h>
-#include <cstdlib>
-
+#include <stdint.h>
 
 using namespace std;
 
-
 typedef unsigned char BYTE;
-typedef signed int    INT32;
 
 enum Format {
     UNKNOWN, BPS_8_MONO, BPS_8_STEREO, BPS_16_MONO, BPS_16_STEREO
@@ -30,15 +27,15 @@ public:
     
     int load();
     BYTE* getData() { return data; }
-    INT32 getSampleRate() { return sampleRate; }
-    INT32 getDataSize() { return dataSize; }
+    int32_t getSampleRate() { return sampleRate; }
+    int32_t getDataSize() { return dataSize; }
     Format getFormat();
     
 private:
     int returnError(string message, FILE *fileToClose);
     BYTE* data;
-    INT32 sampleRate;
-    INT32 dataSize;
+    int32_t sampleRate;
+    int32_t dataSize;
     short bitsPerSample;
     short channels;
     string filename;

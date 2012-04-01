@@ -40,10 +40,10 @@ int Wav::load() {
     
     //Variables to store info about the WAVE file (all of them is not needed for OpenAL)
     char type[4];
-    INT32 size;
-    INT32 chunkSize;
+    int32_t size;
+    int32_t chunkSize;
     short formatType;
-    INT32 avgBytesPerSec;
+    int32_t avgBytesPerSec;
     short bytesPerSample;
     
     //Check that the WAVE file is OK - RIFF
@@ -52,7 +52,7 @@ int Wav::load() {
         return returnError("No RIFF", fp);                                   
     }
 
-    fread(&size, sizeof(INT32), 1, fp);
+    fread(&size, sizeof(int32_t), 1, fp);
     
     //Check that the WAVE file is OK - WAVE
     fread(type, sizeof(char), 4, fp);                                          
@@ -68,11 +68,11 @@ int Wav::load() {
     
     //Now we know that the file is a acceptable WAVE file
     //Info about the WAVE data is now read and stored
-    fread(&chunkSize,       sizeof(INT32), 1, fp);
+    fread(&chunkSize,       sizeof(int32_t), 1, fp);
     fread(&formatType,      sizeof(short), 1, fp);
     fread(&channels,        sizeof(short), 1, fp);
-    fread(&sampleRate,      sizeof(INT32), 1, fp);
-    fread(&avgBytesPerSec,  sizeof(INT32), 1, fp);
+    fread(&sampleRate,      sizeof(int32_t), 1, fp);
+    fread(&avgBytesPerSec,  sizeof(int32_t), 1, fp);
     fread(&bytesPerSample,  sizeof(short), 1, fp);
     fread(&bitsPerSample,   sizeof(short), 1, fp);
     
@@ -82,7 +82,7 @@ int Wav::load() {
         return returnError("Missing DATA", fp);                               
     }
     
-    fread(&dataSize, sizeof(INT32), 1, fp);                                  
+    fread(&dataSize, sizeof(int32_t), 1, fp);                                  
     
     //Display the info about the WAVE file
     cout << "Chunk Size: "       << chunkSize  << "\n";
