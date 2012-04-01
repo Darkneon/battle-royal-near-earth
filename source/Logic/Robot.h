@@ -46,6 +46,9 @@ public:
 	Robot(GLfloat x, GLfloat y);
 	~Robot();
 
+	static int robotIdCount;
+	
+
 	void draw();
 
 	//Used for component toggling
@@ -68,7 +71,7 @@ public:
 	GLfloat* getLightLookAt();
 	GLfloat calculateHeight(int index); //because height varies depending on components
 	GLfloat calculateHeight();
-	void getUFOLockPosition(V3 v3);
+	V3 getUFOLockPosition();
 	void setDestination(GLfloat x, GLfloat z);
 
 	//Camera attachment and synchronization
@@ -99,8 +102,11 @@ public:
 
 	void takeDamage(GLfloat damage);
 
+	int getRobotId();
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
+	int robotId;
 	//Models
 	Model* model;
     Model* nuclearM;

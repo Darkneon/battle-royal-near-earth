@@ -11,6 +11,7 @@
 #include "../Model/Static/LightRubbleModel.h"
 
 bool Robot::isARobotLightOn = false;
+int Robot::robotIdCount = 0;
 
 Robot::Robot() {
 	rubble = (Model*)(new LightRubbleModel());
@@ -25,6 +26,9 @@ Robot::Robot() {
 	headlight = (Model*)(new HeadlightModel);
     model = bipodM;
 	roboCam = NULL;
+
+	robotIdCount++;
+	robotId = robotIdCount;
 	
 	xPos = 0.0f;
 	zPos = 0.0f;
@@ -72,7 +76,10 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	headlight = (Model*)(new HeadlightModel);
     model = bipodM;
 	roboCam = NULL;
-	
+
+	robotIdCount++;
+	robotId = robotIdCount;	
+
 	xPos = x;
 	zPos = y;
 	xDestination = x;
@@ -97,12 +104,12 @@ Robot::Robot(GLfloat x, GLfloat y) {
 		isPartOn[i]=false;
 	}
 
-	turnIndexOn(0);
+	turnIndexOn(1);
 	turnIndexOn(3);
 	turnIndexOn(4);
-	turnIndexOn(5);
-	turnIndexOn(6);
-	turnIndexOn(7);
+	//turnIndexOn(5);
+	//turnIndexOn(6);
+	//turnIndexOn(7);
 
 	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
@@ -902,8 +909,11 @@ void Robot::takeDamage(GLfloat damage){
 	robotLife -= damage;
 }
 
-void Robot::getUFOLockPosition(V3 v3){
-	v3.x = xPos;
-	v3.y = height;
-	v3.z = zPos;
+V3 Robot::getUFOLockPosition(){
+	V3 v3 = {xPos,height+0.5f,zPos};
+	return v3;
+}
+
+int Robot::getRobotId(){
+	return robotId;
 }

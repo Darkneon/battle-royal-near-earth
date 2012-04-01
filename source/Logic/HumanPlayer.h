@@ -43,6 +43,7 @@ public:
 	void robotStrafe(bool negate, int vectorIndex);
 	void robotForward(bool negate, int vectorIndex);
 	void ufoSetDestination(int vectorIndex);
+	void lockRobotAndUfo();
 private:
 	int score;
 	bool robotUfoLock;
@@ -54,9 +55,8 @@ private:
 
 	void setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ);
 	void setUFOPosition(V3 v);
-	bool getRobotPosition(V3 p, int vectorIndex);
 	void setRobotDestination(GLfloat x, GLfloat y, GLfloat z);
-	void lockRobotAndUfo();
+	
 
 
 };

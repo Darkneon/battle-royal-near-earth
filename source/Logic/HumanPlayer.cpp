@@ -163,19 +163,21 @@ void HumanPlayer::setUFOPosition(V3 v){
 	ufo->setPosition(v.x,v.y,v.z);
 }
 
-bool HumanPlayer::getRobotPosition(V3 p, int vectorIndex){
-	if(vectorIndex < (int)(robots.size())){
-		robots.at(vectorIndex)->getUFOLockPosition(p);
-		return true;
-	}
-	return false;
-}
-
 void HumanPlayer::lockRobotAndUfo(){
-	if(!robotUfoLock){
+	V3 ufoPos = ufo->getPosition();
+	if(!robotUfoLock && ufo->ufoCollisionTest(ufoPos.x,ufoPos.y-0.05f,ufoPos.z) > 0){
+		controlRobotAt(0);
+		//searched for robot being collided with and finds index in vector
+		for(int i = 0; i < (int)robots.size(); i++){
+			if(robots.at(i)->getRobotId() == ufo->ufoCollisionTest(ufoPos.x,ufoPos.y-0.05f,ufoPos.z)){
+				//input vector index to control that robot
+				controlRobotAt(i);
+			}
+		}
 		robotUfoLock = true;
 	}
 	else{
+		changeCamera(CAMERA_COMMANDER);
 		robotUfoLock = false;
 	}
 }
@@ -183,8 +185,7 @@ void HumanPlayer::lockRobotAndUfo(){
 void HumanPlayer::robotStrafe(bool negate, int vectorIndex){
 	robots.at(vectorIndex)->moveStrafe(negate);
 	if(robotUfoLock){
-		V3 positionUFO = {0.0f,0.0f,0.0f};
-		getRobotPosition(positionUFO, vectorIndex);
+		V3 positionUFO = robots.at(vectorIndex)->getUFOLockPosition();
 		setUFOPosition(positionUFO);
 	}
 }
@@ -192,16 +193,14 @@ void HumanPlayer::robotStrafe(bool negate, int vectorIndex){
 void HumanPlayer::robotForward(bool negate, int vectorIndex){
 	robots.at(vectorIndex)->moveForward(negate);
 	if(robotUfoLock){
-		V3 positionUFO = {0.0f,0.0f,0.0f};
-		getRobotPosition(positionUFO, vectorIndex);
+		V3 positionUFO = robots.at(vectorIndex)->getUFOLockPosition();
 		setUFOPosition(positionUFO);
 	}
 }
 
 void HumanPlayer::ufoSetDestination(int vectorIndex){
 	if(vectorIndex < (int)robots.size()){
-		V3 ufoPosition = {0.0f,0.0f,0.0f};
-		ufo->getPosition(&ufoPosition);
+		V3 ufoPosition = ufo->getPosition();
 		robots.at(vectorIndex)->setDestination(ufoPosition.x,ufoPosition.z);
 	}
 }

@@ -35,9 +35,9 @@ public:
 	void incrementXPos(bool positive);
 	void incrementZPos(bool positive);
 	void setPosition(GLfloat x, GLfloat y, GLfloat z);
-	void getPosition(V3 *v);
+	V3 getPosition();
 	//collision detection
-	bool ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z);
+	int ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z);
 
 	GLfloat* pos;
 	BoundingBox* box;

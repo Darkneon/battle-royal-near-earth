@@ -31,6 +31,7 @@ public:
 	//tests collision on every bounding box
 	bool collisionTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
 	bool bulletCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
+	int ufoCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
 };
 
 #endif

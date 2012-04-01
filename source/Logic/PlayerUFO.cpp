@@ -91,7 +91,7 @@ void PlayerUFO::incrementHeight(bool positive){
 	}
 	else{
 		if(pos[1]-DOWN_STEP >= MIN_PLAYER_HEIGHT &&
-		!ufoCollisionTest(pos[0],pos[1]-DOWN_STEP,pos[2])){
+		ufoCollisionTest(pos[0],pos[1]-DOWN_STEP,pos[2]) < 0){
 			pos[1] -= DOWN_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
@@ -101,13 +101,13 @@ void PlayerUFO::incrementHeight(bool positive){
 
 void PlayerUFO::incrementXPos(bool positive){
 	if(positive){
-		if(!ufoCollisionTest(pos[0]+SIDE_STEP,pos[1],pos[2])){
+		if(ufoCollisionTest(pos[0]+SIDE_STEP,pos[1],pos[2])<0){
 			pos[0] += SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
 	else{
-		if(!ufoCollisionTest(pos[0]-SIDE_STEP,pos[1],pos[2])){
+		if(ufoCollisionTest(pos[0]-SIDE_STEP,pos[1],pos[2])<0){
 			pos[0] -= SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
@@ -117,13 +117,13 @@ void PlayerUFO::incrementXPos(bool positive){
 
 void PlayerUFO::incrementZPos(bool positive){
 	if(positive){
-		if(!ufoCollisionTest(pos[0],pos[1],pos[2]+SIDE_STEP)){
+		if(ufoCollisionTest(pos[0],pos[1],pos[2]+SIDE_STEP) < 0){
 			pos[2] += SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
 	else{
-		if(!ufoCollisionTest(pos[0],pos[1],pos[2]-SIDE_STEP)){
+		if(ufoCollisionTest(pos[0],pos[1],pos[2]-SIDE_STEP) < 0){
 			pos[2] -= SIDE_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
@@ -132,10 +132,10 @@ void PlayerUFO::incrementZPos(bool positive){
 }
 
 void PlayerUFO::setPosition(GLfloat x, GLfloat y, GLfloat z){
-	if(y <= MAX_PLAYER_HEIGHT && !ufoCollisionTest(x,y,z)){
-		pos[1] = x;
-		pos[2] = y;
-		pos[3] = z;
+	if(y <= MAX_PLAYER_HEIGHT){// && ufoCollisionTest(x,y,z) != 0){
+		pos[0] = x;
+		pos[1] = y;
+		pos[2] = z;
 		box->lockBox(pos[0],pos[1],pos[2]);
 	}
     updateLights(pos[0], pos[1], pos[2]);
@@ -144,8 +144,50 @@ void PlayerUFO::setPosition(GLfloat x, GLfloat y, GLfloat z){
 //---------------------------------------------------------------
 //					COLLISION DETECTION
 //---------------------------------------------------------------
-bool PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
-		if(ct->collisionTest(x,y,z,box->movingBoxId)){
+int PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
+	//if one of bottom ufo vertices collide with robot return robot id
+	if(ct->ufoCollTest(x,y,z,box->movingBoxId) > 0){
+		return ct->ufoCollTest(x,y,z,box->movingBoxId);
+	}
+	if(ct->ufoCollTest(x+box->size.x, y, z,box->movingBoxId) > 0){
+		return ct->ufoCollTest(x+box->size.x, y, z,box->movingBoxId);
+	}
+	if(ct->ufoCollTest(x,	y,	z+box->size.z,box->movingBoxId) > 0){
+		return ct->ufoCollTest(x,	y,	z+box->size.z,box->movingBoxId);
+	}
+	if(ct->ufoCollTest(x+box->size.x,	y,	z+box->size.z,box->movingBoxId)> 0){
+		return ct->ufoCollTest(x+box->size.x,	y,	z+box->size.z,box->movingBoxId);
+	}
+
+	//if bottom didn't collide with robot, still may collide with something else
+	if(ct->ufoCollTest(x,y,z,box->movingBoxId) == 0){
+		return 0;
+	}
+	if(ct->ufoCollTest(x+box->size.x, y, z,box->movingBoxId) == 0){
+		return 0;
+	}
+	if(ct->ufoCollTest(x,	y,	z+box->size.z,box->movingBoxId) == 0){
+		return 0;
+	}
+	if(ct->ufoCollTest(x+box->size.x,	y,	z+box->size.z,box->movingBoxId)== 0){
+		return 0;
+	}
+
+	//test top for collision
+	if(ct->ufoCollTest(x,	y+box->size.y,	z,box->movingBoxId)>= 0){
+		return 0;
+	}
+	if(ct->ufoCollTest(x+box->size.x,	y+box->size.y,	z,box->movingBoxId)>= 0){
+		return 0;
+	}
+	if(ct->ufoCollTest(x,	y+box->size.y,	z+box->size.z,box->movingBoxId)>= 0){
+		return 0;
+	}
+	if(ct->ufoCollTest(x+box->size.x,	y+box->size.y,	z+box->size.z,box->movingBoxId)>= 0){
+		return 0;
+	}
+	return -1;	
+	/*if(ct->collisionTest(x,y,z,box->movingBoxId)){
 			return true;
 		}
 		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
@@ -170,11 +212,10 @@ bool PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 			return true;
 		}
 
-		return false;
+		return false;*/
 }
 
-void PlayerUFO::getPosition(V3 *v){
-	v->x = pos[0];
-	v->y = pos[1];
-	v->z = pos[2];
+V3 PlayerUFO::getPosition(){
+	V3 v = {pos[0],pos[1],pos[2]};
+	return v;
 }

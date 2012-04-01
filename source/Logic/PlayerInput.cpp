@@ -75,7 +75,8 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveStrafe(true);
+			//player->robots.at(0)->moveStrafe(true);
+			player->robotStrafe(true,0);
 		}
 		else
 			player->moveUFOX(true);
@@ -85,7 +86,8 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveStrafe(false);
+			//player->robots.at(0)->moveStrafe(false);
+			player->robotStrafe(false,0);
 		}
 		else
 			player->moveUFOX(false);
@@ -96,7 +98,8 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveForward(false);
+			//player->robots.at(0)->moveForward(false);
+			player->robotForward(false,0);
 		}
 		else
 			player->moveUFOZ(true);
@@ -106,7 +109,8 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveForward(true);
+			//player->robots.at(0)->moveForward(true);
+			player->robotForward(true,0);
 		}
 		else
 			player->moveUFOZ(false);
@@ -140,6 +144,10 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	else if (funcKeyStates[GLUT_KEY_F11])
 	{
 		player->ufoSetDestination(0);
+	}
+	else if (funcKeyStates[GLUT_KEY_F12])
+	{
+		player->lockRobotAndUfo();
 	}
     
 	if (funcKeyStates[GLUT_KEY_LEFT])
