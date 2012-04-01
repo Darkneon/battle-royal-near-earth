@@ -169,8 +169,8 @@ void LevelRenderer::buildMap()
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {	
 			glPushMatrix();
-                        
-                                if (level[i][j]==0)
+                                
+                                if (level[i][j]==0 || level[i][j]==11)
                                 {
                                     glEnable(GL_STENCIL_TEST);
                                     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
@@ -182,7 +182,7 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] >=12){
+				if(level[i][j] >=11){
 					models[0]->draw();
 				}
                                 
@@ -205,6 +205,7 @@ void LevelRenderer::buildMap()
                                         glStencilFunc(GL_EQUAL, 10, ~0);
                                         glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
                                         glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        
                                         glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
                                         if(i < rows/2 && j < columns/2)
                                                 shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
@@ -387,7 +388,9 @@ void LevelRenderer::render() {
 			glVertex3f(0,0,0);
 			glVertex3f(0,0,1);
 		glEnd();
-	glPopMatrix();       
+	glPopMatrix();  
+        
+
 }
 
 void LevelRenderer::map(){

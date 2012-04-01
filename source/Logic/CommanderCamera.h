@@ -21,6 +21,7 @@ public:
 	void zoom(bool zoomIn);
 	void resetZoom();
 	void toggleLight() { return; }
+        void updateFog();
 
 private:
 	GLfloat currentRadius; //radius from lookat point

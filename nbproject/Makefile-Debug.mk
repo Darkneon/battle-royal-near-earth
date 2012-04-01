@@ -58,8 +58,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/PlayerUFO.o \
 	${OBJECTDIR}/source/Logic/LightCamera.o \
-	${OBJECTDIR}/source/Model/Robot/BulletModel.o \
 	${OBJECTDIR}/source/Model/Static/TeamNumberModel.o \
+	${OBJECTDIR}/source/Model/Robot/BulletModel.o \
 	${OBJECTDIR}/source/Logic/Game.o \
 	${OBJECTDIR}/source/Model/Helper/GeoHelper.o \
 	${OBJECTDIR}/source/Model/Light/LightPost.o \
@@ -247,15 +247,15 @@ ${OBJECTDIR}/source/Logic/LightCamera.o: source/Logic/LightCamera.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/LightCamera.o source/Logic/LightCamera.cpp
 
-${OBJECTDIR}/source/Model/Robot/BulletModel.o: source/Model/Robot/BulletModel.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BulletModel.o source/Model/Robot/BulletModel.cpp
-
 ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o: source/Model/Static/TeamNumberModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/TeamNumberModel.o source/Model/Static/TeamNumberModel.cpp
+
+${OBJECTDIR}/source/Model/Robot/BulletModel.o: source/Model/Robot/BulletModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Robot/BulletModel.o source/Model/Robot/BulletModel.cpp
 
 ${OBJECTDIR}/source/Logic/Game.o: source/Logic/Game.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
