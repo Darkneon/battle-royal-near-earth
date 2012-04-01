@@ -9,8 +9,8 @@ void BulletManager::addBullet(Bullet* b){
 	bullets.push_back(b);
 }
 
-void BulletManager::addBullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz){
-	Bullet *b = new Bullet(px,py,pz,dx,dy,dz);
+void BulletManager::addBullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz, GLfloat degrees){
+	Bullet *b = new Bullet(px,py,pz,dx,dy,dz,degrees);
 	bullets.push_back(b);
 	b = NULL;
 }

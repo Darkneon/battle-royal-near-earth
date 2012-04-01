@@ -23,8 +23,11 @@ void MissileModel::render()
 {	
 	GLUquadricObj *quadric = gluNewQuadric();
 	gluQuadricTexture(quadric, true);
-
 	glPushMatrix();
+
+	glScalef(0.02f,0.02f,0.015f);
+	glTranslatef(0.0f,0.0f,-5.0f);
+	glPushMatrix();	
 		glPushMatrix();
 			//glScalef(1.5f, 1.0f, 1.0f);
 			glColor3f(1.0f, 0.0f, 0.0f);
@@ -33,6 +36,10 @@ void MissileModel::render()
 
 		glPushMatrix();
 			//glTranslatef(1.0f, 0.0f, 1.0f);
+			glPushMatrix();
+				glRotatef(180.0f,1.0f,0.0f,0.0f);
+				gluDisk(quadric,0,2,5,5);
+			glPopMatrix();
 			glColor3f(.7f,.7f,.7f);
 			TextureManager::getInstance()->enableTexture();
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("missile.bmp"));
@@ -69,6 +76,7 @@ void MissileModel::render()
 			}
 		glPopMatrix();
 
+	glPopMatrix();
 	glPopMatrix();
 
 	gluDeleteQuadric(quadric);

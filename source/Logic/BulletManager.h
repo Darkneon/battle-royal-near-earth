@@ -15,7 +15,7 @@ public:
 	static vector<Bullet *> bullets;
 
 	void addBullet(Bullet* b);
-	void addBullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz);
+	void addBullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz, GLfloat degrees);
 	void moveBullets();
 	void drawBullets();
 	void cleanUpBullets();

@@ -887,7 +887,7 @@ void Robot::shootBullet(){
 		bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 		bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
 		//Rotate
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2]);
+		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
 		break;
 	case 4:
 		//rotate offset
@@ -897,8 +897,8 @@ void Robot::shootBullet(){
 		bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
 		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2]);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2]);
+		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
 		break;
 	case 3:
 		//offset facing south
@@ -908,8 +908,8 @@ void Robot::shootBullet(){
 		bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
 		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2]);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2]);
+		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
 	default:
 		break;
 	}
