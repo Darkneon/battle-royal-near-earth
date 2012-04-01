@@ -183,6 +183,8 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+                
+        
 	if(showHelpWindow){
 		help_display();
 	}
@@ -430,9 +432,13 @@ void init()
 	initAntTweak();
 	glEnable(GL_NORMALIZE);
 
+        
+        
+        
 	TextureManager::getInstance()->toggleTextures();
 	BoundingBox::showBoxes = !BoundingBox::showBoxes;
 
+        
 //	initGameMusic();
 }
 
