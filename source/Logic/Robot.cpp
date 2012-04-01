@@ -901,3 +901,9 @@ void Robot::shootBullet(){
 void Robot::takeDamage(GLfloat damage){
 	robotLife -= damage;
 }
+
+void Robot::getUFOLockPosition(V3 v3){
+	v3.x = xPos;
+	v3.y = height;
+	v3.z = zPos;
+}

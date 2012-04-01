@@ -32,6 +32,7 @@ public:
 	void incrementHeight(bool positive);
 	void incrementXPos(bool positive);
 	void incrementZPos(bool positive);
+	void setPosition(GLfloat x, GLfloat y, GLfloat z);
 
 	//collision detection
 	bool ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z);

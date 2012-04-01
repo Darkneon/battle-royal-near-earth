@@ -68,6 +68,7 @@ public:
 	GLfloat* getLightLookAt();
 	GLfloat calculateHeight(int index); //because height varies depending on components
 	GLfloat calculateHeight();
+	void getUFOLockPosition(V3 v3);
 
 	//Camera attachment and synchronization
 	void attachToCamera(RobotCamera* rc);
@@ -147,10 +148,6 @@ private:
 	int selectedIndex;
 	//Life
 	GLfloat robotLife;
-
-	
-
-	
 
 	//-----------------------PRIVATE METHODS---------------------------
 	

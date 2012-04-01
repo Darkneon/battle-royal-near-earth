@@ -16,6 +16,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     currentCamera = CAMERA_COMMANDER;
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 	aRobotIsSelected = false;
+	robotUfoLock = false;
 	score = 0;
 }
 
@@ -35,6 +36,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
     currentCamera = CAMERA_COMMANDER;
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 	aRobotIsSelected = false;
+	robotUfoLock = false;
 	score = 0;
 }
 
@@ -59,6 +61,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 		ufo = NULL;
 	}
 	aRobotIsSelected = false;
+	robotUfoLock = false;
 }
 
 HumanPlayer::~HumanPlayer() {    
@@ -132,17 +135,50 @@ void HumanPlayer::selectRobotView(Robot* robo){
 }
 
 void HumanPlayer::levitateUFO(){
-	ufo->incrementHeight(true);
+	if(!robotUfoLock){
+		ufo->incrementHeight(true);
+	}
 }
 
 void HumanPlayer::moveUFOX(bool direction){
-	ufo->incrementXPos(direction);
+	if(!robotUfoLock){
+		ufo->incrementXPos(direction);
+	}
 }
 
 void HumanPlayer::moveUFOZ(bool direction){
-	ufo->incrementZPos(direction);
+	if(!robotUfoLock){
+		ufo->incrementZPos(direction);
+	}
 }
 
 int HumanPlayer::getScore() { return score; }
 
 void HumanPlayer::increaseScore(int value) { score += value; }
+
+void HumanPlayer::getUFOPosition(V3 p){
+	p.x = ufo->pos[0];
+	p.y = ufo->pos[1];
+	p.z = ufo->pos[2];
+}
+
+void HumanPlayer::setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ){
+	ufo->setPosition(setX,setY,setZ);
+}
+
+bool HumanPlayer::getRobotPosition(V3 p, int vectorIndex){
+	if(vectorIndex < robots.size()){
+		robots.at(vectorIndex)->getUFOLockPosition(p);
+		return true;
+	}
+	return false;
+}
+
+void HumanPlayer::lockRobotAndUfo(){
+	if(!robotUfoLock){
+		robotUfoLock = true;
+	}
+	else{
+		robotUfoLock = false;
+	}
+}

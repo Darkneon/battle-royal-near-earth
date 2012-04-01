@@ -194,6 +194,12 @@
     <ClCompile Include="Model\Static\Wall.cpp">
       <Filter>Model\Static</Filter>
     </ClCompile>
+    <ClCompile Include="Helper\SoundHelper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\Wav.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -391,6 +397,12 @@
     <ClInclude Include="Model\Static\Wall.h">
       <Filter>Model\Static</Filter>
     </ClInclude>
+    <ClInclude Include="Helper\SoundHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\Wav.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -437,5 +449,6 @@
     <Library Include="..\library\freeglut_static.lib">
       <Filter>Libraries</Filter>
     </Library>
+    <Library Include="..\library\OpenAL32.lib" />
   </ItemGroup>
 </Project>
