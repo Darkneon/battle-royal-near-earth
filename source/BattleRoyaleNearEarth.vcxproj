@@ -170,7 +170,6 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
-    <Library Include="..\library\OpenAL32.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\AntTweakHelper.h" />

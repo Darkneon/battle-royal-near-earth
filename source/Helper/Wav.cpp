@@ -4,6 +4,9 @@
  * 
  * Created on April 1, 2012, 3:45 AM
  */
+#ifdef _WIN32
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include "Wav.h"
 #include <iostream>
@@ -32,8 +35,10 @@ int Wav::returnError(string message, FILE *fileToClose) {
 
 int Wav::load() {
     
-    FILE *fp = NULL;        
-    fp = fopen(filename.c_str(),"rb");                                          
+
+    FILE *fp = NULL;
+	fp = fopen(filename.c_str(),"rb");
+
     if (!fp) {
         returnError("Failed to open file", NULL);
     }  
