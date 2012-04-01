@@ -11,8 +11,6 @@
 #include <string>
 
 
-
-
 SoundHelper::SoundHelper() {                                                       
     device = alcOpenDevice(NULL);                                             
     if (device) {                        

@@ -15,8 +15,9 @@
 
 using namespace std;
 
+
 typedef unsigned char BYTE;
-typedef unsigned int  INT32;
+typedef signed int    INT32;
 
 enum Format {
     UNKNOWN, BPS_8_MONO, BPS_8_STEREO, BPS_16_MONO, BPS_16_STEREO
