@@ -449,5 +449,8 @@
     <Library Include="..\library\freeglut_static.lib">
       <Filter>Libraries</Filter>
     </Library>
+    <Library Include="..\library\OpenAL32.lib">
+      <Filter>Libraries</Filter>
+    </Library>
   </ItemGroup>
 </Project>
