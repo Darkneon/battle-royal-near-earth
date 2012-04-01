@@ -156,18 +156,15 @@ int HumanPlayer::getScore() { return score; }
 
 void HumanPlayer::increaseScore(int value) { score += value; }
 
-void HumanPlayer::getUFOPosition(V3 p){
-	p.x = ufo->pos[0];
-	p.y = ufo->pos[1];
-	p.z = ufo->pos[2];
-}
-
 void HumanPlayer::setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ){
 	ufo->setPosition(setX,setY,setZ);
 }
+void HumanPlayer::setUFOPosition(V3 v){
+	ufo->setPosition(v.x,v.y,v.z);
+}
 
 bool HumanPlayer::getRobotPosition(V3 p, int vectorIndex){
-	if(vectorIndex < robots.size()){
+	if(vectorIndex < (int)(robots.size())){
 		robots.at(vectorIndex)->getUFOLockPosition(p);
 		return true;
 	}
@@ -180,5 +177,31 @@ void HumanPlayer::lockRobotAndUfo(){
 	}
 	else{
 		robotUfoLock = false;
+	}
+}
+
+void HumanPlayer::robotStrafe(bool negate, int vectorIndex){
+	robots.at(vectorIndex)->moveStrafe(negate);
+	if(robotUfoLock){
+		V3 positionUFO = {0.0f,0.0f,0.0f};
+		getRobotPosition(positionUFO, vectorIndex);
+		setUFOPosition(positionUFO);
+	}
+}
+
+void HumanPlayer::robotForward(bool negate, int vectorIndex){
+	robots.at(vectorIndex)->moveForward(negate);
+	if(robotUfoLock){
+		V3 positionUFO = {0.0f,0.0f,0.0f};
+		getRobotPosition(positionUFO, vectorIndex);
+		setUFOPosition(positionUFO);
+	}
+}
+
+void HumanPlayer::ufoSetDestination(int vectorIndex){
+	if(vectorIndex < (int)robots.size()){
+		V3 ufoPosition = {0.0f,0.0f,0.0f};
+		ufo->getPosition(&ufoPosition);
+		robots.at(vectorIndex)->setDestination(ufoPosition.x,ufoPosition.z);
 	}
 }

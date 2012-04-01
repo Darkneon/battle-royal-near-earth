@@ -37,10 +37,12 @@ public:
 	void moveUFOX(bool direction);
 	void moveUFOZ(bool direction);
 	void controlRobotAt(int index);
-
 	int getScore();
 	void increaseScore(int value = 1);
 
+	void robotStrafe(bool negate, int vectorIndex);
+	void robotForward(bool negate, int vectorIndex);
+	void ufoSetDestination(int vectorIndex);
 private:
 	int score;
 	bool robotUfoLock;
@@ -50,10 +52,13 @@ private:
 
 	bool aRobotIsSelected;
 
-	void getUFOPosition(V3 p);
 	void setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ);
+	void setUFOPosition(V3 v);
 	bool getRobotPosition(V3 p, int vectorIndex);
+	void setRobotDestination(GLfloat x, GLfloat y, GLfloat z);
 	void lockRobotAndUfo();
+
+
 };
 
 #endif	/* HUMANPLAYER_H */

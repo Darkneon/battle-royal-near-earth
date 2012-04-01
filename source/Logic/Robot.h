@@ -69,6 +69,7 @@ public:
 	GLfloat calculateHeight(int index); //because height varies depending on components
 	GLfloat calculateHeight();
 	void getUFOLockPosition(V3 v3);
+	void setDestination(GLfloat x, GLfloat z);
 
 	//Camera attachment and synchronization
 	void attachToCamera(RobotCamera* rc);
@@ -179,7 +180,7 @@ private:
 	//Destination-Related
 	//Robots orients and moves X, then orients and moves Z
 	void goToDestination();
-	void setDestination(GLfloat x, GLfloat z);
+	
 	//spins robot EAST or WEST depending on destination... 
 	//returns true if facing correct direction already
 	bool checkXDestination();

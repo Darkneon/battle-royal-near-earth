@@ -12,6 +12,8 @@
 #include "../Model/Light/LightPost.h"
 #include "../Model/Helper/BoundingBox.h"
 #include "../Model/Helper/CollisionTester.h"
+#include "../Helper/V3struct.h"
+
 #define MAX_PLAYER_HEIGHT 3
 #define MIN_PLAYER_HEIGHT 0
 #define SIDE_STEP 0.2f
@@ -33,7 +35,7 @@ public:
 	void incrementXPos(bool positive);
 	void incrementZPos(bool positive);
 	void setPosition(GLfloat x, GLfloat y, GLfloat z);
-
+	void getPosition(V3 *v);
 	//collision detection
 	bool ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z);
 

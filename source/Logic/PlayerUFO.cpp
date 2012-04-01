@@ -172,3 +172,9 @@ bool PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 
 		return false;
 }
+
+void PlayerUFO::getPosition(V3 *v){
+	v->x = pos[0];
+	v->y = pos[1];
+	v->z = pos[2];
+}

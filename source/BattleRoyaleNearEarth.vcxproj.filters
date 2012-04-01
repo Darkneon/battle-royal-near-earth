@@ -397,10 +397,10 @@
     <ClInclude Include="Model\Static\Wall.h">
       <Filter>Model\Static</Filter>
     </ClInclude>
-    <ClInclude Include="Helper\SoundHelper.h">
+    <ClInclude Include="Helper\Wav.h">
       <Filter>Helper</Filter>
     </ClInclude>
-    <ClInclude Include="Helper\Wav.h">
+    <ClInclude Include="Helper\SoundHelper.h">
       <Filter>Helper</Filter>
     </ClInclude>
   </ItemGroup>
@@ -449,6 +449,8 @@
     <Library Include="..\library\freeglut_static.lib">
       <Filter>Libraries</Filter>
     </Library>
-    <Library Include="..\library\OpenAL32.lib" />
+    <Library Include="..\library\OpenAL32.lib">
+      <Filter>Libraries</Filter>
+    </Library>
   </ItemGroup>
 </Project>

@@ -137,6 +137,10 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	{
 		player->changeCamera(CAMERA_FOLLOW);	
 	}
+	else if (funcKeyStates[GLUT_KEY_F11])
+	{
+		player->ufoSetDestination(0);
+	}
     
 	if (funcKeyStates[GLUT_KEY_LEFT])
 	{
