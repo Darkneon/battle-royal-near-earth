@@ -248,8 +248,8 @@ void render()
 			stringstream score1;
 			stringstream score2;
 
-			score1 << game->p1->getScore();
-			score2 << game->p2->getScore();
+			score1 << game->player1Score;
+			score2 << game->player2Score;
 			string stringScore1 = "Player 1: " + score1.str();
 			string stringScore2 = "Player 2: " + score2.str();
 

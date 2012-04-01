@@ -200,6 +200,9 @@
     <ClCompile Include="Helper\Wav.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
+    <ClCompile Include="Model\NuclearExplosion.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -402,6 +405,9 @@
     </ClInclude>
     <ClInclude Include="Helper\SoundHelper.h">
       <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\NuclearExplosion.h">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

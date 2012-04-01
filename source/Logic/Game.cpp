@@ -11,6 +11,9 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat vie
 	playerInput2 = new JoystickInput(p2);
 
 	lr = new LevelRenderer();
+
+	player1Score = 0;
+	player2Score = 0;
 }
 
 Game::~Game()
@@ -28,11 +31,6 @@ Game::~Game()
 	}
 }
 
-void Game::updateGameState()
-{
-	
-}
-
 void Game::getInput(int keyModifier)
 {
 	playerInput1->functionKeyOperations(keyModifier);
@@ -41,7 +39,13 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
-	lr->render();	
+	//glDisable(GL_LIGHTING);
+	//glTranslatef(25, -5.0f, 25);
+	//nuke.render();
+
+	
+	lr->render();
 	p1->render();
-	p2->render();	
+	p2->render();
+	
 }
