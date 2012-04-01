@@ -176,7 +176,7 @@ void render()
 	//clears the buffer
         //glClearStencil(0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
         
         
 	glMatrixMode(GL_MODELVIEW);
@@ -382,14 +382,14 @@ void keyboardKeysPressed(unsigned char key, int x, int y)
 	windowKeyOps();
 }
 
-void OnKey(unsigned char key, int x, int y)  {
+void onKey(unsigned char key, int x, int y)  {
 	TwEventKeyboardGLUT(key, x, y);		
 	keyboardKeysPressed(key, x, y);	
 }
 
 void initAntTweak() {
  // antTweakHelper.bindCamera(game->p1->getCurrentCamera());
-  //antTweakHelper.bindLightPosts(light1, light2, light3, light4);
+    antTweakHelper.bindLevelRenderer(game->lr);
 }
 
 //http://sites.google.com/site/sdlgamer/beginner/lesson-12
@@ -458,12 +458,14 @@ void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
 }
 
 
-void mouseFunc(int button, int state, int x, int y)
+
+void onMouseFunc(int button, int state, int x, int y)
 {
-	
+	TwEventMouseButtonGLUT(button, state, x, y);
 	game->playerInput1->mouseButtons(button, state);
 	game->playerInput1->mousePassiveOperations(x, y);
 }
+
 
 int main (int argc, char **argv)
 {
@@ -490,11 +492,10 @@ int main (int argc, char **argv)
 	//mouse motion
 	glutMotionFunc(motionFunc);
 	glutPassiveMotionFunc(passiveMotionFunc);
-	glutMouseFunc(mouseFunc);
 	glutJoystickFunc(joystickFunc, 5);
 
-	//glutMouseFunc((GLUTmousebuttonfun)TwEventMouseButtonGLUT);
-	glutKeyboardFunc((GLUTkeyboardfun)OnKey);	
+	glutMouseFunc((GLUTmousebuttonfun)onMouseFunc);
+	glutKeyboardFunc((GLUTkeyboardfun)onKey);	
     
 	init();
     soundHelper.loadWav(TextureManager::getInstance()->getResourcePath() + "music/caja2.wav");

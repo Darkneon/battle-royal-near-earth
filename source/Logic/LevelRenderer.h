@@ -13,8 +13,15 @@
 #include "../Model/Helper/CollisionTester.h"
 #include "BulletManager.h"
 
+#include "AntTweakHelper.h"
+
+//Forward dependency required by AntTweak
+class LightPost;
+
 class LevelRenderer {
 public:
+    friend class AntTweakHelper;
+    
     LevelRenderer();
     ~LevelRenderer();
     void plane();

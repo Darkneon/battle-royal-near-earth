@@ -1,5 +1,7 @@
 #include "AntTweakHelper.h"
-#include "Robot/TracksModel.h"
+#include "Light/LightPost.h"
+
+class LightPost;
 
 AntTweakHelper::AntTweakHelper() {
     TwInit(TW_OPENGL, NULL);
@@ -26,7 +28,13 @@ void AntTweakHelper::bindCamera(Camera *c) {
     TwDefine(" Debugging/Location group=Camera \n Debugging/Rotation group=Camera ");
 }
 
-void AntTweakHelper::bindLightPosts(LightPost *l1, LightPost *l2, LightPost *l3, LightPost *l4) { 
+void AntTweakHelper::bindLevelRenderer(LevelRenderer *l) {
+    LightPost *l1 = l->light1;
+    LightPost *l2 = l->light2;
+    LightPost *l3 = l->light3;
+    LightPost *l4 = l->light4;
+    
+    
     TwAddVarRW(bar, "Spot 1", TW_TYPE_DIR3F, &(l1->spotDir), " group='Light 1' label='Spot Direction' ");
     TwAddVarRW(bar, "X1", TW_TYPE_FLOAT, &(l1->posX), " group='Light 1/Location'");
     TwAddVarRW(bar, "Y1", TW_TYPE_FLOAT, &(l1->posY), " group='Light 1/Location'");
