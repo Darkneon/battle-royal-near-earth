@@ -16,6 +16,7 @@
 #include "FollowCamera.h"
 #include "Player.h"
 #include "PlayerUFO.h"
+#include "../Helper/V3struct.h"
 
 
 class HumanPlayer : public Player
@@ -36,13 +37,24 @@ public:
 	void moveUFOX(bool direction);
 	void moveUFOZ(bool direction);
 	void controlRobotAt(int index);
-
+	void robotStrafe(bool negate, int vectorIndex);
+	void robotForward(bool negate, int vectorIndex);
+	void ufoSetDestination(int vectorIndex);
+	void lockRobotAndUfo();
 private:
+	bool robotUfoLock;
 	int currentCamera;
 	Camera *availableCams[9];
 	PlayerUFO* ufo;
 
 	bool aRobotIsSelected;
+
+	void setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ);
+	void setUFOPosition(V3 v);
+	void setRobotDestination(GLfloat x, GLfloat y, GLfloat z);
+	
+
+
 };
 
 #endif	/* HUMANPLAYER_H */

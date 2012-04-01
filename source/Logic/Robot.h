@@ -46,6 +46,9 @@ public:
 	Robot(GLfloat x, GLfloat y);
 	~Robot();
 
+	static int robotIdCount;
+	
+
 	void draw();
 
 	//Used for component toggling
@@ -68,6 +71,8 @@ public:
 	GLfloat* getLightLookAt();
 	GLfloat calculateHeight(int index); //because height varies depending on components
 	GLfloat calculateHeight();
+	V3 getUFOLockPosition();
+	void setDestination(GLfloat x, GLfloat z);
 
 	//Camera attachment and synchronization
 	void attachToCamera(RobotCamera* rc);
@@ -97,8 +102,11 @@ public:
 
 	void takeDamage(GLfloat damage);
 
+	int getRobotId();
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
+	int robotId;
 	//Models
 	Model* model;
     Model* nuclearM;
@@ -148,10 +156,6 @@ private:
 	//Life
 	GLfloat robotLife;
 
-	
-
-	
-
 	//-----------------------PRIVATE METHODS---------------------------
 	
 	//Used for component toggling
@@ -182,7 +186,7 @@ private:
 	//Destination-Related
 	//Robots orients and moves X, then orients and moves Z
 	void goToDestination();
-	void setDestination(GLfloat x, GLfloat z);
+	
 	//spins robot EAST or WEST depending on destination... 
 	//returns true if facing correct direction already
 	bool checkXDestination();

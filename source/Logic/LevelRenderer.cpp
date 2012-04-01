@@ -25,7 +25,7 @@
 
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "dm-vinelynth.txt";
+	loadmap = "map2.txt";
 
 	//skyboxes
 	isSkySphere = false;
@@ -279,6 +279,11 @@ void LevelRenderer::buildMap()
 					break;
 				case 3: //fence
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),2.75f, (GLfloat)(i+1));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 8: case 9: case 10: case 11: //pits and light rubble
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),0.01f, (GLfloat)(i+1));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
 					break;

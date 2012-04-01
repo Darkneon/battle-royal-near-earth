@@ -40,3 +40,20 @@ bool CollisionTester::bulletCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id)
 	}
 	return false;
 }
+
+int CollisionTester::ufoCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id){
+	for(int i = 0; (i < (int)staticBoxes.size()); i++){
+		//There is a collision
+		if(collision(staticBoxes.at(i),x,y,z,id)){
+			//Collision with robot
+			if(staticBoxes.at(i)->hasRobot){
+				//positive: robot collision
+				return staticBoxes.at(i)->robot->getRobotId(); 
+			}
+			//0: static collision
+			return 0;
+		}
+	}
+	//negative: no collision
+	return -1;
+}
