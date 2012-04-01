@@ -156,6 +156,8 @@
           <itemPath>source/Model/Static/StaticModel.h</itemPath>
           <itemPath>source/Model/Static/TeamNumberModel.cpp</itemPath>
           <itemPath>source/Model/Static/TeamNumberModel.h</itemPath>
+          <itemPath>source/Model/Static/Wall.cpp</itemPath>
+          <itemPath>source/Model/Static/Wall.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Texture" displayName="Texture" projectFiles="true">
           <itemPath>source/Model/Texture/TextureManager.cpp</itemPath>

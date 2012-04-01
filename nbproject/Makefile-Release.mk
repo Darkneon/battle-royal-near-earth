@@ -46,6 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
 	${OBJECTDIR}/source/Helper/Wav.o \
 	${OBJECTDIR}/source/Logic/Base.o \
+	${OBJECTDIR}/source/Model/Static/Wall.o \
 	${OBJECTDIR}/source/Model/Robot/HeadlightModel.o \
 	${OBJECTDIR}/source/Model/Material/RockMaterial.o \
 	${OBJECTDIR}/source/Logic/Player.o \
@@ -186,6 +187,11 @@ ${OBJECTDIR}/source/Logic/Base.o: source/Logic/Base.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Base.o source/Logic/Base.cpp
+
+${OBJECTDIR}/source/Model/Static/Wall.o: source/Model/Static/Wall.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/Wall.o source/Model/Static/Wall.cpp
 
 ${OBJECTDIR}/source/Model/Robot/HeadlightModel.o: source/Model/Robot/HeadlightModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Robot
