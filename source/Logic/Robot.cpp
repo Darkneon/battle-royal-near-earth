@@ -140,7 +140,8 @@ void Robot::draw() {
 	if(robotLife > 0){
 		//draw bounding box
 		glPushMatrix();
-			box->draw();
+
+		box->draw();
 		glPopMatrix();
 
 		//draw robot
@@ -708,14 +709,18 @@ bool Robot::timedZWalk(){
 }
 
 void Robot::incrementXPos(bool pos){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
 	if(pos){
-		if(!robotCollisionTest(xPos+0.05f,0.0f,zPos)){
+		if(!robotCollisionTest(xPos+0.05f,minY,zPos)){
 			xPos += 0.05f;
 			box->moveBox(0.05f,0.0f,0.0f);
 		}
 	}
 	else{
-		if(!robotCollisionTest(xPos-0.05f,0.0f,zPos)){
+		if(!robotCollisionTest(xPos-0.05f,minY,zPos)){
 			xPos -= 0.05f;
 			box->moveBox(-0.05f,0.0f,0.0f);
 		}
@@ -724,14 +729,19 @@ void Robot::incrementXPos(bool pos){
 }
 
 void Robot::incrementZPos(bool positive){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+
 	if(positive){
-		if(!robotCollisionTest(xPos,0.0f,zPos+0.05f)){
+		if(!robotCollisionTest(xPos,minY,zPos+0.05f)){
 			zPos += 0.05f;
 			box->moveBox(0.0f,0.0f,0.05f);
 		}
 	}
 	else{
-		if(!robotCollisionTest(xPos,0.0f,zPos-0.05f)){
+		if(!robotCollisionTest(xPos,minY,zPos-0.05f)){
 			zPos -= 0.05f;
 			box->moveBox(0.0f,0.0f,-0.05f);
 		}
