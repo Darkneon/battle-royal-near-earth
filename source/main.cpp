@@ -3,9 +3,6 @@
 #include <string>
 #include <time.h>
 #include <sstream>
-
-//#include "../include/SDL/sdl.h"
-//#include "../include/SDL/SDL_mixer.h"
         
 #include "Game.h"
 #include "SpotLight.h"

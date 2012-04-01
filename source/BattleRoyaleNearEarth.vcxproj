@@ -167,9 +167,6 @@ copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
-    <Library Include="..\library\SDL.lib" />
-    <Library Include="..\library\SDLmain.lib" />
-    <Library Include="..\library\SDL_mixer.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\AntTweakHelper.h" />

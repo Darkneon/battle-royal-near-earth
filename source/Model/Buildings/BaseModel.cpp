@@ -32,8 +32,10 @@ void BaseModel::render()
         //Draw Base
 		glTranslatef(0.0f,0.0f,0.05f);
         drawBase(0.0f, 0.0f, 0.0f);
-        //glTranslatef(1.75f, 1.15f, 2.2f);
-        teamNumber->render();
+        glPushMatrix();
+			glTranslatef(2.0f, 1.23f, 2.2f);
+			teamNumber->render();
+		glPopMatrix();
     glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
   

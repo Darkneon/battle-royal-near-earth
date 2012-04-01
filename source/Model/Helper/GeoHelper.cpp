@@ -387,9 +387,9 @@ void GeoHelper::drawGarage(GLfloat xOrigin, GLfloat yOrigin, GLfloat zOrigin)
     TextureManager::getInstance()->enableTexture();
     glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("camo.bmp"));
     drawCube(xOrigin, yOrigin + 15, zOrigin, xOrigin + 50, yOrigin + 50, zOrigin + 50);
-    drawCube(xOrigin, yOrigin, zOrigin, xOrigin + 16.66f, yOrigin + 20.0f, zOrigin + 50.0f);
-    drawCube(xOrigin + 33.33f, yOrigin, zOrigin, xOrigin + 50.0f, yOrigin + 20.0f, zOrigin + 50.0f);
-    drawCube(xOrigin, yOrigin, zOrigin, xOrigin+50, yOrigin+50, zOrigin+20);
+    drawCube(xOrigin, yOrigin, zOrigin, xOrigin + 16.66f, yOrigin + 15.0f, zOrigin + 50.0f); //outside
+    drawCube(xOrigin + 33.33f, yOrigin, zOrigin, xOrigin + 50.0f, yOrigin + 15.0f, zOrigin + 50.0f); //middle
+    drawCube(xOrigin+16.66f, yOrigin, zOrigin, xOrigin+33.33f, yOrigin+15.0f, zOrigin+20.0f); //back bottom
     //Draw the roofing
     glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal1.bmp"));
     drawCube(xOrigin, yOrigin+50, zOrigin+45, xOrigin, yOrigin+55, zOrigin+50);
