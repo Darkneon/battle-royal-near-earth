@@ -9,7 +9,7 @@
 #include "JoystickInput.h"
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
-
+#include <string>
 
 #include "MissileModel.h"
 
@@ -39,6 +39,7 @@ public:
 
 	void render();
 	void getInput(int keyModifier); //gets user input
+	void setMap(string mapName);
 };
 
 #endif

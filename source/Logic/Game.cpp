@@ -10,8 +10,6 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat vie
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
 	playerInput2 = new JoystickInput(p2);
 
-	lr = new LevelRenderer();
-
 	player1Score = 0;
 	player2Score = 0;
 }
@@ -48,4 +46,8 @@ void Game::render()
 	p1->render();
 	p2->render();
 	
+}
+
+void Game::setMap(string mapName){
+	lr = new LevelRenderer(mapName);
 }
