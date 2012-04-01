@@ -3,9 +3,6 @@
 #include <string>
 #include <time.h>
 #include <sstream>
-
-//#include "../include/SDL/sdl.h"
-//#include "../include/SDL/SDL_mixer.h"
         
 #include "Game.h"
 #include "SpotLight.h"
@@ -185,6 +182,8 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+                
+        
 	if(showHelpWindow){
 		help_display();
 	}
@@ -209,7 +208,6 @@ void render()
 		game->p1->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	}	
-
 
 	game->getInput(keyModifier); // Gets user input
 	//((HumanPlayer*)(game->p1))->view(); // Camera update (leave as it is for now)
@@ -245,6 +243,22 @@ void render()
         glColor3f(1.0f, 1.0f, 1.0f);
         rasterText(20.0f, 20.0f, GLUT_BITMAP_HELVETICA_18, (char *)prefixAndFps.c_str(), prefixAndFps.size());
         
+		if (isTwoPlayerGame)
+		{
+			stringstream score1;
+			stringstream score2;
+
+			score1 << game->p1->getScore();
+			score2 << game->p2->getScore();
+			string stringScore1 = "Player 1: " + score1.str();
+			string stringScore2 = "Player 2: " + score2.str();
+
+			glColor3f(1.0f, 0.0f, 0.0f);
+			rasterText( width / 3.0f, 20.0f, GLUT_BITMAP_HELVETICA_18, (char *)stringScore1.c_str(), stringScore1.size());
+			glColor3f(0.0f, 0.0f, 1.0f);
+			rasterText( 2 * width / 3.0f, 20.0f, GLUT_BITMAP_HELVETICA_18, (char *)stringScore2.c_str(), stringScore2.size());
+		}
+
         glEnable(GL_LIGHTING);
         glMatrixMode(GL_PROJECTION);
     glPopMatrix();
@@ -417,9 +431,13 @@ void init()
 	initAntTweak();
 	glEnable(GL_NORMALIZE);
 
+        
+        
+        
 	TextureManager::getInstance()->toggleTextures();
 	BoundingBox::showBoxes = !BoundingBox::showBoxes;
 
+        
 //	initGameMusic();
 }
 

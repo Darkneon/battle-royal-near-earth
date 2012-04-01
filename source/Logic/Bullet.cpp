@@ -82,28 +82,28 @@ void Bullet::moveBullet(){
 }
 
 bool Bullet::bulletCollisionTest(GLfloat x, GLfloat y, GLfloat z){
-	if(ct->collisionTest(x,y,z,box->movingBoxId)){
+	if(ct->bulletCollTest(x,y,z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
+		if(ct->bulletCollTest(x+box->size.x, y, z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x,	y,z+box->size.z,box->movingBoxId)){
+		if(ct->bulletCollTest(x,	y,z+box->size.z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x+box->size.x,	y,z+box->size.z,box->movingBoxId)){
+		if(ct->bulletCollTest(x+box->size.x,	y,z+box->size.z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x,	y+box->size.y, z,box->movingBoxId)){
+		if(ct->bulletCollTest(x,	y+box->size.y, z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z,box->movingBoxId)){
+		if(ct->bulletCollTest(x+box->size.x,	y+box->size.y,z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+		if(ct->bulletCollTest(x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
 			return true;
 		}
-		if(ct->collisionTest(x+box->size.x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
+		if(ct->bulletCollTest(x+box->size.x,	y+box->size.y,z+box->size.z,box->movingBoxId)){
 			return true;
 		}
 

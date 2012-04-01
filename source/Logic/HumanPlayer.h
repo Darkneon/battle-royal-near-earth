@@ -23,6 +23,7 @@ class HumanPlayer : public Player
 public:
     HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF);
 	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ);
+	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ, bool hasUFO);
     ~HumanPlayer();
     void render();
 
@@ -36,10 +37,13 @@ public:
 	void moveUFOZ(bool direction);
 	void controlRobotAt(int index);
 
+	int getScore();
+	void increaseScore(int value = 1);
 
 private:
+	int score;
+
 	int currentCamera;
-   // Model *model;
 	Camera *availableCams[9];
 	PlayerUFO* ufo;
 

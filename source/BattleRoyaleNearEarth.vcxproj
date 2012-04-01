@@ -162,14 +162,12 @@ copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
     <ClCompile Include="Model\Static\PitModel.cpp" />
     <ClCompile Include="Model\Static\PlainBlockModel.cpp" />
     <ClCompile Include="Model\Static\TeamNumberModel.cpp" />
+    <ClCompile Include="Model\Static\Wall.cpp" />
     <ClCompile Include="Model\Texture\imageloader.cpp" />
     <ClCompile Include="Model\Texture\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib" />
-    <Library Include="..\library\SDL.lib" />
-    <Library Include="..\library\SDLmain.lib" />
-    <Library Include="..\library\SDL_mixer.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\AntTweakHelper.h" />
@@ -234,6 +232,7 @@ copy ..\library\SDL_mixer.dll ..\Debug /Y</Command>
     <ClInclude Include="Model\Static\PitModel.h" />
     <ClInclude Include="Model\Static\PlainBlockModel.h" />
     <ClInclude Include="Model\Static\TeamNumberModel.h" />
+    <ClInclude Include="Model\Static\Wall.h" />
     <ClInclude Include="Model\Texture\imageloader.h" />
     <ClInclude Include="Model\Texture\TextureManager.h" />
   </ItemGroup>

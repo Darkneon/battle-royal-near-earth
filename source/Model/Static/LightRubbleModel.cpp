@@ -12,8 +12,8 @@
 
 LightRubbleModel::LightRubbleModel(void)
 {
-	GrassModel* child = new GrassModel;
-	setNextChild( (Model*)child );
+        //	GrassModel* child = new GrassModel;
+	//setNextChild( (Model*)child );
     
     material = (Material*)(new RockMaterial());
 }

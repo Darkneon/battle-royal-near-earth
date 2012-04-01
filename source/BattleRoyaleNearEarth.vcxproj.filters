@@ -191,6 +191,9 @@
     <ClCompile Include="Logic\BulletManager.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Static\Wall.cpp">
+      <Filter>Model\Static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -385,6 +388,9 @@
     <ClInclude Include="Helper\V3struct.h">
       <Filter>Helper</Filter>
     </ClInclude>
+    <ClInclude Include="Model\Static\Wall.h">
+      <Filter>Model\Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -429,15 +435,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib">
-      <Filter>Libraries</Filter>
-    </Library>
-    <Library Include="..\library\SDL.lib">
-      <Filter>Libraries</Filter>
-    </Library>
-    <Library Include="..\library\SDL_mixer.lib">
-      <Filter>Libraries</Filter>
-    </Library>
-    <Library Include="..\library\SDLmain.lib">
       <Filter>Libraries</Filter>
     </Library>
   </ItemGroup>

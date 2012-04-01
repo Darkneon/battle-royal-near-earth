@@ -16,6 +16,7 @@ CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLfloat view
 	heightDenom = DEFAULT_HEIGHT_DENOM;
 	fovy = DEFAULT_FOVY;
 	calculate45DegreesForLocY();
+       // updateFog();
 }
 
 void CommanderCamera::view()
@@ -26,6 +27,7 @@ void CommanderCamera::view()
 	
 	gluLookAt(locX + currentRadius * sin(yaw * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(yaw * 1.0f / 8),
 		locX, 0, locZ - currentRadius, 0, 1, 0);
+       // updateFog();
 }
 
 
@@ -41,8 +43,19 @@ void CommanderCamera::moveCameraForwards(bool negateTheValue)
 
 	locX -= (GLfloat)moveVector[0];
 	locZ -= (GLfloat)moveVector[1];
+        //updateFog();
 }
 
+void CommanderCamera::updateFog()
+{
+        GLfloat flowLight[] = {0.5, 0.5, 0.5, 1};
+        glEnable(GL_FOG);
+        glFogfv(GL_FOG_COLOR, flowLight);
+        glFogf(GL_FOG_START, locZ);
+        glFogf(GL_FOG_END, locZ+30);
+        glFogf(GL_FOG_DENSITY, 0.2f);
+        glFogi(GL_FOG_MODE, GL_LINEAR);
+}
 void CommanderCamera::moveCameraStrafe(bool negateTheValue)
 {
 	GLdouble moveVector[] = {sin(yaw / 8.0), cos(yaw / 8.0)};
@@ -55,6 +68,7 @@ void CommanderCamera::moveCameraStrafe(bool negateTheValue)
 
 	locX += (GLfloat)moveVector[1];
 	locZ -= (GLfloat)moveVector[0];
+        //updateFog();
 }
 
 void CommanderCamera::zoom(bool zoomIn)
@@ -81,6 +95,7 @@ void CommanderCamera::zoom(bool zoomIn)
 
 		locY = currentRadius * tan(GL_PI / heightDenom);
 	}
+        
 }
 
 void CommanderCamera::resetZoom()
