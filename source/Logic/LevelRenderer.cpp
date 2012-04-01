@@ -21,9 +21,11 @@
 #include "../Model/Robot/BulletModel.h"
 #include <fstream>
 
+#include "Static/Wall.h"
+
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "map2.txt";
+	loadmap = "dm-vinelynth.txt";
 
 	//skyboxes
 	isSkySphere = false;
@@ -61,6 +63,8 @@ LevelRenderer::LevelRenderer() {
 	FactoryModel *factoryModel = new FactoryModel;
 	BaseModel *baseModel = new BaseModel;
 	BulletModel *bModel = new BulletModel;
+	Wall *bWall = new Wall();
+
 
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
@@ -76,6 +80,7 @@ LevelRenderer::LevelRenderer() {
 	models[11] = (Model*)lightRubbleModel;
 	models[12] = (Model*)factoryModel;
 	models[13] = (Model*)baseModel;
+	models[14] = (Model*)bWall;
 
 	bm = new BulletManager;
 	lrBoxes = new CollisionTester;
@@ -294,6 +299,12 @@ void LevelRenderer::buildMap()
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)(i+1.0f), (GLfloat)(j+3.0f),0.75f, (GLfloat)(i+2.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
+				case 14:
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1.0f),8.0f, (GLfloat)(i+1.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					break;
 				default:
 					break;
 			}

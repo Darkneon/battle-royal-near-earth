@@ -36,6 +36,8 @@ static const GLfloat WEST = 0.0f;
 //MOUSE CONTROL CONSTANTS
 static const GLfloat MOUSE_SENSITIVITY = 0.25f;
 
+static const GLfloat ROBOT_STEP_SIZE = 0.1f;
+
 class RobotCamera;
 
 class Robot {

@@ -26,7 +26,7 @@ public:
 	BulletManager* bm;
 	
 private:	
-    static const int NUM_MODELS = 14;
+    static const int NUM_MODELS = 15;
     Model* models[NUM_MODELS];
     int **level;
 	int rows;
