@@ -9,6 +9,7 @@
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
+#include <time.h>
 
 class PlayerInput
 {
@@ -26,6 +27,9 @@ private:
 	bool *keyStates;
 	bool *funcKeyStates;
 	int *keyModifier;
+
+	double lastPress;
+	double currentTime;
 };
 
 #endif

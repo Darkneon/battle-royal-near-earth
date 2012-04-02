@@ -151,8 +151,7 @@ void Robot::draw() {
 	if(robotLife > 0){
 		//draw bounding box
 		glPushMatrix();
-
-		box->draw();
+			box->draw();
 		glPopMatrix();
 
 		//draw robot
@@ -206,6 +205,10 @@ void Robot::draw() {
 			glPopMatrix();
 		}
 
+		box->resize(box->size.x,0.1f,box->size.z);
+		glPushMatrix();
+			box->draw();
+		glPopMatrix();
 		glPushMatrix();
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
@@ -324,7 +327,12 @@ void Robot::refreshRobot(){
 	}
 	calculateHeight();
 	if(hasBox){
-		box->resize(box->size.x,height,box->size.z);
+		if(robotLife > 0){
+			box->resize(box->size.x,height,box->size.z);
+		}
+		else{
+			box->resize(box->size.x,0.01f,box->size.z);
+		}
 	}
 	notifyCamera();
 }
@@ -919,49 +927,51 @@ void Robot::spinDirectionVector(){
 }
 
 void Robot::shootBullet(){
-	spinDirectionVector();
-	//check which component is highest
-	int highestIndex = 0;
-	for(int i = 3; i <= 5; i++){
-		if(isPartOn[i]){
-			highestIndex = i;
+	if(robotLife>0){
+		spinDirectionVector();
+		//check which component is highest
+		int highestIndex = 0;
+		for(int i = 3; i <= 5; i++){
+			if(isPartOn[i]){
+				highestIndex = i;
+			}
 		}
-	}
-	GLfloat yPosition = calculateHeight(highestIndex);
-	GLfloat bulletSpawnOffset[2];
-	GLfloat bulletSpawnOffset2[2];
-	//create bullet at spawn point
-	switch(highestIndex){
-	case 5:
-		//rotate offset
-		bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
-		//Rotate
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		break;
-	case 4:
-		//rotate offset
-		bulletSpawnOffset[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) - 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) - 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+		GLfloat yPosition = calculateHeight(highestIndex);
+		GLfloat bulletSpawnOffset[2];
+		GLfloat bulletSpawnOffset2[2];
+		//create bullet at spawn point
+		switch(highestIndex){
+		case 5:
+			//rotate offset
+			bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
+			//Rotate
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			break;
+		case 4:
+			//rotate offset
+			bulletSpawnOffset[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) - 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) - 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
-		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		break;
-	case 3:
-		//offset facing south
-		bulletSpawnOffset[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) - 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) - 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			//spawn point needs to accomodate rotation
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			break;
+		case 3:
+			//offset facing south
+			bulletSpawnOffset[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) - 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) - 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
-		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-	default:
-		break;
+			//spawn point needs to accomodate rotation
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+		default:
+			break;
+		}
 	}
 }
 
