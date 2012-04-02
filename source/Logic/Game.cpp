@@ -40,13 +40,12 @@ Game::~Game()
 
 void Game::update(bool* gameOver)
 {
-	Robot* r1 = p1->robots.at(0);
-	Robot* r2 = p2->robots.at(0);
-
-	if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
-		aNukeWentOff = true;
-		twoPlayerIsOn = false;
-		*gameOver = true;
+	if(player1Score == 10 || player2Score == 10){
+		if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
+			aNukeWentOff = true;
+			twoPlayerIsOn = false;
+			*gameOver = true;
+		}
 	}
 	
 }
@@ -75,8 +74,11 @@ void Game::render()
 		p2->render();
 	}
 
-	if (twoPlayerIsOn)
-		nukePowerUp->draw();
+	if (twoPlayerIsOn){
+		if(player1Score == 10 || player2Score == 10){
+			nukePowerUp->draw();
+		}
+	}
 }
 
 void Game::setMap(string mapName){
