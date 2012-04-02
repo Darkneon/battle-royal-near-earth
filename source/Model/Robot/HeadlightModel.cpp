@@ -4,6 +4,7 @@
 HeadlightModel::HeadlightModel(void)
 {
 	material = (Material*)(new MetalMaterial());
+	whiteLight = false;
 }
 
 
@@ -54,7 +55,12 @@ void HeadlightModel::render(void)
 			
 			glPushMatrix();
 				glTranslatef(0.0f,0.0f,0.1f);
-				glColor4f(0.4f, 0.4f, 0.4f, 0.4f);
+				if(!whiteLight){
+					glColor4f(0.4f, 0.4f, 0.4f, 0.4f);
+				}
+				else{
+					glColor4f(1.0f, 1.0f, 1.0f, 0.0f);
+				}
 				gluDisk(quadratic, 0.0f,0.1f,15,5);
 			glPopMatrix();
 			

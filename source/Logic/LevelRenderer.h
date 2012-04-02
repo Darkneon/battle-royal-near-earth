@@ -22,15 +22,16 @@ class LevelRenderer {
 public:
     friend class AntTweakHelper;
     
-    LevelRenderer();
+    LevelRenderer(string mapName);
     ~LevelRenderer();
     void plane();
     void render();
     bool getIsSkySphere();
 	void toggleSkySphere();
-	//vector<BoundingBox *> lrBoxes;
 	CollisionTester* lrBoxes;
 	BulletManager* bm;
+	void toggleTeamNumber();
+	void toggleLights(int light);
 	
 private:	
     static const int NUM_MODELS = 15;
@@ -57,6 +58,8 @@ private:
 	bool spotLight2;
 	bool spotLight3;
 	bool spotLight4;
+	bool allLightToggle;
+	bool showTeamNumbers;
         GLfloat groundplane[4];
         GLfloat shadowMat[16];
 	string loadmap;

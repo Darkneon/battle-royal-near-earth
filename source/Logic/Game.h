@@ -13,7 +13,7 @@
 #include "JoystickInput.h"
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
-
+#include <string>
 
 
 
@@ -36,6 +36,7 @@ public:
 	HumanPlayer* p2;
 	int player1Score;
 	int player2Score;
+	//bool noDisplayList;
 
 	bool twoPlayerIsOn;
 	bool aNukeWentOff;
@@ -51,8 +52,7 @@ public:
 	void render();
 	void update(bool* gameOver);
 	void getInput(int keyModifier); //gets user input
-
-	
+	void setMap(string mapName);
 };
 
 
