@@ -28,22 +28,20 @@ void PlayerInput::keyOperations(int keyModifier)
 	}
         else if (keyStates[49]) //1
 	{
-		//player->changeCamera(CAMERA_LIGHT1);               
-		player->moveUFOX(true);
+		player->changeCamera(CAMERA_LIGHT1);               
 
 	}
         else if (keyStates[50]) //2
 	{
-		//player->changeCamera(CAMERA_LIGHT2);
-		player->moveUFOZ(false);
+		player->changeCamera(CAMERA_LIGHT2);
 	}
         else if (keyStates[51]) //3
 	{
-		//player->changeCamera(CAMERA_LIGHT3);
+		player->changeCamera(CAMERA_LIGHT3);
 	}
         else if (keyStates[52]) //4
 	{
-		//player->changeCamera(CAMERA_LIGHT4);
+		player->changeCamera(CAMERA_LIGHT4);
 	}
 
 	if (keyStates[108]) //l
