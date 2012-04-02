@@ -40,7 +40,7 @@ LevelRenderer::LevelRenderer() {
 	spotLight2 = true;
 	spotLight3 = true;
 	spotLight4 = true;
-
+	showTeamNumbers = false;
 	//Loading textures
 	//DirectoryManipHelper::getDirectoryListing(".");
 
@@ -85,10 +85,10 @@ LevelRenderer::LevelRenderer() {
 	bm = new BulletManager;
 	lrBoxes = new CollisionTester;
 
-        groundplane[0] = 0.0f;
-        groundplane[1] = 1.0f;
-        groundplane[2] = 0.0f;
-        groundplane[3] = 0.0f;
+    groundplane[0] = 0.0f;
+    groundplane[1] = 1.0f;
+    groundplane[2] = 0.0f;
+    groundplane[3] = 0.0f;
 	map();   
 	buildMap();
 } 
@@ -145,8 +145,8 @@ void LevelRenderer::shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ,
 
 void LevelRenderer::buildMap()
 {
-    
-    //SKIN1
+    GrassModel::teamNumber = false;
+    //SKIN1 W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
 	glNewList(2, GL_COMPILE);
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
@@ -155,7 +155,7 @@ void LevelRenderer::buildMap()
 			}
 			glPushMatrix();	
                         
-                        glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+                glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
@@ -167,7 +167,7 @@ void LevelRenderer::buildMap()
 	}
 	glEndList();
 
-	//SKIN2
+	//SKIN2 W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
     glNewList(6, GL_COMPILE);
     TextureManager::getInstance()->toggleSkins();
 
@@ -235,10 +235,9 @@ void LevelRenderer::buildMap()
         //-------------------------------------------
 	glEndList();
     
-	//LIST FOR NO TEXTURES
+	//LIST FOR NO TEXTURES W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
 	BoundingBox* tempBox;
 	glNewList(5, GL_COMPILE);
-
 	TextureManager::getInstance()->toggleTextures();
 
 	for(int i = 0; i < rows; i++) {
@@ -353,6 +352,216 @@ void LevelRenderer::buildMap()
         //-------------------------------------------
 	glEndList();
 	delete tempBox;
+
+	GrassModel::teamNumber = true;
+	TextureManager::getInstance()->toggleTextures();
+	 //SKIN1 W/ TEAM NUMBER ----------------------------------------------------------------------------------------
+	glNewList(8, GL_COMPILE);
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {
+			if(i == 35 && j == 40){
+				int k = 9;
+			}
+			glPushMatrix();	
+                        
+                glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] >=12){
+					models[0]->draw();
+				}
+			glPopMatrix();
+		}
+	}
+	glEndList();
+
+	//SKIN2 W TEAM NUMBER ----------------------------------------------------------------------------------------
+    glNewList(9, GL_COMPILE);
+    TextureManager::getInstance()->toggleSkins();
+
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {	
+			glPushMatrix();
+                                
+                                if (level[i][j]==0 || level[i][j]==11)
+                                {
+                                    glEnable(GL_STENCIL_TEST);
+                                    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+                                    glStencilFunc(GL_ALWAYS, 10, ~0);
+
+                                }
+                        
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] >=11){
+					models[0]->draw();
+				}
+                                
+                            glDisable(GL_STENCIL_TEST);
+			glPopMatrix();
+		}
+	}
+    //SHADOWS-----------------------------------
+                
+                //glDisable(GL_LIGHTING);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                //glEnable(GL_COLOR_MATERIAL);
+               
+                glEnable(GL_BLEND);
+                for(int i = 0; i < rows; i++) {
+                        for(int j = 0; j < columns; j++) {
+                                if(level[i][j]!=0 && level[i][j]!=3 && level[i][j]!= 8 && level[i][j]!= 9 && level[i][j]!= 10){
+                                    glPushMatrix();
+                                        glEnable(GL_STENCIL_TEST);
+                                        glStencilFunc(GL_EQUAL, 10, ~0);
+                                        glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        
+                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
+                                        if(i < rows/2 && j < columns/2)
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                        else if(i< rows/2 && j <= columns)
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j < columns/2)
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j <= columns)
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                        models[ level[i][j] ]->draw();
+                                          glDisable(GL_STENCIL_TEST);              
+                                    glPopMatrix();
+                            }
+                        }
+                }
+                //glEnable(GL_DEPTH_TEST);
+
+                glEnable(GL_DEPTH_TEST);
+                glDisable(GL_BLEND);
+                glEnable(GL_LIGHTING);
+                
+        //-------------------------------------------
+	glEndList();
+    
+	//LIST FOR NO TEXTURES W/ TEAM NUMBER ----------------------------------------------------------------------------------------
+	glNewList(10, GL_COMPILE);
+	toggleTeamNumber();
+	TextureManager::getInstance()->toggleTextures();
+
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {
+                    
+                                if (level[i][j]==0)
+                                {
+                                    glEnable(GL_STENCIL_TEST);
+                                    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+                                    glStencilFunc(GL_ALWAYS, 10, ~0);
+
+                                }
+			glPushMatrix();
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+				models[ level[i][j] ]->draw();
+                                
+				//also draw a grass tile under models
+				/*if(level[i][j] >=12){
+					models[0]->draw();
+				}*/
+			glPopMatrix();
+                        glDisable(GL_STENCIL_TEST);
+			switch(level[i][j]){
+				case 1: case 6: case 7: //hills, plain and holloy block
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1), 1.0f, (GLfloat)(i+1));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 4: case 5: //half blocks
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),0.5f, (GLfloat)(i+1));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 2: //mountains
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+2),3.75f, (GLfloat)(i+1));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 3: //fence
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),2.75f, (GLfloat)(i+1));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 8: case 9: case 10: case 11: //pits and light rubble
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1),0.01f, (GLfloat)(i+1));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					break;
+				case 13://base
+					//5.0f,1.25f,4.0f
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+5.0f),1.25f, (GLfloat)(i+2.5f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					tempBox = new BoundingBox((GLfloat)(j+1.0f), 0.0f, (GLfloat)(i+2.5f), (GLfloat)(j+4.0f),0.75f, (GLfloat)(i+4.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+				case 12://factory
+					//3.0f,1.25f,2.0f
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+3.0f),1.25f, (GLfloat)(i+1.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)(i+1.0f), (GLfloat)(j+3.0f),0.75f, (GLfloat)(i+2.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+				case 14:
+					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1.0f),8.0f, (GLfloat)(i+1.0f));
+					lrBoxes->staticBoxes.push_back(tempBox);
+					tempBox->draw();
+					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
+					break;
+				default:
+					break;
+			}
+		}
+	}
+        //SHADOWS-----------------------------------
+                //glDisable(GL_LIGHTING);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                //glEnable(GL_COLOR_MATERIAL);
+                glEnable(GL_STENCIL_TEST);
+                glStencilFunc(GL_EQUAL, 10, ~0);
+                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                glEnable(GL_BLEND);
+                for(int i = 0; i < rows; i++) {
+                        for(int j = 0; j < columns; j++) {
+                                if(level[i][j]!=0 && level[i][j]!=3 && level[i][j]!= 8 && level[i][j]!= 9 && level[i][j]!= 10){
+                                    glPushMatrix();
+                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
+                                        if(i < rows/2 && j < columns/2)
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                        else if(i< rows/2 && j <= columns)
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j < columns/2)
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
+                                        else if(i<= rows && j <= columns)
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                        models[ level[i][j] ]->draw();
+                                        
+                                    glPopMatrix();
+                            }
+                        }
+                }
+                //glEnable(GL_DEPTH_TEST);
+                glDisable(GL_STENCIL_TEST);
+                glEnable(GL_DEPTH_TEST);
+                glDisable(GL_BLEND);
+                glEnable(GL_LIGHTING);
+                //glEnable(GL_DEPTH);
+        //-------------------------------------------
+	glEndList();
+
+	delete tempBox;
     
 }
 
@@ -378,15 +587,32 @@ void LevelRenderer::render() {
 	renderLights();
 	bm->drawBullets();
 
-	if (TextureManager::getInstance()->texturesEnabled)
-		 if (TextureManager::getInstance()->getCurrentSkin() == 0) {
-            glCallList(2);
+	if (TextureManager::getInstance()->texturesEnabled){
+		if (TextureManager::getInstance()->getCurrentSkin() == 0) {
+			//skin1
+			if(!showTeamNumbers){
+				glCallList(2); //without team numbers
+			}
+			else{
+				glCallList(9); //with team numbers
+			}
+		}
+        else {//skin2
+			if(!showTeamNumbers){
+				glCallList(6); //without team numbers
+			}
+			else{
+				glCallList(8); //with team numbers
+			}
         }
-        else {
-            glCallList(6);
-        }
-	else {
-            glCallList(5);
+	}
+	else { //without textures
+		if(!showTeamNumbers){
+            glCallList(5); //without team numbers
+		}
+		else{
+			glCallList(10); //with team numbers
+		}
     }
 		
 	//Added by Jeff to see axes
@@ -405,8 +631,6 @@ void LevelRenderer::render() {
 			glVertex3f(0,0,1);
 		glEnd();
 	glPopMatrix();  
-        
-
 }
 
 void LevelRenderer::map(){
@@ -538,4 +762,8 @@ void LevelRenderer::renderLights()
         light3->render();
         light4->render();
         
+}
+
+void LevelRenderer::toggleTeamNumber(){
+	showTeamNumbers = !showTeamNumbers;
 }

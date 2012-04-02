@@ -408,7 +408,7 @@ void initAntTweak() {
 
 void init()
 {
-	glGenLists(7);
+	glGenLists(10);
 
 	te = TextureManager::getInstance();
 	srand ( (unsigned int)time(NULL) );

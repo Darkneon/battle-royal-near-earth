@@ -28,9 +28,9 @@ public:
     void render();
     bool getIsSkySphere();
 	void toggleSkySphere();
-	//vector<BoundingBox *> lrBoxes;
 	CollisionTester* lrBoxes;
 	BulletManager* bm;
+	void toggleTeamNumber();
 	
 private:	
     static const int NUM_MODELS = 15;
@@ -57,6 +57,7 @@ private:
 	bool spotLight2;
 	bool spotLight3;
 	bool spotLight4;
+	bool showTeamNumbers;
         GLfloat groundplane[4];
         GLfloat shadowMat[16];
 	string loadmap;

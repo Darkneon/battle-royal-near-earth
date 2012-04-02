@@ -160,6 +160,12 @@ void Robot::draw() {
 			//Draw Headlight
 			glPushMatrix();
 				glTranslatef(0.0f,height,0.0f);
+				if(isMyLightOn){
+					((HeadlightModel*)headlight)->whiteLight = true;
+				}
+				else{
+					((HeadlightModel*)headlight)->whiteLight = false;
+				}
 				headlight->draw();
 			glPopMatrix();
 

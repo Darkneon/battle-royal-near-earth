@@ -31,6 +31,7 @@ public:
 	HumanPlayer* p2;
 	int player1Score;
 	int player2Score;
+	//bool noDisplayList;
 
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;

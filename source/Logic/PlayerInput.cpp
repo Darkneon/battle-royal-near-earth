@@ -1,10 +1,11 @@
 #include "PlayerInput.h"
 
-PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates)
+PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates, LevelRenderer *lr)
 {
 	this->player = player;
 	this->keyStates = keyStates;
 	this->funcKeyStates = funcKeyStates;
+	this->lr = lr;
 }
 
 void PlayerInput::keyOperations(int keyModifier)
@@ -75,7 +76,6 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			//player->robots.at(0)->moveStrafe(true);
 			player->robotStrafe(true,0);
 		}
 		else
@@ -86,7 +86,6 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			//player->robots.at(0)->moveStrafe(false);
 			player->robotStrafe(false,0);
 		}
 		else
@@ -98,7 +97,6 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			//player->robots.at(0)->moveForward(false);
 			player->robotForward(false,0);
 		}
 		else
@@ -109,7 +107,6 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			//player->robots.at(0)->moveForward(true);
 			player->robotForward(true,0);
 		}
 		else
@@ -140,6 +137,10 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	else if (funcKeyStates[GLUT_KEY_F7])
 	{
 		player->changeCamera(CAMERA_FOLLOW);	
+	}
+	else if (funcKeyStates[GLUT_KEY_F10])
+	{
+		lr->toggleTeamNumber();
 	}
 	else if (funcKeyStates[GLUT_KEY_F11])
 	{

@@ -13,7 +13,7 @@
 class PlayerInput
 {
 public:
-	PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates);
+	PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates, LevelRenderer *lr);
 	void functionKeyOperations(int keyModifier);
 	void keyOperations(int keyModifier);
 	void mousePassiveOperations(int x, int y);
@@ -21,6 +21,7 @@ public:
 
 private:
 	HumanPlayer* player;
+	LevelRenderer* lr;
 	bool *keyStates;
 	bool *funcKeyStates;
 	int *keyModifier;
