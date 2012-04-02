@@ -22,7 +22,7 @@ class LevelRenderer {
 public:
     friend class AntTweakHelper;
     
-    LevelRenderer();
+    LevelRenderer(string mapName);
     ~LevelRenderer();
     void plane();
     void render();

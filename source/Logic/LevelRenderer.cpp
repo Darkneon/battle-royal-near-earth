@@ -23,9 +23,9 @@
 
 #include "Static/Wall.h"
 
-LevelRenderer::LevelRenderer() {
+LevelRenderer::LevelRenderer(string mapName) {
 
-	loadmap = "map2.txt";
+	loadmap = mapName;
 
 	//skyboxes
 	isSkySphere = false;

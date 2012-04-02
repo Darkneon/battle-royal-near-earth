@@ -49,3 +49,7 @@ void Game::render()
 	p2->render();
 	
 }
+
+void Game::setMap(string mapName){
+	lr = new LevelRenderer(mapName);
+}
