@@ -32,8 +32,8 @@ private:
 
 	GLfloat lightValue;
 	void emitLight();
-	void drawHalfACylinder(GLUquadricObj*, GLint);
-
+	void drawHalfASphere(GLUquadricObj*, GLint);
+	double currentTime;
 };
 
 #endif

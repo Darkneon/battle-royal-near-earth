@@ -203,6 +203,9 @@
     <ClCompile Include="Model\NuclearExplosion.cpp">
       <Filter>Model</Filter>
     </ClCompile>
+    <ClCompile Include="Model\NukePowerUp.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -407,6 +410,9 @@
       <Filter>Helper</Filter>
     </ClInclude>
     <ClInclude Include="Model\NuclearExplosion.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\NukePowerUp.h">
       <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>

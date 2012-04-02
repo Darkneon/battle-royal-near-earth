@@ -48,6 +48,7 @@ TextureManager *te;
 
 static bool isDebugMode = false;
 
+bool isGameOver = false;
 bool isTwoPlayerGame = false;
 
 int viewStates = 0; //states of the camera views
@@ -77,11 +78,13 @@ void toggleTwoPlayerSplitscreen()
 	{
 		game->p1->controlRobotAt(0);
 		game->p2->controlRobotAt(0);
+		game->twoPlayerIsOn = true;
 	}
 	else
 	{
 		game->p1->changeCamera(CAMERA_COMMANDER);
 		game->p2->changeCamera(CAMERA_COMMANDER);
+		game->twoPlayerIsOn = false;
 	}
 }
 
@@ -182,28 +185,37 @@ void render()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-                
-        
+	game->update(&isGameOver);
+	if (isGameOver)
+	{
+		isTwoPlayerGame = false;
+		game->p1->changeCamera(CAMERA_COMMANDER);
+	}
+    
 	if(showHelpWindow){
 		help_display();
 	}
 
 	if (isTwoPlayerGame)
 	{
-		game->p1->view();
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
+		game->p1->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
 	
-		game->p2->view();
+		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
+		game->p2->view();
 		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
 	}
 	else
 	{
+		
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		game->render();
 		game->p1->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);

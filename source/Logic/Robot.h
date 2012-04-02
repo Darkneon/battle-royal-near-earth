@@ -104,6 +104,12 @@ public:
 
 	int getRobotId();
 
+	//State Variables: coordinates and orientation
+	//Position
+	GLfloat xPos;
+	GLfloat zPos;
+	GLfloat height;
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	int robotId;
@@ -129,11 +135,7 @@ private:
 	CollisionTester* ct;
 	BulletManager* bm;
     
-	//State Variables: coordinates and orientation
-	//Position
-	GLfloat xPos;
-	GLfloat zPos;
-	GLfloat height;
+	
 	//Camera & Light
 	GLfloat lookAtX;
 	GLfloat lookAtY;

@@ -19,13 +19,15 @@
 #include "Buildings/FactoryModel.h"
 #include "Buildings/BaseModel.h"
 #include "../Model/Robot/BulletModel.h"
+
 #include <fstream>
 
+//deathmatch related imports
 #include "Static/Wall.h"
 
 LevelRenderer::LevelRenderer() {
 
-	loadmap = "map2.txt";
+	loadmap = "dm-vinelynth.txt";
 
 	//skyboxes
 	isSkySphere = false;
@@ -63,7 +65,8 @@ LevelRenderer::LevelRenderer() {
 	FactoryModel *factoryModel = new FactoryModel;
 	BaseModel *baseModel = new BaseModel;
 	BulletModel *bModel = new BulletModel;
-	Wall *bWall = new Wall();
+	Wall *wall = new Wall();
+	//NukePowerUp *nukePowerUp = new NukePowerUp();
 
 
 	models[0] = (Model*)grassModel;
@@ -80,15 +83,16 @@ LevelRenderer::LevelRenderer() {
 	models[11] = (Model*)lightRubbleModel;
 	models[12] = (Model*)factoryModel;
 	models[13] = (Model*)baseModel;
-	models[14] = (Model*)bWall;
+	models[14] = (Model*)wall;
+	//models[15] = (Model*)nukePowerUp;
 
 	bm = new BulletManager;
 	lrBoxes = new CollisionTester;
 
-        groundplane[0] = 0.0f;
-        groundplane[1] = 1.0f;
-        groundplane[2] = 0.0f;
-        groundplane[3] = 0.0f;
+    groundplane[0] = 0.0f;
+    groundplane[1] = 1.0f;
+    groundplane[2] = 0.0f;
+    groundplane[3] = 0.0f;
 	map();   
 	buildMap();
 } 
@@ -308,6 +312,7 @@ void LevelRenderer::buildMap()
 				case 14:
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1.0f),8.0f, (GLfloat)(i+1.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
+					//tempBox->hasNukePowerUp = true;
 					tempBox->draw();
 					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)(j+1.0f), (GLfloat)(i+3.0f),0.75f, (GLfloat)(j+2.0f));
 					break;

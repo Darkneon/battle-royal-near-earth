@@ -3,15 +3,19 @@
 #ifndef GAME_H
 #define GAME_H
 
+
+#include "../Model/Helper/CollisionTester.h"
+#include "NukePowerUp.h"
 #include "LevelRenderer.h"
 #include "Player.h"
+#include "NuclearExplosion.h"
 #include "PlayerInput.h"
 #include "JoystickInput.h"
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
 
 
-#include "MissileModel.h"
+
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -19,6 +23,7 @@
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
+	
 
 class Game
 {
@@ -32,13 +37,24 @@ public:
 	int player1Score;
 	int player2Score;
 
+	bool twoPlayerIsOn;
+	bool aNukeWentOff;
+
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;
-	MissileModel mm;
+	NuclearExplosion* nuke;
+	NukePowerUp* nukePowerUp;
+
+	CollisionTester* ct;
 
 	void render();
+	void update(bool* gameOver);
 	void getInput(int keyModifier); //gets user input
+
+	
 };
+
+
 
 #endif
