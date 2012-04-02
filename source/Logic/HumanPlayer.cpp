@@ -17,6 +17,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 	aRobotIsSelected = false;
 	robotUfoLock = false;
+	currentComponent = 0;
 }
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ)
@@ -36,6 +37,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 	aRobotIsSelected = false;
 	robotUfoLock = false;
+	currentComponent = 0;
 }
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
@@ -60,6 +62,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	}
 	aRobotIsSelected = false;
 	robotUfoLock = false;
+	currentComponent = 0;
 }
 
 HumanPlayer::~HumanPlayer() {    
@@ -196,4 +199,16 @@ void HumanPlayer::ufoSetDestination(int vectorIndex){
 		V3 ufoPosition = ufo->getPosition();
 		robots.at(vectorIndex)->setDestination(ufoPosition.x,ufoPosition.z);
 	}
+}
+
+void HumanPlayer::cycleThroughComponents(int vectorIndex){
+	robots.at(vectorIndex)->cycleIndex();
+}
+
+void HumanPlayer::toggleComponentOn(int vectorIndex){
+	robots.at(vectorIndex)->turnSelectedOn();
+}
+
+void HumanPlayer::toggleComponentOff(int vectorIndex){
+	robots.at(vectorIndex)->turnSelectedOff();
 }

@@ -36,7 +36,7 @@ int winPosY = 0;
 
 bool isInFullScreenMode;
 bool showHelpWindow = false;
-
+bool wasPreviouslyPressed = false;
 // Bounds of viewing frustum.
 GLfloat nearPlane =  1.0f;
 GLfloat farPlane  = 100.0f;
@@ -375,6 +375,7 @@ void render()
 			startGame = false;
 			
 		}
+		game->update(&isGameOver);
 		//rendering the game itself
 		renderGame();
 	}
@@ -513,6 +514,7 @@ void keyboardKeysUp(unsigned char key, int x, int y)
 	//Checks for uppercase
 	if (key >= 65 && key <= 90)
 		keyStates[key + 32] = false;
+	//wasPreviouslyPressed = false;
 }
 
 void keyboardKeysPressed(unsigned char key, int x, int y)
@@ -525,11 +527,12 @@ void keyboardKeysPressed(unsigned char key, int x, int y)
 		keyStates[key + 32] = true;
 
 	windowKeyOps();
+	//wasPreviouslyPressed = true;
 }
 
 void onKey(unsigned char key, int x, int y)  {
 	TwEventKeyboardGLUT(key, x, y);		
-	keyboardKeysPressed(key, x, y);	
+	keyboardKeysPressed(key, x, y);
 }
 
 void initAntTweak() {

@@ -120,6 +120,18 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->lockRobotAndUfo();
 	}
+	else if (keyStates[105]) //i
+	{
+		player->cycleThroughComponents(0);
+	}
+	else if (keyStates[106]) //j
+	{
+		player->toggleComponentOn(0);
+	}
+	else if (keyStates[107]) //k
+	{
+		player->toggleComponentOff(0);
+	}
 
 }
 

@@ -35,7 +35,6 @@ bool CollisionTester::collision(BoundingBox* b, GLfloat x, GLfloat y, GLfloat z,
 	return false;
 }
 
-
 bool CollisionTester::bulletCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id){
 	for(int i = 0; (i < (int)staticBoxes.size()); i++){
 		//There is a collision
@@ -75,7 +74,7 @@ bool CollisionTester::nukePowerUpCollisionTest(GLfloat x, GLfloat y, GLfloat z, 
 		//There is a collision
 		if(collision(staticBoxes.at(i),x,y,z,id))
 		{
-			if(staticBoxes.at(i)->hasNukePowerUp){
+			if(staticBoxes.at(i)->hasRobot){
 				//positive: nuke collision
 				return true;
 			}

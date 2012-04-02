@@ -48,7 +48,7 @@ void NuclearModel::render()
 		glPushMatrix();
 			glColor3f(0.0f,0.0f,0.0f);
 			glScalef(0.2f,0.2f,0.2f);
-			glTranslatef(-0.5f,-0.5f,0.0f);
+			glTranslatef(-0.5f,-1.0f,0.0f);
 			glRotatef(90,1.0f,0.0f,0.0f);
 			teamNumber->render();
 		glPopMatrix();

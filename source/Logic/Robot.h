@@ -54,6 +54,7 @@ public:
 	//Used for component toggling
 	void cycleIndex();
 	void turnSelectedOn();
+	void turnSelectedOff();
 
 	//Robot Spinning
 	void incrementSpinDegrees(bool pos, GLfloat speed = 1);
@@ -132,6 +133,7 @@ private:
 	
 	//Collision Detection
 	BoundingBox* box;
+	bool hasBox;
 	CollisionTester* ct;
 	BulletManager* bm;
     

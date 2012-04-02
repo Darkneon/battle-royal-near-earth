@@ -43,9 +43,7 @@ void Game::update(bool* gameOver)
 	Robot* r1 = p1->robots.at(0);
 	Robot* r2 = p2->robots.at(0);
 
-	if (ct->nukePowerUpCollisionTest(r1->xPos, r1->height, r1->zPos, r1->getRobotId()) || 
-		ct->nukePowerUpCollisionTest(r2->xPos, r2->height, r2->zPos, r2->getRobotId()))
-	{
+	if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
 		aNukeWentOff = true;
 		twoPlayerIsOn = false;
 		*gameOver = true;

@@ -89,7 +89,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	pitchAngle = 90.0f;
 	yawAngle = 90.0f;
 	isMyLightOn = false;
-
+	hasBox = false;
 	robotLife = MAX_LIFE;
 
 	directionVector[0] = -1.0f;
@@ -105,10 +105,10 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	}
 
 	turnIndexOn(1);
-	turnIndexOn(3);
+	//turnIndexOn(3);
 	turnIndexOn(4);
 	//turnIndexOn(5);
-	//turnIndexOn(6);
+	turnIndexOn(6);
 	//turnIndexOn(7);
 
 	//incrementSpinDegrees(true,180.0f);
@@ -116,6 +116,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 
 	ct = new CollisionTester;
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true, this);
+	hasBox = true;
 	ct->staticBoxes.push_back(box);
 
 	isRobotBeingControlled = false;
@@ -192,7 +193,15 @@ void Robot::cycleIndex(){
 }
 
 void Robot::turnSelectedOn(){
-	turnIndexOn(selectedIndex);
+	if(!isPartOn[selectedIndex]){
+		turnIndexOn(selectedIndex);
+	}
+}
+
+void Robot::turnSelectedOff(){
+	if(isPartOn[selectedIndex]){
+		turnIndexOn(selectedIndex);
+	}
 }
 
 //Privates
@@ -282,6 +291,9 @@ void Robot::refreshRobot(){
 		model->setNextChild(temp);
 	}
 	calculateHeight();
+	if(hasBox){
+		box->resize(box->size.x,height,box->size.z);
+	}
 	notifyCamera();
 }
 
@@ -840,7 +852,7 @@ bool Robot::checkZDestination(){
 }
 
 bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
-		if(ct->collisionTest(x,y,z,box->movingBoxId)){
+	if(ct->collisionTest(x,y,z,box->movingBoxId)){
 			return true;
 		}
 		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){

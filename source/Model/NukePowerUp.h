@@ -25,7 +25,7 @@ private:
 	GLfloat locX;
 	GLfloat locZ;
 
-	BoundingBox* tempBox;
+	//BoundingBox* tempBox;
 };
 
 

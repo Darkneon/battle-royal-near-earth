@@ -41,9 +41,14 @@ public:
 	void robotForward(bool negate, int vectorIndex);
 	void ufoSetDestination(int vectorIndex);
 	void lockRobotAndUfo();
+	void cycleThroughComponents(int vectorIndex);
+	void toggleComponentOn(int vectorIndex);
+	void toggleComponentOff(int vectorIndex);
+
 private:
 	bool robotUfoLock;
 	int currentCamera;
+	int currentComponent;
 	Camera *availableCams[9];
 	PlayerUFO* ufo;
 
@@ -52,7 +57,6 @@ private:
 	void setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ);
 	void setUFOPosition(V3 v);
 	void setRobotDestination(GLfloat x, GLfloat y, GLfloat z);
-	
 
 
 };

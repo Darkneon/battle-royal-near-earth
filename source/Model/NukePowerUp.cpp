@@ -13,22 +13,22 @@ NukePowerUp::NukePowerUp(GLfloat locX, GLfloat locZ)
 
 	this->locX = locX;
 	this->locZ = locZ;
-	tempBox = new BoundingBox(locX - 0.5f, 0.0f, locZ - 0.5f, 
-		(locX + 0.5f), 0.7f, (locZ + 0.5f));
-	tempBox->hasNukePowerUp = true;
-	CollisionTester::staticBoxes.push_back(tempBox);
+	//tempBox = new BoundingBox(locX - 0.5f, 0.0f, locZ - 0.5f, 
+	//	(locX + 0.5f), 0.7f, (locZ + 0.5f));
+	//tempBox->hasNukePowerUp = true;
+	//CollisionTester::staticBoxes.push_back(tempBox);
 	//tempBox->draw();
 }
 
 NukePowerUp::~NukePowerUp()
 {
-	delete tempBox;
+	//delete tempBox;
 }
 
 void NukePowerUp::draw()
 {
 	currentTime = clock();
-	tempBox->draw();
+	//tempBox->draw();
 	if ((currentTime - lastTranslation) >= 100)
 	{
 		lastTranslation = clock();

@@ -52,8 +52,8 @@ void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
         glLightfv(GL_LIGHT7, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
         glLightfv(GL_LIGHT7, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT7, GL_POSITION, light->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT7, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT7, GL_SPOT_EXPONENT, 0);
+        glLightf(GL_LIGHT7, GL_SPOT_CUTOFF, 20.0f);
+        glLightf(GL_LIGHT7, GL_SPOT_EXPONENT, 150.0f);
         glLightfv(GL_LIGHT7, GL_SPOT_DIRECTION, light->getDirectionArray());
         glEnable(GL_LIGHT7);
 }
