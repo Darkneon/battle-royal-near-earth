@@ -13,11 +13,12 @@
 class PlayerInput
 {
 public:
-	PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates, LevelRenderer *lr);
+	PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates);
 	void functionKeyOperations(int keyModifier);
 	void keyOperations(int keyModifier);
 	void mousePassiveOperations(int x, int y);
 	void mouseButtons(int button, int state);
+	void attachLevelRenderer(LevelRenderer* lr);
 
 private:
 	HumanPlayer* player;

@@ -146,6 +146,8 @@ void LevelRenderer::shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ,
 void LevelRenderer::buildMap()
 {
     GrassModel::teamNumber = false;
+	TextureManager::getInstance()->toggleTextures(true);
+	TextureManager::getInstance()->toggleSkins(0);
     //SKIN1 W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
 	glNewList(2, GL_COMPILE);
 	for(int i = 0; i < rows; i++) {
@@ -157,11 +159,6 @@ void LevelRenderer::buildMap()
                         
                 glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
-
-				//also draw a grass tile under models
-				if(level[i][j] >=12){
-					models[0]->draw();
-				}
 			glPopMatrix();
 		}
 	}
@@ -169,7 +166,7 @@ void LevelRenderer::buildMap()
 
 	//SKIN2 W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
     glNewList(6, GL_COMPILE);
-    TextureManager::getInstance()->toggleSkins();
+    TextureManager::getInstance()->toggleSkins(1);
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {	
@@ -238,7 +235,7 @@ void LevelRenderer::buildMap()
 	//LIST FOR NO TEXTURES W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
 	BoundingBox* tempBox;
 	glNewList(5, GL_COMPILE);
-	TextureManager::getInstance()->toggleTextures();
+	TextureManager::getInstance()->toggleTextures(false);
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
@@ -255,9 +252,9 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
                                 
 				//also draw a grass tile under models
-				/*if(level[i][j] >=12){
+				if(level[i][j] >=12){
 					models[0]->draw();
-				}*/
+				}
 			glPopMatrix();
                         glDisable(GL_STENCIL_TEST);
 			switch(level[i][j]){
@@ -354,7 +351,8 @@ void LevelRenderer::buildMap()
 	delete tempBox;
 
 	GrassModel::teamNumber = true;
-	TextureManager::getInstance()->toggleTextures();
+	TextureManager::getInstance()->toggleTextures(true);
+	TextureManager::getInstance()->toggleSkins(0);
 	 //SKIN1 W/ TEAM NUMBER ----------------------------------------------------------------------------------------
 	glNewList(8, GL_COMPILE);
 	for(int i = 0; i < rows; i++) {
@@ -363,14 +361,8 @@ void LevelRenderer::buildMap()
 				int k = 9;
 			}
 			glPushMatrix();	
-                        
                 glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
-
-				//also draw a grass tile under models
-				if(level[i][j] >=12){
-					models[0]->draw();
-				}
 			glPopMatrix();
 		}
 	}
@@ -378,7 +370,7 @@ void LevelRenderer::buildMap()
 
 	//SKIN2 W TEAM NUMBER ----------------------------------------------------------------------------------------
     glNewList(9, GL_COMPILE);
-    TextureManager::getInstance()->toggleSkins();
+    TextureManager::getInstance()->toggleSkins(1);
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {	
@@ -396,9 +388,9 @@ void LevelRenderer::buildMap()
 				models[ level[i][j] ]->draw();
 
 				//also draw a grass tile under models
-				if(level[i][j] >=11){
+				/*if(level[i][j] >=11){
 					models[0]->draw();
-				}
+				}*/
                                 
                             glDisable(GL_STENCIL_TEST);
 			glPopMatrix();
@@ -447,7 +439,7 @@ void LevelRenderer::buildMap()
 	//LIST FOR NO TEXTURES W/ TEAM NUMBER ----------------------------------------------------------------------------------------
 	glNewList(10, GL_COMPILE);
 	toggleTeamNumber();
-	TextureManager::getInstance()->toggleTextures();
+	TextureManager::getInstance()->toggleTextures(false);
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
@@ -503,6 +495,7 @@ void LevelRenderer::buildMap()
 					tempBox = new BoundingBox((GLfloat)(j+1.0f), 0.0f, (GLfloat)(i+2.5f), (GLfloat)(j+4.0f),0.75f, (GLfloat)(i+4.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
+					break;
 				case 12://factory
 					//3.0f,1.25f,2.0f
 					//tempBox = new BoundingBox((GLfloat)i, 0.0f, (GLfloat)j, (GLfloat)(i+3.0f),1.25f, (GLfloat)(j+1.0f));
@@ -513,6 +506,7 @@ void LevelRenderer::buildMap()
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)(i+1.0f), (GLfloat)(j+3.0f),0.75f, (GLfloat)(i+2.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
 					tempBox->draw();
+					break;
 				case 14:
 					tempBox = new BoundingBox((GLfloat)j, 0.0f, (GLfloat)i, (GLfloat)(j+1.0f),8.0f, (GLfloat)(i+1.0f));
 					lrBoxes->staticBoxes.push_back(tempBox);
@@ -594,7 +588,7 @@ void LevelRenderer::render() {
 				glCallList(2); //without team numbers
 			}
 			else{
-				glCallList(9); //with team numbers
+				glCallList(8); //with team numbers
 			}
 		}
         else {//skin2
@@ -602,7 +596,7 @@ void LevelRenderer::render() {
 				glCallList(6); //without team numbers
 			}
 			else{
-				glCallList(8); //with team numbers
+				glCallList(9); //with team numbers
 			}
         }
 	}

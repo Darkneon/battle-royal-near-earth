@@ -362,9 +362,12 @@ void render()
 		if(startGame){
 			glutSetCursor(GLUT_CURSOR_NONE);
 			game->setMap(loadMap);
+			BoundingBox::showBoxes = false;
 			TextureManager::getInstance()->toggleTextures();
 			antTweakHelper.bindLevelRenderer(game->lr);
+			
 			startGame = false;
+			
 		}
 		//rendering the game itself
 		renderGame();
@@ -537,7 +540,7 @@ void init()
 	glEnable(GL_NORMALIZE);
 
 
-	BoundingBox::showBoxes = !BoundingBox::showBoxes;
+
 
         
 //	initGameMusic();

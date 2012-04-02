@@ -18,6 +18,7 @@ public:
     
 private:
 	void drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos);
+	void renderGrass();
         TeamNumberModel *teamNumber;
         TeamNumberModel *teamNumber2;//Addison
 };

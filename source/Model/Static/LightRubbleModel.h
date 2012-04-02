@@ -12,6 +12,7 @@ public:
 private:
 	void drawRock();
 	void drawBRock();
+	void renderGrass();
 };
 
 #endif	/* LIGHTRUBBLE_H */

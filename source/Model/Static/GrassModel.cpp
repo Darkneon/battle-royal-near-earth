@@ -88,11 +88,11 @@ void GrassModel::build(GLfloat x)
 }
 
 void GrassModel::render() {
+
+	glTranslatef(0,0,1);
 	if(teamNumber){
 		teamNumberRender();
 	}
-
-	glTranslatef(0,0,1);
 	glColor3f(0.8f, 0.8f, 0.8f);
 	TextureManager::getInstance()->enableTexture();
 

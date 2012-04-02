@@ -7,9 +7,8 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat vie
 	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
 	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 28.0f, 10.0f, false);
 		
-	lr = new LevelRenderer();
 
-	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates, lr);
+	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
 	playerInput2 = new JoystickInput(p2);
 
 	player1Score = 0;
@@ -52,4 +51,5 @@ void Game::render()
 
 void Game::setMap(string mapName){
 	lr = new LevelRenderer(mapName);
+	playerInput1->attachLevelRenderer(lr);
 }

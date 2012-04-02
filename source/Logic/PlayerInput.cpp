@@ -1,11 +1,12 @@
 #include "PlayerInput.h"
 
-PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates, LevelRenderer *lr)
+
+PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates)
 {
 	this->player = player;
 	this->keyStates = keyStates;
 	this->funcKeyStates = funcKeyStates;
-	this->lr = lr;
+	lr = NULL;
 }
 
 void PlayerInput::keyOperations(int keyModifier)
@@ -140,7 +141,9 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	}
 	else if (funcKeyStates[GLUT_KEY_F10])
 	{
-		lr->toggleTeamNumber();
+		if(lr != NULL){
+			lr->toggleTeamNumber();
+		}
 	}
 	else if (funcKeyStates[GLUT_KEY_F11])
 	{
@@ -203,4 +206,8 @@ void PlayerInput::mouseButtons(int button, int state)
 
 	if (button == 0 && state == 0 && player->getCurrentCameraType() == CAMERA_ROBOT)
 		player->robots.at(0)->shootBullet();
+}
+
+void PlayerInput::attachLevelRenderer(LevelRenderer* lr){
+	this->lr = lr;
 }
