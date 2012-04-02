@@ -625,6 +625,7 @@ void onMouseFunc(int button, int state, int x, int y)
 				loadMap = "map2.txt";
 			}else{
 				loadMap = "dm-vinelynth.txt";
+                SoundHelper::getInstance()->play("deathmatch.wav", 0, true);
 				toggleTwoPlayerSplitscreen();
 			}
 			beginMenu = false;
@@ -665,6 +666,8 @@ int main (int argc, char **argv)
 	glutKeyboardFunc((GLUTkeyboardfun)onKey);	
     
 	init();
+    
+    SoundHelper::getInstance()->play("menu.wav", true);
 	glutMainLoop();
 	return 0;
 }

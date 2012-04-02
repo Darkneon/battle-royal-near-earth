@@ -33,8 +33,8 @@ public:
     static SoundHelper* getInstance();
 
     
-    void play(string filename);
-    void play(string filename, int sourceNumber);
+    void play(string filename, bool isLoop);
+    void play(string filename, int sourceNumber, bool isLoop);
 
 private:
     static ALuint* loadWav(string filename, int sourceNumber);

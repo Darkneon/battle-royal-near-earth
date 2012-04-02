@@ -129,7 +129,7 @@ Format Wav::getFormat() {
             result = BPS_16_MONO;
         }
         else if(channels == 2) {
-            result = BPS_16_MONO;
+            result = BPS_16_STEREO;
         }
     }
     

@@ -200,7 +200,7 @@ void PlayerInput::mouseButtons(int button, int state)
 
 	if (button == 0 && state == 0 && player->getCurrentCameraType() == CAMERA_ROBOT) {
 		player->robots.at(0)->shootBullet();
-        SoundHelper::getInstance()->play("shoot.wav", 1);
+        SoundHelper::getInstance()->play("shoot.wav", 1, false);
     }
 }
 

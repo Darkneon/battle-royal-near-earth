@@ -91,12 +91,13 @@ ALuint* SoundHelper::loadWav(string filename, int sourceNumber) {
             alListenerfv(AL_ORIENTATION, ListenerOri);                                  //Set orientation of the listener
 
             //Source
-            alSourcei (source[sourceNumber], AL_BUFFER,   *buffer);                                 //Link the buffer to the source
             alSourcef (source[sourceNumber], AL_PITCH,    1.0f     );                                 //Set the pitch of the source
             alSourcef (source[sourceNumber], AL_GAIN,     1.0f     );                                 //Set the gain of the source
             alSourcefv(source[sourceNumber], AL_POSITION, SourcePos);                                 //Set the position of the source
             alSourcefv(source[sourceNumber], AL_VELOCITY, SourceVel); 
         }
+        
+        //TO DO: Fix memory leak
         //delete[] wavFile->getData();
         delete wavFile;
         wavFile = NULL;
@@ -108,7 +109,7 @@ ALuint* SoundHelper::loadWav(string filename, int sourceNumber) {
  
 }
 
-void SoundHelper::play(string fileName, int sourceNumber) {
+void SoundHelper::play(string fileName, int sourceNumber, bool isLoop) {
     
     bool containsFilename = (buffers.end() != buffers.find(fileName));
     if (!containsFilename) {
@@ -117,18 +118,30 @@ void SoundHelper::play(string fileName, int sourceNumber) {
             buffers.insert(bufferPair(fileName, buffer));
         }
     }
-    
+        
+    ALint state; 
+    alGetSourcei(source[sourceNumber], AL_SOURCE_STATE, &state); 
+    if (state == AL_PLAYING) {
+        alSourceStop(source[sourceNumber]);
+    }
+            
     if (buffers[fileName] != NULL) {
-        alSourcei(source[sourceNumber], AL_BUFFER, *buffers[fileName]);                                 //Link the buffer to the sourc
-        alSourcei(source[sourceNumber], AL_LOOPING, AL_FALSE);                                 //Set if source is looping sound
-    
+        alSourcei(source[sourceNumber], AL_BUFFER, *buffers[fileName]); 
+        
+        if (isLoop) {
+            alSourcei(source[sourceNumber], AL_LOOPING, AL_TRUE);                                 //Set if source is looping sound    
+        }
+        else {
+            alSourcei(source[sourceNumber], AL_LOOPING, AL_FALSE);                                 //Set if source is looping sound
+        }
+        
         //PLAY 
         alSourcePlay(source[sourceNumber]);            
     }
 }
 
-void SoundHelper::play(string filename) {
-    play(filename, 0);
+void SoundHelper::play(string filename, bool isLoop) {
+    play(filename, 0, isLoop);
 }
 
 
