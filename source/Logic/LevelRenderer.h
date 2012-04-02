@@ -31,6 +31,7 @@ public:
 	CollisionTester* lrBoxes;
 	BulletManager* bm;
 	void toggleTeamNumber();
+	void toggleLights(int light);
 	
 private:	
     static const int NUM_MODELS = 15;
@@ -57,6 +58,7 @@ private:
 	bool spotLight2;
 	bool spotLight3;
 	bool spotLight4;
+	bool allLightToggle;
 	bool showTeamNumbers;
         GLfloat groundplane[4];
         GLfloat shadowMat[16];

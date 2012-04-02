@@ -28,7 +28,8 @@ void PlayerInput::keyOperations(int keyModifier)
 	}
         else if (keyStates[49]) //1
 	{
-		player->changeCamera(CAMERA_LIGHT1);
+		player->changeCamera(CAMERA_LIGHT1);               
+
 	}
         else if (keyStates[50]) //2
 	{

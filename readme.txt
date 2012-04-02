@@ -68,26 +68,3 @@ make -f Makefile.osx
 Linux:
 cd include/TweakAnt/src/
 make
-
-Texture Credits:
-Fence (grungemetal): http://vortex-x.deviantart.com/art/green-white-metal-wall-118983148
-Mountain (snow): http://www.pixelperfectdigital.com/free_stock_photos/showfull.php?photo=7419
-Floor (rusty_floor): http://www.mb3d.co.uk/mb3d/Metal_Rusty_and_Patterned_Seamless_and_Tileable_High_Res_Textures.html
-Team Number (team): http://free4illustrator.com/2009/04/seamless-reptile-textures-and-photoshop-patterns/
-Player (gold): http://www.psdgraphics.com/textures/brushed-gold-metal-texture/
-MetalVerticalLines: www.webtexture.net/textures/6-high-resolution-metal-texture/
-Brick, Concrete_bare, Dirt, Ink, Marble, Metal1, Metal2, Metal 3, Metal4, Bipodf: www.cgtextures.com
-Lightpost: http://media.moddb.com/legacy/images/tutorials/30/308/gallery/t_508.jpg
-Camo: http://farm4.static.flickr.com/3324/3628571124_51e7bbdff6.jpgsmooth_metal.bmp: http://hhh316.deviantart.com/art/Seamless-metal-texture-smooth-164165216
-skull: http://bestpooltablesreview.blogspot.com/2011/04/buy-2d-glitter-skull-flights-100-micron.html
-Titanium: http://www.jbdesign.it/idesignpro/metal.html
-mechanical: http://www.svgopen.org/2003/papers/UsingSVGFor2DContentInMobile3DGames/index.html
-energy: http://www.123rf.com/photo_9298276_glowing-energy-streaks-abstract-seamless-background-texture.html
-earth and moon : http://frank.mtsu.edu/~njsmith/astr/lab02.shtml
-sun: http://www.dailymail.co.uk/sciencetech/article-1290919/First-photo-planet-circling-distant-sun-outside-solar-system.html
-nebula: http://cs.astronomy.com/asycs/media/p/474777.aspx
-stars1.bmp: http://www.khilafatworld.com/2012/01/poem-look-in-stars.html
-stars2.bmp: http://www.therealfun.com/Stars-in-night-10535.html
-milky way: http://www.moonphases.info/the-stars.html
-warning: http://www.texturemate.com/content/free-texture-symbols-2010080401
-BlackDesign: www.flickr.com/photos/torley/467773018/in/set-72157600105710970

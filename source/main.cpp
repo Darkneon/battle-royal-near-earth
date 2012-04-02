@@ -459,6 +459,36 @@ void windowKeyOps()
 		game->lr->toggleSkySphere();
 	}
 
+	if (keyStates['5'])
+	{
+		game->lr->toggleLights(1);
+	}
+
+	if (keyStates['6'])
+	{
+		game->lr->toggleLights(2);
+	}
+
+	if (keyStates['7'])
+	{
+		game->lr->toggleLights(3);
+	}
+
+	if (keyStates['8'])
+	{
+		game->lr->toggleLights(4);
+	}
+
+	if (keyStates['9'])
+	{
+		game->lr->toggleLights(5);
+	}
+
+	if (keyStates['p'])
+	{
+		game->lr->toggleLights(6);
+	}
+
 	if (keyStates[27]) //ESC
 	{
 		if (game != NULL)

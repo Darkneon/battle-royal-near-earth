@@ -40,6 +40,7 @@ LevelRenderer::LevelRenderer(string mapName) {
 	spotLight2 = true;
 	spotLight3 = true;
 	spotLight4 = true;
+	allLightToggle = true;
 	showTeamNumbers = false;
 	//Loading textures
 	//DirectoryManipHelper::getDirectoryListing(".");
@@ -760,4 +761,39 @@ void LevelRenderer::renderLights()
 
 void LevelRenderer::toggleTeamNumber(){
 	showTeamNumbers = !showTeamNumbers;
+}
+
+void LevelRenderer::toggleLights(int lights){
+	switch(lights){
+	case 1: //toggle light 1
+		spotLight1 = !spotLight1;
+		break;
+	case 2: //toggle light 2
+		spotLight2 = !spotLight2;
+		break;
+	case 3: //toggle light 3
+		spotLight3 = !spotLight3;
+		break;
+	case 4: //toggle light 4
+		spotLight4 = !spotLight4;
+		break;
+	case 5: //toggle all lights
+		allLightToggle = !allLightToggle;
+		if(allLightToggle){
+			spotLight1 = true;
+			spotLight2 = true;
+			spotLight3 = true;
+			spotLight4 = true;
+		}else{
+			spotLight1 = false;
+			spotLight2 = false;
+			spotLight3 = false;
+			spotLight4 = false;
+		}
+
+		break;
+	case 6: //toggle ambient light
+		ambientLight = !ambientLight;
+		break;
+	}
 }
