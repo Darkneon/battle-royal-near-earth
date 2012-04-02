@@ -4,10 +4,16 @@ f2 --------------- mouse look (freelook)
 f3 --------------- commander camera
 f4 ---------------- toggle bird view
 f5 --------------- robot camera (need to attach robot first, with 't')
-[ ] -------------- roll camera
-/ ---------------- reset roll/pitch
+f6 --------------- toggle robot skins
+f8 --------------- toggle split screen
+f10 -------------- toggle team number
+alt+enter -------- fullscreen
+[ ] -------------- roll freelook camera
+/ ---------------- reset freelook roll/pitch
+b ---------------- debugger
+h ---------------- help menu
 l ---------------- toggle light (in bird view)
-o ---------------- toggle texture
+t ---------------- toggle texture and bounding boxes
 arrows ----------- move camera around
 page up/down ----- rotate
 end -------------- reset rotation angle to 0
@@ -28,8 +34,14 @@ The following keys interchange robot parts.
 t --------------- attach robot to Robot camera
 y --------------- cycle through selection of robot parts
 u --------------- toggle selected robot part
-s --------------- toggle skyboxes
+z --------------- toggle skyboxes
 ** The robot can be found near the bottom of the map around where the base and factory are**
+
+GAMEPLAY:
+spacebar: levitate ufo
+wasd: move ufo or robot (depending on which view)
+r: set robot destination with ufo
+f: mate ufo with robot
 Robot View buttons:
 arrows L/R ------ spin robot
 arrows U/D ------ pitch

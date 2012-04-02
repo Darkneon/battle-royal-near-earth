@@ -28,29 +28,26 @@ void PlayerInput::keyOperations(int keyModifier)
 	}
         else if (keyStates[49]) //1
 	{
-		//player->changeCamera(CAMERA_LIGHT1);               
-		player->moveUFOX(true);
-
+		player->changeCamera(CAMERA_LIGHT1);
 	}
         else if (keyStates[50]) //2
 	{
-		//player->changeCamera(CAMERA_LIGHT2);
-		player->moveUFOZ(false);
+		player->changeCamera(CAMERA_LIGHT2);
 	}
         else if (keyStates[51]) //3
 	{
-		//player->changeCamera(CAMERA_LIGHT3);
+		player->changeCamera(CAMERA_LIGHT3);
 	}
         else if (keyStates[52]) //4
 	{
-		//player->changeCamera(CAMERA_LIGHT4);
+		player->changeCamera(CAMERA_LIGHT4);
 	}
 
 	if (keyStates[108]) //l
 	{
 		player->getCurrentCamera()->toggleLight();
 	}
-	if (keyStates[111]) //o
+	if (keyStates[116]) //t
 	{
 		TextureManager::getInstance()->toggleTextures();
 		BoundingBox::showBoxes = !BoundingBox::showBoxes;
@@ -113,17 +110,20 @@ void PlayerInput::keyOperations(int keyModifier)
 		else
 			player->moveUFOZ(false);
 	}
+	else if (keyStates[114]) //r
+	{
+		player->ufoSetDestination(0);
+	}
+	else if (keyStates[102]) //f
+	{
+		player->lockRobotAndUfo();
+	}
 
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)
 {
-
-	if (funcKeyStates[GLUT_KEY_F4])
-	{
-		player->changeCamera(CAMERA_CIRCULAR);
-	}
-	else if (funcKeyStates[GLUT_KEY_F2])
+	if (funcKeyStates[GLUT_KEY_F2])
 	{
 		player->changeCamera(CAMERA_FREELOOK);
 	}
@@ -131,11 +131,11 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	{
 		player->changeCamera(CAMERA_COMMANDER);	
 	}
-	else if (funcKeyStates[GLUT_KEY_F5])
+	else if (funcKeyStates[GLUT_KEY_F4])
 	{
-		player->changeCamera(CAMERA_ROBOT);	
+		player->changeCamera(CAMERA_CIRCULAR);
 	}
-	else if (funcKeyStates[GLUT_KEY_F7])
+	else if (funcKeyStates[GLUT_KEY_F5])
 	{
 		player->changeCamera(CAMERA_FOLLOW);	
 	}
@@ -145,15 +145,7 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 			lr->toggleTeamNumber();
 		}
 	}
-	else if (funcKeyStates[GLUT_KEY_F11])
-	{
-		player->ufoSetDestination(0);
-	}
-	else if (funcKeyStates[GLUT_KEY_F12])
-	{
-		player->lockRobotAndUfo();
-	}
-    
+
 	if (funcKeyStates[GLUT_KEY_LEFT])
 	{
 		player->getCurrentCamera()->moveCameraStrafe(true);
