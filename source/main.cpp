@@ -560,6 +560,8 @@ void initAntTweak() {
 void init()
 {
 	glGenLists(10);
+	
+	toggleFullScreen();
 
 	te = TextureManager::getInstance();
 	srand ( (unsigned int)time(NULL) );
