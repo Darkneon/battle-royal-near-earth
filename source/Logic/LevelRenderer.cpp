@@ -796,4 +796,30 @@ void LevelRenderer::toggleLights(int lights){
 		ambientLight = !ambientLight;
 		break;
 	}
+
+	if(spotLight1){
+		light1->lightOn = true;
+	}
+	else{
+		light1->lightOn = false;
+	}
+	if(spotLight2){
+		light2->lightOn = true;
+	}
+	else{
+		light2->lightOn = false;
+	}
+	if(spotLight3){
+		light3->lightOn = true;
+	}
+	else{
+		light3->lightOn = false;
+	}
+	if(spotLight4){
+		light4->lightOn = true;
+	}
+	else{
+		light4->lightOn = false;
+	}
+
 }

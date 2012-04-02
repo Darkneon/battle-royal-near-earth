@@ -16,7 +16,7 @@
 class LightPost { 
 public:
 	friend class AntTweakHelper;
-
+	bool lightOn;
     LightPost(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
     void render();
     void drawHeadLamp();

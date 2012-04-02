@@ -31,6 +31,7 @@ LightPost::LightPost(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GL
 	axis[0] = 1.0f;
 	axis[1] = 0.0f;
 	axis[2] = 0.0f;
+	lightOn = false;
 }
 
 GLfloat LightPost::getPosX()
@@ -116,23 +117,48 @@ void LightPost::drawHeadLamp()
                 glTranslatef(-0.0f, -0.5f, 0.0f);
             GeoHelper::drawCube(-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 1.0f); //Draw the head of the lamp
             GeoHelper::drawCube(-0.2f, -0.2f, -0.2f, 1.2f, 1.2f, 1.2f);
+			glDisable(GL_TEXTURE_2D);
             //Lightbulb 1
+			
             glPushMatrix();
-                glColor3f(1.0f, 1.0f, 1.0f);
+                if(lightOn){
+					glColor3f(1.0f,1.0f,1.0f);
+				}
+				else{
+					glColor3f(0.2f,0.2f,0.2f);
+				}
                 glTranslatef(0.0f, -0.5f, 0.0f);
                 glutSolidSphere(0.25, 10, 10);
             glPopMatrix();
             //Lightbulb 2
             glPushMatrix();
+				if(lightOn){
+					glColor3f(1.0f,1.0f,1.0f);
+				}
+				else{
+					glColor3f(0.2f,0.2f,0.2f);
+				}
                 glTranslatef(0.6f, -0.5f, 0.0f);
                 glutSolidSphere(0.25, 10, 10);
             glPopMatrix();
             //Lightbulb 3
             glPushMatrix();
+				if(lightOn){
+					glColor3f(1.0f,1.0f,1.0f);
+				}
+				else{
+					glColor3f(0.2f,0.2f,0.2f);
+				}
                 glTranslatef(0.6f, -0.5f, 0.5f);
                 glutSolidSphere(0.25, 10, 10);
             glPopMatrix();
             //Lightbulb 4
+				if(lightOn){
+					glColor3f(1.0f,1.0f,1.0f);
+				}
+				else{
+					glColor3f(0.2f,0.2f,0.2f);
+				}
             glPushMatrix();
                 glTranslatef(0.0f, -0.5f, 0.5f);
                 glutSolidSphere(0.25, 10, 10);
@@ -143,7 +169,7 @@ void LightPost::drawHeadLamp()
             glPopMatrix();
         glPopMatrix();
      glPopMatrix();
-     glDisable(GL_TEXTURE_2D);
+     //glDisable(GL_TEXTURE_2D);
 
 }
 void LightPost::rotateLamp()
