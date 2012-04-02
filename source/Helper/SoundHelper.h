@@ -12,7 +12,8 @@
     #include <OpenAL/al.h>
     #include <OpenAL/alc.h>
 #else
-    //Fill in 
+    #include "AL/al.h"
+	#include "AL/alc.h"
 #endif
 
 #include <string>

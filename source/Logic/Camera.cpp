@@ -43,4 +43,3 @@ void Camera::resetCameraAngle()
 {
 	yaw = 0;
 }
-

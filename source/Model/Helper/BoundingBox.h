@@ -34,6 +34,7 @@ public:
 	GLuint movingBoxId;
 	Robot *robot;
 	bool hasRobot;
+	bool hasNukePowerUp;
 	//coordinates
 	V3 min;
 	V3 max;

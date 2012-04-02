@@ -194,6 +194,18 @@
     <ClCompile Include="Model\Static\Wall.cpp">
       <Filter>Model\Static</Filter>
     </ClCompile>
+    <ClCompile Include="Helper\SoundHelper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\Wav.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\NuclearExplosion.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\NukePowerUp.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -391,6 +403,18 @@
     <ClInclude Include="Model\Static\Wall.h">
       <Filter>Model\Static</Filter>
     </ClInclude>
+    <ClInclude Include="Helper\Wav.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\SoundHelper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\NuclearExplosion.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\NukePowerUp.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Model">
@@ -435,6 +459,9 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\library\freeglut_static.lib">
+      <Filter>Libraries</Filter>
+    </Library>
+    <Library Include="..\library\OpenAL32.lib">
       <Filter>Libraries</Filter>
     </Library>
   </ItemGroup>

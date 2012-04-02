@@ -26,6 +26,14 @@ void Model::draw() {
     }
 }
 
+void Model::drawWithoutChildren() {
+    if (material != NULL) {
+       material->apply();
+    }
+    
+    render();
+}
+
 void Model::removeAllChildren(){
 	 vector<Model *>::iterator iter;
     

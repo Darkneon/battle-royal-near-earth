@@ -1,5 +1,5 @@
 /* 
- * File:   CannonModel.h
+ * File:   MissileModel.h
  * Author: Jonathan
  *
  * Created on January 26, 2012, 6:57 PM

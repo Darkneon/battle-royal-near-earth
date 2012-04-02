@@ -139,6 +139,8 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClCompile Include="Model\Material\RockMaterial.cpp" />
     <ClCompile Include="Model\MissileModel.cpp" />
     <ClCompile Include="Model\Model.cpp" />
+    <ClCompile Include="Model\NuclearExplosion.cpp" />
+    <ClCompile Include="Model\NukePowerUp.cpp" />
     <ClCompile Include="Model\Player\AntennaModel.cpp" />
     <ClCompile Include="Model\Player\PlayerModel.cpp" />
     <ClCompile Include="Model\Robot\AntiGravModel.cpp" />
@@ -212,6 +214,8 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClInclude Include="Model\Material\RockMaterial.h" />
     <ClInclude Include="Model\MissileModel.h" />
     <ClInclude Include="Model\Model.h" />
+    <ClInclude Include="Model\NuclearExplosion.h" />
+    <ClInclude Include="Model\NukePowerUp.h" />
     <ClInclude Include="Model\Player\AntennaModel.h" />
     <ClInclude Include="Model\Player\PlayerModel.h" />
     <ClInclude Include="Model\Robot\AntiGravModel.h" />

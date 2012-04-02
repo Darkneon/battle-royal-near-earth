@@ -2,7 +2,8 @@
 
 Bullet::Bullet(void)
 {
-	model = (Model*)(new BulletModel);
+	//model = (Model*)(new BulletModel);
+	model = (Model*)(new MissileModel);
 	position.x = 0.0f;
 	position.y = 0.0f;
 	position.z = 0.0f;
@@ -10,6 +11,7 @@ Bullet::Bullet(void)
 	direction.x = 0.0f;
 	direction.y = 0.0f;
 	direction.z = 0.0f;
+	degrees = 0.0f;
 
 	duration = MAX_DURATION;
 
@@ -19,8 +21,9 @@ Bullet::Bullet(void)
 		position.x + BULLET_RADIUS, position.y + BULLET_RADIUS, position.z + BULLET_RADIUS, true);
 }
 
-Bullet::Bullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz){
-	model = (Model*)(new BulletModel);
+Bullet::Bullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLfloat dz, GLfloat degrees){
+	//model = (Model*)(new BulletModel);
+	model = (Model*)(new MissileModel);
 	position.x = px;
 	position.y = py;
 	position.z = pz;
@@ -28,6 +31,8 @@ Bullet::Bullet(GLfloat px, GLfloat py, GLfloat pz, GLfloat dx, GLfloat dy, GLflo
 	direction.x = dx;
 	direction.y = dy;
 	direction.z = dz;
+
+	this->degrees = degrees+90;
 
 	duration = MAX_DURATION;
 
@@ -50,6 +55,7 @@ void Bullet::draw(){
 		glPushMatrix();
 			box->draw();
 			glTranslatef(position.x,position.y,position.z);
+			glRotatef(degrees,0.0f,1.0f,0.0f);
 			model->draw();
 			duration--;
 		glPopMatrix();

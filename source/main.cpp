@@ -48,6 +48,7 @@ TextureManager *te;
 
 static bool isDebugMode = false;
 
+bool isGameOver = false;
 bool isTwoPlayerGame = false;
 
 int viewStates = 0; //states of the camera views
@@ -57,6 +58,19 @@ AntTweakHelper antTweakHelper;
 
 //second window for help menu
 int mainWindow = 0;
+bool beginMenu = true;
+bool mapChoice = false;
+bool startGame = false;
+
+GLfloat buttonW1;
+GLfloat	buttonW2;
+GLfloat button1H1;
+GLfloat button1H2;
+
+GLfloat button2H1;
+GLfloat button2H2;
+
+string loadMap;
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
@@ -76,11 +90,13 @@ void toggleTwoPlayerSplitscreen()
 	{
 		game->p1->controlRobotAt(0);
 		game->p2->controlRobotAt(0);
+		game->twoPlayerIsOn = true;
 	}
 	else
 	{
 		game->p1->changeCamera(CAMERA_COMMANDER);
 		game->p2->changeCamera(CAMERA_COMMANDER);
+		game->twoPlayerIsOn = false;
 	}
 }
 
@@ -119,6 +135,7 @@ void rasterText(GLfloat x, GLfloat y, void *font, char *c, int cWidth){
 	glPopMatrix();
 }
 
+//function to draw the help menu
 void help_display(){
     glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
@@ -165,44 +182,107 @@ void help_display(){
     glPopMatrix();
 }
 
-void render()
-{
+//render the menu at the beginning of the game
+void renderMenu(){
+    glPushMatrix();
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		//creating ortho view since text is only 2D
+		glOrtho(0, width, 0, height, 0.0, 0.1);
+		glMatrixMode(GL_MODELVIEW);
+		glDisable(GL_LIGHTING);
+
+		
+		glColor3f(1.0f, 1.0f, 1.0f);
+		string s = "Open Robot Battle Near Earth";
+		rasterText((GLfloat)width/2-110,(GLfloat)height-40,GLUT_BITMAP_HELVETICA_18, (char *)s.c_str(), s.size());
+
+		if(!mapChoice){
+			s = "Please choose one of the following modes:";
+		}else{
+			s = "Please choose one of the following maps:";
+		}
+		rasterText((GLfloat)width/2-105,(GLfloat)height-140,GLUT_BITMAP_HELVETICA_12, (char *)s.c_str(), s.size());
+
+		GLfloat size;
+		if(!mapChoice){
+			s = "Classic Nether Earth";
+			size = (GLfloat)width/2-80;
+		}else{
+			s = "Map1";
+			size = (GLfloat)width/2-20;
+		}
+		rasterText(size,(GLfloat)height-220,GLUT_BITMAP_HELVETICA_18, (char *)s.c_str(), s.size());
+
+		if(!mapChoice){
+			s = "DeathMatch";
+			size = (GLfloat)width/2-50;
+		}else{
+			s = "Map2";
+			size = (GLfloat)width/2-20;
+		}
+		rasterText(size,(GLfloat)height-300,GLUT_BITMAP_HELVETICA_18, (char *)s.c_str(), s.size());
+
+		buttonW1 = (GLfloat)width/2-95;
+		buttonW2 = (GLfloat)width/2+105;
+		button1H1 = (GLfloat)height-230;
+		button1H2 = (GLfloat)height-195;
+
+		button2H1 = (GLfloat)height-310;
+		button2H2 = (GLfloat)height-275;
+
+		glBegin(GL_QUADS);
+			glColor3f(0.0f, 0.5f, 0.0f);
+			glVertex2f(buttonW1, button1H1);
+			glVertex2f(buttonW2, button1H1);
+			glVertex2f(buttonW2, button1H2);
+			glVertex2f(buttonW1, button1H2);
+
+			glVertex2f(buttonW1, button2H1);
+			glVertex2f(buttonW2, button2H1);
+			glVertex2f(buttonW2, button2H2);
+			glVertex2f(buttonW1, button2H2);
+
+			glColor3f(0.0f, 0.0f, 0.0f);
+			glVertex2f(0.0f, 0.0f);
+			glVertex2f((GLfloat)width, 0.0f);
+			glVertex2f((GLfloat)width, (GLfloat)height);
+			glVertex2f(0.0f, (GLfloat)height);
+		glEnd();
+
+		glEnable(GL_LIGHTING);
+		glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+}
+
+
+//render the game itself
+void renderGame(){
 	static time_t lastUpdate = time(NULL);
 	static time_t currentTime = time(NULL);
 	static GLuint fps = 0;
 	static GLuint prevFps = 0;
 
-	//clears the buffer
-        //glClearStencil(0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-        
-        
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-                
-        
-	if(showHelpWindow){
-		help_display();
-	}
-
 	if (isTwoPlayerGame)
 	{
-		game->p1->view();
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
+		game->p1->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
 	
-		game->p2->view();
+		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
+		game->p2->view();
 		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
 	}
 	else
 	{
+		
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		game->render();
 		game->p1->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
@@ -247,8 +327,8 @@ void render()
 			stringstream score1;
 			stringstream score2;
 
-			score1 << game->p1->getScore();
-			score2 << game->p2->getScore();
+			score1 << game->player1Score;
+			score2 << game->player2Score;
 			string stringScore1 = "Player 1: " + score1.str();
 			string stringScore2 = "Player 2: " + score2.str();
 
@@ -261,11 +341,46 @@ void render()
         glEnable(GL_LIGHTING);
         glMatrixMode(GL_PROJECTION);
     glPopMatrix();
+}
+
+
+void render()
+{
+	//clears the buffer
+        //glClearStencil(0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+        
+        
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+    //showing the help menu if needed
+	if(showHelpWindow){
+		help_display();
+	}
+
+	//showing the menu at the beginning of the game
+	if(beginMenu){
+		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+		renderMenu();
+	}else{
+		if(startGame){
+			glutSetCursor(GLUT_CURSOR_NONE);
+			game->setMap(loadMap);
+			BoundingBox::showBoxes = false;
+			TextureManager::getInstance()->toggleTextures();
+			antTweakHelper.bindLevelRenderer(game->lr);
+			
+			startGame = false;
+			
+		}
+		//rendering the game itself
+		renderGame();
+	}
     
 	glutSwapBuffers();
     glutPostRedisplay();
-
-
 	
 }
 
@@ -350,6 +465,36 @@ void windowKeyOps()
 		game->lr->toggleSkySphere();
 	}
 
+	if (keyStates['5'])
+	{
+		game->lr->toggleLights(1);
+	}
+
+	if (keyStates['6'])
+	{
+		game->lr->toggleLights(2);
+	}
+
+	if (keyStates['7'])
+	{
+		game->lr->toggleLights(3);
+	}
+
+	if (keyStates['8'])
+	{
+		game->lr->toggleLights(4);
+	}
+
+	if (keyStates['9'])
+	{
+		game->lr->toggleLights(5);
+	}
+
+	if (keyStates['p'])
+	{
+		game->lr->toggleLights(6);
+	}
+
 	if (keyStates[27]) //ESC
 	{
 		if (game != NULL)
@@ -389,7 +534,7 @@ void onKey(unsigned char key, int x, int y)  {
 
 void initAntTweak() {
  // antTweakHelper.bindCamera(game->p1->getCurrentCamera());
-    antTweakHelper.bindLevelRenderer(game->lr);
+ // antTweakHelper.bindLevelRenderer(game->lr);
 }
 
 //http://sites.google.com/site/sdlgamer/beginner/lesson-12
@@ -408,7 +553,7 @@ void initAntTweak() {
 
 void init()
 {
-	glGenLists(7);
+	glGenLists(10);
 
 	te = TextureManager::getInstance();
 	srand ( (unsigned int)time(NULL) );
@@ -430,9 +575,9 @@ void init()
 	
 	initAntTweak();
 	glEnable(GL_NORMALIZE);
- 
-	TextureManager::getInstance()->toggleTextures();
-	BoundingBox::showBoxes = !BoundingBox::showBoxes;
+
+
+
 
         
 //	initGameMusic();
@@ -461,6 +606,31 @@ void onMouseFunc(int button, int state, int x, int y)
 	TwEventMouseButtonGLUT(button, state, x, y);
 	game->playerInput1->mouseButtons(button, state);
 	game->playerInput1->mousePassiveOperations(x, y);
+
+	if(beginMenu){
+		y = (int)height - y; 
+		//check if clicked button1
+		if (button == 0 && state == 0 && x>buttonW1 && x<buttonW2 && y>button1H1 && y<button1H2){
+			if(mapChoice){
+				loadMap = "map1.txt";
+				beginMenu = false;
+				startGame = true;
+			}else{
+				mapChoice = !mapChoice;
+			}
+		}
+		//check if clicked button2
+		else if (button == 0 && state == 0 && x>buttonW1 && x<buttonW2 && y>button2H1 && y<button2H2){
+		    if(mapChoice){
+				loadMap = "map2.txt";
+			}else{
+				loadMap = "dm-vinelynth.txt";
+				toggleTwoPlayerSplitscreen();
+			}
+			beginMenu = false;
+			startGame = true;
+		}
+	}
 }
 
 

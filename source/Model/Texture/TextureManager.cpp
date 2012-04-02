@@ -134,11 +134,21 @@ void TextureManager::toggleTextures(){
 	texturesEnabled = !texturesEnabled;
 }
 
+void TextureManager::toggleTextures(bool b){
+	texturesEnabled = b;
+}
+
 void TextureManager::toggleSkins(){
     currentSkin += 1;
     if (currentSkin >= NUM_SKINS) {
         currentSkin = 0;
     }
+}
+
+void TextureManager::toggleSkins(int num){
+    if(num < 2){
+		currentSkin = num;
+	}
 }
 
 void TextureManager::enableTexture(){

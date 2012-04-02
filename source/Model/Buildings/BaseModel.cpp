@@ -37,6 +37,9 @@ void BaseModel::render()
 			teamNumber->render();
 		glPopMatrix();
     glPopMatrix();
+	glPushMatrix();
+		renderGrass();
+	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
   
   
@@ -70,4 +73,39 @@ void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos)
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+0.0f);
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+50.0f);
     glPopMatrix();
+}
+
+
+void BaseModel::renderGrass() {
+
+	glTranslatef(0,0,1);
+
+	glColor3f(0.8f, 0.8f, 0.8f);
+	TextureManager::getInstance()->enableTexture();
+	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rusty_floor.bmp"));
+	glPushMatrix();		
+		
+        glBegin(GL_TRIANGLES);
+			glNormal3f(0.0f,1.0f,0.0f);
+
+			glTexCoord2f (0.0f, 0.0f);            
+			glVertex3f(0 ,0 ,0);
+
+			glTexCoord2f (1.0, 0.0);
+            glVertex3f(1, 0 ,0);
+
+			glTexCoord2f (1.0, 1.0);
+            glVertex3f(1, 0, -1);
+
+			glTexCoord2f (0.0, 0.0);
+            glVertex3f(0 ,0 ,0);
+
+			glTexCoord2f (1.0, 1.0);
+            glVertex3f(1, 0, -1);
+
+			glTexCoord2f (0.0, 1.0);
+            glVertex3f(0, 0, -1);
+        glEnd();
+    glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 }

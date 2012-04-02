@@ -6,7 +6,6 @@
 JoystickInput::JoystickInput(HumanPlayer* player)
 {
 	this->player = player;
-
 	deadZoneFound = false;
 }
 
@@ -53,15 +52,12 @@ void JoystickInput::joystickOperations(unsigned int button, int x, int y, int z)
 	{
 		if (x < x_deadZone)
 		{
-			player->robots.at(0)->incrementSpinDegrees(true, 8.0f);
-			std::cout << "Move to the left" << endl;
+			player->robots.at(0)->incrementSpinDegrees(true, 4.0f);
 		}
 		else
 		{
-			player->robots.at(0)->incrementSpinDegrees(false, 8.0f);
-			std::cout << "Move to the right" << endl;
+			player->robots.at(0)->incrementSpinDegrees(false, 4.0f);
 		}
-
 	}
 
 	if (abs(y - deadZoneFound) > JOYSTICK_SENSITIVITY)

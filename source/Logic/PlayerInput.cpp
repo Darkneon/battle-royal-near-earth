@@ -1,11 +1,13 @@
 #include "PlayerInput.h"
 #include "SoundHelper.h"
 
+
 PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates)
 {
 	this->player = player;
 	this->keyStates = keyStates;
 	this->funcKeyStates = funcKeyStates;
+	lr = NULL;
 }
 
 void PlayerInput::keyOperations(int keyModifier)
@@ -27,29 +29,27 @@ void PlayerInput::keyOperations(int keyModifier)
 	}
         else if (keyStates[49]) //1
 	{
-		//player->changeCamera(CAMERA_LIGHT1);               
-		player->moveUFOX(true);
+		player->changeCamera(CAMERA_LIGHT1);               
 
 	}
         else if (keyStates[50]) //2
 	{
-		//player->changeCamera(CAMERA_LIGHT2);
-		player->moveUFOZ(false);
+		player->changeCamera(CAMERA_LIGHT2);
 	}
         else if (keyStates[51]) //3
 	{
-		//player->changeCamera(CAMERA_LIGHT3);
+		player->changeCamera(CAMERA_LIGHT3);
 	}
         else if (keyStates[52]) //4
 	{
-		//player->changeCamera(CAMERA_LIGHT4);
+		player->changeCamera(CAMERA_LIGHT4);
 	}
 
 	if (keyStates[108]) //l
 	{
 		player->getCurrentCamera()->toggleLight();
 	}
-	if (keyStates[111]) //o
+	if (keyStates[116]) //t
 	{
 		TextureManager::getInstance()->toggleTextures();
 		BoundingBox::showBoxes = !BoundingBox::showBoxes;
@@ -76,7 +76,7 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveStrafe(true);
+			player->robotStrafe(true,0);
 		}
 		else
 			player->moveUFOX(true);
@@ -86,7 +86,7 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveStrafe(false);
+			player->robotStrafe(false,0);
 		}
 		else
 			player->moveUFOX(false);
@@ -97,7 +97,7 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveForward(false);
+			player->robotForward(false,0);
 		}
 		else
 			player->moveUFOZ(true);
@@ -107,22 +107,25 @@ void PlayerInput::keyOperations(int keyModifier)
 		if (player->getCurrentCameraType() == CAMERA_ROBOT)
 		{
 			//assume a robot is there for now
-			player->robots.at(0)->moveForward(true);
+			player->robotForward(true,0);
 		}
 		else
 			player->moveUFOZ(false);
+	}
+	else if (keyStates[114]) //r
+	{
+		player->ufoSetDestination(0);
+	}
+	else if (keyStates[102]) //f
+	{
+		player->lockRobotAndUfo();
 	}
 
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)
 {
-
-	if (funcKeyStates[GLUT_KEY_F4])
-	{
-		player->changeCamera(CAMERA_CIRCULAR);
-	}
-	else if (funcKeyStates[GLUT_KEY_F2])
+	if (funcKeyStates[GLUT_KEY_F2])
 	{
 		player->changeCamera(CAMERA_FREELOOK);
 	}
@@ -130,15 +133,21 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	{
 		player->changeCamera(CAMERA_COMMANDER);	
 	}
-	else if (funcKeyStates[GLUT_KEY_F5])
+	else if (funcKeyStates[GLUT_KEY_F4])
 	{
-		player->changeCamera(CAMERA_ROBOT);	
+		player->changeCamera(CAMERA_CIRCULAR);
 	}
-	else if (funcKeyStates[GLUT_KEY_F7])
+	else if (funcKeyStates[GLUT_KEY_F5])
 	{
 		player->changeCamera(CAMERA_FOLLOW);	
 	}
-    
+	else if (funcKeyStates[GLUT_KEY_F10])
+	{
+		if(lr != NULL){
+			lr->toggleTeamNumber();
+		}
+	}
+
 	if (funcKeyStates[GLUT_KEY_LEFT])
 	{
 		player->getCurrentCamera()->moveCameraStrafe(true);
@@ -193,4 +202,8 @@ void PlayerInput::mouseButtons(int button, int state)
 		player->robots.at(0)->shootBullet();
         SoundHelper::getInstance()->play("shoot.wav", 1);
     }
+}
+
+void PlayerInput::attachLevelRenderer(LevelRenderer* lr){
+	this->lr = lr;
 }

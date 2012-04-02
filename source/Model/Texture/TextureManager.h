@@ -34,7 +34,9 @@ public:
 	static TextureManager* getInstance();
 	GLuint getTextures(string fileName);
 	void toggleTextures();
+	void toggleTextures(bool b);
     void toggleSkins();
+	void toggleSkins(int num);
 	void enableTexture();
     int getCurrentSkin() { return currentSkin; };
 

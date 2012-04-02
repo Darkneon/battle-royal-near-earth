@@ -13,11 +13,13 @@
 
 class GrassModel : public Model {
 public:
-    GrassModel();
+	static bool teamNumber;
+	GrassModel();
     void render();
 private:
 	void build();
-        void build(GLfloat x);
+    void build(GLfloat x);
+	void teamNumberRender();
 };
 
 #endif	/* GRASSMODEL_H */

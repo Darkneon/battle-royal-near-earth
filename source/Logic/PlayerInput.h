@@ -18,9 +18,11 @@ public:
 	void keyOperations(int keyModifier);
 	void mousePassiveOperations(int x, int y);
 	void mouseButtons(int button, int state);
+	void attachLevelRenderer(LevelRenderer* lr);
 
 private:
 	HumanPlayer* player;
+	LevelRenderer* lr;
 	bool *keyStates;
 	bool *funcKeyStates;
 	int *keyModifier;

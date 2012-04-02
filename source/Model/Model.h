@@ -41,6 +41,7 @@ public:
     virtual void render() = 0;
     
     void draw();
+	void drawWithoutChildren();
     
     Model* getParent() {
         return parent;

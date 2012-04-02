@@ -36,7 +36,7 @@ static const GLfloat WEST = 0.0f;
 //MOUSE CONTROL CONSTANTS
 static const GLfloat MOUSE_SENSITIVITY = 0.25f;
 
-static const GLfloat ROBOT_STEP_SIZE = 0.1f;
+static const GLfloat ROBOT_STEP_SIZE = 0.2f;
 
 class RobotCamera;
 
@@ -45,6 +45,9 @@ public:
 	Robot();
 	Robot(GLfloat x, GLfloat y);
 	~Robot();
+
+	static int robotIdCount;
+	
 
 	void draw();
 
@@ -68,6 +71,8 @@ public:
 	GLfloat* getLightLookAt();
 	GLfloat calculateHeight(int index); //because height varies depending on components
 	GLfloat calculateHeight();
+	V3 getUFOLockPosition();
+	void setDestination(GLfloat x, GLfloat z);
 
 	//Camera attachment and synchronization
 	void attachToCamera(RobotCamera* rc);
@@ -97,8 +102,17 @@ public:
 
 	void takeDamage(GLfloat damage);
 
+	int getRobotId();
+
+	//State Variables: coordinates and orientation
+	//Position
+	GLfloat xPos;
+	GLfloat zPos;
+	GLfloat height;
+
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
+	int robotId;
 	//Models
 	Model* model;
     Model* nuclearM;
@@ -121,11 +135,7 @@ private:
 	CollisionTester* ct;
 	BulletManager* bm;
     
-	//State Variables: coordinates and orientation
-	//Position
-	GLfloat xPos;
-	GLfloat zPos;
-	GLfloat height;
+	
 	//Camera & Light
 	GLfloat lookAtX;
 	GLfloat lookAtY;
@@ -147,10 +157,6 @@ private:
 	int selectedIndex;
 	//Life
 	GLfloat robotLife;
-
-	
-
-	
 
 	//-----------------------PRIVATE METHODS---------------------------
 	
@@ -182,7 +188,7 @@ private:
 	//Destination-Related
 	//Robots orients and moves X, then orients and moves Z
 	void goToDestination();
-	void setDestination(GLfloat x, GLfloat z);
+	
 	//spins robot EAST or WEST depending on destination... 
 	//returns true if facing correct direction already
 	bool checkXDestination();
