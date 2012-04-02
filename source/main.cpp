@@ -263,23 +263,26 @@ void renderGame(){
 	static GLuint fps = 0;
 	static GLuint prevFps = 0;
 
-	if (isTwoPlayerGame)
+	if (isTwoPlayerGame && !isGameOver)
 	{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
 		game->p1->view();
-		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
+		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
 	
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
 		game->p2->view();
-		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
 	}
 	else
 	{
+		if(isGameOver){
+			game->p1->changeCamera(CAMERA_COMMANDER);
+		}
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();

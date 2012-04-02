@@ -61,6 +61,11 @@ Robot::Robot() {
 	refreshRobot();
 
 	isRobotBeingControlled = false;
+	currentTime = clock();
+	lastExplosion = clock();
+
+	explosionSize = 0.5f;
+	stop = false;
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
@@ -121,6 +126,11 @@ Robot::Robot(GLfloat x, GLfloat y) {
 
 	isRobotBeingControlled = false;
 	shootBullet();
+	currentTime = clock();
+	lastExplosion = clock();
+
+	explosionSize = 0.5f;
+	stop = false;
 	
 }
 
@@ -175,11 +185,33 @@ void Robot::draw() {
 		glPopMatrix();
 	}
 	else{
+		GLUquadricObj *quadric = gluNewQuadric();
+		gluQuadricTexture(quadric, true);
+
+		currentTime = clock();
+		if ((currentTime - lastExplosion) >= 200.0 && explosionSize <= 2.0f)
+		{
+			explosionSize+=.5f;
+			lastExplosion = clock();
+			if (explosionSize == 2.5f)
+				stop = true;
+		}
+
+		if (!stop)
+		{
+			glPushMatrix();
+				glColor3f(1.0f, 0.4f, 0.0f);
+				glTranslatef(xPos, 0.0f, zPos);
+				gluSphere(quadric, explosionSize+=.5f, 5, 5);
+			glPopMatrix();
+		}
+
 		glPushMatrix();
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
 			rubble->draw();
 		glPopMatrix();
+		gluDeleteQuadric(quadric);
 	}
 }
 

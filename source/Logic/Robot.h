@@ -14,6 +14,7 @@
 #include "../Model/Helper/BoundingBox.h"
 #include "../Model/Helper/CollisionTester.h"
 #include "../Logic/BulletManager.h"
+#include <time.h>
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.59f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -159,6 +160,13 @@ private:
 	int selectedIndex;
 	//Life
 	GLfloat robotLife;
+
+	//Robot explosion
+	double currentTime;
+	double lastExplosion;
+
+	GLfloat explosionSize;
+	bool stop;
 
 	//-----------------------PRIVATE METHODS---------------------------
 	
