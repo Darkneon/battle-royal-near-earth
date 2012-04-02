@@ -54,7 +54,6 @@ int viewStates = 0; //states of the camera views
 
 Game* game;
 AntTweakHelper antTweakHelper;
-SoundHelper soundHelper;
 
 //second window for help menu
 int mainWindow = 0;
@@ -357,6 +356,7 @@ void windowKeyOps()
 		{
 			delete game;
 		}
+  
 		exit(0);
 	}
 }
@@ -430,10 +430,7 @@ void init()
 	
 	initAntTweak();
 	glEnable(GL_NORMALIZE);
-
-        
-        
-        
+ 
 	TextureManager::getInstance()->toggleTextures();
 	BoundingBox::showBoxes = !BoundingBox::showBoxes;
 
@@ -498,9 +495,6 @@ int main (int argc, char **argv)
 	glutKeyboardFunc((GLUTkeyboardfun)onKey);	
     
 	init();
-    soundHelper.loadWav(TextureManager::getInstance()->getResourcePath() + "music/caja2.wav");
-    soundHelper.play();
-    
 	glutMainLoop();
 	return 0;
 }
