@@ -148,6 +148,10 @@
           <itemPath>source/Model/Static/LightRubbleModel.h</itemPath>
           <itemPath>source/Model/Static/MountainModel.cpp</itemPath>
           <itemPath>source/Model/Static/MountainModel.h</itemPath>
+          <itemPath>source/Model/NuclearExplosion.cpp</itemPath>
+          <itemPath>source/Model/NuclearExplosion.h</itemPath>
+          <itemPath>source/Model/NukePowerUp.cpp</itemPath>
+          <itemPath>source/Model/NukePowerUp.h</itemPath>
           <itemPath>source/Model/Static/PitModel.cpp</itemPath>
           <itemPath>source/Model/Static/PitModel.h</itemPath>
           <itemPath>source/Model/Static/PlainBlockModel.cpp</itemPath>

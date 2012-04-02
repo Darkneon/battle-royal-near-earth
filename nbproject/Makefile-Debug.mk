@@ -44,12 +44,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Skybox/CubicSkybox.o \
 	${OBJECTDIR}/source/Model/Material/DefaultMaterial.o \
 	${OBJECTDIR}/source/Model/Static/FenceModel.o \
-	${OBJECTDIR}/source/Helper/Wav.o \
 	${OBJECTDIR}/source/Logic/Base.o \
+	${OBJECTDIR}/source/Model/NuclearExplosion.o \
+	${OBJECTDIR}/source/Helper/Wav.o \
 	${OBJECTDIR}/source/Model/Static/Wall.o \
 	${OBJECTDIR}/source/Model/Robot/HeadlightModel.o \
 	${OBJECTDIR}/source/Model/Material/RockMaterial.o \
 	${OBJECTDIR}/source/Logic/Player.o \
+	${OBJECTDIR}/source/Model/NukePowerUp.o \
 	${OBJECTDIR}/source/Logic/SpotLight.o \
 	${OBJECTDIR}/source/Model/Robot/CannonModel.o \
 	${OBJECTDIR}/source/Model/Static/HalfPlainBlockModel.o \
@@ -180,15 +182,20 @@ ${OBJECTDIR}/source/Model/Static/FenceModel.o: source/Model/Static/FenceModel.cp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/FenceModel.o source/Model/Static/FenceModel.cpp
 
-${OBJECTDIR}/source/Helper/Wav.o: source/Helper/Wav.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Helper
-	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/Wav.o source/Helper/Wav.cpp
-
 ${OBJECTDIR}/source/Logic/Base.o: source/Logic/Base.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Base.o source/Logic/Base.cpp
+
+${OBJECTDIR}/source/Model/NuclearExplosion.o: source/Model/NuclearExplosion.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/NuclearExplosion.o source/Model/NuclearExplosion.cpp
+
+${OBJECTDIR}/source/Helper/Wav.o: source/Helper/Wav.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/Wav.o source/Helper/Wav.cpp
 
 ${OBJECTDIR}/source/Model/Static/Wall.o: source/Model/Static/Wall.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
@@ -209,6 +216,11 @@ ${OBJECTDIR}/source/Logic/Player.o: source/Logic/Player.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/Player.o source/Logic/Player.cpp
+
+${OBJECTDIR}/source/Model/NukePowerUp.o: source/Model/NukePowerUp.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/NukePowerUp.o source/Model/NukePowerUp.cpp
 
 ${OBJECTDIR}/source/Logic/SpotLight.o: source/Logic/SpotLight.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic

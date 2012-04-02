@@ -1,6 +1,6 @@
 #include "NukePowerUp.h"
-#include "Material\MetalMaterial.h"
-#include "Helper\CollisionTester.h"
+#include "Material/MetalMaterial.h"
+#include "Helper/CollisionTester.h"
 
 NukePowerUp::NukePowerUp(GLfloat locX, GLfloat locZ)
 {
