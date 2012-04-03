@@ -299,9 +299,9 @@ void renderGame(){
 	{		
         
         if (envMapView > 0 ) { 
-        envMap.RegenerateEnvMap(game->lr, 
-                                game->p1->getUFO()->pos[0], 
-                                game->p1->getUFO()->pos[2]);
+            envMap.RegenerateEnvMap(game->lr, 
+                                    game->p1->getUFO()->pos[0], 
+                                    game->p1->getUFO()->pos[2]);
         }
         
 		glMatrixMode(GL_MODELVIEW);
@@ -310,6 +310,13 @@ void renderGame(){
         glViewport(0, 0, (GLsizei)width, (GLsizei)height);
      
         if (envMapView == 0) {
+            game->p1->setEnvMap(false);
+            game->render();
+            
+        }
+        else if (envMapView == 1) {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            game->p1->setEnvMap(true);   
             game->render();
         }
         else {
