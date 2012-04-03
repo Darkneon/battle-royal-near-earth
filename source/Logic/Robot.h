@@ -6,7 +6,7 @@
 #define GL_PI 3.14159f //PI
 #define RadiansToDegrees 180.0f/GL_PI
 #define DegreesToRadians GL_PI/180.0f
-#define MAX_LIFE 2
+static const float MAX_LIFE = 7.0f;
 
 #include "Model.h"
 #include "Static/TeamNumberModel.h"
@@ -112,6 +112,13 @@ public:
 	GLfloat zPos;
 	GLfloat height;
 
+
+	//Life
+	GLfloat robotLife;
+
+	bool isAlive;
+
+	BoundingBox* box;
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	int robotId;
@@ -133,7 +140,7 @@ private:
 	RobotCamera* roboCam;
 	
 	//Collision Detection
-	BoundingBox* box;
+	
 	bool hasBox;
 	CollisionTester* ct;
 	BulletManager* bm;
@@ -158,8 +165,7 @@ private:
 	//Used for component toggling
 	bool isPartOn[8];
 	int selectedIndex;
-	//Life
-	GLfloat robotLife;
+	
 
 	//Robot explosion
 	double currentTime;

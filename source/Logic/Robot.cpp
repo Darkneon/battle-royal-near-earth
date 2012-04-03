@@ -66,6 +66,8 @@ Robot::Robot() {
 
 	explosionSize = 0.5f;
 	stop = false;
+
+	isAlive = true;
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
@@ -132,6 +134,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	explosionSize = 0.5f;
 	stop = false;
 	
+	isAlive = true;
 }
 
 Robot::~Robot() {
@@ -394,7 +397,7 @@ GLfloat* Robot::getLightLookAt(){
 }
 
 GLfloat Robot::calculateHeight(){
-	GLfloat h = 0; 
+	GLfloat h = 0;
 	for(int i = 0; i <= 7; i++){
 		if(isPartOn[i]){
 			switch(i){
