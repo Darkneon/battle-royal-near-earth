@@ -44,7 +44,8 @@ public:
 	void cycleThroughComponents(int vectorIndex);
 	void toggleComponentOn(int vectorIndex);
 	void toggleComponentOff(int vectorIndex);
-
+    PlayerUFO* getUFO() { return ufo; };
+    
 private:
 	bool robotUfoLock;
 	int currentCamera;

@@ -297,17 +297,29 @@ void renderGame(){
 	}
 	else
 	{		
+        
+        if (envMapView > 0 ) { 
+        envMap.RegenerateEnvMap(game->lr, 
+                                game->p1->getUFO()->pos[0], 
+                                game->p1->getUFO()->pos[2]);
+        }
+        
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->p1->view();
         glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-      
-        game->render();
+     
+        if (envMapView == 0) {
+            game->render();
+        }
+        else {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            envMap.tex();
+        }
         
         glPushMatrix();
             glTranslatef(25.0f, 2.0f, 10.0f);
             flag.render();
-     //       envMap.tex();
         glPopMatrix();
         
 	}	
@@ -526,6 +538,14 @@ void windowKeyOps()
 	if (keyStates['p'])
 	{
 		game->lr->toggleLights(6);
+	}
+    
+    if (keyStates['k'])
+	{
+        envMapView += 1;
+        if (envMapView > 2) {
+            envMapView = 0;
+        }
 	}
 
 	if (keyStates[27]) //ESC
