@@ -31,7 +31,7 @@ FollowCamera::FollowCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPl
 	up[1] = 1.0f;
     up[2] = 0.0f;
     
-    distance = 7.0f;
+    distance = 8.0f;
 }
 
 FollowCamera::~FollowCamera() {
