@@ -22,9 +22,6 @@ LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX
 
 void LightCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
         gluLookAt(posX, posY, posZ, posX+lookX, posY+lookY, posZ+lookZ,  0, 1, 0);
 
 }

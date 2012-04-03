@@ -37,6 +37,8 @@
         <itemPath>source/Logic/CirclingCamera.h</itemPath>
         <itemPath>source/Logic/CommanderCamera.cpp</itemPath>
         <itemPath>source/Logic/CommanderCamera.h</itemPath>
+        <itemPath>source/Logic/EnvMap.cpp</itemPath>
+        <itemPath>source/Logic/EnvMap.h</itemPath>
         <itemPath>source/Logic/Factory.cpp</itemPath>
         <itemPath>source/Logic/Factory.h</itemPath>
         <itemPath>source/Logic/FollowCamera.cpp</itemPath>

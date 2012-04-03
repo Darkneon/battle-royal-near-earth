@@ -2,7 +2,7 @@
 #define ENV_MAP_H
 
 
-#include <GLEE/glee.h>
+//#include <GLEE/glee.h>
 #include "LevelRenderer.h"
 
 #ifdef __APPLE__
@@ -25,8 +25,6 @@ public:
 	void tex();
 
 private:
-	GLuint frameBufferID;
-	GLuint renderbufferID;
 	GLuint windowWidth;
 	GLuint textures[5];
 	GLuint envMapTextureID;   

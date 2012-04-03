@@ -137,25 +137,9 @@ void EnvMap::tex() {
         glEnable(GL_LIGHTING);
 
         glPopMatrix();
-        glMatrixMode(GL_PROJECTION);
-        glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
 }
 void EnvMap::init() {	
-	glGenFramebuffersEXT(1, &frameBufferID);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBufferID);
-
-	glGenRenderbuffersEXT(1, &renderbufferID);
-	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, renderbufferID);
-
-	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, windowWidth, windowWidth);
-	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, renderbufferID);
-
-	glDrawBuffer(GL_NONE);
-	glReadBuffer(GL_NONE);
-	
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-
 	// This texture will be used for displaying the envmap for education purposes
     glBindTexture(GL_TEXTURE_2D, textures[4]);
     glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, 1);
@@ -184,11 +168,4 @@ void EnvMap::init() {
 }
 
 void EnvMap::cleanup() {
-	if (glDeleteFramebuffersEXT) {
-		glDeleteFramebuffersEXT(1, &frameBufferID);
-	}
-
-	if (glDeleteRenderbuffersEXT) {
-		glDeleteRenderbuffersEXT(1, &renderbufferID);
-	}
 }

@@ -64,6 +64,8 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	aRobotIsSelected = false;
 	robotUfoLock = false;
 	currentComponent = 0;
+    
+    hasEnvMap = false;
 }
 
 HumanPlayer::~HumanPlayer() {    
@@ -84,8 +86,35 @@ HumanPlayer::~HumanPlayer() {
 
 void HumanPlayer::render(){
 	if(ufo != NULL){
+        if (hasEnvMap) {
+			GLfloat mv[16], invMV[16];
+            glEnable(GL_TEXTURE_CUBE_MAP);
+			glEnable(GL_TEXTURE_GEN_S);
+			glEnable(GL_TEXTURE_GEN_T);
+			glEnable(GL_TEXTURE_GEN_R);
+
+			glGetFloatv(GL_MODELVIEW_MATRIX, mv);
+			invMV[0]  = mv[0]; invMV[1]  = mv[4]; invMV[2]  = mv[8];  invMV[3]  = 0;
+            invMV[4]  = mv[1]; invMV[5]  = mv[5]; invMV[6]  = mv[9];  invMV[7]  = 0;
+            invMV[8]  = mv[2]; invMV[9]  = mv[6]; invMV[10] = mv[10]; invMV[11] = 0;
+            invMV[12] = 0;    invMV[13] = 0;     invMV[14] = 0;      invMV[15] = 1;
+
+			glMatrixMode(GL_TEXTURE);
+			glPushMatrix();
+			glLoadMatrixf(invMV);
+            glMatrixMode(GL_MODELVIEW);
+        }
+        
 		ufo->draw();
-	}
+	
+        if (hasEnvMap) {
+            glDisable(GL_TEXTURE_CUBE_MAP);
+            glDisable(GL_TEXTURE_GEN_S);
+            glDisable(GL_TEXTURE_GEN_T);
+            glDisable(GL_TEXTURE_GEN_R);
+            glMatrixMode(GL_TEXTURE);
+        }
+    }
 
 	//keep drawing until all the children are done
     for(int j = 0; j < (int)robots.size(); j++){

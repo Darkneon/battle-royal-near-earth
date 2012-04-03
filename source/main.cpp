@@ -12,6 +12,7 @@
 
 #include "AntTweakHelper.h"
 #include "SoundHelper.h"
+#include "EnvMap.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -75,6 +76,9 @@ GLfloat button2H1;
 GLfloat button2H2;
 
 string loadMap;
+
+EnvMap envMap;
+int envMapView = 0;
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
@@ -279,38 +283,55 @@ void renderGame(){
 	{
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		game->render();
 		game->p1->view();
 		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
-	
+        game->render();
+
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		game->render();
 		game->p2->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
+        game->render();
+
 	}
 	else
-	{
-		
-		
-
-		game->p1->view();
-		
+	{		
+        
+        if (envMapView > 0 ) { 
+            envMap.RegenerateEnvMap(game->lr, 
+                                    game->p1->getUFO()->pos[0], 
+                                    game->p1->getUFO()->pos[2]);
+        }
+        
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		game->render();
+		game->p1->view();
+        glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+     
+        if (envMapView == 0) {
+            game->p1->setEnvMap(false);
+            game->render();
+            
+        }
+        else if (envMapView == 1) {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            game->p1->setEnvMap(true);   
+            game->render();
+        }
+        else {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            envMap.tex();
+        }
         
         glPushMatrix();
-        glTranslatef(25.0f, 2.0f, 10.0f);
-        flag.render();
+            glTranslatef(25.0f, 2.0f, 10.0f);
+            flag.render();
         glPopMatrix();
         
-		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	}	
 
 	game->getInput(keyModifier); // Gets user input
-	//((HumanPlayer*)(game->p1))->view(); // Camera update (leave as it is for now)
 	
 	if (isDebugMode) {
 		antTweakHelper.draw();
@@ -360,7 +381,15 @@ void renderGame(){
 		}
 
         glEnable(GL_LIGHTING);
+        
         glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(60, (float)width / height, 1, 100);
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+        
     glPopMatrix();
 }
 
@@ -395,7 +424,6 @@ void render()
 			antTweakHelper.bindLevelRenderer(game->lr);
 			
 			startGame = false;
-			
 		}
         
 		game->update(&isGameOver);
@@ -518,6 +546,14 @@ void windowKeyOps()
 	{
 		game->lr->toggleLights(6);
 	}
+    
+    if (keyStates['k'])
+	{
+        envMapView += 1;
+        if (envMapView > 2) {
+            envMapView = 0;
+        }
+	}
 
 	if (keyStates[27]) //ESC
 	{
@@ -563,19 +599,6 @@ void initAntTweak() {
  // antTweakHelper.bindLevelRenderer(game->lr);
 }
 
-//http://sites.google.com/site/sdlgamer/beginner/lesson-12
-/*void initGameMusic()
-{
-	// Inilialize SDL_mixer , exit if fail
-	if( SDL_Init(SDL_INIT_AUDIO) < 0 ) exit(1);
-	// Setup audio mode
-	Mix_OpenAudio(22050,AUDIO_S16SYS,2,640);
-	Mix_Music *mus; // *mus2 ;  // Background Music
-	//Mix_Chunk *wav , *wav2 ;  // For Sounds
-	string track01 = "music/Darkness.mid";
-	mus = Mix_LoadMUS((TextureManager::getResourcePath() + track01).c_str());
-	Mix_PlayMusic(mus,1); //Music loop=1
-}*/
 
 void init()
 {
@@ -604,7 +627,7 @@ void init()
 	initAntTweak();
 	glEnable(GL_NORMALIZE);
 
-
+    envMap.init();
 
 
         

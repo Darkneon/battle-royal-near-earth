@@ -44,7 +44,8 @@ public:
 	void cycleThroughComponents(int vectorIndex);
 	void toggleComponentOn(int vectorIndex);
 	void toggleComponentOff(int vectorIndex);
-
+    PlayerUFO* getUFO() { return ufo; };
+    void setEnvMap(bool value) { hasEnvMap = value; }
 private:
 	bool robotUfoLock;
 	int currentCamera;
@@ -53,7 +54,8 @@ private:
 	PlayerUFO* ufo;
 
 	bool aRobotIsSelected;
-
+    bool hasEnvMap;
+    
 	void setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ);
 	void setUFOPosition(V3 v);
 	void setRobotDestination(GLfloat x, GLfloat y, GLfloat z);
