@@ -8,6 +8,7 @@
 #include "SpotLight.h"
 #include "Light/LightPost.h"
 #include "Model/Texture/TextureManager.h"
+#include "Buildings/FlagModel.h"
 
 #include "AntTweakHelper.h"
 #include "SoundHelper.h"
@@ -62,6 +63,9 @@ bool beginMenu = true;
 bool mapChoice = false;
 bool startGame = false;
 
+        FlagModel flag;
+
+        
 GLfloat buttonW1;
 GLfloat	buttonW2;
 GLfloat button1H1;
@@ -375,6 +379,13 @@ void render()
 			startGame = false;
 			
 		}
+        
+        
+        glPushMatrix();
+        glTranslatef(10.0f, 2.0f, -5.0f);
+        flag.render();
+        glPopMatrix();
+        
 		game->update(&isGameOver);
 		//rendering the game itself
 		renderGame();
