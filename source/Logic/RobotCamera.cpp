@@ -21,7 +21,19 @@ RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 void RobotCamera::view(){
 	if(hasRobot) {
 		gluLookAt(locX, locY, locZ,lookAt[0], lookAt[1], lookAt[2],0,1,0);
+		//updateFog();
 	}
+}
+
+void RobotCamera::updateFog()
+{
+        GLfloat flowLight[] = {0.5, 0.5, 0.5, 1};
+        glEnable(GL_FOG);
+        glFogfv(GL_FOG_COLOR, flowLight);
+        glFogf(GL_FOG_START, locZ);
+        glFogf(GL_FOG_END, locZ + 10);
+        glFogf(GL_FOG_DENSITY, 0.4f);
+        glFogi(GL_FOG_MODE, GL_LINEAR);
 }
 
 //----------------------------------------------------------------

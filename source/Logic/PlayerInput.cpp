@@ -209,8 +209,6 @@ void PlayerInput::mouseButtons(int button, int state)
 {
 	//0 is left button, 2 is right button, 1 is middle mouse
 	//0 is pressed, 1 is released for STATES
-
-	//if (button == 0 && state == 0 && player->getCurrentCameraType() == CAMERA_ROBOT) {
 	if (button == 0 && state == 0) {
 		if (player->robots.at(0)->isAlive)
 		{

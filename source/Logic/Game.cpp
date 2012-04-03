@@ -49,7 +49,7 @@ void Game::update(bool* gameOver)
 	if (twoPlayerIsOn)
 	{
 
-		if(player1Score == 0 || player2Score == 0)
+		if(player1Score >= 10 || player2Score >= 10)
 		{
 			if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
 				aNukeWentOff = true;
@@ -98,12 +98,11 @@ void Game::render()
             p2->render();
         }
 
-        if (twoPlayerIsOn){
-            if(player1Score == 0 || player2Score == 0){
-                nukePowerUp->draw();
-            }
-        }
-    glPopMatrix();
+	if (twoPlayerIsOn){
+		if(player1Score >= 10 || player2Score >= 10){
+			nukePowerUp->draw();
+		}
+	}
 }
 
 void Game::setMap(string mapName){

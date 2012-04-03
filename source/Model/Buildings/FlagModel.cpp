@@ -50,7 +50,7 @@ FlagModel::FlagModel() {
     nurb = NULL;
     
     angle = 0.0f;
-    inc = 0.05;
+    inc = 0.05f;
 }
 
 
@@ -80,7 +80,7 @@ void FlagModel::render() {
         gluNurbsSurface(nurb, 8, knots, 8, knots, 4*3, 3, &ctrlPoints[0][0][0], 4, 4, GL_MAP2_VERTEX_3);
         gluEndSurface(nurb);
 
-        glTranslatef(-0.6f, -1.5f, -0.05);
+        glTranslatef(-0.6f, -1.5f, -0.05f);
         glColor3f(0.0f, 1.0f, 1.0);
         GeoHelper::drawCube(0.0f, 0.0f, 0.0f, 0.1f, 2.0f, 0.1f);
         glEnable(GL_CULL_FACE);

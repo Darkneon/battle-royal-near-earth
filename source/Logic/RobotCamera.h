@@ -22,6 +22,8 @@ public:
 	//Light-Related
 	void toggleLight();
 
+	void updateFog();
+
 	//Robot-Related - Must attach a robot to a robot camera
 	Robot* robot;
 	void attachToRobot(Robot* r);

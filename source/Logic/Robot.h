@@ -38,7 +38,7 @@ static const GLfloat WEST = 0.0f;
 static const GLfloat MOUSE_SENSITIVITY = 0.25f;
 
 static const GLfloat ROBOT_STEP_SIZE = 0.2f;
-static const GLfloat ROBOT_LOOK_SIZE = 0.2f;
+static const GLfloat ROBOT_LOOK_SIZE = 2.0f;
 
 class RobotCamera;
 
@@ -121,6 +121,9 @@ public:
 	bool computerControlled;
 
 	BoundingBox* box;
+
+	bool stop;
+	GLfloat explosionSize;
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	int robotId;
@@ -172,9 +175,7 @@ private:
 	//Robot explosion
 	double currentTime;
 	double lastExplosion;
-
-	GLfloat explosionSize;
-	bool stop;
+	
 
 	int aiShootCount;
 
