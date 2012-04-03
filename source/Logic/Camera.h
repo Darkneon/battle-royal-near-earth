@@ -52,7 +52,7 @@ public:
 protected:
 	//perspective variables
 	GLint viewWidth, viewHeight;
-	GLfloat viewNearPlane, viewFarPlane;
+	GLdouble viewNearPlane, viewFarPlane;
 	int centerX, centerY;
 
 	int viewStates;
@@ -63,7 +63,7 @@ protected:
 	
 	bool isLightOn;
 
-	void initialize(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
+	void initialize(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane);
 };
 
 #endif

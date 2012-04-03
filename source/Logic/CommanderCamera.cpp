@@ -1,6 +1,6 @@
 #include "CommanderCamera.h"
 
-CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane)
 {
 	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	//camera rotation
@@ -21,9 +21,9 @@ CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLfloat view
 
 void CommanderCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
 	
 	gluLookAt(locX + currentRadius * sin(yaw * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(yaw * 1.0f / 8),
 		locX, 0, locZ - currentRadius, 0, 1, 0);

@@ -11,7 +11,7 @@ static const GLfloat CENTER_OF_MAP = 25.0f;
 class CirclingCamera : public Camera
 {
 public:
-	CirclingCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
+	CirclingCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane);
 
 	//interface methods
 	void view();

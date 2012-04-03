@@ -11,7 +11,7 @@
 
 class FollowCamera : public Camera {
 public:
-    FollowCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
+    FollowCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane);
     virtual ~FollowCamera();
     
     void view();

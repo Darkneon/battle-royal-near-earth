@@ -40,7 +40,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	currentComponent = 0;
 }*/
 
-HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
+HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
 					: Player(spawnX,spawnZ){
     
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);

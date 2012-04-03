@@ -1,7 +1,7 @@
 #include "RobotCamera.h"
 
 
-RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane)
 {
 	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	hasRobot = false;
@@ -19,10 +19,7 @@ RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 }
 
 void RobotCamera::view(){
-	if(hasRobot){
-		glMatrixMode(GL_PROJECTION); //why?
-		glLoadIdentity();
-		gluPerspective(fovy,viewWidth/viewHeight, 0.1, viewFarPlane);
+	if(hasRobot) {
 		gluLookAt(locX, locY, locZ,lookAt[0], lookAt[1], lookAt[2],0,1,0);
 		//updateFog();
 	}

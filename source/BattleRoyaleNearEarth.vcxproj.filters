@@ -209,6 +209,9 @@
     <ClCompile Include="Model\Buildings\FlagModel.cpp">
       <Filter>Model\Buildings</Filter>
     </ClCompile>
+    <ClCompile Include="Logic\EnvMap.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\Base.h">
@@ -420,6 +423,9 @@
     </ClInclude>
     <ClInclude Include="Model\Buildings\FlagModel.h">
       <Filter>Model\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\EnvMap.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

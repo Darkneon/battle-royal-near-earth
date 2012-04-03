@@ -12,6 +12,7 @@
 
 #include "AntTweakHelper.h"
 #include "SoundHelper.h"
+#include "EnvMap.h"
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -39,8 +40,8 @@ bool isInFullScreenMode;
 bool showHelpWindow = false;
 bool wasPreviouslyPressed = false;
 // Bounds of viewing frustum.
-GLfloat nearPlane =  1.0f;
-GLfloat farPlane  = 100.0f;
+GLdouble nearPlane =  0.1;
+GLdouble farPlane  = 500.0;
 
 bool keyStates[256];
 bool funcKeyStates[256];
@@ -54,7 +55,7 @@ bool isTwoPlayerGame = false;
 
 int viewStates = 0; //states of the camera views
 
-Game* game;
+Game* game = NULL;
 AntTweakHelper antTweakHelper;
 
 //second window for help menu
@@ -75,6 +76,9 @@ GLfloat button2H1;
 GLfloat button2H2;
 
 string loadMap;
+
+EnvMap envMap;
+int envMapView = 0;
 
 void reshapeMainWindow (int newWidth, int newHeight)
 {
@@ -270,47 +274,45 @@ void renderGame(){
 
 	if(isGameOver)
 	{
-		game->p1->changeCamera(CAMERA_CIRCULAR);
+		gluLookAt(40, 30, 40, 15, 0, 15, 0, 1, 0);
 		glutPostRedisplay();
 	}
 			
 	
 	if (isTwoPlayerGame && !isGameOver)
 	{
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		game->render();
-		game->p1->view();
-		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
-	
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		game->render();
 		game->p2->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height / 2);
-	}
-	else
-	{
-		
-		
+        game->render();
 
-		game->p1->view();
-		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		game->render();
+		game->p1->view();
+		glViewport(0, (GLint)height / 2, (GLsizei)width, (GLsizei)height / 2);
+        game->render();
+
+	}
+	else
+	{		
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		game->p1->view();
+        glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+      
+        game->render();
         
         glPushMatrix();
-        glTranslatef(25.0f, 2.0f, 10.0f);
-        flag.render();
+            glTranslatef(25.0f, 2.0f, 10.0f);
+            flag.render();
+     //       envMap.tex();
         glPopMatrix();
         
-		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	}	
 
 	game->getInput(keyModifier); // Gets user input
-	//((HumanPlayer*)(game->p1))->view(); // Camera update (leave as it is for now)
 	
 	if (isDebugMode) {
 		antTweakHelper.draw();
@@ -360,7 +362,15 @@ void renderGame(){
 		}
 
         glEnable(GL_LIGHTING);
+        
         glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(60, (float)width / height, 0.1, 100);
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		//glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+        
     glPopMatrix();
 }
 
@@ -395,7 +405,6 @@ void render()
 			antTweakHelper.bindLevelRenderer(game->lr);
 			
 			startGame = false;
-			
 		}
         
 		game->update(&isGameOver);
@@ -563,19 +572,6 @@ void initAntTweak() {
  // antTweakHelper.bindLevelRenderer(game->lr);
 }
 
-//http://sites.google.com/site/sdlgamer/beginner/lesson-12
-/*void initGameMusic()
-{
-	// Inilialize SDL_mixer , exit if fail
-	if( SDL_Init(SDL_INIT_AUDIO) < 0 ) exit(1);
-	// Setup audio mode
-	Mix_OpenAudio(22050,AUDIO_S16SYS,2,640);
-	Mix_Music *mus; // *mus2 ;  // Background Music
-	//Mix_Chunk *wav , *wav2 ;  // For Sounds
-	string track01 = "music/Darkness.mid";
-	mus = Mix_LoadMUS((TextureManager::getResourcePath() + track01).c_str());
-	Mix_PlayMusic(mus,1); //Music loop=1
-}*/
 
 void init()
 {
@@ -586,7 +582,7 @@ void init()
 	te = TextureManager::getInstance();
 	srand ( (unsigned int)time(NULL) );
 
-	game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates);
+	
 	glEnable(GL_DEPTH_TEST);
 	isInFullScreenMode = false;
 
@@ -604,7 +600,7 @@ void init()
 	initAntTweak();
 	glEnable(GL_NORMALIZE);
 
-
+    envMap.init();
 
 
         
@@ -614,17 +610,20 @@ void init()
 //mouse movement functions, primarily used to modify the view
 void passiveMotionFunc(int x, int y)
 {
-	game->playerInput1->mousePassiveOperations(x, y);
+	if (game != NULL)
+		game->playerInput1->mousePassiveOperations(x, y);
 }
 
 void motionFunc(int x, int y)
 {
-	game->playerInput1->mousePassiveOperations(x, y);
+	if (game != NULL)
+		game->playerInput1->mousePassiveOperations(x, y);
 }
 
 void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
 {
-	game->playerInput2->joystickOperations(button, xaxis, yaxis, zaxis);
+	if (game != NULL)
+		game->playerInput2->joystickOperations(button, xaxis, yaxis, zaxis);
 }
 
 
@@ -632,14 +631,19 @@ void joystickFunc(unsigned int button, int xaxis, int yaxis, int zaxis)
 void onMouseFunc(int button, int state, int x, int y)
 {
 	TwEventMouseButtonGLUT(button, state, x, y);
-	game->playerInput1->mouseButtons(button, state);
-	game->playerInput1->mousePassiveOperations(x, y);
+
+	if (game != NULL)
+	{
+		game->playerInput1->mouseButtons(button, state);
+		game->playerInput1->mousePassiveOperations(x, y);
+	}
 
 	if(beginMenu){
 		y = (int)height - y; 
 		//check if clicked button1
 		if (button == 0 && state == 0 && x>buttonW1 && x<buttonW2 && y>button1H1 && y<button1H2){
 			if(mapChoice){
+				game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates, false);
 				loadMap = "map1.txt";
 				beginMenu = false;
 				startGame = true;
@@ -650,8 +654,10 @@ void onMouseFunc(int button, int state, int x, int y)
 		//check if clicked button2
 		else if (button == 0 && state == 0 && x>buttonW1 && x<buttonW2 && y>button2H1 && y<button2H2){
 		    if(mapChoice){
+				game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates, false);
 				loadMap = "map2.txt";
 			}else{
+				game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates, true);
 				loadMap = "dm-vinelynth.txt";
                 SoundHelper::getInstance()->play("deathmatch.wav", 0, true);
 				toggleTwoPlayerSplitscreen();

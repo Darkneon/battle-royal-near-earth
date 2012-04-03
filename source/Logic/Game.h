@@ -28,8 +28,8 @@
 class Game
 {
 public:
-	Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, 
-		bool *keyStates, bool *funcKeyStates);
+	Game(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane, 
+		bool *keyStates, bool *funcKeyStates, bool isTwoPlayer);
 	~Game();
 	
 	HumanPlayer* p1;

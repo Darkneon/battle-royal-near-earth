@@ -14,7 +14,7 @@
 class LightCamera : public Camera
 {
 public:
-	LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ, GLint, GLint, GLfloat, GLfloat);
+	LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ, GLint, GLint, GLdouble, GLdouble);
 
 	//interface methods
 	void view();

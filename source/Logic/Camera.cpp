@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-void Camera::initialize(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+void Camera::initialize(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane)
 {
 	viewStates = 0;
 	

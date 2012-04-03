@@ -7,7 +7,7 @@
 
 #include "FollowCamera.h"
 
-FollowCamera::FollowCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane) {
+FollowCamera::FollowCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane) {
     Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	
 	//camera rotation
@@ -38,11 +38,6 @@ FollowCamera::~FollowCamera() {
 }
 
 void FollowCamera::view() {
-    
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
-
 	gluLookAt(locX, locY, locZ, direction[0], direction[1], direction[2], up[0], up[1], up[2]);
 }
 

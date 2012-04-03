@@ -1,13 +1,13 @@
 #include "Game.h"
 
-Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane,
-	bool *keyStates, bool *funcKeyStates)
+Game::Game(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane,
+	bool *keyStates, bool *funcKeyStates, bool isTwoPlayer)
 {
 
-	/*if (twoPlayerIsOn)
+	if (isTwoPlayer)
 		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, false);
-	else*/
-	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
+	else
+		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
 
 	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 28.0f, 10.0f, false);
 	p2->robots.at(0)->computerControlled = true;
@@ -81,21 +81,22 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
-	lr->render();
+    glPushMatrix();
+        lr->render();
 
-	if (aNukeWentOff)
-	{
-		glPushMatrix();
-			glTranslatef(15.0f, 0.0f, 15.0f);
-			glScalef(3.0f, 1.5f, 3.0f);
-			nuke->render();
-		glPopMatrix();
-	}
-	else
-	{
-		p1->render();
-		p2->render();
-	}
+        if (aNukeWentOff)
+        {
+            glPushMatrix();
+                glTranslatef(15.0f, 0.0f, 15.0f);
+                glScalef(3.0f, 1.5f, 3.0f);
+                nuke->render();
+            glPopMatrix();
+        }
+        else
+        {
+            p1->render();
+            p2->render();
+        }
 
 	if (twoPlayerIsOn){
 		if(player1Score >= 10 || player2Score >= 10){
