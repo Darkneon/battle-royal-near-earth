@@ -45,14 +45,32 @@ Game::~Game()
 
 void Game::update(bool* gameOver)
 {
-	if(player1Score == 10 || player2Score == 10){
-		if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
-			aNukeWentOff = true;
-			twoPlayerIsOn = false;
-			*gameOver = true;
+
+	if (twoPlayerIsOn)
+	{
+
+		if(player1Score == 0 || player2Score == 0)
+		{
+			if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
+				aNukeWentOff = true;
+				twoPlayerIsOn = false;
+				*gameOver = true;
+			}
 		}
+
+		if (p1->robots.at(0)->robotLife <= 0.0f && p1->robots.at(0)->isAlive)
+		{
+			player2Score++;
+			p1->robots.at(0)->isAlive = false;
+		}
+
+		if (p2->robots.at(0)->robotLife <= 0.0f && p2->robots.at(0)->isAlive)
+		{
+			player1Score++;
+			p2->robots.at(0)->isAlive = false;
+		}
+
 	}
-	
 }
 
 void Game::getInput(int keyModifier)
@@ -80,7 +98,7 @@ void Game::render()
 	}
 
 	if (twoPlayerIsOn){
-		if(player1Score == 10 || player2Score == 10){
+		if(player1Score == 0 || player2Score == 0){
 			nukePowerUp->draw();
 		}
 	}

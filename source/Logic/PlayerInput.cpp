@@ -211,8 +211,13 @@ void PlayerInput::mouseButtons(int button, int state)
 	//0 is pressed, 1 is released for STATES
 
 	if (button == 0 && state == 0 && player->getCurrentCameraType() == CAMERA_ROBOT) {
-		player->robots.at(0)->shootBullet();
-        SoundHelper::getInstance()->play("shoot.wav", 1, false);
+		if (player->robots.at(0)->isAlive)
+		{
+			player->robots.at(0)->shootBullet();
+			SoundHelper::getInstance()->play("shoot.wav", 1, false);
+		}
+		else
+			player->respawn();
     }
 }
 

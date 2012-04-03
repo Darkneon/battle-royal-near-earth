@@ -263,6 +263,14 @@ void renderGame(){
 	static GLuint fps = 0;
 	static GLuint prevFps = 0;
 
+
+	if(isGameOver)
+	{
+		game->p1->changeCamera(CAMERA_CIRCULAR);
+		glutPostRedisplay();
+	}
+			
+	
 	if (isTwoPlayerGame && !isGameOver)
 	{
 		glMatrixMode(GL_MODELVIEW);
@@ -280,14 +288,14 @@ void renderGame(){
 	}
 	else
 	{
-		if(isGameOver){
-			game->p1->changeCamera(CAMERA_COMMANDER);
-		}
+		
+		
+
+		game->p1->view();
 		
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
-		game->p1->view();
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	}	
 
