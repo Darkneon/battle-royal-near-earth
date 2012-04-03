@@ -119,6 +119,9 @@ public:
 	bool isAlive;
 
 	BoundingBox* box;
+
+	bool stop;
+	GLfloat explosionSize;
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	int robotId;
@@ -170,9 +173,7 @@ private:
 	//Robot explosion
 	double currentTime;
 	double lastExplosion;
-
-	GLfloat explosionSize;
-	bool stop;
+	
 
 	//-----------------------PRIVATE METHODS---------------------------
 	

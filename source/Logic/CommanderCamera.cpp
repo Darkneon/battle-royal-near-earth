@@ -43,7 +43,7 @@ void CommanderCamera::moveCameraForwards(bool negateTheValue)
 
 	locX -= (GLfloat)moveVector[0];
 	locZ -= (GLfloat)moveVector[1];
-        //updateFog();
+       // updateFog();
 }
 
 void CommanderCamera::updateFog()
