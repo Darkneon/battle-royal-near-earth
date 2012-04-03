@@ -136,8 +136,6 @@ void EnvMap::tex() {
         glEnable(GL_LIGHTING);
 
         glPopMatrix();
-        glMatrixMode(GL_PROJECTION);
-        glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
 }
 void EnvMap::init() {	
