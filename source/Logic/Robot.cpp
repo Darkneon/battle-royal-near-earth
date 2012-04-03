@@ -1000,27 +1000,39 @@ int Robot::getRobotId(){
 }
 
 void Robot::aiSetDestination(){
-	aiShootCount = (aiShootCount+1)%15;
-	if(aiShootCount == 7){
+	//randomize shooting
+	int randomNum = rand() % 15;
+	if(randomNum == 7 || randomNum == 9){
 		shootBullet();
 	}
-	if(checkXPos(false)){
-		setDestination(xPos-ROBOT_LOOK_SIZE, zPos);
-	}
-	else{
-		if(checkZPos(false)){
-			setDestination(xPos, zPos-ROBOT_LOOK_SIZE);
-		}
-		else{
+	//randomize destination
+	if((checkXDestination() && checkZDestination())){
+		int randomNum2 = rand() % 10;
+		switch(randomNum2){
+		case 0: case 1: case 2: case 3: case 4:
+			if(checkXPos(false)){
+				setDestination(xPos-ROBOT_LOOK_SIZE-1, zPos);
+			}
+			break;
+		case 5: case 6:
+			if(checkZPos(false)){
+				setDestination(xPos, zPos-ROBOT_LOOK_SIZE);
+			}
+			break;
+		case 8:
 			if(checkZPos(true)){
 				setDestination(xPos, zPos+ROBOT_LOOK_SIZE);
 			}
-			else{
-				if(checkXPos(true)){
-					setDestination(xPos+ROBOT_LOOK_SIZE, zPos);
-				}
+			break;
+		case 9:
+			if(checkXPos(true)){
+				setDestination(xPos+ROBOT_LOOK_SIZE, zPos);
 			}
+			break;
+		default:
+			break;
 		}
+		
 	}
 }
 
@@ -1038,7 +1050,7 @@ bool Robot::checkXPos(bool pos){
 		}
 	}
 	else{
-		if(!robotCollisionTest(xPos-ROBOT_LOOK_SIZE,minY,zPos)){
+		if(!robotCollisionTest(xPos-ROBOT_LOOK_SIZE-1,minY,zPos)){
 			return true;
 		}
 		else{
