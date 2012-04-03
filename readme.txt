@@ -23,6 +23,7 @@ f8 --------------- toggle splitscreen
 f10 -------------- toggle team number
 Alt-Enter -------- fullscreen
 b ---------------- debugger
+k ---------------- Toggle environmental mapping
 [ ] -------------- roll camera
 / ---------------- reset roll/pitch
 l ---------------- toggle light (in bird view)

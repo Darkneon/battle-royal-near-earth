@@ -151,7 +151,8 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	}
 	else if (funcKeyStates[GLUT_KEY_F5])
 	{
-		player->changeCamera(CAMERA_FOLLOW);	
+		player->changeCamera(CAMERA_FOLLOW);
+		player->robots.at(0)->isRobotBeingControlled = false;
 	}
 	else if (funcKeyStates[GLUT_KEY_F10])
 	{

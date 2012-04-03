@@ -183,7 +183,7 @@ void Robot::draw() {
 
 			//Draw Headlight
 			glPushMatrix();
-				glTranslatef(0.0f,height,0.0f);
+				glTranslatef(0.0f,height-0.25f,0.0f);
 				if(isMyLightOn){
 					((HeadlightModel*)headlight)->whiteLight = true;
 				}
@@ -416,7 +416,7 @@ GLfloat* Robot::getLightLookAt(){
 }
 
 GLfloat Robot::calculateHeight(){
-	GLfloat h = 0;
+	GLfloat h = 0.25f;
 	for(int i = 0; i <= 7; i++){
 		if(isPartOn[i]){
 			switch(i){
@@ -453,7 +453,7 @@ GLfloat Robot::calculateHeight(){
 	return h;
 }
 GLfloat Robot::calculateHeight(int index){
-	GLfloat h = 0; 
+	GLfloat h = 0.25f; 
 	for(int i = 0; i <= index; i++){
 		if(isPartOn[i]){
 			switch(i){
