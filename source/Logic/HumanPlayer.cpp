@@ -40,18 +40,18 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	currentComponent = 0;
 }*/
 
-HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
+HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
 					: Player(spawnX,spawnZ){
     
-	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_ROBOT] = new RobotCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FOLLOW] = new FollowCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+	availableCams[CAMERA_COMMANDER] = new CommanderCamera();
+	availableCams[CAMERA_FREELOOK] = new FreeLookCamera();
+	availableCams[CAMERA_CIRCULAR] = new CirclingCamera();
+	availableCams[CAMERA_ROBOT] = new RobotCamera();
+    availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
+    availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
+    availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f);
+    availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f);
+	availableCams[CAMERA_FOLLOW] = new FollowCamera();
 
     currentCamera = CAMERA_COMMANDER;
 	if(hasUFO){

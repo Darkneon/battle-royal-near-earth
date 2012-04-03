@@ -25,7 +25,7 @@ class HumanPlayer : public Player
 public:
     //HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF);
 	//HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ);
-	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ, bool hasUFO);
+	HumanPlayer(GLint viewW, GLint viewH, GLdouble viewN, GLdouble viewF, GLfloat spawnX, GLfloat spawnZ, bool hasUFO);
     ~HumanPlayer();
     void render();
 

@@ -5,8 +5,6 @@
 NukePowerUp::NukePowerUp(GLfloat locX, GLfloat locZ)
 {
 	material = (Material*)(new MetalMaterial());
-
-	NuclearModel::NuclearModel();
 	lastRotation = lastTranslation = currentTime = clock();
 	yaw = height = 0.0f;
 	goingUp = true;

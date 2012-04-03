@@ -12,7 +12,7 @@ static const GLfloat DEFAULT_MOVEMENT_SENSITIVITY = 0.35f;
 class FreeLookCamera : public Camera
 {
 public:
-	FreeLookCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
+	FreeLookCamera();
 
 	void view();
 	//Movement related methods
