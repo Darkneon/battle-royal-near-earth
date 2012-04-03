@@ -9,7 +9,7 @@ class Robot;
 class RobotCamera : public Camera
 {
 public:
-	RobotCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane);
+	RobotCamera();
 
 	void view();
 	

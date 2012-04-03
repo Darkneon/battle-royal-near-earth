@@ -11,7 +11,7 @@ static const GLfloat DEFAULT_HEIGHT_DENOM =  4.0f;
 class CommanderCamera : public Camera
 {
 public:
-	CommanderCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane);
+	CommanderCamera();
 
 	//interface methods
 	void view();

@@ -3,10 +3,8 @@
 #include "FreeLookCamera.h"
 
 
-FreeLookCamera::FreeLookCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane)
+FreeLookCamera::FreeLookCamera()
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	
 	//camera rotation
 	yaw = 0.0f;
 	pitch = 0.0f;

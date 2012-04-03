@@ -7,9 +7,8 @@
 
 #include "LightCamera.h"
 
-LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ, GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane) 
+LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ) 
 {
-    Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
     fovy = DEFAULT_FOVY;
     offset = 0.9f;
     this->posX = posX;

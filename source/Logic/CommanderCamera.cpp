@@ -1,8 +1,7 @@
 #include "CommanderCamera.h"
 
-CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane)
+CommanderCamera::CommanderCamera()
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	//camera rotation
 	yaw = 0.0f;
 	pitch = 0.0f;

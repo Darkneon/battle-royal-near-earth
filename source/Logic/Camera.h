@@ -34,7 +34,7 @@ class Camera
 public:
   friend class AntTweakHelper;
 
-	Camera(){}
+	Camera();
 	virtual ~Camera(){}
 	virtual void view() = 0;
 
@@ -50,9 +50,6 @@ public:
 	virtual void resetCameraAngle(); //reset the camera angle to 0
 	
 protected:
-	//perspective variables
-	GLint viewWidth, viewHeight;
-	GLdouble viewNearPlane, viewFarPlane;
 	int centerX, centerY;
 
 	int viewStates;
@@ -62,8 +59,6 @@ protected:
 	GLdouble yaw, pitch, roll; //camera rotation
 	
 	bool isLightOn;
-
-	void initialize(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane);
 };
 
 #endif
