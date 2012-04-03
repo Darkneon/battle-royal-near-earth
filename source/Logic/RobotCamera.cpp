@@ -22,7 +22,7 @@ void RobotCamera::view(){
 	if(hasRobot){
 		glMatrixMode(GL_PROJECTION); //why?
 		glLoadIdentity();
-		gluPerspective(fovy,viewWidth/viewHeight, viewNearPlane, viewFarPlane);
+		gluPerspective(fovy,viewWidth/viewHeight, 0.1, viewFarPlane);
 		gluLookAt(locX, locY, locZ,lookAt[0], lookAt[1], lookAt[2],0,1,0);
 		//updateFog();
 	}
