@@ -63,7 +63,7 @@ bool beginMenu = true;
 bool mapChoice = false;
 bool startGame = false;
 
-        FlagModel flag;
+FlagModel flag;
 
         
 GLfloat buttonW1;
@@ -300,6 +300,12 @@ void renderGame(){
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
+        
+        glPushMatrix();
+        glTranslatef(25.0f, 2.0f, 10.0f);
+        flag.render();
+        glPopMatrix();
+        
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	}	
 
@@ -379,6 +385,7 @@ void render()
 	if(beginMenu){
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 		renderMenu();
+     
 	}else{
 		if(startGame){
 			glutSetCursor(GLUT_CURSOR_NONE);
@@ -390,12 +397,6 @@ void render()
 			startGame = false;
 			
 		}
-        
-        
-        glPushMatrix();
-        glTranslatef(10.0f, 2.0f, -5.0f);
-        flag.render();
-        glPopMatrix();
         
 		game->update(&isGameOver);
 		//rendering the game itself
@@ -580,7 +581,7 @@ void init()
 {
 	glGenLists(10);
 	
-	toggleFullScreen();
+	//toggleFullScreen();
 
 	te = TextureManager::getInstance();
 	srand ( (unsigned int)time(NULL) );
