@@ -29,7 +29,7 @@ public:
         lookAt[1] = y;
         lookAt[2] = z;
         
-        locX = x + distance;
+        locX = x;
         locY = y + distance;
         locZ = z + distance;
         
@@ -37,7 +37,7 @@ public:
     }
 
     void calculateDirection() {
-        direction[0] = lookAt[0] - locX;
+        direction[0] = lookAt[0];
         direction[1] = lookAt[1] - locY;
         direction[2] = lookAt[2] - locZ;
     }

@@ -59,6 +59,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/MissileModel.o \
 	${OBJECTDIR}/source/Logic/CommanderCamera.o \
 	${OBJECTDIR}/source/Model/Static/HollowBlockModel.o \
+	${OBJECTDIR}/source/Model/Buildings/FlagModel.o \
 	${OBJECTDIR}/source/Model/Static/PlainBlockModel.o \
 	${OBJECTDIR}/source/Logic/PlayerUFO.o \
 	${OBJECTDIR}/source/Logic/LightCamera.o \
@@ -254,6 +255,11 @@ ${OBJECTDIR}/source/Model/Static/HollowBlockModel.o: source/Model/Static/HollowB
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/HollowBlockModel.o source/Model/Static/HollowBlockModel.cpp
+
+${OBJECTDIR}/source/Model/Buildings/FlagModel.o: source/Model/Buildings/FlagModel.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Model/Buildings
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Buildings/FlagModel.o source/Model/Buildings/FlagModel.cpp
 
 ${OBJECTDIR}/source/Model/Static/PlainBlockModel.o: source/Model/Static/PlainBlockModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static

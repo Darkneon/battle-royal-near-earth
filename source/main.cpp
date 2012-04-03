@@ -8,6 +8,7 @@
 #include "SpotLight.h"
 #include "Light/LightPost.h"
 #include "Model/Texture/TextureManager.h"
+#include "Buildings/FlagModel.h"
 
 #include "AntTweakHelper.h"
 #include "SoundHelper.h"
@@ -62,6 +63,9 @@ bool beginMenu = true;
 bool mapChoice = false;
 bool startGame = false;
 
+FlagModel flag;
+
+        
 GLfloat buttonW1;
 GLfloat	buttonW2;
 GLfloat button1H1;
@@ -296,6 +300,12 @@ void renderGame(){
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->render();
+        
+        glPushMatrix();
+        glTranslatef(25.0f, 2.0f, 10.0f);
+        flag.render();
+        glPopMatrix();
+        
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	}	
 
@@ -375,6 +385,7 @@ void render()
 	if(beginMenu){
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 		renderMenu();
+     
 	}else{
 		if(startGame){
 			glutSetCursor(GLUT_CURSOR_NONE);
@@ -386,6 +397,7 @@ void render()
 			startGame = false;
 			
 		}
+        
 		game->update(&isGameOver);
 		//rendering the game itself
 		renderGame();
@@ -569,7 +581,7 @@ void init()
 {
 	glGenLists(10);
 	
-	toggleFullScreen();
+	//toggleFullScreen();
 
 	te = TextureManager::getInstance();
 	srand ( (unsigned int)time(NULL) );

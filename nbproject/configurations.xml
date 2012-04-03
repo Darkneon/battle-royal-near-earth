@@ -72,6 +72,8 @@
           <itemPath>source/Model/Buildings/BaseModel.h</itemPath>
           <itemPath>source/Model/Buildings/FactoryModel.cpp</itemPath>
           <itemPath>source/Model/Buildings/FactoryModel.h</itemPath>
+          <itemPath>source/Model/Buildings/FlagModel.cpp</itemPath>
+          <itemPath>source/Model/Buildings/FlagModel.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
           <itemPath>source/Model/Helper/BoundingBox.cpp</itemPath>
