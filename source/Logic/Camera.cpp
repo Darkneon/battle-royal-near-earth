@@ -1,17 +1,11 @@
 #include "Camera.h"
 
-void Camera::initialize(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+Camera::Camera()
 {
 	viewStates = 0;
 	
-	//initialzing the perspective 
-	this->viewWidth = viewWidth;
-	this->viewHeight = viewHeight;
-	this->viewNearPlane = viewNearPlane;
-	this->viewFarPlane = viewFarPlane;
-
-	centerX = (int)viewWidth / 2;
-	centerY = (int)viewHeight / 2;
+	centerX = (int)glutGet(GLUT_WINDOW_WIDTH) / 2;
+	centerY = (int)glutGet(GLUT_WINDOW_HEIGHT) / 2;
 }
 
 void Camera::toggleDifferentView()

@@ -1,9 +1,9 @@
 #include "RobotCamera.h"
 
 
-RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+RobotCamera::RobotCamera()
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+	
 	hasRobot = false;
 	//camera location
 

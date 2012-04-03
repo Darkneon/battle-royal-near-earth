@@ -1,8 +1,7 @@
 #include "CirclingCamera.h"
 
-CirclingCamera::CirclingCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+CirclingCamera::CirclingCamera()
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	//camera rotation
 	yaw = 0.0f;
 

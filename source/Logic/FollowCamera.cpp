@@ -7,8 +7,7 @@
 
 #include "FollowCamera.h"
 
-FollowCamera::FollowCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane) {
-    Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+FollowCamera::FollowCamera() {
 	
 	//camera rotation
 	yaw = 0.0f;

@@ -12,7 +12,6 @@ EnvMap::~EnvMap(void)
 {
 }
 
-
 void EnvMap::RegenerateEnvMap(LevelRenderer *level, GLfloat cameraX, GLfloat cameraZ) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
