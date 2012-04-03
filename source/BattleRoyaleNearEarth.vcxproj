@@ -104,7 +104,6 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClCompile Include="Helper\DirectoryManipHelper.cpp" />
     <ClCompile Include="Helper\SoundHelper.cpp" />
     <ClCompile Include="Helper\Wav.cpp" />
-    <ClCompile Include="Logic\AIPlayer.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
     <ClCompile Include="Logic\Bullet.cpp" />
     <ClCompile Include="Logic\BulletManager.cpp" />
@@ -182,7 +181,6 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClInclude Include="Helper\SoundHelper.h" />
     <ClInclude Include="Helper\V3struct.h" />
     <ClInclude Include="Helper\Wav.h" />
-    <ClInclude Include="Logic\AIPlayer.h" />
     <ClInclude Include="Logic\Base.h" />
     <ClInclude Include="Logic\Bullet.h" />
     <ClInclude Include="Logic\BulletManager.h" />

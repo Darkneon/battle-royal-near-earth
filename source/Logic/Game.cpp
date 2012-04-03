@@ -103,6 +103,7 @@ void Game::render()
 			nukePowerUp->draw();
 		}
 	}
+	glPopMatrix();
 }
 
 void Game::setMap(string mapName){
