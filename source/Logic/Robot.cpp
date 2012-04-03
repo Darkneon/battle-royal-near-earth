@@ -68,6 +68,8 @@ Robot::Robot() {
 	stop = false;
 
 	isAlive = true;
+	aiShootCount = 0;
+	computerControlled = false;
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
@@ -135,6 +137,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	stop = false;
 	
 	isAlive = true;
+	aiShootCount = 0;
+	computerControlled = false;
 }
 
 Robot::~Robot() {
@@ -154,14 +158,17 @@ void Robot::draw() {
 	if(robotLife > 0){
 		//draw bounding box
 		glPushMatrix();
-
-		box->draw();
+			box->draw();
 		glPopMatrix();
 
 		//draw robot
 		glPushMatrix();
-			if (!isRobotBeingControlled)
+			if (!isRobotBeingControlled){
+				if(computerControlled){
+					aiSetDestination();
+				}
 				goToDestination();
+			}
 		
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
@@ -209,6 +216,10 @@ void Robot::draw() {
 			glPopMatrix();
 		}
 
+		box->resize(box->size.x,0.1f,box->size.z);
+		glPushMatrix();
+			box->draw();
+		glPopMatrix();
 		glPushMatrix();
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
@@ -327,7 +338,12 @@ void Robot::refreshRobot(){
 	}
 	calculateHeight();
 	if(hasBox){
-		box->resize(box->size.x,height,box->size.z);
+		if(robotLife > 0){
+			box->resize(box->size.x,height,box->size.z);
+		}
+		else{
+			box->resize(box->size.x,0.01f,box->size.z);
+		}
 	}
 	notifyCamera();
 }
@@ -815,6 +831,23 @@ void Robot::goToDestination(){
 		return;
 	}
 
+	if(!checkZDestination()){
+		if(spinDestination != spinDegrees){
+			//Spins until facing correct angle
+			timedSpin();
+		}
+		else{
+			//translates north or south
+			if(spinDegrees == SOUTH){
+				incrementZPos(true);
+			}
+			else{
+				incrementZPos(false);
+			}
+		}
+		return;
+	}
+
 	//Orient
 	if(!checkXDestination()){
 		if(spinDestination != spinDegrees){
@@ -828,23 +861,6 @@ void Robot::goToDestination(){
 			}
 			else{
 				incrementXPos(false);
-			}
-		}
-		return;
-	}
-	
-	if(!checkZDestination()){
-		if(spinDestination != spinDegrees){
-			//Spins until facing correct angle
-			timedSpin();
-		}
-		else{
-			//translates north or south
-			if(spinDegrees == SOUTH){
-				incrementZPos(true);
-			}
-			else{
-				incrementZPos(false);
 			}
 		}
 		return;
@@ -922,49 +938,51 @@ void Robot::spinDirectionVector(){
 }
 
 void Robot::shootBullet(){
-	spinDirectionVector();
-	//check which component is highest
-	int highestIndex = 0;
-	for(int i = 3; i <= 5; i++){
-		if(isPartOn[i]){
-			highestIndex = i;
+	if(robotLife>0){
+		spinDirectionVector();
+		//check which component is highest
+		int highestIndex = 0;
+		for(int i = 3; i <= 5; i++){
+			if(isPartOn[i]){
+				highestIndex = i;
+			}
 		}
-	}
-	GLfloat yPosition = calculateHeight(highestIndex);
-	GLfloat bulletSpawnOffset[2];
-	GLfloat bulletSpawnOffset2[2];
-	//create bullet at spawn point
-	switch(highestIndex){
-	case 5:
-		//rotate offset
-		bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
-		//Rotate
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		break;
-	case 4:
-		//rotate offset
-		bulletSpawnOffset[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) - 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) - 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+		GLfloat yPosition = calculateHeight(highestIndex);
+		GLfloat bulletSpawnOffset[2];
+		GLfloat bulletSpawnOffset2[2];
+		//create bullet at spawn point
+		switch(highestIndex){
+		case 5:
+			//rotate offset
+			bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
+			//Rotate
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			break;
+		case 4:
+			//rotate offset
+			bulletSpawnOffset[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) - 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) - 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
-		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		break;
-	case 3:
-		//offset facing south
-		bulletSpawnOffset[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) - 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) - 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			//spawn point needs to accomodate rotation
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			break;
+		case 3:
+			//offset facing south
+			bulletSpawnOffset[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) - 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) - 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
-		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-	default:
-		break;
+			//spawn point needs to accomodate rotation
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+		default:
+			break;
+		}
 	}
 }
 
@@ -979,4 +997,90 @@ V3 Robot::getUFOLockPosition(){
 
 int Robot::getRobotId(){
 	return robotId;
+}
+
+void Robot::aiSetDestination(){
+	//randomize shooting
+	int randomNum = rand() % 15;
+	if(randomNum == 7 || randomNum == 9){
+		shootBullet();
+	}
+	//randomize destination
+	if((checkXDestination() && checkZDestination())){
+		int randomNum2 = rand() % 10;
+		switch(randomNum2){
+		case 0: case 1: case 2: case 3: case 4:
+			if(checkXPos(false)){
+				setDestination(xPos-ROBOT_LOOK_SIZE-1, zPos);
+			}
+			break;
+		case 5: case 6:
+			if(checkZPos(false)){
+				setDestination(xPos, zPos-ROBOT_LOOK_SIZE);
+			}
+			break;
+		case 8:
+			if(checkZPos(true)){
+				setDestination(xPos, zPos+ROBOT_LOOK_SIZE);
+			}
+			break;
+		case 9:
+			if(checkXPos(true)){
+				setDestination(xPos+ROBOT_LOOK_SIZE, zPos);
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
+}
+
+bool Robot::checkXPos(bool pos){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+	if(pos){
+		if(!robotCollisionTest(xPos+ROBOT_LOOK_SIZE,minY,zPos)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos-ROBOT_LOOK_SIZE-1,minY,zPos)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	notifyCamera();
+}
+
+bool Robot::checkZPos(bool positive){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+
+	if(positive){
+		if(!robotCollisionTest(xPos,minY,zPos+ROBOT_LOOK_SIZE)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos,minY,zPos-ROBOT_LOOK_SIZE)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	notifyCamera();
 }

@@ -4,13 +4,13 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat vie
 	bool *keyStates, bool *funcKeyStates)
 {
 
-	if (twoPlayerIsOn)
+	/*if (twoPlayerIsOn)
 		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, false);
-	else
-		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
+	else*/
+	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
 
 	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 28.0f, 10.0f, false);
-		
+	p2->robots.at(0)->computerControlled = true;
 
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
 	playerInput2 = new JoystickInput(p2);

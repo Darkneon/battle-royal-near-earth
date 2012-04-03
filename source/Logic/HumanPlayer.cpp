@@ -1,7 +1,7 @@
 #include "HumanPlayer.h"
 #include "Player/PlayerModel.h"
 
-
+/*
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane){
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
@@ -38,7 +38,7 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 	aRobotIsSelected = false;
 	robotUfoLock = false;
 	currentComponent = 0;
-}
+}*/
 
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
 					: Player(spawnX,spawnZ){
@@ -55,7 +55,8 @@ HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 
     currentCamera = CAMERA_COMMANDER;
 	if(hasUFO){
-		ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
+		//ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
+		ufo = new PlayerUFO(spawnPtX,spawnPtZ);
 	}
 	else{
 		ufo = NULL;

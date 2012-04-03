@@ -9,7 +9,7 @@ Player::Player() {
 	base = new Base(spawnPtX-2,spawnPtZ-4);
 	//init robots
 	selectedRobot = 0;
-	Robot* newRobot = new Robot(spawnPtX, spawnPtZ);
+	Robot* newRobot = new Robot(spawnPtX, spawnPtZ+2.0f);
 	robots.push_back(newRobot);
 	newRobot = NULL;
 	delete newRobot;
@@ -25,7 +25,7 @@ Player::Player(GLfloat spawnX, GLfloat spawnZ) {
 
 	//init robots
 	selectedRobot = 0;
-	Robot* newRobot = new Robot(spawnPtX, spawnPtZ);
+	Robot* newRobot = new Robot(spawnPtX, spawnPtZ+2.0f);
 	robots.push_back(newRobot);
 	newRobot = NULL;
 	delete newRobot;
