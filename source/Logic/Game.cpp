@@ -3,9 +3,14 @@
 Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane,
 	bool *keyStates, bool *funcKeyStates)
 {
+
+	/*if (twoPlayerIsOn)
+		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, false);
+	else*/
 	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
+
 	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 28.0f, 10.0f, false);
-		
+	p2->robots.at(0)->computerControlled = true;
 
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
 	playerInput2 = new JoystickInput(p2);
@@ -40,15 +45,32 @@ Game::~Game()
 
 void Game::update(bool* gameOver)
 {
-	Robot* r1 = p1->robots.at(0);
-	Robot* r2 = p2->robots.at(0);
 
-	if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
-		aNukeWentOff = true;
-		twoPlayerIsOn = false;
-		*gameOver = true;
+	if (twoPlayerIsOn)
+	{
+
+		if(player1Score == 0 || player2Score == 0)
+		{
+			if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
+				aNukeWentOff = true;
+				twoPlayerIsOn = false;
+				*gameOver = true;
+			}
+		}
+
+		if (p1->robots.at(0)->robotLife <= 0.0f && p1->robots.at(0)->isAlive)
+		{
+			player2Score++;
+			p1->robots.at(0)->isAlive = false;
+		}
+
+		if (p2->robots.at(0)->robotLife <= 0.0f && p2->robots.at(0)->isAlive)
+		{
+			player1Score++;
+			p2->robots.at(0)->isAlive = false;
+		}
+
 	}
-	
 }
 
 void Game::getInput(int keyModifier)
@@ -75,8 +97,11 @@ void Game::render()
 		p2->render();
 	}
 
-	if (twoPlayerIsOn)
-		nukePowerUp->draw();
+	if (twoPlayerIsOn){
+		if(player1Score == 0 || player2Score == 0){
+			nukePowerUp->draw();
+		}
+	}
 }
 
 void Game::setMap(string mapName){

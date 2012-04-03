@@ -6,7 +6,7 @@
 #define GL_PI 3.14159f //PI
 #define RadiansToDegrees 180.0f/GL_PI
 #define DegreesToRadians GL_PI/180.0f
-#define MAX_LIFE 2
+static const float MAX_LIFE = 7.0f;
 
 #include "Model.h"
 #include "Static/TeamNumberModel.h"
@@ -14,6 +14,7 @@
 #include "../Model/Helper/BoundingBox.h"
 #include "../Model/Helper/CollisionTester.h"
 #include "../Logic/BulletManager.h"
+#include <time.h>
 
 static const GLfloat ELECTRONICS_HEIGHT = 0.59f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
@@ -37,6 +38,7 @@ static const GLfloat WEST = 0.0f;
 static const GLfloat MOUSE_SENSITIVITY = 0.25f;
 
 static const GLfloat ROBOT_STEP_SIZE = 0.2f;
+static const GLfloat ROBOT_LOOK_SIZE = 0.2f;
 
 class RobotCamera;
 
@@ -111,6 +113,14 @@ public:
 	GLfloat zPos;
 	GLfloat height;
 
+
+	//Life
+	GLfloat robotLife;
+
+	bool isAlive;
+	bool computerControlled;
+
+	BoundingBox* box;
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	int robotId;
@@ -132,7 +142,7 @@ private:
 	RobotCamera* roboCam;
 	
 	//Collision Detection
-	BoundingBox* box;
+	
 	bool hasBox;
 	CollisionTester* ct;
 	BulletManager* bm;
@@ -157,8 +167,16 @@ private:
 	//Used for component toggling
 	bool isPartOn[8];
 	int selectedIndex;
-	//Life
-	GLfloat robotLife;
+	
+
+	//Robot explosion
+	double currentTime;
+	double lastExplosion;
+
+	GLfloat explosionSize;
+	bool stop;
+
+	int aiShootCount;
 
 	//-----------------------PRIVATE METHODS---------------------------
 	
@@ -186,6 +204,9 @@ private:
 	bool timedZWalk();
 	void incrementXPos(bool pos);
 	void incrementZPos(bool pos);
+	bool checkXPos(bool pos);
+	void aiSetDestination();
+	bool checkZPos(bool pos);
 
 	//Destination-Related
 	//Robots orients and moves X, then orients and moves Z
