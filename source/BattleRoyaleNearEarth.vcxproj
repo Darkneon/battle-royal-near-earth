@@ -128,6 +128,7 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
+    <ClCompile Include="Model\Buildings\FlagModel.cpp" />
     <ClCompile Include="Model\Helper\BoundingBox.cpp" />
     <ClCompile Include="Model\Helper\CollisionTester.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
@@ -203,6 +204,7 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClInclude Include="Logic\SpotLight.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
+    <ClInclude Include="Model\Buildings\FlagModel.h" />
     <ClInclude Include="Model\Helper\BoundingBox.h" />
     <ClInclude Include="Model\Helper\CollisionTester.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
