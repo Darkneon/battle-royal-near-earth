@@ -68,9 +68,11 @@ void Player::respawn()
 {
 	robots.at(0)->robotLife = MAX_LIFE;
 	robots.at(0)->isAlive = true;
+	robots.at(0)->explosionSize = 0.5f;
+	robots.at(0)->stop = false;
 	
 	 // this is a really bad way of doing this but our structure would require too much time to change
-	respawnLocation = respawnLocation++ % 3;
+	respawnLocation = ++respawnLocation % 3;
 
 	switch(respawnLocation)
 	{

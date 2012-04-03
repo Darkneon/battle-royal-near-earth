@@ -121,6 +121,9 @@ public:
 	bool computerControlled;
 
 	BoundingBox* box;
+
+	bool stop;
+	GLfloat explosionSize;
 private:
 	//-----------------------PRIVATE ATTRIBUTES---------------------------
 	int robotId;
@@ -172,9 +175,7 @@ private:
 	//Robot explosion
 	double currentTime;
 	double lastExplosion;
-
-	GLfloat explosionSize;
-	bool stop;
+	
 
 	int aiShootCount;
 
