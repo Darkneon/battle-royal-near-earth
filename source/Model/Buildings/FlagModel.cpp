@@ -59,11 +59,12 @@ FlagModel::~FlagModel() {
 
 void FlagModel::render() {
     nurb = gluNewNurbsRenderer();
-    gluNurbsProperty(nurb, GLU_SAMPLING_TOLERANCE, 25.0f);
+    //gluNurbsProperty(nurb, GLU_SAMPLING_TOLERANCE, 50.0f);
     gluNurbsProperty(nurb, GLU_DISPLAY_MODE, (GLfloat)GLU_FILL);
     
     glPushMatrix();
-        glRotatef(90.0f, 0, 1, 0);
+        //glRotatef(90.0f, 0, 1, 0);
+		glScalef(0.5f,0.5f,0.5f);
         angle += inc;
 
         if (angle > 0.25 || angle < -0.25) {

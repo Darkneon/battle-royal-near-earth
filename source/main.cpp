@@ -302,13 +302,17 @@ void renderGame(){
             envMap.RegenerateEnvMap(game->lr, 
                                     game->p1->getUFO()->pos[0], 
                                     game->p1->getUFO()->pos[2]);
+
+			        glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(60, (float)width / (float)height, 1, 100);
         }
         
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		game->p1->view();
         glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-     
+		
         if (envMapView == 0) {
             game->p1->setEnvMap(false);
             game->render();
@@ -325,7 +329,7 @@ void renderGame(){
         }
         
         glPushMatrix();
-            glTranslatef(25.0f, 2.0f, 10.0f);
+            glTranslatef(3.0f, 2.0f, 3.0f);
             flag.render();
         glPopMatrix();
         
@@ -384,7 +388,7 @@ void renderGame(){
         
         glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(60, (float)width / height, 1, 100);
+		gluPerspective(60, (float)width / (float)height, 1, 100);
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();

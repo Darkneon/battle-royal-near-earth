@@ -120,8 +120,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	//turnIndexOn(3);
 	turnIndexOn(4);
 	//turnIndexOn(5);
-	turnIndexOn(6);
-	//turnIndexOn(7);
+	//turnIndexOn(6);
+	turnIndexOn(7);
 
 	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
@@ -225,10 +225,6 @@ void Robot::draw() {
 		glPushMatrix();
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
-			glPushMatrix();
-				glTranslatef(0.5f,1.5f,0.25f);
-				flag->draw();
-			glPopMatrix();
 			glColor3f(0.5f,0.5f,0.5f);
 			rubble->draw();
 		glPopMatrix();

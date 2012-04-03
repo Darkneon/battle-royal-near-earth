@@ -112,14 +112,18 @@ void HumanPlayer::render(){
             glDisable(GL_TEXTURE_GEN_S);
             glDisable(GL_TEXTURE_GEN_T);
             glDisable(GL_TEXTURE_GEN_R);
-            glMatrixMode(GL_TEXTURE);
+            glMatrixMode(GL_MODELVIEW);
+			glPopMatrix();
         }
     }
 
 	//keep drawing until all the children are done
-    for(int j = 0; j < (int)robots.size(); j++){
+	glPushMatrix();
+	for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();
 	}
+	//glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
 }
 
 void HumanPlayer::controlRobotAt(int index)
