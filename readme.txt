@@ -12,23 +12,28 @@ Compile Directions:
 
 This version works on windows, mac and linux?.
 
-Key bindings:
-
-f1 --------------- toggle wireframe/smooth shading/flat shading
+Key Bindings:
+f1 --------------- cycle wireframe/smooth shading/flat shading
 f2 --------------- mouse look (freelook)
-f3 --------------- commander camera (toggle light with 'l')
-f5 --------------- robot camera (need to attach robot first, with 't')
-f6 ______________ toggle robot skins
-f7 ______________ switch to follow camera 
-z --------------- toggle bird view (disabled for now)
-o --------------- toggle textures
-arrows ---------- move camera around
-page up/down ---- rotate
-end ------------- reset rotation angle to 0
-= --------------- zoom in
-- --------------- zoom out
-0 --------------- reset zoom
-a --------------- toggle ambient light
+f3 --------------- commander camera
+f4 ---------------- toggle bird view
+f5 --------------- side view camera
+f6 --------------- toggle skins
+f8 --------------- toggle splitscreen
+f10 -------------- toggle team number
+Alt-Enter -------- fullscreen
+b ---------------- debugger
+[ ] -------------- roll camera
+/ ---------------- reset roll/pitch
+l ---------------- toggle light (in bird view)
+t ---------------- toggle texture
+arrows ----------- move camera around
+page up/down ----- rotate
+end -------------- reset rotation angle to 0
+= ---------------- zoom in
+- ---------------- zoom out
+0 ---------------- reset zoom
+p ---------------- toggle ambient light
 1 --------------- camera of light 1
 2 --------------- camera of light 2
 3 --------------- camera of light 3
@@ -39,20 +44,16 @@ a --------------- toggle ambient light
 8 --------------- on/off light 4
 9 --------------- on/off all lights
 
-The following keys interchange robot parts.
-** The robot can be found near the bottom of the map around where the base and factory are**
-t --------------- attach robot to Robot camera
-y --------------- cycle through selection of robot parts
-u --------------- toggle selected robot part
-s --------------- Toggle SkyBox/SkySphere
-h --------------- help
-o --------------- toggle textures
+GamePlay:
+Space ----------- levitate ufo
+wasd ------------ move ufo in commander view… move robot in robot view
+r --------------- set robot destination with ufo
+f --------------- mate ufo with robot
 
-Robot View buttons:
-arrows L/R ------ spin robot
-arrows U/D ------ pitch
-page up/down ---- yaw
-l --------------- light
+Toggle robot components:
+i --------------- cycle components
+j --------------- turn component off
+u --------------- turn component on
 
 AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
 Dirent API for windows http://www.softagalleria.net/dirent.php
