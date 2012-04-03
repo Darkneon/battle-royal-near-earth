@@ -81,10 +81,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Material/OrganicMaterial.o \
 	${OBJECTDIR}/source/Model/Material/MetalMaterial.o \
 	${OBJECTDIR}/source/Model/Model.o \
-	${OBJECTDIR}/source/Helper/DirectoryManipHelper.o \
+	${OBJECTDIR}/source/Logic/EnvMap.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
 	${OBJECTDIR}/source/Logic/PlayerInput.o \
 	${OBJECTDIR}/source/Logic/RobotCamera.o \
+	${OBJECTDIR}/source/Helper/DirectoryManipHelper.o \
 	${OBJECTDIR}/source/Model/Static/HillsModel.o \
 	${OBJECTDIR}/source/Model/Robot/NuclearModel.o \
 	${OBJECTDIR}/source/Model/Static/LightRubbleModel.o \
@@ -368,10 +369,10 @@ ${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
 
-${OBJECTDIR}/source/Helper/DirectoryManipHelper.o: source/Helper/DirectoryManipHelper.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Helper
+${OBJECTDIR}/source/Logic/EnvMap.o: source/Logic/EnvMap.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
-	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/DirectoryManipHelper.o source/Helper/DirectoryManipHelper.cpp
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/EnvMap.o source/Logic/EnvMap.cpp
 
 ${OBJECTDIR}/source/Model/Static/MountainModel.o: source/Model/Static/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
@@ -387,6 +388,11 @@ ${OBJECTDIR}/source/Logic/RobotCamera.o: source/Logic/RobotCamera.cpp
 	${MKDIR} -p ${OBJECTDIR}/source/Logic
 	${RM} $@.d
 	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/RobotCamera.o source/Logic/RobotCamera.cpp
+
+${OBJECTDIR}/source/Helper/DirectoryManipHelper.o: source/Helper/DirectoryManipHelper.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Helper
+	${RM} $@.d
+	$(COMPILE.cc) -g -Isource/Model -Isource/Logic -Iinclude -Isource/Helper -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Helper/DirectoryManipHelper.o source/Helper/DirectoryManipHelper.cpp
 
 ${OBJECTDIR}/source/Model/Static/HillsModel.o: source/Model/Static/HillsModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static

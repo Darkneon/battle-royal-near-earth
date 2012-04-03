@@ -81,27 +81,29 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
-	lr->render();
+    glPushMatrix();
+        lr->render();
 
-	if (aNukeWentOff)
-	{
-		glPushMatrix();
-			glTranslatef(15.0f, 0.0f, 15.0f);
-			glScalef(3.0f, 1.5f, 3.0f);
-			nuke->render();
-		glPopMatrix();
-	}
-	else
-	{
-		p1->render();
-		p2->render();
-	}
+        if (aNukeWentOff)
+        {
+            glPushMatrix();
+                glTranslatef(15.0f, 0.0f, 15.0f);
+                glScalef(3.0f, 1.5f, 3.0f);
+                nuke->render();
+            glPopMatrix();
+        }
+        else
+        {
+            p1->render();
+            p2->render();
+        }
 
-	if (twoPlayerIsOn){
-		if(player1Score == 0 || player2Score == 0){
-			nukePowerUp->draw();
-		}
-	}
+        if (twoPlayerIsOn){
+            if(player1Score == 0 || player2Score == 0){
+                nukePowerUp->draw();
+            }
+        }
+    glPopMatrix();
 }
 
 void Game::setMap(string mapName){

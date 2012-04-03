@@ -18,10 +18,6 @@ CirclingCamera::CirclingCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNe
 
 void CirclingCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
-
 	GLfloat lookAtX = CENTER_OF_MAP + currentRadius * (GLfloat)sin(yaw * 0.0625);
 	GLfloat lookAtZ = CENTER_OF_MAP + currentRadius * (GLfloat)cos(yaw * 0.0625);
 

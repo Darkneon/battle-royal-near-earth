@@ -32,10 +32,6 @@ FreeLookCamera::FreeLookCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNe
 
 void FreeLookCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
-
 	gluLookAt(locX, locY, locZ,
 		locX + directionVector[0], locY + directionVector[1], locZ + directionVector[2],  
 		upVector[0], upVector[1], upVector[2]);
