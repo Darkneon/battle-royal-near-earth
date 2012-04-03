@@ -136,6 +136,7 @@ private:
     Model* antiGravM;
 	Model* headlight;
 	Model* rubble;
+	Model* flag;
 	TeamNumberModel teamNumberModel;
 	
 	//Camera
@@ -167,7 +168,6 @@ private:
 	//Used for component toggling
 	bool isPartOn[8];
 	int selectedIndex;
-	
 
 	//Robot explosion
 	double currentTime;

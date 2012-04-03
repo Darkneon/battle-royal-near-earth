@@ -9,12 +9,14 @@
 #include "Robot/NuclearModel.h"
 #include "Robot/HeadlightModel.h"
 #include "../Model/Static/LightRubbleModel.h"
+#include "../Model/Buildings/FlagModel.h"
 
 bool Robot::isARobotLightOn = false;
 int Robot::robotIdCount = 0;
 
 Robot::Robot() {
 	rubble = (Model*)(new LightRubbleModel());
+	flag = (Model*)(new FlagModel());
     nuclearM = (Model*)(new NuclearModel()); 
     electronicsM = (Model*)(new ElectronicsModel()); 
     phaserM = (Model*)(new PhaserModel);
@@ -74,6 +76,7 @@ Robot::Robot() {
 
 Robot::Robot(GLfloat x, GLfloat y) {
 	rubble = (Model*)(new LightRubbleModel());
+	flag = (Model*)(new FlagModel());
     nuclearM = (Model*)(new NuclearModel()); 
     electronicsM = (Model*)(new ElectronicsModel()); 
     phaserM = (Model*)(new PhaserModel);
@@ -198,7 +201,6 @@ void Robot::draw() {
 		GLUquadricObj *quadric = gluNewQuadric();
 		gluQuadricTexture(quadric, true);
 
-		currentTime = clock();
 		if ((currentTime - lastExplosion) >= 200.0 && explosionSize <= 2.0f)
 		{
 			explosionSize+=.5f;
@@ -223,6 +225,10 @@ void Robot::draw() {
 		glPushMatrix();
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
+			glPushMatrix();
+				glTranslatef(0.5f,1.5f,0.25f);
+				flag->draw();
+			glPopMatrix();
 			rubble->draw();
 		glPopMatrix();
 		gluDeleteQuadric(quadric);
