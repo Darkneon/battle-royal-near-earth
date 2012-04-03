@@ -68,6 +68,8 @@ Robot::Robot() {
 	stop = false;
 
 	isAlive = true;
+	aiShootCount = 0;
+	computerControlled = false;
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
@@ -135,6 +137,8 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	stop = false;
 	
 	isAlive = true;
+	aiShootCount = 0;
+	computerControlled = false;
 }
 
 Robot::~Robot() {
@@ -159,8 +163,12 @@ void Robot::draw() {
 
 		//draw robot
 		glPushMatrix();
-			if (!isRobotBeingControlled)
+			if (!isRobotBeingControlled){
+				if(computerControlled){
+					aiSetDestination();
+				}
 				goToDestination();
+			}
 		
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
@@ -823,6 +831,23 @@ void Robot::goToDestination(){
 		return;
 	}
 
+	if(!checkZDestination()){
+		if(spinDestination != spinDegrees){
+			//Spins until facing correct angle
+			timedSpin();
+		}
+		else{
+			//translates north or south
+			if(spinDegrees == SOUTH){
+				incrementZPos(true);
+			}
+			else{
+				incrementZPos(false);
+			}
+		}
+		return;
+	}
+
 	//Orient
 	if(!checkXDestination()){
 		if(spinDestination != spinDegrees){
@@ -836,23 +861,6 @@ void Robot::goToDestination(){
 			}
 			else{
 				incrementXPos(false);
-			}
-		}
-		return;
-	}
-	
-	if(!checkZDestination()){
-		if(spinDestination != spinDegrees){
-			//Spins until facing correct angle
-			timedSpin();
-		}
-		else{
-			//translates north or south
-			if(spinDegrees == SOUTH){
-				incrementZPos(true);
-			}
-			else{
-				incrementZPos(false);
 			}
 		}
 		return;
@@ -989,4 +997,78 @@ V3 Robot::getUFOLockPosition(){
 
 int Robot::getRobotId(){
 	return robotId;
+}
+
+void Robot::aiSetDestination(){
+	aiShootCount = (aiShootCount+1)%15;
+	if(aiShootCount == 7){
+		shootBullet();
+	}
+	if(checkXPos(false)){
+		setDestination(xPos-ROBOT_LOOK_SIZE, zPos);
+	}
+	else{
+		if(checkZPos(false)){
+			setDestination(xPos, zPos-ROBOT_LOOK_SIZE);
+		}
+		else{
+			if(checkZPos(true)){
+				setDestination(xPos, zPos+ROBOT_LOOK_SIZE);
+			}
+			else{
+				if(checkXPos(true)){
+					setDestination(xPos+ROBOT_LOOK_SIZE, zPos);
+				}
+			}
+		}
+	}
+}
+
+bool Robot::checkXPos(bool pos){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+	if(pos){
+		if(!robotCollisionTest(xPos+ROBOT_LOOK_SIZE,minY,zPos)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos-ROBOT_LOOK_SIZE,minY,zPos)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	notifyCamera();
+}
+
+bool Robot::checkZPos(bool positive){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+
+	if(positive){
+		if(!robotCollisionTest(xPos,minY,zPos+ROBOT_LOOK_SIZE)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos,minY,zPos-ROBOT_LOOK_SIZE)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	notifyCamera();
 }

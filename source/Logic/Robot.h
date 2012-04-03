@@ -38,6 +38,7 @@ static const GLfloat WEST = 0.0f;
 static const GLfloat MOUSE_SENSITIVITY = 0.25f;
 
 static const GLfloat ROBOT_STEP_SIZE = 0.2f;
+static const GLfloat ROBOT_LOOK_SIZE = 0.2f;
 
 class RobotCamera;
 
@@ -117,6 +118,7 @@ public:
 	GLfloat robotLife;
 
 	bool isAlive;
+	bool computerControlled;
 
 	BoundingBox* box;
 private:
@@ -174,6 +176,8 @@ private:
 	GLfloat explosionSize;
 	bool stop;
 
+	int aiShootCount;
+
 	//-----------------------PRIVATE METHODS---------------------------
 	
 	//Used for component toggling
@@ -200,6 +204,9 @@ private:
 	bool timedZWalk();
 	void incrementXPos(bool pos);
 	void incrementZPos(bool pos);
+	bool checkXPos(bool pos);
+	void aiSetDestination();
+	bool checkZPos(bool pos);
 
 	//Destination-Related
 	//Robots orients and moves X, then orients and moves Z
