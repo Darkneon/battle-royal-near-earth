@@ -38,7 +38,7 @@ void PhaserModel::render() {
                 teamNumber->render();
         glPopMatrix();
 		TextureManager::getInstance()->enableTexture();
-		glColor3f(0.7f, 0.7f, 0.7f);
+		//glColor3f(0.7f, 0.7f, 0.7f);
 		GLUquadricObj *quadratic = gluNewQuadric();
 
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smooth_metal.bmp"));

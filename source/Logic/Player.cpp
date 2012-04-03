@@ -12,7 +12,10 @@ Player::Player() {
 	Robot* newRobot = new Robot(spawnPtX, spawnPtZ);
 	robots.push_back(newRobot);
 	newRobot = NULL;
+        rows;
+        columns;
 	delete newRobot;
+        
 }
 
 Player::Player(GLfloat spawnX, GLfloat spawnZ) {
@@ -28,6 +31,8 @@ Player::Player(GLfloat spawnX, GLfloat spawnZ) {
 	Robot* newRobot = new Robot(spawnPtX, spawnPtZ);
 	robots.push_back(newRobot);
 	newRobot = NULL;
+        rows;
+        columns;
 	delete newRobot;
 }
 
@@ -57,8 +62,14 @@ void Player::selectRobot(int i){
 void Player::render(){
 	//base->draw();
 	//keep drawing until all the children are done
+   // glTranslatef(2.0f, 0.0f, 0.0f);
+  //  robots.at(0)->draw();
     for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();
+	}
+    for(int j = 0; j < (int)robots.size(); j++){
+                //robots.at(j)->applyShadow(rows, columns);
+                //robots.at(j)->draw();
 	}
 }
 

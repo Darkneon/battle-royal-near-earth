@@ -35,7 +35,7 @@ void BipodModel::render(){
 		glTranslatef(0.f, 1.3f, 0.f);
 		//rectangle
 		glPushMatrix();
-			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rustymetal.bmp"));
+			//glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("rustymetal.bmp"));
 			glBegin(GL_QUADS);
 				glNormal3f(0.0f, 0.0f, -1.0f);
 				glTexCoord2f(0.0f, 0.0f);

@@ -33,20 +33,20 @@ void NuclearModel::render()
 		glTranslatef(0.5f,0.0f,0.5f);
 		glScalef(0.5f, 0.7f, 0.5f);
         glRotatef(-90, 1,0,0);
-		glColor3f(0.4f,0.4f,0.4f);
+		//glColor3f(0.4f,0.4f,0.4f);
 		gluCylinder(quadratic, .45, .45, .5, 8, 5);
 
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metalRadiation.bmp"));
 		gluQuadricTexture(quadratic,true);
 		// Bottom
-		glColor3f(0.6f,0.6f,0.6f);
+		//glColor3f(0.6f,0.6f,0.6f);
 		gluDisk(quadratic, 0, .45, 8, 5);
 		
 		// Top with Team Number
 		glTranslatef(0,0,.5);
 		gluDisk(quadratic, 0, .45, 8, 5);
 		glPushMatrix();
-			glColor3f(0.0f,0.0f,0.0f);
+			//glColor3f(0.0f,0.0f,0.0f);
 			glScalef(0.2f,0.2f,0.2f);
 			glTranslatef(-0.5f,-0.5f,0.0f);
 			glRotatef(90,1.0f,0.0f,0.0f);

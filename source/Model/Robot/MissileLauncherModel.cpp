@@ -38,7 +38,7 @@ void MissileLauncherModel::render() {
         glTranslatef(0.5f, 0.175f, 0.5f); //by jeff
         glScalef(0.27f, 0.27f, 0.27f); //by jeff
 		glRotatef(-90, 0.0f, 1.0f, 0.0f);
-		glColor3f(0.7f, 0.7f, 0.7f);
+		//glColor3f(0.7f, 0.7f, 0.7f);
 
 		//Chasis
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smooth_metal.bmp"));

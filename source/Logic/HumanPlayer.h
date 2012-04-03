@@ -41,6 +41,7 @@ public:
 	void robotForward(bool negate, int vectorIndex);
 	void ufoSetDestination(int vectorIndex);
 	void lockRobotAndUfo();
+        
 private:
 	bool robotUfoLock;
 	int currentCamera;

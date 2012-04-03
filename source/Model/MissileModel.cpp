@@ -30,7 +30,7 @@ void MissileModel::render()
 	glPushMatrix();	
 		glPushMatrix();
 			//glScalef(1.5f, 1.0f, 1.0f);
-			glColor3f(1.0f, 0.0f, 0.0f);
+			//glColor3f(1.0f, 0.0f, 0.0f);
 			gluSphere(quadric, 2, 8, 8);
 		glPopMatrix();
 
@@ -40,13 +40,13 @@ void MissileModel::render()
 				glRotatef(180.0f,1.0f,0.0f,0.0f);
 				gluDisk(quadric,0,2,5,5);
 			glPopMatrix();
-			glColor3f(.7f,.7f,.7f);
+			//glColor3f(.7f,.7f,.7f);
 			TextureManager::getInstance()->enableTexture();
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("missile.bmp"));
 			gluCylinder(quadric, 2, 2, 10, 8, 8);
 
 			glTranslatef(0.0f, 0.0f, 10.0f);
-			glColor3f(1.0f,.0f,0.0f);
+			//glColor3f(1.0f,.0f,0.0f);
 			gluCylinder(quadric, 2, 3, 3, 8, 8);
 		glPopMatrix();
 

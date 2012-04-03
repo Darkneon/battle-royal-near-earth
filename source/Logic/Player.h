@@ -29,6 +29,8 @@ public:
 	vector<Robot *> robots;
 	int selectedRobot;
 	Base* base;
+        GLfloat rows;
+        GLfloat columns;
 
 protected:
 	GLfloat spawnPtX;

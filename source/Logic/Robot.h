@@ -15,6 +15,7 @@
 #include "../Model/Helper/CollisionTester.h"
 #include "../Logic/BulletManager.h"
 
+
 static const GLfloat ELECTRONICS_HEIGHT = 0.59f;
 static const GLfloat NUCLEAR_HEIGHT = 0.355f;
 static const GLfloat PHASER_HEIGHT = 0.9f;
@@ -36,7 +37,7 @@ static const GLfloat WEST = 0.0f;
 //MOUSE CONTROL CONSTANTS
 static const GLfloat MOUSE_SENSITIVITY = 0.25f;
 
-static const GLfloat ROBOT_STEP_SIZE = 0.2f;
+static const GLfloat ROBOT_STEP_SIZE = 0.5f;
 
 class RobotCamera;
 
@@ -54,7 +55,7 @@ public:
 	//Used for component toggling
 	void cycleIndex();
 	void turnSelectedOn();
-
+        GLfloat calculateAlpha(GLfloat, GLfloat, GLfloat, GLfloat);
 	//Robot Spinning
 	void incrementSpinDegrees(bool pos, GLfloat speed = 1);
 	void incrementSpinDegrees(int x, int y);
@@ -62,7 +63,9 @@ public:
 	//move commands
 	void moveForward(bool pos);
 	void moveStrafe(bool pos);
-
+        void applyShadow(GLfloat, GLfloat);
+        int returnClosestLight(GLfloat, GLfloat);
+        void shadowMatrix(GLfloat, GLfloat, GLfloat, GLfloat);
 	//Coordinate accessors
 	GLfloat getEyeX();
 	GLfloat getEyeY();
@@ -120,7 +123,8 @@ private:
 	Model* headlight;
 	Model* rubble;
 	TeamNumberModel teamNumberModel;
-	
+        GLfloat groundplane[4];
+        GLfloat shadowMat[16];
 	//Camera
 	RobotCamera* roboCam;
 	

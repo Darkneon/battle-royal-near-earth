@@ -10,7 +10,7 @@
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
 #include <string>
-
+#include "../Model/Buildings/FlagModel.h"
 #include "MissileModel.h"
 
 #ifdef __APPLE__
@@ -32,12 +32,13 @@ public:
 	int player1Score;
 	int player2Score;
 	//bool noDisplayList;
-
+        FlagModel* flag;
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;
 	MissileModel mm;
-
+        GLfloat rows;
+        GLfloat columns;
 	void render();
 	void getInput(int keyModifier); //gets user input
 	void setMap(string mapName);

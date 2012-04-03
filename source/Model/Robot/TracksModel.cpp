@@ -46,7 +46,7 @@ void TracksModel::drawTrack(){
 
 	glPushMatrix();
 		//first track cylinder
-		glColor3f(1.0f, 1.0f, 1.0f);
+		//glColor3f(1.0f, 1.0f, 1.0f);
 		glPushMatrix();
 			glTranslatef(0.5f, 0.5f, 0.0f);
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("tracks1.bmp"));
@@ -89,7 +89,7 @@ void TracksModel::drawTrack(){
 			glEnd();
 		glPopMatrix();
 
-		glColor3f(0.3f, 0.3f, 0.3f);
+		//glColor3f(0.3f, 0.3f, 0.3f);
 		//circles and squares to finish model
 		glPushMatrix();
 			glRotatef(180, 0.0f,1.0f, 0.0f);

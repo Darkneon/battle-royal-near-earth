@@ -83,9 +83,11 @@ void HumanPlayer::render(){
 		ufo->draw();
 	}
 
+        //robots.at(0)->applyShadow(rows, columns);
 	//keep drawing until all the children are done
     for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();
+                robots.at(j)->applyShadow(rows, columns);
 	}
 }
 
