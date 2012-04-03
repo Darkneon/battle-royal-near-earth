@@ -229,6 +229,7 @@ void Robot::draw() {
 				glTranslatef(0.5f,1.5f,0.25f);
 				flag->draw();
 			glPopMatrix();
+			glColor3f(0.5f,0.5f,0.5f);
 			rubble->draw();
 		glPopMatrix();
 		gluDeleteQuadric(quadric);
@@ -1005,6 +1006,9 @@ int Robot::getRobotId(){
 	return robotId;
 }
 
+//-----------------------------------------------------------------------------------------
+//          randomize automated movements
+//-----------------------------------------------------------------------------------------
 void Robot::aiSetDestination(){
 	//randomize shooting
 	int randomNum = rand() % 15;
@@ -1042,6 +1046,7 @@ void Robot::aiSetDestination(){
 	}
 }
 
+//used to help decide on a destination
 bool Robot::checkXPos(bool pos){
 	GLfloat minY = 0.0f;
 	if(isPartOn[2]){
@@ -1066,6 +1071,7 @@ bool Robot::checkXPos(bool pos){
 	notifyCamera();
 }
 
+//used to help decide on a destination
 bool Robot::checkZPos(bool positive){
 	GLfloat minY = 0.0f;
 	if(isPartOn[2]){

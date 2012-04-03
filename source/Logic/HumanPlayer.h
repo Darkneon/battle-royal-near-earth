@@ -19,6 +19,7 @@
 #include "../Helper/V3struct.h"
 
 
+
 class HumanPlayer : public Player
 {
 public:

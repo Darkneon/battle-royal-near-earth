@@ -124,11 +124,11 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->cycleThroughComponents(0);
 	}
-	else if (keyStates[106]) //j
+	else if (keyStates[117]) //u
 	{
 		player->toggleComponentOn(0);
 	}
-	else if (keyStates[107]) //k
+	else if (keyStates[106]) //j
 	{
 		player->toggleComponentOff(0);
 	}

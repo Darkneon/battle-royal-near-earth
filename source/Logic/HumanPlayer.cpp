@@ -1,6 +1,6 @@
 #include "HumanPlayer.h"
 #include "Player/PlayerModel.h"
-
+#define GL_TEXTURE_CUBE_MAP 0x8513
 /*
 HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane){
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);

@@ -161,9 +161,6 @@
     <ClCompile Include="Logic\HumanPlayer.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
-    <ClCompile Include="Logic\AIPlayer.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
     <ClCompile Include="Logic\PlayerUFO.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
@@ -208,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="Model\Buildings\FlagModel.cpp">
       <Filter>Model\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic\EnvMap.cpp">
+      <Filter>Logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,9 +370,6 @@
     <ClInclude Include="Logic\HumanPlayer.h">
       <Filter>Logic</Filter>
     </ClInclude>
-    <ClInclude Include="Logic\AIPlayer.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
     <ClInclude Include="Logic\PlayerUFO.h">
       <Filter>Logic</Filter>
     </ClInclude>
@@ -420,6 +417,9 @@
     </ClInclude>
     <ClInclude Include="Model\Buildings\FlagModel.h">
       <Filter>Model\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic\EnvMap.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
