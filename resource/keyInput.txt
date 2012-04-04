@@ -40,3 +40,14 @@ Toggle robot components:
 i --------------- cycle components
 j --------------- turn component off
 u --------------- turn component on
+
+DeathMatch Controls:
+player 1:
+mouse move ------------look around
+mouse left button ---- shoot / respawn
+wasd ----------------- move around
+
+player 2 (joystick):
+arrows --------------- to move forwards/backwards and strafe
+bumpers -------------- to turn left or right
+a -------------------- to shoot /respawn

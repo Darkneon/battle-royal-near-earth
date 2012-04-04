@@ -97,5 +97,5 @@ void Player::respawn()
 	robots.at(0)->box = new BoundingBox(robots.at(0)->xPos,0.0f,robots.at(0)->zPos,robots.at(0)->xPos+1.0f,robots.at(0)->height,
 		robots.at(0)->zPos+1.0f, true, robots.at(0));
 
-	glutPostRedisplay();
+	robots.at(0)->notifyCamera();
 }
