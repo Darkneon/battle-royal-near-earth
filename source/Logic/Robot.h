@@ -56,6 +56,7 @@ public:
 	//Used for component toggling
 	void cycleIndex();
 	void turnSelectedOn();
+        GLfloat calculateAlpha(GLfloat, GLfloat, GLfloat, GLfloat);
 	void turnSelectedOff();
 
 	//Robot Spinning
@@ -65,7 +66,9 @@ public:
 	//move commands
 	void moveForward(bool pos);
 	void moveStrafe(bool pos);
-
+        void applyShadow(GLfloat, GLfloat);
+        int returnClosestLight(GLfloat, GLfloat);
+        void shadowMatrix(GLfloat, GLfloat, GLfloat, GLfloat);
 	//Coordinate accessors
 	GLfloat getEyeX();
 	GLfloat getEyeY();
@@ -141,7 +144,8 @@ private:
 	Model* rubble;
 	Model* flag;
 	TeamNumberModel teamNumberModel;
-	
+        GLfloat groundplane[4];
+        GLfloat shadowMat[16];
 	//Camera
 	RobotCamera* roboCam;
 	

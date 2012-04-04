@@ -23,7 +23,7 @@
 class HumanPlayer : public Player
 {
 public:
-	HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUFO);
+	HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUF, GLfloat rows, GLfloat columns);
     ~HumanPlayer();
     void render();
 

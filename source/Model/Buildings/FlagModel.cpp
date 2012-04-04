@@ -65,6 +65,7 @@ void FlagModel::render() {
     glPushMatrix();
         //glRotatef(90.0f, 0, 1, 0);
 		glScalef(0.5f,0.5f,0.5f);
+                glColor3f(1.0f, 0.0f, 0.0f);
         angle += inc;
 
         if (angle > 0.25 || angle < -0.25) {

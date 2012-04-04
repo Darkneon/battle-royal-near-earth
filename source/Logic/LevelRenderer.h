@@ -32,6 +32,8 @@ public:
 	BulletManager* bm;
 	void toggleTeamNumber();
 	void toggleLights(int light);
+	int rows;
+	int columns;
 	GLfloat getCenterOfMapX();
 	GLfloat getCenterOfMapZ();
 
@@ -39,8 +41,6 @@ private:
     static const int NUM_MODELS = 15;
     Model* models[NUM_MODELS];
     int **level;
-	int rows;
-	int columns;
 	CubicSkybox *cubicSkyBox;
 	SphericSkybox *sphericSkyBox;
     bool isSkySphere;
@@ -49,6 +49,7 @@ private:
 	void map();
 	void renderLights();
         void shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ, GLfloat lightW);
+        GLfloat calculateAlpha(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat);
 	//Initialize light objects
 	SpotLight *spotLight;
 	LightPost *light1;

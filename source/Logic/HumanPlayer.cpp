@@ -2,20 +2,19 @@
 #include "Player/PlayerModel.h"
 #define GL_TEXTURE_CUBE_MAP 0x8513
 
-HumanPlayer::HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
+HumanPlayer::HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUFO, GLfloat rows, GLfloat columns)
 					: Player(spawnX,spawnZ){
     
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera();
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera();
 	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(centerOfMapX, CenterOfMapZ);
 	availableCams[CAMERA_ROBOT] = new RobotCamera();
-    availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
-    availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);
-    availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f);
-    availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f);
+        availableCams[CAMERA_LIGHT1] = new LightCamera(1.0f, 6.0f, 1.0f, 2.5f, -2.5f, 2.5f);
+        availableCams[CAMERA_LIGHT2] = new LightCamera(columns-1, 6.0f, 1.0f, -2.5f, -2.5f, 2.5f);
+        availableCams[CAMERA_LIGHT3] = new LightCamera(columns-1, 6.0f, rows-1, -2.5f, -2.5f, -2.5f);
+        availableCams[CAMERA_LIGHT4] = new LightCamera(1.0f, 6.0f, rows-1, 2.5f, -2.5f, -2.5f);
 	availableCams[CAMERA_FOLLOW] = new FollowCamera();
-
-    currentCamera = CAMERA_FOLLOW;
+        currentCamera = CAMERA_FOLLOW;
 	if(hasUFO){
 		//ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
 		ufo = new PlayerUFO(spawnPtX,spawnPtZ);
@@ -79,10 +78,12 @@ void HumanPlayer::render(){
         }
     }
 
+        //robots.at(0)->applyShadow(rows, columns);
 	//keep drawing until all the children are done
 	glPushMatrix();
 	for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();
+                robots.at(j)->applyShadow(rows, columns);
 	}
 	//glMatrixMode(GL_TEXTURE);
 	glPopMatrix();

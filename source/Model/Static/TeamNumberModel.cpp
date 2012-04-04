@@ -15,7 +15,7 @@ void TeamNumberModel::render() {
     TextureManager::getInstance()->enableTexture();
 	glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("team.bmp"));
 
-    glColor3f(1.0f, 1.0f, 1.0f);
+   // glColor3f(1.0f, 1.0f, 1.0f);
     
     GLfloat distance = -1.0f / 5.0f;
     glPushMatrix();

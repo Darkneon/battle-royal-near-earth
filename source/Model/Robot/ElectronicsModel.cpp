@@ -35,22 +35,22 @@ void ElectronicsModel::build()
 			glPushMatrix();
 				GLUquadricObj *quadratic = gluNewQuadric();
 				//Base
-				glColor3f(.2f,.2f,.2f);
+				//glColor3f(.2f,.2f,.2f);
 				glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("concrete_bare.bmp"));
 				gluQuadricTexture(quadratic,true);
 				gluCylinder(quadratic, .5, .5, .1, 8, 3);
 
 				// Bottom of Base
-				glColor3f(.2f,.2f,.2f);
+				//glColor3f(.2f,.2f,.2f);
 				glTranslatef(0.0f,0.0f,0.0f);
 				gluDisk(quadratic, 0, .5, 8, 5);
 		
 				// Top of Base with Team Number
-				glColor3f(.2f,.2f,.2f);
+				//glColor3f(.2f,.2f,.2f);
 				glTranslatef(0.0f,0.0f,.1f);
 				gluDisk(quadratic, 0, .5, 8, 5);
 				glPushMatrix();
-					glColor3f(1.0f,1.0f,1.0f);
+					//glColor3f(1.0f,1.0f,1.0f);
 					glScalef(0.4f,0.4f,0.4f);
 					glTranslatef(-0.5f,-1.3f,0.0f);
 					glRotatef(90,1.0f,0.0f,0.0f);
@@ -62,7 +62,7 @@ void ElectronicsModel::build()
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("concrete_bare.bmp"));
 			glPushMatrix();
 				//Neck
-				glColor3f(.4f,.4f,.4f);
+				//glColor3f(.4f,.4f,.4f);
 				gluCylinder(quadratic, .2, .2, .475, 8, 4);
 			glPopMatrix();
 		
@@ -79,7 +79,7 @@ void ElectronicsModel::build()
 					glClipPlane(GL_CLIP_PLANE0, coordinate);
 					glEnable(GL_CLIP_PLANE0);
 						//outer sphere
-						glColor3f(.5,.5,.5);
+						//glColor3f(.5,.5,.5);
 						glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("metal4.bmp"));
 						gluQuadricTexture(quadratic,true);
 						glPushMatrix();
@@ -88,7 +88,7 @@ void ElectronicsModel::build()
 						glPopMatrix();
 						//inner sphere
 						gluQuadricOrientation(quadratic, GLU_INSIDE);
-						glColor3f(.55f, .55f, .55f);
+						//glColor3f(.55f, .55f, .55f);
 						glPushMatrix();
 							glRotatef(180,1.0f,0.0f,0.0f);
 							gluSphere(quadratic, .5, 10, 10);
@@ -98,7 +98,7 @@ void ElectronicsModel::build()
 					glPushMatrix();
 						glTranslatef(0.0f, -.15f, 0.0f);
 						glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-						glColor3f(.4f, .4f, .4f);
+						//glColor3f(.4f, .4f, .4f);
 						gluDisk(quadratic, .465, .59, 20, 5);
 					glPopMatrix();
 
@@ -106,7 +106,7 @@ void ElectronicsModel::build()
 					glPushMatrix();
 						glTranslatef(0.0f, 0.55f, 0.0f);
 						glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-						glColor3f(.8f, .8f, .8f);
+						//glColor3f(.8f, .8f, .8f);
 						gluCylinder(quadratic, .05, .0, .9, 8, 4);
 						glPushMatrix();
 							//Tip of antenna

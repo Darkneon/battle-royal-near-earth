@@ -30,7 +30,7 @@ void CannonModel::render()
 		glPushMatrix();
 			glTranslatef(0.5f, 0.1f, 0.5f);
 			glScalef(0.3f, 0.4f, 0.3f);
-			glColor3f(0.7f, 0.7f, 0.7f);
+			//glColor3f(0.7f, 0.7f, 0.7f);
 
 			//chassis
 			glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("smooth_metal.bmp"));

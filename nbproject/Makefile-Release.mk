@@ -81,8 +81,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/Model/Material/OrganicMaterial.o \
 	${OBJECTDIR}/source/Model/Material/MetalMaterial.o \
 	${OBJECTDIR}/source/Model/Model.o \
-	${OBJECTDIR}/source/Logic/EnvMap.o \
 	${OBJECTDIR}/source/Model/Static/MountainModel.o \
+	${OBJECTDIR}/source/Logic/EnvMap.o \
 	${OBJECTDIR}/source/Logic/PlayerInput.o \
 	${OBJECTDIR}/source/Logic/RobotCamera.o \
 	${OBJECTDIR}/source/Helper/DirectoryManipHelper.o \
@@ -367,15 +367,15 @@ ${OBJECTDIR}/source/Model/Model.o: source/Model/Model.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Model.o source/Model/Model.cpp
 
-${OBJECTDIR}/source/Logic/EnvMap.o: source/Logic/EnvMap.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source/Logic
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/EnvMap.o source/Logic/EnvMap.cpp
-
 ${OBJECTDIR}/source/Model/Static/MountainModel.o: source/Model/Static/MountainModel.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Model/Static
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Model/Static/MountainModel.o source/Model/Static/MountainModel.cpp
+
+${OBJECTDIR}/source/Logic/EnvMap.o: source/Logic/EnvMap.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source/Logic
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Logic/EnvMap.o source/Logic/EnvMap.cpp
 
 ${OBJECTDIR}/source/Logic/PlayerInput.o: source/Logic/PlayerInput.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source/Logic

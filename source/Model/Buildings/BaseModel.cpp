@@ -18,10 +18,13 @@
 #include "BaseModel.h"
 #include "Material/MetalMaterial.h"
 
+
 BaseModel::BaseModel()
 {
    teamNumber = new TeamNumberModel();
    material = (Material*)(new MetalMaterial());
+   //flag = new FlagModel();
+   
    //box->resize(5.0f,1.25f,4.0f);
 }
 
@@ -36,12 +39,17 @@ void BaseModel::render()
 			glTranslatef(2.0f, 1.23f, 2.2f);
 			teamNumber->render();
 		glPopMatrix();
-    glPopMatrix();
+        glPopMatrix();
 	glPushMatrix();
 		renderGrass();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
-  
+        //Draw the flag
+       /* glPushMatrix();
+                glTranslatef(0.5, 3.0, 1.75);
+                flag->render();
+        glPopMatrix();
+        */
   
 }
 
@@ -73,6 +81,9 @@ void BaseModel::drawBase(GLfloat xPos, GLfloat yPos, GLfloat zPos)
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+0.0f);
     GeoHelper::drawGarage(xPos+200.0f, yPos+0.0f, zPos+50.0f);
     glPopMatrix();
+    //draw flag
+    
+
 }
 
 

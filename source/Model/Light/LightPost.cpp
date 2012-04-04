@@ -26,12 +26,11 @@ LightPost::LightPost(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GL
     spotDir[0] = this->lookX;
     spotDir[1] = this->lookY;
     spotDir[2] = this->lookZ;
-
-	rot = 0.0f;
-	axis[0] = 1.0f;
-	axis[1] = 0.0f;
-	axis[2] = 0.0f;
-	lightOn = true;
+    rot = 0.0f;
+    axis[0] = 1.0f;
+    axis[1] = 0.0f;
+    axis[2] = 0.0f;
+    lightOn = true;
 }
 
 GLfloat LightPost::getPosX()

@@ -5,11 +5,11 @@ Game::Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlaye
 
 	lr = new LevelRenderer(mapName);
 	if (isTwoPlayer)
-		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, false);
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, false, lr->rows, lr->columns);
 	else
-		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, true);
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, true, lr->rows, lr->columns);
 
-	p2 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 28.0f, 10.0f, false);
+	p2 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 28.0f, 10.0f, false, lr->rows, lr->columns);
 
 	p2->robots.at(0)->computerControlled = true;
 
@@ -27,7 +27,7 @@ Game::Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlaye
 	aNukeWentOff = false;
 
 	ct = new CollisionTester(p1->robots.at(0)->getRobotId(), 
-		p2->robots.at(0)->getRobotId());
+        p2->robots.at(0)->getRobotId());
 
 
 }
@@ -87,7 +87,13 @@ void Game::render()
 {
     glPushMatrix();
         lr->render();
-
+        //Sets rows and columns for use with rendering shadows
+        rows = lr->rows;
+        columns = lr->columns;
+        p1->rows = rows;
+        p1->columns = columns;
+        p2->rows = rows;
+        p2->columns = columns;
         if (aNukeWentOff)
         {
             glPushMatrix();

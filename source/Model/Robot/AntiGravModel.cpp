@@ -110,7 +110,7 @@ void AntiGravModel::render(){
 		TextureManager::getInstance()->enableTexture();
 		//cylinder
 		glTranslatef(1.0f,0.8f,1.0f);
-		glColor3f(1.0f,1.0f,1.0f);
+		//glColor3f(1.0f,1.0f,1.0f);
 		glBindTexture(GL_TEXTURE_2D, TextureManager::getInstance()->getTextures("copper.bmp"));
 		gluQuadricTexture(qGrav,true);
 
@@ -153,7 +153,7 @@ void AntiGravModel::render(){
 
 void AntiGravModel::drawMachineCube(){
 
-	glColor3f(0.6f,0.6f,0.6f);
+	//glColor3f(0.6f,0.6f,0.6f);
 	glPushMatrix();
 		glPushMatrix();
 			

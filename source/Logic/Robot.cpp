@@ -30,7 +30,12 @@ Robot::Robot() {
 	headlight = (Model*)(new HeadlightModel);
     model = bipodM;
 	roboCam = NULL;
-
+        
+        groundplane[0] = 0.0f;
+        groundplane[1] = 1.0f;
+        groundplane[2] = 0.0f;
+        groundplane[3] = 0.0f;
+        
 	robotIdCount++;
 	robotId = robotIdCount;
 	
@@ -90,7 +95,10 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	headlight = (Model*)(new HeadlightModel);
     model = bipodM;
 	roboCam = NULL;
-
+        groundplane[0] = 0.0f;
+        groundplane[1] = 1.0f;
+        groundplane[2] = 0.0f;
+        groundplane[3] = 0.0f;
 	robotIdCount++;
 	robotId = robotIdCount;	
 
@@ -119,11 +127,11 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	}
 
 	turnIndexOn(1);
-	//turnIndexOn(3);
-	turnIndexOn(4);
+	turnIndexOn(3);
+	//turnIndexOn(4);
 	//turnIndexOn(5);
 	//turnIndexOn(6);
-	turnIndexOn(7);
+	//turnIndexOn(7);
 
 	//incrementSpinDegrees(true,180.0f);
 	refreshRobot();
@@ -144,6 +152,146 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	isAlive = true;
 	aiShootCount = 0;
 	computerControlled = false;
+}
+
+void Robot::shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ, GLfloat lightW)
+{
+    GLfloat dot;
+    //Find dot product between light position vector and ground plane normal
+    //From openGL.org
+    dot =   groundplane[0]*lightX +
+            groundplane[1]*lightY +
+            groundplane[2]*lightZ +
+            groundplane[3]*lightW;
+    
+    shadowMat[0] = dot-lightX*groundplane[0];
+    shadowMat[4] = 0.0f-lightX*groundplane[1];
+    shadowMat[8] = 0.0f-lightX*groundplane[2];
+    shadowMat[12] = 0.0f-lightX*groundplane[3];
+    
+    shadowMat[1] = 0.0f-lightY*groundplane[0];
+    shadowMat[5] = dot - lightY*groundplane[1]; 
+    shadowMat[9] = 0.0f - lightY*groundplane[2];
+    shadowMat[13] = 0.0f - lightY*groundplane[3];
+    
+    shadowMat[2] = 0.0f - lightZ*groundplane[0];
+    shadowMat[6] = 0.0f - lightZ*groundplane[1];
+    shadowMat[10] = dot - lightZ*groundplane[2];
+    shadowMat[14] = 0.0f - lightZ*groundplane[3];
+    
+    shadowMat[3] = 0.0f - lightW*groundplane[0];
+    shadowMat[7] = 0.0f - lightW*groundplane[1];
+    shadowMat[11] = 0.0f - lightW*groundplane[2];
+    shadowMat[15] = dot - lightW*groundplane[3];
+    
+    glMultMatrixf(shadowMat);
+}
+
+int Robot::returnClosestLight(GLfloat rows, GLfloat columns) {
+    GLfloat len1 = sqrt((xPos-0)*(xPos-0)+(zPos-0)*(zPos-0));
+    GLfloat len2 = sqrt((xPos-0)*(xPos-0)+(zPos-rows)*(zPos-rows));
+    GLfloat len3 = sqrt((xPos-columns)*(xPos-columns)+(zPos-0)*(zPos-0));
+    GLfloat len4 = sqrt((xPos-columns)*(xPos-columns)+(zPos-rows)*(zPos-rows));
+    if (len1<len2 && len1<len3 && len1<len4)
+        return 1;
+    else if (len2<len1 && len2<len3 && len2<len4)
+        return 2;
+    else if (len3<len2 && len3<len1 && len3<len4)
+        return 3;
+    else
+        return 4;
+}
+
+GLfloat Robot::calculateAlpha(GLfloat x, GLfloat z, GLfloat rows, GLfloat columns) {
+    GLfloat alpha = 1-(sqrt((xPos-x)*(xPos-x)+(zPos-z)*(zPos-z))/((rows+columns)/4));
+    if (alpha>=0.5)
+        return 0.5f;
+    if (alpha<=0.0)
+        return 0.0f;
+    else
+        return alpha;
+}
+void Robot::applyShadow(GLfloat rows, GLfloat columns) {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glDisable(GL_LIGHTING);
+         if (calculateAlpha(0, 0, rows, columns) >=0) {
+             glPushMatrix();
+                glEnable(GL_STENCIL_TEST);
+                glStencilFunc(GL_EQUAL, 10, ~0);
+                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                glTranslatef(xPos, 0.02f, zPos); 
+                TextureManager::getInstance()->toggleTextures();
+                shadowMatrix(0-xPos, 12, 0-zPos, 1.0f);
+                
+                glColor4f(0.0, 0.0, 0.0, calculateAlpha(0, 0, rows, columns));
+                model->draw();
+                //draw();
+                TextureManager::getInstance()->toggleTextures();
+                
+                 glDisable(GL_STENCIL_TEST); 
+             glPopMatrix();
+         }
+            if (calculateAlpha(0, rows, rows, columns) >=0) {
+            glPushMatrix();
+                glEnable(GL_STENCIL_TEST);
+                glStencilFunc(GL_EQUAL, 10, ~0);
+                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                glTranslatef(xPos, 0.02f, zPos); 
+                TextureManager::getInstance()->toggleTextures();
+                shadowMatrix(0-xPos, 12, rows-zPos, 1.0f);
+                glColor4f(0.0, 0.0, 0.0, calculateAlpha(0, rows, rows, columns));
+                model->draw();
+                //draw();
+                TextureManager::getInstance()->toggleTextures();
+                glDisable(GL_STENCIL_TEST); 
+             glPopMatrix();
+            }
+            if (calculateAlpha(columns, 0, rows, columns) >=0) {
+            glPushMatrix();
+                glEnable(GL_STENCIL_TEST);
+                glStencilFunc(GL_EQUAL, 10, ~0);
+                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                glTranslatef(xPos, 0.02f, zPos); 
+                TextureManager::getInstance()->toggleTextures();
+                shadowMatrix(columns-xPos, 12, 0-zPos, 1.0f);
+                glColor4f(0.0, 0.0, 0.0, calculateAlpha(columns, 0, rows, columns));
+                model->draw();
+                //draw();
+                TextureManager::getInstance()->toggleTextures();
+                glDisable(GL_STENCIL_TEST); 
+             glPopMatrix();
+            }
+            if (calculateAlpha(columns, rows, rows, columns) >=0) {
+            glPushMatrix();
+                glEnable(GL_STENCIL_TEST);
+                glStencilFunc(GL_EQUAL, 10, ~0);
+                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                glTranslatef(xPos, 0.02f, zPos); 
+                TextureManager::getInstance()->toggleTextures();
+                shadowMatrix(columns-xPos, 12, rows-zPos, 1.0f);
+                glColor4f(0.0, 0.0, 0.0, calculateAlpha(columns, rows, rows, columns));
+                model->draw();
+                //draw();
+                TextureManager::getInstance()->toggleTextures();
+                glDisable(GL_STENCIL_TEST); 
+             glPopMatrix();
+            }
+    //}
+    //glDisable(GL_TEXTURE_2D);
+                
+                
+                
+                
+                //glDisable(GL_STENCIL_TEST);  
+       // glPopMatrix();
+                    
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+        glEnable(GL_LIGHTING);
+        //glEnable(GL_COLOR_MATERIAL);
+    //}
+    
 }
 
 Robot::~Robot() {

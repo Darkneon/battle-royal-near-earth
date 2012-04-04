@@ -43,6 +43,9 @@ public:
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;
+	//MissileModel mm;
+        GLfloat rows;
+        GLfloat columns;
 	NuclearExplosion* nuke;
 	NukePowerUp* nukePowerUp;
 

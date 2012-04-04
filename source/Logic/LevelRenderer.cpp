@@ -35,9 +35,7 @@ LevelRenderer::LevelRenderer(string mapName) {
 	//LIGHT
 	//Initialize light objects
 	spotLight = new SpotLight(0.3f, 0.9f, 0.1f, 0.0f);
-
 	ambientLight = true;
-
 	spotLight1 = true;
 	spotLight2 = true;
 	spotLight3 = true;
@@ -69,7 +67,6 @@ LevelRenderer::LevelRenderer(string mapName) {
 	Wall *wall = new Wall();
 	//NukePowerUp *nukePowerUp = new NukePowerUp();
 
-
 	models[0] = (Model*)grassModel;
 	models[1] = (Model*)hillsModel;
 	models[2] = (Model*)mountainModel;
@@ -90,10 +87,10 @@ LevelRenderer::LevelRenderer(string mapName) {
 	bm = new BulletManager;
 	lrBoxes = new CollisionTester;
 
-    groundplane[0] = 0.0f;
-    groundplane[1] = 1.0f;
-    groundplane[2] = 0.0f;
-    groundplane[3] = 0.0f;
+        groundplane[0] = 0.0f;
+        groundplane[1] = 1.0f;
+        groundplane[2] = 0.0f;
+        groundplane[3] = 0.0f;
 	map();   
 	buildMap();
 } 
@@ -147,26 +144,104 @@ void LevelRenderer::shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ,
     
     glMultMatrixf(shadowMat);
 }
-
+GLfloat LevelRenderer::calculateAlpha(GLfloat j, GLfloat i, GLfloat x, GLfloat z, GLfloat rows, GLfloat columns) {
+    GLfloat alpha = 1-(sqrt((j-x)*(j-x)+(i-z)*(i-z))/((rows+columns)/4));
+    if (alpha>=0.5)
+        return 0.5f;
+    if (alpha<=0.0)
+        return 0.1f;
+    else
+        return alpha;
+}
 void LevelRenderer::buildMap()
 {
-    GrassModel::teamNumber = false;
+        GrassModel::teamNumber = false;
 	TextureManager::getInstance()->toggleTextures(true);
 	TextureManager::getInstance()->toggleSkins(0);
     //SKIN1 W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
 	glNewList(2, GL_COMPILE);
-	for(int i = 0; i < rows; i++) {
+	/*for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
-			if(i == 35 && j == 40){
-				int k = 9;
-			}
 			glPushMatrix();	
                         
                 glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
 			glPopMatrix();
 		}
+	}*/
+        for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {	
+			glPushMatrix();
+                                
+                                if (level[i][j]==0 || level[i][j]==11)
+                                {
+                                    glEnable(GL_STENCIL_TEST);
+                                    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+                                    glStencilFunc(GL_ALWAYS, 10, ~0);
+
+                                }
+                        
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] >=11){
+					models[0]->draw();
+				}
+                                
+                            glDisable(GL_STENCIL_TEST);
+			glPopMatrix();
+		}
 	}
+        //SHADOWS-----------------------------------
+                
+                //glDisable(GL_LIGHTING);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                //glEnable(GL_COLOR_MATERIAL);
+               
+                glEnable(GL_BLEND);
+                for(int i = 0; i < rows; i++) {
+                        for(int j = 0; j < columns; j++) {
+                                if(level[i][j]!=0 && level[i][j]!=3 && level[i][j]!= 8 && level[i][j]!= 9 && level[i][j]!= 10){
+                                    glPushMatrix();
+                                        glEnable(GL_STENCIL_TEST);
+                                        glStencilFunc(GL_EQUAL, 10, ~0);
+                                        glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                                        //glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        
+                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
+                                        if(i < rows/2 && j < columns/2) {
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, 0, rows, columns));
+
+                                        }
+                                        else if(i< rows/2 && j <= columns) {
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, 0, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j < columns/2) {
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, rows, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j <= columns) {
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, rows, rows, columns));
+                                        }        
+                                        models[ level[i][j] ]->draw();
+                                          glDisable(GL_STENCIL_TEST);              
+                                    glPopMatrix();
+                            }
+                        }
+                }
+                //glEnable(GL_DEPTH_TEST);
+
+                glEnable(GL_DEPTH_TEST);
+                glDisable(GL_BLEND);
+                glEnable(GL_LIGHTING);
+                
+        //-------------------------------------------
 	glEndList();
 
 	//SKIN2 W/OUT TEAM NUMBER ----------------------------------------------------------------------------------------
@@ -211,17 +286,28 @@ void LevelRenderer::buildMap()
                                         glEnable(GL_STENCIL_TEST);
                                         glStencilFunc(GL_EQUAL, 10, ~0);
                                         glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
-                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        //glColor4f(0.0, 0.0, 0.0, 0.5f);
                                         
                                         glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
-                                        if(i < rows/2 && j < columns/2)
+                                        if(i < rows/2 && j < columns/2) {
                                                 shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
-                                        else if(i< rows/2 && j <= columns)
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, 0, rows, columns));
+
+                                        }
+                                        else if(i< rows/2 && j <= columns) {
                                                 shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j < columns/2)
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, 0, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j < columns/2) {
                                                 shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j <= columns)
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, rows, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j <= columns) {
                                                 shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, rows, rows, columns));
+                                        }        
                                         models[ level[i][j] ]->draw();
                                           glDisable(GL_STENCIL_TEST);              
                                     glPopMatrix();
@@ -320,39 +406,53 @@ void LevelRenderer::buildMap()
 		}
 	}
         //SHADOWS-----------------------------------
+                
                 //glDisable(GL_LIGHTING);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 //glEnable(GL_COLOR_MATERIAL);
-                glEnable(GL_STENCIL_TEST);
-                glStencilFunc(GL_EQUAL, 10, ~0);
-                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+               
                 glEnable(GL_BLEND);
                 for(int i = 0; i < rows; i++) {
                         for(int j = 0; j < columns; j++) {
                                 if(level[i][j]!=0 && level[i][j]!=3 && level[i][j]!= 8 && level[i][j]!= 9 && level[i][j]!= 10){
                                     glPushMatrix();
-                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
-                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
-                                        if(i < rows/2 && j < columns/2)
-                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
-                                        else if(i< rows/2 && j <= columns)
-                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j < columns/2)
-                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j <= columns)
-                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
-                                        models[ level[i][j] ]->draw();
+                                        glEnable(GL_STENCIL_TEST);
+                                        glStencilFunc(GL_EQUAL, 10, ~0);
+                                        glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                                        //glColor4f(0.0, 0.0, 0.0, 0.5f);
                                         
+                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
+                                        if(i < rows/2 && j < columns/2) {
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, 0, rows, columns));
+
+                                        }
+                                        else if(i< rows/2 && j <= columns) {
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, 0, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j < columns/2) {
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, rows, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j <= columns) {
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, rows, rows, columns));
+                                        }        
+                                        models[ level[i][j] ]->draw();
+                                          glDisable(GL_STENCIL_TEST);              
                                     glPopMatrix();
                             }
                         }
                 }
                 //glEnable(GL_DEPTH_TEST);
-                glDisable(GL_STENCIL_TEST);
+
                 glEnable(GL_DEPTH_TEST);
                 glDisable(GL_BLEND);
                 glEnable(GL_LIGHTING);
-                //glEnable(GL_DEPTH);
+                
         //-------------------------------------------
 	glEndList();
 	delete tempBox;
@@ -360,19 +460,82 @@ void LevelRenderer::buildMap()
 	GrassModel::teamNumber = true;
 	TextureManager::getInstance()->toggleTextures(true);
 	TextureManager::getInstance()->toggleSkins(0);
-	 //SKIN1 W/ TEAM NUMBER ----------------------------------------------------------------------------------------
+	 
+        //SKIN1 W/ TEAM NUMBER ----------------------------------------------------------------------------------------
 	glNewList(8, GL_COMPILE);
 	for(int i = 0; i < rows; i++) {
-		for(int j = 0; j < columns; j++) {
-			if(i == 35 && j == 40){
-				int k = 9;
-			}
-			glPushMatrix();	
-                glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
+		for(int j = 0; j < columns; j++) {	
+			glPushMatrix();
+                                
+                                if (level[i][j]==0 || level[i][j]==11)
+                                {
+                                    glEnable(GL_STENCIL_TEST);
+                                    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+                                    glStencilFunc(GL_ALWAYS, 10, ~0);
+
+                                }
+                        
+				glTranslatef((GLfloat)j, (GLfloat)0, (GLfloat)i);
 				models[ level[i][j] ]->draw();
+
+				//also draw a grass tile under models
+				if(level[i][j] >=11){
+					models[0]->draw();
+				}
+                                
+                            glDisable(GL_STENCIL_TEST);
 			glPopMatrix();
 		}
 	}
+        //SHADOWS-----------------------------------
+                
+                //glDisable(GL_LIGHTING);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                //glEnable(GL_COLOR_MATERIAL);
+               
+                glEnable(GL_BLEND);
+                for(int i = 0; i < rows; i++) {
+                        for(int j = 0; j < columns; j++) {
+                                if(level[i][j]!=0 && level[i][j]!=3 && level[i][j]!= 8 && level[i][j]!= 9 && level[i][j]!= 10){
+                                    glPushMatrix();
+                                        glEnable(GL_STENCIL_TEST);
+                                        glStencilFunc(GL_EQUAL, 10, ~0);
+                                        glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                                        //glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        
+                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
+                                        if(i < rows/2 && j < columns/2) {
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, 0, rows, columns));
+
+                                        }
+                                        else if(i< rows/2 && j <= columns) {
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, 0, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j < columns/2) {
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, rows, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j <= columns) {
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, rows, rows, columns));
+                                        }        
+                                        models[ level[i][j] ]->draw();
+                                          glDisable(GL_STENCIL_TEST);              
+                                    glPopMatrix();
+                            }
+                        }
+                }
+                //glEnable(GL_DEPTH_TEST);
+
+                glEnable(GL_DEPTH_TEST);
+                glDisable(GL_BLEND);
+                glEnable(GL_LIGHTING);
+                
+        //-------------------------------------------
 	glEndList();
 
 	//SKIN2 W TEAM NUMBER ----------------------------------------------------------------------------------------
@@ -417,17 +580,28 @@ void LevelRenderer::buildMap()
                                         glEnable(GL_STENCIL_TEST);
                                         glStencilFunc(GL_EQUAL, 10, ~0);
                                         glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
-                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
+                                        //glColor4f(0.0, 0.0, 0.0, 0.5f);
                                         
                                         glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
-                                        if(i < rows/2 && j < columns/2)
+                                        if(i < rows/2 && j < columns/2) {
                                                 shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
-                                        else if(i< rows/2 && j <= columns)
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, 0, rows, columns));
+
+                                        }
+                                        else if(i< rows/2 && j <= columns) {
                                                 shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j < columns/2)
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, 0, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j < columns/2) {
                                                 shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j <= columns)
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, rows, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j <= columns) {
                                                 shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, rows, rows, columns));
+                                        }        
                                         models[ level[i][j] ]->draw();
                                           glDisable(GL_STENCIL_TEST);              
                                     glPopMatrix();
@@ -527,39 +701,53 @@ void LevelRenderer::buildMap()
 		}
 	}
         //SHADOWS-----------------------------------
+                
                 //glDisable(GL_LIGHTING);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 //glEnable(GL_COLOR_MATERIAL);
-                glEnable(GL_STENCIL_TEST);
-                glStencilFunc(GL_EQUAL, 10, ~0);
-                glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+               
                 glEnable(GL_BLEND);
                 for(int i = 0; i < rows; i++) {
                         for(int j = 0; j < columns; j++) {
                                 if(level[i][j]!=0 && level[i][j]!=3 && level[i][j]!= 8 && level[i][j]!= 9 && level[i][j]!= 10){
                                     glPushMatrix();
-                                        glColor4f(0.0, 0.0, 0.0, 0.5f);
-                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
-                                        if(i < rows/2 && j < columns/2)
-                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
-                                        else if(i< rows/2 && j <= columns)
-                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j < columns/2)
-                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
-                                        else if(i<= rows && j <= columns)
-                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
-                                        models[ level[i][j] ]->draw();
+                                        glEnable(GL_STENCIL_TEST);
+                                        glStencilFunc(GL_EQUAL, 10, ~0);
+                                        glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
+                                        //glColor4f(0.0, 0.0, 0.0, 0.5f);
                                         
+                                        glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i);                                        
+                                        if(i < rows/2 && j < columns/2) {
+                                                shadowMatrix(light1->getPosX()-j, light1->getPosY()*2, light1->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, 0, rows, columns));
+
+                                        }
+                                        else if(i< rows/2 && j <= columns) {
+                                                shadowMatrix(light2->getPosX()-j, light2->getPosY()*2, light2->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, 0, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j < columns/2) {
+                                                shadowMatrix(light4->getPosX()-j, light4->getPosY()*2, light4->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, 0, rows, rows, columns));
+
+                                        }        
+                                        else if(i<= rows && j <= columns) {
+                                                shadowMatrix(light3->getPosX()-j, light3->getPosY()*2, light3->getPosZ()-i, 1.0f);
+                                                glColor4f(0.0, 0.0, 0.0, calculateAlpha(j, i, columns, rows, rows, columns));
+                                        }        
+                                        models[ level[i][j] ]->draw();
+                                          glDisable(GL_STENCIL_TEST);              
                                     glPopMatrix();
                             }
                         }
                 }
                 //glEnable(GL_DEPTH_TEST);
-                glDisable(GL_STENCIL_TEST);
+
                 glEnable(GL_DEPTH_TEST);
                 glDisable(GL_BLEND);
                 glEnable(GL_LIGHTING);
-                //glEnable(GL_DEPTH);
+                
         //-------------------------------------------
 	glEndList();
 
