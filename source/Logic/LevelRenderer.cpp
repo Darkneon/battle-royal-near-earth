@@ -830,3 +830,13 @@ void LevelRenderer::toggleLights(int lights){
 	}
 
 }
+
+GLfloat LevelRenderer::getCenterOfMapX()
+{
+	return columns / 2.0f;
+}
+
+GLfloat LevelRenderer::getCenterOfMapZ()
+{
+	return rows / 2.0f;
+}

@@ -106,13 +106,13 @@ void NuclearExplosion::render()
 
 void NuclearExplosion::emitLight()
 {
-	GLfloat light[] = {lightValue, 3.0f, 0.0f, 1.0f};
+	GLfloat light[] = {lightValue, 0.0f, .0f, 1.0f};
 	
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light);
 	glLightf(GL_LIGHT0, GL_SHININESS, 128.0f);
-	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 255.0f);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 360.0f);
     glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 255.0f); 
 
 	glEnable(GL_LIGHT0);

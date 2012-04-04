@@ -2,12 +2,12 @@
 #include "Player/PlayerModel.h"
 #define GL_TEXTURE_CUBE_MAP 0x8513
 
-HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
+HumanPlayer::HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
 					: Player(spawnX,spawnZ){
     
 	availableCams[CAMERA_COMMANDER] = new CommanderCamera();
 	availableCams[CAMERA_FREELOOK] = new FreeLookCamera();
-	availableCams[CAMERA_CIRCULAR] = new CirclingCamera();
+	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(centerOfMapX, CenterOfMapZ);
 	availableCams[CAMERA_ROBOT] = new RobotCamera();
     availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f);
     availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f);

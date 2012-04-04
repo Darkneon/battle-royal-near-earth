@@ -22,13 +22,13 @@
     #define FREEGLUT_STATIC
     #include <GL/glut.h>
 #endif
-	
+
+const int KILL_LIMIT = 3;
 
 class Game
 {
 public:
-	Game(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane, 
-		bool *keyStates, bool *funcKeyStates, bool isTwoPlayer);
+	Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlayer);
 	~Game();
 	
 	HumanPlayer* p1;
@@ -51,7 +51,6 @@ public:
 	void render();
 	void update(bool* gameOver);
 	void getInput(int keyModifier); //gets user input
-	void setMap(string mapName);
 };
 
 

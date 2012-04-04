@@ -52,6 +52,7 @@ static bool isDebugMode = false;
 
 bool isGameOver = false;
 bool isTwoPlayerGame = false;
+bool didClownLaugh = false;
 
 int viewStates = 0; //states of the camera views
 
@@ -274,7 +275,26 @@ void renderGame(){
 
 	if(isGameOver)
 	{
-		gluLookAt(40, 30, 40, 15, 0, 15, 0, 1, 0);
+		if (!didClownLaugh)
+		{
+			SoundHelper::getInstance()->play("evillaugh.wav", 0, false);
+			didClownLaugh = true;
+		}
+
+		game->p1->changeCamera(CAMERA_CIRCULAR);
+		((CirclingCamera*)game->p1->getCurrentCamera())->changeAngleDMCam();
+
+		static double currentTime = clock();
+		static double lastUpdatedYawInc = clock();
+
+		currentTime = clock();
+
+		if ((currentTime - lastUpdatedYawInc) >= 100.0)
+		{
+			((CirclingCamera*)game->p1->getCurrentCamera())->moveCameraStrafe(true);
+			lastUpdatedYawInc = clock();
+		}
+
 		glutPostRedisplay();
 	}
 			
@@ -422,7 +442,6 @@ void render()
 	}else{
 		if(startGame){
 			glutSetCursor(GLUT_CURSOR_NONE);
-			game->setMap(loadMap);
 			BoundingBox::showBoxes = false;
 			TextureManager::getInstance()->toggleTextures();
 			antTweakHelper.bindLevelRenderer(game->lr);
@@ -674,8 +693,9 @@ void onMouseFunc(int button, int state, int x, int y)
 		//check if clicked button1
 		if (button == 0 && state == 0 && x>buttonW1 && x<buttonW2 && y>button1H1 && y<button1H2){
 			if(mapChoice){
-				game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates, false);
 				loadMap = "map1.txt";
+				game = new Game(loadMap, keyStates, funcKeyStates, false);
+
 				beginMenu = false;
 				startGame = true;
 			}else{
@@ -685,11 +705,12 @@ void onMouseFunc(int button, int state, int x, int y)
 		//check if clicked button2
 		else if (button == 0 && state == 0 && x>buttonW1 && x<buttonW2 && y>button2H1 && y<button2H2){
 		    if(mapChoice){
-				game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates, false);
 				loadMap = "map2.txt";
+				game = new Game(loadMap, keyStates, funcKeyStates, false);
+				
 			}else{
-				game = new Game(width, height, nearPlane, farPlane, keyStates, funcKeyStates, true);
 				loadMap = "dm-vinelynth.txt";
+				game = new Game(loadMap, keyStates, funcKeyStates, true);
                 SoundHelper::getInstance()->play("deathmatch.wav", 0, true);
 				toggleTwoPlayerSplitscreen();
 			}

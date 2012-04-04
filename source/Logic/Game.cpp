@@ -1,18 +1,20 @@
 #include "Game.h"
 
-Game::Game(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble viewFarPlane,
-	bool *keyStates, bool *funcKeyStates, bool isTwoPlayer)
+Game::Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlayer)
 {
 
+	lr = new LevelRenderer(mapName);
 	if (isTwoPlayer)
-		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, false);
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, false);
 	else
-		p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, true);
 
-	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 28.0f, 10.0f, false);
+	p2 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 28.0f, 10.0f, false);
+
 	p2->robots.at(0)->computerControlled = true;
 
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
+	playerInput1->attachLevelRenderer(lr);
 	playerInput2 = new JoystickInput(p2);
 
 	player1Score = 0;
@@ -26,6 +28,8 @@ Game::Game(GLint viewWidth, GLint viewHeight, GLdouble viewNearPlane, GLdouble v
 
 	ct = new CollisionTester(p1->robots.at(0)->getRobotId(), 
 		p2->robots.at(0)->getRobotId());
+
+
 }
 
 Game::~Game()
@@ -49,7 +53,7 @@ void Game::update(bool* gameOver)
 	if (twoPlayerIsOn)
 	{
 
-		if(player1Score >= 10 || player2Score >= 10)
+		if(player1Score >= KILL_LIMIT || player2Score >= KILL_LIMIT)
 		{
 			if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
 				aNukeWentOff = true;
@@ -99,14 +103,9 @@ void Game::render()
         }
 
 	if (twoPlayerIsOn){
-		if(player1Score >= 10 || player2Score >= 10){
+		if(player1Score >= KILL_LIMIT || player2Score >= KILL_LIMIT){
 			nukePowerUp->draw();
 		}
 	}
 	glPopMatrix();
-}
-
-void Game::setMap(string mapName){
-	lr = new LevelRenderer(mapName);
-	playerInput1->attachLevelRenderer(lr);
 }
