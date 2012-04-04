@@ -5,11 +5,11 @@ Game::Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlaye
 
 	lr = new LevelRenderer(mapName);
 	if (isTwoPlayer)
-		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, false, lr->rows, lr->columns);
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, false, (GLfloat)lr->rows, (GLfloat)lr->columns);
 	else
-		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, true, lr->rows, lr->columns);
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, true, (GLfloat)lr->rows, (GLfloat)lr->columns);
 
-	p2 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 28.0f, 10.0f, false, lr->rows, lr->columns);
+	p2 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 28.0f, 10.0f, false, (GLfloat)lr->rows, (GLfloat)lr->columns);
 
 	p2->robots.at(0)->computerControlled = true;
 
@@ -88,8 +88,8 @@ void Game::render()
     glPushMatrix();
         lr->render();
         //Sets rows and columns for use with rendering shadows
-        rows = lr->rows;
-        columns = lr->columns;
+        rows = (GLfloat)lr->rows;
+        columns = (GLfloat)lr->columns;
         p1->rows = rows;
         p1->columns = columns;
         p2->rows = rows;

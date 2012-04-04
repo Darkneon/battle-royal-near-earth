@@ -1132,8 +1132,8 @@ void Robot::shootBullet(){
 			bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
 			//spawn point needs to accomodate rotation
-			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
 		default:
 			break;
 		}
