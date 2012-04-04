@@ -89,7 +89,7 @@ void RobotCamera::attachToRobot(Robot* r){
 
 void RobotCamera::synchEyePosition(){
 	locX = robot->getEyeX();
-	locY = robot->getEyeY();
+	locY = robot->getEyeY()-0.25f;
 	locZ = robot->getEyeZ();
 }
 

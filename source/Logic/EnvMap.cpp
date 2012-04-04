@@ -67,7 +67,7 @@ void EnvMap::RegenerateEnvMap(LevelRenderer *level, GLfloat cameraX, GLfloat cam
 }
 
 void EnvMap::tex() {
-	glMatrixMode(GL_PROJECTION);
+		glMatrixMode(GL_PROJECTION);
         glPushMatrix();
         glLoadIdentity();
         glMatrixMode(GL_MODELVIEW);
