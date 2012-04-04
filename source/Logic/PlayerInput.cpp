@@ -134,7 +134,6 @@ void PlayerInput::keyOperations(int keyModifier)
 	{
 		player->toggleComponentOff(0);
 	}
-
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)

@@ -27,6 +27,7 @@ public:
 private:
 	void calculate45DegreesForLocY(); //45 degrees for cams (useful for more than one class
         LightPost* light;
+public:
         GLfloat posX; 
         GLfloat posY;
         GLfloat posZ;

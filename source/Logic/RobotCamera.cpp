@@ -96,7 +96,7 @@ void RobotCamera::synchEyePosition(){
 void RobotCamera::synchLookAtPosition(){
 	GLfloat* i = robot->getLookAt();
 	lookAt[0] = i[0];
-	lookAt[1] = i[1];
+	lookAt[1] = i[1] - 0.25f;
 	lookAt[2] = i[2];
 	delete [] i;
 }
