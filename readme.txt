@@ -56,6 +56,19 @@ i --------------- cycle components
 j --------------- turn component off
 u --------------- turn component on
 
+
+DeathMatch Controls:
+player 1:
+mouse move ------------look around
+mouse left button ---- shoot / respawn
+wasd ----------------- move around
+
+player 2 (joystick):
+arrows --------------- to move forwards/backwards and strafe
+bumpers -------------- to turn left or right
+a -------------------- to shoot /respawn
+
+
 AntTweakBar is used (http://www.antisphere.com/Wiki/tools:anttweakbar) for the debugging window. The output in the makefile has been modified to accomodate our project structure 
 Dirent API for windows http://www.softagalleria.net/dirent.php
 
