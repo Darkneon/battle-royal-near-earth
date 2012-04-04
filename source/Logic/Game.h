@@ -10,7 +10,7 @@
 #include "HumanPlayer.h"
 #include "AIPlayer.h"
 #include <string>
-#include "../Model/Buildings/FlagModel.h"
+//#include "../Model/Buildings/FlagModel.h"
 #include "MissileModel.h"
 
 #ifdef __APPLE__
@@ -32,7 +32,7 @@ public:
 	int player1Score;
 	int player2Score;
 	//bool noDisplayList;
-        FlagModel* flag;
+        //FlagModel* flag;
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;

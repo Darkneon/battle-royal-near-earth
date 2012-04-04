@@ -10,7 +10,7 @@
 
 #include "Model.h"
 #include "Static/TeamNumberModel.h"
-#include "FlagModel.h"
+//#include "FlagModel.h"
 
 class BaseModel : Model {
 public:
@@ -22,7 +22,7 @@ private:
 	void renderGrass();
         TeamNumberModel *teamNumber;
         TeamNumberModel *teamNumber2;//Addison
-        FlagModel *flag;
+        //FlagModel *flag;
 };
 
 #endif

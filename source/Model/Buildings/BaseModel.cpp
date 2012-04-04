@@ -23,7 +23,7 @@ BaseModel::BaseModel()
 {
    teamNumber = new TeamNumberModel();
    material = (Material*)(new MetalMaterial());
-   flag = new FlagModel();
+   //flag = new FlagModel();
    
    //box->resize(5.0f,1.25f,4.0f);
 }

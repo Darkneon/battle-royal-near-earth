@@ -20,7 +20,7 @@
 #include "Buildings/BaseModel.h"
 #include "../Model/Robot/BulletModel.h"
 #include <fstream>
-#include "../Model/Buildings/FlagModel.h"
+//#include "../Model/Buildings/FlagModel.h"
 
 #include "Static/Wall.h"
 
