@@ -10,6 +10,8 @@
 #include "Robot/HeadlightModel.h"
 #include "../Model/Static/LightRubbleModel.h"
 #include "../Model/Buildings/FlagModel.h"
+#include "../Helper/SoundHelper.h"
+
 
 bool Robot::isARobotLightOn = false;
 int Robot::robotIdCount = 0;
@@ -945,6 +947,7 @@ void Robot::spinDirectionVector(){
 }
 
 void Robot::shootBullet(){
+	SoundHelper::getInstance()->play("shoot.wav", 1, false);
 	if(robotLife>0){
 		spinDirectionVector();
 		//check which component is highest
