@@ -13,7 +13,7 @@
 #include "../Model/Helper/BoundingBox.h"
 #include "../Model/Helper/CollisionTester.h"
 #include "../Helper/V3struct.h"
-#include <gl\GL.h>
+//#include <gl/GL.h>
 
 #define MAX_PLAYER_HEIGHT 3
 #define MIN_PLAYER_HEIGHT 0
