@@ -7,13 +7,13 @@
 
 #include "LightCamera.h"
 
-LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ, GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane) 
+LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ) 
 {
-    Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+    
     fovy = DEFAULT_FOVY;
-    offset = 0.9f;
+    //offset = 0.9f;
     this->posX = posX;
-    this->posY = posY*offset;
+    this->posY = posY;
     this->posZ = posZ;
     this->lookX = lookX;
     this->lookY = lookY;
@@ -22,9 +22,5 @@ LightCamera::LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX
 
 void LightCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
         gluLookAt(posX, posY, posZ, posX+lookX, posY+lookY, posZ+lookZ,  0, 1, 0);
-
 }

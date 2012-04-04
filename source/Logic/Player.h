@@ -31,6 +31,7 @@ public:
 	Base* base;
         GLfloat rows;
         GLfloat columns;
+	void respawn();
 
 protected:
 	GLfloat spawnPtX;

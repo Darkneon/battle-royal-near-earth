@@ -1,9 +1,9 @@
 #include "RobotCamera.h"
 
 
-RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+RobotCamera::RobotCamera()
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
+	
 	hasRobot = false;
 	//camera location
 
@@ -19,12 +19,21 @@ RobotCamera::RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlan
 }
 
 void RobotCamera::view(){
-	if(hasRobot){
-		glMatrixMode(GL_PROJECTION); //why?
-		glLoadIdentity();
-		gluPerspective(fovy,viewWidth/viewHeight, viewNearPlane, viewFarPlane);
+	if(hasRobot) {
 		gluLookAt(locX, locY, locZ,lookAt[0], lookAt[1], lookAt[2],0,1,0);
+		//updateFog();
 	}
+}
+
+void RobotCamera::updateFog()
+{
+        GLfloat flowLight[] = {0.5, 0.5, 0.5, 1};
+        glEnable(GL_FOG);
+        glFogfv(GL_FOG_COLOR, flowLight);
+        glFogf(GL_FOG_START, locZ);
+        glFogf(GL_FOG_END, locZ + 10);
+        glFogf(GL_FOG_DENSITY, 0.4f);
+        glFogi(GL_FOG_MODE, GL_LINEAR);
 }
 
 //----------------------------------------------------------------
@@ -80,14 +89,14 @@ void RobotCamera::attachToRobot(Robot* r){
 
 void RobotCamera::synchEyePosition(){
 	locX = robot->getEyeX();
-	locY = robot->getEyeY();
+	locY = robot->getEyeY()-0.25f;
 	locZ = robot->getEyeZ();
 }
 
 void RobotCamera::synchLookAtPosition(){
 	GLfloat* i = robot->getLookAt();
 	lookAt[0] = i[0];
-	lookAt[1] = i[1];
+	lookAt[1] = i[1] - 0.25f;
 	lookAt[2] = i[2];
 	delete [] i;
 }

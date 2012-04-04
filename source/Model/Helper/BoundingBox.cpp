@@ -18,6 +18,7 @@ BoundingBox::BoundingBox(void)
 	movingBoxId = 0;
 	//robot = NULL;
 	hasRobot = false;
+	hasNukePowerUp = false;
 }
 
 BoundingBox::BoundingBox(V3 min, V3 max){
@@ -29,6 +30,7 @@ BoundingBox::BoundingBox(V3 min, V3 max){
 	movingBoxId = 0;
 	//robot = NULL;
 	hasRobot = false;
+	hasNukePowerUp = false;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ){
@@ -44,6 +46,7 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	movingBoxId = 0;
 //	robot = NULL;
 	hasRobot = false;
+	hasNukePowerUp = false;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving){
@@ -65,6 +68,7 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	}
 	//robot = NULL;
 	hasRobot = false;
+	hasNukePowerUp = false;
 }
 
 BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX, GLfloat maxY, GLfloat maxZ, bool moving, Robot* r){
@@ -86,6 +90,7 @@ BoundingBox::BoundingBox(GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat maxX,
 	}
 	robot = r;
 	hasRobot = true;
+	hasNukePowerUp = false;
 }
 
 BoundingBox::~BoundingBox(void){

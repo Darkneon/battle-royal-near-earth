@@ -37,6 +37,8 @@
         <itemPath>source/Logic/CirclingCamera.h</itemPath>
         <itemPath>source/Logic/CommanderCamera.cpp</itemPath>
         <itemPath>source/Logic/CommanderCamera.h</itemPath>
+        <itemPath>source/Logic/EnvMap.cpp</itemPath>
+        <itemPath>source/Logic/EnvMap.h</itemPath>
         <itemPath>source/Logic/Factory.cpp</itemPath>
         <itemPath>source/Logic/Factory.h</itemPath>
         <itemPath>source/Logic/FollowCamera.cpp</itemPath>
@@ -72,6 +74,8 @@
           <itemPath>source/Model/Buildings/BaseModel.h</itemPath>
           <itemPath>source/Model/Buildings/FactoryModel.cpp</itemPath>
           <itemPath>source/Model/Buildings/FactoryModel.h</itemPath>
+          <itemPath>source/Model/Buildings/FlagModel.cpp</itemPath>
+          <itemPath>source/Model/Buildings/FlagModel.h</itemPath>
         </logicalFolder>
         <logicalFolder name="Helper" displayName="Helper" projectFiles="true">
           <itemPath>source/Model/Helper/BoundingBox.cpp</itemPath>
@@ -148,6 +152,10 @@
           <itemPath>source/Model/Static/LightRubbleModel.h</itemPath>
           <itemPath>source/Model/Static/MountainModel.cpp</itemPath>
           <itemPath>source/Model/Static/MountainModel.h</itemPath>
+          <itemPath>source/Model/NuclearExplosion.cpp</itemPath>
+          <itemPath>source/Model/NuclearExplosion.h</itemPath>
+          <itemPath>source/Model/NukePowerUp.cpp</itemPath>
+          <itemPath>source/Model/NukePowerUp.h</itemPath>
           <itemPath>source/Model/Static/PitModel.cpp</itemPath>
           <itemPath>source/Model/Static/PitModel.h</itemPath>
           <itemPath>source/Model/Static/PlainBlockModel.cpp</itemPath>

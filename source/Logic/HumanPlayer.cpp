@@ -1,65 +1,32 @@
 #include "HumanPlayer.h"
 #include "Player/PlayerModel.h"
+#define GL_TEXTURE_CUBE_MAP 0x8513
 
-
-HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane){
-	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_ROBOT] = new RobotCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_FOLLOW] = new FollowCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    
-    currentCamera = CAMERA_COMMANDER;
-	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
-	aRobotIsSelected = false;
-	robotUfoLock = false;
-}
-
-HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ)
+HumanPlayer::HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUFO, GLfloat rows, GLfloat columns)
 					: Player(spawnX,spawnZ){
     
-	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_ROBOT] = new RobotCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FOLLOW] = new FollowCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-
-    currentCamera = CAMERA_COMMANDER;
-	ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
-	aRobotIsSelected = false;
-	robotUfoLock = false;
-}
-
-HumanPlayer::HumanPlayer(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, GLfloat spawnX, GLfloat spawnZ, bool hasUFO)
-					: Player(spawnX,spawnZ){
-    
-	availableCams[CAMERA_COMMANDER] = new CommanderCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FREELOOK] = new FreeLookCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_ROBOT] = new RobotCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT1] = new LightCamera(0.0f, 6.0f, 0.0f, 2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT2] = new LightCamera(50.0f, 6.0f, 0.0f, -2.5f, -2.5f, 2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT3] = new LightCamera(50.0f, 6.0f, 50.0f, -2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-    availableCams[CAMERA_LIGHT4] = new LightCamera(0.0f, 6.0f, 50.0f, 2.5f, -2.5f, -2.5f ,viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-	availableCams[CAMERA_FOLLOW] = new FollowCamera(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
-
-    currentCamera = CAMERA_COMMANDER;
+	availableCams[CAMERA_COMMANDER] = new CommanderCamera();
+	availableCams[CAMERA_FREELOOK] = new FreeLookCamera();
+	availableCams[CAMERA_CIRCULAR] = new CirclingCamera(centerOfMapX, CenterOfMapZ);
+	availableCams[CAMERA_ROBOT] = new RobotCamera();
+        availableCams[CAMERA_LIGHT1] = new LightCamera(1.0f, 6.0f, 1.0f, 2.5f, -2.5f, 2.5f);
+        availableCams[CAMERA_LIGHT2] = new LightCamera(columns-1, 6.0f, 1.0f, -2.5f, -2.5f, 2.5f);
+        availableCams[CAMERA_LIGHT3] = new LightCamera(columns-1, 6.0f, rows-1, -2.5f, -2.5f, -2.5f);
+        availableCams[CAMERA_LIGHT4] = new LightCamera(1.0f, 6.0f, rows-1, 2.5f, -2.5f, -2.5f);
+	availableCams[CAMERA_FOLLOW] = new FollowCamera();
+        currentCamera = CAMERA_FOLLOW;
 	if(hasUFO){
-		ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
+		//ufo = new PlayerUFO(spawnPtX,spawnPtZ+5.0f);
+		ufo = new PlayerUFO(spawnPtX,spawnPtZ);
 	}
 	else{
 		ufo = NULL;
 	}
 	aRobotIsSelected = false;
 	robotUfoLock = false;
+	currentComponent = 0;
+    
+    hasEnvMap = false;
 }
 
 HumanPlayer::~HumanPlayer() {    
@@ -80,15 +47,46 @@ HumanPlayer::~HumanPlayer() {
 
 void HumanPlayer::render(){
 	if(ufo != NULL){
+        if (hasEnvMap) {
+			GLfloat mv[16], invMV[16];
+            glEnable(GL_TEXTURE_CUBE_MAP);
+			glEnable(GL_TEXTURE_GEN_S);
+			glEnable(GL_TEXTURE_GEN_T);
+			glEnable(GL_TEXTURE_GEN_R);
+
+			glGetFloatv(GL_MODELVIEW_MATRIX, mv);
+			invMV[0]  = mv[0]; invMV[1]  = mv[4]; invMV[2]  = mv[8];  invMV[3]  = 0;
+            invMV[4]  = mv[1]; invMV[5]  = mv[5]; invMV[6]  = mv[9];  invMV[7]  = 0;
+            invMV[8]  = mv[2]; invMV[9]  = mv[6]; invMV[10] = mv[10]; invMV[11] = 0;
+            invMV[12] = 0;    invMV[13] = 0;     invMV[14] = 0;      invMV[15] = 1;
+
+			glMatrixMode(GL_TEXTURE);
+			glPushMatrix();
+			glLoadMatrixf(invMV);
+            glMatrixMode(GL_MODELVIEW);
+        }
+        
 		ufo->draw();
-	}
+	
+        if (hasEnvMap) {
+            glDisable(GL_TEXTURE_CUBE_MAP);
+            glDisable(GL_TEXTURE_GEN_S);
+            glDisable(GL_TEXTURE_GEN_T);
+            glDisable(GL_TEXTURE_GEN_R);
+            glMatrixMode(GL_MODELVIEW);
+			glPopMatrix();
+        }
+    }
 
         //robots.at(0)->applyShadow(rows, columns);
 	//keep drawing until all the children are done
-    for(int j = 0; j < (int)robots.size(); j++){
+	glPushMatrix();
+	for(int j = 0; j < (int)robots.size(); j++){
 		robots.at(j)->draw();
                 robots.at(j)->applyShadow(rows, columns);
 	}
+	//glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
 }
 
 void HumanPlayer::controlRobotAt(int index)
@@ -160,7 +158,7 @@ void HumanPlayer::setUFOPosition(V3 v){
 
 void HumanPlayer::lockRobotAndUfo(){
 	V3 ufoPos = ufo->getPosition();
-	if(!robotUfoLock && ufo->ufoCollisionTest(ufoPos.x,ufoPos.y-0.05f,ufoPos.z) > 0){
+	if(!robotUfoLock && ufo->ufoCollisionTest(ufoPos.x,ufoPos.y-0.1f,ufoPos.z) > 0){
 		controlRobotAt(0);
 		//searched for robot being collided with and finds index in vector
 		for(int i = 0; i < (int)robots.size(); i++){
@@ -172,7 +170,8 @@ void HumanPlayer::lockRobotAndUfo(){
 		robotUfoLock = true;
 	}
 	else{
-		changeCamera(CAMERA_COMMANDER);
+		changeCamera(CAMERA_FOLLOW);
+		robots.at(0)->isRobotBeingControlled = false;
 		robotUfoLock = false;
 	}
 }
@@ -198,4 +197,16 @@ void HumanPlayer::ufoSetDestination(int vectorIndex){
 		V3 ufoPosition = ufo->getPosition();
 		robots.at(vectorIndex)->setDestination(ufoPosition.x,ufoPosition.z);
 	}
+}
+
+void HumanPlayer::cycleThroughComponents(int vectorIndex){
+	robots.at(vectorIndex)->cycleIndex();
+}
+
+void HumanPlayer::toggleComponentOn(int vectorIndex){
+	robots.at(vectorIndex)->turnSelectedOn();
+}
+
+void HumanPlayer::toggleComponentOff(int vectorIndex){
+	robots.at(vectorIndex)->turnSelectedOff();
 }

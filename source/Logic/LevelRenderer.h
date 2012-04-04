@@ -34,6 +34,9 @@ public:
 	void toggleLights(int light);
 	int rows;
 	int columns;
+	GLfloat getCenterOfMapX();
+	GLfloat getCenterOfMapZ();
+
 private:	
     static const int NUM_MODELS = 15;
     Model* models[NUM_MODELS];
@@ -60,8 +63,8 @@ private:
 	bool spotLight4;
 	bool allLightToggle;
 	bool showTeamNumbers;
-        GLfloat groundplane[4];
-        GLfloat shadowMat[16];
+    GLfloat groundplane[4];
+    GLfloat shadowMat[16];
 	string loadmap;
 };
 #endif

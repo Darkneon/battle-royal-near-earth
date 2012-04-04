@@ -20,9 +20,8 @@ NuclearExplosion::NuclearExplosion()
 	topStoppedGrowing = false;
 	lightValue = 1.0f;
 	lightIsEmitting = false;
+	currentTime = clock();
 }
-
-static double currentTime = clock();
 
 void NuclearExplosion::render()
 {
@@ -73,13 +72,14 @@ void NuclearExplosion::render()
 			botSize += 0.25f;
 			flyTime = clock();
 		}
+		
 	}
 
 
 	glPushMatrix();
 		glTranslatef(0.0f, cylinderHeight, 0.0f);
 		glScalef(mushroomHeadSize, mushroomHeadSize, mushroomHeadSize);
-		drawHalfACylinder(quadric, topRadius);
+		drawHalfASphere(quadric, topRadius);
 	glPopMatrix();
 
 	
@@ -92,7 +92,7 @@ void NuclearExplosion::render()
 
 		glPushMatrix();
 			glScalef(botSize, botSize, botSize);
-			drawHalfACylinder(quadric, topRadius / 2);
+			drawHalfASphere(quadric, topRadius / 2);
 		glPopMatrix();
 	}
 
@@ -106,19 +106,19 @@ void NuclearExplosion::render()
 
 void NuclearExplosion::emitLight()
 {
-	GLfloat light[] = {lightValue, 3.0f, 0.0f, 1.0f};
+	GLfloat light[] = {lightValue, 0.0f, .0f, 1.0f};
 	
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light);
 	glLightf(GL_LIGHT0, GL_SHININESS, 128.0f);
-	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 255.0f);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 360.0f);
     glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 255.0f); 
 
 	glEnable(GL_LIGHT0);
 }
 
-void NuclearExplosion::drawHalfACylinder(GLUquadricObj* quadric, GLint radius)
+void NuclearExplosion::drawHalfASphere(GLUquadricObj* quadric, GLint radius)
 {
 	GLdouble coordinate[4] = {0,1,0,.15};
 	glClipPlane(GL_CLIP_PLANE0, coordinate);

@@ -3,15 +3,18 @@
 #ifndef GAME_H
 #define GAME_H
 
+
+#include "../Model/Helper/CollisionTester.h"
+#include "NukePowerUp.h"
 #include "LevelRenderer.h"
 #include "Player.h"
+#include "NuclearExplosion.h"
 #include "PlayerInput.h"
 #include "JoystickInput.h"
 #include "HumanPlayer.h"
-#include "AIPlayer.h"
 #include <string>
-//#include "../Model/Buildings/FlagModel.h"
-#include "MissileModel.h"
+
+
 
 #ifdef __APPLE__
     #include <Glut/glut.h>
@@ -20,11 +23,12 @@
     #include <GL/glut.h>
 #endif
 
+const int KILL_LIMIT = 3;
+
 class Game
 {
 public:
-	Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane, 
-		bool *keyStates, bool *funcKeyStates);
+	Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlayer);
 	~Game();
 	
 	HumanPlayer* p1;
@@ -32,16 +36,26 @@ public:
 	int player1Score;
 	int player2Score;
 	//bool noDisplayList;
-        //FlagModel* flag;
+
+	bool twoPlayerIsOn;
+	bool aNukeWentOff;
+
 	PlayerInput* playerInput1;
 	JoystickInput* playerInput2;
 	LevelRenderer* lr;
-	MissileModel mm;
+	//MissileModel mm;
         GLfloat rows;
         GLfloat columns;
+	NuclearExplosion* nuke;
+	NukePowerUp* nukePowerUp;
+
+	CollisionTester* ct;
+
 	void render();
+	void update(bool* gameOver);
 	void getInput(int keyModifier); //gets user input
-	void setMap(string mapName);
 };
+
+
 
 #endif

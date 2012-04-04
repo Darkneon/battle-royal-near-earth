@@ -11,7 +11,7 @@
 #include "Model.h"
 #include "Static/TeamNumberModel.h"
 
-class NuclearModel : Model {
+class NuclearModel : public Model {
 public:
     NuclearModel();
 	//GLfloat height;

@@ -1,4 +1,5 @@
 #include "PlayerInput.h"
+#include "SoundHelper.h"
 
 
 PlayerInput::PlayerInput(HumanPlayer* player, bool *keyStates, bool *funcKeyStates)
@@ -77,7 +78,7 @@ void PlayerInput::keyOperations(int keyModifier)
 			//assume a robot is there for now
 			player->robotStrafe(true,0);
 		}
-		else
+		else if (player->getUFO() != NULL)
 			player->moveUFOX(true);
 	}
 	else if(keyStates[97])//a
@@ -87,7 +88,7 @@ void PlayerInput::keyOperations(int keyModifier)
 			//assume a robot is there for now
 			player->robotStrafe(false,0);
 		}
-		else
+		else if (player->getUFO() != NULL)
 			player->moveUFOX(false);
 	}
 
@@ -98,7 +99,7 @@ void PlayerInput::keyOperations(int keyModifier)
 			//assume a robot is there for now
 			player->robotForward(false,0);
 		}
-		else
+		else if (player->getUFO() != NULL)
 			player->moveUFOZ(true);
 	}
 	else if(keyStates[119]){//w
@@ -108,18 +109,31 @@ void PlayerInput::keyOperations(int keyModifier)
 			//assume a robot is there for now
 			player->robotForward(true,0);
 		}
-		else
+		else if (player->getUFO() != NULL)
 			player->moveUFOZ(false);
 	}
 	else if (keyStates[114]) //r
 	{
-		player->ufoSetDestination(0);
+		if (player->getUFO() != NULL)
+			player->ufoSetDestination(0);
 	}
 	else if (keyStates[102]) //f
 	{
-		player->lockRobotAndUfo();
+		if (player->getUFO() != NULL)
+			player->lockRobotAndUfo();
 	}
-
+	else if (keyStates[105]) //i
+	{
+		player->cycleThroughComponents(0);
+	}
+	else if (keyStates[117]) //u
+	{
+		player->toggleComponentOn(0);
+	}
+	else if (keyStates[106]) //j
+	{
+		player->toggleComponentOff(0);
+	}
 }
 
 void PlayerInput::functionKeyOperations(int keyModifier)
@@ -138,7 +152,8 @@ void PlayerInput::functionKeyOperations(int keyModifier)
 	}
 	else if (funcKeyStates[GLUT_KEY_F5])
 	{
-		player->changeCamera(CAMERA_FOLLOW);	
+		player->changeCamera(CAMERA_FOLLOW);
+		player->robots.at(0)->isRobotBeingControlled = false;
 	}
 	else if (funcKeyStates[GLUT_KEY_F10])
 	{
@@ -196,9 +211,15 @@ void PlayerInput::mouseButtons(int button, int state)
 {
 	//0 is left button, 2 is right button, 1 is middle mouse
 	//0 is pressed, 1 is released for STATES
-
-	if (button == 0 && state == 0 && player->getCurrentCameraType() == CAMERA_ROBOT)
-		player->robots.at(0)->shootBullet();
+	if (button == 0 && state == 0) {
+		if (player->robots.at(0)->isAlive)
+		{
+			player->robots.at(0)->shootBullet();
+			
+		}
+		else
+			player->respawn();
+    }
 }
 
 void PlayerInput::attachLevelRenderer(LevelRenderer* lr){

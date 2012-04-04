@@ -104,13 +104,13 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClCompile Include="Helper\DirectoryManipHelper.cpp" />
     <ClCompile Include="Helper\SoundHelper.cpp" />
     <ClCompile Include="Helper\Wav.cpp" />
-    <ClCompile Include="Logic\AIPlayer.cpp" />
     <ClCompile Include="Logic\Base.cpp" />
     <ClCompile Include="Logic\Bullet.cpp" />
     <ClCompile Include="Logic\BulletManager.cpp" />
     <ClCompile Include="Logic\Camera.cpp" />
     <ClCompile Include="Logic\CirclingCamera.cpp" />
     <ClCompile Include="Logic\CommanderCamera.cpp" />
+    <ClCompile Include="Logic\EnvMap.cpp" />
     <ClCompile Include="Logic\Factory.cpp" />
     <ClCompile Include="Logic\FollowCamera.cpp" />
     <ClCompile Include="Logic\FreeLookCamera.cpp" />
@@ -128,6 +128,7 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Buildings\BaseModel.cpp" />
     <ClCompile Include="Model\Buildings\FactoryModel.cpp" />
+    <ClCompile Include="Model\Buildings\FlagModel.cpp" />
     <ClCompile Include="Model\Helper\BoundingBox.cpp" />
     <ClCompile Include="Model\Helper\CollisionTester.cpp" />
     <ClCompile Include="Model\Helper\GeoHelper.cpp" />
@@ -140,6 +141,7 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClCompile Include="Model\MissileModel.cpp" />
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Model\NuclearExplosion.cpp" />
+    <ClCompile Include="Model\NukePowerUp.cpp" />
     <ClCompile Include="Model\Player\AntennaModel.cpp" />
     <ClCompile Include="Model\Player\PlayerModel.cpp" />
     <ClCompile Include="Model\Robot\AntiGravModel.cpp" />
@@ -179,13 +181,13 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClInclude Include="Helper\SoundHelper.h" />
     <ClInclude Include="Helper\V3struct.h" />
     <ClInclude Include="Helper\Wav.h" />
-    <ClInclude Include="Logic\AIPlayer.h" />
     <ClInclude Include="Logic\Base.h" />
     <ClInclude Include="Logic\Bullet.h" />
     <ClInclude Include="Logic\BulletManager.h" />
     <ClInclude Include="Logic\Camera.h" />
     <ClInclude Include="Logic\CirclingCamera.h" />
     <ClInclude Include="Logic\CommanderCamera.h" />
+    <ClInclude Include="Logic\EnvMap.h" />
     <ClInclude Include="Logic\Factory.h" />
     <ClInclude Include="Logic\FollowCamera.h" />
     <ClInclude Include="Logic\FreeLookCamera.h" />
@@ -202,6 +204,7 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClInclude Include="Logic\SpotLight.h" />
     <ClInclude Include="Model\Buildings\BaseModel.h" />
     <ClInclude Include="Model\Buildings\FactoryModel.h" />
+    <ClInclude Include="Model\Buildings\FlagModel.h" />
     <ClInclude Include="Model\Helper\BoundingBox.h" />
     <ClInclude Include="Model\Helper\CollisionTester.h" />
     <ClInclude Include="Model\Helper\GeoHelper.h" />
@@ -214,6 +217,7 @@ copy ..\library\OpenAL32.dll ..\Debug /Y</Command>
     <ClInclude Include="Model\MissileModel.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Model\NuclearExplosion.h" />
+    <ClInclude Include="Model\NukePowerUp.h" />
     <ClInclude Include="Model\Player\AntennaModel.h" />
     <ClInclude Include="Model\Player\PlayerModel.h" />
     <ClInclude Include="Model\Robot\AntiGravModel.h" />

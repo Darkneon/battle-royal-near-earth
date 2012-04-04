@@ -15,9 +15,11 @@
 Wav::Wav(string filename) {
     this->filename = filename;
     data = NULL;
+    dataSize = 0;
 }
 
 Wav::~Wav() {
+    cout << "ENNNNNNNNDDDDDD";
     if (data != NULL) {
         delete[] data;
     }
@@ -40,7 +42,7 @@ int Wav::load() {
 	fp = fopen(filename.c_str(),"rb");
 
     if (!fp) {
-        returnError("Failed to open file", NULL);
+        return returnError("Failed to open file", NULL);
     }  
     
     //Variables to store info about the WAVE file (all of them is not needed for OpenAL)
@@ -127,7 +129,7 @@ Format Wav::getFormat() {
             result = BPS_16_MONO;
         }
         else if(channels == 2) {
-            result = BPS_16_MONO;
+            result = BPS_16_STEREO;
         }
     }
     

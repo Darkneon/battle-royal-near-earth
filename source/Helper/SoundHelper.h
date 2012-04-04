@@ -17,27 +17,36 @@
 #endif
 
 #include <string>
+#include <map>
 #include <iostream> //For NULL
 #include "Wav.h"
 
 using namespace std;
 
+typedef std::pair<string, ALuint*> bufferPair; 
+
 class SoundHelper {
 public:
-    SoundHelper();
+    SoundHelper(string path);
     ~SoundHelper();
     
-    void loadWav(string filename);
-    void play();
- 
+    static SoundHelper* getInstance();
+
+    
+    void play(string filename, bool isLoop);
+    void play(string filename, int sourceNumber, bool isLoop);
+
 private:
+    static ALuint* loadWav(string filename, int sourceNumber);
     
-    ALCcontext *context;
-    ALCdevice *device;
-    ALuint source;                                                           
-    ALuint buffer;
+    static SoundHelper *instance;
     
-    Wav *wavFile;
+    static ALCcontext *context;
+    static ALCdevice *device;
+    static ALuint source[3];                                                           
+    static map<string, ALuint*> buffers;
+    static string path;
+    static Wav *wavFile;
 };
 
 #endif	/* SOUNDHELPER_H */

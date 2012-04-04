@@ -1,17 +1,35 @@
 #include "Game.h"
 
-
-Game::Game(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane,
-	bool *keyStates, bool *funcKeyStates)
+Game::Game(string mapName, bool *keyStates, bool *funcKeyStates, bool isTwoPlayer)
 {
-	p1 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 4.0f, 6.0f, true);
-	p2 = new HumanPlayer(viewWidth, viewHeight, viewNearPlane, viewFarPlane, 28.0f, 10.0f, false);
+
+	lr = new LevelRenderer(mapName);
+	if (isTwoPlayer)
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, false, lr->rows, lr->columns);
+	else
+		p1 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 4.0f, 6.0f, true, lr->rows, lr->columns);
+
+	p2 = new HumanPlayer(lr->getCenterOfMapX(), lr->getCenterOfMapZ(), 28.0f, 10.0f, false, lr->rows, lr->columns);
+
+	p2->robots.at(0)->computerControlled = true;
 
 	playerInput1 = new PlayerInput(p1, keyStates, funcKeyStates);
+	playerInput1->attachLevelRenderer(lr);
 	playerInput2 = new JoystickInput(p2);
-        //flag = new FlagModel();
+
 	player1Score = 0;
 	player2Score = 0;
+
+	nukePowerUp = new NukePowerUp(4.0f, 28.0f);
+	nuke = new NuclearExplosion();
+
+	twoPlayerIsOn = false;
+	aNukeWentOff = false;
+
+	ct = new CollisionTester(p1->robots.at(0)->getRobotId(), 
+        p2->robots.at(0)->getRobotId());
+
+
 }
 
 Game::~Game()
@@ -29,6 +47,36 @@ Game::~Game()
 	}
 }
 
+void Game::update(bool* gameOver)
+{
+
+	if (twoPlayerIsOn)
+	{
+
+		if(player1Score >= KILL_LIMIT || player2Score >= KILL_LIMIT)
+		{
+			if (ct->nukePowerUpCollisionTest(4.0f,0.5f,28.0f,100)){
+				aNukeWentOff = true;
+				twoPlayerIsOn = false;
+				*gameOver = true;
+			}
+		}
+
+		if (p1->robots.at(0)->robotLife <= 0.0f && p1->robots.at(0)->isAlive)
+		{
+			player2Score++;
+			p1->robots.at(0)->isAlive = false;
+		}
+
+		if (p2->robots.at(0)->robotLife <= 0.0f && p2->robots.at(0)->isAlive)
+		{
+			player1Score++;
+			p2->robots.at(0)->isAlive = false;
+		}
+
+	}
+}
+
 void Game::getInput(int keyModifier)
 {
 	playerInput1->functionKeyOperations(keyModifier);
@@ -37,25 +85,33 @@ void Game::getInput(int keyModifier)
 
 void Game::render()
 {
-	//glDisable(GL_LIGHTING);
-	//glTranslatef(25, -5.0f, 25);
-	//nuke.render();
-
     glPushMatrix();
-        glTranslatef(6.0f, 2.0f, 6.0f);
-       // flag->render();
-    glPopMatrix();
-	lr->render();
+        lr->render();
+        //Sets rows and columns for use with rendering shadows
         rows = lr->rows;
         columns = lr->columns;
         p1->rows = rows;
         p1->columns = columns;
-        p1->render();
-	p2->render();
-	
-}
+        p2->rows = rows;
+        p2->columns = columns;
+        if (aNukeWentOff)
+        {
+            glPushMatrix();
+                glTranslatef(15.0f, 0.0f, 15.0f);
+                glScalef(3.0f, 1.5f, 3.0f);
+                nuke->render();
+            glPopMatrix();
+        }
+        else
+        {
+            p1->render();
+            p2->render();
+        }
 
-void Game::setMap(string mapName){
-	lr = new LevelRenderer(mapName);
-	playerInput1->attachLevelRenderer(lr);
+	if (twoPlayerIsOn){
+		if(player1Score >= KILL_LIMIT || player2Score >= KILL_LIMIT){
+			nukePowerUp->draw();
+		}
+	}
+	glPopMatrix();
 }

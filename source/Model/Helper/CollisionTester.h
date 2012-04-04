@@ -23,6 +23,7 @@ class CollisionTester
 {
 public:
 	CollisionTester(void);
+	CollisionTester(GLint r1Id, GLint r2Id);
 	virtual ~CollisionTester(void);
 	//list of all boxes (not just static)
 	static vector<BoundingBox *> staticBoxes;
@@ -32,6 +33,10 @@ public:
 	bool collisionTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
 	bool bulletCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
 	int ufoCollTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
+	bool nukePowerUpCollisionTest(GLfloat x, GLfloat y, GLfloat z, GLuint id);
+
+private:
+	GLint r1Id, r2Id;
 };
 
 #endif

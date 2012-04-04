@@ -1,8 +1,7 @@
 #include "CommanderCamera.h"
 
-CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+CommanderCamera::CommanderCamera()
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	//camera rotation
 	yaw = 0.0f;
 	pitch = 0.0f;
@@ -16,19 +15,18 @@ CommanderCamera::CommanderCamera(GLint viewWidth, GLint viewHeight, GLfloat view
 	heightDenom = DEFAULT_HEIGHT_DENOM;
 	fovy = DEFAULT_FOVY;
 	calculate45DegreesForLocY();
-        updateFog();
+       // updateFog();
 }
 
 void CommanderCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
 	
 	gluLookAt(locX + currentRadius * sin(yaw * 1.0f / 8), locY, locZ - currentRadius + currentRadius * cos(yaw * 1.0f / 8),
 		locX, 0, locZ - currentRadius, 0, 1, 0);
-        //glMatrixMode(GL_MODELVIEW);
-        updateFog();
+       // updateFog();
 }
 
 
@@ -44,23 +42,18 @@ void CommanderCamera::moveCameraForwards(bool negateTheValue)
 
 	locX -= (GLfloat)moveVector[0];
 	locZ -= (GLfloat)moveVector[1];
-        updateFog();
+       // updateFog();
 }
 
 void CommanderCamera::updateFog()
 {
-        /*GLfloat flowLight[] = {0.5, 0.5, 0.5, 1};
+        GLfloat flowLight[] = {0.5, 0.5, 0.5, 1};
         glEnable(GL_FOG);
-        glPushMatrix();
-        glRotatef(45, 0, 1, 0);
         glFogfv(GL_FOG_COLOR, flowLight);
-        glHint(GL_FOG_HINT, GL_NICEST);
         glFogf(GL_FOG_START, locZ);
         glFogf(GL_FOG_END, locZ+30);
         glFogf(GL_FOG_DENSITY, 0.2f);
         glFogi(GL_FOG_MODE, GL_LINEAR);
-        glPopMatrix();
-         */
 }
 void CommanderCamera::moveCameraStrafe(bool negateTheValue)
 {
@@ -74,7 +67,7 @@ void CommanderCamera::moveCameraStrafe(bool negateTheValue)
 
 	locX += (GLfloat)moveVector[1];
 	locZ -= (GLfloat)moveVector[0];
-        updateFog();
+        //updateFog();
 }
 
 void CommanderCamera::zoom(bool zoomIn)
@@ -122,5 +115,4 @@ void CommanderCamera::modifyYaw(bool negateTheValue, int x, int y)
 		yaw++;
 	else
 		yaw--;
-        updateFog();
 }

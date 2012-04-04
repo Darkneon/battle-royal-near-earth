@@ -19,12 +19,11 @@
 #include "../Helper/V3struct.h"
 
 
+
 class HumanPlayer : public Player
 {
 public:
-    HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF);
-	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ);
-	HumanPlayer(GLint viewW, GLint viewH, GLfloat viewN, GLfloat viewF, GLfloat spawnX, GLfloat spawnZ, bool hasUFO);
+	HumanPlayer(GLfloat centerOfMapX, GLfloat CenterOfMapZ, GLfloat spawnX, GLfloat spawnZ, bool hasUF, GLfloat rows, GLfloat columns);
     ~HumanPlayer();
     void render();
 
@@ -41,19 +40,24 @@ public:
 	void robotForward(bool negate, int vectorIndex);
 	void ufoSetDestination(int vectorIndex);
 	void lockRobotAndUfo();
-        
+	void cycleThroughComponents(int vectorIndex);
+	void toggleComponentOn(int vectorIndex);
+	void toggleComponentOff(int vectorIndex);
+    PlayerUFO* getUFO() { return ufo; };
+    void setEnvMap(bool value) { hasEnvMap = value; }
 private:
 	bool robotUfoLock;
 	int currentCamera;
+	int currentComponent;
 	Camera *availableCams[9];
 	PlayerUFO* ufo;
 
 	bool aRobotIsSelected;
-
+    bool hasEnvMap;
+    
 	void setUFOPosition(GLfloat setX, GLfloat setY, GLfloat setZ);
 	void setUFOPosition(V3 v);
 	void setRobotDestination(GLfloat x, GLfloat y, GLfloat z);
-	
 
 
 };

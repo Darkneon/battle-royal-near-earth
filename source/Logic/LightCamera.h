@@ -14,7 +14,7 @@
 class LightCamera : public Camera
 {
 public:
-	LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ, GLint, GLint, GLfloat, GLfloat);
+	LightCamera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GLfloat lookY, GLfloat lookZ);
 
 	//interface methods
 	void view();
@@ -27,6 +27,7 @@ public:
 private:
 	void calculate45DegreesForLocY(); //45 degrees for cams (useful for more than one class
         LightPost* light;
+public:
         GLfloat posX; 
         GLfloat posY;
         GLfloat posZ;

@@ -9,12 +9,16 @@
 #include "Robot/NuclearModel.h"
 #include "Robot/HeadlightModel.h"
 #include "../Model/Static/LightRubbleModel.h"
+#include "../Model/Buildings/FlagModel.h"
+#include "../Helper/SoundHelper.h"
+
 
 bool Robot::isARobotLightOn = false;
 int Robot::robotIdCount = 0;
 
 Robot::Robot() {
 	rubble = (Model*)(new LightRubbleModel());
+	flag = (Model*)(new FlagModel());
     nuclearM = (Model*)(new NuclearModel()); 
     electronicsM = (Model*)(new ElectronicsModel()); 
     phaserM = (Model*)(new PhaserModel);
@@ -66,11 +70,20 @@ Robot::Robot() {
 	refreshRobot();
 
 	isRobotBeingControlled = false;
-        
+	currentTime = clock();
+	lastExplosion = clock();
+
+	explosionSize = 0.5f;
+	stop = false;
+
+	isAlive = true;
+	aiShootCount = 0;
+	computerControlled = false;
 }
 
 Robot::Robot(GLfloat x, GLfloat y) {
 	rubble = (Model*)(new LightRubbleModel());
+	flag = (Model*)(new FlagModel());
     nuclearM = (Model*)(new NuclearModel()); 
     electronicsM = (Model*)(new ElectronicsModel()); 
     phaserM = (Model*)(new PhaserModel);
@@ -98,7 +111,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 	pitchAngle = 90.0f;
 	yawAngle = 90.0f;
 	isMyLightOn = false;
-
+	hasBox = false;
 	robotLife = MAX_LIFE;
 
 	directionVector[0] = -1.0f;
@@ -115,7 +128,7 @@ Robot::Robot(GLfloat x, GLfloat y) {
 
 	turnIndexOn(1);
 	turnIndexOn(3);
-	turnIndexOn(4);
+	//turnIndexOn(4);
 	//turnIndexOn(5);
 	//turnIndexOn(6);
 	//turnIndexOn(7);
@@ -125,11 +138,20 @@ Robot::Robot(GLfloat x, GLfloat y) {
 
 	ct = new CollisionTester;
 	box = new BoundingBox(xPos,0.0f,zPos,xPos+1.0f,height,zPos+1.0f, true, this);
+	hasBox = true;
 	ct->staticBoxes.push_back(box);
 
 	isRobotBeingControlled = false;
 	shootBullet();
+	currentTime = clock();
+	lastExplosion = clock();
+
+	explosionSize = 0.5f;
+	stop = false;
 	
+	isAlive = true;
+	aiShootCount = 0;
+	computerControlled = false;
 }
 
 void Robot::shadowMatrix(GLfloat lightX, GLfloat lightY, GLfloat lightZ, GLfloat lightW)
@@ -191,18 +213,8 @@ GLfloat Robot::calculateAlpha(GLfloat x, GLfloat z, GLfloat rows, GLfloat column
 }
 void Robot::applyShadow(GLfloat rows, GLfloat columns) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        //glEnable(GL_BLEND);
         glEnable(GL_BLEND);
         glDisable(GL_LIGHTING);
-        //glEnable(GL_COLOR_MATERIAL);
-        /*glPushMatrix();
-            glEnable(GL_STENCIL_TEST);
-            glStencilFunc(GL_EQUAL, 10, ~0);
-            glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
-            glTranslatef(xPos, 0.02f, zPos);                                        
-            //glTranslatef((GLfloat)j, (GLfloat)0.02, (GLfloat)i); */
-            
-    //switch (returnClosestLight(rows, columns)) {
          if (calculateAlpha(0, 0, rows, columns) >=0) {
              glPushMatrix();
                 glEnable(GL_STENCIL_TEST);
@@ -299,14 +311,17 @@ void Robot::draw() {
 	if(robotLife > 0){
 		//draw bounding box
 		glPushMatrix();
-
-		box->draw();
+			box->draw();
 		glPopMatrix();
 
 		//draw robot
 		glPushMatrix();
-			if (!isRobotBeingControlled)
+			if (!isRobotBeingControlled){
+				if(computerControlled){
+					aiSetDestination();
+				}
 				goToDestination();
+			}
 		
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
@@ -318,7 +333,7 @@ void Robot::draw() {
 
 			//Draw Headlight
 			glPushMatrix();
-				glTranslatef(0.0f,height,0.0f);
+				glTranslatef(0.0f,height-0.25f,0.0f);
 				if(isMyLightOn){
 					((HeadlightModel*)headlight)->whiteLight = true;
 				}
@@ -331,16 +346,40 @@ void Robot::draw() {
 			//Draw Model
 			model->draw();
 		glPopMatrix();
-                
 	}
 	else{
+		GLUquadricObj *quadric = gluNewQuadric();
+		gluQuadricTexture(quadric, true);
+
+		if ((currentTime - lastExplosion) >= 200.0 && explosionSize <= 2.0f)
+		{
+			explosionSize+=.5f;
+			lastExplosion = clock();
+			if (explosionSize == 2.5f)
+				stop = true;
+		}
+
+		if (!stop)
+		{
+			glPushMatrix();
+				glColor3f(1.0f, 0.4f, 0.0f);
+				glTranslatef(xPos, 0.0f, zPos);
+				gluSphere(quadric, explosionSize+=.5f, 5, 5);
+			glPopMatrix();
+		}
+
+		box->resize(box->size.x,0.1f,box->size.z);
+		glPushMatrix();
+			box->draw();
+		glPopMatrix();
 		glPushMatrix();
 			//Translate()
 			glTranslatef(xPos,0.0f,zPos);
+			glColor3f(0.5f,0.5f,0.5f);
 			rubble->draw();
 		glPopMatrix();
+		gluDeleteQuadric(quadric);
 	}
-        
 }
 
 //-------------------------------------------------------------
@@ -353,7 +392,15 @@ void Robot::cycleIndex(){
 }
 
 void Robot::turnSelectedOn(){
-	turnIndexOn(selectedIndex);
+	if(!isPartOn[selectedIndex]){
+		turnIndexOn(selectedIndex);
+	}
+}
+
+void Robot::turnSelectedOff(){
+	if(isPartOn[selectedIndex]){
+		turnIndexOn(selectedIndex);
+	}
 }
 
 //Privates
@@ -443,6 +490,14 @@ void Robot::refreshRobot(){
 		model->setNextChild(temp);
 	}
 	calculateHeight();
+	if(hasBox){
+		if(robotLife > 0){
+			box->resize(box->size.x,height,box->size.z);
+		}
+		else{
+			box->resize(box->size.x,0.01f,box->size.z);
+		}
+	}
 	notifyCamera();
 }
 
@@ -511,7 +566,7 @@ GLfloat* Robot::getLightLookAt(){
 }
 
 GLfloat Robot::calculateHeight(){
-	GLfloat h = 0; 
+	GLfloat h = 0.25f;
 	for(int i = 0; i <= 7; i++){
 		if(isPartOn[i]){
 			switch(i){
@@ -548,7 +603,7 @@ GLfloat Robot::calculateHeight(){
 	return h;
 }
 GLfloat Robot::calculateHeight(int index){
-	GLfloat h = 0; 
+	GLfloat h = 0.25f; 
 	for(int i = 0; i <= index; i++){
 		if(isPartOn[i]){
 			switch(i){
@@ -770,10 +825,10 @@ void Robot::timedSpin(){
 		return;
 	}
 	else if(calcDestinationAngle()<=180){
-		incrementSpinDegrees(true, 10.0f);
+		incrementSpinDegrees(true);
 	}
 	else{
-		incrementSpinDegrees(false, 10.0f);
+		incrementSpinDegrees(false);
 	}
 }
 
@@ -882,13 +937,13 @@ void Robot::incrementXPos(bool pos){
 	}
 	if(pos){
 		if(!robotCollisionTest(xPos+0.05f,minY,zPos)){
-			xPos += 0.5f;
+			xPos += 0.05f;
 			box->moveBox(0.05f,0.0f,0.0f);
 		}
 	}
 	else{
 		if(!robotCollisionTest(xPos-0.05f,minY,zPos)){
-			xPos -= 0.5f;
+			xPos -= 0.05f;
 			box->moveBox(-0.05f,0.0f,0.0f);
 		}
 	}
@@ -903,13 +958,13 @@ void Robot::incrementZPos(bool positive){
 
 	if(positive){
 		if(!robotCollisionTest(xPos,minY,zPos+0.05f)){
-			zPos += 0.5f;
+			zPos += 0.05f;
 			box->moveBox(0.0f,0.0f,0.05f);
 		}
 	}
 	else{
 		if(!robotCollisionTest(xPos,minY,zPos-0.05f)){
-			zPos -= 0.5f;
+			zPos -= 0.05f;
 			box->moveBox(0.0f,0.0f,-0.05f);
 		}
 	}
@@ -929,6 +984,23 @@ void Robot::goToDestination(){
 		return;
 	}
 
+	if(!checkZDestination()){
+		if(spinDestination != spinDegrees){
+			//Spins until facing correct angle
+			timedSpin();
+		}
+		else{
+			//translates north or south
+			if(spinDegrees == SOUTH){
+				incrementZPos(true);
+			}
+			else{
+				incrementZPos(false);
+			}
+		}
+		return;
+	}
+
 	//Orient
 	if(!checkXDestination()){
 		if(spinDestination != spinDegrees){
@@ -942,23 +1014,6 @@ void Robot::goToDestination(){
 			}
 			else{
 				incrementXPos(false);
-			}
-		}
-		return;
-	}
-	
-	if(!checkZDestination()){
-		if(spinDestination != spinDegrees){
-			//Spins until facing correct angle
-			timedSpin();
-		}
-		else{
-			//translates north or south
-			if(spinDegrees == SOUTH){
-				incrementZPos(true);
-			}
-			else{
-				incrementZPos(false);
 			}
 		}
 		return;
@@ -1001,7 +1056,7 @@ bool Robot::checkZDestination(){
 }
 
 bool Robot::robotCollisionTest(GLfloat x, GLfloat y, GLfloat z){
-		if(ct->collisionTest(x,y,z,box->movingBoxId)){
+	if(ct->collisionTest(x,y,z,box->movingBoxId)){
 			return true;
 		}
 		if(ct->collisionTest(x+box->size.x, y, z,box->movingBoxId)){
@@ -1036,49 +1091,52 @@ void Robot::spinDirectionVector(){
 }
 
 void Robot::shootBullet(){
-	spinDirectionVector();
-	//check which component is highest
-	int highestIndex = 0;
-	for(int i = 3; i <= 5; i++){
-		if(isPartOn[i]){
-			highestIndex = i;
+	SoundHelper::getInstance()->play("shoot.wav", 1, false);
+	if(robotLife>0){
+		spinDirectionVector();
+		//check which component is highest
+		int highestIndex = 0;
+		for(int i = 3; i <= 5; i++){
+			if(isPartOn[i]){
+				highestIndex = i;
+			}
 		}
-	}
-	GLfloat yPosition = calculateHeight(highestIndex);
-	GLfloat bulletSpawnOffset[2];
-	GLfloat bulletSpawnOffset2[2];
-	//create bullet at spawn point
-	switch(highestIndex){
-	case 5:
-		//rotate offset
-		bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
-		//Rotate
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		break;
-	case 4:
-		//rotate offset
-		bulletSpawnOffset[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) - 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) - 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+		GLfloat yPosition = calculateHeight(highestIndex);
+		GLfloat bulletSpawnOffset[2];
+		GLfloat bulletSpawnOffset2[2];
+		//create bullet at spawn point
+		switch(highestIndex){
+		case 5:
+			//rotate offset
+			bulletSpawnOffset[0] = -.7f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = .7f*sin((spinDegrees)*DegreesToRadians) +0.5f;
+			//Rotate
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.3f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			break;
+		case 4:
+			//rotate offset
+			bulletSpawnOffset[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) - 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) - 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[0] = -0.7f*cos((spinDegrees)*DegreesToRadians) + 0.35f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[1] = 0.7f*sin((spinDegrees)*DegreesToRadians) + 0.35f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
-		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		break;
-	case 3:
-		//offset facing south
-		bulletSpawnOffset[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) - 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) - 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
-		bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			//spawn point needs to accomodate rotation
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition-0.2f,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition-0.2f,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			break;
+		case 3:
+			//offset facing south
+			bulletSpawnOffset[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) - 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) - 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[0] = -0.85f*cos((spinDegrees)*DegreesToRadians) + 0.15f*sin((spinDegrees)*DegreesToRadians) + 0.5f;
+			bulletSpawnOffset2[1] = 0.85f*sin((spinDegrees)*DegreesToRadians) + 0.15f*cos((spinDegrees)*DegreesToRadians) + 0.5f;
 
-		//spawn point needs to accomodate rotation
-		bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-		bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
-	default:
-		break;
+			//spawn point needs to accomodate rotation
+			bm->addBullet(xPos+bulletSpawnOffset[0],yPosition,zPos+bulletSpawnOffset[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+			bm->addBullet(xPos+bulletSpawnOffset2[0],yPosition,zPos+bulletSpawnOffset2[1],directionVector[0],directionVector[1],directionVector[2], spinDegrees);
+		default:
+			break;
+		}
 	}
 }
 
@@ -1093,4 +1151,95 @@ V3 Robot::getUFOLockPosition(){
 
 int Robot::getRobotId(){
 	return robotId;
+}
+
+//-----------------------------------------------------------------------------------------
+//          randomize automated movements
+//-----------------------------------------------------------------------------------------
+void Robot::aiSetDestination(){
+	//randomize shooting
+	int randomNum = rand() % 15;
+	if(randomNum == 7 || randomNum == 9){
+		shootBullet();
+	}
+	//randomize destination
+	if((checkXDestination() && checkZDestination())){
+		int randomNum2 = rand() % 10;
+		switch(randomNum2){
+		case 0: case 1: case 2: case 3: case 4:
+			if(checkXPos(false)){
+				setDestination(xPos-ROBOT_LOOK_SIZE-1, zPos);
+			}
+			break;
+		case 5: case 6:
+			if(checkZPos(false)){
+				setDestination(xPos, zPos-ROBOT_LOOK_SIZE);
+			}
+			break;
+		case 8:
+			if(checkZPos(true)){
+				setDestination(xPos, zPos+ROBOT_LOOK_SIZE);
+			}
+			break;
+		case 9:
+			if(checkXPos(true)){
+				setDestination(xPos+ROBOT_LOOK_SIZE, zPos);
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
+}
+
+//used to help decide on a destination
+bool Robot::checkXPos(bool pos){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+	if(pos){
+		if(!robotCollisionTest(xPos+ROBOT_LOOK_SIZE,minY,zPos)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos-ROBOT_LOOK_SIZE-1,minY,zPos)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	notifyCamera();
+}
+
+//used to help decide on a destination
+bool Robot::checkZPos(bool positive){
+	GLfloat minY = 0.0f;
+	if(isPartOn[2]){
+		minY = 0.1f;
+	}
+
+	if(positive){
+		if(!robotCollisionTest(xPos,minY,zPos+ROBOT_LOOK_SIZE)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		if(!robotCollisionTest(xPos,minY,zPos-ROBOT_LOOK_SIZE)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	notifyCamera();
 }

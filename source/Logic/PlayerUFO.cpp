@@ -11,7 +11,7 @@ PlayerUFO::PlayerUFO(void)
 	pos[0] = 0.0f;
 	pos[1] = 0.0f;
 	pos[2] = 0.0f;
-	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+0.5f,pos[2]+1.0f, true);
+	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+1.0f,pos[2]+1.0f, true);
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
         updateLights(pos[0], pos[1], pos[2]);
@@ -25,7 +25,7 @@ PlayerUFO::PlayerUFO(GLfloat x, GLfloat z)
 	pos[0] = x;
 	pos[1] = 0;
 	pos[2] = z;
-	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+0.5f,pos[2]+1.0f, true);
+	box = new BoundingBox(pos[0],pos[1],pos[2],pos[0]+1.0f,pos[1]+1.0f,pos[2]+1.0f, true);
 	ct = new CollisionTester;
 	ct->staticBoxes.push_back(box);
 
@@ -52,8 +52,8 @@ void PlayerUFO::updateLights(GLfloat xPos, GLfloat yPos, GLfloat zPos)
         glLightfv(GL_LIGHT7, GL_DIFFUSE, spotLight->getDiffuse()); // Setup diffuse lighting
         glLightfv(GL_LIGHT7, GL_SPECULAR, spotLight->getSpecular());
         glLightfv(GL_LIGHT7, GL_POSITION, light->getPositionArray()); // Setup the lighting 
-        glLightf(GL_LIGHT7, GL_SPOT_CUTOFF, 25.0f);
-        glLightf(GL_LIGHT7, GL_SPOT_EXPONENT, 0);
+        glLightf(GL_LIGHT7, GL_SPOT_CUTOFF, 20.0f);
+        glLightf(GL_LIGHT7, GL_SPOT_EXPONENT, 150.0f);
         glLightfv(GL_LIGHT7, GL_SPOT_DIRECTION, light->getDirectionArray());
         glEnable(GL_LIGHT7);
 }
@@ -79,7 +79,7 @@ void PlayerUFO::draw(){
 //---------------------------------------------------------------
 void PlayerUFO::incrementHeight(bool positive){
 	if(positive){
-		
+		//if upstep is less than max height -> upstep
 		if(pos[1]+UP_STEP <= MAX_PLAYER_HEIGHT){
 			pos[1] += UP_STEP;
 			box->lockBox(pos[0],pos[1],pos[2]);
@@ -90,9 +90,16 @@ void PlayerUFO::incrementHeight(bool positive){
 		}
 	}
 	else{
-		if(pos[1]-DOWN_STEP >= MIN_PLAYER_HEIGHT &&
-		ufoCollisionTest(pos[0],pos[1]-DOWN_STEP,pos[2]) < 0){
-			pos[1] -= DOWN_STEP;
+		if(pos[1]-DOWN_STEP >= MIN_PLAYER_HEIGHT){
+			if(ufoCollisionTest(pos[0],pos[1]-DOWN_STEP,pos[2]) < 0){
+				//if downstep is not too far and there is no collision
+				pos[1] -= DOWN_STEP;
+				box->lockBox(pos[0],pos[1],pos[2]);
+			}
+		}
+		else{
+			//if downstep is too far
+			pos[1] = MIN_PLAYER_HEIGHT;
 			box->lockBox(pos[0],pos[1],pos[2]);
 		}
 	}
@@ -186,6 +193,7 @@ int PlayerUFO::ufoCollisionTest(GLfloat x, GLfloat y, GLfloat z){
 	if(ct->ufoCollTest(x+box->size.x,	y+box->size.y,	z+box->size.z,box->movingBoxId)>= 0){
 		return 0;
 	}
+	//no collision
 	return -1;	
 	/*if(ct->collisionTest(x,y,z,box->movingBoxId)){
 			return true;

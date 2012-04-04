@@ -1,13 +1,15 @@
 #include "CirclingCamera.h"
 
-CirclingCamera::CirclingCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane)
+CirclingCamera::CirclingCamera(GLfloat centerOfMapX, GLfloat centerOfMapZ)
 {
-	Camera::initialize(viewWidth, viewHeight, viewNearPlane, viewFarPlane);
 	//camera rotation
 	yaw = 0.0f;
 
 	//camera location
-	currentRadius = DEFAULT_CIRCLING_RADIUS;
+	currentRadius = centerOfMapZ + 5.0f;
+	centerOfTheMapX = centerOfMapX;
+	centerOfTheMapZ = centerOfMapZ;
+
 	locX = 25.0f;
 	locZ = 25.0f + currentRadius;
 
@@ -18,12 +20,8 @@ CirclingCamera::CirclingCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNe
 
 void CirclingCamera::view()
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, viewWidth / viewHeight, viewNearPlane, viewFarPlane);
-
-	GLfloat lookAtX = CENTER_OF_MAP + currentRadius * (GLfloat)sin(yaw * 0.0625);
-	GLfloat lookAtZ = CENTER_OF_MAP + currentRadius * (GLfloat)cos(yaw * 0.0625);
+	GLfloat lookAtX = centerOfTheMapX + currentRadius * (GLfloat)sin(yaw * 0.0625);
+	GLfloat lookAtZ = centerOfTheMapZ + currentRadius * (GLfloat)cos(yaw * 0.0625);
 
 	GLfloat fromX = (currentRadius * (GLfloat)sin(yaw * 0.0625)) + lookAtX;
 	GLfloat fromZ = (currentRadius * (GLfloat)cos(yaw * 0.0625)) + lookAtZ;
@@ -70,4 +68,9 @@ void CirclingCamera::toggleLight()
 
 	if (!isLightOn)
 		glDisable(GL_LIGHT6);
+}
+
+void CirclingCamera::changeAngleDMCam()
+{
+	locY = currentRadius * tan((float)GL_PI / 3.5f);
 }

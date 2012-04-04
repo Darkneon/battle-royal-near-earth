@@ -9,7 +9,7 @@ class Robot;
 class RobotCamera : public Camera
 {
 public:
-	RobotCamera(GLint viewWidth, GLint viewHeight, GLfloat viewNearPlane, GLfloat viewFarPlane);
+	RobotCamera();
 
 	void view();
 	
@@ -21,6 +21,8 @@ public:
 	
 	//Light-Related
 	void toggleLight();
+
+	void updateFog();
 
 	//Robot-Related - Must attach a robot to a robot camera
 	Robot* robot;
