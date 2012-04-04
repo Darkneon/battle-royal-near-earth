@@ -31,7 +31,7 @@ LightPost::LightPost(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat lookX, GL
 	axis[0] = 1.0f;
 	axis[1] = 0.0f;
 	axis[2] = 0.0f;
-	lightOn = false;
+	lightOn = true;
 }
 
 GLfloat LightPost::getPosX()
